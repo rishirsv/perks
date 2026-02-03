@@ -1,0 +1,6 @@
+# Optional dependencies used for rendering/QA workflows.
+python-pptx
+pillow
+numpy
+scikit-image
+opencv-python

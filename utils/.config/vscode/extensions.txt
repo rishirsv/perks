@@ -1,0 +1,15 @@
+alexandernanberg.horizon-theme-vscode
+anthropic.claude-code
+catppuccin.catppuccin-vsc-icons
+esbenp.prettier-vscode
+github.copilot
+github.copilot-chat
+mechatroner.rainbow-csv
+miguelsolorio.fluent-icons
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance
+ms-python.vscode-python-envs
+openai.chatgpt
+tomoki1207.pdf
+zhuangtongfa.material-theme

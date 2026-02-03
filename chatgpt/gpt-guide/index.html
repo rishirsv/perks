@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Effective Custom GPTs | KPMG Transaction Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-brand">Building Effective Custom GPTs</div>
+    <div class="nav-controls">
+      <button class="nav-btn" id="prevBtn" title="Previous (←)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">18</span></span>
+      <button class="nav-btn" id="nextBtn" title="Next (→)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <button class="nav-btn menu-btn" id="menuBtn" title="All Pages">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+
+  <!-- Overview Panel -->
+  <div class="overview-panel" id="overviewPanel">
+    <div class="overview-header">
+      <h3>All Pages</h3>
+      <button class="close-btn" id="closeOverview">&times;</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </div>
+
+  <!-- Pages Container -->
+  <main class="slides-container" id="slidesContainer">
+
+    <!-- Page 1: Title -->
+    <section class="slide slide-title" data-slide="1">
+      <div class="slide-content">
+        <div class="kpmg-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.756 192.756"><g fill-rule="evenodd" clip-rule="evenodd"><path fill="#00338D" d="M17.437 116.961V62.42h38.597v54.541H17.437z"/><path fill="#0091DA" d="M60.177 116.961V62.42h38.597v54.541H60.177z"/><path fill="#483698" d="M102.916 116.961V62.42h38.596v54.541h-38.596z"/><path fill="#00A3A1" d="M145.656 116.961V62.42h38.596v54.541h-38.596z"/><path fill="#fff" d="M152.389 115.646l1.74-5.58h15.631l-5.227 18.626c-2.088.827-9.023 1.645-13.951 1.645-7.422 0-18.199-4.943-13.77-19.51 5.299-17.43 14.496-19.079 21.918-19.079 10.846 0 14.709 6.996 12.764 12.646l-7.58-.01c.123-.254.164-.621.252-.914 1.311-4.396-1.393-6.172-6.156-6.398-7.033-.331-10.838 5.229-13.23 13.537-2.58 8.96-.41 14.432 7.406 14.404 6.213-.021 5.881-1.3 5.881-1.3l2.559-8.067h-8.237zM16.773 129.417H8.504l11.074-36.886h8.27c-.001 0-10.914 36.129-11.075 36.886zM23.23 108.824h-.006l16.159-16.293h10.159l-18.268 17.064 9.286 19.822h-9.006l-8.329-20.629.005.036zM46.94 129.416l11.126-36.889h9.399c8.505-.103 17.667-.232 15.567 11.135-1.1 5.95-6.3 11.193-18.079 11.181l-6.07.004-4.356 14.569H46.94zm13.377-19.987c2.742 0 4.744.043 6.588.009 5.543-.101 7.242-2.018 8.492-5.775 2.17-6.522-3.381-5.836-11.699-5.827l-3.381 11.593zM122.594 92.525h12.119l-9.188 36.871h-8.553l9.389-31.579-20.406 31.579h-7.18l-1.908-31.583-9.352 31.583h-6.93L91.88 92.525h11.992s1.83 18.925.426 31.897c.001.001 3.567-11.457 18.296-31.897z"/></g></svg>
+        </div>
+        <h1>Building Effective<br>Custom GPTs</h1>
+        <p class="subtitle">A practical guide to designing, building, and deploying production-ready GPT applications</p>
+        <p class="author-attribution">Rishi Sharma</p>
+        <div class="title-features">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Architecture Patterns</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Production Techniques</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> Best Practices</span>
+        </div>
+        <div class="scroll-hint">
+          <span>Press <kbd>→</kbd> or scroll to begin</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 2: GPT Fundamentals -->
+    <section class="slide" data-slide="2">
+      <div class="slide-content">
+        <h2>GPT Fundamentals</h2>
+        <p class="slide-intro">Every custom GPT is built from three components: the <strong>system prompt</strong> (the model's operating instructions), <strong>knowledge files</strong> (your reusable reference library), and the <strong>context window</strong> (the model's working memory, measured in tokens). Reliable production behavior comes from designing these parts together.</p>
+
+        <div class="card-grid three-col">
+          <div class="card card-primary">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3>System Prompt</h3>
+            <div class="card-stat">~8,000 chars max</div>
+            <ul>
+              <li>Defines the GPT's role, boundaries, and decision rules</li>
+              <li>Contains behavioral rules and priority hierarchies (what wins when instructions conflict)</li>
+              <li>Specifies output format, structure, and validation requirements</li>
+              <li>Establishes guardrails (hard rules to prevent recurring failure modes)</li>
+            </ul>
+            <div class="card-tag">Behavior, not reference</div>
+          </div>
+
+          <div class="card card-accent">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3>Knowledge Files</h3>
+            <div class="card-stat">Max 20 files</div>
+            <ul>
+              <li>Provide examples, templates, and style guides for consistent output</li>
+              <li>Contain industry-specific modules and domain knowledge</li>
+              <li>Include Python scripts for complex calculations and data processing</li>
+              <li>Store glossaries, term lists, and reference documentation</li>
+            </ul>
+            <div class="card-tag">Reference, not behavior</div>
+          </div>
+
+          <div class="card card-green">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            </div>
+            <h3>Context Window</h3>
+            <div class="card-stat">~200K tokens</div>
+            <ul>
+              <li>Holds the developer prompt, system prompt, and user messages</li>
+              <li>Contains all loaded knowledge files and retrieved content</li>
+              <li>Includes the full conversation history from the session</li>
+              <li>Reserves space for the model's response generation</li>
+            </ul>
+            <div class="card-tag">Plan for long sessions</div>
+          </div>
+        </div>
+
+        <div class="callout callout-tip">
+          <div class="callout-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="callout-content">
+            <strong>Progressive Disclosure:</strong> Never load all knowledge files at startup. Reference files by name in your system prompt and instruct the GPT to load them only when needed. This preserves context window space for longer conversations and larger deliverables.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 3: Rule-Based vs Workflow-Based -->
+    <section class="slide" data-slide="3">
+      <div class="slide-content">
+        <h2>Rule-Based vs Workflow-Based GPTs</h2>
+        <p class="slide-intro">Before writing prompts, pick an architecture: <strong>rule-based</strong> when you need deterministic behavior (same input → same output shape), <strong>workflow-based</strong> when you need structured judgment across steps. Using the wrong architecture is the fastest path to inconsistent output.</p>
+
+        <div class="agency-continuum">
+          <div class="agency-label agency-low">Lower Agency</div>
+          <div class="agency-arrow">
+            <div class="agency-arrow-line"></div>
+            <div class="agency-arrow-text">Increasing model autonomy</div>
+          </div>
+          <div class="agency-label agency-high">Higher Agency</div>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comparison-card comparison-left">
+            <div class="comparison-header" style="background: var(--kpmg-violet)">
+              <h3>Rule-Based</h3>
+              <span>Deterministic, predictable output</span>
+            </div>
+            <div class="comparison-body">
+              <blockquote>"Here are the rules. Follow them exactly."</blockquote>
+              <h4>You Provide:</h4>
+              <ul>
+                <li>Exhaustive constraints for each scenario</li>
+                <li>Explicit format specs</li>
+                <li>Ban lists and substitution rules</li>
+                <li>Fixed output schema</li>
+              </ul>
+              <div class="use-cases">
+                <strong>Best for:</strong> Compliance docs, legal language, template filling, QA checks, redline reviews
+              </div>
+            </div>
+          </div>
+
+          <div class="comparison-divider">
+            <span>VS</span>
+          </div>
+
+          <div class="comparison-card comparison-right">
+            <div class="comparison-header" style="background: var(--kpmg-green)">
+              <h3>Workflow-Based</h3>
+              <span>Adaptive, context-aware output</span>
+            </div>
+            <div class="comparison-body">
+              <blockquote>"Here's the goal and boundaries. Navigate to the outcome."</blockquote>
+              <h4>You Provide:</h4>
+              <ul>
+                <li>Purpose statement (what "good" looks like)</li>
+                <li>Boundaries (must do / must not do)</li>
+                <li>Principles (how to make decisions)</li>
+                <li>Steps with decision points</li>
+              </ul>
+              <div class="use-cases">
+                <strong>Best for:</strong> Research, analysis, meeting notes, client briefings, multi-step processes
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="callout-content">
+            <strong>Common mistake:</strong> Building a workflow GPT with rule-based patterns (or vice versa). Match the architecture to the task.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 4: The Spec Process -->
+    <section class="slide" data-slide="4">
+      <div class="slide-content">
+        <h2>The Spec Process</h2>
+        <p class="slide-intro">Write the spec before you touch the system prompt. A good spec forces crisp definitions of inputs, outputs, constraints, and edge cases—so you discover ambiguity on paper instead of in production failures.</p>
+
+        <div class="spec-layout">
+          <div class="spec-steps">
+            <div class="process-step" style="--step-color: var(--kpmg-blue)">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Inputs</h3>
+                <p>What documents/data will users provide? What formats? What variations?</p>
+              </div>
+            </div>
+
+            <div class="process-step" style="--step-color: var(--kpmg-violet)">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Outputs</h3>
+                <p>What exactly should the GPT produce? What structure? What level of detail?</p>
+              </div>
+            </div>
+
+            <div class="process-step" style="--step-color: var(--kpmg-green)">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Constraints</h3>
+                <p>What must it always do? What must it never do? Non-negotiables?</p>
+              </div>
+            </div>
+
+            <div class="process-step" style="--step-color: var(--color-orange)">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h3>Edge Cases</h3>
+                <p>What happens when input is incomplete, ambiguous, or unexpected?</p>
+              </div>
+            </div>
+
+            <div class="process-step" style="--step-color: var(--color-red)">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h3>Success Criteria</h3>
+                <p>How do you know it's working correctly? What makes output "good"?</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-example">
+            <div class="spec-example-header">
+              <span class="spec-badge">Example Spec</span>
+              <span class="spec-title">Meeting Notes GPT</span>
+            </div>
+            <div class="spec-example-body">
+              <div class="spec-section">
+                <h4>1. Inputs</h4>
+                <p>Meeting transcripts uploaded as .txt, .docx, or pasted text. Transcripts may be raw audio-to-text (no speaker labels), Teams/Zoom exports (with speaker labels), or manual notes. Length ranges from 500 words to 25,000+ words. May contain multiple topics or single-focus discussions.</p>
+              </div>
+              <div class="spec-section">
+                <h4>2. Outputs</h4>
+                <p>Structured markdown document with: Meeting title and date, Attendees list (if identifiable), 4-15 topical sections with Key Takeaways + Meeting Notes subsections, Key Findings table (for FDD meetings), Action Items with owners and priorities, Open Questions.</p>
+              </div>
+              <div class="spec-section">
+                <h4>3. Constraints</h4>
+                <p><strong>Must:</strong> Ground every statement in the transcript. Use exact figures when stated. Preserve verbatim quotes for critical claims.<br>
+                <strong>Must not:</strong> Infer conclusions not stated. Fabricate names, numbers, or dates. Add context not in source material.</p>
+              </div>
+              <div class="spec-section">
+                <h4>4. Edge Cases</h4>
+                <p>No clear action items → output "No action items identified." Speaker unclear → use "[Speaker]" placeholder. Conflicting information stated → note both versions. Truncated transcript → process available content, note incompleteness.</p>
+              </div>
+              <div class="spec-section">
+                <h4>5. Success Criteria</h4>
+                <p>Every bullet traceable to specific transcript passage. Zero fabricated names, numbers, or claims. Action items include owner when stated. Output length scales with input length (not fixed).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-tip">
+          <div class="callout-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="callout-content">
+            <strong>Interview a model first:</strong> Before writing your spec, ask a model: "Walk me through how you would approach [task]. What would you need to know? What could go wrong?" Use the answers to pressure-test your inputs, edge cases, and success criteria.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 5: Role Boundaries & Guardrails -->
+    <section class="slide" data-slide="5">
+      <div class="slide-content">
+        <h2>Role Boundaries & Guardrails</h2>
+        <p class="slide-intro">Production GPTs fail less from "bad writing" and more from unclear scope. Role boundaries define what the GPT does and doesn't do; guardrails are targeted constraints that eliminate specific recurring misbehaviors after you observe them in testing.</p>
+
+        <div class="split-layout">
+          <div class="split-panel">
+            <h3 class="panel-header" style="background: var(--kpmg-blue)">Role Boundaries</h3>
+            <div class="panel-content">
+              <p>Define what the GPT does AND what it explicitly doesn't do:</p>
+              <div class="check-list">
+                <div class="check-item check-good">You are a meeting notes specialist</div>
+                <div class="check-item check-good">You produce structured summaries from transcripts</div>
+                <div class="check-item check-bad">You do NOT provide legal or financial advice</div>
+                <div class="check-item check-bad">You do NOT invent facts not present in the transcript</div>
+              </div>
+              <p class="panel-note">Without explicit boundaries, the model will try to be "helpful" in ways you didn't ask for—like offering strategic recommendations when you only wanted a summary.</p>
+            </div>
+          </div>
+
+          <div class="split-panel">
+            <h3 class="panel-header" style="background: var(--color-red)">Guardrails Pattern</h3>
+            <div class="panel-content">
+              <p>When the model keeps doing something wrong, create an explicit guardrail:</p>
+              <div class="guardrail-anatomy">
+                <div class="guardrail-part">
+                  <span class="guardrail-label">1. Name the behavior</span>
+                  <span class="guardrail-desc">What is the model doing wrong?</span>
+                </div>
+                <div class="guardrail-part">
+                  <span class="guardrail-label">2. Show the wrong way</span>
+                  <span class="guardrail-desc">Concrete example of the bad output</span>
+                </div>
+                <div class="guardrail-part">
+                  <span class="guardrail-label">3. Show the right way</span>
+                  <span class="guardrail-desc">Exact replacement behavior</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guardrail-examples">
+          <div class="guardrail-card">
+            <div class="guardrail-header">
+              <span class="guardrail-trigger">Stubborn behavior:</span>
+              <span>Model asks clarifying questions instead of starting work</span>
+            </div>
+            <div class="guardrail-body">
+              <div class="guardrail-wrong">
+                <div class="guardrail-wrong-label">Avoid this</div>
+                <div class="guardrail-wrong-content">"Before I begin, could you clarify: 1) What format would you prefer? 2) Should I include headers? 3) How detailed should..."</div>
+              </div>
+              <div class="guardrail-right">
+                <div class="guardrail-right-label">Do this instead</div>
+                <div class="guardrail-right-content">[Immediately produces output using reasonable defaults, then asks] "Here's the first draft. Would you like any adjustments to format or detail level?"</div>
+              </div>
+              <div class="guardrail-rule">
+                <strong>Guardrail:</strong> "When user provides input, BEGIN IMMEDIATELY with sensible defaults. Ask for adjustments AFTER producing output, not before."
+              </div>
+            </div>
+          </div>
+
+          <div class="guardrail-card">
+            <div class="guardrail-header">
+              <span class="guardrail-trigger">Stubborn behavior:</span>
+              <span>Model adds excessive caveats and disclaimers</span>
+            </div>
+            <div class="guardrail-body">
+              <div class="guardrail-wrong">
+                <div class="guardrail-wrong-label">Avoid this</div>
+                <div class="guardrail-wrong-content">"I should note that this analysis is based on limited information and may not reflect all factors. Additionally, please verify these figures independently as I cannot guarantee accuracy..."</div>
+              </div>
+              <div class="guardrail-right">
+                <div class="guardrail-right-label">Do this instead</div>
+                <div class="guardrail-right-content">"Revenue increased 23% YoY ($4.2M to $5.2M). [If data is incomplete:] Note: Q4 figures pending."</div>
+              </div>
+              <div class="guardrail-rule">
+                <strong>Guardrail:</strong> "NO meta-commentary about limitations. State facts directly. If data is missing, note it inline briefly, then continue."
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 6: Prompt Doctor -->
+    <section class="slide" data-slide="6">
+      <div class="slide-content">
+        <h2>Prompt Doctor</h2>
+        <p class="slide-intro">When a GPT repeatedly fails in the same ways, stop "tuning" and debug. Use this template to identify the shared pattern across failure traces, patch the prompt precisely, and define tests to prevent regressions.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Prompt Doctor Template</span>
+            <button class="copy-btn" data-copy="promptdoctor">Copy</button>
+          </div>
+          <pre><code id="promptdoctor">You are a prompt debugging specialist. Analyze the system prompt and failure traces below.
+
+## INPUTS
+[System Prompt]: {paste full prompt}
+[Failure 1]: Input: {user input} → Output: {bad output} → Expected: {correct output}
+[Failure 2]: ...
+[Failure 3]: ...
+
+## DELIVERABLES
+1. PATTERN: What do these failures have in common?
+2. ROOT CAUSE: Which prompt instruction (or missing instruction) enables this?
+3. PATCHES: Exact text to add/modify in the prompt
+4. TESTS: How to verify the fix without causing regressions</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 7: Architecture Patterns -->
+    <section class="slide" data-slide="7">
+      <div class="slide-content">
+        <h2>Architecture Patterns</h2>
+        <p class="slide-intro">The core architecture principle is separation of concerns: keep behavior in the system prompt (HOW to act) and reference material in knowledge files (WHAT to use). This reduces prompt bloat, supports independent updates, and keeps the context window usable for real workloads.</p>
+
+        <div class="architecture-diagram">
+          <div class="arch-box arch-prompt">
+            <h3>System Prompt</h3>
+            <span class="arch-subtitle">Behavior instructions</span>
+            <ul>
+              <li>Role definition + boundaries</li>
+              <li>Processing steps (workflow)</li>
+              <li>Output format specification</li>
+              <li>Priority rules for conflicts</li>
+              <li>Validation checklist</li>
+            </ul>
+            <div class="arch-footer">
+              <span class="arch-limit">Keep under 8K characters</span>
+              <span class="arch-focus">Focus: HOW to behave</span>
+            </div>
+          </div>
+
+          <div class="arch-arrow">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+
+          <div class="arch-box arch-files">
+            <h3>Knowledge Files</h3>
+            <span class="arch-subtitle">Reference material</span>
+            <ul>
+              <li>Examples + templates</li>
+              <li>Style guides</li>
+              <li>Industry modules (saas.md, etc.)</li>
+              <li>Python scripts for calculations</li>
+              <li>Glossaries + term lists</li>
+            </ul>
+            <div class="arch-footer">
+              <span class="arch-limit">Load on demand</span>
+              <span class="arch-focus">Focus: WHAT to reference</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="context-window-viz">
+          <h3 style="margin-bottom: 1rem;">Context Window Allocation (~200K tokens)</h3>
+          <div class="context-bar">
+            <div class="context-segment" style="flex: 0.5; background: var(--kpmg-blue);">Dev Prompt</div>
+            <div class="context-segment" style="flex: 1; background: var(--kpmg-violet);">System Prompt</div>
+            <div class="context-segment" style="flex: 3; background: var(--kpmg-light-blue);">Loaded Knowledge Files</div>
+            <div class="context-segment" style="flex: 4; background: var(--kpmg-green);">Conversation History</div>
+            <div class="context-segment" style="flex: 1.5; background: var(--color-orange);">Response</div>
+          </div>
+          <div class="context-legend">
+            <div class="legend-item"><span class="legend-dot" style="background: var(--kpmg-blue);"></span> Developer Prompt (~1%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--kpmg-violet);"></span> System Prompt (~2-5%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--kpmg-light-blue);"></span> Knowledge Files (~15-30%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--kpmg-green);"></span> Conversation (~40-60%)</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--color-orange);"></span> Response (~10-15%)</div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Example: Progressive File Loading</span>
+            <button class="copy-btn" data-copy="loading">Copy</button>
+          </div>
+          <pre><code id="loading">## First Steps (Always)
+1. LOAD `report-structure.md` for section guidance
+2. LOAD `industry-index.md` to identify correct module
+3. LOAD specific module (e.g., `saas.md`, `banking-lending.md`)
+
+If no module matches the industry exactly, use the closest fit
+plus general KPIs from `cross-industry-metrics.md`.</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 8: System Prompt Example (merged with Knowledge File) -->
+    <section class="slide slide-full-example" data-slide="8">
+      <div class="slide-content wide">
+        <h2>Example: System Prompt & Knowledge File</h2>
+        <p class="slide-intro">This example shows the intended split: the system prompt defines workflow, priorities, and constraints; the template file defines structure. Keep the system prompt stable and evolve templates independently.</p>
+
+        <div class="two-col-example">
+          <div class="example-col">
+            <div class="example-code-block">
+              <div class="example-code-header">
+                <span class="example-label">System Prompt: Role & Workflow</span>
+              </div>
+              <pre class="example-pre"><code><span class="hl-comment"># Meeting Intelligence</span>
+You produce comprehensive, template-structured
+FDD meeting notes from transcripts.
+<span class="hl-highlight">Zero invention—all content grounded in transcript.</span>
+
+<span class="hl-section">## Workflow</span>
+<span class="hl-comment">### Step 1: Classify meeting type</span>
+Determine if FDD or General Business based on content.
+
+<span class="hl-comment">### Step 2: Read entire transcript</span>
+Maintain running outline of topics discussed.
+Consolidate into 4–15 thematic sections.
+
+<span class="hl-comment">### Step 3: Compose notes</span>
+Use template: <span class="hl-highlight">fdd-meeting-template.md</span> or
+<span class="hl-highlight">general-business-template.md</span>
+
+<span class="hl-comment">### Step 4: Validate before output</span>
+Check: correct template used, all topics covered,
+no fabricated numbers, action items have owners.</code></pre>
+            </div>
+
+            <div class="example-code-block">
+              <div class="example-code-header">
+                <span class="example-label">System Prompt: Priority Rules</span>
+              </div>
+              <pre class="example-pre"><code><span class="hl-section">## Rules</span>
+When guidance conflicts, apply in order (<span class="hl-highlight">1 = highest</span>):
+
+<span class="hl-highlight">1. Transcript-first, zero inference</span>
+   Every statement grounded in transcript. Never fabricate.
+
+<span class="hl-highlight">2. Completeness over brevity</span>
+   Capture all material figures, even if repetitive.
+
+<span class="hl-highlight">3. Verbatim anchors</span>
+   Preserve exact quotes for critical statements.
+
+<span class="hl-highlight">4. Structure and organization</span>
+   Conclusion-first bullets. Never reconstruct dialogue.
+
+<span class="hl-dimmed">5. Insights (if valuable)</span>
+<span class="hl-dimmed">6. Omit non-substantive content</span></code></pre>
+            </div>
+          </div>
+
+          <div class="example-col">
+            <div class="example-code-block">
+              <div class="example-code-header">
+                <span class="example-label">Knowledge File: FDD Template</span>
+              </div>
+              <pre class="example-pre"><code><span class="hl-comment"># FDD Meeting Notes — &lt;Deal / Project Name&gt;</span>
+
+- Date: <span class="hl-highlight">&lt;Date&gt;</span>
+- Target: <span class="hl-highlight">&lt;Name/codename&gt;</span>
+- Industry: <span class="hl-highlight">&lt;Sector&gt;</span>
+- Purpose: Describe in 1-2 sentences.
+
+<span class="hl-section">## &lt;Topic Name&gt;</span>
+<span class="hl-dimmed">(Use clear, descriptive name — e.g., "Revenue Recognition")</span>
+
+<span class="hl-comment">### Key Takeaways</span>
+2-4 bullets answering: <span class="hl-highlight">"What does this mean for the deal?"</span>
+<span class="hl-warning">- Synthesize, don't summarize — explain the implication</span>
+<span class="hl-warning">- Flag risks and adjustment candidates with rationale</span>
+
+<span class="hl-comment">### Meeting Notes</span>
+- Exhaustive notes, one bullet per unit of information
+- Include all figures, dates, and names mentioned</code></pre>
+            </div>
+
+            <div class="example-code-block">
+              <div class="example-code-header">
+                <span class="example-label">Knowledge File: Key Findings Table</span>
+              </div>
+              <pre class="example-pre"><code><span class="hl-section">## Key Findings</span>
+<span class="hl-dimmed">Aggregate figures, adjustments, risks for scanning.</span>
+
+| Ref   | Item     | Category | Type      | Rationale       |
+|-------|----------|----------|-----------|-----------------|
+| <span class="hl-highlight">QoE1</span>  | &lt;Name&gt;   | EBITDA   | Normalize | &lt;One-line why&gt;  |
+| <span class="hl-highlight">QoE2</span>  | &lt;Name&gt;   | Revenue  | Adjust    | &lt;One-line why&gt;  |
+| <span class="hl-highlight">Risk1</span> | &lt;Name&gt;   | Working  | Flag      | &lt;One-line why&gt;  |
+
+<span class="hl-section">## Open Items & Follow-Ups</span>
+| Priority | Item                                     |
+|----------|------------------------------------------|
+| <span class="hl-highlight">[H]</span>      | Blocking — cannot close without this     |
+| <span class="hl-highlight">[M]</span>      | Material — affects conclusion            |
+| <span class="hl-highlight">[L]</span>      | Housekeeping — nice to have              |</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-bar">
+          <div class="insights-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Key Design Decisions
+          </div>
+          <div class="insights-grid">
+            <div class="insight-item">
+              <span class="insight-num">1</span>
+              <span class="insight-text"><strong>One-line role</strong> Model knows its purpose instantly from the first sentence</span>
+            </div>
+            <div class="insight-item red">
+              <span class="insight-num">2</span>
+              <span class="insight-text"><strong>Numbered priorities</strong> When Rule 2 and Rule 6 conflict, model knows Rule 2 wins</span>
+            </div>
+            <div class="insight-item orange">
+              <span class="insight-num">3</span>
+              <span class="insight-text"><strong>Template placeholders</strong> &lt;brackets&gt; tell model exactly where to inject content</span>
+            </div>
+            <div class="insight-item green">
+              <span class="insight-num">4</span>
+              <span class="insight-text"><strong>Swappable templates</strong> Different template for FDD vs General meetings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 9: Output Format & Validation -->
+    <section class="slide" data-slide="9">
+      <div class="slide-content">
+        <h2>Output Format, Validation & Verbosity</h2>
+        <p class="slide-intro">Formatting drift is a production problem: if you don't specify the schema, the model will vary structure across runs. Add validation gates, control verbosity, and scale output to the user's input—especially when requests are brief.</p>
+
+        <div class="card-grid three-col">
+          <div class="card card-primary">
+            <h3>Output Format</h3>
+            <p>Explicit schemas prevent drift. Show the exact structure:</p>
+            <div class="mini-code">
+              <pre><code>## Output Format
+# [Meeting Title]
+**Date:** YYYY-MM-DD
+
+## Key Figures
+| Metric | Value |
+|--------|-------|
+
+## Action Items
+- [ ] Item (Owner)</code></pre>
+            </div>
+            <p class="card-note">Use tables for structured data. Use headers for sections.</p>
+          </div>
+
+          <div class="card card-red">
+            <h3>Validation Gates</h3>
+            <p>Make the model check its own work before finalizing:</p>
+            <div class="mini-code">
+              <pre><code>## Validation Checklist
+1. Every claim has a number
+2. No passive without subject
+3. No banned words used
+4. All placeholders filled
+
+Run BEFORE finalizing output</code></pre>
+            </div>
+            <p class="card-note">Self-validation catches errors the model would otherwise miss.</p>
+          </div>
+
+          <div class="card card-green">
+            <h3>Verbosity Control</h3>
+            <p>Match output length to input specificity:</p>
+            <div class="mini-code">
+              <pre><code>## Verbosity (input-scaled)
+&lt;4k words → 2-3 pages
+4-12k    → 3-6 pages
+&gt;12k     → 6-10 pages
+
+Mirror user's specificity</code></pre>
+            </div>
+            <p class="card-note">User gives 7 words? Don't return 6 substeps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 10: Section Divider - Advanced Patterns -->
+    <section class="slide slide-section" data-slide="10">
+      <div class="slide-content">
+        <div class="section-label">Section II</div>
+        <h1>Advanced Patterns</h1>
+        <p class="section-subtitle">Production-tested techniques from real GPTs</p>
+        <div class="section-topics">
+          <div class="topic-pill">Mode Detection</div>
+          <div class="topic-pill">Approval Gates</div>
+          <div class="topic-pill">Priority Rules</div>
+          <div class="topic-pill">Resilience</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 11: Mode Detection & Routing -->
+    <section class="slide" data-slide="11">
+      <div class="slide-content">
+        <h2>Intent Detection & Auto-Routing</h2>
+        <p class="slide-intro">If one GPT supports multiple jobs, remove the "menu." Use mode detection to select the right workflow internally based on keywords, file type, or input patterns. Users should never see the routing logic—they just get the right output.</p>
+
+        <div class="pattern-grid">
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-violet)">
+            <div class="pattern-header">
+              <h3>Keyword-Triggered Modes</h3>
+              <span>Scan input → branch behavior</span>
+            </div>
+            <div class="pattern-body">
+              <p>Detect specific words in user input to switch workflows. Default to one mode; override when keyword detected.</p>
+              <div class="pattern-code">
+                <pre><code>## Mode Detection
+1. Scan input for keywords
+2. Branch:
+   • "draft" → Skip comparison section
+   • "polish" → Light editing only
+   • Default → Full rewrite mode</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> Same GPT serves multiple use cases that differ in workflow.
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-green)">
+            <div class="pattern-header">
+              <h3>Auto-Start on Upload</h3>
+              <span>Input type → immediate action</span>
+            </div>
+            <div class="pattern-body">
+              <p>When user uploads a document, start processing immediately without asking permission. The upload IS the instruction.</p>
+              <div class="pattern-code">
+                <pre><code>## CRITICAL BEHAVIOR
+When document uploaded:
+- Do NOT ask "what would you like?"
+- Do NOT request clarification
+- Do NOT offer options
+- START PROCESSING immediately
+- Use Default Scope settings</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> The upload itself is the signal. User wants output, not conversation.
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-light-blue)">
+            <div class="pattern-header">
+              <h3>Internal Template Selection</h3>
+              <span>Classify → select → never mention</span>
+            </div>
+            <div class="pattern-body">
+              <p>Analyze input characteristics to select the right output template. Never expose the selection logic to users.</p>
+              <div class="pattern-code">
+                <pre><code>## Template Selection (Internal)
+Based on input complexity:
+- Short request → Essential (80-150 words)
+- Standard → Standard (120-220 words)
+- Detailed → Research (180-350 words)
+
+NEVER mention template names in output</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> Different inputs need different output structures or detail levels.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 12: Approval Gates -->
+    <section class="slide" data-slide="12">
+      <div class="slide-content">
+        <h2>Approval Gates & Staged Workflows</h2>
+        <p class="slide-intro">Introduce gates to control cost and correctness. Approval gates are stop-and-confirm checkpoints before expensive steps (web browsing, code execution); validation gates block output until required inputs are present.</p>
+
+        <div class="pattern-grid">
+          <div class="pattern-card" style="--pattern-color: var(--color-orange)">
+            <div class="pattern-header">
+              <h3>Approval Gates</h3>
+              <span>Pause before expensive operations</span>
+            </div>
+            <div class="pattern-body">
+              <p>Insert "wait for user" checkpoints before web browsing, code execution, or file generation.</p>
+              <div class="pattern-code">
+                <pre><code>## Step 2: Research Plan
+After user confirms, produce:
+1. Output structure — sections
+2. Research tracks — 3-6 questions
+
+This is the **approval gate**.
+Wait for user to say "go"
+before browsing.</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> Next step is expensive (web search, code execution) or irreversible.
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-green)">
+            <div class="pattern-header">
+              <h3>Validation Gates</h3>
+              <span>Don't proceed until requirements met</span>
+            </div>
+            <div class="pattern-body">
+              <p>Block output generation until all required inputs are collected. Prevents incomplete or malformed output.</p>
+              <div class="pattern-code">
+                <pre><code>## CRITICAL CONSTRAINTS
+STRICT VALIDATION GATE —
+Do NOT generate document until
+ALL required fields have values.
+
+If ANY field missing:
+  Missing required fields:
+  - [field 1]
+  - [field 2]
+DO NOT PROCEED until provided.</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> Output quality depends on complete inputs.
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-violet)">
+            <div class="pattern-header">
+              <h3>Confirmation Before Action</h3>
+              <span>Show what you'll do → get approval</span>
+            </div>
+            <div class="pattern-body">
+              <p>Display collected values or planned actions for user review before executing.</p>
+              <div class="pattern-code">
+                <pre><code>### Step 5: Confirmation
+Display all collected values:
+
+Ready to generate [Template]:
+- Date: [value]
+- Client: [value]
+...
+
+Is this correct?
+(Say "yes" to generate)</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> Action produces a deliverable. User should see what they're getting.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 13: Priority Rules -->
+    <section class="slide" data-slide="13">
+      <div class="slide-content">
+        <h2>Priority Rules & Conflict Resolution</h2>
+        <p class="slide-intro">Every non-trivial GPT has instructions that conflict. If you don't specify a priority hierarchy, the model will resolve conflicts inconsistently across runs. Priority rules make behavior predictable and reviewable.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Example: Rule Hierarchy</span>
+            <button class="copy-btn" data-copy="priority">Copy</button>
+          </div>
+          <pre><code id="priority">## Rules
+When guidance conflicts, apply these rules in order (1 = highest priority):
+
+1. Transcript-first, zero inference
+   Every statement grounded in transcript. Never fabricate.
+
+2. Completeness over brevity
+   Capture all material figures, even if repetitive.
+
+3. Verbatim anchors
+   Preserve exact quotes for critical statements.
+
+4. Structure and organization
+   Conclusion-first bullets. Never reconstruct dialogue.
+
+5. Insights (if valuable)
+6. Omit non-substantive content</code></pre>
+        </div>
+
+        <div class="callout callout-example">
+          <div class="callout-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="callout-content">
+            <strong>Example Conflict:</strong> Rule 2 says "capture everything material." Rule 6 says "omit non-substantive content." When a detail is borderline, what wins?
+            <span class="resolution">Resolution: Rule 2 has higher priority. When in doubt, include it.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 14: Hybrid Architecture & Resilience -->
+    <section class="slide" data-slide="14">
+      <div class="slide-content">
+        <h2>Hybrid Architecture & Resilience</h2>
+        <p class="slide-intro">Use a hybrid architecture when output must be consistent: let the model extract and structure content, then use Python for deterministic generation. Build resilience so the GPT degrades cleanly under truncation, missing data, or tool failures.</p>
+
+        <div class="split-layout">
+          <div class="split-panel">
+            <h3 class="panel-header" style="background: var(--kpmg-violet)">Hybrid: Python + GPT</h3>
+            <div class="panel-content">
+              <p>GPT handles extraction and reasoning. Python handles deterministic output.</p>
+
+              <div class="flow-diagram">
+                <div class="flow-step" style="--flow-color: var(--kpmg-blue)">
+                  <span class="flow-label">GPT</span>
+                  <span class="flow-desc">Extract + reason</span>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step" style="--flow-color: var(--kpmg-violet)">
+                  <span class="flow-label">Python</span>
+                  <span class="flow-desc">Generate file</span>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step" style="--flow-color: var(--kpmg-green)">
+                  <span class="flow-label">.pptx</span>
+                  <span class="flow-desc">Consistent output</span>
+                </div>
+              </div>
+
+              <div class="mini-code">
+                <pre><code>## Slide Generation
+- Use only the internal glossary engine
+- Let engine handle slide count automatically
+- Never hand-craft slides or write PPTX code</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-panel">
+            <h3 class="panel-header" style="background: var(--color-red)">Resilience Patterns</h3>
+            <div class="panel-content">
+              <p>Production GPTs must handle edge cases gracefully:</p>
+
+              <div class="resilience-grid">
+                <div class="resilience-item">
+                  <span class="resilience-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </span>
+                  <div class="resilience-content">
+                    <strong>Truncation</strong>
+                    <span>Detect cutoff, offer "continue" option.</span>
+                  </div>
+                </div>
+                <div class="resilience-item">
+                  <span class="resilience-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  </span>
+                  <div class="resilience-content">
+                    <strong>Unclear input</strong>
+                    <span>Flag as open item, keep producing.</span>
+                  </div>
+                </div>
+                <div class="resilience-item">
+                  <span class="resilience-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </span>
+                  <div class="resilience-content">
+                    <strong>Missing data</strong>
+                    <span>Mark "[?]" or "Not disclosed" — never fabricate.</span>
+                  </div>
+                </div>
+                <div class="resilience-item">
+                  <span class="resilience-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  </span>
+                  <div class="resilience-content">
+                    <strong>Tool failure</strong>
+                    <span>Fall back to degraded mode, document it.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 15: Writing Style & Output Control -->
+    <section class="slide" data-slide="15">
+      <div class="slide-content">
+        <h2>Writing Style & Output Control</h2>
+        <p class="slide-intro">Models follow concrete constraints, not vague advice. Specify prohibited patterns with examples, set section-level word budgets, and explicitly ban preambles so outputs stay direct and consistent across runs.</p>
+
+        <div class="pattern-grid">
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-blue)">
+            <div class="pattern-header">
+              <h3>Prohibited Patterns</h3>
+              <span>Show what NOT to do with examples</span>
+            </div>
+            <div class="pattern-body">
+              <p>Don't just say "don't do X." Show the exact bad pattern and the exact fix.</p>
+              <div class="pattern-code">
+                <pre><code>## Dialogue Ban
+Never reconstruct dialogue flow.
+
+❌ "When asked about X, response was Y"
+✓ "Y."
+
+❌ "CFO noted..." "Jane said..."
+✓ State facts directly</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-green)">
+            <div class="pattern-header">
+              <h3>Word Budgets</h3>
+              <span>Explicit length per section</span>
+            </div>
+            <div class="pattern-body">
+              <p>Don't say "be concise." Give exact word counts for each section.</p>
+              <div class="pattern-code">
+                <pre><code>## Section Budgets
+TARGET: 9-10 pages (~4,500 words)
+
+| Section           | Words     |
+|-------------------|-----------|
+| Company Overview  | 250-350   |
+| Industry Context  | 1200-1500 |
+| Financial Summary | 400-500   |
+| Diligence Playbook| 1200-1600 |</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--color-orange)">
+            <div class="pattern-header">
+              <h3>Skip Preambles</h3>
+              <span>Straight to the content</span>
+            </div>
+            <div class="pattern-body">
+              <p>Models love to say "Here are the notes..." Ban this explicitly.</p>
+              <div class="do-dont">
+                <div class="dont">❌ "Based on the transcript, here are the meeting notes..."</div>
+                <div class="do">✓ "# Revenue Discussion<br><br>FY24 revenue reached $45.2M..."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-principle">
+          <div class="callout-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="callout-content">
+            <strong>The principle:</strong> Writing style rules need to be specific and example-driven. "Be concise" doesn't work. "Section X should be 200-300 words" does.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 16: Anti-Patterns Gallery -->
+    <section class="slide slide-antipatterns" data-slide="16">
+      <div class="slide-content wide">
+        <h2>Anti-Patterns Gallery</h2>
+        <p class="slide-intro">These are recurring production failures caused by underspecified prompts. Treat each as a trigger: when you see the behavior, add a targeted guardrail with a concrete wrong/right example and a test case so the fix sticks.</p>
+
+        <div class="antipattern-grid">
+          <div class="antipattern-card">
+            <h4>Over-Elaboration</h4>
+            <p><strong>Problem:</strong> When users give brief input, the model invents detailed substeps, formulas, or verification steps they never asked for. This wastes time and creates noise.</p>
+            <div class="ap-bad">User: "Roll forward databook"<br>→ GPT outputs 4 substeps with formulas, verification checks, reconciliation steps</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Mirror the user's level of specificity. A brief request gets a brief response: "Add Jul-25 column to IS and BS tabs."
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Dialogue Reconstruction</h4>
+            <p><strong>Problem:</strong> The model narrates the back-and-forth of a conversation instead of stating facts directly. This wastes words and buries the actual information.</p>
+            <div class="ap-bad">"When asked about revenue, the CFO said it grew 15% year-over-year"</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> State facts directly without attribution: "Revenue grew 15% YoY." Use a guardrail to ban dialogue reconstruction patterns.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Explaining the Obvious</h4>
+            <p><strong>Problem:</strong> The model defines concepts that domain experts already understand. This wastes space and can come across as condescending.</p>
+            <div class="ap-bad">"Build opening/activity/ending where:<br>• Opening = beginning balance..."</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Trust the expert knows standard formats. Say "Build opening/activity/ending by vendor" without definitions.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Assurance Language</h4>
+            <p><strong>Problem:</strong> The model uses words that imply guarantees or professional opinions, which can create liability issues in professional contexts.</p>
+            <div class="ap-bad">"ensure," "accurate," "fair,"<br>"we believe," "appears to be"</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Use data-anchored language instead: "the data indicates," "results in," "the calculation shows." Add these to your ban list.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Vague Magnitudes</h4>
+            <p><strong>Problem:</strong> Using words like "significant" or "substantial" without numbers provides no actual information. It sounds meaningful but says nothing.</p>
+            <div class="ap-bad">"Revenue increased significantly"<br>"Substantial improvement in margins"</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Always anchor to exact figures: "Revenue increased 15% ($3.2M)." Add a validation check requiring numbers for any claim.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Invented Requirements</h4>
+            <p><strong>Problem:</strong> The model adds steps, checks, or columns that the user never requested, trying to be "helpful" but actually creating extra work.</p>
+            <div class="ap-bad">User says "standard columns"<br>→ GPT lists out 12 specific columns</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Don't invent what wasn't specified. Output "with standard columns" and let the user define if needed.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Hedge Stacking</h4>
+            <p><strong>Problem:</strong> The model piles on qualifiers until statements become meaningless. Excessive hedging destroys the value of the output.</p>
+            <div class="ap-bad">"It may potentially be possible that this could perhaps indicate..."</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Allow one hedge maximum, then commit: "This suggests..." or "The data shows..." Ban multiple hedges in sequence.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Permission Seeking</h4>
+            <p><strong>Problem:</strong> The model asks if the user wants something obvious before doing it, creating unnecessary friction and slowing down work.</p>
+            <div class="ap-bad">"Would you like me to summarize this?"<br>"Should I include the key points?"</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Just do the obvious task. Offer adjustments after: "Here's the summary. Want any changes?" Use sensible defaults.
+            </div>
+          </div>
+
+          <div class="antipattern-card">
+            <h4>Scope Creep</h4>
+            <p><strong>Problem:</strong> The model expands beyond what was requested to be "thorough," adding unrequested analysis that bloats the output.</p>
+            <div class="ap-bad">Asked for revenue analysis<br>→ Also adds cost structure, competitive positioning, market trends</div>
+            <div class="ap-fix">
+              <span class="ap-fix-label">Better</span>
+              <strong>Remediation:</strong> Answer exactly what was asked, nothing more. Offer to expand if relevant: "Want me to add cost analysis?"
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 17: Python Scripts & Code Execution -->
+    <section class="slide" data-slide="17">
+      <div class="slide-content">
+        <h2>Python Scripts & Code Execution</h2>
+        <p class="slide-intro">Use Python when the output must be deterministic: calculations, data transformations, and file generation where formatting and numbers must be repeatable. In ChatGPT, Code Interpreter provides a controlled Python runtime for these operations.</p>
+
+        <div class="pattern-grid">
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-blue)">
+            <div class="pattern-header">
+              <h3>When to Use Python</h3>
+              <span>Deterministic operations</span>
+            </div>
+            <div class="pattern-body">
+              <p>Python shines for tasks where consistency matters more than creativity:</p>
+              <div class="pattern-code">
+                <pre><code>## Use Python For:
+- Financial calculations (margins, growth rates)
+- Data transformations (pivot, aggregate)
+- File generation (PPTX, XLSX, PDF)
+- Structured data extraction
+- Date/time calculations
+- Number formatting</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Key insight:</strong> If you need the same input to always produce the exact same output, use Python.
+              </div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-green)">
+            <div class="pattern-header">
+              <h3>Script in Knowledge Files</h3>
+              <span>Reusable code modules</span>
+            </div>
+            <div class="pattern-body">
+              <p>Store Python functions in knowledge files and instruct the GPT when to use them:</p>
+              <div class="pattern-code">
+                <pre><code># calculate_metrics.py
+def calculate_growth(current, prior):
+    """Calculate YoY growth rate."""
+    if prior == 0:
+        return None
+    return (current - prior) / prior
+
+def format_currency(value):
+    """Format as $XM or $Xk."""
+    if abs(value) >= 1_000_000:
+        return f"${value/1_000_000:.1f}M"
+    return f"${value/1_000:.0f}k"</code></pre>
+              </div>
+              <div class="pattern-benefit">✓ Consistent calculations across all sessions</div>
+            </div>
+          </div>
+
+          <div class="pattern-card" style="--pattern-color: var(--kpmg-violet)">
+            <div class="pattern-header">
+              <h3>Document Generation</h3>
+              <span>PPTX, XLSX, PDF output</span>
+            </div>
+            <div class="pattern-body">
+              <p>For branded deliverables, use Python to generate documents from templates:</p>
+              <div class="pattern-code">
+                <pre><code>## Document Workflow
+1. GPT extracts key data points
+2. GPT structures into JSON schema
+3. Python script generates PPTX
+   using python-pptx library
+4. Apply KPMG template styling
+5. Return downloadable file
+
+NEVER manually write slide XML</code></pre>
+              </div>
+              <div class="pattern-when">
+                <strong>Use when:</strong> Output must match exact brand formatting or template structure.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-tip">
+          <div class="callout-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="callout-content">
+            <strong>Testing tip:</strong> Before deploying, test your Python scripts independently with edge cases: zero values, negative numbers, missing data, extremely large numbers. The GPT will call your code with whatever the user provides.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 18: Build Checklist & Summary -->
+    <section class="slide slide-checklist" data-slide="18">
+      <div class="slide-content wide">
+        <div class="remember-hero">
+          <h2 class="remember-title">Remember These 3 Things</h2>
+          <div class="remember-grid">
+            <div class="remember-card">
+              <span class="remember-num">1</span>
+              <div class="remember-content">
+                <strong>Spec First, Prompt Second</strong>
+                <p>Define inputs, outputs, and constraints before writing a single line of your system prompt.</p>
+              </div>
+            </div>
+            <div class="remember-card">
+              <span class="remember-num">2</span>
+              <div class="remember-content">
+                <strong>Show, Don't Tell</strong>
+                <p>Abstract rules get ignored. Concrete examples of wrong → right behavior get followed.</p>
+              </div>
+            </div>
+            <div class="remember-card">
+              <span class="remember-num">3</span>
+              <div class="remember-content">
+                <strong>Behavior ≠ Reference</strong>
+                <p>System prompt defines HOW to act. Knowledge files provide WHAT to use. Keep them separate.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Build Checklist</h2>
+        <p class="slide-intro">Treat a GPT launch like any production release: validate scope, constraints, and failure handling before users do. The critical items below are the minimum bar for consistent behavior and predictable outputs.</p>
+
+        <div class="checklist-grid">
+          <div class="checklist-section">
+            <h3><span class="checklist-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </span> Planning</h3>
+            <ul class="checklist">
+              <li class="critical"><span class="check"></span> GPT type identified (Rule-Based / Workflow-Based)</li>
+              <li class="critical"><span class="check"></span> Written spec with inputs, outputs, constraints</li>
+              <li><span class="check"></span> Success criteria defined and testable</li>
+              <li><span class="check"></span> Test cases for common + edge cases</li>
+              <li><span class="check"></span> Anti-patterns documented with examples</li>
+            </ul>
+          </div>
+
+          <div class="checklist-section">
+            <h3><span class="checklist-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </span> System Prompt</h3>
+            <ul class="checklist">
+              <li class="critical"><span class="check"></span> Role boundaries: what it does AND doesn't do</li>
+              <li class="critical"><span class="check"></span> Guardrails: ban lists WITH substitutions</li>
+              <li class="critical"><span class="check"></span> Priority rules for conflict resolution</li>
+              <li><span class="check"></span> Output format explicitly specified</li>
+              <li><span class="check"></span> Validation checklist (model self-checks)</li>
+              <li><span class="check"></span> Under 8,000 characters</li>
+            </ul>
+          </div>
+
+          <div class="checklist-section">
+            <h3><span class="checklist-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </span> Architecture</h3>
+            <ul class="checklist">
+              <li class="critical"><span class="check"></span> Behavior in prompt, reference in files</li>
+              <li><span class="check"></span> Progressive disclosure: files load on demand</li>
+              <li><span class="check"></span> Knowledge files under 20, consolidated</li>
+              <li><span class="check"></span> Approval gates before expensive operations</li>
+              <li><span class="check"></span> Resilience: truncation handling, fallbacks</li>
+              <li><span class="check"></span> Mode detection if multiple workflows exist</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="summary-section">
+          <h3 class="summary-title">Key Takeaways</h3>
+          <div class="summary-points">
+            <div class="summary-point">
+              <span class="summary-point-num">1</span>
+              <span class="summary-point-text"><strong>Start with the spec</strong> Define inputs, outputs, constraints, and success criteria before touching the system prompt.</span>
+            </div>
+            <div class="summary-point">
+              <span class="summary-point-num">2</span>
+              <span class="summary-point-text"><strong>Match architecture to task</strong> Rule-based for compliance, workflow-based for research. Mixing them causes failures.</span>
+            </div>
+            <div class="summary-point">
+              <span class="summary-point-num">3</span>
+              <span class="summary-point-text"><strong>Be specific, not abstract</strong> "Be concise" doesn't work. "Section X: 200-300 words" does.</span>
+            </div>
+            <div class="summary-point">
+              <span class="summary-point-num">4</span>
+              <span class="summary-point-text"><strong>Guardrails need examples</strong> Show the wrong output and the exact fix. Abstract rules get ignored.</span>
+            </div>
+            <div class="summary-point">
+              <span class="summary-point-num">5</span>
+              <span class="summary-point-text"><strong>Priority rules resolve conflicts</strong> When rules conflict, the model needs to know which one wins.</span>
+            </div>
+            <div class="summary-point">
+              <span class="summary-point-num">6</span>
+              <span class="summary-point-text"><strong>Separate behavior from reference</strong> System prompt = HOW to act. Knowledge files = WHAT to use.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Keyboard shortcuts hint -->
+  <div class="shortcuts-hint" id="shortcutsHint">
+    <kbd>←</kbd> <kbd>→</kbd> Navigate &nbsp;|&nbsp; <kbd>M</kbd> Menu &nbsp;|&nbsp; <kbd>F</kbd> Fullscreen
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

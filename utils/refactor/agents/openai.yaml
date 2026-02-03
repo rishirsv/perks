@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactor"
+  short_description: "Choose the single highest-ROI refactor"
+  default_prompt: "Use $refactor to find the single highest-value refactor (value vs cost/risk) and output an evidence-backed plan citing file paths."

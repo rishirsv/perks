@@ -1,0 +1,79 @@
+# Codex Configuration - Permissive Setup
+# Location: ~/.codex/config.toml
+
+################################################################################
+# Approval & Sandbox (fully permissive)
+################################################################################
+
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+model = "gpt-5.2"
+model_reasoning_effort = "high"
+model_personality = "friendly"
+personality = "pragmatic"
+
+[sandbox_workspace_write]
+writable_roots = []
+network_access = true
+exclude_tmpdir_env_var = false
+exclude_slash_tmp = false
+
+################################################################################
+# Web Search (live mode for real-time results)
+################################################################################
+
+web_search = "live"
+
+################################################################################
+# Feature Flags (everything enabled)
+################################################################################
+
+[features]
+undo = true
+unified_exec = true
+shell_snapshot = true
+apps = true
+steer = true
+
+################################################################################
+# Shell Environment Policy (inherit everything)
+################################################################################
+
+[shell_environment_policy]
+inherit = "all"
+ignore_default_excludes = true
+exclude = []
+set = {}
+include_only = []
+experimental_use_profile = true
+suppress_unstable_features_warning = true
+
+################################################################################
+# History (save everything)
+################################################################################
+
+[history]
+persistence = "save-all"
+# max_bytes = 0
+
+################################################################################
+# UI & Notifications
+################################################################################
+
+file_opener = "vscode"
+check_for_update_on_startup = true
+
+[tui]
+notifications = true
+animations = true
+show_tooltips = true
+
+[notice]
+hide_full_access_warning = true
+hide_world_writable_warning = true
+hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.2" = "gpt-5.2-codex"
+
+

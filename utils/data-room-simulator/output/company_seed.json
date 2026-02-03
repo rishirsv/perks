@@ -1,0 +1,371 @@
+{
+  "metadata": {
+    "generated_at": "2026-01-07T00:33:43.878762",
+    "generator_version": "1.0.0",
+    "industry": "saas",
+    "size": "mid",
+    "realism_mode": "realistic"
+  },
+  "company": {
+    "name": "ImageRecent Systems",
+    "legal_name": "ImageRecent Systems, Inc.",
+    "industry": "saas",
+    "industry_display": "Software-as-a-Service",
+    "vertical": "FinTech",
+    "founded": 2008,
+    "headquarters": {
+      "city": "San Jose",
+      "state": "California",
+      "country": "United States",
+      "address": "585 Norton Mews",
+      "zip_code": "67801"
+    },
+    "website": "www.imagerecentsystems.com"
+  },
+  "brand": {
+    "primary_color": "#0891B2",
+    "secondary_color": "#06B6D4",
+    "accent_color": "#22D3EE",
+    "font_family": "Inter",
+    "font_family_mono": "JetBrains Mono"
+  },
+  "management": [
+    {
+      "title": "Chief Executive Officer",
+      "short_title": "CEO",
+      "name": "Antonio Torres",
+      "years_at_company": 13,
+      "background": "Former VP at Williams PLC"
+    },
+    {
+      "title": "Chief Financial Officer",
+      "short_title": "CFO",
+      "name": "Shane Harris",
+      "years_at_company": 10,
+      "background": "Former Controller at Mata Ltd"
+    },
+    {
+      "title": "Chief Operating Officer",
+      "short_title": "COO",
+      "name": "Ashley Anderson",
+      "years_at_company": 3,
+      "background": "Former VP Operations at Ruiz, Harmon and Stanley"
+    },
+    {
+      "title": "VP of Sales",
+      "short_title": "VP Sales",
+      "name": "Jared Thompson",
+      "years_at_company": 3,
+      "background": "Former Sales Director at West LLC"
+    },
+    {
+      "title": "VP of Engineering",
+      "short_title": "VP Eng",
+      "name": "Tom Stewart",
+      "years_at_company": 8,
+      "background": "Former Engineering Director at Rosales and Sons"
+    }
+  ],
+  "story": {
+    "founding_narrative": "Started in 2008 by Hayley Moss, the company began as a small operation focused on fintech.",
+    "founder_name": "Hayley Moss",
+    "milestones": [
+      {
+        "year": 2010,
+        "title": "First major contract",
+        "description": "Landed first enterprise customer: Hawkins, Meyer and Jackson"
+      },
+      {
+        "year": 2012,
+        "title": "Key hire",
+        "description": "Brought on experienced leadership team from industry"
+      },
+      {
+        "year": 2013,
+        "title": "Geographic expansion",
+        "description": "Expanded operations to Midwest"
+      },
+      {
+        "year": 2015,
+        "title": "Award",
+        "description": "Recognized as top fintech provider in region"
+      }
+    ],
+    "market_position": "Leading regional provider in the fintech space",
+    "why_selling": "Strategic review identified M&A as optimal path for next growth phase",
+    "years_in_business": 18
+  },
+  "financials": {
+    "annual_revenue": 81700000,
+    "gross_margin": 0.792,
+    "headcount": 198,
+    "revenue_per_employee": 412626.0,
+    "fiscal_year_end": "December 31",
+    "years_of_history": 5
+  },
+  "events": [
+    {
+      "date": "2021-02-06",
+      "type": "customer_win",
+      "description": "New customer: Gray Group",
+      "revenue_impact": 3664395.0,
+      "recurring": true
+    },
+    {
+      "date": "2021-03-25",
+      "type": "customer_win",
+      "description": "New customer: Sampson, Boyd and Shaw",
+      "revenue_impact": 3200196.0,
+      "recurring": true
+    },
+    {
+      "date": "2021-09-26",
+      "type": "customer_win",
+      "description": "New customer: Miller, Doyle and Brewer",
+      "revenue_impact": 1650768.0,
+      "recurring": true
+    },
+    {
+      "date": "2021-12-09",
+      "type": "customer_win",
+      "description": "New customer: Cabrera, Powell and Edwards",
+      "revenue_impact": 2223365.0,
+      "recurring": true
+    },
+    {
+      "date": "2021-12-25",
+      "type": "customer_win",
+      "description": "New customer: Walters-Boyd",
+      "revenue_impact": 1039944.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-01-05",
+      "type": "customer_win",
+      "description": "New customer: Wagner LLC",
+      "revenue_impact": 1646367.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-04-20",
+      "type": "customer_win",
+      "description": "New customer: Ellis LLC",
+      "revenue_impact": 3004769.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-05-13",
+      "type": "customer_win",
+      "description": "New customer: Pace Inc",
+      "revenue_impact": 1186723.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-05-25",
+      "type": "customer_win",
+      "description": "New customer: Pierce, Diaz and Peterson",
+      "revenue_impact": 2343907.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-05-28",
+      "type": "customer_win",
+      "description": "New customer: Liu and Sons",
+      "revenue_impact": 2190561.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-06-24",
+      "type": "customer_win",
+      "description": "New customer: Miller-Richardson",
+      "revenue_impact": 1713312.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-07-12",
+      "type": "customer_win",
+      "description": "New customer: Burgess LLC",
+      "revenue_impact": 3476860.0,
+      "recurring": true
+    },
+    {
+      "date": "2022-10-04",
+      "type": "legal",
+      "description": "Legal settlement",
+      "financial_impact": -1134235.0,
+      "one_time": true
+    },
+    {
+      "date": "2022-11-17",
+      "type": "customer_win",
+      "description": "New customer: Rodriguez, Griffin and Gordon",
+      "revenue_impact": 1389887.0,
+      "recurring": true
+    },
+    {
+      "date": "2023-01-03",
+      "type": "customer_win",
+      "description": "New customer: Davis, Johnson and Hanson",
+      "revenue_impact": 1747523.0,
+      "recurring": true
+    },
+    {
+      "date": "2023-08-01",
+      "type": "customer_win",
+      "description": "New customer: Lopez, Bell and Ellis",
+      "revenue_impact": 1025672.0,
+      "recurring": true
+    },
+    {
+      "date": "2023-09-20",
+      "type": "customer_loss",
+      "description": "Lost customer: Brown Ltd",
+      "revenue_impact": -1374612.0,
+      "reason": "Customer M&A"
+    },
+    {
+      "date": "2023-10-15",
+      "type": "customer_win",
+      "description": "New customer: Pierce, Donaldson and Jimenez",
+      "revenue_impact": 3108554.0,
+      "recurring": true
+    },
+    {
+      "date": "2023-11-26",
+      "type": "insurance",
+      "description": "Insurance claim recovery",
+      "financial_impact": 586004.0,
+      "one_time": true
+    },
+    {
+      "date": "2023-12-14",
+      "type": "customer_win",
+      "description": "New customer: Rose-Owens",
+      "revenue_impact": 1865803.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-01-12",
+      "type": "customer_win",
+      "description": "New customer: Johnson, Morrison and Lyons",
+      "revenue_impact": 1473278.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-02-10",
+      "type": "customer_win",
+      "description": "New customer: Moore-Howell",
+      "revenue_impact": 3001184.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-10-22",
+      "type": "customer_win",
+      "description": "New customer: Collier and Sons",
+      "revenue_impact": 2169327.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-11-04",
+      "type": "customer_win",
+      "description": "New customer: Buck and Sons",
+      "revenue_impact": 3212248.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-11-14",
+      "type": "customer_win",
+      "description": "New customer: Cochran, Fisher and Chen",
+      "revenue_impact": 1743459.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-12-01",
+      "type": "customer_win",
+      "description": "New customer: Garcia-Guzman",
+      "revenue_impact": 2689338.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-12-22",
+      "type": "customer_win",
+      "description": "New customer: Ortega-Smith",
+      "revenue_impact": 2570954.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-12-25",
+      "type": "legal",
+      "description": "Legal settlement",
+      "financial_impact": -823723.0,
+      "one_time": true
+    },
+    {
+      "date": "2025-02-13",
+      "type": "customer_win",
+      "description": "New customer: Williams, Shaw and Taylor",
+      "revenue_impact": 3482308.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-04-16",
+      "type": "customer_win",
+      "description": "New customer: James, Parsons and Wilson",
+      "revenue_impact": 1907545.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-06-11",
+      "type": "customer_win",
+      "description": "New customer: Davis, Brewer and Jones",
+      "revenue_impact": 1088497.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-07-16",
+      "type": "customer_win",
+      "description": "New customer: Morrow, Harris and Gonzalez",
+      "revenue_impact": 3283524.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-10-05",
+      "type": "customer_win",
+      "description": "New customer: Pierce-Wells",
+      "revenue_impact": 2231227.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-01-25",
+      "type": "customer_win",
+      "description": "New customer: Wagner Inc",
+      "revenue_impact": 3757045.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-04-01",
+      "type": "customer_win",
+      "description": "New customer: Thornton-Brown",
+      "revenue_impact": 3250284.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-10-01",
+      "type": "customer_win",
+      "description": "New customer: Vazquez, Barry and Gomez",
+      "revenue_impact": 2067853.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-12-09",
+      "type": "customer_win",
+      "description": "New customer: Gibson, Johnson and Ritter",
+      "revenue_impact": 1404125.0,
+      "recurring": true
+    }
+  ],
+  "profile_reference": "profiles/saas.json",
+  "operations": {
+    "customer_count": 223
+  }
+}
