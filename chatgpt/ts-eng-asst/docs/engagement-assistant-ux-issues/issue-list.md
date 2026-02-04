@@ -174,7 +174,7 @@ This is based on the current schema as of 2/3/2026:
 
 ### Current supported industries (schema options)
 Currently supported `INDUSTRY` keys (from `chatgpt/TS-SoW/dist/el-placeholder-schema.json`):
-- `construction`, `eyecare`, `healthcare`, `hvac`, `manufacturing`, `prof_services`, `real_estate`, `service`, `supermarket`, `tech`, `transportation`
+- `construction`, `eyecare`, `healthcare`, `hvac`, `manufacturing`, `prof_services`, `real_estate`, `service`, `supermarket`, `tech`, `transportation`, `retail`, `banking`, `insurance`, `telecomm`, `aerospace`, `building`, `generic`
 
 ### “Top 15 by revenue” industries identified (from “Revenue by Industry” workbook)
 Top 15 (as labeled in the workbook):
@@ -196,24 +196,15 @@ Top 15 (as labeled in the workbook):
 
 ### Missing from current support (to add)
 Industries from the top 15 that are **not** currently supported as explicit `INDUSTRY` options:
-- Retail
-- Priv Equity
-- Asset Mgmt
-- Misc
-- Holding
-- Pensions
-- Banking
-- Insurance
-- Building
-- Telecomm
-- Aerospace
+- None (all Top-15 *operating industries* are now supported as explicit `INDUSTRY` options).
 
 Notes:
 - “Technology” is covered by `tech`.
 - “Ind Mfctg” is covered by `manufacturing`.
 - “Health” is covered by `healthcare`.
 - “Transport” is covered by `transportation`.
-- Today “Retail / consumer retail” is effectively mapped to `supermarket` in conversation. Decide whether to add `retail` explicitly (even if it maps to the same scope module initially) to avoid surprising users.
+- `retail` is now a first-class `INDUSTRY` option; any non-exact industry input should be confirmed explicitly (no silent “closest match” mapping).
+- “Priv Equity”, “Asset Mgmt”, “Misc”, “Holding”, “Pensions” are revenue-segment categories and are intentionally not modeled as `INDUSTRY` (which is the target operating industry).
 
 ### Work required to add missing industries
 - Add new `INDUSTRY` keys to `el-placeholder-schema.json` (with user-friendly labels and any aliases).

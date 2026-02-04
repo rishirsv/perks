@@ -264,6 +264,9 @@ def build_template_js(
  * Generated: {generated_at}
  */
 
+import fs from 'node:fs';
+import path from 'node:path';
+import {{ fileURLToPath }} from 'node:url';
 import PptxGenJS from 'pptxgenjs';
 
 import {{ addCover }} from '../../generator/builders/cover.js';
@@ -276,6 +279,18 @@ import {{ addTitleStrapline4TextBoxes }} from '../../generator/builders/process.
 import {{ addBackCover }} from '../../generator/builders/back-cover.js';
 import {{ addOneColumnText }} from '../../generator/builders/one-column.js';
 import {{ paginateDeckSpec }} from '../../generator/runtime/paginate.js';
+import {{ svgToDataUri }} from '../../generator/helpers/svg.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const FOOTER_LOGO_PATH = path.join(__dirname, 'assets', 'kpmg-logo.svg');
+const FOOTER_LOGO_DATA = fs.existsSync(FOOTER_LOGO_PATH)
+  ? svgToDataUri(fs.readFileSync(FOOTER_LOGO_PATH, 'utf8'))
+  : null;
+const FOOTER_GEOMETRY = {{
+  logo: {{ x: 1.097, y: 6.854, w: 0.53, h: 0.213 }},
+  slideNumber: {{ x: 11.971, y: 6.854, w: 0.265, h: 0.163 }},
+}};
 
 export const TOKENS = {tokens_js};
 export const ASSETS = {assets_js};
@@ -369,10 +384,14 @@ function defineMasters(pptx) {{
   const white = TOKENS?.colors?.semantic?.bgLight || 'FFFFFF';
 
   // Default white master (base for most content slides).
+  const footerObjects = FOOTER_LOGO_DATA
+    ? [{{ image: {{ data: FOOTER_LOGO_DATA, ...FOOTER_GEOMETRY.logo }} }}]
+    : [];
   pptx.defineSlideMaster({{
     title: 'KPMG_WHITE',
     background: {{ color: white }},
-    slideNumber: {{ x: 12.5, y: '95%', fontFace: 'Arial', fontSize: 8, color: '666666' }},
+    slideNumber: {{ ...FOOTER_GEOMETRY.slideNumber, fontFace: 'Arial', fontSize: 8, color: '666666' }},
+    objects: footerObjects,
   }});
 
   // Cover master: solid KPMG blue.

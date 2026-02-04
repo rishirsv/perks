@@ -42,12 +42,22 @@ function collectMissingSlots(deckSpec) {
 
 function runStrictOverflow(pptxPath, outDir) {
   const scriptPath = path.resolve('qa', 'strict_overflow.py');
-  const result = spawnSync(
-    'python3',
-    [scriptPath, pptxPath, '--out', outDir],
-    { stdio: 'inherit' },
-  );
-  return { status: result.status ?? 1 };
+  const result = spawnSync('python3', [scriptPath, pptxPath, '--out', outDir], { encoding: 'utf8' });
+  const status = result.status ?? 1;
+  if (status === 0) return { status: 0 };
+
+  const combined = `${result.stdout || ''}\n${result.stderr || ''}`;
+  if (/No module named ['"]numpy['"]/.test(combined)) {
+    const msg = 'Strict overflow check skipped: optional dependency `numpy` is not installed.';
+    console.warn(msg);
+    recordWarning(msg);
+    return { status: 0, skipped: true, reason: 'missing_numpy' };
+  }
+
+  // Show error details for unexpected failures.
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+  return { status };
 }
 
 export async function generateToFile(deckSpec, outPath, options = {}) {

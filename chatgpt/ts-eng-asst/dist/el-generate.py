@@ -1147,7 +1147,10 @@ def main():
             with open(args.scope_selection, "r") as f:
                 scope_selection = json.load(f)
         else:
-            scope_selection = json.loads(args.scope_selection)
+            try:
+                scope_selection = json.loads(args.scope_selection)
+            except json.JSONDecodeError:
+                scope_selection = None
 
     result = generate_engagement_letter(
         template_file=args.template,

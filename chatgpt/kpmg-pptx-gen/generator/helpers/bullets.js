@@ -70,7 +70,7 @@ export function toBulletRuns(lines) {
     return [{ text: safeText(text), options: { ...paraOpts, breakLine: true } }];
   }
 
-  function headerRuns(text) {
+  function headerRuns(text, { gapBefore = false } = {}) {
     const clean = safeText(text).trim();
     if (!clean) return [];
     return [
@@ -79,6 +79,7 @@ export function toBulletRuns(lines) {
         options: {
           bold: true,
           color: COLORS.kpmgBlue,
+          ...(gapBefore ? { paraSpaceBefore: 14 } : {}),
           paraSpaceAfter: BULLETS.paraSpaceAfterPt,
           breakLine: true,
         },
@@ -87,6 +88,7 @@ export function toBulletRuns(lines) {
   }
 
   const runs = [];
+  let prdHeaderCount = 0;
   for (let i = 0; i < lines.length; i++) {
     const item = lines[i];
     if (Array.isArray(item)) {
@@ -120,7 +122,11 @@ export function toBulletRuns(lines) {
     }
 
     if (isHeaderLine(item)) {
-      runs.push(...headerRuns(item));
+      const clean = safeText(item).trim();
+      const isPrdHeader = ['Problem:', 'How we solve it:', 'Outcome / ROI:'].includes(clean);
+      const gapBefore = isPrdHeader && prdHeaderCount > 0;
+      if (isPrdHeader) prdHeaderCount += 1;
+      runs.push(...headerRuns(item, { gapBefore }));
       continue;
     }
 
