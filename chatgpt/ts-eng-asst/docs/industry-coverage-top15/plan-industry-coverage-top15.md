@@ -21,8 +21,8 @@
 - [x] 2.0 Expand `INDUSTRY` schema choices for missing operating industries
   - [x] 2.1 Add: `retail`, `banking`, `insurance`, `telecomm`, `aerospace`, `building`, plus `generic`
 - [x] 3.0 Expand the flat scope library with initial modules for new industries
-  - [x] 3.1 Add new `industry_modules` entries in `reference/fdd_scope_library.json`
-  - [x] 3.2 Rebuild `dist/fdd_scope_library.v2.json`
+  - [x] 3.1 Add new `industry_modules` entries in `dist/fdd_scope_library.authoring.v1_1.json`
+  - [x] 3.2 Rebuild `dist/fdd_scope_library.bundle.v1_1.json`
 - [x] 4.0 Create per-industry exports from the dist bundle
   - [x] 4.1 Export `docs/scope-library/industries/<industry>.json`
   - [x] 4.2 Export `docs/scope-library/industries/<industry>.md`

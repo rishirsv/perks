@@ -1,15 +1,15 @@
 """
-Build a v2 nested scope library (no text changes).
+Build a nested bundle scope library from the flat authoring file (no text changes).
 
-Reads a flat `fdd_scope_library.json` and produces a v2 file that:
+Reads a flat authoring file and produces a bundle file that:
 - Preserves all bullet text verbatim
 - Adds explicit parent/child nesting
 - Assigns sequential ids to top-level bullets (scope.001, scope.002, ...)
 
 Usage:
   python3 scripts/build-fdd-scope-v2.py \
-    --in reference/fdd_scope_library.json \
-    --out dist/fdd_scope_library.v2.json
+    --in dist/fdd_scope_library.authoring.v1_1.json \
+    --out dist/fdd_scope_library.bundle.v1_1.json
 """
 
 from __future__ import annotations
@@ -117,7 +117,7 @@ def _parse_scope_bullets(bullets: list[Any]) -> list[ScopeNode]:
 
 
 def _assign_ids(nodes: list[ScopeNode], next_id: int) -> tuple[list[dict[str, Any]], int]:
-    """Return v2 bullet objects with sequential ids for top-level nodes."""
+    """Return bundle bullet objects with sequential ids for top-level nodes."""
     out: list[dict[str, Any]] = []
     for node in nodes:
         item: dict[str, Any] = {
@@ -143,7 +143,7 @@ def _to_children(nodes: list[ScopeNode]) -> list[dict[str, Any]]:
 
 
 def _flatten_v2_bullets(bullets: Iterable[dict[str, Any]]) -> list[str]:
-    """Flatten v2 bullet objects into a preorder list of text strings."""
+    """Flatten bundle bullet objects into a preorder list of text strings."""
     out: list[str] = []
 
     def walk(items: Iterable[dict[str, Any]]) -> None:
@@ -210,8 +210,11 @@ def _validate_no_text_changes(original: dict[str, Any], updated: dict[str, Any])
 
 
 def build_v2(scope_library: dict[str, Any]) -> dict[str, Any]:
-    """Build a v2 nested scope library with sequential top-level ids."""
+    """Build a nested bundle scope library with sequential top-level ids."""
     out = copy.deepcopy(scope_library)
+    # Explicitly label the runtime bundle artifact.
+    out["library_format"] = "bundle_nested"
+    out["library_filename"] = "fdd_scope_library.bundle.v1_1.json"
     next_id = 1
 
     # Common skeleton
@@ -239,7 +242,7 @@ def build_v2(scope_library: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build v2 nested scope library")
+    parser = argparse.ArgumentParser(description="Build nested bundle scope library")
     parser.add_argument("--in", dest="input_path", required=True, help="Path to input scope library JSON")
     parser.add_argument("--out", dest="output_path", required=True, help="Path to output v2 scope library JSON")
     args = parser.parse_args()

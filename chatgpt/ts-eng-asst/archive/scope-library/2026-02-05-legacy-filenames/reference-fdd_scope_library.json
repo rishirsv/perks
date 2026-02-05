@@ -15,18 +15,18 @@
       "heading": "Accounting overview",
       "normalized_heading": "accounting_overview",
       "default_bullets": [
+        "Understand and summarize the financial statement preparation process, including:",
+        "Understand the Target's financial statement preparation process including:",
         "Read Target's financial statements and discuss Target's accounting policies and practices with management, including:",
-        "Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems);",
-        "Significant accounting policies and recent or contemplated changes in accounting principles, procedures, or estimates;",
-        "Significant accounting estimates (e.g. bad debt provision, rebates, capitalized R&D, etc.); and",
-        "Intercompany accounts and related party transactions, if any.",
-        "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent.",
+        "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Target resources).",
         "Consider if the following accounting policies have been applied consistently within and across historical periods:",
-        "Cash versus accrual accounting policies;",
-        "Capitalization policies;",
-        "Depreciation policies; and",
-        "Differences between interim and year-end procedures; and",
-        "Revenue recognition policies;"
+        "Finance function, financial reporting framework, and management reporting relationships (including process, timing, structure of financial reporting, and interaction with the information/ accounting systems);",
+        "Significant accounting policies and recent or contemplated changes in accounting principles, procedures, or estimates;",
+        "Reporting methodology;",
+        "Revenue recognition;",
+        "Significant accounting estimates;",
+        "Intercompany accounts and related party transactions;",
+        "Reconciliation of management's internal financial reporting packages to the audited financial statements; and"
       ]
     },
     {
@@ -60,7 +60,6 @@
         "Seasonal fluctuations in demand and monthly sales trends; and",
         "Obtain and read an analysis of Target's revenue and inquire about:",
         "Gross to net revenue;",
-        "Revenue recognition policies;",
         "Revenue and gross margin by customer;",
         "Organic growth and delineation between price vs. volume;",
         "Pricing practices;",
@@ -126,25 +125,27 @@
       ]
     },
     {
-      "heading": "Commitments and contingencies",
-      "normalized_heading": "commitments_and_contingencies",
-      "default_bullets": [
-        "Inquire about significant commitments and contingent liabilities including:",
-        "Pending or threatened litigation or investigations by regulatory or other authorities; and",
-        "Contractual obligations, including leases;",
-        "Purchase commitments; and",
-        "Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);",
-        "Incentive compensation and employee benefit obligations;",
-        "Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and",
-        "Other off-balance sheet transactions."
-      ]
-    },
-    {
       "heading": "Net debt",
       "normalized_heading": "net_debt",
       "default_bullets": [
         "Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;",
         "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+      ]
+    },
+    {
+      "heading": "Commitments and contingencies",
+      "normalized_heading": "commitments_and_contingencies",
+      "default_bullets": [
+        "Inquire about significant commitments and contingent liabilities including:",
+        "Pending or threatened litigation or investigation by regulatory or other authorities; and",
+        "Operating and capital leases;",
+        "Operating leases;",
+        "Purchase commitments; and",
+        "Incentive compensation;",
+        "Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);",
+        "Other off-balance sheet transactions (including contingencies and guarantees).",
+        "Obtain and comment on any contingent claims or liabilities including:",
+        "Contractual obligations, including leases;"
       ]
     }
   ],
@@ -152,7 +153,7 @@
     "construction": {
       "financial_due_diligence": [
         "The deliverable will be in the form of a report and Excel data book.",
-        "Unless otherwise noted, our work will concentrate on financial information for the last three fiscal years ended the most recent interim period, along with the most recent available financial information (e.g. year-to-date the most recent interim period or more recent monthly data as available)."
+        "Unless otherwise noted, our work will concentrate on financial information for the last three fiscal years ended December 31, 2023, 2024, along with the most recent available financial information (e.g. year-to-date March 31, 2025 or more recent monthly data as available)."
       ],
       "quality_of_earnings": [
         "Analyze historical earnings before interest, taxes, depreciation, and amortization (“EBITDA”) at segment levels including understanding the impact of potential non-recurring or non-operation items such as:",
@@ -173,8 +174,17 @@
         "Industry",
         "Understand Target’s job costing methodology (components included in margin, and periodic true ups)",
         "Understand Target’s revenue recognition and billing process (e.g. percentage of completion, periodic and contract completion true-ups (and its variability), loss provision process, policies in place to control accounting recognition and policy escalations, and lifecycle), with specific focus on Construction Management contracts, and its corresponding timing impact to EBITDA;",
-        "Understanding the profile (and exposure) of major project/contracts (i.e. Indigenous Partnership with Target.);",
+        "Understanding the profile (and exposure) of major project/contracts (i.e. Indigenous Partnership with Target);",
         "Obtain and analyze the backlog and active backlog as at latest available date (backlog margin on a project basis, and analysis of historical backlog conversion)"
+      ],
+      "operating_expenses": [
+        "Obtain and read an analysis of Target’s expenses and inquire about:",
+        "Costing methodology;",
+        "Cost of sale trends, impact of material change in vendors (if any);",
+        "Employee compensation and related costs by function;",
+        "Selling, general, and administrative expenses;",
+        "Repairs and maintenance expense;",
+        "Unusual and extraordinary items (if any)."
       ],
       "working_capital": [
         "Obtain and read an analysis of working capital and inquire about the following on a combined basis:",
@@ -182,6 +192,13 @@
         "Monthly trending and fluctuations in working capital and impact on reported metrics (e.g. days sales/payables/inventory outstanding, net working capital as a percentage of revenues, etc.);",
         "Large, unusual, or non-operating items and current or upcoming initiatives that may affect normalized working capital trends, such as exited business, settlements, capital projects, understanding non-trade balances, etc.",
         "Gain an understanding of the nature of the Company’s unearned revenue."
+      ],
+      "accounts_receivable": [
+        "Obtain and read an analysis of the Target’s accounts receivable and inquire and comment on:",
+        "Billed/unbilled aging analysis, turnover and days sales outstanding;",
+        "Credit terms;",
+        "Trade and non-trade balances;",
+        "Allowance for uncollectible accounts and write-offs."
       ],
       "prepaid_materials_and_other_assets": [
         "Prepare a summary of other assets (including prepaid materials, prepaid assets) and comment on unusual items, significant fluctuations and significant balances"
@@ -193,7 +210,9 @@
         "Obtain and read an analysis of Target’s accounts payable and accrued liabilities and inquire about:",
         "Terms of trade with major suppliers, significant vendor allowances, rebates and/or purchase commitments;",
         "Trade payables aging analysis and days payable outstanding analysis;",
-        "Billings in excess of cost profile; and"
+        "Accrued liabilities;",
+        "Billings in excess of cost profile; and",
+        "Other current and non-current liabilities."
       ],
       "capital_expenditure_requirements": [
         "Obtain an understanding of the Company’s current equipment, including:",
@@ -211,6 +230,7 @@
       ],
       "commitments_and_contingencies": [
         "Obtain and comment on any contingent claims or liabilities including:",
+        "Contractual obligations, including leases;",
         "Pending or threatened litigation or investigation by regulatory or other authorities; and",
         "Other off-balance sheet transactions (including contingencies and guarantees)."
       ],
@@ -221,6 +241,7 @@
         "Significant accounts estimates and any recent or contemplated changes in accounting principles, procedures, or estimates.",
         "If available, understand the reviewed statements unrecorded differences, management letter points, and other significant findings encountered during the annual review.",
         "Target’s accounting policies and the key differences with IFRS Accounting Standards as applied by Parent",
+        "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent",
         "(Following the high-level gap assessment, if a more detailed gap assessment is required, we will work with Client to identify topics for further analysis and the estimate fees for the incremental analysis.)"
       ]
     },
@@ -276,7 +297,9 @@
         "Monthly working capital trends, including seasonality, for the historical period;",
         "Comment on factors that may have distorted the current or historical working capital position."
       ],
-      "accounts_receivable": ["Obtain and read an analysis of the Target's"],
+      "accounts_receivable": [
+        "Obtain and read an analysis of the Target's"
+      ],
       "inventories": [
         "Understand Target's underlying process for recording inventory and comment on unusual items."
       ],
@@ -286,15 +309,23 @@
       "accounts_payable_and_accrued_liabilities": [
         "Obtain and read an analysis of Target's payables and accrued liabilities and inquire about:",
         "Terms of trade with major suppliers, aging analysis;",
-        "Accrued liabilities; and"
+        "Accrued liabilities; and",
+        "Other current and non-current liabilities."
+      ],
+      "capital_expenditure_requirements": [
+        "Obtain and read an analysis of existing and future capital cost requirements including:",
+        "Maintenance versus growth capital expenditures;",
+        "Other historical, deferred, and planned capital expenditures"
       ],
       "net_debt": [
         "Summarize and comment on net debt items (on and off balance sheet) presented by management and other potential debt-like items.",
         "Analysis of remaining liabilities surrounding contingent consideration."
       ],
       "commitments_and_contingencies": [
+        "Inquire about significant commitments and contingent liabilities including:",
         "Pending or threatened litigation or investigations;",
         "Incentive compensation;",
+        "Purchase commitments; and",
         "Off-balance sheet transactions."
       ]
     },
@@ -311,16 +342,20 @@
         "Information systems."
       ],
       "accounting_overview": [
+        "Read Target's financial statements and discuss Target's accounting policies and practices with management, including:",
         "Reporting methodology;",
         "Basis for cost allocations, if any;",
         "Revenue recognition policies by service type, and any recent changes in policy;",
         "Significant accounting estimates;",
         "Recent or contemplated changes in accounting principles, procedures, or estimates;",
+        "Cash versus accrual accounting policies;",
         "Intercompany accounts and related party transactions;",
+        "Differences between interim and year-end procedures; and",
         "Non-recurring transactions.",
         "Read Target's financial statements and discuss them with management to gain an understanding of accounting policies and practices including:",
         "Finance function, financial reporting framework, and management reporting relationships (including process, timing, structure of financial reporting, and interaction with the information/accounting systems);",
-        "Significant accounting estimates (i.e. allowances for doubtful accounts, inventory provisions, accruals, etc.);"
+        "Significant accounting estimates (i.e. allowances for doubtful accounts, inventory provisions, accruals, etc.);",
+        "Intercompany accounts and related party transactions, if any."
       ],
       "quality_of_earnings": [
         "Summarize potential adjustments identified regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact EBITDA, including:",
@@ -361,11 +396,12 @@
         "De novo start-up costs; and",
         "Components of other income and expense for the historical periods. Consider items that may impact EBITDA.",
         "Understands the health and sustainability of revenue and margin, that will bring clarity and insights into the drivers of business performance to strengthen deal conviction. Provides confidence in value creation planning / realization by uncovering opportunities earlier.",
+        "Obtain and read an analysis of Target's revenue and inquire about:",
         "Leveraging proprietary analytics tool, use the transaction / sales database from the IT / ERP systems to analyze revenue and profitability (cost, price, margin), key KPIs (e.g., average sales price, average order size, etc.) and performance trends (e.g., concentration, price-volume-mix, high growth SKUs, negative margins, etc.); evaluating by front-store and Pharmacy (Rx), Category (Dispensary, Over-the-Counter Products, Health and Beauty, Home Healthcare, Grocery, etc.), sub-category (by brand and sub-category), channel (brick & mortar, eCom), by brand, and by geography (store ID, postal code, city, etc.)",
-        "Where information is available, also include Front of Store Partners (e.g.,, etc.) and eCom Partners (,, etc.)",
+        "Where information is available, also include Front of Store Partners and eCom Partners",
         "Where information is available, generic versus branded drugs",
         "Where information is available, public, private, or cash",
-        "Integrate anonymized customer data to understand revenue and mix (one-time versus recurring) across different locations; use of loyalty programs loyalty programs (e.g., impact of discounts, recurring nature of customers, etc.); and how this impacts overall revenue sustainability",
+        "Integrate anonymized customer data to understand revenue and mix (one-time versus recurring) across different locations; use of loyalty programs (e.g., impact of discounts, recurring nature of customers, etc.); and how this impacts overall revenue sustainability",
         "Store costs analysed as a percentage of sales or applicable metric (selling payroll, other store payroll, store rent, marketing, shrinkage, sales-by-square footage, etc.).",
         "Sales and COGS adjustments (including sales returns, markdowns, supplier revenue, stock shrinkage, obsolescence, other income, loyalty points and gift cards);",
         "Consolidate the data into a clean Excel data cube and PowerBI Analysis file, and extract and understand any patterns and trends that might inform value creation and optimization opportunities"
@@ -385,7 +421,7 @@
         "Salaries and wages (including headcount by area and function, if possible);",
         "General and administrative expenses;",
         "Information systems expenses;",
-        "Corporate costs and any allocations to store level as applicable; clarify expenses with",
+        "Corporate costs and any allocations to store level as applicable; clarify expenses with Target",
         "Extraordinary expenses;",
         "Rent and leases; and",
         "Miscellaneous and other expenses."
@@ -410,6 +446,7 @@
         "Collection experience; and",
         "Other reserves and adjustments.",
         "Aging analysis and related credit terms (including special terms);",
+        "Trade and non-trade balances;",
         "Allowance for uncollectible accounts and write-offs; and",
         "Reserve and adjustments."
       ],
@@ -426,7 +463,9 @@
       "accounts_payable_and_accrued_liabilities": [
         "Obtain and read an analysis of Target's accounts payable and accrued liabilities and inquire about:",
         "Accounts payable aging;",
+        "Accrued liabilities;",
         "Deferred revenue; and",
+        "Other current and non-current liabilities.",
         "Obtain and read an analysis of Target's accounts payable and accrued expenses and inquire about:",
         "AP aging analysis, terms of trade with major vendors and days payables outstanding;",
         "Accrued expenses; and"
@@ -447,6 +486,7 @@
         "Prepare a summary of debt and debt-like items (e.g. notes payable, capital vendor payables, deferred purchase price of property or services, accrued bonuses, capital lease obligation, etc.), commitments and contingencies."
       ],
       "commitments_and_contingencies": [
+        "Inquire about significant commitments and contingent liabilities including:",
         "Debt;",
         "Self-insurance;",
         "Post-retirement benefits;",
@@ -491,6 +531,7 @@
       "accounting_overview": [
         "Understand the Target's financial statement preparation process including:",
         "Finance function, financial reporting framework, and management reporting relationships; (including process, timing, structure of financial reporting, and interaction with the information/ accounting systems);",
+        "Significant accounting policies and recent or contemplated changes in accounting principles, procedures, or estimates;",
         "Reconciliation of management's internal financial reporting packages to the audited financial statements; and",
         "Read the audit workpapers for the Historical Period",
         "Read Target's financial statements and discuss them with Target's management to gain an understanding of accounting policies and practices including:",
@@ -528,11 +569,11 @@
         "Non-cash compensation (for Profits Interest Units)",
         "Normalization of vendor purchaser rebates (to the extent required)",
         "Analyze the pro forma impact of:",
-        "Pre-acquisition results (on an adjusted basis) on acquired businesses (AB May in the Historical Period)",
+        "Pre-acquisition results (on an adjusted basis) on acquired businesses (AB May in 2022)",
         "Updated Pricing Agreements with Customers",
         "Quantifiable synergies that management has identified and believe are applicable (i.e. on prior acquisitions)",
         "Retained costs sitting within Corporate",
-        "Understand impact of Quality of Earnings adjustments on the the Historical Period budget",
+        "Understand impact of Quality of Earnings adjustments on the the forecast period budget",
         "Quality of earnings – To the extent not covered by the sell-side due diligence report. Assessment of any subsequent roll-forward of the sell-side quality of earnings report (if available) and propose potential incremental adjustments identified by considering:",
         "Management's proposed adjustments to reported EBITDA;",
         "The impact of revenue accounting and accounting / cash timing differences including:",
@@ -543,7 +584,7 @@
         "The impact of any changes in labour costs;",
         "The impact of commodity prices, pricing lags and pass-through mechanisms;",
         "The impact of foreign exchange (if any);",
-        "The pro forma impact of new by geography Branch;",
+        "The pro forma impact of a new branch;",
         "The impact of any key supplier cost arrangements;",
         "The impact of settlements related to litigation, if any; and",
         "The impact of cash to accrual accounting and other potential items discovered in the due diligence process."
@@ -552,9 +593,10 @@
         "Leverage Data ana Analytics analyses (see below) to understand revenue and margin trends by customer, service offering, type and inform how it may impact the quality of earnings analysis as applicable.",
         "Revenue and margin by business segment (Services & Projects: HVAC, Compressed air, Plumbing, Chiller, Electrical, CM4, CM+, repair etc.);",
         "Revenue and margin by customer end market (Industrial, commerical, retirement homes, schools, condos etc.);",
-        "Revenue and margin by geography (i.e. by geography, by geography, by geography, by geography etc.);",
+        "Revenue and margin by geography (by geography);",
         "Price vs. volume trends;",
         "Understand revenue lifecycle of significant customers;",
+        "Any non-recurring components of revenue;",
         "Effectiveness of cross-selling programs;",
         "Revenue seasonality;",
         "Backlog and pipeline/committed revenue; and",
@@ -610,6 +652,7 @@
         "Credit balances and refund policies; and",
         "Other adjustments.",
         "Aging analysis and related credit terms (including special terms);",
+        "Trade and non-trade balances;",
         "Allowance for uncollectible accounts and write-offs; and",
         "Reserve and adjustments."
       ],
@@ -634,14 +677,19 @@
         "Terms of trade with major vendors;",
         "Revenue arrangements and timing of payments;",
         "Payroll related funding and timing of cash flows;",
-        "Cadence and consistency of bonus/commission and other incentive compensation; and"
+        "Cadence and consistency of bonus/commission and other incentive compensation; and",
+        "Other current and non-current liabilities."
       ],
       "commitments_and_contingencies": [
+        "Inquire about significant commitments and contingent liabilities including:",
         "Long-term debt, Finance lease obligations, and other long-term liabilities;",
+        "Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);",
         "Deferred revenue / Contingent considerations / earnouts on acquisitions / warranty & insurance reserves",
         "Post-retirement obligations or incentive compensation;",
+        "Pending or threatened litigation or investigations by regulatory or other authorities; and",
         "Other significant and/or unusual liabilities including off-balance sheet liabilities",
         "Pending or threatened litigations by regulatory or other authorities and by employees;",
+        "Incentive compensation and employee benefit obligations;",
         "Significant lease and purchase obligations; and",
         "Inquire about other off-balance sheet transactions."
       ],
@@ -652,6 +700,7 @@
       ],
       "capital_expenditure_requirements": [
         "Obtain and read an analysis of Target's existing capital costs and inquire about:",
+        "Maintenance versus growth capital expenditures;",
         "Other historical, deferred, and planned capital expenditures; and",
         "Impairment write-downs and issues."
       ],
@@ -659,14 +708,14 @@
         "Understand the nature and extent of related party transactions and basis for pricing arrangements."
       ],
       "fy24_outturn": [
-        "Obtain the the Historical Period budget and forecast for the rest of the year. Interview management about the reasons for significant fluctuations with budget. Discuss and bridge to full-year the Historical Period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the the Historical Period budget."
+        "Obtain the the forecast period budget and forecast for the rest of the year. Interview management about the reasons for significant fluctuations with budget. Discuss and bridge to full-year the forecast period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the the budget for the forecast period."
       ],
       "data_and_analytics": [
-        "The purpose of this section is to perform detailed analysis on the drivers of revenue and margin growth, marketing performance, and operations to understand upside opportunities and communicate an effective story in conjunction with the Quality of Earnings. The outputs will be a PowerPoint trend report, highlighting key insights; a Power BI dashboard that / sell-side advisor can use to 'slice & dice' and extract visuals, this can also be shared with select buyers; and a consolidated Excel sales cube. Steps below are dependent on data from the brands"
+        "The purpose of this section is to perform detailed analysis on the drivers of revenue and margin growth, marketing performance, and operations to understand upside opportunities and communicate an effective story in conjunction with the Quality of Earnings. The outputs will be a PowerPoint trend report, highlighting key insights; a Power BI dashboard that Target can use to 'slice & dice' and extract visuals, this can also be shared with select buyers; and a consolidated Excel sales cube. Steps below are dependent on data from the brands"
       ],
       "revenue_and_profitability_analysis_da": [
-        "Understands the health and sustainability of revenue and margin; covers last fiscal years (the Historical Period) and TTM (the most recent period)",
-        "Leveraging proprietary analytics tool, use the transaction / sales database from each entity (business units), analyze revenue and profitability (cost, price, margin), key KPIs (e.g., number of jobs, average sales price, etc.) and performance trends (e.g., concentration, new-lost-existing customers, price-volume-mix, high growth services, OEM/equipment used, etc.); evaluating by product category/service offering, (e.g., Heating, Cooling, Plumbing, Electrical, etc.), sub-category/service type (e.g., AC installs, AC repairs, AC maintenance, etc.) and by channel (e.g., Google, Social Media, Direct Campaign, referral, etc.), by service type, by geography (zip code, county, etc.), by branch, by customer, by end market, etc.",
+        "Understands the health and sustainability of revenue and margin; covers last fiscal years (2020 – 2022) and TTM 2023",
+        "Leveraging proprietary analytics tool, use the transaction / sales database from each entity, analyze revenue and profitability (cost, price, margin), key KPIs (e.g., number of jobs, average sales price, etc.) and performance trends (e.g., concentration, new-lost-existing customers, price-volume-mix, high growth services, OEM/equipment used, etc.); evaluating by product category/service offering, (e.g., Heating, Cooling, Plumbing, Electrical, etc.), sub-category/service type (e.g., AC installs, AC repairs, AC maintenance, etc.) and by channel (e.g., Google, Social Media, Direct Campaign, referral, etc.), by service type, by geography (zip code, county, etc.), by branch, by customer, by end market, etc.",
         "Perform a service-level line item analysis to understand profitability (including price, volume, and mix calculations; low margin service areas; basket analysis, etc.), opportunities to optimize pricing, areas to rationalize, reflect cost increases, drive cross-sell / improve baskets, etc.",
         "Extract and identify top brands / OEMs used in servicing customers and understand any opportunities to harmonize pricing across different business that might result in upside",
         "Where available, link above sales / job data to technician utilization and salary to understand performance opportunities",
@@ -674,20 +723,20 @@
         "Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer"
       ],
       "customer_base_health_da": [
-        "Building on the previous step, the phase evaluates the health of the customer base; how sustainable and recurring (or re-occurring) in nature are the customers; covers last fiscal years (the Historical Period) and TTM (the most recent period)",
+        "Building on the previous step, the phase evaluates the health of the customer base; how sustainable and recurring (or re-occurring) in nature are the customers; covers last fiscal years (2020 – 2022) and TTM 2023",
         "Analyze health of the customer base across the three entities, in terms of revenue / profitability by customer, type of customer (residential, commercial, etc.) any customer contracts, etc.; overall retention, growth patterns, renewal history, cohort (vintage); new, loss, existing; customer concentration; etc. including associated services and categories these customers purchase to understand patterns and insights",
         "Analyze type of revenue and mix (one-time versus recurring), across different streams (e.g., revenues from HVAC & Electrical, from Repair Services, from Extended Warranty, and Construction), and understand any performance trending insights",
         "Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer"
       ],
       "marketing_and_advertising_performance_da": [
-        "Evaluates the performance of marketing and advertising; data is analyzed in conjunction with the revenue and customer analysis to understand any trends / insights in relation to how marketing and advertising drives performance; covers last fiscal years (the Historical Period) and TTM (the most recent period)",
+        "Evaluates the performance of marketing and advertising; data is analyzed in conjunction with the revenue and customer analysis to understand any trends / insights in relation to how marketing and advertising drives performance; covers last fiscal years (2020 – 2022) and TTM 2023",
         "Analyzes trends and insights related to revenue, customers, average revenue/margin per job, recurring nature of customers, high value products, etc. by lead source /channel by brand and advertising spend by lead source / channel by brand",
         "Extracts insights into drivers of profitability and opportunities for value creation / optimization by the next buyer",
         "Analyzes the sales funnel and conversion metrics by lead source / channel by brand, including leads generated, quotes, and sales conversion rates; ties this to revenue and customer analysis in the previous steps to understand insights to drive the business",
         "Analyzes revenue generating job (e.g., service visit, install, replacement, etc.) and ties back to performance"
       ],
       "operations_performance_da": [
-        "Evaluates the performance of operations; where appropriate, ties back this analysis to the previous steps; covers last fiscal years (the Historical Period) and TTM (the most recent period)",
+        "Evaluates the performance of operations; where appropriate, ties back this analysis to the previous steps; covers last fiscal years (2020 – 2022) and TTM 2023",
         "Analyze employee census by role, position, annual salary, and bonus; where appropriate (e.g., technicians, sales people) tie back to revenue / margin performance to understand returns (e.g., salary vs sales or utilization multiples) and other associated metrics (e.g., revenue per tech, utilization, margin by tech, etc.)",
         "Evaluate technician turnover metrics by brand and whether it is voluntary or involuntary; further evaluate against tenure (<90 days vs. >90 days); where appropriate tie back to sales and compensation",
         "Analyze the fleet of each brand respectively, including number of vehicles, age of vehicles, lease vs. owned, maintenance cost per vehicle, average cost of replacement, etc.; where appropriate, tie back to technician performance (e.g., revenue / margin)",
@@ -742,7 +791,9 @@
       "accounting_overview": [
         "Read Target's financial statements and discuss them with Target's management to gain an understanding of accounting policies and practices including:",
         "Reporting methodology;",
+        "Revenue recognition policies;",
         "Frequency of standard cost updates and procedures for analyzing variances;",
+        "Significant accounting estimates (e.g. bad debt provision, rebates, capitalized R&D, etc.); and",
         "Recent or contemplated changes in accounting principles."
       ],
       "quality_of_earnings": [
@@ -755,6 +806,7 @@
         "The impact of provisions, management estimates, adjusting entries, or changes in accounting policies on reported results; and",
         "Related party transactions and the pricing thereof.",
         "Any other large, unusual or non-recurring events or transactions that may have distorted results and not identified by management in the financial statements; and",
+        "Other potential items identified during the due diligence process.",
         "Summarize potential adjustments identified regarding the earnings of Target in the form of a quality of earnings analysis, summarizing the risks that may impact revenue and/or earnings before interest, taxes, depreciation and amortization (\"EBITDA\") including:",
         "Normalization adjustments presented in the VDD Report;",
         "The impact of any changes in accounting policies;",
@@ -764,14 +816,14 @@
         "Any other large, unusual or non-recurring events or transactions that may have distorted results and not identified by management in the financial statements (e.g. non-recurring purchase orders; potential business disruption due to COVID-19); and",
         "Identify potential adjustments to reported earnings before interest, income taxes, depreciation, and amortization (\"EBITDA\") by considering the impact of:",
         "Management's proposed adjustments to reported EBITDA (e.g. out-of period inventory adjustments, non-recurring professional fees, Dot customer normalizations etc.);",
-        "The impact of acquisitions (e.g. acquired businesses);",
+        "The impact of acquisitions (e.g. Target);",
         "The impact of supply chain disruptions, if any;",
         "The timing of true-ups and other adjustments made less frequently than monthly;",
         "The impact of any changes to senior management or team structure;",
         "The impacts of foreign exchange including constant currency analysis;",
         "The impact of commodity / raw material cost fluctuations and any associated hedging programs;",
         "The impact of any key supplier cost arrangements including assessment of hedged vs. market prices and illustrative impacts to EBITDA;",
-        "The impact of lease renewal;",
+        "The impact of Target lease renewal;",
         "The impact of related party transactions (i.e. non-fair market pricing, personal expenses, donations etc.); and",
         "Other potential items discovered in the due diligence process."
       ],
@@ -786,18 +838,37 @@
         "Key financial risks and uncertainties with potential impact to value."
       ],
       "revenue_analysis": [
+        "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
         "Revenue and margin trends by customer, program, SKU, and product category:",
+        "Revenue and margin by significant customer and end market/ segment/ region;",
+        "Price and volume trends.",
+        "Discuss with Management:",
+        "impact of large or long-term orders/ seasonality (if applicable); and",
+        "any non-recurring components of revenue.",
         "Breakdown of costs of goods sold including: materials, scrap/waste, labour expense, manufacturing overhead, packing and outbound freight for product sales; and",
         "Ability to pass through changes in the cost of raw material and other inputs.",
         "Obtain a comprehensive view of revenue, value add and contribution margin (pending data availability) by product line and by customer. Obtain the analysis and underlying transactional data (manufacturing orders database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
         "Historical revenues (gross, net, volume), value add, contribution, average selling price and average cost per lbs by:",
         "product line (e.g. by décor, technology, packaging format, resin type, category/ SKU grouping, sales channel, order size, if available); additional services (if applicable);",
+        "customer category (i.e. individual, business);",
+        "distribution channel (i.e. online, wholesale, etc.); and",
+        "price, volume, mix and cross-sell analysis.",
+        "Seasonal fluctuations in demand and monthly sales trends; and",
         "Breakdown of cost of sales including: raw materials, labels (if applicable), scrap/waste/expired ingredients, packaging materials, freight-in, labour expense, manufacturing overhead, packing and outbound freight for product sales.",
+        "Obtain and read an analysis of Target's revenue and inquire about:",
+        "Gross to net revenue;",
         "Revenue and gross margin by plant;",
         "Revenue and gross margin by brand;",
         "Revenue and gross margin by product category (bread, frozen dough rolls, garlic toast, cookies, muffins etc.);",
+        "Revenue and gross margin by customer;",
         "Revenue and gross margin by SKU;",
-        "Raw material costs including hedging programs and high level evaluation of embedded inventory gains and/or losses; and"
+        "Organic growth and delineation between price vs. volume;",
+        "Pricing practices;",
+        "Promotions and discounts;",
+        "Any non-recurring components of revenue;",
+        "Revenue seasonality, if any;",
+        "Raw material costs including hedging programs and high level evaluation of embedded inventory gains and/or losses; and",
+        "Other components of cost of sales and key suppliers."
       ],
       "operating_expenses": [
         "Obtain and read an analysis of Company's operating expenses and SG&A and inquire about and comment on:",
@@ -831,18 +902,18 @@
       ],
       "normalized_ebitda_bridges": [
         "Summarize and prepared normalized EBITDA bridges from:",
-        "the Historical Period to the Historical Period;",
-        "YTD23 to YTD24;",
-        "YTD24 to the Historical Period forecast; and",
-        "the Historical Period forecast to the Historical Period budget."
+        "the Historical Period to the most recent fiscal year;",
+        "year-to-date period to year-to-date period;",
+        "year-to-date period to the forecast period forecast; and",
+        "the forecast period forecast to the forecast period budget."
       ],
       "forecast_and_budget_analysis": [
-        "Obtain and read the the Historical Period forecast and the Historical Period budget and:",
+        "Obtain and read the the forecast period forecast and the forecast period budget and:",
         "Summarize the assumptions used by Management which underpin the achievement of the forecasts; and",
-        "Analyze the customer booking information to understand what portion of the the Historical Period outturn revenues (i.e. Sep'24 to Dec'24) and the the Historical Period budget revenues have been secured by customer orders."
+        "Analyze the customer booking information to understand what portion of the the Historical Period outturn revenues (i.e. Sep'24 to Dec'24) and the the forecast period budget revenues have been secured by customer orders."
       ],
       "budget_vs_actual": [
-        "Obtain the historical, latest interim financial information available and forecast for the rest of the year. Compare actual results to budget and forecast results to prior year. Interview management about the reasons for significant fluctuations between periods and with budget. Discuss and bridge to full-year the Historical Period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the the Historical Period budget."
+        "Obtain the historical, latest interim financial information available and forecast for the rest of the year. Compare actual results to budget and forecast results to prior year. Interview management about the reasons for significant fluctuations between periods and with budget. Discuss and bridge to full-year the forecast period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the the budget for the forecast period."
       ],
       "working_capital": [
         "Summarize and normalize historical working capital in the business, including:",
@@ -864,15 +935,19 @@
         "Trade and non-trade (due from officers, stockholder, employees, affiliates, and other) balances;",
         "Aging analysis by key customer and by customer type and turnover analysis;",
         "Credit terms and any other special terms; and",
+        "Allowance for uncollectible accounts and write-offs.",
         "Obtain and read an analysis of Target's accounts receivable and inquire about:",
         "Aging analysis and related credit terms (including special terms and changes thereto e.g. early payment discount elimination);",
+        "Trade and non-trade balances;",
         "Allowance for uncollectible accounts and write-offs; and",
         "Reserve and adjustments."
       ],
       "accounts_payable_and_accrued_liabilities": [
         "Obtain and read an analysis of accounts payable and accrued compensation and liabilities and inquire about:",
+        "Accounts payable aging and days outstanding;",
         "Accrued liabilities including (where possible) a basis for the adequacy of accruals for such items as bonuses, deferred compensation, severance, workers' compensation, commissions, vacation pay, litigation, customer returns, product liability, sales allowances and credits, and other;",
         "Vendor/supplier settlement terms; and",
+        "Other current and non-current liabilities.",
         "Obtain and read an analysis of Target's accounts payable and accrued liabilities and inquire about:",
         "AP aging analysis and days outstanding;",
         "Terms of trade with major vendors;",
@@ -918,14 +993,18 @@
         "Summarize and comment on net debt items (on and off balance sheet) presented by management and other potential debt-like items; and"
       ],
       "commitments_and_contingencies": [
+        "Inquire about significant commitments and contingent liabilities including:",
         "Significant purchase commitments and product financing arrangements with customers and/or suppliers;",
         "Operating leases;",
         "Earn-out arrangements and commitments relating to previous acquisitions;",
+        "Incentive compensation and employee benefit obligations;",
+        "Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and",
         "Pending or threatened litigation or investigations.",
         "Minimum purchase commitments under long-term supply and/or manufacturing contracts;",
         "Incentive compensation and employee pension and post-retirement benefit obligations;",
         "Lease obligations to related parties and 3rd parties (if applicable);",
         "Pending or threatened litigation relating to infringement of intellectual property, regulatory, etc.; and",
+        "Other off-balance sheet transactions.",
         "Pending or threatened litigations by regulatory or other authorities and by employees;",
         "Incentive compensation and employee benefit obligations; and",
         "Significant lease and purchase obligations."
@@ -946,7 +1025,7 @@
       "operational_cost_margin_assessment": [
         "Review the overall appropriateness and sustainability of management's operating expenses and operating margin, especially critical factors leading to the Historical Period EBITDA margins;",
         "Review margin contribution and operating leverage and determine whether costs are fixed, variable, or mixed;",
-        "Support assessment by performing external functional benchmarking of other players in the industry and related industries from publicly available information, prior engagements and from proprietary analytics tool Database;",
+        "Support assessment by performing external functional benchmarking of other players in the industry and related industries from publicly available information, KPMG's previous engagements and from proprietary analytics tool Database;",
         "Test the operational reasonability of management's cost forecast through the following:",
         "Develop an independent bottom-up build of forecasted costs to test robustness, completeness and accuracy;",
         "Develop a detailed headcount forecast in order to assess appropriateness of headcount to support revenue targets and identify gaps; and",
@@ -1045,7 +1124,7 @@
         "Impairment write-downs and other potential issues."
       ],
       "budget": [
-        "Obtain a copy of the Target's the Historical Period budget, bridge / reconcile revenue and EBITDA from prior periods and inquire about significant assumptions and estimates, including:",
+        "Obtain a copy of the Target's the forecast period budget, bridge / reconcile revenue and EBITDA from prior periods and inquire about significant assumptions and estimates, including:",
         "Revenue assumptions (including backlog, pipeline and opportunities)",
         "Headcount and payroll assumptions",
         "Other direct and indirect cost structure"
@@ -1058,6 +1137,7 @@
     "real_estate": {
       "accounting_overview": [
         "Understand and summarize the financial statement preparation process, including:",
+        "Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems);",
         "Significant accounting policies and estimates and contemplated changes; and",
         "Reporting methodology (structure and process) and consolidation process, period ending process and related party transactions."
       ],
@@ -1136,6 +1216,13 @@
         "Capitalization of employee expenses, software and development costs and commissions; and",
         "Research and development and potential future costs savings."
       ],
+      "working_capital": [
+        "Obtain monthly details of the Company's consolidated working capital and analyze and comment on:",
+        "The composition of individual working capital accounts (e.g., trade receivables, accounts payable and accruals, etc.);",
+        "Monthly working capital trends, metrics, and seasonality;",
+        "Large, unusual, or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and",
+        "Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment."
+      ],
       "accounts_receivable": [
         "Obtain and read an analysis of the Company's accounts receivable and inquire about bad debt reserve, write-offs, adjustments, aging, and non-trade balances."
       ],
@@ -1153,7 +1240,13 @@
         "Capitalized labour trends (labour, software development and commission); and",
         "Other historical, deferred, and planned capital expenditures."
       ],
-      "net_debt": ["Commitment and contingencies."],
+      "net_debt": [
+        "Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;",
+        "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+      ],
+      "commitments_and_contingencies": [
+        "Commitment and contingencies."
+      ],
       "audit_work_papers": [
         "Obtain and read audit working papers for the last two fiscal years and perform the following:",
         "Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, any changes in accounting policies or methods; and",
@@ -1252,23 +1345,24 @@
         "internal financial controls; and",
         "financial reporting.",
         "Gain a general understanding of the services, customers, operations and entities in the business, including:",
-        "Organization structure, including Target's position within the broader Parent;",
+        "Basis of financial information;",
+        "Organization structure, including Target's position within the broader Target;",
         "Key revenue streams (Professional Services, Managed Services, Perpetual License, Third Party Revenue); and",
         "Key milestones in the Target's recent history, including key operational and financial developments of note (new service offerings / revenue streams / geographical expansion, cost investment, changes in key management).",
-        "Understand points of contact with the broader Parent, including intergroup transactions, shared services and resources, shared customers, and allocated costs."
+        "Understand points of contact with the broader Target, including intergroup transactions, shared services and resources, shared customers, and allocated costs."
       ],
       "accounting_overview": [
         "Using analysis performed by you, and discussions with you and Target:",
         "Present the income statement and balance sheet of Target on a 'reported' basis.",
-        "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Parent resources).",
+        "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Target resources).",
         "Understand significant accounting policies applied and, where applicable, understand changes in accounting policies over the Historical Period and the potential financial impact. In particular, understand:",
         "Revenue recognition, in particular recognition of recurring revenues and deferral of revenues;",
         "Matching of revenue and costs (including deferral of staff sales commissions);",
         "Capitalization policy;",
         "Monthly vs year-end policies; and",
         "Adjustments, entries, or areas of improvement suggested by the business' external accountant.",
-        "Identify components of EBITDA which are incurred entirely within Target (i.e. stand-alone costs) and costs that are allocated to / from Parent, and compare to understanding of intra-group points of contact with broader Parent.",
-        "Review a reconciliation of trial balance information to internal and external financial statements and to Parent year-end financial statements (to be performed by you).",
+        "Identify components of EBITDA which are incurred entirely within Target (i.e. stand-alone costs) and costs that are allocated to / from Target, and compare to understanding of intra-group points of contact with broader Target.",
+        "Review a reconciliation of trial balance information to internal and external financial statements and to Target year-end financial statements (to be performed by you).",
         "Review a reconciliation of net income and net assets period-over-period (to be performed by you)."
       ],
       "revenue_analysis": [
@@ -1280,7 +1374,7 @@
         "Understand what work has been performed to reconcile reported revenues, cash income, and ARR.",
         "Consider methodology used by the seller in presenting ARR and associated KPIs (upsell, downsell, churn, ARR per license / per logo, key account concentration)",
         "identify key anomalies or items of concern relating to calculation methodology and / or resulting trends.",
-        "Perform Phase 2 top up due diligence as requested by you (e.g. recalculation of ARR and KPIs using methodology)."
+        "Perform Phase 2 top up due diligence as requested by you (e.g. recalculation of ARR and KPIs using Target methodology)."
       ],
       "quality_of_earnings": [
         "Consider the quality of earnings analysis prepared by the sell side. Form a view on seller proposed adjustments, and consider whether other adjustments might be considered, including:",
@@ -1300,12 +1394,13 @@
         "Investment or changes in the cost base of the business.",
         "Perform other Phase 2 top up due diligence as requested by you (e.g. roll forward of quality of earnings analysis to a more recent date).",
         "Using analysis performed by you, and discussions with you and Target:",
-        "Present a potential adjusted earnings before interest, taxes, depreciation, and amortization (\"EBITDA\"), including normalization items for the Historical Period by considering the items identified in our understanding of the financial reporting environment, in our consideration of your own analysis of quality of earnings, and any additional analysis performed by advisor, that have an earnings impact, including consideration of:",
+        "Present a potential adjusted earnings before interest, taxes, depreciation, and amortization (\"EBITDA\"), including normalization items for the Historical Period by considering the items identified in our understanding of the financial reporting environment, in our consideration of your own analysis of quality of earnings, and any additional analysis performed by KPMG, that have an earnings impact, including consideration of:",
         "Revenue recognition (cash vs accruals accounting; treatment of implementation revenues; gross vs net considerations on third party / license revenues);",
-        "Allocated costs to / from Parent, considering the basis and methodology of allocation of costs compared to our understanding of Target's interaction with other Parent divisions and shared infrastructure*;",
+        "Allocated costs to / from Target, considering the basis and methodology of allocation of costs compared to our understanding of Target's interaction with other Target divisions and shared infrastructure*;",
         "Stand alone costs prepared by Target / you*;",
         "Other internal accounting practices (e.g. cut-off on accruals; matching of costs and revenues; treatment of capital expenses; provision movements and/or releases) and the impact of changes in accounting practices and policies;",
         "Year-end adjustments/true ups that should be considered in the presentation of a TTM earnings (e.g. differences between month-end and year-end practices influencing TTM reporting);",
+        "The impact of foreign currency transactions;",
         "Unadjusted year-end differences and other external accountant findings (where applicable); and",
         "Other one-off, non-recurring, or non-business items identified through the course of our work.",
         "Discuss whether additional EBITDA adjustments might be considered, in addition to those already identified in your analysis.",
@@ -1348,7 +1443,7 @@
         "Monthly vs annual accounting for judgmental balances such as bonuses.",
         "Understand cash and working capital cycle, including the impact of government RFPs and payment terms on working capital balances.",
         "Consider the components of net working capital, monthly trends (including days), key drivers and seasonality (analysis to be performed by you).",
-        "Present and comment on the average level of working capital and its development over the Historical Period for consideration when setting a working capital target. Consider one off / non-business items in reported working capital, 'allocated' balances within working capital, and the potential impact of stand-alone working capital balances when Target is no longer part of the Parent (analysis to be performed by you).",
+        "Present and comment on the average level of working capital and its development over the Historical Period for consideration when setting a working capital target. Consider one off / non-business items in reported working capital, 'allocated' balances within working capital, and the potential impact of stand-alone working capital balances when Target is no longer part of the Target (analysis to be performed by you).",
         "Discuss whether additional net working capital adjustments might be considered, in addition to those already identified in your analysis.",
         "Consider the ageing of trade payables and receivables."
       ],
@@ -1363,7 +1458,7 @@
         "Present an analysis of the balance sheet for Target as at the last two fiscal year ends and the latest available date.",
         "Consider your analysis stratifying the components of the balance sheet into net working capital, net cash / debt balances, fixed assets, and 'other' balances (analysis to be performed by you).",
         "Discuss whether additional net working capital adjustments / net debt adjustments might be considered, in addition to those already identified in your analysis.",
-        "Summarize and comment on net debt considerations as at the latest balance sheet date, including contingent liabilities (e.g. ongoing or pending litigation), constructive liabilities (e.g. unaccrued bonuses) and other obligations (e.g., deferred or committed capex) – including balances relating to the broader Parent that could remain in the legal entity being acquired."
+        "Summarize and comment on net debt considerations as at the latest balance sheet date, including contingent liabilities (e.g. ongoing or pending litigation), constructive liabilities (e.g. unaccrued bonuses) and other obligations (e.g., deferred or committed capex) – including balances relating to the broader Target that could remain in the legal entity being acquired."
       ],
       "phase_1_gaap_considerations": [
         "We will conduct a high-level analysis to identify and evaluate the differences between the target's financial statement results prepared in accordance with Spanish GAAP and US GAAP. This analysis will encompass the following:",
@@ -1374,10 +1469,31 @@
       ]
     },
     "transportation": {
+      "business_overview": [
+        "Meet with Target's officers and management in order to develop an understanding of operations, including its:",
+        "Basis of financial information;",
+        "Organization structure;",
+        "Historical growth by geography; and",
+        "Finance function, financial reporting framework and internal control environment."
+      ],
       "accounting_overview": [
+        "Consider if the following accounting policies have been applied consistently within and across historical periods:",
         "Revenue recognition;",
         "Significant accounting estimates (e.g. inventory costing, allowance for doubtful accounts, etc.);",
+        "Capitalization policies;",
+        "Depreciation policies; and",
         "Recent or contemplated changes in accounting principles, procedures or estimates and provisions."
+      ],
+      "quality_of_earnings": [
+        "Identify, and where possible quantify, potential earnings before interest, taxes, depreciation, and amortization (\"EBITDA\") normalization items by considering:",
+        "The impact of the normalization adjustments identified by Management;",
+        "Large, unusual or non-recurring events, or transactions that may have distorted results;",
+        "The impact of any changes to senior management or management team structure;",
+        "The impact of provisions (allowance for doubtful accounts, inventory obsolescence, other), management estimates or adjusting entries on the reported results;",
+        "The impact of foreign currency transactions;",
+        "The impact of related party transactions and shared services provided by other entities, if applicable;",
+        "The impact of any changes in accounting policies, procedures and estimates; and",
+        "Other potential items identified during the due diligence process."
       ],
       "revenue_analysis": [
         "Obtain and read an analysis of Target's revenue and margins and inquire about:",
@@ -1393,6 +1509,8 @@
       "operating_expenses": [
         "Obtain and read an analysis of expenses and inquire about:",
         "Direct costs (labour and benefits, etc.);",
+        "Employee compensation and related costs by function;",
+        "Selling, general, and administrative expenses;",
         "Rent and utilities expense;",
         "Historical operating expense trend as a % of revenue; and",
         "Unusual and extraordinary items."
@@ -1406,6 +1524,7 @@
       ],
       "accounts_receivable": [
         "Obtain and read an analysis of accounts receivable and inquire and comment on:",
+        "Trade and non-trade balances;",
         "Aging analysis and turnover analysis; and",
         "Allowance for uncollectible accounts, write-offs and reserves."
       ],
@@ -1418,8 +1537,16 @@
       "other_assets_and_liabilities": [
         "Prepare a summary of other assets and liabilities (including prepaid expenses and deposits, deferred revenue and customer deposits) and comment on unusual items, significant fluctuations and significant balances."
       ],
+      "accounts_payable_and_accrued_liabilities": [
+        "Obtain and read an analysis of accounts payable, accrued liabilities and customer deposits and inquire about:",
+        "Accounts payable aging and days outstanding;",
+        "Accrued liabilities;",
+        "Supplier settlement terms; and",
+        "Other current and non-current liabilities."
+      ],
       "capital_expenditure_requirements": [
         "Obtain and read an analysis of historic and future capital cost requirements including:",
+        "Maintenance versus growth capital expenditures;",
         "Other historical, deferred, and planned capital expenditures;",
         "Historical replacement cycle and costs;",
         "Utilization per unit; and",
@@ -1434,9 +1561,12 @@
         "Basis of pricing for arrangements with related parties."
       ],
       "commitments_and_contingencies": [
+        "Inquire about significant commitments and contingent liabilities including:",
         "Off-balance sheet liabilities;",
         "Purchase commitments;",
         "Operating and capital leases;",
+        "Incentive compensation and employee benefit obligations;",
+        "Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and",
         "Pending or threatened litigation or investigations."
       ]
     },
@@ -1467,86 +1597,6 @@
         "Inventory valuation methodology and reserves;",
         "Stock shrinkage, obsolescence, and write-downs; and",
         "Returns, damages, and vendor return programs."
-      ]
-    },
-    "building": {
-      "business_overview": [
-        "Gain an understanding of the project/contracting model, including service lines, end markets, geographic footprint, and typical contract types.",
-        "Understand backlog, bidding pipeline, and key customers/projects, including customer concentration.",
-        "Understand subcontractor usage, sourcing/procurement practices, and key suppliers."
-      ],
-      "revenue_analysis": [
-        "Analyze revenue and gross margin trends by project type, geography, and major customer.",
-        "Understand contract pricing structures (fixed price, time and materials, unit price) and change order practices.",
-        "Assess seasonality and weather/field-operations impacts on revenue and margin."
-      ],
-      "accounts_receivable": [
-        "Understand billing practices, including progress billings, retention, and contract assets/liabilities.",
-        "Review aging, collectability, disputes/claims, and change-order collectability.",
-        "Assess concentration and credit risk by customer and project."
-      ],
-      "accounts_payable_and_accrued_liabilities": [
-        "Understand subcontractor payables, accrued costs, and cut-off practices.",
-        "Assess payroll/union accruals (if applicable) and warranty/defect accruals where relevant.",
-        "Review contingent liabilities related to claims, liquidated damages, and performance obligations."
-      ],
-      "work_in_progress_and_backlog": [
-        "Obtain and review work-in-progress (WIP) reporting and inquire and comment on:",
-        "Percentage-of-completion methodology and inputs (cost-to-complete, estimated gross margin);",
-        "Under/over billings and their drivers;",
-        "Job-level margin fade/gain and change-order tracking; and",
-        "Backlog composition, burn-off, and conversion assumptions."
-      ],
-      "commitments_and_contingencies": [
-        "Bonding capacity and surety requirements (if applicable).",
-        "Warranty obligations, claims, and litigation, including project-specific disputes.",
-        "Purchase commitments and long-lead materials exposure."
-      ]
-    },
-    "aerospace": {
-      "business_overview": [
-        "Gain an understanding of product lines, programs, customers (OEM/tier relationships), and regulatory/quality requirements.",
-        "Understand backlog, program life cycles, and ramp/production cadence.",
-        "Understand manufacturing footprint, capacity constraints, and supply chain dependencies."
-      ],
-      "revenue_analysis": [
-        "Analyze revenue and gross margin trends by program, customer, and product line.",
-        "Understand contract structures (long-term agreements, pricing escalators, penalties/claims) and revenue recognition approach.",
-        "Assess customer concentration, order volatility, and backlog conversion assumptions."
-      ],
-      "inventory": [
-        "Obtain and read an analysis of inventory/WIP and inquire and comment on:",
-        "Long-cycle inventory, work-in-process, and slow-moving/obsolete inventory;",
-        "Material price variance, scrap/rework, and yield;",
-        "Supplier lead times and risk of shortages; and",
-        "Inventory valuation and reserves."
-      ],
-      "capital_expenditure_requirements": [
-        "Understand capex requirements for tooling, equipment, and capacity expansion.",
-        "Assess maintenance capex versus growth capex and related replacement cycles.",
-        "Review capitalized development/tooling costs (if applicable) and impairment considerations."
-      ]
-    },
-    "telecomm": {
-      "business_overview": [
-        "Gain an understanding of the product and service portfolio, customer segments, and go-to-market channels.",
-        "Understand network/infrastructure model (owned vs leased) and key third-party dependencies.",
-        "Understand key commercial arrangements (carriers/partners, wholesale, roaming, etc.) where applicable."
-      ],
-      "revenue_analysis": [
-        "Analyze revenue trends by product line and customer segment, including recurring vs usage-based components.",
-        "Assess churn, ARPU, net adds, retention, and other subscriber/customer KPIs where available.",
-        "Understand pricing, discounting, promotions, and contract terms driving revenue sustainability."
-      ],
-      "capital_expenditure_requirements": [
-        "Assess capex intensity and planned network/infrastructure investments.",
-        "Understand timing and drivers of capex programs and any deferral/backlog dynamics.",
-        "Review lease-versus-buy considerations for infrastructure and related cash flow impacts."
-      ],
-      "commitments_and_contingencies": [
-        "Review key long-term commitments (network leases, tower/site leases, capacity commitments, vendor agreements).",
-        "Assess regulatory and licensing exposure (including spectrum-related commitments if applicable).",
-        "Review material customer credits, service-level penalties, and dispute exposure."
       ]
     },
     "banking": {
@@ -1597,12 +1647,92 @@
         "Review reinsurance program structure, retention levels, counterparty exposure, and recoverables.",
         "Assess concentrations in ceded exposure and any disputes or collectability issues with reinsurers."
       ]
+    },
+    "telecomm": {
+      "business_overview": [
+        "Gain an understanding of the product and service portfolio, customer segments, and go-to-market channels.",
+        "Understand network/infrastructure model (owned vs leased) and key third-party dependencies.",
+        "Understand key commercial arrangements (carriers/partners, wholesale, roaming, etc.) where applicable."
+      ],
+      "revenue_analysis": [
+        "Analyze revenue trends by product line and customer segment, including recurring vs usage-based components.",
+        "Assess churn, ARPU, net adds, retention, and other subscriber/customer KPIs where available.",
+        "Understand pricing, discounting, promotions, and contract terms driving revenue sustainability."
+      ],
+      "capital_expenditure_requirements": [
+        "Assess capex intensity and planned network/infrastructure investments.",
+        "Understand timing and drivers of capex programs and any deferral/backlog dynamics.",
+        "Review lease-versus-buy considerations for infrastructure and related cash flow impacts."
+      ],
+      "commitments_and_contingencies": [
+        "Review key long-term commitments (network leases, tower/site leases, capacity commitments, vendor agreements).",
+        "Assess regulatory and licensing exposure (including spectrum-related commitments if applicable).",
+        "Review material customer credits, service-level penalties, and dispute exposure."
+      ]
+    },
+    "aerospace": {
+      "business_overview": [
+        "Gain an understanding of product lines, programs, customers (OEM/tier relationships), and regulatory/quality requirements.",
+        "Understand backlog, program life cycles, and ramp/production cadence.",
+        "Understand manufacturing footprint, capacity constraints, and supply chain dependencies."
+      ],
+      "revenue_analysis": [
+        "Analyze revenue and gross margin trends by program, customer, and product line.",
+        "Understand contract structures (long-term agreements, pricing escalators, penalties/claims) and revenue recognition approach.",
+        "Assess customer concentration, order volatility, and backlog conversion assumptions."
+      ],
+      "inventory": [
+        "Obtain and read an analysis of inventory/WIP and inquire and comment on:",
+        "Long-cycle inventory, work-in-process, and slow-moving/obsolete inventory;",
+        "Material price variance, scrap/rework, and yield;",
+        "Supplier lead times and risk of shortages; and",
+        "Inventory valuation and reserves."
+      ],
+      "capital_expenditure_requirements": [
+        "Understand capex requirements for tooling, equipment, and capacity expansion.",
+        "Assess maintenance capex versus growth capex and related replacement cycles.",
+        "Review capitalized development/tooling costs (if applicable) and impairment considerations."
+      ]
+    },
+    "building": {
+      "business_overview": [
+        "Gain an understanding of the project/contracting model, including service lines, end markets, geographic footprint, and typical contract types.",
+        "Understand backlog, bidding pipeline, and key customers/projects, including customer concentration.",
+        "Understand subcontractor usage, sourcing/procurement practices, and key suppliers."
+      ],
+      "revenue_analysis": [
+        "Analyze revenue and gross margin trends by project type, geography, and major customer.",
+        "Understand contract pricing structures (fixed price, time and materials, unit price) and change order practices.",
+        "Assess seasonality and weather/field-operations impacts on revenue and margin."
+      ],
+      "accounts_receivable": [
+        "Understand billing practices, including progress billings, retention, and contract assets/liabilities.",
+        "Review aging, collectability, disputes/claims, and change-order collectability.",
+        "Assess concentration and credit risk by customer and project."
+      ],
+      "accounts_payable_and_accrued_liabilities": [
+        "Understand subcontractor payables, accrued costs, and cut-off practices.",
+        "Assess payroll/union accruals (if applicable) and warranty/defect accruals where relevant.",
+        "Review contingent liabilities related to claims, liquidated damages, and performance obligations."
+      ],
+      "work_in_progress_and_backlog": [
+        "Obtain and review work-in-progress (WIP) reporting and inquire and comment on:",
+        "Percentage-of-completion methodology and inputs (cost-to-complete, estimated gross margin);",
+        "Under/over billings and their drivers;",
+        "Job-level margin fade/gain and change-order tracking; and",
+        "Backlog composition, burn-off, and conversion assumptions."
+      ],
+      "commitments_and_contingencies": [
+        "Bonding capacity and surety requirements (if applicable).",
+        "Warranty obligations, claims, and litigation, including project-specific disputes.",
+        "Purchase commitments and long-lead materials exposure."
+      ]
     }
   },
   "metadata": {
     "industries_analyzed": 11,
     "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "total_sections_found": 61,
+    "total_bullets_cataloged": 1264
   }
 }

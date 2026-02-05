@@ -1,5 +1,5 @@
 """
-Export per-industry views from the bundled v2 scope library.
+Export per-industry views from the bundled scope library artifact.
 
 Why:
 - Easier human review per industry (JSON + Markdown)
@@ -19,7 +19,7 @@ from typing import Any, Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_BUNDLE = PROJECT_ROOT / "dist" / "fdd_scope_library.v2.json"
+DEFAULT_BUNDLE = PROJECT_ROOT / "dist" / "fdd_scope_library.bundle.v1_1.json"
 DEFAULT_OUT_DIR = PROJECT_ROOT / "docs" / "scope-library" / "industries"
 
 
@@ -60,7 +60,7 @@ def _render_industry_markdown(*, bundle: dict[str, Any], industry: str) -> str:
     lines: list[str] = []
     lines.append(f"# FDD Scope — `{industry}`")
     lines.append("")
-    lines.append("Generated from `dist/fdd_scope_library.v2.json`.")
+    lines.append("Generated from `dist/fdd_scope_library.bundle.v1_1.json`.")
     lines.append("")
 
     common = bundle.get("common_skeleton", []) or []
@@ -99,8 +99,8 @@ def _render_industry_markdown(*, bundle: dict[str, Any], industry: str) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Export per-industry scope library views (v2 bundle)")
-    parser.add_argument("--bundle", default=str(DEFAULT_BUNDLE), help="Path to dist bundle JSON (v2)")
+    parser = argparse.ArgumentParser(description="Export per-industry scope library views (bundle)")
+    parser.add_argument("--bundle", default=str(DEFAULT_BUNDLE), help="Path to dist bundle JSON")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR), help="Output directory for exports")
     parser.add_argument("--industry", default="all", help="Industry key to export (or 'all')")
     args = parser.parse_args()
@@ -134,4 +134,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

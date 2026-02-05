@@ -1,5 +1,5 @@
 """
-Validate that per-industry exports match the dist v2 bundle.
+Validate that per-industry exports match the dist bundle artifact.
 
 Usage:
   python3 scripts/validate-scope-exports.py
@@ -14,7 +14,7 @@ from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_BUNDLE = PROJECT_ROOT / "dist" / "fdd_scope_library.v2.json"
+DEFAULT_BUNDLE = PROJECT_ROOT / "dist" / "fdd_scope_library.bundle.v1_1.json"
 DEFAULT_OUT_DIR = PROJECT_ROOT / "docs" / "scope-library" / "industries"
 
 
@@ -30,7 +30,7 @@ def _slice_bundle(bundle: dict[str, Any], industry: str) -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate per-industry scope exports")
-    parser.add_argument("--bundle", default=str(DEFAULT_BUNDLE), help="Path to dist bundle JSON (v2)")
+    parser.add_argument("--bundle", default=str(DEFAULT_BUNDLE), help="Path to dist bundle JSON")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR), help="Exports directory")
     args = parser.parse_args()
 
@@ -59,4 +59,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

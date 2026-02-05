@@ -19,8 +19,8 @@ Usage:
 
   # Explicit in/out:
   python3 scripts/build-fdd-scope-schema.py \\
-    --in reference/fdd_scope_library.json \\
-    --out reference/fdd_scope_library.schema_v1_1.json
+    --in dist/fdd_scope_library.authoring.v1_1.json \\
+    --out dist/fdd_scope_library.authoring.schema_v1_1.json
 """
 
 from __future__ import annotations
@@ -215,8 +215,8 @@ def build_schema(scope_library: dict[str, Any]) -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build a schema-annotated FDD scope library copy")
-    parser.add_argument("--in", dest="inp", default="reference/fdd_scope_library.json", help="Input library path")
-    parser.add_argument("--out", dest="out", default="reference/fdd_scope_library.schema_v1_1.json", help="Output path")
+    parser.add_argument("--in", dest="inp", default="dist/fdd_scope_library.authoring.v1_1.json", help="Input library path")
+    parser.add_argument("--out", dest="out", default="dist/fdd_scope_library.authoring.schema_v1_1.json", help="Output path")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent.parent

@@ -123,7 +123,7 @@ import json, subprocess, sys
 cmd = [
     sys.executable, "/mnt/data/el-generate.py",
     "--template", template_file,
-    "--scope-library", "/mnt/data/fdd_scope_library.v2.json",
+    "--scope-library", "/mnt/data/fdd_scope_library.bundle.v1_1.json",
     "--industry", industry,
     "--variables", json.dumps(variables),
     "--output", output_path,
@@ -148,7 +148,7 @@ Provide a download link to the completed `.docx`.
 
 3. **Guidance blocks** — Curly-brace guidance like `{{GUIDANCE_01}}` / `{{GUIDANCE: ...}}` are internal instructions and are deleted entirely during generation. Bracketed guidance like `[GUIDANCE: ...]` stays in the generated `.docx` for humans to edit; do not surface or rewrite guidance text in chat.
 
-4. **FDD scope replacement** — The sample scope section between "FINANCIAL DUE DILIGENCE" and "These Terms and Conditions" is replaced with industry-specific content from `fdd_scope_library.v2.json`. Do not manually write scope content.
+4. **FDD scope replacement** — The sample scope section between "FINANCIAL DUE DILIGENCE" and "These Terms and Conditions" is replaced with industry-specific content from `fdd_scope_library.bundle.v1_1.json`. Do not manually write scope content.
 
 5. **DOCX only** — The output is a single downloadable `.docx` file. No PDF.
 

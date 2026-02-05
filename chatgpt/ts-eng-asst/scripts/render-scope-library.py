@@ -553,7 +553,7 @@ def _render_html(sections: list[dict[str, Any]], title: str) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render the FDD scope library for review")
-    parser.add_argument("--library", default="reference/fdd_scope_library.json", help="Path to a scope library JSON file")
+    parser.add_argument("--library", default="dist/fdd_scope_library.authoring.v1_1.json", help="Path to a scope library JSON file")
     parser.add_argument("--out-dir", default="docs/scope-curation/viewer", help="Output directory")
     parser.add_argument("--industry", help="Only render a single industry module (e.g., healthcare)")
     parser.add_argument("--prefer-schema", action="store_true", help="If the library includes scope_schema, render using it")

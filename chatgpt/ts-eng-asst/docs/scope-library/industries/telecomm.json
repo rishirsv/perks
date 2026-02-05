@@ -30,44 +30,44 @@
       "default_bullets": [
         {
           "id": "scope.002",
-          "text": "Read Target's financial statements and discuss Target's accounting policies and practices with management, including:",
+          "text": "Understand and summarize the financial statement preparation process, including:"
+        },
+        {
+          "id": "scope.003",
+          "text": "Understand the Target's financial statement preparation process including:"
+        },
+        {
+          "id": "scope.004",
+          "text": "Read Target's financial statements and discuss Target's accounting policies and practices with management, including:"
+        },
+        {
+          "id": "scope.005",
+          "text": "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Target resources)."
+        },
+        {
+          "id": "scope.006",
+          "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
             {
-              "text": "Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems);"
+              "text": "Finance function, financial reporting framework, and management reporting relationships (including process, timing, structure of financial reporting, and interaction with the information/ accounting systems);"
             },
             {
               "text": "Significant accounting policies and recent or contemplated changes in accounting principles, procedures, or estimates;"
             },
             {
-              "text": "Significant accounting estimates (e.g. bad debt provision, rebates, capitalized R&D, etc.); and"
+              "text": "Reporting methodology;"
             },
             {
-              "text": "Intercompany accounts and related party transactions, if any."
-            }
-          ]
-        },
-        {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
-          "id": "scope.004",
-          "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
-          "children": [
-            {
-              "text": "Cash versus accrual accounting policies;"
+              "text": "Revenue recognition;"
             },
             {
-              "text": "Capitalization policies;"
+              "text": "Significant accounting estimates;"
             },
             {
-              "text": "Depreciation policies; and"
+              "text": "Intercompany accounts and related party transactions;"
             },
             {
-              "text": "Differences between interim and year-end procedures; and"
-            },
-            {
-              "text": "Revenue recognition policies;"
+              "text": "Reconciliation of management's internal financial reporting packages to the audited financial statements; and"
             }
           ]
         }
@@ -78,7 +78,7 @@
       "normalized_heading": "quality_of_earnings",
       "default_bullets": [
         {
-          "id": "scope.005",
+          "id": "scope.007",
           "text": "Identify, and where possible quantify, potential earnings before interest, taxes, depreciation, and amortization (\"EBITDA\") normalization items by considering:",
           "children": [
             {
@@ -114,7 +114,7 @@
       "normalized_heading": "revenue_analysis",
       "default_bullets": [
         {
-          "id": "scope.006",
+          "id": "scope.008",
           "text": "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
           "children": [
             {
@@ -126,7 +126,7 @@
           ]
         },
         {
-          "id": "scope.007",
+          "id": "scope.009",
           "text": "Discuss with Management:",
           "children": [
             {
@@ -150,14 +150,11 @@
           ]
         },
         {
-          "id": "scope.008",
+          "id": "scope.010",
           "text": "Obtain and read an analysis of Target's revenue and inquire about:",
           "children": [
             {
               "text": "Gross to net revenue;"
-            },
-            {
-              "text": "Revenue recognition policies;"
             },
             {
               "text": "Revenue and gross margin by customer;"
@@ -189,7 +186,7 @@
       "normalized_heading": "operating_expenses",
       "default_bullets": [
         {
-          "id": "scope.009",
+          "id": "scope.011",
           "text": "Obtain and read an analysis of Target’s expenses and inquire about:",
           "children": [
             {
@@ -219,7 +216,7 @@
       "normalized_heading": "working_capital",
       "default_bullets": [
         {
-          "id": "scope.010",
+          "id": "scope.012",
           "text": "Obtain monthly details of the Company's consolidated working capital and analyze and comment on:",
           "children": [
             {
@@ -243,7 +240,7 @@
       "normalized_heading": "accounts_receivable",
       "default_bullets": [
         {
-          "id": "scope.011",
+          "id": "scope.013",
           "text": "Obtain and read an analysis of the Target’s accounts receivable and inquire and comment on:",
           "children": [
             {
@@ -267,7 +264,7 @@
       "normalized_heading": "accounts_payable_and_accrued_liabilities",
       "default_bullets": [
         {
-          "id": "scope.012",
+          "id": "scope.014",
           "text": "Obtain and read an analysis of accounts payable, accrued liabilities and customer deposits and inquire about:",
           "children": [
             {
@@ -291,7 +288,7 @@
       "normalized_heading": "capital_expenditure_requirements",
       "default_bullets": [
         {
-          "id": "scope.013",
+          "id": "scope.015",
           "text": "Obtain and read an analysis of existing and future capital cost requirements including:",
           "children": [
             {
@@ -305,49 +302,58 @@
       ]
     },
     {
+      "heading": "Net debt",
+      "normalized_heading": "net_debt",
+      "default_bullets": [
+        {
+          "id": "scope.016",
+          "text": "Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;"
+        },
+        {
+          "id": "scope.017",
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+        }
+      ]
+    },
+    {
       "heading": "Commitments and contingencies",
       "normalized_heading": "commitments_and_contingencies",
       "default_bullets": [
         {
-          "id": "scope.014",
+          "id": "scope.018",
           "text": "Inquire about significant commitments and contingent liabilities including:",
           "children": [
             {
-              "text": "Pending or threatened litigation or investigations by regulatory or other authorities; and"
+              "text": "Pending or threatened litigation or investigation by regulatory or other authorities; and"
             },
             {
-              "text": "Contractual obligations, including leases;"
+              "text": "Operating and capital leases;"
+            },
+            {
+              "text": "Operating leases;"
             },
             {
               "text": "Purchase commitments; and"
             },
             {
+              "text": "Incentive compensation;"
+            },
+            {
               "text": "Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);"
             },
             {
-              "text": "Incentive compensation and employee benefit obligations;"
-            },
-            {
-              "text": "Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and"
-            },
-            {
-              "text": "Other off-balance sheet transactions."
+              "text": "Other off-balance sheet transactions (including contingencies and guarantees)."
             }
           ]
-        }
-      ]
-    },
-    {
-      "heading": "Net debt",
-      "normalized_heading": "net_debt",
-      "default_bullets": [
-        {
-          "id": "scope.015",
-          "text": "Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;"
         },
         {
-          "id": "scope.016",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+          "id": "scope.019",
+          "text": "Obtain and comment on any contingent claims or liabilities including:",
+          "children": [
+            {
+              "text": "Contractual obligations, including leases;"
+            }
+          ]
         }
       ]
     }
@@ -356,57 +362,57 @@
     "telecomm": {
       "business_overview": [
         {
-          "id": "scope.498",
+          "id": "scope.460",
           "text": "Gain an understanding of the product and service portfolio, customer segments, and go-to-market channels."
         },
         {
-          "id": "scope.499",
+          "id": "scope.461",
           "text": "Understand network/infrastructure model (owned vs leased) and key third-party dependencies."
         },
         {
-          "id": "scope.500",
+          "id": "scope.462",
           "text": "Understand key commercial arrangements (carriers/partners, wholesale, roaming, etc.) where applicable."
         }
       ],
       "revenue_analysis": [
         {
-          "id": "scope.501",
+          "id": "scope.463",
           "text": "Analyze revenue trends by product line and customer segment, including recurring vs usage-based components."
         },
         {
-          "id": "scope.502",
+          "id": "scope.464",
           "text": "Assess churn, ARPU, net adds, retention, and other subscriber/customer KPIs where available."
         },
         {
-          "id": "scope.503",
+          "id": "scope.465",
           "text": "Understand pricing, discounting, promotions, and contract terms driving revenue sustainability."
         }
       ],
       "capital_expenditure_requirements": [
         {
-          "id": "scope.504",
+          "id": "scope.466",
           "text": "Assess capex intensity and planned network/infrastructure investments."
         },
         {
-          "id": "scope.505",
+          "id": "scope.467",
           "text": "Understand timing and drivers of capex programs and any deferral/backlog dynamics."
         },
         {
-          "id": "scope.506",
+          "id": "scope.468",
           "text": "Review lease-versus-buy considerations for infrastructure and related cash flow impacts."
         }
       ],
       "commitments_and_contingencies": [
         {
-          "id": "scope.507",
+          "id": "scope.469",
           "text": "Review key long-term commitments (network leases, tower/site leases, capacity commitments, vendor agreements)."
         },
         {
-          "id": "scope.508",
+          "id": "scope.470",
           "text": "Assess regulatory and licensing exposure (including spectrum-related commitments if applicable)."
         },
         {
-          "id": "scope.509",
+          "id": "scope.471",
           "text": "Review material customer credits, service-level penalties, and dispute exposure."
         }
       ]
@@ -415,7 +421,7 @@
   "metadata": {
     "industries_analyzed": 11,
     "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "total_sections_found": 53,
+    "total_bullets_cataloged": 1235
   }
 }

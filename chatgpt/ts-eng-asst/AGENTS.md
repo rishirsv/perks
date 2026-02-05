@@ -20,7 +20,7 @@ Keep `dist/` limited to:
 - System prompt markdown(s)
 - Generator scripts needed by the prompt
 - Template `.docx` files
-- The current schema(s) / library files referenced by the prompt (e.g. `fdd_scope_library.v2.json`)
+- The current schema(s) / library files referenced by the prompt (e.g. `fdd_scope_library.bundle.v1_1.json`)
 - Any icon assets explicitly used for the GPT configuration
 
 Do **not** add to `dist/`:

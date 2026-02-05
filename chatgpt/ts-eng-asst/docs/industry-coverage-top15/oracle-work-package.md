@@ -1,6 +1,6 @@
 # Oracle work package: Top-15 operating industries scope curation
 
-This project inserts a Financial Due Diligence (FDD) scope block from `dist/fdd_scope_library.v2.json` based on `INDUSTRY`.
+This project inserts a Financial Due Diligence (FDD) scope block from `dist/fdd_scope_library.bundle.v1_1.json` based on `INDUSTRY`.
 
 ## Objective
 
@@ -15,8 +15,8 @@ Improve the initial modules for these new `INDUSTRY` keys:
 
 ## Inputs (provide Oracle these files)
 
-- `dist/fdd_scope_library.v2.json` (bundle used in ChatGPT knowledge)
-- `reference/fdd_scope_library.json` (flat source of truth used to rebuild v2)
+- `dist/fdd_scope_library.bundle.v1_1.json` (bundle used in ChatGPT knowledge)
+- `dist/fdd_scope_library.authoring.v1_1.json` (flat source of truth used to rebuild the bundle)
 - `docs/scope-library/industries/<industry>.md` (per-industry readable view)
 - `docs/mining/audit-verification-results.md` (guardrails: avoid proper nouns and sensitive tooling language)
 
@@ -38,4 +38,3 @@ Provide `industry_modules.<industry_key>` content in the **flat library format**
 - Do not include client names, project names, or engagement-specific entities.
 - Do not include references to proprietary internal tools, brand names, or named datasets.
 - Keep wording consistent with existing scope bullets (imperative analysis tasks; colon-parent nesting is OK).
-

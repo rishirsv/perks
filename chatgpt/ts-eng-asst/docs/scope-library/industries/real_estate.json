@@ -30,44 +30,44 @@
       "default_bullets": [
         {
           "id": "scope.002",
-          "text": "Read Target's financial statements and discuss Target's accounting policies and practices with management, including:",
+          "text": "Understand and summarize the financial statement preparation process, including:"
+        },
+        {
+          "id": "scope.003",
+          "text": "Understand the Target's financial statement preparation process including:"
+        },
+        {
+          "id": "scope.004",
+          "text": "Read Target's financial statements and discuss Target's accounting policies and practices with management, including:"
+        },
+        {
+          "id": "scope.005",
+          "text": "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Target resources)."
+        },
+        {
+          "id": "scope.006",
+          "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
             {
-              "text": "Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems);"
+              "text": "Finance function, financial reporting framework, and management reporting relationships (including process, timing, structure of financial reporting, and interaction with the information/ accounting systems);"
             },
             {
               "text": "Significant accounting policies and recent or contemplated changes in accounting principles, procedures, or estimates;"
             },
             {
-              "text": "Significant accounting estimates (e.g. bad debt provision, rebates, capitalized R&D, etc.); and"
+              "text": "Reporting methodology;"
             },
             {
-              "text": "Intercompany accounts and related party transactions, if any."
-            }
-          ]
-        },
-        {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
-          "id": "scope.004",
-          "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
-          "children": [
-            {
-              "text": "Cash versus accrual accounting policies;"
+              "text": "Revenue recognition;"
             },
             {
-              "text": "Capitalization policies;"
+              "text": "Significant accounting estimates;"
             },
             {
-              "text": "Depreciation policies; and"
+              "text": "Intercompany accounts and related party transactions;"
             },
             {
-              "text": "Differences between interim and year-end procedures; and"
-            },
-            {
-              "text": "Revenue recognition policies;"
+              "text": "Reconciliation of management's internal financial reporting packages to the audited financial statements; and"
             }
           ]
         }
@@ -78,7 +78,7 @@
       "normalized_heading": "quality_of_earnings",
       "default_bullets": [
         {
-          "id": "scope.005",
+          "id": "scope.007",
           "text": "Identify, and where possible quantify, potential earnings before interest, taxes, depreciation, and amortization (\"EBITDA\") normalization items by considering:",
           "children": [
             {
@@ -114,7 +114,7 @@
       "normalized_heading": "revenue_analysis",
       "default_bullets": [
         {
-          "id": "scope.006",
+          "id": "scope.008",
           "text": "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
           "children": [
             {
@@ -126,7 +126,7 @@
           ]
         },
         {
-          "id": "scope.007",
+          "id": "scope.009",
           "text": "Discuss with Management:",
           "children": [
             {
@@ -150,14 +150,11 @@
           ]
         },
         {
-          "id": "scope.008",
+          "id": "scope.010",
           "text": "Obtain and read an analysis of Target's revenue and inquire about:",
           "children": [
             {
               "text": "Gross to net revenue;"
-            },
-            {
-              "text": "Revenue recognition policies;"
             },
             {
               "text": "Revenue and gross margin by customer;"
@@ -189,7 +186,7 @@
       "normalized_heading": "operating_expenses",
       "default_bullets": [
         {
-          "id": "scope.009",
+          "id": "scope.011",
           "text": "Obtain and read an analysis of Target’s expenses and inquire about:",
           "children": [
             {
@@ -219,7 +216,7 @@
       "normalized_heading": "working_capital",
       "default_bullets": [
         {
-          "id": "scope.010",
+          "id": "scope.012",
           "text": "Obtain monthly details of the Company's consolidated working capital and analyze and comment on:",
           "children": [
             {
@@ -243,7 +240,7 @@
       "normalized_heading": "accounts_receivable",
       "default_bullets": [
         {
-          "id": "scope.011",
+          "id": "scope.013",
           "text": "Obtain and read an analysis of the Target’s accounts receivable and inquire and comment on:",
           "children": [
             {
@@ -267,7 +264,7 @@
       "normalized_heading": "accounts_payable_and_accrued_liabilities",
       "default_bullets": [
         {
-          "id": "scope.012",
+          "id": "scope.014",
           "text": "Obtain and read an analysis of accounts payable, accrued liabilities and customer deposits and inquire about:",
           "children": [
             {
@@ -291,7 +288,7 @@
       "normalized_heading": "capital_expenditure_requirements",
       "default_bullets": [
         {
-          "id": "scope.013",
+          "id": "scope.015",
           "text": "Obtain and read an analysis of existing and future capital cost requirements including:",
           "children": [
             {
@@ -305,49 +302,58 @@
       ]
     },
     {
+      "heading": "Net debt",
+      "normalized_heading": "net_debt",
+      "default_bullets": [
+        {
+          "id": "scope.016",
+          "text": "Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;"
+        },
+        {
+          "id": "scope.017",
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+        }
+      ]
+    },
+    {
       "heading": "Commitments and contingencies",
       "normalized_heading": "commitments_and_contingencies",
       "default_bullets": [
         {
-          "id": "scope.014",
+          "id": "scope.018",
           "text": "Inquire about significant commitments and contingent liabilities including:",
           "children": [
             {
-              "text": "Pending or threatened litigation or investigations by regulatory or other authorities; and"
+              "text": "Pending or threatened litigation or investigation by regulatory or other authorities; and"
             },
             {
-              "text": "Contractual obligations, including leases;"
+              "text": "Operating and capital leases;"
+            },
+            {
+              "text": "Operating leases;"
             },
             {
               "text": "Purchase commitments; and"
             },
             {
+              "text": "Incentive compensation;"
+            },
+            {
               "text": "Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);"
             },
             {
-              "text": "Incentive compensation and employee benefit obligations;"
-            },
-            {
-              "text": "Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and"
-            },
-            {
-              "text": "Other off-balance sheet transactions."
+              "text": "Other off-balance sheet transactions (including contingencies and guarantees)."
             }
           ]
-        }
-      ]
-    },
-    {
-      "heading": "Net debt",
-      "normalized_heading": "net_debt",
-      "default_bullets": [
-        {
-          "id": "scope.015",
-          "text": "Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;"
         },
         {
-          "id": "scope.016",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+          "id": "scope.019",
+          "text": "Obtain and comment on any contingent claims or liabilities including:",
+          "children": [
+            {
+              "text": "Contractual obligations, including leases;"
+            }
+          ]
         }
       ]
     }
@@ -356,9 +362,12 @@
     "real_estate": {
       "accounting_overview": [
         {
-          "id": "scope.318",
+          "id": "scope.279",
           "text": "Understand and summarize the financial statement preparation process, including:",
           "children": [
+            {
+              "text": "Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems);"
+            },
             {
               "text": "Significant accounting policies and estimates and contemplated changes; and"
             },
@@ -370,7 +379,7 @@
       ],
       "quality_of_earnings": [
         {
-          "id": "scope.319",
+          "id": "scope.280",
           "text": "Summarize potential adjustments to historical Net operating income (“NOI”) on a consolidated basis by considering:",
           "children": [
             {
@@ -385,71 +394,71 @@
           ]
         },
         {
-          "id": "scope.320",
+          "id": "scope.281",
           "text": "Consider the pro forma impact of new units, lost units, acquired, developed, sold properties and expiring leases;"
         },
         {
-          "id": "scope.321",
+          "id": "scope.282",
           "text": "The pro forma impact consideration is contingent on readily available information from Target that summarizes its business trends such as revenue and margins by location, by community, by type, occupancy rates, lease rates, etc. for which the information has been reconciled to the Target’s financial statements and can be used to formulate the potential pro forma consideration. To the extent the information is not readily available or not transferrable to calculate a potential impact, we will discuss with Client the applicability of the impact and potential time effort to analyze accordingly."
         },
         {
-          "id": "scope.322",
+          "id": "scope.283",
           "text": "The impact of provisions, management estimates, or adjusting entries on the reported results;"
         },
         {
-          "id": "scope.323",
+          "id": "scope.284",
           "text": "Any other unusual or non-recurring events (revenue or expenses) or transactions that may have distorted results; and"
         },
         {
-          "id": "scope.324",
+          "id": "scope.285",
           "text": "Other potential items discovered in the due diligence process."
         }
       ],
       "operating_expenses": [
         {
-          "id": "scope.325",
+          "id": "scope.286",
           "text": "Obtain and read an analysis of the Company’s operating expenses and inquire about"
         },
         {
-          "id": "scope.326",
+          "id": "scope.287",
           "text": "Primary components of property operating costs, property tax expenses;"
         },
         {
-          "id": "scope.327",
+          "id": "scope.288",
           "text": "Rent bad debt expense trends;"
         },
         {
-          "id": "scope.328",
+          "id": "scope.289",
           "text": "Wages, payroll taxes and benefits, by operating segment and function, if possible;"
         },
         {
-          "id": "scope.329",
+          "id": "scope.290",
           "text": "Incentive based compensation;"
         },
         {
-          "id": "scope.330",
+          "id": "scope.291",
           "text": "General and administrative expenses;"
         },
         {
-          "id": "scope.331",
+          "id": "scope.292",
           "text": "Sales and marketing and other expenses."
         }
       ],
       "balance_sheet": [
         {
-          "id": "scope.332",
+          "id": "scope.293",
           "text": "Summarize and understand Target’s balance sheet profile:"
         },
         {
-          "id": "scope.333",
+          "id": "scope.294",
           "text": "Comment on the working capital trends, for the respective periods including unusual trends, unusual balances."
         },
         {
-          "id": "scope.334",
+          "id": "scope.295",
           "text": "Accounts receivable: Obtain and read an analysis of the Company’s accounts receivable and inquire about Rent receivable profile including aging analysis and provisions; other non-trade receivable balances."
         },
         {
-          "id": "scope.335",
+          "id": "scope.296",
           "text": "Other assets (i.e., prepaid expenses and deposits):",
           "children": [
             {
@@ -458,7 +467,7 @@
           ]
         },
         {
-          "id": "scope.336",
+          "id": "scope.297",
           "text": "Obtain and read an analysis of the Company’s accounts payable and accrued expenses and inquire about:",
           "children": [
             {
@@ -476,15 +485,15 @@
           ]
         },
         {
-          "id": "scope.337",
+          "id": "scope.298",
           "text": "Understand the nature of investment properties and joint ventures;"
         },
         {
-          "id": "scope.338",
+          "id": "scope.299",
           "text": "Analyze historical capital expenditure trends"
         },
         {
-          "id": "scope.339",
+          "id": "scope.300",
           "text": "Understand the components of indebtedness including:",
           "children": [
             {
@@ -501,25 +510,25 @@
       ],
       "operating_cash_flow_funds_from_operations": [
         {
-          "id": "scope.340",
+          "id": "scope.301",
           "text": "Analyze the Company’s historical operating cash flow / FFO trends incorporating the impact of adjusted NOI trends from the quality of earnings analysis, the Company’s net working capital profile, and capital expenditures trends."
         }
       ],
       "audit_work_paper": [
         {
-          "id": "scope.341",
+          "id": "scope.302",
           "text": "Obtain and read the Company’s audit working paper files and management letters for the latest fiscal year:"
         },
         {
-          "id": "scope.342",
+          "id": "scope.303",
           "text": "Summarize audit matters, if any;"
         },
         {
-          "id": "scope.343",
+          "id": "scope.304",
           "text": "Comment on the nature and volume of audit differences (adjustments), use of accounting estimates, any changes in accounting policies or methods and their implications; and"
         },
         {
-          "id": "scope.344",
+          "id": "scope.305",
           "text": "Read analytical reviews for trends, unusual practices, internal control matters."
         }
       ]
@@ -528,7 +537,7 @@
   "metadata": {
     "industries_analyzed": 11,
     "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "total_sections_found": 53,
+    "total_bullets_cataloged": 1235
   }
 }

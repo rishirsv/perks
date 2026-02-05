@@ -18,7 +18,7 @@ Usage (Code Interpreter):
     }
     result = generate_engagement_letter(
         template_file="buyside-engagement-letter.docx",
-        scope_library_file="fdd_scope_library.v2.json",
+        scope_library_file="fdd_scope_library.bundle.v1_1.json",
         industry="healthcare",
         variables=variables,
         scope_selection=scope_selection,
@@ -28,7 +28,7 @@ Usage (Code Interpreter):
 Usage (CLI):
     python3 el-generate.py \\
         --template buyside-engagement-letter.docx \\
-        --scope-library fdd_scope_library.v2.json \\
+        --scope-library fdd_scope_library.bundle.v1_1.json \\
         --industry healthcare \\
         --variables '{"CLIENT_LEGAL_NAME": "Acme Inc.", ...}' \\
         --scope-selection '{"excluded_top_level_ids":["scope.002"]}' \\
@@ -968,7 +968,7 @@ def generate_engagement_letter(
 
     Args:
         template_file: Path to the .docx template.
-        scope_library_file: Path to the scope library JSON (e.g. fdd_scope_library.v2.json).
+        scope_library_file: Path to the scope library bundle JSON (e.g. fdd_scope_library.bundle.v1_1.json).
         industry: Industry key (e.g. "healthcare").
         variables: Dict of KEY -> value (without {{ }} wrappers).
         output_file: Output filename.
@@ -1081,7 +1081,7 @@ def main():
     if has_flag:
         parser = argparse.ArgumentParser(description="Generate an engagement letter")
         parser.add_argument("--template", required=True, help="Path to .docx template")
-        parser.add_argument("--scope-library", required=True, help="Path to the scope library JSON (e.g. fdd_scope_library.v2.json)")
+        parser.add_argument("--scope-library", required=True, help="Path to the scope library bundle JSON (e.g. fdd_scope_library.bundle.v1_1.json)")
         parser.add_argument("--industry", required=True, help="Industry key")
         parser.add_argument("--variables", required=True, help="JSON string or path to JSON file with variables")
         parser.add_argument("--scope-selection", help="Optional JSON string or path to JSON file controlling scope inclusion")
