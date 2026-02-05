@@ -1,0 +1,463 @@
+{
+  "metadata": {
+    "title": "KPMG Custom GPT Portfolio",
+    "author": "KPMG Transaction Services"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "KPMG Custom GPT Portfolio",
+      "subtitle": "Transaction Services\nExecutive inventory of what we have built and the outcomes it enables"
+    },
+    {
+      "type": "divider",
+      "sectionNumber": "01",
+      "sectionTitle": "Transaction Services"
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Meeting Intelligence",
+      "strapline": "Turn transcripts into deliverable-ready notes that feed downstream work.",
+      "leftBody": [
+        "Problem:",
+        "Before, associates split attention between listening and note-taking, and key numbers and follow-ups are missed or captured inconsistently. After the call, teams spend time turning rough notes into a usable record, slowing momentum.",
+        "Before, meeting content is hard to reuse, so teams restate the same facts when drafting deliverables. After, report writing and earnings adjustment work starts from scratch instead of a structured source.",
+        "How we solve it:",
+        "Meeting Intelligence converts transcripts into a detailed, structured note pack with topics, decisions, risks, owners, and next steps. The output is designed to paste directly into downstream tools without reformatting.",
+        "It supports deliverable creation by feeding report writing and generating practical guides, including steps to calculate earnings adjustments.",
+        "Outcome / ROI:",
+        "Associates stay focused and leave the call with a review-ready record. Teams move faster from meeting to action because the notes are already structured and complete.",
+        "Reuse improves across workstreams because teams start from one high-quality source of truth. Rework and re-confirmation drop, speeding drafting where detail matters."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/meeting-intelligence-logo.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the final structured note pack output that is ready to reuse in downstream work."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "TS Engagement Assistant",
+      "strapline": "Generates industry-specific Statement of Work and compliant Engagement Letter in minutes.",
+      "leftBody": [
+        "Problem:",
+        "Before, the engagement letter is assembled around the statement of work with copy-paste and inconsistent wording across versions. After edits, the package can drift and approvals slow down.",
+        "How we solve it:",
+        "TS Engagement Assistant analyzes documents and asks questions to collect the inputs needed for a complete statement of work and produces a structured first draft with a clear approach, deliverables, timeline, roles, and assumptions. It prompts for missing details so the scope is defensible and easy to review.",
+        "Includes industry library of thousands of SoW items.",
+        "It then generates the engagement letter using the approved structure, keeping the statement of work as the core content. The output is review-ready and easy to tailor without breaking consistency.",
+        "Outcome / ROI:",
+        "Teams get to a strong first draft fast, shifting review from rewriting to validating engagement specifics. Turnaround improves without sacrificing completeness.",
+        "Scope alignment happens earlier because boundaries and assumptions are explicit. Late-stage rework drops and kickoff becomes more predictable."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/ts-engagement-assistant-icon.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the generated statement of work sections and the resulting engagement letter excerpt (final state)."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "KDN Tasks",
+      "strapline": "Turn rough requests into execution-ready task packets for offshore support.",
+      "leftBody": [
+        "Problem:",
+        "Before, instructions are informal, scattered, or incomplete, so offshore execution starts slowly and quality varies. After delivery, associates spend time clarifying scope and reworking outputs, which adds cycle time.",
+        "Before, it is unclear what to do, what to check, and what “done” looks like, so handoffs depend on individual judgment. After, teams lose efficiency through follow-up questions and inconsistent first-pass quality.",
+        "How we solve it:",
+        "KDN Tasks converts informal instructions into structured task packets with clear inputs, steps, checks, and deliverable expectations. It makes the handoff explicit by defining required files, expected outputs, naming conventions, and acceptance criteria.",
+        "It also produces a send-ready handoff message so execution teams can start quickly and managers can review expectations before work begins. The format stays consistent across tasks so teams can reuse and improve it over time.",
+        "Outcome / ROI:",
+        "Offshore teams start faster and need fewer clarifications because expectations are explicit. Associates spend less time writing instructions and less time answering follow-up questions.",
+        "First-pass quality improves because checks are defined up front, reducing rework the next morning. Over time, this increases throughput and predictability for overnight support."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/kdn_logo.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show a task packet and the send-ready handoff message."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "SPA Assistant",
+      "strapline": "Review long SPAs quickly by extracting definitions and producing precise drafting fixes.",
+      "leftBody": [
+        "Problem:",
+        "Before, teams navigate very long, complex SPAs and rely on manual review to locate what matters most. After a first pass, it is easy to miss how definitions and key clauses drive economics and risk.",
+        "Before, findings vary by reviewer and are hard to compare across drafts. After, teams spend time re-reading and rewriting instead of escalating issues with clear, clause-linked recommendations.",
+        "How we solve it:",
+        "SPA Assistant extracts all definitions, flags financial definitions, and compares them to market practice. It outputs precise drafting edits and suggested legal wording modifications for review with counsel.",
+        "It compares redlines across drafts and breaks major definitions and clauses into components so changes are easy to understand. Outputs stay clause-linked for fast verification and discussion.",
+        "Outcome / ROI:",
+        "Teams surface material definition and clause issues faster, with consistent framing across reviewers. Stakeholders spend less time searching the document and more time deciding what to escalate and negotiate.",
+        "Review cycles tighten because recommendations are specific and clause-linked. This improves speed and confidence as documents change across drafts."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/spa-assistant-logo.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show a definitions table with flagged financial definitions, market-practice notes, and suggested drafting edits."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "TS Copywriter",
+      "strapline": "Turn rough notes into deliverable-ready TS writing in a consistent executive voice.",
+      "leftBody": [
+        "Problem:",
+        "Before, teams spend significant time drafting, rewriting, and aligning tone across deliverables, especially under deadline and across contributors. After reviews, managers often rewrite for clarity and structure instead of focusing on the analysis.",
+        "Before, language quality varies across sections and versions, which can dilute executive readability. After late changes, teams lose time to last-minute narrative clean-up.",
+        "How we solve it:",
+        "TS Copywriter turns rough notes into structured, professional language suited to TS deliverables and executive audiences. It rewrites for clarity, consistency, and a coherent voice across sections.",
+        "It produces deliverable-ready paragraphs and summaries for drafting new content or refining existing text. Outputs follow a repeatable structure so teams can iterate quickly without losing control of tone.",
+        "Outcome / ROI:",
+        "Teams move faster from analysis to client-ready narrative with fewer rewrites and less manager time spent on stylistic edits. Reviews become more efficient because language quality is consistent.",
+        "Deliverables read more clearly and consistently across engagements, improving executive readability. This reduces drafting burden during peak deal periods."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/ts-copywriter-icon.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show polished deliverable-ready paragraph output."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "FDD Researcher",
+      "strapline": "Generate a kickoff brief that sets early diligence priorities from limited materials.",
+      "leftBody": [
+        "Problem:",
+        "Before, early engagement days have limited materials and little time to form a clear diligence view. After kickoff prep, quality varies across teams and early questions and requests can be inconsistent.",
+        "Before, teams risk missing standard early diligence angles and workstreams can start from different assumptions. After misalignment, ramp-up slows and downstream work has to be reoriented.",
+        "How we solve it:",
+        "FDD Researcher turns kickoff materials into a structured brief and highlights unknowns, early risks, and priorities for follow-up. It guides teams toward a consistent set of focus areas and questions that managers can refine.",
+        "It produces a kickoff brief that aligns the deal team and accelerates the first wave of diligence planning and data requests. The output provides a repeatable starting point rather than rebuilding from scratch.",
+        "Outcome / ROI:",
+        "Teams ramp faster and enter early meetings with sharper, more consistent questions and a clearer plan. Early diligence becomes more structured because everyone starts from the same brief.",
+        "Momentum improves in kickoff and the risk of missing key angles drops. Alignment improves across workstreams because priorities and unknowns are communicated consistently."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/fdd-researcher-icon.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the kickoff brief output (final state)."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "KPMG Slide Gen",
+      "strapline": "Generate a fully brand-compliant KPMG PowerPoint deck in minutes.",
+      "leftBody": [
+        "Problem:",
+        "Before, teams build decks manually and spend time on formatting instead of the message and insights. After inputs change, slides are reworked repeatedly and review cycles drift into layout clean-up.",
+        "Before, brand compliance varies across teams and versions. After, last-minute fixes create delay and distract from decision-quality content.",
+        "How we solve it:",
+        "KPMG Slide Gen produces PowerPoint decks using KPMG layouts so the deck is brand-compliant by default. Teams generate and regenerate quickly as inputs evolve without rebuilding slides by hand.",
+        "It packages content into a consistent, review-ready structure so formatting stays stable while teams iterate the storyline and recommendations.",
+        "Outcome / ROI:",
+        "Teams move from content to a polished deck quickly, cutting formatting-driven review loops. Refreshes take minutes rather than hours.",
+        "Consistency improves across engagements because decks follow the same standard. Review time shifts toward clarity, insight, and decisions rather than cosmetics."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show a generated KPMG-branded slide in PowerPoint (final state)."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Lingo",
+      "strapline": "Upload a deck and get a KPMG Blue, brand-compliant version back in minutes.",
+      "leftBody": [
+        "Problem:",
+        "Before, rebranding or cleaning a deck is manual and time-consuming, especially when fonts, colors, and layouts drift across many slides. After a few edits, inconsistencies persist and teams spend time on polish instead of content.",
+        "Before, “final” decks still require last-minute fixes to align to brand expectations. After, quality control becomes a repetitive checklist rather than a quick, reliable step.",
+        "How we solve it:",
+        "Lingo takes an existing PowerPoint and applies KPMG Blue styling consistently across slides so the deck becomes brand-compliant quickly. The output is a refreshed deck that can be reviewed and adjusted rather than rebuilt.",
+        "It fixes common formatting issues systematically instead of slide-by-slide. This makes it easier to keep multiple versions aligned as the storyline evolves.",
+        "Outcome / ROI:",
+        "Teams can get to a client-ready look fast (often within ~10 minutes), freeing time for message, analysis, and recommendations. Cleanup work shrinks to a short review pass.",
+        "Consistency improves across the full deck, reducing last-minute churn and increasing confidence in professionalism, especially when decks change near deadlines."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/lingo_logo.png",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show a “before and after” view of the same slide rebranded to KPMG Blue."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Meta Prompt",
+      "strapline": "Turn rough requests into reusable prompts that help teams build custom GPTs and tools.",
+      "leftBody": [
+        "Problem:",
+        "Before, outputs vary because requests are inconsistent and depend on individual drafting skill. After a few iterations, teams spend time refining the request instead of using the result.",
+        "Before, good prompting does not scale, so each person reinvents patterns. After, adoption stalls because quality is unpredictable and hard to govern.",
+        "How we solve it:",
+        "Meta Prompt converts an informal request into a structured instruction set with explicit context, constraints, and an output format. It produces prompts that are easy to reuse and easy for a reviewer to validate.",
+        "Teams use the output as a starting point to build custom GPTs and other AI tools for repeatable workflows. This creates a practical library of “known-good” prompts rather than one-off drafts.",
+        "Outcome / ROI:",
+        "Teams spend less time on trial-and-error and more time working with consistent, review-ready outputs. Quality improves because the request structure is standardized.",
+        "Experimentation and internal tool-building accelerates because people start from a strong baseline. Governance and training become easier because patterns are shared and repeatable."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "assets/gpt-icons/meta-prompt-icon.jpeg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the structured prompt output ready to copy/paste, including constraints and the required output format."
+      }
+    },
+    {
+      "type": "divider",
+      "sectionNumber": "02",
+      "sectionTitle": "Corporate Finance"
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Bid Summarizer",
+      "strapline": "Generate a bid summary slide from an EOI or LOI in minutes.",
+      "leftBody": [
+        "Problem:",
+        "Before, teams read long EOIs and LOIs and manually extract terms into a bid summary under deadline. After the draft, reviewers still hunt the document to confirm value, conditions, and timing.",
+        "Before, each summary is formatted differently, making comparisons harder. After edits, the table often needs rework to stay consistent and slide-ready.",
+        "How we solve it:",
+        "Bid Summarizer converts an offer document into a structured table covering value, equity roll, earnout, assumptions, conditions and approvals, diligence, timeline, financing, and key considerations. The layout is consistent so gaps and risks are easy to spot.",
+        "It produces a KPMG-formatted slide as the primary output so the team can tailor it for the client without rebuilding structure. Review focuses on validating terms rather than formatting the summary.",
+        "Outcome / ROI:",
+        "Teams get a strong first-pass bid summary in minutes, even when terms change across drafts. This reduces cycle time from offer receipt to internal decision discussions.",
+        "Comparability improves across bidders because key terms sit in the same structure every time. Rework drops because reviewers start from a slide-ready baseline."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the generated bid summary table slide with key terms populated."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Get Smart",
+      "strapline": "Produce a pitch-ready company and market brief from light inputs.",
+      "leftBody": [
+        "Problem:",
+        "Before, early diligence and pitch prep starts from scattered sources, slowing ramp-up and alignment. After basic research, teams still lack a coherent brief that is easy to reuse.",
+        "Before, competitor and comparable context is assembled inconsistently and often late. After, teams spend time reformatting notes instead of improving insight quality.",
+        "How we solve it:",
+        "Get Smart produces a structured brief covering the business, leadership, products and services, and competitive context. The output highlights what to validate and what questions to pursue next.",
+        "It also proposes relevant comparables and examples to frame positioning and valuation context. The structure is designed to drop into internal updates and client materials with minimal editing.",
+        "Outcome / ROI:",
+        "Teams move from a blank page to a usable first draft quickly, improving speed to stakeholder alignment. Time shifts from assembling facts to validating and sharpening the story.",
+        "Consistency improves because the same framework is applied each time. Updates are easier because the brief can be refreshed as new information arrives."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the structured company and market brief output."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Industry Research",
+      "strapline": "Turn industry research into an executive-ready market narrative.",
+      "leftBody": [
+        "Problem:",
+        "Before, industry research is stitched together from multiple sources and varies in scope by team. After the first cut, missing competitors, trends, or sizing angles create rework.",
+        "Before, findings live in long notes that are hard to turn into slides. After, teams spend time cleaning and aligning language instead of pressure-testing implications.",
+        "How we solve it:",
+        "Industry Research produces a structured view of the market, competitors, key trends, and growth drivers in a consistent format. It makes it easy to review, validate, and extend with better sources.",
+        "It calls out key unknowns and questions to confirm through diligence or management discussions. Outputs are packaged to support an executive storyline and quick reuse.",
+        "Outcome / ROI:",
+        "Teams get to a coherent market narrative faster and align on what matters earlier. Effort moves from structuring the content to validating the highest-impact uncertainties.",
+        "Speed and consistency improve for pitches and client updates, and the risk of missing standard market angles drops. Review is faster because the structure is predictable."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the structured industry research summary with competitors and trends."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Buyer List Builder",
+      "strapline": "Generate a buyer universe with evidence-backed rationales.",
+      "leftBody": [
+        "Problem:",
+        "Before, buyer lists rely on manual precedent review and brainstorming, which can miss obvious candidates. After a first pass, teams iterate repeatedly without a consistent method.",
+        "Before, lists live in ad hoc formats that are hard to track during a live process. After, time is spent cleaning names and categories rather than prioritizing outreach.",
+        "How we solve it:",
+        "Buyer List Builder proposes strategic and financial buyers with concise rationales tied to fit and evidence. It separates must-include names from watch-list candidates so prioritization starts earlier.",
+        "It outputs an export-ready structure that is easy to review, filter, and maintain as the process evolves. The team starts from a clean baseline instead of rebuilding list mechanics.",
+        "Outcome / ROI:",
+        "Teams move faster from thesis to a defensible buyer universe and spend more time on prioritization and messaging. Outreach planning improves because the list is structured and evidence-backed.",
+        "Consistency improves across deals and the risk of missing relevant buyers drops. Collaboration is easier because the file is clean and maintainable."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the buyer list output with strategic and financial categories and rationales."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Presentation Auditor",
+      "strapline": "Flag deck clarity and consistency issues before delivery.",
+      "leftBody": [
+        "Problem:",
+        "Before, teams review decks manually to catch formatting drift and typos late in the process. After multiple edits, small inconsistencies compound and distract from the message.",
+        "Before, feedback varies by reviewer, so fixes are hard to prioritize. After, teams churn through subjective comments without a clear checklist of what matters most.",
+        "How we solve it:",
+        "Presentation Auditor scans a presentation and flags common issues like inconsistent formatting, repeated errors, and unclear wording. It outputs a structured set of findings that is easy to work through quickly.",
+        "Findings are grouped by severity and type so teams can prioritize client-readiness fixes. This creates a repeatable quality-control step before review and delivery.",
+        "Outcome / ROI:",
+        "Teams reduce last-minute clean-up and improve polish with fewer cycles of cosmetic feedback. Review discussions focus more on message and insight rather than formatting nits.",
+        "Consistency improves across engagements and avoidable errors drop. Junior team members gain a clear checklist to execute against confidently."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show an audit summary with prioritized issues and example callouts."
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Target Hunter",
+      "strapline": "Generate target ideas from a reference deal, with clear fit rationales.",
+      "leftBody": [
+        "Problem:",
+        "Before, target screening starts broad and depends on manual research, which is slow and uneven. After initial work, teams struggle to explain clearly why each name fits the thesis.",
+        "Before, it is hard to translate a reference transaction into a focused universe. After, outputs become long lists with limited prioritization and weak rationales.",
+        "How we solve it:",
+        "Target Hunter takes a reference deal, comparable company, or subsector and proposes private-company targets that match the profile. Each suggestion includes a clear, concise fit rationale tied to strategy and positioning.",
+        "It suggests practical filters and follow-up questions to validate fit and narrow quickly. Outputs are structured so teams can triage, prioritize, and deepen research efficiently.",
+        "Outcome / ROI:",
+        "Teams reach a shortlist faster and spend more time validating and positioning instead of starting from scratch. Outreach planning improves because candidates are linked to a clear deal logic.",
+        "Consistency improves in how target ideas are generated and defended to stakeholders. This reduces wasted effort on generic lists that do not match the reference intent."
+      ],
+      "rightBody": [
+        " "
+      ],
+      "iconPlacement": "titleLeft",
+      "icon": "runtime/kpmg-diligence/assets/kpmg-logo.svg",
+      "style": {
+        "bodyFontSize": 11,
+        "straplineFontSize": 11,
+        "iconSize": 0.62
+      },
+      "screenshotPlaceholder": {
+        "caption": "Show the target shortlist output with fit rationales and next-step validation questions."
+      }
+    },
+    {
+      "type": "backCover",
+      "disclaimer": "Internal use only",
+      "url": ""
+    }
+  ]
+}

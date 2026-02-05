@@ -1,3 +1,0 @@
-# Current extractor modules are stdlib-only.
-#
-# This repo intentionally avoids runtime QA/render dependencies.

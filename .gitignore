@@ -14,11 +14,11 @@ desktop.ini
 *.swo
 *~
 
-# ---- kpmg-pptx-gen ----
-chatgpt/kpmg-pptx-gen/**/outputs/
-chatgpt/kpmg-pptx-gen/**/node_modules/
-chatgpt/kpmg-pptx-gen/**/__pycache__/
-# ---- /kpmg-pptx-gen ----
+# ---- kpmg-slidegen ----
+chatgpt/kpmg-slidegen/**/outputs/
+chatgpt/kpmg-slidegen/**/node_modules/
+chatgpt/kpmg-slidegen/**/__pycache__/
+# ---- /kpmg-slidegen ----
 
 # Env files
 .env
