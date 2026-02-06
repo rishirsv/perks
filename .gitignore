@@ -26,3 +26,7 @@ chatgpt/kpmg-pptx-gen/**/__pycache__/
 !.env*.sample
 !.env*.template
 # ---- /codex:system-and-env ----
+
+# ---- oracle ----
+oracle/
+# ---- oracle ----
