@@ -197,8 +197,8 @@ Generated from `dist/fdd_scope_library.v2.json`.
   - Present an analysis of revenues split between one-time (e.g. implementation) and recurring (analysis to be performed by you).
   - Present an analysis and comment on the development of recurring revenues, including a reconciliation of revenues over time (new / lost / existing revenues) (analysis to be performed by you).
 - (scope.420) Review a reconciliation of annual recurring revenues (ARR) per the underlying "customer cube" of subscription revenues to reported revenue and deferred revenue per the internal financial information (analysis to be performed by you).
-- (scope.421) Comment on trends in key KPIs for recurring and reoccurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell).
-- (scope.422) Summarize and comment on customer retention (churn) rates for recurring and reoccurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you).
+- (scope.421) Comment on trends in key KPIs for recurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell).
+- (scope.422) Summarize and comment on customer retention (churn) rates for recurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you).
 
 ### Operating Expenses (`operating_expenses`)
 - (scope.423) Based on analysis performed by you:
@@ -218,7 +218,7 @@ Generated from `dist/fdd_scope_library.v2.json`.
 - (scope.429) Consider the components of net working capital, monthly trends (including days), key drivers and seasonality (analysis to be performed by you).
 - (scope.430) Present and comment on the average level of working capital and its development over the Historical Period for consideration when setting a working capital target. Consider one off / non-business items in reported working capital, 'allocated' balances within working capital, and the potential impact of stand-alone working capital balances when Target is no longer part of the Parent (analysis to be performed by you).
 - (scope.431) Discuss whether additional net working capital adjustments might be considered, in addition to those already identified in your analysis.
-- (scope.432) Consider the ageing of trade payables and receivables.
+- (scope.432) Consider the aging of trade payables and receivables.
 
 ### Locked Box (`locked_box`)
 - (scope.433) Consider the locked box analysis provided by the seller, and consider a potential buy-side position. To consider:

@@ -172,7 +172,7 @@ Generated from `dist/fdd_scope_library.v2.json`.
 ### Revenue Analysis (`revenue_analysis`)
 - (scope.150) Leverage Data ana Analytics analyses (see below) to understand revenue and margin trends by customer, service offering, type and inform how it may impact the quality of earnings analysis as applicable.
 - (scope.151) Revenue and margin by business segment (Services & Projects: HVAC, Compressed air, Plumbing, Chiller, Electrical, CM4, CM+, repair etc.);
-- (scope.152) Revenue and margin by customer end market (Industrial, commerical, retirement homes, schools, condos etc.);
+- (scope.152) Revenue and margin by customer end market (Industrial, commercial, retirement homes, schools, condos etc.);
 - (scope.153) Revenue and margin by geography (i.e. by geography, by geography, by geography, by geography etc.);
 - (scope.154) Price vs. volume trends;
 - (scope.155) Understand revenue lifecycle of significant customers;

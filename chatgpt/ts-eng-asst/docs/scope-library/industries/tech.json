@@ -655,11 +655,11 @@
         },
         {
           "id": "scope.421",
-          "text": "Comment on trends in key KPIs for recurring and reoccurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell)."
+          "text": "Comment on trends in key KPIs for recurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell)."
         },
         {
           "id": "scope.422",
-          "text": "Summarize and comment on customer retention (churn) rates for recurring and reoccurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you)."
+          "text": "Summarize and comment on customer retention (churn) rates for recurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you)."
         }
       ],
       "operating_expenses": [
@@ -725,7 +725,7 @@
         },
         {
           "id": "scope.432",
-          "text": "Consider the ageing of trade payables and receivables."
+          "text": "Consider the aging of trade payables and receivables."
         }
       ],
       "locked_box": [

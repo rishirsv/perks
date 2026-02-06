@@ -36,6 +36,7 @@ Usage (CLI):
 """
 
 import json
+import difflib
 import re
 import sys
 from datetime import date
@@ -91,6 +92,20 @@ MONEY_KEYS = {
 }
 
 _MONEY_INT_RE = re.compile(r"^\s*\$?\s*([0-9][0-9,]*)\s*$")
+
+# Common user-facing industry aliases/variants mapped to canonical keys.
+_INDUSTRY_ALIAS_MAP = {
+    "telecom": "telecomm",
+    "telecommunications": "telecomm",
+    "professional services": "prof_services",
+    "professional_service": "prof_services",
+    "professional_services": "prof_services",
+    "prof services": "prof_services",
+    "pro services": "prof_services",
+    "real estate": "real_estate",
+    "realestate": "real_estate",
+    "eye care": "eyecare",
+}
 
 
 def _is_blank(value) -> bool:
@@ -150,6 +165,58 @@ def _normalize_money_value(value) -> str:
     if n < 1000:
         n *= 1000
     return f"{n:,}"
+
+
+def _normalize_lookup_key(value: str) -> str:
+    s = (value or "").strip().lower()
+    return re.sub(r"[^a-z0-9]+", "_", s).strip("_")
+
+
+def resolve_industry_key(industry: str, scope_library: dict) -> tuple[str, Optional[str]]:
+    """
+    Resolve a user-provided industry key to a supported scope library key.
+
+    Behaviors:
+    - exact match
+    - normalized/alias match
+    - fuzzy typo correction
+    - fallback to generic (if present), with warning text
+    """
+    modules = scope_library.get("industry_modules") if isinstance(scope_library, dict) else None
+    if not isinstance(modules, dict) or not modules:
+        return industry, None
+
+    supported = sorted(k for k in modules.keys() if isinstance(k, str))
+    requested = (industry or "").strip()
+    if requested in modules:
+        return requested, None
+
+    norm_to_supported = {_normalize_lookup_key(k): k for k in supported}
+    alias_map = {_normalize_lookup_key(k): v for k, v in _INDUSTRY_ALIAS_MAP.items()}
+    requested_norm = _normalize_lookup_key(requested)
+
+    if requested_norm in norm_to_supported:
+        resolved = norm_to_supported[requested_norm]
+        return resolved, f"Industry '{industry}' normalized to '{resolved}'."
+
+    aliased = alias_map.get(requested_norm)
+    if aliased in modules:
+        return aliased, f"Industry '{industry}' mapped to '{aliased}'."
+
+    fuzzy_candidates = sorted(set(norm_to_supported.keys()) | set(alias_map.keys()))
+    match = difflib.get_close_matches(requested_norm, fuzzy_candidates, n=1, cutoff=0.82)
+    if match:
+        m = match[0]
+        resolved = norm_to_supported.get(m) or alias_map.get(m)
+        if resolved in modules:
+            return resolved, f"Industry '{industry}' corrected to '{resolved}'."
+
+    if "generic" in modules:
+        return "generic", f"Industry '{industry}' not recognized; using 'generic' scope."
+
+    # Even when `generic` is not an explicit industry module key, this still
+    # yields common-skeleton-only scope insertion (the intended generic fallback).
+    return "generic", f"Industry '{industry}' not recognized; using common-scope fallback."
 
 
 def _infer_template_type(template_file: str) -> Optional[str]:
@@ -310,6 +377,19 @@ def _delete_paragraph(paragraph: Paragraph) -> None:
         parent.remove(element)
 
 
+def _paragraph_has_section_break(paragraph: Paragraph) -> bool:
+    """
+    Return True when a paragraph contains section properties (`w:sectPr`).
+
+    These markers define section boundaries (for example, Appendix A -> Appendix B)
+    and must be preserved when replacing scope text.
+    """
+    element = getattr(paragraph, "_element", None)
+    if element is None:
+        return False
+    return bool(element.xpath(".//*[local-name()='sectPr']"))
+
+
 def _normalize_yes_no(value) -> str:
     s = ("" if value is None else str(value)).strip().lower()
     if s in {"y", "yes", "true", "1"}:
@@ -421,12 +501,6 @@ def _replace_in_runs(runs, old: str, new: str) -> int:
     return count
 
 
-def _replace_in_paragraph(para, variables: dict) -> None:
-    if not para.runs:
-        return
-    _replace_in_runs(para.runs, variables=None)  # type: ignore
-
-
 def replace_placeholders(doc: Document, variables: dict) -> None:
     """Replace all {{KEY}} placeholders throughout the document."""
     # Build replacement map: {{KEY}} -> value
@@ -485,7 +559,7 @@ def remove_guidance_blocks(doc: Document) -> int:
 
     Supports both:
     - Numeric placeholders: {{GUIDANCE_NN}}
-    - Freeform guidance blocks: {{GUIDANCE: ...}} or [GUIDANCE: ...]
+    - Freeform guidance blocks: {{GUIDANCE: ...}}
     Returns count of paragraphs removed.
     """
     removed = 0
@@ -766,9 +840,14 @@ def replace_fdd_scope_block(
     if bold_template is None:
         return {"error": "No formatting template found in scope block", "sections_inserted": 0, "bullets_inserted": 0}
 
-    # Delete scope content
+    # Delete scope content, but preserve section-break paragraphs so Appendix
+    # boundaries/headers remain intact (Appendix A scope vs Appendix B terms).
     to_remove = paras[start_idx + 1: end_idx]
+    preserved_section_breaks = 0
     for p in to_remove:
+        if _paragraph_has_section_break(p):
+            preserved_section_breaks += 1
+            continue
         p._p.getparent().remove(p._p)
 
     # Build and insert replacement content
@@ -920,6 +999,7 @@ def replace_fdd_scope_block(
         "sections_inserted": section_count,
         "bullets_inserted": bullet_count,
         "industry": industry,
+        "section_breaks_preserved": preserved_section_breaks,
     }
 
 
@@ -997,19 +1077,29 @@ def generate_engagement_letter(
 
     # Step 3: Replace FDD scope block
     scope_library = load_scope_library(scope_library_file)
+    resolved_industry, industry_note = resolve_industry_key(industry, scope_library)
+    if industry_note:
+        summary["steps"].append(industry_note)
+    summary["requested_industry"] = industry
+    summary["industry"] = resolved_industry
+
     scope_result = replace_fdd_scope_block(
         doc,
-        industry=industry,
+        industry=resolved_industry,
         scope_library=scope_library,
         scope_selection=scope_selection,
     )
     if "error" in scope_result:
         summary["steps"].append(f"Scope replacement warning: {scope_result['error']}")
     else:
-        summary["steps"].append(
+        scope_step = (
             f"Inserted FDD scope: {scope_result['sections_inserted']} sections, "
             f"{scope_result['bullets_inserted']} bullets"
         )
+        preserved_breaks = scope_result.get("section_breaks_preserved")
+        if isinstance(preserved_breaks, int) and preserved_breaks > 0:
+            scope_step += f"; preserved {preserved_breaks} section break marker(s)"
+        summary["steps"].append(scope_step)
 
     # Step 4: Derive defaults + ensure template placeholder coverage (pre-gate)
     placeholder_keys = _extract_placeholders(doc)

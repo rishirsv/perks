@@ -367,7 +367,7 @@
       "quality_of_earnings": [
         {
           "id": "scope.019",
-          "text": "Analyze historical earnings before interest, taxes, depreciation, and amortization (“EBITDA”) at segment levels including understanding the impact of potential non-recurring or non-operation items such as:"
+          "text": "Analyze historical earnings before interest, taxes, depreciation, and amortization (“EBITDA”) at segment levels including understanding the impact of potential non-recurring or non-operating items such as:"
         },
         {
           "id": "scope.020",
@@ -1005,7 +1005,7 @@
               "text": "Integrate anonymized customer data to understand revenue and mix (one-time versus recurring) across different locations; use of loyalty programs loyalty programs (e.g., impact of discounts, recurring nature of customers, etc.); and how this impacts overall revenue sustainability"
             },
             {
-              "text": "Store costs analysed as a percentage of sales or applicable metric (selling payroll, other store payroll, store rent, marketing, shrinkage, sales-by-square footage, etc.)."
+              "text": "Store costs analyzed as a percentage of sales or applicable metric (selling payroll, other store payroll, store rent, marketing, shrinkage, sales-by-square footage, etc.)."
             },
             {
               "text": "Sales and COGS adjustments (including sales returns, markdowns, supplier revenue, stock shrinkage, obsolescence, other income, loyalty points and gift cards);"
@@ -1590,7 +1590,7 @@
         },
         {
           "id": "scope.152",
-          "text": "Revenue and margin by customer end market (Industrial, commerical, retirement homes, schools, condos etc.);"
+          "text": "Revenue and margin by customer end market (Industrial, commercial, retirement homes, schools, condos etc.);"
         },
         {
           "id": "scope.153",
@@ -2941,7 +2941,7 @@
               "text": "Pro forma impact of changes in Members/Partners' remuneration, including validation of Sellers estimate via benchmarking exercise outlined below;"
             },
             {
-              "text": "arve-out considerations (costs related to US and China operations);"
+              "text": "carve-out considerations (costs related to US and China operations);"
             },
             {
               "text": "Impact of US royalties;"
@@ -3989,11 +3989,11 @@
         },
         {
           "id": "scope.421",
-          "text": "Comment on trends in key KPIs for recurring and reoccurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell)."
+          "text": "Comment on trends in key KPIs for recurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell)."
         },
         {
           "id": "scope.422",
-          "text": "Summarize and comment on customer retention (churn) rates for recurring and reoccurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you)."
+          "text": "Summarize and comment on customer retention (churn) rates for recurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you)."
         }
       ],
       "operating_expenses": [
@@ -4059,7 +4059,7 @@
         },
         {
           "id": "scope.432",
-          "text": "Consider the ageing of trade payables and receivables."
+          "text": "Consider the aging of trade payables and receivables."
         }
       ],
       "locked_box": [

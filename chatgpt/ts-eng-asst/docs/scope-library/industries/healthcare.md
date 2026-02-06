@@ -176,7 +176,7 @@ Generated from `dist/fdd_scope_library.v2.json`.
   - Where information is available, generic versus branded drugs
   - Where information is available, public, private, or cash
   - Integrate anonymized customer data to understand revenue and mix (one-time versus recurring) across different locations; use of loyalty programs loyalty programs (e.g., impact of discounts, recurring nature of customers, etc.); and how this impacts overall revenue sustainability
-  - Store costs analysed as a percentage of sales or applicable metric (selling payroll, other store payroll, store rent, marketing, shrinkage, sales-by-square footage, etc.).
+  - Store costs analyzed as a percentage of sales or applicable metric (selling payroll, other store payroll, store rent, marketing, shrinkage, sales-by-square footage, etc.).
   - Sales and COGS adjustments (including sales returns, markdowns, supplier revenue, stock shrinkage, obsolescence, other income, loyalty points and gift cards);
   - Consolidate the data into a clean Excel data cube and PowerBI Analysis file, and extract and understand any patterns and trends that might inform value creation and optimization opportunities
 

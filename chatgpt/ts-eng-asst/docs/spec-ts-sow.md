@@ -131,6 +131,17 @@ The engagement letter templates use `{{...}}` markers for multiple purposes. V1 
 - **Optional clauses** (keep or remove): e.g., a whole clause wrapped in `{{...}}` that should be included sometimes and deleted other times.
 - **Guidance blocks** (remove): e.g., `{{GUIDANCE: ...}}` notes that should not appear in the final client-ready document.
 
+Rules for feature workers:
+
+- Curly-brace guidance is internal and removed (e.g., `{{GUIDANCE_01}}`, `{{GUIDANCE: ...}}`).
+- Bracketed guidance remains in output for human post-editing (e.g., `[GUIDANCE: ...]`).
+
+### Independence behavior (intended)
+
+- `CHOICE_INDEPENDENCE_APPLIES` controls whether Independence Considerations remains.
+- If `CHOICE_INDEPENDENCE_APPLIES=no`, the full Independence block is removed.
+- `CHOICE_SEC_STATUS` is conditionally required only when `CHOICE_INDEPENDENCE_APPLIES=yes` and the section is present in the selected template.
+
 ### Conversation Flow
 
 ```

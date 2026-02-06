@@ -114,7 +114,7 @@ Generated from `dist/fdd_scope_library.v2.json`.
 - (scope.018) Unless otherwise noted, our work will concentrate on financial information for the last three fiscal years ended the most recent interim period, along with the most recent available financial information (e.g. year-to-date the most recent interim period or more recent monthly data as available).
 
 ### Quality Of Earnings (`quality_of_earnings`)
-- (scope.019) Analyze historical earnings before interest, taxes, depreciation, and amortization (“EBITDA”) at segment levels including understanding the impact of potential non-recurring or non-operation items such as:
+- (scope.019) Analyze historical earnings before interest, taxes, depreciation, and amortization (“EBITDA”) at segment levels including understanding the impact of potential non-recurring or non-operating items such as:
 - (scope.020) Obtain and comment on the Seller’s proposed adjustments analysis;
 - (scope.021) Working with Client, understand potential impact with potential change in incentive compensation, dis-synergies, or synergies (if applicable);
 - (scope.022) Understand the impact of the Company’s JV business in the dredging sector;

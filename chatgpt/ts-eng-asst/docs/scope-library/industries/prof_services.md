@@ -134,7 +134,7 @@ Generated from `dist/fdd_scope_library.v2.json`.
   - Sustainability of margins (including the impact of changes in POC estimates on the Target's earnings);
   - Impacts of COVID-19;
   - Pro forma impact of changes in Members/Partners' remuneration, including validation of Sellers estimate via benchmarking exercise outlined below;
-  - arve-out considerations (costs related to US and China operations);
+  - carve-out considerations (costs related to US and China operations);
   - Impact of US royalties;
   - Impact of provisions (including bad debt provisions, claims on contracts and loss making contracts), management estimates or adjusting entries on reported results;
   - Operational cash flows not captured within EBITDA (capitalized software costs, leases capitalized etc.);
