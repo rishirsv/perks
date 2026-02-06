@@ -15,10 +15,12 @@ Usage (Code Interpreter):
     scope_selection = {
         # Optional: omit unchecked top-level scope items (default: include all)
         "excluded_top_level_ids": [],          # e.g. ["scope.002"]
+        # Optional (preferred for section-level UX): omit complete scope sections
+        "excluded_section_keys": [],           # e.g. ["net_debt", "working_capital"]
     }
     result = generate_engagement_letter(
         template_file="buyside-engagement-letter.docx",
-        scope_library_file="fdd_scope_library.v2.json",
+        scope_library_file="scope-library.json",
         industry="healthcare",
         variables=variables,
         scope_selection=scope_selection,
@@ -28,7 +30,7 @@ Usage (Code Interpreter):
 Usage (CLI):
     python3 el-generate.py \\
         --template buyside-engagement-letter.docx \\
-        --scope-library fdd_scope_library.v2.json \\
+        --scope-library scope-library.json \\
         --industry healthcare \\
         --variables '{"CLIENT_LEGAL_NAME": "Acme Inc.", ...}' \\
         --scope-selection '{"excluded_top_level_ids":["scope.002"]}' \\
@@ -229,6 +231,37 @@ def _infer_template_type(template_file: str) -> Optional[str]:
     return None
 
 
+def _iter_table_paragraphs(table):
+    for row in table.rows:
+        for cell in row.cells:
+            for para in cell.paragraphs:
+                yield para
+            for nested_table in cell.tables:
+                yield from _iter_table_paragraphs(nested_table)
+
+
+def _iter_document_paragraphs(doc: Document):
+    # Body paragraphs
+    for para in doc.paragraphs:
+        yield para
+
+    # Body tables (including nested tables)
+    for table in doc.tables:
+        yield from _iter_table_paragraphs(table)
+
+    # Headers/footers (paragraphs + tables, including nested tables)
+    for section in doc.sections:
+        for para in section.header.paragraphs:
+            yield para
+        for table in section.header.tables:
+            yield from _iter_table_paragraphs(table)
+
+        for para in section.footer.paragraphs:
+            yield para
+        for table in section.footer.tables:
+            yield from _iter_table_paragraphs(table)
+
+
 def _extract_placeholders(doc: Document) -> set[str]:
     """
     Extract placeholder keys (without braces) from the current document state.
@@ -238,39 +271,14 @@ def _extract_placeholders(doc: Document) -> set[str]:
 
     def _scan_text(text: str) -> None:
         for token in PLACEHOLDER_RE.findall(text or ""):
-            if token in GUIDANCE_KEYS:
-                continue
             inner = token[2:-2].strip()
+            if token in GUIDANCE_KEYS or f"{{{{{inner}}}}}" in GUIDANCE_KEYS:
+                continue
             if inner:
                 keys.add(inner)
 
-    for para in doc.paragraphs:
+    for para in _iter_document_paragraphs(doc):
         _scan_text(para.text)
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for para in cell.paragraphs:
-                    _scan_text(para.text)
-                for nested_table in cell.tables:
-                    for nrow in nested_table.rows:
-                        for ncell in nrow.cells:
-                            for para in ncell.paragraphs:
-                                _scan_text(para.text)
-    for section in doc.sections:
-        for para in section.header.paragraphs:
-            _scan_text(para.text)
-        for table in section.header.tables:
-            for row in table.rows:
-                for cell in row.cells:
-                    for para in cell.paragraphs:
-                        _scan_text(para.text)
-        for para in section.footer.paragraphs:
-            _scan_text(para.text)
-        for table in section.footer.tables:
-            for row in table.rows:
-                for cell in row.cells:
-                    for para in cell.paragraphs:
-                        _scan_text(para.text)
 
     return keys
 
@@ -502,52 +510,77 @@ def _replace_in_runs(runs, old: str, new: str) -> int:
     return count
 
 
+def _replace_placeholder_key_in_runs(runs, key: str, new: str) -> int:
+    """
+    Replace placeholder tokens for a key, allowing optional whitespace inside braces.
+
+    Examples matched:
+      {{KEY}}, {{ KEY }}, {{ KEY}}, {{KEY }}
+    """
+    key = (key or "").strip()
+    if not key:
+        return 0
+
+    pattern = re.compile(r"\{\{\s*" + re.escape(key) + r"\s*\}\}")
+    count = 0
+
+    while True:
+        full_text = "".join(run.text for run in runs)
+        m = pattern.search(full_text)
+        if not m:
+            break
+
+        idx, end_idx = m.span()
+        cursor = 0
+        inserted = False
+
+        for run in runs:
+            text = run.text
+            run_end = cursor + len(text)
+
+            if run_end <= idx or cursor >= end_idx:
+                cursor = run_end
+                continue
+
+            before = text[: max(0, idx - cursor)] if idx > cursor else ""
+            after = text[end_idx - cursor:] if run_end > end_idx else ""
+
+            if not inserted:
+                run.text = before + str(new) + after
+                inserted = True
+            else:
+                run.text = after
+
+            cursor = run_end
+
+        count += 1
+
+    return count
+
+
 def replace_placeholders(doc: Document, variables: dict) -> None:
     """Replace all {{KEY}} placeholders throughout the document."""
-    # Build replacement map: {{KEY}} -> value
-    repl = {}
+    # Build replacement map by placeholder key (without braces), allowing
+    # whitespace-padded token variants in templates.
+    repl: dict[str, str] = {}
     for key, value in variables.items():
-        token = f"{{{{{key}}}}}" if not key.startswith("{{") else key
-        repl[token] = str(value) if value is not None else ""
+        raw = str(key) if key is not None else ""
+        if raw.startswith("{{") and raw.endswith("}}"):
+            normalized_key = raw[2:-2].strip()
+        else:
+            normalized_key = raw.strip()
+        if not normalized_key:
+            continue
+        repl[normalized_key] = str(value) if value is not None else ""
 
     def _process_paragraph(para):
         if not para.runs:
             return
-        for old, new in repl.items():
-            _replace_in_runs(para.runs, old, new)
+        for placeholder_key, new in repl.items():
+            _replace_placeholder_key_in_runs(para.runs, placeholder_key, new)
 
-    # Body paragraphs
-    for para in doc.paragraphs:
+    for para in _iter_document_paragraphs(doc):
         _process_paragraph(para)
-
-    # Tables
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for para in cell.paragraphs:
-                    _process_paragraph(para)
-                for nested_table in cell.tables:
-                    for nrow in nested_table.rows:
-                        for ncell in nrow.cells:
-                            for para in ncell.paragraphs:
-                                _process_paragraph(para)
-
-    # Headers/footers
-    for section in doc.sections:
-        for para in section.header.paragraphs:
-            _process_paragraph(para)
-        for table in section.header.tables:
-            for row in table.rows:
-                for cell in row.cells:
-                    for para in cell.paragraphs:
-                        _process_paragraph(para)
-        for para in section.footer.paragraphs:
-            _process_paragraph(para)
-        for table in section.footer.tables:
-            for row in table.rows:
-                for cell in row.cells:
-                    for para in cell.paragraphs:
-                        _process_paragraph(para)
 
 
 # ---------------------------------------------------------------------------
@@ -995,6 +1028,11 @@ def replace_fdd_scope_block(
     ]
 
     excluded_top_level_ids: set[str] = set()
+    excluded_section_keys: set[str] = set()
+
+    def _normalize_section_key(value: str) -> str:
+        return _normalize_lookup_key(str(value or ""))
+
     if isinstance(scope_selection, dict):
         excluded_top_level_ids = set(
             scope_selection.get("excluded_top_level_ids", [])
@@ -1002,6 +1040,15 @@ def replace_fdd_scope_block(
             or scope_selection.get("excluded_top_level_bullet_ids", [])
             or []
         )
+        raw_section_keys = (
+            scope_selection.get("excluded_section_keys", [])
+            or scope_selection.get("excluded_sections", [])
+            or []
+        )
+        for key in raw_section_keys:
+            normalized = _normalize_section_key(str(key))
+            if normalized:
+                excluded_section_keys.add(normalized)
 
     cursor = paras[start_idx]
     section_count = 0
@@ -1018,10 +1065,19 @@ def replace_fdd_scope_block(
     alpha_num_fallback_id, _ = _get_paragraph_num_info(alpha_template)
     roman_num_fallback_id, _ = _get_paragraph_num_info(roman_template)
 
-    def _new_num_id(abstract_id: Optional[int], fallback_num_id: Optional[int] = None) -> Optional[int]:
+    def _new_num_id(
+        abstract_id: Optional[int],
+        fallback_num_id: Optional[int] = None,
+        *,
+        restart_at: Optional[int] = 1,
+    ) -> Optional[int]:
         if abstract_id is not None:
             try:
-                return int(numbering.add_num(int(abstract_id)).numId)
+                num = numbering.add_num(int(abstract_id))
+                if restart_at is not None:
+                    lvl_override = num.add_lvlOverride(0)
+                    lvl_override.add_startOverride(int(restart_at))
+                return int(num.numId)
             except Exception:
                 pass
         return fallback_num_id
@@ -1096,6 +1152,8 @@ def replace_fdd_scope_block(
     for section in common:
         heading = section["heading"]
         norm = section["normalized_heading"]
+        if _normalize_section_key(norm) in excluded_section_keys:
+            continue
         default_bullets = section.get("default_bullets", [])
         industry_bullets = modules.get(norm, [])
 
@@ -1146,6 +1204,8 @@ def replace_fdd_scope_block(
 
     # Extra industry-only sections
     for heading_key, bullets in extra_sections:
+        if _normalize_section_key(heading_key) in excluded_section_keys:
+            continue
         display_heading = heading_key.replace("_", " ").title()
         nodes = None
         if _is_v2_bullet_list(bullets):
@@ -1180,6 +1240,7 @@ def replace_fdd_scope_block(
         "bullets_inserted": bullet_count,
         "industry": industry,
         "section_breaks_preserved": preserved_section_breaks,
+        "excluded_section_keys_applied": sorted(excluded_section_keys),
     }
 
 
@@ -1195,18 +1256,8 @@ def validate_no_placeholders(doc: Document) -> list:
         matches = PLACEHOLDER_RE.findall(para.text)
         remaining.extend(matches)
 
-    for para in doc.paragraphs:
+    for para in _iter_document_paragraphs(doc):
         _scan(para)
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for para in cell.paragraphs:
-                    _scan(para)
-    for section in doc.sections:
-        for para in section.header.paragraphs:
-            _scan(para)
-        for para in section.footer.paragraphs:
-            _scan(para)
 
     return sorted(set(remaining))
 
@@ -1228,7 +1279,7 @@ def generate_engagement_letter(
 
     Args:
         template_file: Path to the .docx template.
-        scope_library_file: Path to the scope library JSON (e.g. fdd_scope_library.v2.json).
+        scope_library_file: Path to the scope library JSON (e.g. scope-library.json).
         industry: Industry key (e.g. "healthcare").
         variables: Dict of KEY -> value (without {{ }} wrappers).
         output_file: Output filename.
@@ -1340,6 +1391,42 @@ def generate_engagement_letter(
 def main():
     import argparse
 
+    def _path_exists_safe(value: str) -> bool:
+        """Return True when value is a valid existing path, without raising OSError."""
+        try:
+            return Path(value).exists()
+        except OSError:
+            return False
+
+    def _load_json_arg(value: str, *, arg_name: str, required: bool = True):
+        """
+        Load JSON from either an inline JSON string or a filesystem path.
+
+        Parsing order is intentional:
+        1) Try inline JSON first (avoids Path.exists OSError on long JSON strings).
+        2) Try path-based JSON.
+        """
+        if value is None:
+            if required:
+                raise SystemExit(f"Missing required argument: {arg_name}")
+            return None
+
+        # Prefer inline JSON first to avoid path checks on long payloads.
+        try:
+            return json.loads(value)
+        except (json.JSONDecodeError, TypeError):
+            pass
+
+        if _path_exists_safe(value):
+            with open(value, "r") as f:
+                return json.load(f)
+
+        if required:
+            raise SystemExit(
+                f"Invalid {arg_name}: expected a JSON string or path to a JSON file."
+            )
+        return None
+
     # Back-compat: Code Interpreter sometimes invokes this script with positional
     # args instead of flags. Support both:
     #   python el-generate.py --template ... --scope-library ... --industry ... --variables ... --scope-selection ... --output ...
@@ -1351,7 +1438,7 @@ def main():
     if has_flag:
         parser = argparse.ArgumentParser(description="Generate an engagement letter")
         parser.add_argument("--template", required=True, help="Path to .docx template")
-        parser.add_argument("--scope-library", required=True, help="Path to the scope library JSON (e.g. fdd_scope_library.v2.json)")
+        parser.add_argument("--scope-library", required=True, help="Path to the scope library JSON (e.g. scope-library.json)")
         parser.add_argument("--industry", required=True, help="Industry key")
         parser.add_argument("--variables", required=True, help="JSON string or path to JSON file with variables")
         parser.add_argument("--scope-selection", help="Optional JSON string or path to JSON file controlling scope inclusion")
@@ -1375,7 +1462,7 @@ def main():
             return s2.startswith("{") or s2.startswith("[")
 
         industry = None
-        if len(rest) >= 3 and (not _is_jsonish(rest[0])) and (Path(rest[1]).exists() or _is_jsonish(rest[1])):
+        if len(rest) >= 3 and (not _is_jsonish(rest[0])) and (_path_exists_safe(rest[1]) or _is_jsonish(rest[1])):
             # TEMPLATE SCOPE INDUSTRY VARIABLES SCOPE_SELECTION [OUTPUT]
             industry = rest[0]
             variables_arg = rest[1]
@@ -1399,11 +1486,7 @@ def main():
         args.output = output_file
 
     # Parse variables
-    if Path(args.variables).exists():
-        with open(args.variables, "r") as f:
-            variables = json.load(f)
-    else:
-        variables = json.loads(args.variables)
+    variables = _load_json_arg(args.variables, arg_name="--variables", required=True)
 
     if getattr(args, "industry", None) in (None, ""):
         inferred = variables.get("INDUSTRY") or variables.get("industry")
@@ -1413,14 +1496,11 @@ def main():
 
     scope_selection = None
     if args.scope_selection:
-        if Path(args.scope_selection).exists():
-            with open(args.scope_selection, "r") as f:
-                scope_selection = json.load(f)
-        else:
-            try:
-                scope_selection = json.loads(args.scope_selection)
-            except json.JSONDecodeError:
-                scope_selection = None
+        scope_selection = _load_json_arg(
+            args.scope_selection,
+            arg_name="--scope-selection",
+            required=False,
+        )
 
     result = generate_engagement_letter(
         template_file=args.template,

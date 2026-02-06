@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "description": "Bucket and alias config for pre-generate scope review. Unknown section keys must fall back to industry_specific_analysis.",
+  "bucket_order": [
+    {
+      "key": "core_financial_performance",
+      "label": "Core Financial Performance"
+    },
+    {
+      "key": "operational_and_commercial_analysis",
+      "label": "Operations and Commercial Analysis"
+    },
+    {
+      "key": "balance_sheet_analysis",
+      "label": "Balance Sheet Analysis"
+    },
+    {
+      "key": "transaction_support_and_reporting",
+      "label": "Transaction Support and Reporting"
+    },
+    {
+      "key": "financial_services_specialty_analysis",
+      "label": "Financial Services Specialty Analysis"
+    },
+    {
+      "key": "industry_specific_analysis",
+      "label": "Industry-Specific Analysis"
+    }
+  ],
+  "section_to_bucket": {
+    "accounting_overview": "core_financial_performance",
+    "accounts_payable_and_accrued_liabilities": "balance_sheet_analysis",
+    "accounts_receivable": "balance_sheet_analysis",
+    "allowance_for_credit_losses": "financial_services_specialty_analysis",
+    "arr_drivers": "operational_and_commercial_analysis",
+    "aspe_to_ifrs_us_gaap_assessment": "transaction_support_and_reporting",
+    "assistance_with_transaction_documentation": "transaction_support_and_reporting",
+    "audit_work_paper": "transaction_support_and_reporting",
+    "audit_work_papers": "transaction_support_and_reporting",
+    "audit_working_papers": "transaction_support_and_reporting",
+    "balance_sheet": "balance_sheet_analysis",
+    "budget": "operational_and_commercial_analysis",
+    "budget_vs_actual": "operational_and_commercial_analysis",
+    "business_overview": "core_financial_performance",
+    "capital_expenditure_requirements": "balance_sheet_analysis",
+    "claims_and_reinsurance": "financial_services_specialty_analysis",
+    "commitments_and_contingencies": "transaction_support_and_reporting",
+    "customer_base_health_da": "operational_and_commercial_analysis",
+    "data_and_analytics": "operational_and_commercial_analysis",
+    "financial_due_diligence": "core_financial_performance",
+    "forecast_and_budget_analysis": "operational_and_commercial_analysis",
+    "fy24_outturn": "operational_and_commercial_analysis",
+    "inventories": "balance_sheet_analysis",
+    "inventory": "balance_sheet_analysis",
+    "loan_portfolio_and_credit_quality": "financial_services_specialty_analysis",
+    "locked_box": "balance_sheet_analysis",
+    "marketing_and_advertising_performance_da": "operational_and_commercial_analysis",
+    "net_debt": "balance_sheet_analysis",
+    "normalized_ebitda_bridges": "core_financial_performance",
+    "operating_cash_flow_funds_from_operations": "core_financial_performance",
+    "operating_expenses": "operational_and_commercial_analysis",
+    "operational_cost_margin_assessment": "operational_and_commercial_analysis",
+    "operations_performance_da": "operational_and_commercial_analysis",
+    "optional_fdd_procedures": "transaction_support_and_reporting",
+    "other_assets": "balance_sheet_analysis",
+    "other_assets_and_liabilities": "balance_sheet_analysis",
+    "other_current_assets": "balance_sheet_analysis",
+    "other_current_assets_liabilities": "balance_sheet_analysis",
+    "phase_1_gaap_considerations": "transaction_support_and_reporting",
+    "phase_2_post_bid_support": "transaction_support_and_reporting",
+    "prepaid_expenses_and_other_assets": "balance_sheet_analysis",
+    "prepaid_materials_and_other_assets": "balance_sheet_analysis",
+    "prepaids": "balance_sheet_analysis",
+    "prepaids_and_other_current_assets": "balance_sheet_analysis",
+    "purchase_and_sale_agreement": "transaction_support_and_reporting",
+    "quality_of_earnings": "core_financial_performance",
+    "quality_of_revenue_and_receivables_and_cash_proof": "core_financial_performance",
+    "regulatory_capital_and_liquidity": "financial_services_specialty_analysis",
+    "related_parties": "transaction_support_and_reporting",
+    "related_party_transactions": "transaction_support_and_reporting",
+    "revenue_analysis": "operational_and_commercial_analysis",
+    "revenue_and_profitability_analysis_da": "operational_and_commercial_analysis",
+    "store_portfolio_analysis": "operational_and_commercial_analysis",
+    "supporting_analysis_for_quality_of_earnings": "core_financial_performance",
+    "supporting_analysis_to_quality_of_earnings": "core_financial_performance",
+    "underwriting_and_loss_reserves": "financial_services_specialty_analysis",
+    "vdd_report_review": "transaction_support_and_reporting",
+    "waterfall_revenue_analysis": "operational_and_commercial_analysis",
+    "work_in_progress": "balance_sheet_analysis",
+    "work_in_progress_and_backlog": "operational_and_commercial_analysis",
+    "working_capital": "balance_sheet_analysis"
+  },
+  "bucket_aliases": {
+    "core financial performance": "core_financial_performance",
+    "operations and commercial analysis": "operational_and_commercial_analysis",
+    "operational and commercial analysis": "operational_and_commercial_analysis",
+    "balance sheet analysis": "balance_sheet_analysis",
+    "working capital and debt": "balance_sheet_analysis",
+    "transaction support and reporting": "transaction_support_and_reporting",
+    "financial services specialty analysis": "financial_services_specialty_analysis",
+    "industry specific analysis": "industry_specific_analysis",
+    "industry-specific analysis": "industry_specific_analysis"
+  },
+  "section_aliases": {
+    "accounting": "accounting_overview",
+    "accounting overview": "accounting_overview",
+    "accounts payable": "accounts_payable_and_accrued_liabilities",
+    "accounts receivable": "accounts_receivable",
+    "accrued liabilities": "accounts_payable_and_accrued_liabilities",
+    "allowance for credit losses": "allowance_for_credit_losses",
+    "ar": "accounts_receivable",
+    "arr drivers": "arr_drivers",
+    "balance sheet": "balance_sheet",
+    "business overview": "business_overview",
+    "capex": "capital_expenditure_requirements",
+    "capital expenditure": "capital_expenditure_requirements",
+    "capital expenditure requirements": "capital_expenditure_requirements",
+    "claims and reinsurance": "claims_and_reinsurance",
+    "commitments and contingencies": "commitments_and_contingencies",
+    "commitments": "commitments_and_contingencies",
+    "contingencies": "commitments_and_contingencies",
+    "credit quality": "loan_portfolio_and_credit_quality",
+    "inventory": "inventory",
+    "locked box": "locked_box",
+    "loan portfolio": "loan_portfolio_and_credit_quality",
+    "net debt": "net_debt",
+    "operating expenses": "operating_expenses",
+    "opex": "operating_expenses",
+    "quality of earnings": "quality_of_earnings",
+    "qoe": "quality_of_earnings",
+    "receivables": "accounts_receivable",
+    "regulatory capital and liquidity": "regulatory_capital_and_liquidity",
+    "revenue": "revenue_analysis",
+    "revenue analysis": "revenue_analysis",
+    "store portfolio": "store_portfolio_analysis",
+    "underwriting and loss reserves": "underwriting_and_loss_reserves",
+    "vdd report review": "vdd_report_review",
+    "wc": "working_capital",
+    "working capital": "working_capital"
+  },
+  "concept_to_sections": {
+    "debt_concept": [
+      "net_debt",
+      "locked_box"
+    ]
+  },
+  "concept_aliases": {
+    "debt": "debt_concept",
+    "debt-like": "debt_concept",
+    "net debt concept": "debt_concept"
+  },
+  "fallback_bucket_key": "industry_specific_analysis"
+}

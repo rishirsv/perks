@@ -60,7 +60,7 @@
           "example": "healthcare",
           "required": true,
           "applies_to": ["buyside", "sellside"],
-          "notes": "Controls which FDD scope section is inserted from fdd_scope_library.v2.json. Use 'generic' to insert only the common scope skeleton."
+          "notes": "Controls which FDD scope section is inserted from scope-library.json. Use 'generic' to insert only the common scope skeleton."
         }
       ]
     },
@@ -418,8 +418,9 @@
           "type": "field",
           "label": "Billing entity legal name",
           "example": "Acme Holdings Inc.",
-          "required": true,
-          "applies_to": ["buyside", "sellside"]
+          "required": false,
+          "applies_to": ["buyside", "sellside"],
+          "notes": "Derived by default from CLIENT_LEGAL_NAME unless user explicitly overrides."
         }
       ]
     },
