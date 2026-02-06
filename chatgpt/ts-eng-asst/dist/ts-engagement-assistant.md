@@ -148,7 +148,7 @@ Provide a download link to the completed `.docx`.
 
 3. **Guidance blocks** — Curly-brace guidance like `{{GUIDANCE_01}}` / `{{GUIDANCE: ...}}` are internal instructions and are deleted entirely during generation. Bracketed guidance like `[GUIDANCE: ...]` stays in the generated `.docx` for humans to edit; do not surface or rewrite guidance text in chat.
 
-4. **FDD scope replacement** — The sample scope section between "FINANCIAL DUE DILIGENCE" and "These Terms and Conditions" is replaced with industry-specific content from `fdd_scope_library.v2.json`. Do not manually write scope content.
+4. **FDD scope replacement** — The sample scope section between "FINANCIAL DUE DILIGENCE" and "These Terms and Conditions" is replaced with industry-specific content from `fdd_scope_library.v2.json`. Generated scope formatting uses native Word numbering with dynamic tiers (`1.` section headings, `a)` parent bullets, `i.` descendants) and flattens deeper nesting into the descendant tier. Do not manually write scope content.
 
 5. **DOCX only** — The output is a single downloadable `.docx` file. No PDF.
 

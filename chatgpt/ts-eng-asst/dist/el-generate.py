@@ -46,6 +46,7 @@ from pathlib import Path
 from typing import Optional
 
 from docx import Document
+from docx.oxml.ns import qn
 from docx.shared import Emu
 from docx.text.paragraph import Paragraph
 
@@ -782,6 +783,85 @@ def _indent_for_depth(depth: int) -> Emu:
     return _INDENT_SUBSUBBULLET
 
 
+def _get_paragraph_num_info(paragraph: Paragraph) -> tuple[Optional[int], Optional[int]]:
+    ppr = paragraph._p.pPr
+    if ppr is None or ppr.numPr is None:
+        return None, None
+    num_id = ppr.numPr.numId.val if ppr.numPr.numId is not None else None
+    ilvl = ppr.numPr.ilvl.val if ppr.numPr.ilvl is not None else 0
+    try:
+        return (int(num_id) if num_id is not None else None, int(ilvl) if ilvl is not None else 0)
+    except (TypeError, ValueError):
+        return None, None
+
+
+def _extract_numbering_metadata(doc: Document) -> tuple[dict[int, int], dict[int, tuple[Optional[str], Optional[str]]]]:
+    numbering = doc.part.numbering_part.numbering_definitions._numbering
+
+    num_to_abstract: dict[int, int] = {}
+    for num in numbering.num_lst:
+        try:
+            num_to_abstract[int(num.numId)] = int(num.abstractNumId.val)
+        except (TypeError, ValueError):
+            continue
+
+    abstract_level0: dict[int, tuple[Optional[str], Optional[str]]] = {}
+    for abstract in numbering.findall(qn("w:abstractNum")):
+        abstract_id_raw = abstract.get(qn("w:abstractNumId"))
+        try:
+            abstract_id = int(abstract_id_raw) if abstract_id_raw is not None else None
+        except ValueError:
+            abstract_id = None
+        if abstract_id is None:
+            continue
+
+        level0 = None
+        for level in abstract.findall(qn("w:lvl")):
+            if level.get(qn("w:ilvl")) == "0":
+                level0 = level
+                break
+        if level0 is None:
+            continue
+
+        fmt_el = level0.find(qn("w:numFmt"))
+        text_el = level0.find(qn("w:lvlText"))
+        abstract_level0[abstract_id] = (
+            fmt_el.get(qn("w:val")) if fmt_el is not None else None,
+            text_el.get(qn("w:val")) if text_el is not None else None,
+        )
+
+    return num_to_abstract, abstract_level0
+
+
+def _find_abstract_id(
+    abstract_level0: dict[int, tuple[Optional[str], Optional[str]]],
+    *,
+    num_fmt: str,
+    lvl_text_suffix: Optional[str] = None,
+) -> Optional[int]:
+    for abstract_id in sorted(abstract_level0.keys()):
+        fmt, text = abstract_level0[abstract_id]
+        if fmt != num_fmt:
+            continue
+        if lvl_text_suffix and not str(text or "").endswith(lvl_text_suffix):
+            continue
+        return abstract_id
+    return None
+
+
+def _set_paragraph_numbering(paragraph: Paragraph, *, num_id: Optional[int], ilvl: int = 0) -> None:
+    ppr = paragraph._p.get_or_add_pPr()
+    if ppr.numPr is not None:
+        ppr._remove_numPr()
+
+    if num_id is None:
+        return
+
+    num_pr = ppr.get_or_add_numPr()
+    num_pr.get_or_add_numId().val = int(num_id)
+    num_pr.get_or_add_ilvl().val = int(ilvl)
+
+
 def load_scope_library(path: str) -> dict:
     """Load the FDD scope library JSON."""
     with open(path, "r", encoding="utf-8") as f:
@@ -818,26 +898,79 @@ def replace_fdd_scope_block(
     if end_idx is None:
         return {"error": f"End boundary '{end_boundary_search}' not found", "sections_inserted": 0, "bullets_inserted": 0}
 
-    # Capture formatting templates
-    bold_template = None
-    bullet_template = None
-    for p in paras[start_idx + 1: end_idx]:
-        if not p.text.strip():
-            continue
-        if bold_template is None and p.runs and any(r.bold for r in p.runs):
-            bold_template = p
-        if bullet_template is None and p.runs and not any(r.bold for r in p.runs):
-            bullet_template = p
+    # Capture formatting templates + numbering archetypes from the sample scope.
+    # This keeps generated scope numbering stable and dynamic even when items are
+    # added/removed (e.g., exclusions).
+    num_to_abstract, abstract_level0 = _extract_numbering_metadata(doc)
 
-    if bold_template is None:
-        for p in paras[start_idx + 1: end_idx]:
-            if p.text.strip():
-                bold_template = p
+    heading_template = None
+    alpha_template = None
+    roman_template = None
+    fallback_nonbold_template = None
+
+    section_abstract_id: Optional[int] = None
+    alpha_abstract_id: Optional[int] = None
+    roman_abstract_id: Optional[int] = None
+
+    sample_paras = [p for p in paras[start_idx + 1: end_idx] if p.text.strip()]
+    for p in sample_paras:
+        num_id, _ = _get_paragraph_num_info(p)
+        abstract_id = num_to_abstract.get(num_id) if num_id is not None else None
+        fmt, lvl_text = abstract_level0.get(abstract_id, (None, None)) if abstract_id is not None else (None, None)
+
+        if fallback_nonbold_template is None and not any(r.bold for r in p.runs):
+            fallback_nonbold_template = p
+
+        if heading_template is None and any(r.bold for r in p.runs) and fmt == "decimal":
+            heading_template = p
+            section_abstract_id = abstract_id
+
+        if alpha_template is None and fmt == "lowerLetter" and str(lvl_text or "").endswith(")"):
+            alpha_template = p
+            alpha_abstract_id = abstract_id
+
+        if roman_template is None and fmt == "lowerRoman":
+            roman_template = p
+            roman_abstract_id = abstract_id
+
+    if heading_template is None:
+        for p in sample_paras:
+            if any(r.bold for r in p.runs):
+                heading_template = p
+                num_id, _ = _get_paragraph_num_info(p)
+                section_abstract_id = num_to_abstract.get(num_id) if num_id is not None else section_abstract_id
                 break
-    if bullet_template is None:
-        bullet_template = bold_template
+    if heading_template is None and sample_paras:
+        heading_template = sample_paras[0]
 
-    if bold_template is None:
+    if alpha_template is None:
+        for p in sample_paras:
+            num_id, _ = _get_paragraph_num_info(p)
+            abstract_id = num_to_abstract.get(num_id) if num_id is not None else None
+            fmt, _ = abstract_level0.get(abstract_id, (None, None)) if abstract_id is not None else (None, None)
+            if fmt == "lowerLetter":
+                alpha_template = p
+                alpha_abstract_id = abstract_id
+                break
+    if alpha_template is None:
+        alpha_template = fallback_nonbold_template or heading_template
+
+    if roman_template is None:
+        roman_template = alpha_template
+
+    # Fallback abstracts when a direct template match isn't available.
+    if section_abstract_id is None:
+        section_abstract_id = _find_abstract_id(abstract_level0, num_fmt="decimal", lvl_text_suffix=".")
+    if alpha_abstract_id is None:
+        alpha_abstract_id = _find_abstract_id(abstract_level0, num_fmt="lowerLetter", lvl_text_suffix=")")
+    if alpha_abstract_id is None:
+        alpha_abstract_id = _find_abstract_id(abstract_level0, num_fmt="lowerLetter")
+    if roman_abstract_id is None:
+        roman_abstract_id = _find_abstract_id(abstract_level0, num_fmt="lowerRoman", lvl_text_suffix=".")
+    if roman_abstract_id is None:
+        roman_abstract_id = _find_abstract_id(abstract_level0, num_fmt="lowerRoman")
+
+    if heading_template is None:
         return {"error": "No formatting template found in scope block", "sections_inserted": 0, "bullets_inserted": 0}
 
     # Delete scope content, but preserve section-break paragraphs so Appendix
@@ -880,9 +1013,23 @@ def replace_fdd_scope_block(
     common_schema = schema_nesting.get("common_skeleton") if isinstance(schema_nesting, dict) else None
     industry_schema = schema_nesting.get("industry_modules") if isinstance(schema_nesting, dict) else None
 
-    def _insert_after(cursor_para, text, bold=False, indent=None):
-        template = bold_template if bold else bullet_template
-        new_p = deepcopy(template._p)
+    numbering = doc.part.numbering_part.numbering_definitions._numbering
+    heading_num_fallback_id, _ = _get_paragraph_num_info(heading_template)
+    alpha_num_fallback_id, _ = _get_paragraph_num_info(alpha_template)
+    roman_num_fallback_id, _ = _get_paragraph_num_info(roman_template)
+
+    def _new_num_id(abstract_id: Optional[int], fallback_num_id: Optional[int] = None) -> Optional[int]:
+        if abstract_id is not None:
+            try:
+                return int(numbering.add_num(int(abstract_id)).numId)
+            except Exception:
+                pass
+        return fallback_num_id
+
+    section_num_id = _new_num_id(section_abstract_id, heading_num_fallback_id)
+
+    def _insert_after(cursor_para, text, *, template_para: Paragraph, bold=False, indent=None, num_id: Optional[int] = None, ilvl: int = 0):
+        new_p = deepcopy(template_para._p)
         cursor_para._p.addnext(new_p)
         new_para = Paragraph(new_p, cursor_para._parent)
 
@@ -896,6 +1043,8 @@ def replace_fdd_scope_block(
             run = new_para.add_run(text)
             run.bold = bold
 
+        _set_paragraph_numbering(new_para, num_id=num_id, ilvl=ilvl)
+
         pf = new_para.paragraph_format
         pf.left_indent = indent
 
@@ -906,25 +1055,42 @@ def replace_fdd_scope_block(
 
         return new_para
 
-    def _insert_nodes(section_key: str, nodes: list[_ScopeNode]) -> None:
+    def _insert_nodes(nodes: list[_ScopeNode], *, alpha_num_id: Optional[int]) -> None:
         nonlocal cursor, bullet_count
+
+        def _insert_children(children: list[_ScopeNode], depth: int, *, roman_num_id: Optional[int]) -> None:
+            nonlocal cursor, bullet_count
+            for child in children:
+                # Cap visual depth so output stays at the agreed 3-tier model:
+                # section heading (1.) -> parent (a)) -> descendant (i.).
+                flattened_depth = 1 if depth >= 1 else depth
+                cursor = _insert_after(
+                    cursor,
+                    child.text,
+                    template_para=roman_template,
+                    indent=_indent_for_depth(flattened_depth),
+                    num_id=roman_num_id,
+                )
+                bullet_count += 1
+                if child.children:
+                    _insert_children(child.children, depth + 1, roman_num_id=roman_num_id)
+
         for node in nodes:
             if node.top_level_id and node.top_level_id in excluded_top_level_ids:
                 continue
 
-            cursor = _insert_after(cursor, node.text, indent=_indent_for_depth(0))
+            cursor = _insert_after(
+                cursor,
+                node.text,
+                template_para=alpha_template,
+                indent=_indent_for_depth(0),
+                num_id=alpha_num_id,
+            )
             bullet_count += 1
 
-            def _insert_children(children: list[_ScopeNode], depth: int) -> None:
-                nonlocal cursor, bullet_count
-                for child in children:
-                    cursor = _insert_after(cursor, child.text, indent=_indent_for_depth(depth))
-                    bullet_count += 1
-                    if child.children:
-                        _insert_children(child.children, depth + 1)
-
             if node.children:
-                _insert_children(node.children, 1)
+                roman_num_id = _new_num_id(roman_abstract_id, roman_num_fallback_id)
+                _insert_children(node.children, 1, roman_num_id=roman_num_id)
 
     # Common skeleton sections
     for section in common:
@@ -967,9 +1133,16 @@ def replace_fdd_scope_block(
         if not any(n.top_level_id not in excluded_top_level_ids for n in nodes):
             continue
 
-        cursor = _insert_after(cursor, heading, bold=True)
+        alpha_num_id = _new_num_id(alpha_abstract_id, alpha_num_fallback_id)
+        cursor = _insert_after(
+            cursor,
+            heading,
+            template_para=heading_template,
+            bold=True,
+            num_id=section_num_id,
+        )
         section_count += 1
-        _insert_nodes(norm, nodes)
+        _insert_nodes(nodes, alpha_num_id=alpha_num_id)
 
     # Extra industry-only sections
     for heading_key, bullets in extra_sections:
@@ -991,9 +1164,16 @@ def replace_fdd_scope_block(
         if not any(n.top_level_id not in excluded_top_level_ids for n in nodes):
             continue
 
-        cursor = _insert_after(cursor, display_heading, bold=True)
+        alpha_num_id = _new_num_id(alpha_abstract_id, alpha_num_fallback_id)
+        cursor = _insert_after(
+            cursor,
+            display_heading,
+            template_para=heading_template,
+            bold=True,
+            num_id=section_num_id,
+        )
         section_count += 1
-        _insert_nodes(heading_key, nodes)
+        _insert_nodes(nodes, alpha_num_id=alpha_num_id)
 
     return {
         "sections_inserted": section_count,
