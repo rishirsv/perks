@@ -2,22 +2,58 @@
 
 Generated from `dist/scope-library.json`.
 
-## Common skeleton
+## Review Tracking
+
+Entries below are pulled from `docs/Scope Review/deletion-optional-tracker.md`.
+
+### Excluded / Rewrite Before Reuse
+
+| Scope ID | Path | Status | Disposition | Notes |
+|---|---|---|---|---|
+| `scope.003` | `common.accounting_overview.scope.003` | `REMOVED_CANONICAL` | `EXCLUDE_REUSABLE_OR_REWRITE` | Parent/jurisdiction-specific IFRS framing. |
+
+### Optional / Pending Review
+
+_None._
+
+## Applicability
+
+Rules source: `docs/scope-library/section-applicability.json`.
+
+- Excluded common sections: _None_
+- Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
+- Added industry sections: _None_
+- Replaced industry sections: _None_
+
+## Section Review (Common + Industry)
+
+Each section below shows common skeleton bullets and then industry-specific bullets together.
 
 ### Business overview (`business_overview`)
+
+#### Common
+
 - (scope.001) Meet with Target's officers and management in order to develop an understanding of operations, including its:
   - Basis of financial information;
   - Organization structure;
   - Historical growth by geography; and
   - Finance function, financial reporting framework and internal control environment.
 
+#### Industry (`aerospace`)
+
+- (scope.488) Gain an understanding of product lines, programs, customers (OEM/tier relationships), and regulatory/quality requirements.
+- (scope.489) Understand backlog, program life cycles, and ramp/production cadence.
+- (scope.490) Understand manufacturing footprint, capacity constraints, and supply chain dependencies.
+
 ### Accounting overview (`accounting_overview`)
+
+#### Common
+
 - (scope.002) Read Target's financial statements and discuss Target's accounting policies and practices with management, including:
   - Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems);
   - Significant accounting policies and recent or contemplated changes in accounting principles, procedures, or estimates;
   - Significant accounting estimates (e.g. bad debt provision, rebates, capitalized R&D, etc.); and
   - Intercompany accounts and related party transactions, if any.
-- (scope.003) Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent.
 - (scope.004) Consider if the following accounting policies have been applied consistently within and across historical periods:
   - Cash versus accrual accounting policies;
   - Capitalization policies;
@@ -25,7 +61,14 @@ Generated from `dist/scope-library.json`.
   - Differences between interim and year-end procedures; and
   - Revenue recognition policies;
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Quality of earnings (`quality_of_earnings`)
+
+#### Common
+
 - (scope.005) Identify, and where possible quantify, potential earnings before interest, taxes, depreciation, and amortization ("EBITDA") normalization items by considering:
   - The impact of the normalization adjustments identified by Management;
   - Large, unusual or non-recurring events, or transactions that may have distorted results;
@@ -36,29 +79,38 @@ Generated from `dist/scope-library.json`.
   - The impact of any changes in accounting policies, procedures and estimates; and
   - Other potential items identified during the due diligence process.
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Revenue analysis (`revenue_analysis`)
-- (scope.006) Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:
-  - Revenue and margin by significant customer and end market/ segment/ region;
-  - Price and volume trends.
-- (scope.007) Discuss with Management:
-  - impact of large or long-term orders/ seasonality (if applicable); and
-  - any non-recurring components of revenue.
-  - customer category (i.e. individual, business);
-  - distribution channel (i.e. online, wholesale, etc.); and
-  - price, volume, mix and cross-sell analysis.
-  - Seasonal fluctuations in demand and monthly sales trends; and
-- (scope.008) Obtain and read an analysis of Target's revenue and inquire about:
-  - Gross to net revenue;
-  - Revenue recognition policies;
-  - Revenue and gross margin by customer;
-  - Organic growth and delineation between price vs. volume;
-  - Pricing practices;
-  - Promotions and discounts;
-  - Any non-recurring components of revenue;
-  - Revenue seasonality, if any;
-  - Other components of cost of sales and key suppliers.
+
+#### Common
+
+- (scope.006) Obtain a comprehensive view of revenue and margins. Obtain underlying transactional detail, if available, and gain an understanding of major trends in revenue and margins, including:
+  - Revenue and margin by significant customer, channel, and/or market segment, as applicable; and
+  - Price, volume, and mix trends.
+- (scope.007) Discuss with management key drivers of revenue and margin over the Historical Period, including:
+  - Major customer/contract wins or losses and timing impacts;
+  - Non-recurring items affecting period results; and
+  - Operational, market, or seasonal factors affecting demand and fulfillment.
+- (scope.008) Obtain and review an analysis of revenue quality and related balances, and inquire about:
+  - Revenue recognition policies and any recent changes;
+  - Billing and collection terms, including significant deviations from standard terms;
+  - Credits, rebates, returns, and other contra-revenue items;
+  - Concentration/dependency risk; and
+  - Other unusual items affecting reported revenue or gross margin.
+
+#### Industry (`aerospace`)
+
+- (scope.491) Analyze revenue and gross margin trends by program, customer, and product line.
+- (scope.492) Understand contract structures (long-term agreements, pricing escalators, penalties/claims) and revenue recognition approach.
+- (scope.493) Assess customer concentration, order volatility, and backlog conversion assumptions.
 
 ### Operating expenses (`operating_expenses`)
+
+#### Common
+
 - (scope.009) Obtain and read an analysis of Target’s expenses and inquire about:
   - Costing methodology;
   - Cost of sale trends, impact of material change in vendors (if any);
@@ -67,33 +119,70 @@ Generated from `dist/scope-library.json`.
   - Repairs and maintenance expense;
   - Unusual and extraordinary items (if any).
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Working capital (`working_capital`)
+
+#### Common
+
 - (scope.010) Obtain monthly details of the Company's consolidated working capital and analyze and comment on:
   - The composition of individual working capital accounts (e.g., trade receivables, accounts payable and accruals, etc.);
   - Monthly working capital trends, metrics, and seasonality;
-  - Large, unusual, or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and
+  - Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and
   - Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment.
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Accounts receivable (`accounts_receivable`)
+
+#### Common
+
 - (scope.011) Obtain and read an analysis of the Target’s accounts receivable and inquire and comment on:
   - Billed/unbilled aging analysis, turnover and days sales outstanding;
   - Credit terms;
   - Trade and non-trade balances;
   - Allowance for uncollectible accounts and write-offs.
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Accounts payable and accrued liabilities (`accounts_payable_and_accrued_liabilities`)
+
+#### Common
+
 - (scope.012) Obtain and read an analysis of accounts payable, accrued liabilities and customer deposits and inquire about:
   - Accounts payable aging and days outstanding;
   - Accrued liabilities;
   - Supplier settlement terms; and
   - Other current and non-current liabilities.
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Capital expenditure requirements (`capital_expenditure_requirements`)
+
+#### Common
+
 - (scope.013) Obtain and read an analysis of existing and future capital cost requirements including:
   - Maintenance versus growth capital expenditures;
-  - Other historical, deferred, and planned capital expenditures
+  - Other historical, deferred, and planned capital expenditures.
+
+#### Industry (`aerospace`)
+
+- (scope.495) Understand capex requirements for tooling, equipment, and capacity expansion.
+- (scope.496) Assess maintenance capex versus growth capex and related replacement cycles.
+- (scope.497) Review capitalized development/tooling costs (if applicable) and impairment considerations.
 
 ### Commitments and contingencies (`commitments_and_contingencies`)
+
+#### Common
+
 - (scope.014) Inquire about significant commitments and contingent liabilities including:
   - Pending or threatened litigation or investigations by regulatory or other authorities; and
   - Contractual obligations, including leases;
@@ -103,30 +192,45 @@ Generated from `dist/scope-library.json`.
   - Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and
   - Other off-balance sheet transactions.
 
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
+
 ### Net debt (`net_debt`)
+
+#### Common
+
 - (scope.015) Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;
-- (scope.016) Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and
+- (scope.016) Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt.
 
-## Industry module — `aerospace`
+#### Industry (`aerospace`)
 
-### Business Overview (`business_overview`)
-- (scope.488) Gain an understanding of product lines, programs, customers (OEM/tier relationships), and regulatory/quality requirements.
-- (scope.489) Understand backlog, program life cycles, and ramp/production cadence.
-- (scope.490) Understand manufacturing footprint, capacity constraints, and supply chain dependencies.
+_No industry-specific bullets._
 
-### Revenue Analysis (`revenue_analysis`)
-- (scope.491) Analyze revenue and gross margin trends by program, customer, and product line.
-- (scope.492) Understand contract structures (long-term agreements, pricing escalators, penalties/claims) and revenue recognition approach.
-- (scope.493) Assess customer concentration, order volatility, and backlog conversion assumptions.
+### Audit work paper (`audit_work_paper`)
+
+#### Common
+
+- (scope.114) If required, obtain and read the auditor's working papers for the latest fiscal year.
+- (scope.115) Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods.
+- (scope.116) Comment on control issues identified by the external auditors, if applicable.
+- (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
+- (scope.118) Review audit committee reporting and presentations from the audit firm.
+
+#### Industry (`aerospace`)
+
+_No industry-specific bullets._
 
 ### Inventory (`inventory`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`aerospace`)
+
 - (scope.494) Obtain and read an analysis of inventory/WIP and inquire and comment on:
   - Long-cycle inventory, work-in-process, and slow-moving/obsolete inventory;
   - Material price variance, scrap/rework, and yield;
   - Supplier lead times and risk of shortages; and
   - Inventory valuation and reserves.
-
-### Capital Expenditure Requirements (`capital_expenditure_requirements`)
-- (scope.495) Understand capex requirements for tooling, equipment, and capacity expansion.
-- (scope.496) Assess maintenance capex versus growth capex and related replacement cycles.
-- (scope.497) Review capitalized development/tooling costs (if applicable) and impairment considerations.

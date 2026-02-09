@@ -47,10 +47,6 @@
           ]
         },
         {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
           "id": "scope.004",
           "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
@@ -110,79 +106,58 @@
       ]
     },
     {
-      "heading": "Revenue analysis",
       "normalized_heading": "revenue_analysis",
       "default_bullets": [
         {
           "id": "scope.006",
-          "text": "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
+          "text": "Obtain a comprehensive view of revenue and margins. Obtain underlying transactional detail, if available, and gain an understanding of major trends in revenue and margins, including:",
           "children": [
             {
-              "text": "Revenue and margin by significant customer and end market/ segment/ region;"
+              "text": "Revenue and margin by significant customer, channel, and/or market segment, as applicable; and"
             },
             {
-              "text": "Price and volume trends."
+              "text": "Price, volume, and mix trends."
             }
           ]
         },
         {
           "id": "scope.007",
-          "text": "Discuss with Management:",
+          "text": "Discuss with management key drivers of revenue and margin over the Historical Period, including:",
           "children": [
             {
-              "text": "impact of large or long-term orders/ seasonality (if applicable); and"
+              "text": "Major customer/contract wins or losses and timing impacts;"
             },
             {
-              "text": "any non-recurring components of revenue."
+              "text": "Non-recurring items affecting period results; and"
             },
             {
-              "text": "customer category (i.e. individual, business);"
-            },
-            {
-              "text": "distribution channel (i.e. online, wholesale, etc.); and"
-            },
-            {
-              "text": "price, volume, mix and cross-sell analysis."
-            },
-            {
-              "text": "Seasonal fluctuations in demand and monthly sales trends; and"
+              "text": "Operational, market, or seasonal factors affecting demand and fulfillment."
             }
           ]
         },
         {
           "id": "scope.008",
-          "text": "Obtain and read an analysis of Target's revenue and inquire about:",
+          "text": "Obtain and review an analysis of revenue quality and related balances, and inquire about:",
           "children": [
             {
-              "text": "Gross to net revenue;"
+              "text": "Revenue recognition policies and any recent changes;"
             },
             {
-              "text": "Revenue recognition policies;"
+              "text": "Billing and collection terms, including significant deviations from standard terms;"
             },
             {
-              "text": "Revenue and gross margin by customer;"
+              "text": "Credits, rebates, returns, and other contra-revenue items;"
             },
             {
-              "text": "Organic growth and delineation between price vs. volume;"
+              "text": "Concentration/dependency risk; and"
             },
             {
-              "text": "Pricing practices;"
-            },
-            {
-              "text": "Promotions and discounts;"
-            },
-            {
-              "text": "Any non-recurring components of revenue;"
-            },
-            {
-              "text": "Revenue seasonality, if any;"
-            },
-            {
-              "text": "Other components of cost of sales and key suppliers."
+              "text": "Other unusual items affecting reported revenue or gross margin."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Revenue analysis"
     },
     {
       "heading": "Operating expenses",
@@ -215,7 +190,6 @@
       ]
     },
     {
-      "heading": "Working capital",
       "normalized_heading": "working_capital",
       "default_bullets": [
         {
@@ -229,14 +203,15 @@
               "text": "Monthly working capital trends, metrics, and seasonality;"
             },
             {
-              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
+              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
             },
             {
               "text": "Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Working capital"
     },
     {
       "heading": "Accounts receivable",
@@ -287,7 +262,6 @@
       ]
     },
     {
-      "heading": "Capital expenditure requirements",
       "normalized_heading": "capital_expenditure_requirements",
       "default_bullets": [
         {
@@ -298,11 +272,12 @@
               "text": "Maintenance versus growth capital expenditures;"
             },
             {
-              "text": "Other historical, deferred, and planned capital expenditures"
+              "text": "Other historical, deferred, and planned capital expenditures."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Capital expenditure requirements"
     },
     {
       "heading": "Commitments and contingencies",
@@ -338,7 +313,6 @@
       ]
     },
     {
-      "heading": "Net debt",
       "normalized_heading": "net_debt",
       "default_bullets": [
         {
@@ -347,9 +321,36 @@
         },
         {
           "id": "scope.016",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt."
         }
-      ]
+      ],
+      "heading": "Net debt"
+    },
+    {
+      "normalized_heading": "audit_work_paper",
+      "default_bullets": [
+        {
+          "id": "scope.114",
+          "text": "If required, obtain and read the auditor's working papers for the latest fiscal year."
+        },
+        {
+          "id": "scope.115",
+          "text": "Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods."
+        },
+        {
+          "id": "scope.116",
+          "text": "Comment on control issues identified by the external auditors, if applicable."
+        },
+        {
+          "id": "scope.117",
+          "text": "Comment on any additional red flags or key risks identified in the provided audit materials."
+        },
+        {
+          "id": "scope.118",
+          "text": "Review audit committee reporting and presentations from the audit firm."
+        }
+      ],
+      "heading": "Audit work paper"
     }
   ],
   "industry_modules": {
@@ -388,42 +389,20 @@
       ],
       "accounting_overview": [
         {
-          "id": "scope.074",
-          "text": "Reporting methodology;"
-        },
-        {
-          "id": "scope.075",
-          "text": "Basis for cost allocations, if any;"
-        },
-        {
-          "id": "scope.076",
-          "text": "Revenue recognition policies by service type, and any recent changes in policy;"
-        },
-        {
-          "id": "scope.077",
-          "text": "Significant accounting estimates;"
-        },
-        {
-          "id": "scope.078",
-          "text": "Recent or contemplated changes in accounting principles, procedures, or estimates;"
-        },
-        {
-          "id": "scope.079",
-          "text": "Intercompany accounts and related party transactions;"
-        },
-        {
-          "id": "scope.080",
-          "text": "Non-recurring transactions."
-        },
-        {
           "id": "scope.081",
-          "text": "Read Target's financial statements and discuss them with management to gain an understanding of accounting policies and practices including:",
+          "text": "Discuss healthcare-specific accounting profile considerations with management, including:",
           "children": [
             {
-              "text": "Finance function, financial reporting framework, and management reporting relationships (including process, timing, structure of financial reporting, and interaction with the information/accounting systems);"
+              "text": "Reporting methodology and management reporting structure;"
             },
             {
-              "text": "Significant accounting estimates (i.e. allowances for doubtful accounts, inventory provisions, accruals, etc.);"
+              "text": "Basis for cost allocations and shared services, if any;"
+            },
+            {
+              "text": "Revenue recognition policies by service type and payor class, and any recent policy changes; and"
+            },
+            {
+              "text": "Significant accounting estimates and non-recurring transactions."
             }
           ]
         }
@@ -446,139 +425,43 @@
               "text": "Pro forma impacts for items such as recent de novo."
             }
           ]
-        },
-        {
-          "id": "scope.083",
-          "text": "Read and comment on the adjusted EBITDA prepared by Target and its sell-side advisors, and:",
-          "children": [
-            {
-              "text": "Roll-forward the quality of earnings analysis included in the sell-side diligence report accordingly;"
-            }
-          ]
-        },
-        {
-          "id": "scope.084",
-          "text": "Propose any additional potential adjustments to historical earnings before interest, taxes, depreciation, and amortization (\"EBITDA\"), presented on a consolidated basis, by considering:",
-          "children": [
-            {
-              "text": "The validity / impact of adjustments proposed by Management and the sell-side due diligence advisors, including Restructuring costs; Impact of loyalty program breakage; Sourcing changes; Vacation policy change; Accounting changes; Other normalization adjustments; Pro forma and run-rate adjustments; Carve-out, stand alone, corporate allocation considerations."
-            },
-            {
-              "text": "Work with Client to consider synergy considerations, purchasing rebates, etc.(See below synergies validation for additional detail);"
-            },
-            {
-              "text": "Other large, unusual or non-recurring events or transactions that may have distorted results;"
-            },
-            {
-              "text": "Other potential items discovered in the due diligence process."
-            }
-          ]
-        }
-      ],
-      "store_portfolio_analysis": [
-        {
-          "id": "scope.085",
-          "text": "Obtain store P&L data to perform analysis to understand the drivers of historical sales and profitability development within the store portfolio to perform the following (to the extent possible based on information availability and transaction timelines):",
-          "children": [
-            {
-              "text": "Sales and profitability by store location (including same store sales analysis, front store vs pharmacy, cost and margin profiles);"
-            }
-          ]
-        },
-        {
-          "id": "scope.086",
-          "text": "Segment the store portfolio to assess historical performance based on the following:",
-          "children": [
-            {
-              "text": "Outlier performance – top quartile vs bottom quartile performing stores"
-            },
-            {
-              "text": "Store-type – Suburban / Dense Urban / Rural / etc., size format, storefront vs mall, etc"
-            },
-            {
-              "text": "Existing (same) stores, new stores, renovated stores, closed stores; standard, specialty, next gen"
-            },
-            {
-              "text": "Cohort analysis based on vintage year:",
-              "children": [
-                {
-                  "text": "Ramp analysis to understand ramp profile and assess reasonability of pro forma revenue and EBITDA maturity adjustments for recently opened locations;"
-                },
-                {
-                  "text": "Store productivity and KPI metrics (e.g. Rx count, Rx revenue per Rx, sales/profitability per square foot);"
-                }
-              ]
-            }
-          ]
         }
       ],
       "revenue_analysis": [
         {
           "id": "scope.087",
-          "text": "Obtain and read center-level financial information including key operating metrics as well as related revenue and EBITDA. Inquire of Target regarding unusual trends or fluctuations in center performance over the historical period, including:",
-          "children": [
-            {
-              "text": "Unusual or non-standard contracts;"
-            }
-          ]
+          "text": "Obtain and review center-level financial information, including key operating metrics, revenue, and EBITDA, and inquire about unusual trends or fluctuations over the historical period, including unusual or non-standard contracts."
         },
         {
           "id": "scope.088",
-          "text": "Bridge revenue and profitability for the following changes:",
+          "text": "Bridge revenue and profitability over the historical period by considering:",
           "children": [
             {
-              "text": "Same location and de novo center;"
+              "text": "Same-location and de novo center performance;"
             },
             {
-              "text": "Center-based vs. home-based;"
+              "text": "Center-based versus home-based mix;"
             },
             {
-              "text": "Type of procedure by CPT code;"
+              "text": "Procedure mix (including CPT-code-level analysis, where available);"
             },
             {
-              "text": "Top patient and/or top payers; and"
+              "text": "Top patient and/or top payor concentration;"
             },
             {
-              "text": "Changes in direct and indirect operating expenses."
+              "text": "Changes in direct and indirect operating expenses;"
             },
             {
               "text": "Center-level expense trends;"
             },
             {
-              "text": "Allocations of corporate overhead costs, if any;"
+              "text": "Corporate overhead allocations, if any;"
             },
             {
               "text": "De novo start-up costs; and"
             },
             {
-              "text": "Components of other income and expense for the historical periods. Consider items that may impact EBITDA."
-            },
-            {
-              "text": "Understands the health and sustainability of revenue and margin, that will bring clarity and insights into the drivers of business performance to strengthen deal conviction. Provides confidence in value creation planning / realization by uncovering opportunities earlier."
-            },
-            {
-              "text": "Leveraging proprietary analytics tool, use the transaction / sales database from the IT / ERP systems to analyze revenue and profitability (cost, price, margin), key KPIs (e.g., average sales price, average order size, etc.) and performance trends (e.g., concentration, price-volume-mix, high growth SKUs, negative margins, etc.); evaluating by front-store and Pharmacy (Rx), Category (Dispensary, Over-the-Counter Products, Health and Beauty, Home Healthcare, Grocery, etc.), sub-category (by brand and sub-category), channel (brick & mortar, eCom), by brand, and by geography (store ID, postal code, city, etc.)"
-            },
-            {
-              "text": "Where information is available, also include Front of Store Partners (e.g.,, etc.) and eCom Partners (,, etc.)"
-            },
-            {
-              "text": "Where information is available, generic versus branded drugs"
-            },
-            {
-              "text": "Where information is available, public, private, or cash"
-            },
-            {
-              "text": "Integrate anonymized customer data to understand revenue and mix (one-time versus recurring) across different locations; use of loyalty programs loyalty programs (e.g., impact of discounts, recurring nature of customers, etc.); and how this impacts overall revenue sustainability"
-            },
-            {
-              "text": "Store costs analyzed as a percentage of sales or applicable metric (selling payroll, other store payroll, store rent, marketing, shrinkage, sales-by-square footage, etc.)."
-            },
-            {
-              "text": "Sales and COGS adjustments (including sales returns, markdowns, supplier revenue, stock shrinkage, obsolescence, other income, loyalty points and gift cards);"
-            },
-            {
-              "text": "Consolidate the data into a clean Excel data cube and PowerBI Analysis file, and extract and understand any patterns and trends that might inform value creation and optimization opportunities"
+              "text": "Components of other income and expense that may impact EBITDA."
             }
           ]
         }
@@ -589,7 +472,7 @@
           "text": "Obtain and read an analysis of Target's expenses and inquire about:",
           "children": [
             {
-              "text": "Behavior Therapists (registered and unregistered) and Board Certified Behavior Analyst; compensation and benefits, including incentive compensation and historical turnover;"
+              "text": "Behavior therapists (registered and unregistered) and board-certified behavior analysts: compensation, benefits, incentive compensation, and turnover;"
             },
             {
               "text": "Non-provider salaries, wages, and benefits, including incentive compensation;"
@@ -607,40 +490,10 @@
               "text": "Insurance expense;"
             },
             {
-              "text": "Selling, general and administrative/corporate expenses;"
+              "text": "Selling, general, and administrative/corporate expenses; and"
             },
             {
-              "text": "Overhead allocations; and"
-            },
-            {
-              "text": "Unusual and extraordinary items."
-            }
-          ]
-        },
-        {
-          "id": "scope.090",
-          "text": "Obtain and read an analysis of the Target's selling, general and administration expenses and inquire about:",
-          "children": [
-            {
-              "text": "Salaries and wages (including headcount by area and function, if possible);"
-            },
-            {
-              "text": "General and administrative expenses;"
-            },
-            {
-              "text": "Information systems expenses;"
-            },
-            {
-              "text": "Corporate costs and any allocations to store level as applicable; clarify expenses with"
-            },
-            {
-              "text": "Extraordinary expenses;"
-            },
-            {
-              "text": "Rent and leases; and"
-            },
-            {
-              "text": "Miscellaneous and other expenses."
+              "text": "Overhead allocations."
             }
           ]
         }
@@ -648,31 +501,7 @@
       "working_capital": [
         {
           "id": "scope.091",
-          "text": "Obtain and read an analysis of working capital on a monthly basis. Inquire about historical trends, including seasonality, fluctuations in key metrics such as days revenue outstanding, days payable outstanding, and working capital as a percent of trailing revenue, and other significant items."
-        },
-        {
-          "id": "scope.092",
-          "text": "Summarize historical working capital in the business including:",
-          "children": [
-            {
-              "text": "The composition of individual working capital accounts (e.g. trade receivables, inventory, accounts payable and accruals, etc.);"
-            },
-            {
-              "text": "Working capital trends and impact on reported metrics;"
-            },
-            {
-              "text": "Large, unusual or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, understanding non-trade balances, etc.);"
-            },
-            {
-              "text": "Understanding the accounting impact of allowance for uncollectible amounts, provisions, and other accruals requiring judgment;"
-            },
-            {
-              "text": "Working capital seasonality; and"
-            },
-            {
-              "text": "Historical trends in key working capital metrics."
-            }
-          ]
+          "text": "Obtain and read an analysis of working capital on a monthly basis and inquire about historical trends, including seasonality, fluctuations in days revenue outstanding and days payable outstanding, working capital as a percent of trailing revenue, and other significant items."
         }
       ],
       "accounts_receivable": [
@@ -681,7 +510,7 @@
           "text": "Obtain and read an analysis of Target's accounts receivable and inquire about:",
           "children": [
             {
-              "text": "Aging analysis by center by payor;"
+              "text": "Aging analysis by center and by payor;"
             },
             {
               "text": "Contractual allowances;"
@@ -690,7 +519,7 @@
               "text": "Allowance for doubtful accounts and write-offs;"
             },
             {
-              "text": "Prior period accounts receivable adjustments;"
+              "text": "Prior-period accounts receivable adjustments;"
             },
             {
               "text": "Self-pay and credit balances;"
@@ -700,17 +529,80 @@
             },
             {
               "text": "Other reserves and adjustments."
-            },
-            {
-              "text": "Aging analysis and related credit terms (including special terms);"
-            },
-            {
-              "text": "Allowance for uncollectible accounts and write-offs; and"
-            },
-            {
-              "text": "Reserve and adjustments."
             }
           ]
+        }
+      ],
+      "accounts_payable_and_accrued_liabilities": [
+        {
+          "id": "scope.096",
+          "text": "Obtain and read an analysis of Target's accounts payable and accrued liabilities and inquire about:",
+          "children": [
+            {
+              "text": "Accounts payable aging, terms of trade with major vendors, and days payable outstanding;"
+            },
+            {
+              "text": "Accrued liabilities;"
+            },
+            {
+              "text": "Deferred revenue; and"
+            },
+            {
+              "text": "Other current and non-current liabilities."
+            }
+          ]
+        }
+      ],
+      "capital_expenditure_requirements": [
+        {
+          "id": "scope.099",
+          "text": "Obtain and read an analysis of historical and future capital cost requirements including:",
+          "children": [
+            {
+              "text": "Fixed-asset continuity schedules (including significant additions and disposals);"
+            },
+            {
+              "text": "Maintenance versus growth capital expenditures;"
+            },
+            {
+              "text": "Planned, committed, and deferred capital expenditures; and"
+            },
+            {
+              "text": "Under-utilized assets and impairment write-downs/issues."
+            }
+          ]
+        }
+      ],
+      "commitments_and_contingencies": [
+        {
+          "id": "scope.103",
+          "text": "Self-insurance;"
+        },
+        {
+          "id": "scope.104",
+          "text": "Post-retirement benefits;"
+        },
+        {
+          "id": "scope.105",
+          "text": "Incentive compensation plans;"
+        },
+        {
+          "id": "scope.106",
+          "text": "Leases;"
+        },
+        {
+          "id": "scope.107",
+          "text": "Pending or threatened litigation or investigations by regulatory or other authorities; and"
+        },
+        {
+          "id": "scope.109",
+          "text": "Other significant and/or unusual liabilities."
+        }
+      ],
+      "net_debt": [
+        {
+          "id": "scope.100",
+          "text": "Obtain, read, and discuss with management net debt and debt-like items, whether recorded on-balance sheet or off-balance sheet (for example: notes payable, capital vendor payables, deferred purchase price of property or services, accrued bonuses, and capital lease obligations), including expected future payout timing and amounts."
         }
       ],
       "inventory": [
@@ -739,198 +631,37 @@
           "text": "Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances."
         }
       ],
-      "accounts_payable_and_accrued_liabilities": [
-        {
-          "id": "scope.096",
-          "text": "Obtain and read an analysis of Target's accounts payable and accrued liabilities and inquire about:",
-          "children": [
-            {
-              "text": "Accounts payable aging;"
-            },
-            {
-              "text": "Deferred revenue; and"
-            }
-          ]
-        },
-        {
-          "id": "scope.097",
-          "text": "Obtain and read an analysis of Target's accounts payable and accrued expenses and inquire about:",
-          "children": [
-            {
-              "text": "AP aging analysis, terms of trade with major vendors and days payables outstanding;"
-            },
-            {
-              "text": "Accrued expenses; and"
-            }
-          ]
-        }
-      ],
-      "capital_expenditure_requirements": [
-        {
-          "id": "scope.098",
-          "text": "Obtain and read an analysis of Target's fixed assets, capital expenditures, and other assets and inquire about:",
-          "children": [
-            {
-              "text": "Historical, deferred and planned capital expenditures;"
-            },
-            {
-              "text": "Capitalized internal labor;"
-            },
-            {
-              "text": "Under-utilized assets; and"
-            },
-            {
-              "text": "Impairment write-downs and issues."
-            }
-          ]
-        },
-        {
-          "id": "scope.099",
-          "text": "Obtain and read an analysis of historical and future capital cost requirements including:",
-          "children": [
-            {
-              "text": "Fixed asset continuity schedules (including significant additions and disposals);"
-            },
-            {
-              "text": "Maintenance versus growth capital expenditures; and"
-            },
-            {
-              "text": "Planned, committed, and deferred capital expenditures."
-            }
-          ]
-        }
-      ],
-      "net_debt": [
-        {
-          "id": "scope.100",
-          "text": "Obtain, read, and discuss with management net debt and debt-like items, whether recorded on the balance sheet or off-balance sheet, including the expected future payout timing and amounts."
-        },
-        {
-          "id": "scope.101",
-          "text": "Prepare a summary of debt and debt-like items (e.g. notes payable, capital vendor payables, deferred purchase price of property or services, accrued bonuses, capital lease obligation, etc.), commitments and contingencies."
-        }
-      ],
-      "commitments_and_contingencies": [
-        {
-          "id": "scope.102",
-          "text": "Debt;"
-        },
-        {
-          "id": "scope.103",
-          "text": "Self-insurance;"
-        },
-        {
-          "id": "scope.104",
-          "text": "Post-retirement benefits;"
-        },
-        {
-          "id": "scope.105",
-          "text": "Incentive compensation plans;"
-        },
-        {
-          "id": "scope.106",
-          "text": "Leases;"
-        },
-        {
-          "id": "scope.107",
-          "text": "Pending or threatened litigation or investigations by regulatory or other authorities;"
-        },
-        {
-          "id": "scope.108",
-          "text": "Capital expenditures; and"
-        },
-        {
-          "id": "scope.109",
-          "text": "Other significant and/or unusual liabilities."
-        }
-      ],
-      "purchase_and_sale_agreement": [
-        {
-          "id": "scope.110",
-          "text": "Read available draft of the Purchase and Sale Agreement and offer commentary to you and your attorneys primarily concerning sections relating to accounting matters, based on the results of the due diligence assistance we provide to you. You agree to review with your attorney all our comments and suggestions concerning the Purchase and Sale agreement before acting on any of our suggestions."
-        }
-      ],
-      "assistance_with_transaction_documentation": [
-        {
-          "id": "scope.111",
-          "text": "Assist with relevant asset purchase agreement financial definitions (e.g. net working capital and debt-like item definitions and adjustment procedures)."
-        }
-      ],
       "waterfall_revenue_analysis": [
         {
           "id": "scope.112",
-          "text": "If available, obtain patient/encounter-level detail from the billing and collections systems utilized by Target to perform a claims-level revenue analysis reflecting net cash received on closed claims, and estimated cash expected to be received on open claims (based on historical reimbursement trends). Discuss with management:",
+          "text": "If available, obtain patient/encounter-level detail from billing and collections systems to perform a claims-level revenue analysis reflecting net cash received on closed claims and estimated cash expected on open claims (based on historical reimbursement trends). Discuss with management:",
           "children": [
             {
-              "text": "Drivers of monthly/quarterly/annual net revenue trends:",
-              "children": [
-                {
-                  "text": "By location (8 clinic locations and 2 de novo locations);"
-                },
-                {
-                  "text": "By significant payor; and"
-                },
-                {
-                  "text": "By significant service code."
-                },
-                {
-                  "text": "Reimbursement trends by payor, by service, and by location;"
-                },
-                {
-                  "text": "Pricing/volume trends by location by payor by service;"
-                },
-                {
-                  "text": "Payor mix in total and by location;"
-                },
-                {
-                  "text": "Trends and drivers of fluctuation in the cash collection cycle;"
-                },
-                {
-                  "text": "Reconciliation of cash collections reported in the billing system to third-party bank statements (on a sample basis);"
-                },
-                {
-                  "text": "Reconciliation of billing and collection information to financial statements; and"
-                }
-              ]
+              "text": "Drivers of monthly/quarterly/annual net revenue trends by location, significant payor, and significant service code;"
+            },
+            {
+              "text": "Reimbursement trends by payor, service, and location;"
+            },
+            {
+              "text": "Pricing/volume trends by location, payor, and service;"
+            },
+            {
+              "text": "Payor mix trends in total and by location;"
+            },
+            {
+              "text": "Trends and drivers of fluctuation in the cash collection cycle;"
+            },
+            {
+              "text": "Reconciliation of cash collections reported in the billing system to third-party bank statements (on a sample basis); and"
+            },
+            {
+              "text": "Reconciliation of billing and collection information to financial statements."
             }
           ]
         },
         {
           "id": "scope.113",
-          "text": "Bridge revenue for the following changes:",
-          "children": [
-            {
-              "text": "Patient volumes;"
-            },
-            {
-              "text": "Same store, de novo, and acquired facilities; and"
-            },
-            {
-              "text": "Changes in direct and indirect operating expense"
-            }
-          ]
-        }
-      ],
-      "audit_working_papers": [
-        {
-          "id": "scope.114",
-          "text": "Obtain and read the auditor's working papers for the latest fiscal year:"
-        },
-        {
-          "id": "scope.115",
-          "text": "Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, any changes in accounting policies or methods; and"
-        },
-        {
-          "id": "scope.116",
-          "text": "Comment on control issues identified by the external auditors, if applicable."
-        },
-        {
-          "id": "scope.117",
-          "text": "Comment on any additional \"red flags\" or key risks as identified in the provided audit materials"
-        },
-        {
-          "id": "scope.118",
-          "text": "Review of the audit committee reporting and presentations from the audit firm"
+          "text": "Bridge revenue for changes in patient volumes, same-store/de novo/acquired facilities, and changes in direct and indirect operating expenses."
         }
       ]
     }
@@ -940,5 +671,84 @@
     "common_threshold": "8 of 11",
     "total_sections_found": 55,
     "total_bullets_cataloged": 1064
+  },
+  "review_tracking": {
+    "source": "docs/Scope Review/deletion-optional-tracker.md",
+    "entries_for_industry": [
+      {
+        "scope_id": "scope.003",
+        "path": "common.accounting_overview.scope.003",
+        "short_text": "Analyze the accounting policies as disclosed in the audited financial statements and perform...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Parent/jurisdiction-specific IFRS framing."
+      },
+      {
+        "scope_id": "scope.111",
+        "path": "healthcare.assistance_with_transaction_documentation.scope.111",
+        "short_text": "Assist with relevant asset purchase agreement financial definitions (e.g. net working capita...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Transaction documentation support is deal-specific; purchase agreement definition framing."
+      },
+      {
+        "scope_id": "scope.110",
+        "path": "healthcare.purchase_and_sale_agreement.scope.110",
+        "short_text": "Read available draft of the Purchase and Sale Agreement and offer commentary to you and your...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Transaction legal-document support is deal-specific; purchase-and-sale-agreement attorney framing."
+      },
+      {
+        "scope_id": "scope.083",
+        "path": "healthcare.quality_of_earnings.scope.083",
+        "short_text": "Read and comment on the adjusted EBITDA prepared by Target and its sell-side advisors, and:",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Sell-side advisor framing in reusable baseline."
+      },
+      {
+        "scope_id": "scope.084",
+        "path": "healthcare.quality_of_earnings.scope.084",
+        "short_text": "Propose any additional potential adjustments to historical earnings before interest, taxes,...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Sell-side advisor framing in reusable baseline."
+      }
+    ],
+    "counts": {
+      "entries_total": 5,
+      "removed_canonical": 5,
+      "optional_candidates": 0,
+      "pending_review_delete": 0
+    }
+  },
+  "applicability": {
+    "source": "docs/scope-library/section-applicability.json",
+    "excluded_common_sections": [],
+    "replaced_common_sections": [
+      "audit_work_paper",
+      "capital_expenditure_requirements",
+      "net_debt",
+      "revenue_analysis",
+      "working_capital"
+    ],
+    "replaced_industry_sections": [
+      "accounting_overview",
+      "accounts_payable_and_accrued_liabilities",
+      "accounts_receivable",
+      "assistance_with_transaction_documentation",
+      "audit_work_paper",
+      "capital_expenditure_requirements",
+      "commitments_and_contingencies",
+      "net_debt",
+      "operating_expenses",
+      "purchase_and_sale_agreement",
+      "revenue_analysis",
+      "store_portfolio_analysis",
+      "waterfall_revenue_analysis",
+      "working_capital"
+    ],
+    "added_industry_sections": []
   }
 }

@@ -62,7 +62,7 @@ Never ask these unless user explicitly asks to override:
 Goal: give user control over top-level scope sections without exposing child bullets.
 
 - Section-level controls only; never show or toggle child bullets.
-- Build section options from `scope-library.json` (common + selected industry sections).
+- Build section options from `scope-library.json` (common + selected industry), then omit common sections where `section_applicability.common_skeleton.<section>.exclude_for_industries` contains the industry.
 - Group sections using `scope-review-buckets.json` (`section_to_bucket`); unknown sections -> `Industry-Specific Analysis`.
 - Parse user removal intent using `section_aliases` (and bucket aliases if user names a bucket).
 - Parse concept-wide removals using `concept_aliases` + `concept_to_sections` and expand to section keys.
@@ -80,7 +80,7 @@ Removal mapping contract:
 
 ```python
 scope_selection = {"excluded_section_keys": sorted(excluded_section_keys)}
-# Generator applies section keys across common + industry modules.
+# Generator applies section keys across active scope.
 ```
 
 Soft-optional generate contract:

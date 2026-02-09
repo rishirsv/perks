@@ -1,371 +1,427 @@
 {
   "metadata": {
-    "generated_at": "2026-01-07T00:33:43.878762",
+    "generated_at": "2026-02-09T10:22:53.799209",
     "generator_version": "1.0.0",
     "industry": "saas",
     "size": "mid",
-    "realism_mode": "realistic"
+    "realism_mode": "clean"
   },
   "company": {
-    "name": "ImageRecent Systems",
-    "legal_name": "ImageRecent Systems, Inc.",
+    "name": "Garcia Tech",
+    "legal_name": "Garcia Tech, Inc.",
     "industry": "saas",
     "industry_display": "Software-as-a-Service",
-    "vertical": "FinTech",
-    "founded": 2008,
+    "vertical": "EdTech",
+    "founded": 2007,
     "headquarters": {
-      "city": "San Jose",
-      "state": "California",
+      "city": "Chicago",
+      "state": "Illinois",
       "country": "United States",
-      "address": "585 Norton Mews",
-      "zip_code": "67801"
+      "address": "3413 Marilyn Inlet Apt. 249",
+      "zip_code": "31390"
     },
-    "website": "www.imagerecentsystems.com"
+    "website": "www.garciatech.com"
   },
   "brand": {
-    "primary_color": "#0891B2",
-    "secondary_color": "#06B6D4",
-    "accent_color": "#22D3EE",
-    "font_family": "Inter",
+    "primary_color": "#2563EB",
+    "secondary_color": "#3B82F6",
+    "accent_color": "#60A5FA",
+    "font_family": "Open Sans",
     "font_family_mono": "JetBrains Mono"
   },
   "management": [
     {
       "title": "Chief Executive Officer",
       "short_title": "CEO",
-      "name": "Antonio Torres",
-      "years_at_company": 13,
-      "background": "Former VP at Williams PLC"
+      "name": "Dawn Bell",
+      "years_at_company": 14,
+      "background": "Former VP at Kane Group"
     },
     {
       "title": "Chief Financial Officer",
       "short_title": "CFO",
-      "name": "Shane Harris",
-      "years_at_company": 10,
-      "background": "Former Controller at Mata Ltd"
+      "name": "Todd Hernandez",
+      "years_at_company": 5,
+      "background": "Former CFO at Jennings-Anderson"
     },
     {
       "title": "Chief Operating Officer",
       "short_title": "COO",
-      "name": "Ashley Anderson",
-      "years_at_company": 3,
-      "background": "Former VP Operations at Ruiz, Harmon and Stanley"
+      "name": "Daniel Curry",
+      "years_at_company": 5,
+      "background": "Former GM at Smith PLC"
     },
     {
       "title": "VP of Sales",
       "short_title": "VP Sales",
-      "name": "Jared Thompson",
+      "name": "Ashley Finley",
       "years_at_company": 3,
-      "background": "Former Sales Director at West LLC"
+      "background": "Former Enterprise AE at Leonard and Sons"
     },
     {
       "title": "VP of Engineering",
       "short_title": "VP Eng",
-      "name": "Tom Stewart",
-      "years_at_company": 8,
-      "background": "Former Engineering Director at Rosales and Sons"
+      "name": "Alexandria Ellison",
+      "years_at_company": 5,
+      "background": "Former Staff Engineer at Dean-Hickman"
     }
   ],
   "story": {
-    "founding_narrative": "Started in 2008 by Hayley Moss, the company began as a small operation focused on fintech.",
-    "founder_name": "Hayley Moss",
+    "founding_narrative": "Barbara Estrada founded the company in 2007 after identifying a gap in the edtech market.",
+    "founder_name": "Barbara Estrada",
     "milestones": [
       {
         "year": 2010,
-        "title": "First major contract",
-        "description": "Landed first enterprise customer: Hawkins, Meyer and Jackson"
-      },
-      {
-        "year": 2012,
         "title": "Key hire",
         "description": "Brought on experienced leadership team from industry"
       },
       {
-        "year": 2013,
-        "title": "Geographic expansion",
-        "description": "Expanded operations to Midwest"
+        "year": 2012,
+        "title": "Product launch",
+        "description": "Launched flagship product/service offering"
       },
       {
-        "year": 2015,
-        "title": "Award",
-        "description": "Recognized as top fintech provider in region"
+        "year": 2014,
+        "title": "First major contract",
+        "description": "Landed first enterprise customer: Fernandez-Roberts"
+      },
+      {
+        "year": 2017,
+        "title": "Acquisition",
+        "description": "Acquired complementary business Luna-Oconnor"
       }
     ],
-    "market_position": "Leading regional provider in the fintech space",
-    "why_selling": "Strategic review identified M&A as optimal path for next growth phase",
-    "years_in_business": 18
+    "market_position": "Niche provider with deep expertise in edtech",
+    "why_selling": "Ownership seeking liquidity while company has strong momentum",
+    "years_in_business": 19
   },
   "financials": {
-    "annual_revenue": 81700000,
-    "gross_margin": 0.792,
-    "headcount": 198,
-    "revenue_per_employee": 412626.0,
-    "fiscal_year_end": "December 31",
+    "annual_revenue": 52100000,
+    "gross_margin": 0.738,
+    "headcount": 186,
+    "revenue_per_employee": 280108.0,
+    "fiscal_year_end": "June 30",
     "years_of_history": 5
   },
   "events": [
     {
-      "date": "2021-02-06",
+      "date": "2021-01-19",
       "type": "customer_win",
-      "description": "New customer: Gray Group",
-      "revenue_impact": 3664395.0,
+      "description": "New customer: Allison, Meyers and Cannon",
+      "revenue_impact": 2038965.0,
       "recurring": true
     },
     {
-      "date": "2021-03-25",
+      "date": "2021-03-01",
       "type": "customer_win",
-      "description": "New customer: Sampson, Boyd and Shaw",
-      "revenue_impact": 3200196.0,
+      "description": "New customer: Fox LLC",
+      "revenue_impact": 2443925.0,
       "recurring": true
     },
     {
-      "date": "2021-09-26",
+      "date": "2021-04-28",
       "type": "customer_win",
-      "description": "New customer: Miller, Doyle and Brewer",
-      "revenue_impact": 1650768.0,
+      "description": "New customer: Knox-Miller",
+      "revenue_impact": 1927745.0,
       "recurring": true
     },
     {
-      "date": "2021-12-09",
+      "date": "2021-11-07",
       "type": "customer_win",
-      "description": "New customer: Cabrera, Powell and Edwards",
-      "revenue_impact": 2223365.0,
+      "description": "New customer: Leblanc-Juarez",
+      "revenue_impact": 2082009.0,
       "recurring": true
     },
     {
-      "date": "2021-12-25",
+      "date": "2021-11-11",
       "type": "customer_win",
-      "description": "New customer: Walters-Boyd",
-      "revenue_impact": 1039944.0,
+      "description": "New customer: Webb-Watson",
+      "revenue_impact": 1688773.0,
       "recurring": true
     },
     {
-      "date": "2022-01-05",
+      "date": "2022-01-10",
       "type": "customer_win",
-      "description": "New customer: Wagner LLC",
-      "revenue_impact": 1646367.0,
+      "description": "New customer: Huff, Neal and Williams",
+      "revenue_impact": 1649307.0,
       "recurring": true
     },
     {
-      "date": "2022-04-20",
+      "date": "2022-03-10",
       "type": "customer_win",
-      "description": "New customer: Ellis LLC",
-      "revenue_impact": 3004769.0,
+      "description": "New customer: Smith-Smith",
+      "revenue_impact": 2117255.0,
       "recurring": true
     },
     {
-      "date": "2022-05-13",
+      "date": "2022-07-18",
       "type": "customer_win",
-      "description": "New customer: Pace Inc",
-      "revenue_impact": 1186723.0,
+      "description": "New customer: Green Group",
+      "revenue_impact": 1365934.0,
       "recurring": true
     },
     {
-      "date": "2022-05-25",
+      "date": "2022-08-24",
       "type": "customer_win",
-      "description": "New customer: Pierce, Diaz and Peterson",
-      "revenue_impact": 2343907.0,
+      "description": "New customer: Allison, Perez and Johnson",
+      "revenue_impact": 2036815.0,
       "recurring": true
     },
     {
-      "date": "2022-05-28",
+      "date": "2022-08-25",
       "type": "customer_win",
-      "description": "New customer: Liu and Sons",
-      "revenue_impact": 2190561.0,
+      "description": "New customer: Harrell-Turner",
+      "revenue_impact": 1282098.0,
       "recurring": true
     },
     {
-      "date": "2022-06-24",
+      "date": "2022-08-28",
       "type": "customer_win",
-      "description": "New customer: Miller-Richardson",
-      "revenue_impact": 1713312.0,
+      "description": "New customer: Wong, White and Wilson",
+      "revenue_impact": 1818613.0,
       "recurring": true
     },
     {
-      "date": "2022-07-12",
+      "date": "2022-09-28",
       "type": "customer_win",
-      "description": "New customer: Burgess LLC",
-      "revenue_impact": 3476860.0,
+      "description": "New customer: Rowe LLC",
+      "revenue_impact": 2395255.0,
       "recurring": true
     },
     {
-      "date": "2022-10-04",
-      "type": "legal",
-      "description": "Legal settlement",
-      "financial_impact": -1134235.0,
-      "one_time": true
-    },
-    {
-      "date": "2022-11-17",
+      "date": "2022-10-13",
       "type": "customer_win",
-      "description": "New customer: Rodriguez, Griffin and Gordon",
-      "revenue_impact": 1389887.0,
+      "description": "New customer: Velez-Long",
+      "revenue_impact": 2509368.0,
       "recurring": true
     },
     {
-      "date": "2023-01-03",
+      "date": "2022-10-15",
       "type": "customer_win",
-      "description": "New customer: Davis, Johnson and Hanson",
-      "revenue_impact": 1747523.0,
+      "description": "New customer: Flores-Cannon",
+      "revenue_impact": 1181057.0,
       "recurring": true
     },
     {
-      "date": "2023-08-01",
+      "date": "2023-02-17",
       "type": "customer_win",
-      "description": "New customer: Lopez, Bell and Ellis",
-      "revenue_impact": 1025672.0,
+      "description": "New customer: Kemp, Patrick and Hobbs",
+      "revenue_impact": 983759.0,
       "recurring": true
     },
     {
-      "date": "2023-09-20",
-      "type": "customer_loss",
-      "description": "Lost customer: Brown Ltd",
-      "revenue_impact": -1374612.0,
-      "reason": "Customer M&A"
-    },
-    {
-      "date": "2023-10-15",
+      "date": "2023-02-21",
       "type": "customer_win",
-      "description": "New customer: Pierce, Donaldson and Jimenez",
-      "revenue_impact": 3108554.0,
+      "description": "New customer: Kennedy, Buckley and Davis",
+      "revenue_impact": 1138662.0,
       "recurring": true
     },
     {
-      "date": "2023-11-26",
-      "type": "insurance",
-      "description": "Insurance claim recovery",
-      "financial_impact": 586004.0,
-      "one_time": true
-    },
-    {
-      "date": "2023-12-14",
+      "date": "2023-04-04",
       "type": "customer_win",
-      "description": "New customer: Rose-Owens",
-      "revenue_impact": 1865803.0,
+      "description": "New customer: Miller, Thomas and Mcfarland",
+      "revenue_impact": 894947.0,
       "recurring": true
     },
     {
-      "date": "2024-01-12",
+      "date": "2023-05-05",
       "type": "customer_win",
-      "description": "New customer: Johnson, Morrison and Lyons",
-      "revenue_impact": 1473278.0,
+      "description": "New customer: Miles PLC",
+      "revenue_impact": 1046719.0,
       "recurring": true
     },
     {
-      "date": "2024-02-10",
+      "date": "2023-10-16",
       "type": "customer_win",
-      "description": "New customer: Moore-Howell",
-      "revenue_impact": 3001184.0,
+      "description": "New customer: Mathis, Shah and Hernandez",
+      "revenue_impact": 1503091.0,
       "recurring": true
     },
     {
-      "date": "2024-10-22",
+      "date": "2023-10-16",
       "type": "customer_win",
-      "description": "New customer: Collier and Sons",
-      "revenue_impact": 2169327.0,
+      "description": "New customer: Gonzalez, Waller and Smith",
+      "revenue_impact": 710753.0,
       "recurring": true
     },
     {
-      "date": "2024-11-04",
+      "date": "2024-01-23",
       "type": "customer_win",
-      "description": "New customer: Buck and Sons",
-      "revenue_impact": 3212248.0,
+      "description": "New customer: Payne LLC",
+      "revenue_impact": 2525953.0,
       "recurring": true
     },
     {
-      "date": "2024-11-14",
+      "date": "2024-04-18",
       "type": "customer_win",
-      "description": "New customer: Cochran, Fisher and Chen",
-      "revenue_impact": 1743459.0,
+      "description": "New customer: Gibson-Moore",
+      "revenue_impact": 1983296.0,
       "recurring": true
     },
     {
-      "date": "2024-12-01",
+      "date": "2024-04-26",
       "type": "customer_win",
-      "description": "New customer: Garcia-Guzman",
-      "revenue_impact": 2689338.0,
+      "description": "New customer: Burnett-Hammond",
+      "revenue_impact": 1620612.0,
       "recurring": true
     },
     {
-      "date": "2024-12-22",
+      "date": "2024-05-10",
       "type": "customer_win",
-      "description": "New customer: Ortega-Smith",
-      "revenue_impact": 2570954.0,
+      "description": "New customer: Dickerson, Bernard and Clarke",
+      "revenue_impact": 2335217.0,
       "recurring": true
     },
     {
-      "date": "2024-12-25",
-      "type": "legal",
-      "description": "Legal settlement",
-      "financial_impact": -823723.0,
-      "one_time": true
-    },
-    {
-      "date": "2025-02-13",
+      "date": "2024-06-01",
       "type": "customer_win",
-      "description": "New customer: Williams, Shaw and Taylor",
-      "revenue_impact": 3482308.0,
+      "description": "New customer: Riggs, Larson and Strickland",
+      "revenue_impact": 1939318.0,
       "recurring": true
     },
     {
-      "date": "2025-04-16",
+      "date": "2024-07-25",
       "type": "customer_win",
-      "description": "New customer: James, Parsons and Wilson",
-      "revenue_impact": 1907545.0,
+      "description": "New customer: Myers-Estes",
+      "revenue_impact": 2420045.0,
       "recurring": true
     },
     {
-      "date": "2025-06-11",
+      "date": "2024-12-09",
       "type": "customer_win",
-      "description": "New customer: Davis, Brewer and Jones",
-      "revenue_impact": 1088497.0,
+      "description": "New customer: Medina-Campos",
+      "revenue_impact": 1095834.0,
+      "recurring": true
+    },
+    {
+      "date": "2024-12-20",
+      "type": "customer_win",
+      "description": "New customer: Smith PLC",
+      "revenue_impact": 1965789.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-01-13",
+      "type": "customer_win",
+      "description": "New customer: Perez, Guzman and Tyler",
+      "revenue_impact": 1554547.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-03-01",
+      "type": "customer_win",
+      "description": "New customer: Tran, Garcia and Young",
+      "revenue_impact": 1337953.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-03-26",
+      "type": "customer_win",
+      "description": "New customer: Carr-Atkins",
+      "revenue_impact": 829627.0,
+      "recurring": true
+    },
+    {
+      "date": "2025-05-25",
+      "type": "customer_win",
+      "description": "New customer: Jones Group",
+      "revenue_impact": 1940617.0,
       "recurring": true
     },
     {
       "date": "2025-07-16",
       "type": "customer_win",
-      "description": "New customer: Morrow, Harris and Gonzalez",
-      "revenue_impact": 3283524.0,
+      "description": "New customer: Cox-Johnston",
+      "revenue_impact": 2130188.0,
       "recurring": true
     },
     {
-      "date": "2025-10-05",
+      "date": "2025-07-28",
       "type": "customer_win",
-      "description": "New customer: Pierce-Wells",
-      "revenue_impact": 2231227.0,
+      "description": "New customer: Perkins PLC",
+      "revenue_impact": 1716196.0,
       "recurring": true
     },
     {
-      "date": "2026-01-25",
+      "date": "2025-10-07",
       "type": "customer_win",
-      "description": "New customer: Wagner Inc",
-      "revenue_impact": 3757045.0,
+      "description": "New customer: Dougherty Ltd",
+      "revenue_impact": 1230282.0,
       "recurring": true
     },
     {
-      "date": "2026-04-01",
+      "date": "2025-11-02",
       "type": "customer_win",
-      "description": "New customer: Thornton-Brown",
-      "revenue_impact": 3250284.0,
+      "description": "New customer: Howe Group",
+      "revenue_impact": 929187.0,
       "recurring": true
     },
     {
-      "date": "2026-10-01",
+      "date": "2025-11-10",
       "type": "customer_win",
-      "description": "New customer: Vazquez, Barry and Gomez",
-      "revenue_impact": 2067853.0,
+      "description": "New customer: Washington Ltd",
+      "revenue_impact": 2284339.0,
       "recurring": true
     },
     {
-      "date": "2026-12-09",
+      "date": "2025-12-03",
       "type": "customer_win",
-      "description": "New customer: Gibson, Johnson and Ritter",
-      "revenue_impact": 1404125.0,
+      "description": "New customer: Johnson, Williams and Bray",
+      "revenue_impact": 2448528.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-01-02",
+      "type": "customer_win",
+      "description": "New customer: Robbins, Turner and Jones",
+      "revenue_impact": 1404091.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-01-07",
+      "type": "customer_win",
+      "description": "New customer: Burton-Graham",
+      "revenue_impact": 1993223.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-01-19",
+      "type": "customer_win",
+      "description": "New customer: Buck-Wilson",
+      "revenue_impact": 538334.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-03-10",
+      "type": "customer_win",
+      "description": "New customer: Sullivan-Thomas",
+      "revenue_impact": 1661032.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-04-26",
+      "type": "customer_win",
+      "description": "New customer: Clayton-Peterson",
+      "revenue_impact": 2166254.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-06-06",
+      "type": "customer_win",
+      "description": "New customer: Wagner-Dennis",
+      "revenue_impact": 1467493.0,
+      "recurring": true
+    },
+    {
+      "date": "2026-06-25",
+      "type": "customer_win",
+      "description": "New customer: Hamilton Ltd",
+      "revenue_impact": 1642713.0,
       "recurring": true
     }
   ],
   "profile_reference": "profiles/saas.json",
   "operations": {
-    "customer_count": 223
+    "customer_count": 1549
   }
 }

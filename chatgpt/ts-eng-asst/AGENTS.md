@@ -41,15 +41,80 @@ If you need demo or test materials, put them under `chatgpt/ts-sow/reference/` (
 - For prompt changes, run:
   - `python3 scripts/check-system-prompt-contract.py --prompt dist/ts-engagement-assistant.md --max-chars 7200`
 - Validate outputs are “clean”: no remaining `{{...}}` tokens in generated `.docx`.
-- For scope text changes, keep all copies in sync:
-  - `dist/scope-library.json`
-  - `reference/scope-library.json`
-  - `docs/scope-library/industries/*` (re-export with `python3 scripts/export-scope-library.py`)
+- For scope text changes, treat `dist/scope-library.json` as canonical.
+- Keep `docs/scope-library/industries/*` synced to `dist` (re-export with `python3 scripts/export-scope-library.py`).
+- `reference/legacy/*` contains historical snapshots only (not authoritative).
 - For scope text QA, run:
   - `python3 scripts/check-scope-spelling.py`
   - `python3 scripts/validate-scope-exports.py`
   - `python3 -m json.tool dist/scope-library.json >/dev/null`
   - `python3 -m json.tool dist/scope-review-buckets.json >/dev/null`
+
+## Scope Library Review Workflow (Docs-first)
+
+When scope cleanup is in review mode, use `docs/scope-library/industries` as the working review surface.
+
+- Update/review full per-industry outputs in:
+  - `docs/scope-library/industries/*.json`
+  - `docs/scope-library/industries/*.md`
+- Regenerate industry files with:
+  - `python3 scripts/export-scope-library.py`
+- Only generate skeleton pack when explicitly requested:
+  - `python3 scripts/export-scope-library.py --with-skeleton`
+- Do not update `dist/scope-library.json` unless the user explicitly says to finalize/canonicalize changes.
+- After exports, always run:
+  - `python3 scripts/validate-scope-exports.py`
+  - `python3 scripts/check-scope-spelling.py`
+
+## Section Applicability (Docs-layer)
+
+Use `docs/scope-library/section-applicability.json` to control industry behavior during docs export without changing `dist/scope-library.json`.
+
+- `section_applicability.common_skeleton.<section>.exclude_for_industries`
+  - Excludes a common section for listed industries.
+  - Example: exclude `revenue_analysis` for `banking`.
+- `common_section_replacements.<section>`
+  - Replaces a common skeleton section for all industries (after exclusions are applied).
+  - Use this when a “common” section is too industry-biased and needs neutral baseline wording.
+- `industry_section_replacements.<industry>.<section>`
+  - Replaces the base industry section bullets (full replacement) for review-mode exports.
+  - Use this to remove redundancy and keep only incremental industry content.
+- `industry_section_additions.<industry>.<section>`
+  - Appends or creates bullets for a section after replacements are applied.
+  - Use this for new sections (or incremental adds where replacement is not required).
+
+Workflow:
+
+1. Update `docs/scope-library/section-applicability.json`.
+2. Regenerate exports:
+   - `python3 scripts/export-scope-library.py`
+   - Optional skeleton pack: `python3 scripts/export-scope-library.py --with-skeleton`
+3. Validate:
+   - `python3 scripts/validate-scope-exports.py`
+   - `python3 scripts/check-scope-spelling.py`
+
+Notes:
+
+- Applicability config is docs-review behavior only until canonicalized in `dist/scope-library.json`.
+- Prefer replacements over layered additions when duplicate/overlapping bullets appear in the same section.
+
+## Banking Revenue Drafting Standard
+
+For banking-oriented revenue wording, prefer income-stream framing over generic product sales framing.
+
+Use this structure when drafting/revising banking revenue scope:
+
+Revenue - Gain an understanding of income streams by type, including:
+
+a) Net interest margin - trends therein / evolution thereof, including:
+   i. Interest rate profile (fixed vs variable; differences by term / duration);
+   ii. Product features (variable/floating and fixed);
+   iii. Changes in maturity profile (including extensions of amortization periods and impact on yields); and
+   iv. Cost of funding.
+
+b) Non-interest income / margin - trends therein and key drivers (service charges, card/payment fees, wealth/asset-management fees, trading/treasury results, and other recurring non-interest streams).
+
+c) Other fee income and commissions - trends therein and noted one-time / non-cash items.
 
 ## Constraint
 

@@ -16,7 +16,6 @@ from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_BUNDLE = PROJECT_ROOT / "dist" / "scope-library.json"
-DEFAULT_REFERENCE = PROJECT_ROOT / "reference" / "scope-library.json"
 
 
 # High-confidence spelling issues to block.
@@ -24,6 +23,10 @@ BANNED_PATTERNS: dict[str, str] = {
     r"\bcommerical\b": "commercial",
     r"\barve-out\b": "carve-out",
     r"\bnon-operation items\b": "non-operating items",
+    r"\bthe the\b": "the",
+    r"customers,etc\.": "customers, etc.",
+    r"sell-side due diligence advisor sell-side advisor": "sell-side due diligence advisor",
+    r"Target[’']s the Historical Period": "Target's Historical Period",
 }
 
 # Preferred US spelling variants for consistency in this library.
@@ -61,24 +64,12 @@ def _check_patterns(bundle: dict[str, Any], patterns: dict[str, str], label: str
 def main() -> None:
     parser = argparse.ArgumentParser(description="Check scope library spelling consistency")
     parser.add_argument("--bundle", default=str(DEFAULT_BUNDLE), help="Path to bundled v2 scope JSON")
-    parser.add_argument(
-        "--reference",
-        default=str(DEFAULT_REFERENCE),
-        help="Path to reference v2 scope JSON (should match dist)",
-    )
     args = parser.parse_args()
 
     bundle_path = Path(args.bundle)
-    reference_path = Path(args.reference)
     bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
-    reference = json.loads(reference_path.read_text(encoding="utf-8"))
 
     findings: list[str] = []
-
-    if bundle != reference:
-        findings.append(
-            f"SYNC: `{bundle_path}` and `{reference_path}` differ. Keep both files identical."
-        )
 
     findings.extend(_check_patterns(bundle, BANNED_PATTERNS, "TYPO"))
     findings.extend(_check_patterns(bundle, NON_PREFERRED_VARIANTS, "STYLE"))

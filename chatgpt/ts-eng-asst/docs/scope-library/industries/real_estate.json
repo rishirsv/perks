@@ -47,10 +47,6 @@
           ]
         },
         {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
           "id": "scope.004",
           "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
@@ -110,79 +106,58 @@
       ]
     },
     {
-      "heading": "Revenue analysis",
       "normalized_heading": "revenue_analysis",
       "default_bullets": [
         {
           "id": "scope.006",
-          "text": "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
+          "text": "Obtain a comprehensive view of revenue and margins. Obtain underlying transactional detail, if available, and gain an understanding of major trends in revenue and margins, including:",
           "children": [
             {
-              "text": "Revenue and margin by significant customer and end market/ segment/ region;"
+              "text": "Revenue and margin by significant customer, channel, and/or market segment, as applicable; and"
             },
             {
-              "text": "Price and volume trends."
+              "text": "Price, volume, and mix trends."
             }
           ]
         },
         {
           "id": "scope.007",
-          "text": "Discuss with Management:",
+          "text": "Discuss with management key drivers of revenue and margin over the Historical Period, including:",
           "children": [
             {
-              "text": "impact of large or long-term orders/ seasonality (if applicable); and"
+              "text": "Major customer/contract wins or losses and timing impacts;"
             },
             {
-              "text": "any non-recurring components of revenue."
+              "text": "Non-recurring items affecting period results; and"
             },
             {
-              "text": "customer category (i.e. individual, business);"
-            },
-            {
-              "text": "distribution channel (i.e. online, wholesale, etc.); and"
-            },
-            {
-              "text": "price, volume, mix and cross-sell analysis."
-            },
-            {
-              "text": "Seasonal fluctuations in demand and monthly sales trends; and"
+              "text": "Operational, market, or seasonal factors affecting demand and fulfillment."
             }
           ]
         },
         {
           "id": "scope.008",
-          "text": "Obtain and read an analysis of Target's revenue and inquire about:",
+          "text": "Obtain and review an analysis of revenue quality and related balances, and inquire about:",
           "children": [
             {
-              "text": "Gross to net revenue;"
+              "text": "Revenue recognition policies and any recent changes;"
             },
             {
-              "text": "Revenue recognition policies;"
+              "text": "Billing and collection terms, including significant deviations from standard terms;"
             },
             {
-              "text": "Revenue and gross margin by customer;"
+              "text": "Credits, rebates, returns, and other contra-revenue items;"
             },
             {
-              "text": "Organic growth and delineation between price vs. volume;"
+              "text": "Concentration/dependency risk; and"
             },
             {
-              "text": "Pricing practices;"
-            },
-            {
-              "text": "Promotions and discounts;"
-            },
-            {
-              "text": "Any non-recurring components of revenue;"
-            },
-            {
-              "text": "Revenue seasonality, if any;"
-            },
-            {
-              "text": "Other components of cost of sales and key suppliers."
+              "text": "Other unusual items affecting reported revenue or gross margin."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Revenue analysis"
     },
     {
       "heading": "Operating expenses",
@@ -215,7 +190,6 @@
       ]
     },
     {
-      "heading": "Working capital",
       "normalized_heading": "working_capital",
       "default_bullets": [
         {
@@ -229,14 +203,15 @@
               "text": "Monthly working capital trends, metrics, and seasonality;"
             },
             {
-              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
+              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
             },
             {
               "text": "Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Working capital"
     },
     {
       "heading": "Accounts receivable",
@@ -287,7 +262,6 @@
       ]
     },
     {
-      "heading": "Capital expenditure requirements",
       "normalized_heading": "capital_expenditure_requirements",
       "default_bullets": [
         {
@@ -298,11 +272,12 @@
               "text": "Maintenance versus growth capital expenditures;"
             },
             {
-              "text": "Other historical, deferred, and planned capital expenditures"
+              "text": "Other historical, deferred, and planned capital expenditures."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Capital expenditure requirements"
     },
     {
       "heading": "Commitments and contingencies",
@@ -338,7 +313,6 @@
       ]
     },
     {
-      "heading": "Net debt",
       "normalized_heading": "net_debt",
       "default_bullets": [
         {
@@ -347,9 +321,36 @@
         },
         {
           "id": "scope.016",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt."
         }
-      ]
+      ],
+      "heading": "Net debt"
+    },
+    {
+      "normalized_heading": "audit_work_paper",
+      "default_bullets": [
+        {
+          "id": "scope.114",
+          "text": "If required, obtain and read the auditor's working papers for the latest fiscal year."
+        },
+        {
+          "id": "scope.115",
+          "text": "Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods."
+        },
+        {
+          "id": "scope.116",
+          "text": "Comment on control issues identified by the external auditors, if applicable."
+        },
+        {
+          "id": "scope.117",
+          "text": "Comment on any additional red flags or key risks identified in the provided audit materials."
+        },
+        {
+          "id": "scope.118",
+          "text": "Review audit committee reporting and presentations from the audit firm."
+        }
+      ],
+      "heading": "Audit work paper"
     }
   ],
   "industry_modules": {
@@ -435,6 +436,24 @@
           "text": "Sales and marketing and other expenses."
         }
       ],
+      "audit_work_paper": [
+        {
+          "id": "scope.341",
+          "text": "Obtain and read the Company’s audit working paper files and management letters for the latest fiscal year:"
+        },
+        {
+          "id": "scope.342",
+          "text": "Summarize audit matters, if any;"
+        },
+        {
+          "id": "scope.343",
+          "text": "Comment on the nature and volume of audit differences (adjustments), use of accounting estimates, any changes in accounting policies or methods and their implications; and"
+        },
+        {
+          "id": "scope.344",
+          "text": "Read analytical reviews for trends, unusual practices, internal control matters."
+        }
+      ],
       "balance_sheet": [
         {
           "id": "scope.332",
@@ -504,24 +523,6 @@
           "id": "scope.340",
           "text": "Analyze the Company’s historical operating cash flow / FFO trends incorporating the impact of adjusted NOI trends from the quality of earnings analysis, the Company’s net working capital profile, and capital expenditures trends."
         }
-      ],
-      "audit_work_paper": [
-        {
-          "id": "scope.341",
-          "text": "Obtain and read the Company’s audit working paper files and management letters for the latest fiscal year:"
-        },
-        {
-          "id": "scope.342",
-          "text": "Summarize audit matters, if any;"
-        },
-        {
-          "id": "scope.343",
-          "text": "Comment on the nature and volume of audit differences (adjustments), use of accounting estimates, any changes in accounting policies or methods and their implications; and"
-        },
-        {
-          "id": "scope.344",
-          "text": "Read analytical reviews for trends, unusual practices, internal control matters."
-        }
       ]
     }
   },
@@ -530,5 +531,37 @@
     "common_threshold": "8 of 11",
     "total_sections_found": 55,
     "total_bullets_cataloged": 1064
+  },
+  "review_tracking": {
+    "source": "docs/Scope Review/deletion-optional-tracker.md",
+    "entries_for_industry": [
+      {
+        "scope_id": "scope.003",
+        "path": "common.accounting_overview.scope.003",
+        "short_text": "Analyze the accounting policies as disclosed in the audited financial statements and perform...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Parent/jurisdiction-specific IFRS framing."
+      }
+    ],
+    "counts": {
+      "entries_total": 1,
+      "removed_canonical": 1,
+      "optional_candidates": 0,
+      "pending_review_delete": 0
+    }
+  },
+  "applicability": {
+    "source": "docs/scope-library/section-applicability.json",
+    "excluded_common_sections": [],
+    "replaced_common_sections": [
+      "audit_work_paper",
+      "capital_expenditure_requirements",
+      "net_debt",
+      "revenue_analysis",
+      "working_capital"
+    ],
+    "replaced_industry_sections": [],
+    "added_industry_sections": []
   }
 }

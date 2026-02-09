@@ -47,10 +47,6 @@
           ]
         },
         {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
           "id": "scope.004",
           "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
@@ -539,82 +535,10 @@
           ]
         }
       ],
-      "accounting_overview": [
-        {
-          "id": "scope.046",
-          "text": "Understand and summarize the financial statement preparation process, including:",
-          "children": [
-            {
-              "text": "Finance function, financial reporting framework, and management reporting relationships (including process, timing, structure of financial reporting, and interaction with the information/ accounting systems);"
-            },
-            {
-              "text": "Integration of recent acquisitions and status of any ongoing integration processes;"
-            },
-            {
-              "text": "Significant accounts estimates and any recent or contemplated changes in accounting principles, procedures, or estimates."
-            },
-            {
-              "text": "If available, understand the reviewed statements unrecorded differences, management letter points, and other significant findings encountered during the annual review."
-            },
-            {
-              "text": "Target’s accounting policies and the key differences with IFRS Accounting Standards as applied by Parent"
-            },
-            {
-              "text": "(Following the high-level gap assessment, if a more detailed gap assessment is required, we will work with Client to identify topics for further analysis and the estimate fees for the incremental analysis.)"
-            }
-          ]
-        }
-      ]
+      "accounting_overview": []
     },
     "eyecare": {
-      "business_overview": [
-        {
-          "id": "scope.047",
-          "text": "Read Target's financial statements and discuss them with management to gain an understanding of Target's accounting policies and practices, including:",
-          "children": [
-            {
-              "text": "Finance function, financial reporting framework, and management reporting relationships;"
-            },
-            {
-              "text": "Significant accounting policies and estimates (e.g. revenue recognition, capitalized costs, deferred revenue) and contemplated changes"
-            }
-          ]
-        },
-        {
-          "id": "scope.048",
-          "text": "Read Target's financial statements and discuss with Management to gain an understanding of the following:",
-          "children": [
-            {
-              "text": "Financial performance over the historical period;"
-            },
-            {
-              "text": "Potential adjustments to the profit and loss performance identified by Management;"
-            },
-            {
-              "text": "Accounting policies and practices."
-            }
-          ]
-        }
-      ],
       "quality_of_earnings": [
-        {
-          "id": "scope.049",
-          "text": "Summarize potential adjustments identified regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact earnings before interest, taxes, depreciation and amortization (\"EBITDA\"), including:",
-          "children": [
-            {
-              "text": "Leveraging Target commissioned Sell-side Due Diligence Report and understand proposed adjustments (including but not limited to cash to accrual, physician compensation, pro pricing adjustments, etc);"
-            },
-            {
-              "text": "Large, unusual, and non-recurring events or transactions that may have distorted results;"
-            },
-            {
-              "text": "The impact of provisions, management estimates or adjusting entries on the reported results; and"
-            },
-            {
-              "text": "Other potential items discovered during the due diligence process."
-            }
-          ]
-        },
         {
           "id": "scope.050",
           "text": "Provide a high-level analysis regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact earnings before interest, taxes, depreciation and amortization (\"EBITDA\"), including:",
@@ -735,7 +659,7 @@
           "text": "Obtain and read an analysis of the Target's"
         }
       ],
-      "inventories": [
+      "inventory": [
         {
           "id": "scope.065",
           "text": "Understand Target's underlying process for recording inventory and comment on unusual items."
@@ -879,33 +803,6 @@
               "text": "Pro forma impacts for items such as recent de novo."
             }
           ]
-        },
-        {
-          "id": "scope.083",
-          "text": "Read and comment on the adjusted EBITDA prepared by Target and its sell-side advisors, and:",
-          "children": [
-            {
-              "text": "Roll-forward the quality of earnings analysis included in the sell-side diligence report accordingly;"
-            }
-          ]
-        },
-        {
-          "id": "scope.084",
-          "text": "Propose any additional potential adjustments to historical earnings before interest, taxes, depreciation, and amortization (\"EBITDA\"), presented on a consolidated basis, by considering:",
-          "children": [
-            {
-              "text": "The validity / impact of adjustments proposed by Management and the sell-side due diligence advisors, including Restructuring costs; Impact of loyalty program breakage; Sourcing changes; Vacation policy change; Accounting changes; Other normalization adjustments; Pro forma and run-rate adjustments; Carve-out, stand alone, corporate allocation considerations."
-            },
-            {
-              "text": "Work with Client to consider synergy considerations, purchasing rebates, etc.(See below synergies validation for additional detail);"
-            },
-            {
-              "text": "Other large, unusual or non-recurring events or transactions that may have distorted results;"
-            },
-            {
-              "text": "Other potential items discovered in the due diligence process."
-            }
-          ]
         }
       ],
       "store_portfolio_analysis": [
@@ -1009,9 +906,6 @@
             },
             {
               "text": "Sales and COGS adjustments (including sales returns, markdowns, supplier revenue, stock shrinkage, obsolescence, other income, loyalty points and gift cards);"
-            },
-            {
-              "text": "Consolidate the data into a clean Excel data cube and PowerBI Analysis file, and extract and understand any patterns and trends that might inform value creation and optimization opportunities"
             }
           ]
         }
@@ -1277,18 +1171,8 @@
           "text": "Other significant and/or unusual liabilities."
         }
       ],
-      "purchase_and_sale_agreement": [
-        {
-          "id": "scope.110",
-          "text": "Read available draft of the Purchase and Sale Agreement and offer commentary to you and your attorneys primarily concerning sections relating to accounting matters, based on the results of the due diligence assistance we provide to you. You agree to review with your attorney all our comments and suggestions concerning the Purchase and Sale agreement before acting on any of our suggestions."
-        }
-      ],
-      "assistance_with_transaction_documentation": [
-        {
-          "id": "scope.111",
-          "text": "Assist with relevant asset purchase agreement financial definitions (e.g. net working capital and debt-like item definitions and adjustment procedures)."
-        }
-      ],
+      "purchase_and_sale_agreement": [],
+      "assistance_with_transaction_documentation": [],
       "waterfall_revenue_analysis": [
         {
           "id": "scope.112",
@@ -1344,7 +1228,7 @@
           ]
         }
       ],
-      "audit_working_papers": [
+      "audit_work_paper": [
         {
           "id": "scope.114",
           "text": "Obtain and read the auditor's working papers for the latest fiscal year:"
@@ -1429,18 +1313,6 @@
       ],
       "quality_of_earnings": [
         {
-          "id": "scope.123",
-          "text": "Based on the analysis and discussion with the sell-side due diligence advisor, comment on Management's proposed adjustments to reported EBITDA (i.e. Executive compensation changes, personal expenses, one-time / non-recurring items, out-of-period adjustments, truck recovery rate increases, other etc.) and inquire about the nature and rationale of such adjustments and supporting documentation;"
-        },
-        {
-          "id": "scope.124",
-          "text": "Perform a traffic light assessment of Management and sell-side proposed adjustments;"
-        },
-        {
-          "id": "scope.125",
-          "text": "Propose any significant adjustments identified that are not reflected in the sell-side Quality of Earnings analysis; and"
-        },
-        {
           "id": "scope.126",
           "text": "Comment on any potential findings that could have material impacts to enterprise / equity value."
         },
@@ -1520,19 +1392,7 @@
         },
         {
           "id": "scope.137",
-          "text": "Understand impact of Quality of Earnings adjustments on the the Historical Period budget"
-        },
-        {
-          "id": "scope.138",
-          "text": "Quality of earnings – To the extent not covered by the sell-side due diligence report. Assessment of any subsequent roll-forward of the sell-side quality of earnings report (if available) and propose potential incremental adjustments identified by considering:",
-          "children": [
-            {
-              "text": "Management's proposed adjustments to reported EBITDA;"
-            },
-            {
-              "text": "The impact of revenue accounting and accounting / cash timing differences including:"
-            }
-          ]
+          "text": "Understand impact of Quality of Earnings adjustments on the Historical Period budget"
         },
         {
           "id": "scope.139",
@@ -1943,10 +1803,6 @@
           "text": "Where available, link above sales / job data to technician utilization and salary to understand performance opportunities"
         },
         {
-          "id": "scope.193",
-          "text": "Consolidate the data into a clean data cube that can be leveraged by potential buyers"
-        },
-        {
           "id": "scope.194",
           "text": "Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer"
         }
@@ -2010,7 +1866,7 @@
         },
         {
           "id": "scope.208",
-          "text": "Analyze suppliers, including total purchases, type of material, typical markups to customers,etc.; understand rebates vs. volume discounts; where possible, tie back to job type (e.g., HVAC, electrical) and overall job performance (e.g., revenue / margin)"
+          "text": "Analyze suppliers, including total purchases, type of material, typical markups to customers, etc.; understand rebates vs. volume discounts; where possible, tie back to job type (e.g., HVAC, electrical) and overall job performance (e.g., revenue / margin)"
         },
         {
           "id": "scope.209",
@@ -2025,21 +1881,9 @@
         {
           "id": "scope.211",
           "text": "Update our due diligence report (and other supporting information) prepared in Phase I on a monthly or quarterly basis for subsequent reporting periods as requested by Client."
-        },
-        {
-          "id": "scope.212",
-          "text": "Participate in buyer diligence calls"
-        },
-        {
-          "id": "scope.213",
-          "text": "Read and provide feedback to management with respect to their responses to potential Buyer (and their advisors) inquiries during the diligence process, specifically those related to financial / accounting matters."
         }
       ],
       "optional_fdd_procedures": [
-        {
-          "id": "scope.214",
-          "text": "Review purchase agreement and all relevant definitions (e.g. NWC, debt-like items definitions and adjustment procedures)."
-        },
         {
           "id": "scope.215",
           "text": "Calls with R&W insurers / lenders\nConduct call with potential R&W insurers / lenders and answer any Q&A as it pertains to our engagement."
@@ -2175,18 +2019,6 @@
       ],
       "quality_of_earnings": [
         {
-          "id": "scope.225",
-          "text": "Based on the analysis and discussion with the sell-side due diligence advisor sell-side advisor, comment on Management's proposed adjustments to reported EBITDA and inquire about the nature and rationale of such adjustments and supporting documentation;"
-        },
-        {
-          "id": "scope.226",
-          "text": "Perform a traffic light assessment of Management and sell-side proposed adjustments; and"
-        },
-        {
-          "id": "scope.227",
-          "text": "Propose any significant adjustments identified that are not reflected in the sell-side Quality of Earnings analysis."
-        },
-        {
           "id": "scope.228",
           "text": "Summarize potential adjustments identified regarding the earnings of the Company in the form of a quality of earnings analysis, summarizing the risks that may impact revenue and/or earnings before interest, taxes, depreciation and amortization (\"EBITDA\") including:",
           "children": [
@@ -2204,30 +2036,6 @@
             },
             {
               "text": "Any other large, unusual or non-recurring events or transactions that may have distorted results and not identified by management in the financial statements; and"
-            }
-          ]
-        },
-        {
-          "id": "scope.229",
-          "text": "Summarize potential adjustments identified regarding the earnings of Target in the form of a quality of earnings analysis, summarizing the risks that may impact revenue and/or earnings before interest, taxes, depreciation and amortization (\"EBITDA\") including:",
-          "children": [
-            {
-              "text": "Normalization adjustments presented in the VDD Report;"
-            },
-            {
-              "text": "The impact of any changes in accounting policies;"
-            },
-            {
-              "text": "The impact of foreign exchange including constant currency analysis;"
-            },
-            {
-              "text": "Related party transactions and the pricing thereof;"
-            },
-            {
-              "text": "Recent changes to the business to understand the run-rate EBITDA impact (e.g. brand development and marketing expenses, business expansion into other product segments, impacts of capex investment etc.);"
-            },
-            {
-              "text": "Any other large, unusual or non-recurring events or transactions that may have distorted results and not identified by management in the financial statements (e.g. non-recurring purchase orders; potential business disruption due to COVID-19); and"
             }
           ]
         },
@@ -2473,7 +2281,7 @@
       "forecast_and_budget_analysis": [
         {
           "id": "scope.245",
-          "text": "Obtain and read the the Historical Period forecast and the Historical Period budget and:"
+          "text": "Obtain and read the Historical Period forecast and the Historical Period budget and:"
         },
         {
           "id": "scope.246",
@@ -2483,7 +2291,7 @@
       "budget_vs_actual": [
         {
           "id": "scope.248",
-          "text": "Obtain the historical, latest interim financial information available and forecast for the rest of the year. Compare actual results to budget and forecast results to prior year. Interview management about the reasons for significant fluctuations between periods and with budget. Discuss and bridge to full-year the Historical Period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the the Historical Period budget."
+          "text": "Obtain the historical, latest interim financial information available and forecast for the rest of the year. Compare actual results to budget and forecast results to prior year. Interview management about the reasons for significant fluctuations between periods and with budget. Discuss and bridge to full-year the Historical Period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the Historical Period budget."
         }
       ],
       "working_capital": [
@@ -2518,25 +2326,6 @@
         {
           "id": "scope.256",
           "text": "Payroll related funding and timing of cash flows; and"
-        },
-        {
-          "id": "scope.257",
-          "text": "Large or unusual non-recurring items that may have impacted normal working capital trends including potential items identified within the quality of earnings analysis noted above."
-        },
-        {
-          "id": "scope.258",
-          "text": "Summarize and normalize historical working capital in the business including:",
-          "children": [
-            {
-              "text": "Commenting on the working capital trends, for the respective period;"
-            },
-            {
-              "text": "Understanding key drivers (i.e., seasonality, accounts payable days, days sales outstanding, days inventory outstanding); and"
-            },
-            {
-              "text": "Identifying large or unusual non-recurring items that may have impacted normal working capital trends including potential items identified within the quality of earnings analysis noted above."
-            }
-          ]
         }
       ],
       "accounts_receivable": [
@@ -2791,7 +2580,7 @@
           "text": "Review financial information and financial statements to gain an understanding of Target's key accounting policies and practices. Summarize any potential adjustments between ASPE and IFRS/US GAAP that may impact historical EBITDA or balance sheet accounts."
         }
       ],
-      "related_party_transactions": [
+      "related_parties": [
         {
           "id": "scope.288",
           "text": "Inquire about and summarize related party transactions including:",
@@ -3099,7 +2888,7 @@
       "budget": [
         {
           "id": "scope.315",
-          "text": "Obtain a copy of the Target's the Historical Period budget, bridge / reconcile revenue and EBITDA from prior periods and inquire about significant assumptions and estimates, including:",
+          "text": "Obtain a copy of the Target's Historical Period budget, bridge / reconcile revenue and EBITDA from prior periods and inquire about significant assumptions and estimates, including:",
           "children": [
             {
               "text": "Revenue assumptions (including backlog, pipeline and opportunities)"
@@ -3117,10 +2906,6 @@
         {
           "id": "scope.316",
           "text": "Review purchase agreement and all relevant definitions (e.g. NWC, debt-like items definitions and adjustment procedures)."
-        },
-        {
-          "id": "scope.317",
-          "text": "Note: Fees for this optional procedure are in addition to the above fee estimate and will be billed at discounted hourly rates."
         }
       ]
     },
@@ -3419,7 +3204,7 @@
           "text": "Commitment and contingencies."
         }
       ],
-      "audit_work_papers": [
+      "audit_work_paper": [
         {
           "id": "scope.354",
           "text": "Obtain and read audit working papers for the last two fiscal years and perform the following:"
@@ -3437,21 +3222,6 @@
     "supermarket": {
       "business_overview": [
         {
-          "id": "scope.357",
-          "text": "Summarize and comment on the key Target’s accounting processes:",
-          "children": [
-            {
-              "text": "Finance function, and financial reporting framework (including process, timing, structure of financial reporting, and interaction with the information/accounting systems);"
-            },
-            {
-              "text": "Understanding of key differences between US GAAP and IFRS, including pro forma view highlighting the impact on operating income, net income, EPS, etc."
-            },
-            {
-              "text": "Key indicators of financial performance;"
-            }
-          ]
-        },
-        {
           "id": "scope.358",
           "text": "Understand Target’s accounting of intercompany transactions and consolidation process; and"
         },
@@ -3460,38 +3230,7 @@
           "text": "Significant accounting policies and estimates and contemplated changes."
         }
       ],
-      "quality_of_earnings": [
-        {
-          "id": "scope.360",
-          "text": "Summarize potential adjustments identified regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact earnings before interest, taxes, depreciation and amortization (“EBITDA”) including:",
-          "children": [
-            {
-              "text": "Leverage Target’s Sell-side quality of earnings analysis as applicable"
-            },
-            {
-              "text": "Impact of COVID on sales trends and expenses, and any corresponding impact relating to inventory provision or write-offs;"
-            },
-            {
-              "text": "Impact of recent input cost increases on EBITDA;"
-            },
-            {
-              "text": "Impact of new locations or closures;"
-            },
-            {
-              "text": "Non-recurring professional fees;"
-            },
-            {
-              "text": "The impact of provisions, estimates, or adjusting entries on the reported results;"
-            },
-            {
-              "text": "The impact of related party transactions (e.g. related party family adjustments to EBITDA, related party leases, etc.); and"
-            },
-            {
-              "text": "Any other large, unusual or non-recurring events or transactions that may have distorted results."
-            }
-          ]
-        }
-      ],
+      "quality_of_earnings": [],
       "supporting_analysis_for_quality_of_earnings": [
         {
           "id": "scope.361",
@@ -3562,10 +3301,6 @@
         {
           "id": "scope.374",
           "text": "Understand Target’s central production unit and the current sales it supports"
-        },
-        {
-          "id": "scope.375",
-          "text": "Develop analysis in both PowerPoint slides / Excel and PowerBI – create an interactive dashboard"
         }
       ],
       "operating_expenses": [
@@ -3664,10 +3399,10 @@
           "text": "Historical and planned capital expenditures."
         }
       ],
-      "audit_work_papers": [
+      "audit_work_paper": [
         {
           "id": "scope.388",
-          "text": "Access Target’s the Historical Period audit work papers and identified audit matters including unrecorded audit differences, control matters, and other salient findings."
+          "text": "Access Target’s Historical Period audit work papers and identified audit matters including unrecorded audit differences, control matters, and other salient findings."
         }
       ],
       "assistance_with_transaction_documentation": [
@@ -3734,15 +3469,6 @@
       ],
       "accounting_overview": [
         {
-          "id": "scope.394",
-          "text": "Using analysis performed by you, and discussions with you and Target:",
-          "children": [
-            {
-              "text": "Present the income statement and balance sheet of Target on a 'reported' basis."
-            }
-          ]
-        },
-        {
           "id": "scope.395",
           "text": "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Parent resources)."
         },
@@ -3770,14 +3496,6 @@
         {
           "id": "scope.397",
           "text": "Identify components of EBITDA which are incurred entirely within Target (i.e. stand-alone costs) and costs that are allocated to / from Parent, and compare to understanding of intra-group points of contact with broader Parent."
-        },
-        {
-          "id": "scope.398",
-          "text": "Review a reconciliation of trial balance information to internal and external financial statements and to Parent year-end financial statements (to be performed by you)."
-        },
-        {
-          "id": "scope.399",
-          "text": "Review a reconciliation of net income and net assets period-over-period (to be performed by you)."
         }
       ],
       "revenue_analysis": [
@@ -3810,34 +3528,9 @@
         {
           "id": "scope.403",
           "text": "identify key anomalies or items of concern relating to calculation methodology and / or resulting trends."
-        },
-        {
-          "id": "scope.404",
-          "text": "Perform Phase 2 top up due diligence as requested by you (e.g. recalculation of ARR and KPIs using methodology)."
         }
       ],
       "quality_of_earnings": [
-        {
-          "id": "scope.405",
-          "text": "Consider the quality of earnings analysis prepared by the sell side. Form a view on seller proposed adjustments, and consider whether other adjustments might be considered, including:",
-          "children": [
-            {
-              "text": "Capitalized R&D and other internal costs;"
-            },
-            {
-              "text": "Commissions and contract assets;"
-            },
-            {
-              "text": "Accounting adjustments;"
-            },
-            {
-              "text": "One-time items."
-            },
-            {
-              "text": "Treatment of FX"
-            }
-          ]
-        },
         {
           "id": "scope.406",
           "text": "Perform an analysis of adjusted EBITDA compared to free cash flow and set out key considerations in relation to EBITDA to cash flow conversion."
@@ -3873,46 +3566,6 @@
           ]
         },
         {
-          "id": "scope.409",
-          "text": "Perform other Phase 2 top up due diligence as requested by you (e.g. roll forward of quality of earnings analysis to a more recent date)."
-        },
-        {
-          "id": "scope.410",
-          "text": "Using analysis performed by you, and discussions with you and Target:",
-          "children": [
-            {
-              "text": "Present a potential adjusted earnings before interest, taxes, depreciation, and amortization (\"EBITDA\"), including normalization items for the Historical Period by considering the items identified in our understanding of the financial reporting environment, in our consideration of your own analysis of quality of earnings, and any additional analysis performed by advisor, that have an earnings impact, including consideration of:",
-              "children": [
-                {
-                  "text": "Revenue recognition (cash vs accruals accounting; treatment of implementation revenues; gross vs net considerations on third party / license revenues);"
-                },
-                {
-                  "text": "Allocated costs to / from Parent, considering the basis and methodology of allocation of costs compared to our understanding of Target's interaction with other Parent divisions and shared infrastructure*;"
-                },
-                {
-                  "text": "Stand alone costs prepared by Target / you*;"
-                },
-                {
-                  "text": "Other internal accounting practices (e.g. cut-off on accruals; matching of costs and revenues; treatment of capital expenses; provision movements and/or releases) and the impact of changes in accounting practices and policies;"
-                },
-                {
-                  "text": "Year-end adjustments/true ups that should be considered in the presentation of a TTM earnings (e.g. differences between month-end and year-end practices influencing TTM reporting);"
-                },
-                {
-                  "text": "Unadjusted year-end differences and other external accountant findings (where applicable); and"
-                },
-                {
-                  "text": "Other one-off, non-recurring, or non-business items identified through the course of our work."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "scope.411",
-          "text": "Discuss whether additional EBITDA adjustments might be considered, in addition to those already identified in your analysis."
-        },
-        {
           "id": "scope.412",
           "text": "Present an adjusted income statement showing revenues, costs and EBITDA on an adjusted basis."
         },
@@ -3921,45 +3574,11 @@
           "text": "Consider the quantum of recurring non-capital cash costs outside of EBITDA in the Historical Period (e.g. capitalized labour costs relating to IT / R&D projects, etc.)."
         },
         {
-          "id": "scope.414",
-          "text": "Review a reconciliation of employee costs included in adjusted EBITDA to the planned go-forward employee structure proposed by the seller (to be performed by you)."
-        },
-        {
-          "id": "scope.415",
-          "text": "* The quality of earnings analysis will consider the allocated costs included in the reported financial information for Target, and the proposed stand-alone cost structure which we understand has been prepared by the Target and reviewed by you. We will also reconcile employee costs in adjusted EBITDA to the Target workforce proposed by Management."
-        },
-        {
-          "id": "scope.416",
-          "text": "We will flag in our report if, in the course of our analysis and discussion with Target, the stand alone costs or allocations are illogical or appear to be inconsistent with our understanding of existing group operations or the operations of Target. However, we will not undertake any work with the intent to assess or analyze the appropriateness of the stand alone cost base prepared by you / Target, other than to consider whether the costs included in adjusted EBITDA in our work are consistent with those costs calculated by you / Target."
-        },
-        {
           "id": "scope.417",
           "text": "In the event that you determine that additional work is required to consider the appropriateness of the stand alone costs, the future target operating model, one-off separation costs and / or stranded costs, we will discuss this with you and agree additional procedures under separate cover."
         }
       ],
-      "supporting_analysis_to_quality_of_earnings": [
-        {
-          "id": "scope.418",
-          "text": "Consider the following analysis, to be performed by you, and consider the impact on the quality of earnings analysis:",
-          "children": [
-            {
-              "text": "Analysis of sales and margin trends on a monthly basis by revenue stream, as applicable, to identify anomalies or one-off items;"
-            },
-            {
-              "text": "Analysis of cost of sales and operating expenses by type on a monthly basis to identify anomalies or one-off items;"
-            },
-            {
-              "text": "Trends in employee remuneration;"
-            },
-            {
-              "text": "Trends in other relevant KPIs tracked by management; and"
-            },
-            {
-              "text": "Trends in balance sheet components and balance sheet movements at the start and end of the Historical Period, the Historical Period, the Historical Period and TTM, with a potential EBITDA impact."
-            }
-          ]
-        }
-      ],
+      "supporting_analysis_to_quality_of_earnings": [],
       "arr_drivers": [
         {
           "id": "scope.419",
@@ -4103,9 +3722,6 @@
             },
             {
               "text": "Assessment of the potential impact of these differences on the overall financial statements."
-            },
-            {
-              "text": "Based on the findings from the above Phase 1 procedures, we can determine and agree with you the scope of subsequent phases including potential quantification of the GAAP differences. Such a scope extension would be covered by an addendum to this Engagement Letter."
             }
           ]
         }
@@ -4263,7 +3879,7 @@
           "text": "Prepare a summary of debt and debt-like items (e.g. notes payable, letters of credit, capital vendor payables, etc.), other assets, and liabilities and comment on unusual items, significant fluctuations and significant balances."
         }
       ],
-      "related_party_transactions": [
+      "related_parties": [
         {
           "id": "scope.454",
           "text": "Inquire about and summarize related party transactions including:",
@@ -4431,7 +4047,7 @@
           "text": "Review contingent liabilities related to claims, liquidated damages, and performance obligations."
         }
       ],
-      "work_in_progress_and_backlog": [
+      "work_in_progress": [
         {
           "id": "scope.484",
           "text": "Obtain and review work-in-progress (WIP) reporting and inquire and comment on:",

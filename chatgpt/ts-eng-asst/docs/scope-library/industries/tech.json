@@ -47,10 +47,6 @@
           ]
         },
         {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
           "id": "scope.004",
           "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
@@ -110,79 +106,58 @@
       ]
     },
     {
-      "heading": "Revenue analysis",
       "normalized_heading": "revenue_analysis",
       "default_bullets": [
         {
           "id": "scope.006",
-          "text": "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
+          "text": "Obtain a comprehensive view of revenue and margins. Obtain underlying transactional detail, if available, and gain an understanding of major trends in revenue and margins, including:",
           "children": [
             {
-              "text": "Revenue and margin by significant customer and end market/ segment/ region;"
+              "text": "Revenue and margin by significant customer, channel, and/or market segment, as applicable; and"
             },
             {
-              "text": "Price and volume trends."
+              "text": "Price, volume, and mix trends."
             }
           ]
         },
         {
           "id": "scope.007",
-          "text": "Discuss with Management:",
+          "text": "Discuss with management key drivers of revenue and margin over the Historical Period, including:",
           "children": [
             {
-              "text": "impact of large or long-term orders/ seasonality (if applicable); and"
+              "text": "Major customer/contract wins or losses and timing impacts;"
             },
             {
-              "text": "any non-recurring components of revenue."
+              "text": "Non-recurring items affecting period results; and"
             },
             {
-              "text": "customer category (i.e. individual, business);"
-            },
-            {
-              "text": "distribution channel (i.e. online, wholesale, etc.); and"
-            },
-            {
-              "text": "price, volume, mix and cross-sell analysis."
-            },
-            {
-              "text": "Seasonal fluctuations in demand and monthly sales trends; and"
+              "text": "Operational, market, or seasonal factors affecting demand and fulfillment."
             }
           ]
         },
         {
           "id": "scope.008",
-          "text": "Obtain and read an analysis of Target's revenue and inquire about:",
+          "text": "Obtain and review an analysis of revenue quality and related balances, and inquire about:",
           "children": [
             {
-              "text": "Gross to net revenue;"
+              "text": "Revenue recognition policies and any recent changes;"
             },
             {
-              "text": "Revenue recognition policies;"
+              "text": "Billing and collection terms, including significant deviations from standard terms;"
             },
             {
-              "text": "Revenue and gross margin by customer;"
+              "text": "Credits, rebates, returns, and other contra-revenue items;"
             },
             {
-              "text": "Organic growth and delineation between price vs. volume;"
+              "text": "Concentration/dependency risk; and"
             },
             {
-              "text": "Pricing practices;"
-            },
-            {
-              "text": "Promotions and discounts;"
-            },
-            {
-              "text": "Any non-recurring components of revenue;"
-            },
-            {
-              "text": "Revenue seasonality, if any;"
-            },
-            {
-              "text": "Other components of cost of sales and key suppliers."
+              "text": "Other unusual items affecting reported revenue or gross margin."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Revenue analysis"
     },
     {
       "heading": "Operating expenses",
@@ -215,7 +190,6 @@
       ]
     },
     {
-      "heading": "Working capital",
       "normalized_heading": "working_capital",
       "default_bullets": [
         {
@@ -229,14 +203,15 @@
               "text": "Monthly working capital trends, metrics, and seasonality;"
             },
             {
-              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
+              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
             },
             {
               "text": "Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Working capital"
     },
     {
       "heading": "Accounts receivable",
@@ -287,7 +262,6 @@
       ]
     },
     {
-      "heading": "Capital expenditure requirements",
       "normalized_heading": "capital_expenditure_requirements",
       "default_bullets": [
         {
@@ -298,11 +272,12 @@
               "text": "Maintenance versus growth capital expenditures;"
             },
             {
-              "text": "Other historical, deferred, and planned capital expenditures"
+              "text": "Other historical, deferred, and planned capital expenditures."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Capital expenditure requirements"
     },
     {
       "heading": "Commitments and contingencies",
@@ -338,7 +313,6 @@
       ]
     },
     {
-      "heading": "Net debt",
       "normalized_heading": "net_debt",
       "default_bullets": [
         {
@@ -347,9 +321,36 @@
         },
         {
           "id": "scope.016",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt."
         }
-      ]
+      ],
+      "heading": "Net debt"
+    },
+    {
+      "normalized_heading": "audit_work_paper",
+      "default_bullets": [
+        {
+          "id": "scope.114",
+          "text": "If required, obtain and read the auditor's working papers for the latest fiscal year."
+        },
+        {
+          "id": "scope.115",
+          "text": "Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods."
+        },
+        {
+          "id": "scope.116",
+          "text": "Comment on control issues identified by the external auditors, if applicable."
+        },
+        {
+          "id": "scope.117",
+          "text": "Comment on any additional red flags or key risks identified in the provided audit materials."
+        },
+        {
+          "id": "scope.118",
+          "text": "Review audit committee reporting and presentations from the audit firm."
+        }
+      ],
+      "heading": "Audit work paper"
     }
   ],
   "industry_modules": {
@@ -410,15 +411,6 @@
       ],
       "accounting_overview": [
         {
-          "id": "scope.394",
-          "text": "Using analysis performed by you, and discussions with you and Target:",
-          "children": [
-            {
-              "text": "Present the income statement and balance sheet of Target on a 'reported' basis."
-            }
-          ]
-        },
-        {
           "id": "scope.395",
           "text": "Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Parent resources)."
         },
@@ -446,74 +438,9 @@
         {
           "id": "scope.397",
           "text": "Identify components of EBITDA which are incurred entirely within Target (i.e. stand-alone costs) and costs that are allocated to / from Parent, and compare to understanding of intra-group points of contact with broader Parent."
-        },
-        {
-          "id": "scope.398",
-          "text": "Review a reconciliation of trial balance information to internal and external financial statements and to Parent year-end financial statements (to be performed by you)."
-        },
-        {
-          "id": "scope.399",
-          "text": "Review a reconciliation of net income and net assets period-over-period (to be performed by you)."
-        }
-      ],
-      "revenue_analysis": [
-        {
-          "id": "scope.400",
-          "text": "Understand the business' revenue streams and related accounting policies and practice. To include understanding of:",
-          "children": [
-            {
-              "text": "cash / billing cycle;"
-            },
-            {
-              "text": "typical contract terms;"
-            },
-            {
-              "text": "timing of price increases; and"
-            },
-            {
-              "text": "calculation of deferred revenue."
-            }
-          ]
-        },
-        {
-          "id": "scope.401",
-          "text": "Understand what work has been performed to reconcile reported revenues, cash income, and ARR."
-        },
-        {
-          "id": "scope.402",
-          "text": "Consider methodology used by the seller in presenting ARR and associated KPIs (upsell, downsell, churn, ARR per license / per logo, key account concentration)"
-        },
-        {
-          "id": "scope.403",
-          "text": "identify key anomalies or items of concern relating to calculation methodology and / or resulting trends."
-        },
-        {
-          "id": "scope.404",
-          "text": "Perform Phase 2 top up due diligence as requested by you (e.g. recalculation of ARR and KPIs using methodology)."
         }
       ],
       "quality_of_earnings": [
-        {
-          "id": "scope.405",
-          "text": "Consider the quality of earnings analysis prepared by the sell side. Form a view on seller proposed adjustments, and consider whether other adjustments might be considered, including:",
-          "children": [
-            {
-              "text": "Capitalized R&D and other internal costs;"
-            },
-            {
-              "text": "Commissions and contract assets;"
-            },
-            {
-              "text": "Accounting adjustments;"
-            },
-            {
-              "text": "One-time items."
-            },
-            {
-              "text": "Treatment of FX"
-            }
-          ]
-        },
         {
           "id": "scope.406",
           "text": "Perform an analysis of adjusted EBITDA compared to free cash flow and set out key considerations in relation to EBITDA to cash flow conversion."
@@ -549,46 +476,6 @@
           ]
         },
         {
-          "id": "scope.409",
-          "text": "Perform other Phase 2 top up due diligence as requested by you (e.g. roll forward of quality of earnings analysis to a more recent date)."
-        },
-        {
-          "id": "scope.410",
-          "text": "Using analysis performed by you, and discussions with you and Target:",
-          "children": [
-            {
-              "text": "Present a potential adjusted earnings before interest, taxes, depreciation, and amortization (\"EBITDA\"), including normalization items for the Historical Period by considering the items identified in our understanding of the financial reporting environment, in our consideration of your own analysis of quality of earnings, and any additional analysis performed by advisor, that have an earnings impact, including consideration of:",
-              "children": [
-                {
-                  "text": "Revenue recognition (cash vs accruals accounting; treatment of implementation revenues; gross vs net considerations on third party / license revenues);"
-                },
-                {
-                  "text": "Allocated costs to / from Parent, considering the basis and methodology of allocation of costs compared to our understanding of Target's interaction with other Parent divisions and shared infrastructure*;"
-                },
-                {
-                  "text": "Stand alone costs prepared by Target / you*;"
-                },
-                {
-                  "text": "Other internal accounting practices (e.g. cut-off on accruals; matching of costs and revenues; treatment of capital expenses; provision movements and/or releases) and the impact of changes in accounting practices and policies;"
-                },
-                {
-                  "text": "Year-end adjustments/true ups that should be considered in the presentation of a TTM earnings (e.g. differences between month-end and year-end practices influencing TTM reporting);"
-                },
-                {
-                  "text": "Unadjusted year-end differences and other external accountant findings (where applicable); and"
-                },
-                {
-                  "text": "Other one-off, non-recurring, or non-business items identified through the course of our work."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "scope.411",
-          "text": "Discuss whether additional EBITDA adjustments might be considered, in addition to those already identified in your analysis."
-        },
-        {
           "id": "scope.412",
           "text": "Present an adjusted income statement showing revenues, costs and EBITDA on an adjusted basis."
         },
@@ -597,69 +484,40 @@
           "text": "Consider the quantum of recurring non-capital cash costs outside of EBITDA in the Historical Period (e.g. capitalized labour costs relating to IT / R&D projects, etc.)."
         },
         {
-          "id": "scope.414",
-          "text": "Review a reconciliation of employee costs included in adjusted EBITDA to the planned go-forward employee structure proposed by the seller (to be performed by you)."
-        },
-        {
-          "id": "scope.415",
-          "text": "* The quality of earnings analysis will consider the allocated costs included in the reported financial information for Target, and the proposed stand-alone cost structure which we understand has been prepared by the Target and reviewed by you. We will also reconcile employee costs in adjusted EBITDA to the Target workforce proposed by Management."
-        },
-        {
-          "id": "scope.416",
-          "text": "We will flag in our report if, in the course of our analysis and discussion with Target, the stand alone costs or allocations are illogical or appear to be inconsistent with our understanding of existing group operations or the operations of Target. However, we will not undertake any work with the intent to assess or analyze the appropriateness of the stand alone cost base prepared by you / Target, other than to consider whether the costs included in adjusted EBITDA in our work are consistent with those costs calculated by you / Target."
-        },
-        {
           "id": "scope.417",
           "text": "In the event that you determine that additional work is required to consider the appropriateness of the stand alone costs, the future target operating model, one-off separation costs and / or stranded costs, we will discuss this with you and agree additional procedures under separate cover."
         }
       ],
-      "supporting_analysis_to_quality_of_earnings": [
+      "revenue_analysis": [
         {
-          "id": "scope.418",
-          "text": "Consider the following analysis, to be performed by you, and consider the impact on the quality of earnings analysis:",
+          "id": "scope.400",
+          "text": "Understand the business' revenue streams and related accounting policies and practice. To include understanding of:",
           "children": [
             {
-              "text": "Analysis of sales and margin trends on a monthly basis by revenue stream, as applicable, to identify anomalies or one-off items;"
+              "text": "cash / billing cycle;"
             },
             {
-              "text": "Analysis of cost of sales and operating expenses by type on a monthly basis to identify anomalies or one-off items;"
+              "text": "typical contract terms;"
             },
             {
-              "text": "Trends in employee remuneration;"
+              "text": "timing of price increases; and"
             },
             {
-              "text": "Trends in other relevant KPIs tracked by management; and"
-            },
-            {
-              "text": "Trends in balance sheet components and balance sheet movements at the start and end of the Historical Period, the Historical Period, the Historical Period and TTM, with a potential EBITDA impact."
-            }
-          ]
-        }
-      ],
-      "arr_drivers": [
-        {
-          "id": "scope.419",
-          "text": "Using analysis performed by you:",
-          "children": [
-            {
-              "text": "Present an analysis of revenues split between one-time (e.g. implementation) and recurring (analysis to be performed by you)."
-            },
-            {
-              "text": "Present an analysis and comment on the development of recurring revenues, including a reconciliation of revenues over time (new / lost / existing revenues) (analysis to be performed by you)."
+              "text": "calculation of deferred revenue."
             }
           ]
         },
         {
-          "id": "scope.420",
-          "text": "Review a reconciliation of annual recurring revenues (ARR) per the underlying \"customer cube\" of subscription revenues to reported revenue and deferred revenue per the internal financial information (analysis to be performed by you)."
+          "id": "scope.401",
+          "text": "Understand what work has been performed to reconcile reported revenues, cash income, and ARR."
         },
         {
-          "id": "scope.421",
-          "text": "Comment on trends in key KPIs for recurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell)."
+          "id": "scope.402",
+          "text": "Consider methodology used by the seller in presenting ARR and associated KPIs (upsell, downsell, churn, ARR per license / per logo, key account concentration)"
         },
         {
-          "id": "scope.422",
-          "text": "Summarize and comment on customer retention (churn) rates for recurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you)."
+          "id": "scope.403",
+          "text": "identify key anomalies or items of concern relating to calculation methodology and / or resulting trends."
         }
       ],
       "operating_expenses": [
@@ -728,6 +586,51 @@
           "text": "Consider the aging of trade payables and receivables."
         }
       ],
+      "net_debt": [
+        {
+          "id": "scope.434",
+          "text": "Present an analysis of the balance sheet for Target as at the last two fiscal year ends and the latest available date."
+        },
+        {
+          "id": "scope.435",
+          "text": "Consider your analysis stratifying the components of the balance sheet into net working capital, net cash / debt balances, fixed assets, and 'other' balances (analysis to be performed by you)."
+        },
+        {
+          "id": "scope.436",
+          "text": "Discuss whether additional net working capital adjustments / net debt adjustments might be considered, in addition to those already identified in your analysis."
+        },
+        {
+          "id": "scope.437",
+          "text": "Summarize and comment on net debt considerations as at the latest balance sheet date, including contingent liabilities (e.g. ongoing or pending litigation), constructive liabilities (e.g. unaccrued bonuses) and other obligations (e.g., deferred or committed capex) – including balances relating to the broader Parent that could remain in the legal entity being acquired."
+        }
+      ],
+      "supporting_analysis_to_quality_of_earnings": [],
+      "arr_drivers": [
+        {
+          "id": "scope.419",
+          "text": "Using analysis performed by you:",
+          "children": [
+            {
+              "text": "Present an analysis of revenues split between one-time (e.g. implementation) and recurring (analysis to be performed by you)."
+            },
+            {
+              "text": "Present an analysis and comment on the development of recurring revenues, including a reconciliation of revenues over time (new / lost / existing revenues) (analysis to be performed by you)."
+            }
+          ]
+        },
+        {
+          "id": "scope.420",
+          "text": "Review a reconciliation of annual recurring revenues (ARR) per the underlying \"customer cube\" of subscription revenues to reported revenue and deferred revenue per the internal financial information (analysis to be performed by you)."
+        },
+        {
+          "id": "scope.421",
+          "text": "Comment on trends in key KPIs for recurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell)."
+        },
+        {
+          "id": "scope.422",
+          "text": "Summarize and comment on customer retention (churn) rates for recurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you)."
+        }
+      ],
       "locked_box": [
         {
           "id": "scope.433",
@@ -748,24 +651,6 @@
           ]
         }
       ],
-      "net_debt": [
-        {
-          "id": "scope.434",
-          "text": "Present an analysis of the balance sheet for Target as at the last two fiscal year ends and the latest available date."
-        },
-        {
-          "id": "scope.435",
-          "text": "Consider your analysis stratifying the components of the balance sheet into net working capital, net cash / debt balances, fixed assets, and 'other' balances (analysis to be performed by you)."
-        },
-        {
-          "id": "scope.436",
-          "text": "Discuss whether additional net working capital adjustments / net debt adjustments might be considered, in addition to those already identified in your analysis."
-        },
-        {
-          "id": "scope.437",
-          "text": "Summarize and comment on net debt considerations as at the latest balance sheet date, including contingent liabilities (e.g. ongoing or pending litigation), constructive liabilities (e.g. unaccrued bonuses) and other obligations (e.g., deferred or committed capex) – including balances relating to the broader Parent that could remain in the legal entity being acquired."
-        }
-      ],
       "phase_1_gaap_considerations": [
         {
           "id": "scope.438",
@@ -779,9 +664,6 @@
             },
             {
               "text": "Assessment of the potential impact of these differences on the overall financial statements."
-            },
-            {
-              "text": "Based on the findings from the above Phase 1 procedures, we can determine and agree with you the scope of subsequent phases including potential quantification of the GAAP differences. Such a scope extension would be covered by an addendum to this Engagement Letter."
             }
           ]
         }
@@ -793,5 +675,117 @@
     "common_threshold": "8 of 11",
     "total_sections_found": 55,
     "total_bullets_cataloged": 1064
+  },
+  "review_tracking": {
+    "source": "docs/Scope Review/deletion-optional-tracker.md",
+    "entries_for_industry": [
+      {
+        "scope_id": "scope.003",
+        "path": "common.accounting_overview.scope.003",
+        "short_text": "Analyze the accounting policies as disclosed in the audited financial statements and perform...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Parent/jurisdiction-specific IFRS framing."
+      },
+      {
+        "scope_id": "scope.394",
+        "path": "tech.accounting_overview.scope.394",
+        "short_text": "Using analysis performed by you, and discussions with you and Target:",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"by you\")."
+      },
+      {
+        "scope_id": "scope.398",
+        "path": "tech.accounting_overview.scope.398",
+        "short_text": "Review a reconciliation of trial balance information to internal and external financial stat...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"to be performed by you\")."
+      },
+      {
+        "scope_id": "scope.399",
+        "path": "tech.accounting_overview.scope.399",
+        "short_text": "Review a reconciliation of net income and net assets period-over-period (to be performed by...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"to be performed by you\")."
+      },
+      {
+        "scope_id": "scope.405",
+        "path": "tech.quality_of_earnings.scope.405",
+        "short_text": "Consider the quality of earnings analysis prepared by the sell side. Form a view on seller p...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Sell-side framing in reusable baseline."
+      },
+      {
+        "scope_id": "scope.410",
+        "path": "tech.quality_of_earnings.scope.410",
+        "short_text": "Using analysis performed by you, and discussions with you and Target:",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"analysis performed by you\")."
+      },
+      {
+        "scope_id": "scope.411",
+        "path": "tech.quality_of_earnings.scope.411",
+        "short_text": "Discuss whether additional EBITDA adjustments might be considered, in addition to those alre...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"your analysis\")."
+      },
+      {
+        "scope_id": "scope.414",
+        "path": "tech.quality_of_earnings.scope.414",
+        "short_text": "Review a reconciliation of employee costs included in adjusted EBITDA to the planned go-forw...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"to be performed by you\")."
+      },
+      {
+        "scope_id": "scope.415",
+        "path": "tech.quality_of_earnings.scope.415",
+        "short_text": "* The quality of earnings analysis will consider the allocated costs included in the reporte...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"reviewed by you\")."
+      },
+      {
+        "scope_id": "scope.416",
+        "path": "tech.quality_of_earnings.scope.416",
+        "short_text": "We will flag in our report if, in the course of our analysis and discussion with Target, the...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"prepared by you\")."
+      },
+      {
+        "scope_id": "scope.418",
+        "path": "tech.supporting_analysis_to_quality_of_earnings.scope.418",
+        "short_text": "Consider the following analysis, to be performed by you, and consider the impact on the qual...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Client-performed work framing (\"to be performed by you\")."
+      }
+    ],
+    "counts": {
+      "entries_total": 11,
+      "removed_canonical": 11,
+      "optional_candidates": 0,
+      "pending_review_delete": 0
+    }
+  },
+  "applicability": {
+    "source": "docs/scope-library/section-applicability.json",
+    "excluded_common_sections": [],
+    "replaced_common_sections": [
+      "audit_work_paper",
+      "capital_expenditure_requirements",
+      "net_debt",
+      "revenue_analysis",
+      "working_capital"
+    ],
+    "replaced_industry_sections": [],
+    "added_industry_sections": []
   }
 }

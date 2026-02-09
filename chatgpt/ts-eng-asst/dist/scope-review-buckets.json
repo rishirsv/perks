@@ -36,8 +36,6 @@
     "aspe_to_ifrs_us_gaap_assessment": "transaction_support_and_reporting",
     "assistance_with_transaction_documentation": "transaction_support_and_reporting",
     "audit_work_paper": "transaction_support_and_reporting",
-    "audit_work_papers": "transaction_support_and_reporting",
-    "audit_working_papers": "transaction_support_and_reporting",
     "balance_sheet": "balance_sheet_analysis",
     "budget": "operational_and_commercial_analysis",
     "budget_vs_actual": "operational_and_commercial_analysis",
@@ -49,7 +47,6 @@
     "data_and_analytics": "operational_and_commercial_analysis",
     "financial_due_diligence": "core_financial_performance",
     "forecast_and_budget_analysis": "operational_and_commercial_analysis",
-    "inventories": "balance_sheet_analysis",
     "inventory": "balance_sheet_analysis",
     "loan_portfolio_and_credit_quality": "financial_services_specialty_analysis",
     "locked_box": "balance_sheet_analysis",
@@ -76,7 +73,6 @@
     "quality_of_revenue_and_receivables_and_cash_proof": "core_financial_performance",
     "regulatory_capital_and_liquidity": "financial_services_specialty_analysis",
     "related_parties": "transaction_support_and_reporting",
-    "related_party_transactions": "transaction_support_and_reporting",
     "revenue_analysis": "operational_and_commercial_analysis",
     "revenue_and_profitability_analysis_da": "operational_and_commercial_analysis",
     "store_portfolio_analysis": "operational_and_commercial_analysis",
@@ -86,7 +82,6 @@
     "vdd_report_review": "transaction_support_and_reporting",
     "waterfall_revenue_analysis": "operational_and_commercial_analysis",
     "work_in_progress": "balance_sheet_analysis",
-    "work_in_progress_and_backlog": "operational_and_commercial_analysis",
     "working_capital": "balance_sheet_analysis"
   },
   "bucket_aliases": {
@@ -135,7 +130,16 @@
     "underwriting and loss reserves": "underwriting_and_loss_reserves",
     "vdd report review": "vdd_report_review",
     "wc": "working_capital",
-    "working capital": "working_capital"
+    "working capital": "working_capital",
+    "audit work paper": "audit_work_paper",
+    "audit work papers": "audit_work_paper",
+    "audit working papers": "audit_work_paper",
+    "inventories": "inventory",
+    "related party transactions": "related_parties",
+    "related parties": "related_parties",
+    "work in progress and backlog": "work_in_progress",
+    "wip and backlog": "work_in_progress",
+    "work in progress": "work_in_progress"
   },
   "concept_to_sections": {
     "debt_concept": [

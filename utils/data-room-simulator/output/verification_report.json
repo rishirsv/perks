@@ -1,206 +1,148 @@
 {
-  "generated_at": "2026-01-07T00:36:05.848791",
-  "company": "ImageRecent Systems",
+  "generated_at": "2026-02-09T10:23:09.113763",
+  "company": "Garcia Tech",
   "industry": "saas",
-  "realism_mode": "realistic",
+  "realism_mode": "clean",
   "status": "pass",
   "summary": {
     "total_checks": 22,
     "passed": 22,
     "failed": 0,
-    "qoe_issues": 10
+    "qoe_issues": 0
   },
   "checks": [
     {
       "name": "trial_balance_exists",
       "description": "Trial balance file exists",
       "passed": true,
-      "details": "61 periods"
+      "details": "62 periods"
     },
     {
       "name": "bs_equation_2021",
       "description": "Balance sheet equation (A = L + E) for 2021",
       "passed": true,
-      "details": "Assets = $18,154,812"
+      "details": "Assets = $9,543,446"
     },
     {
       "name": "bs_equation_2022",
       "description": "Balance sheet equation (A = L + E) for 2022",
       "passed": true,
-      "details": "Assets = $26,719,018"
+      "details": "Assets = $14,889,848"
     },
     {
       "name": "bs_equation_2023",
       "description": "Balance sheet equation (A = L + E) for 2023",
       "passed": true,
-      "details": "Assets = $35,984,244"
+      "details": "Assets = $21,547,960"
     },
     {
       "name": "bs_equation_2024",
       "description": "Balance sheet equation (A = L + E) for 2024",
       "passed": true,
-      "details": "Assets = $45,436,460"
+      "details": "Assets = $28,913,024"
     },
     {
       "name": "bs_equation_2025",
       "description": "Balance sheet equation (A = L + E) for 2025",
       "passed": true,
-      "details": "Assets = $59,545,886"
+      "details": "Assets = $36,621,839"
     },
     {
       "name": "bs_equation_2026",
       "description": "Balance sheet equation (A = L + E) for 2026",
       "passed": true,
-      "details": "Assets = $58,211,719"
+      "details": "Assets = $36,019,882"
     },
     {
       "name": "revenue_consistency_2021.0",
       "description": "Revenue consistency between IS and TB for 2021.0",
       "passed": true,
-      "details": "IS: $43,646,228, TB: $43,646,228"
+      "details": "IS: $24,984,607, TB: $24,984,607"
     },
     {
       "name": "revenue_consistency_2022.0",
       "description": "Revenue consistency between IS and TB for 2022.0",
       "passed": true,
-      "details": "IS: $45,705,739, TB: $45,705,739"
+      "details": "IS: $32,340,323, TB: $32,340,323"
     },
     {
       "name": "revenue_consistency_2023.0",
       "description": "Revenue consistency between IS and TB for 2023.0",
       "passed": true,
-      "details": "IS: $48,179,931, TB: $48,179,931"
+      "details": "IS: $38,734,237, TB: $38,734,237"
     },
     {
       "name": "revenue_consistency_2024.0",
       "description": "Revenue consistency between IS and TB for 2024.0",
       "passed": true,
-      "details": "IS: $49,914,056, TB: $49,914,056"
+      "details": "IS: $44,396,017, TB: $44,396,017"
     },
     {
       "name": "revenue_consistency_2025.0",
       "description": "Revenue consistency between IS and TB for 2025.0",
       "passed": true,
-      "details": "IS: $60,616,962, TB: $60,616,962"
+      "details": "IS: $54,030,254, TB: $54,030,254"
     },
     {
       "name": "revenue_consistency_2026.0",
       "description": "Revenue consistency between IS and TB for 2026.0",
       "passed": true,
-      "details": "IS: $4,693,332, TB: $4,693,332"
+      "details": "IS: $8,525,699, TB: $8,525,699"
     },
     {
       "name": "ar_aging_tie",
       "description": "AR aging total ties to balance sheet AR",
       "passed": true,
-      "details": "Aging: $7,319,927, BS: $7,319,927"
+      "details": "Aging: $5,693,645, BS: $5,693,645"
     },
     {
       "name": "ap_aging_tie",
       "description": "AP aging total ties to balance sheet AP",
       "passed": true,
-      "details": "Aging: $2,044,254, BS: $2,044,254"
+      "details": "Aging: $1,986,979, BS: $1,986,979"
     },
     {
       "name": "headcount_tie",
       "description": "Employee headcount matches company seed",
       "passed": true,
-      "details": "Target: 198, Actual: 198"
+      "details": "Target: 186, Actual: 186"
     },
     {
       "name": "mrr_revenue_tie_2021-12",
       "description": "MRR ties to P&L revenue for 2021-12",
       "passed": true,
-      "details": "MRR: $4,195,798, P&L: $4,195,798"
+      "details": "MRR: $2,672,388, P&L: $2,672,388"
     },
     {
       "name": "mrr_revenue_tie_2022-12",
       "description": "MRR ties to P&L revenue for 2022-12",
       "passed": true,
-      "details": "MRR: $4,348,341, P&L: $4,348,341"
+      "details": "MRR: $3,503,102, P&L: $3,503,102"
     },
     {
       "name": "mrr_revenue_tie_2023-12",
       "description": "MRR ties to P&L revenue for 2023-12",
       "passed": true,
-      "details": "MRR: $4,726,087, P&L: $4,726,087"
+      "details": "MRR: $4,041,816, P&L: $4,041,816"
     },
     {
       "name": "mrr_revenue_tie_2024-12",
       "description": "MRR ties to P&L revenue for 2024-12",
       "passed": true,
-      "details": "MRR: $5,531,302, P&L: $5,531,302"
+      "details": "MRR: $4,748,514, P&L: $4,748,514"
     },
     {
       "name": "mrr_revenue_tie_2025-12",
       "description": "MRR ties to P&L revenue for 2025-12",
       "passed": true,
-      "details": "MRR: $6,301,767, P&L: $6,301,767"
+      "details": "MRR: $5,609,035, P&L: $5,609,035"
     },
     {
       "name": "arr_calculation",
       "description": "ARR = MRR \u00d7 12",
       "passed": true,
-      "details": "MRR: $4,693,332, ARR: $56,319,985"
+      "details": "MRR: $4,264,585, ARR: $51,175,024"
     }
   ],
-  "qoe_issues": [
-    {
-      "type": "one_time_event",
-      "date": "2022-10-04",
-      "description": "Legal settlement",
-      "impact": -1134235.0,
-      "category": "legal"
-    },
-    {
-      "type": "one_time_event",
-      "date": "2023-11-26",
-      "description": "Insurance claim recovery",
-      "impact": 586004.0,
-      "category": "insurance"
-    },
-    {
-      "type": "one_time_event",
-      "date": "2024-12-25",
-      "description": "Legal settlement",
-      "impact": -823723.0,
-      "category": "legal"
-    },
-    {
-      "type": "customer_churn",
-      "description": "1 customer losses identified",
-      "total_impact": -1374612.0,
-      "category": "revenue_risk"
-    },
-    {
-      "type": "potential_adjustment",
-      "description": "One-time implementation revenue recognized upfront",
-      "category": "qoe_common"
-    },
-    {
-      "type": "potential_adjustment",
-      "description": "Capitalized software costs (R&D vs. development split)",
-      "category": "qoe_common"
-    },
-    {
-      "type": "potential_adjustment",
-      "description": "Stock-based compensation add-back",
-      "category": "qoe_common"
-    },
-    {
-      "type": "potential_adjustment",
-      "description": "Non-recurring legal/IP costs",
-      "category": "qoe_common"
-    },
-    {
-      "type": "owner_addback",
-      "description": "Above-market executive compensation",
-      "category": "qoe_addback"
-    },
-    {
-      "type": "owner_addback",
-      "description": "Related party software licensing fees",
-      "category": "qoe_addback"
-    }
-  ]
+  "qoe_issues": []
 }

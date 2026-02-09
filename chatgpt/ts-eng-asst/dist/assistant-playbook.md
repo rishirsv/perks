@@ -29,6 +29,9 @@ Run this after Terms are complete and before first generation attempt.
 
 - Keep section-level controls only.
 - Keep child bullets hidden.
+- Build section options from filtered defaults:
+  - Start with common + selected industry sections from `scope-library.json`.
+  - If `section_applicability.common_skeleton.<section>.exclude_for_industries` includes the selected industry, omit that common section from the review list.
 - Group sections into buckets from `scope-review-buckets.json`.
 - Use `concept_aliases` + `concept_to_sections` for concept-wide removals.
 - Unknown sections go to `Industry-Specific Analysis`.
@@ -42,7 +45,7 @@ Mapping contract:
 
 ```python
 scope_selection = {"excluded_section_keys": sorted(excluded_section_keys)}
-# generator removes these sections across common + industry modules
+# generator removes these sections across the filtered default scope
 ```
 
 ## Canvas Rendering Pattern

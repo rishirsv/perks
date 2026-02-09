@@ -47,10 +47,6 @@
           ]
         },
         {
-          "id": "scope.003",
-          "text": "Analyze the accounting policies as disclosed in the audited financial statements and perform a high-level gap assessment to identify differences between the Target’s accounting policies and practices and IFRS Accounting Standards as applied by Parent."
-        },
-        {
           "id": "scope.004",
           "text": "Consider if the following accounting policies have been applied consistently within and across historical periods:",
           "children": [
@@ -110,79 +106,58 @@
       ]
     },
     {
-      "heading": "Revenue analysis",
       "normalized_heading": "revenue_analysis",
       "default_bullets": [
         {
           "id": "scope.006",
-          "text": "Obtain a comprehensive view of revenue and margins. Obtain the underlying transactional data (i.e. sales database), if available, and gain an understanding of the major trends in revenue and margins addressing areas including:",
+          "text": "Obtain a comprehensive view of revenue and margins. Obtain underlying transactional detail, if available, and gain an understanding of major trends in revenue and margins, including:",
           "children": [
             {
-              "text": "Revenue and margin by significant customer and end market/ segment/ region;"
+              "text": "Revenue and margin by significant customer, channel, and/or market segment, as applicable; and"
             },
             {
-              "text": "Price and volume trends."
+              "text": "Price, volume, and mix trends."
             }
           ]
         },
         {
           "id": "scope.007",
-          "text": "Discuss with Management:",
+          "text": "Discuss with management key drivers of revenue and margin over the Historical Period, including:",
           "children": [
             {
-              "text": "impact of large or long-term orders/ seasonality (if applicable); and"
+              "text": "Major customer/contract wins or losses and timing impacts;"
             },
             {
-              "text": "any non-recurring components of revenue."
+              "text": "Non-recurring items affecting period results; and"
             },
             {
-              "text": "customer category (i.e. individual, business);"
-            },
-            {
-              "text": "distribution channel (i.e. online, wholesale, etc.); and"
-            },
-            {
-              "text": "price, volume, mix and cross-sell analysis."
-            },
-            {
-              "text": "Seasonal fluctuations in demand and monthly sales trends; and"
+              "text": "Operational, market, or seasonal factors affecting demand and fulfillment."
             }
           ]
         },
         {
           "id": "scope.008",
-          "text": "Obtain and read an analysis of Target's revenue and inquire about:",
+          "text": "Obtain and review an analysis of revenue quality and related balances, and inquire about:",
           "children": [
             {
-              "text": "Gross to net revenue;"
+              "text": "Revenue recognition policies and any recent changes;"
             },
             {
-              "text": "Revenue recognition policies;"
+              "text": "Billing and collection terms, including significant deviations from standard terms;"
             },
             {
-              "text": "Revenue and gross margin by customer;"
+              "text": "Credits, rebates, returns, and other contra-revenue items;"
             },
             {
-              "text": "Organic growth and delineation between price vs. volume;"
+              "text": "Concentration/dependency risk; and"
             },
             {
-              "text": "Pricing practices;"
-            },
-            {
-              "text": "Promotions and discounts;"
-            },
-            {
-              "text": "Any non-recurring components of revenue;"
-            },
-            {
-              "text": "Revenue seasonality, if any;"
-            },
-            {
-              "text": "Other components of cost of sales and key suppliers."
+              "text": "Other unusual items affecting reported revenue or gross margin."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Revenue analysis"
     },
     {
       "heading": "Operating expenses",
@@ -215,7 +190,6 @@
       ]
     },
     {
-      "heading": "Working capital",
       "normalized_heading": "working_capital",
       "default_bullets": [
         {
@@ -229,14 +203,15 @@
               "text": "Monthly working capital trends, metrics, and seasonality;"
             },
             {
-              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends, (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
+              "text": "Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and"
             },
             {
               "text": "Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Working capital"
     },
     {
       "heading": "Accounts receivable",
@@ -287,7 +262,6 @@
       ]
     },
     {
-      "heading": "Capital expenditure requirements",
       "normalized_heading": "capital_expenditure_requirements",
       "default_bullets": [
         {
@@ -298,11 +272,12 @@
               "text": "Maintenance versus growth capital expenditures;"
             },
             {
-              "text": "Other historical, deferred, and planned capital expenditures"
+              "text": "Other historical, deferred, and planned capital expenditures."
             }
           ]
         }
-      ]
+      ],
+      "heading": "Capital expenditure requirements"
     },
     {
       "heading": "Commitments and contingencies",
@@ -338,7 +313,6 @@
       ]
     },
     {
-      "heading": "Net debt",
       "normalized_heading": "net_debt",
       "default_bullets": [
         {
@@ -347,9 +321,36 @@
         },
         {
           "id": "scope.016",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt; and"
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt."
         }
-      ]
+      ],
+      "heading": "Net debt"
+    },
+    {
+      "normalized_heading": "audit_work_paper",
+      "default_bullets": [
+        {
+          "id": "scope.114",
+          "text": "If required, obtain and read the auditor's working papers for the latest fiscal year."
+        },
+        {
+          "id": "scope.115",
+          "text": "Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods."
+        },
+        {
+          "id": "scope.116",
+          "text": "Comment on control issues identified by the external auditors, if applicable."
+        },
+        {
+          "id": "scope.117",
+          "text": "Comment on any additional red flags or key risks identified in the provided audit materials."
+        },
+        {
+          "id": "scope.118",
+          "text": "Review audit committee reporting and presentations from the audit firm."
+        }
+      ],
+      "heading": "Audit work paper"
     }
   ],
   "industry_modules": {
@@ -462,18 +463,6 @@
       ],
       "quality_of_earnings": [
         {
-          "id": "scope.225",
-          "text": "Based on the analysis and discussion with the sell-side due diligence advisor sell-side advisor, comment on Management's proposed adjustments to reported EBITDA and inquire about the nature and rationale of such adjustments and supporting documentation;"
-        },
-        {
-          "id": "scope.226",
-          "text": "Perform a traffic light assessment of Management and sell-side proposed adjustments; and"
-        },
-        {
-          "id": "scope.227",
-          "text": "Propose any significant adjustments identified that are not reflected in the sell-side Quality of Earnings analysis."
-        },
-        {
           "id": "scope.228",
           "text": "Summarize potential adjustments identified regarding the earnings of the Company in the form of a quality of earnings analysis, summarizing the risks that may impact revenue and/or earnings before interest, taxes, depreciation and amortization (\"EBITDA\") including:",
           "children": [
@@ -491,30 +480,6 @@
             },
             {
               "text": "Any other large, unusual or non-recurring events or transactions that may have distorted results and not identified by management in the financial statements; and"
-            }
-          ]
-        },
-        {
-          "id": "scope.229",
-          "text": "Summarize potential adjustments identified regarding the earnings of Target in the form of a quality of earnings analysis, summarizing the risks that may impact revenue and/or earnings before interest, taxes, depreciation and amortization (\"EBITDA\") including:",
-          "children": [
-            {
-              "text": "Normalization adjustments presented in the VDD Report;"
-            },
-            {
-              "text": "The impact of any changes in accounting policies;"
-            },
-            {
-              "text": "The impact of foreign exchange including constant currency analysis;"
-            },
-            {
-              "text": "Related party transactions and the pricing thereof;"
-            },
-            {
-              "text": "Recent changes to the business to understand the run-rate EBITDA impact (e.g. brand development and marketing expenses, business expansion into other product segments, impacts of capex investment etc.);"
-            },
-            {
-              "text": "Any other large, unusual or non-recurring events or transactions that may have distorted results and not identified by management in the financial statements (e.g. non-recurring purchase orders; potential business disruption due to COVID-19); and"
             }
           ]
         },
@@ -554,35 +519,6 @@
             },
             {
               "text": "Other potential items discovered in the due diligence process."
-            }
-          ]
-        }
-      ],
-      "vdd_report_review": [
-        {
-          "id": "scope.231",
-          "text": "Read the VDD Report and any available updates and discuss with sell-side advisor and comment on significant areas including the following:",
-          "children": [
-            {
-              "text": "Management proposed adjustments to reported EBITDA (i.e. market rent, non-recurring items, customer chargebacks, contracted services, director fees, bad debt expenses etc.);"
-            },
-            {
-              "text": "Completeness of the scope of work, any scope restrictions encountered, and out-of-scope areas;"
-            },
-            {
-              "text": "Transaction perimeter;"
-            },
-            {
-              "text": "Extent of access to management, quality of information available, and depth of analysis performed;"
-            },
-            {
-              "text": "Procedures performed to form views on the appropriateness of Target's inventory valuation methodologies;"
-            },
-            {
-              "text": "Views on the perceived accuracy of the monthly/annual cut-off process; and"
-            },
-            {
-              "text": "Key financial risks and uncertainties with potential impact to value."
             }
           ]
         }
@@ -737,46 +673,6 @@
           "text": "Other operating and G&A expenses."
         }
       ],
-      "normalized_ebitda_bridges": [
-        {
-          "id": "scope.244",
-          "text": "Summarize and prepared normalized EBITDA bridges from:",
-          "children": [
-            {
-              "text": "the Historical Period to the Historical Period;"
-            },
-            {
-              "text": "YTD23 to YTD24;"
-            },
-            {
-              "text": "YTD24 to the Historical Period forecast; and"
-            },
-            {
-              "text": "the Historical Period forecast to the Historical Period budget."
-            }
-          ]
-        }
-      ],
-      "forecast_and_budget_analysis": [
-        {
-          "id": "scope.245",
-          "text": "Obtain and read the the Historical Period forecast and the Historical Period budget and:"
-        },
-        {
-          "id": "scope.246",
-          "text": "Summarize the assumptions used by Management which underpin the achievement of the forecasts; and"
-        },
-        {
-          "id": "scope.247",
-          "text": "Analyze the customer booking information to understand what portion of the the Historical Period outturn revenues (i.e. Sep'24 to Dec'24) and the the Historical Period budget revenues have been secured by customer orders."
-        }
-      ],
-      "budget_vs_actual": [
-        {
-          "id": "scope.248",
-          "text": "Obtain the historical, latest interim financial information available and forecast for the rest of the year. Compare actual results to budget and forecast results to prior year. Interview management about the reasons for significant fluctuations between periods and with budget. Discuss and bridge to full-year the Historical Period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the the Historical Period budget."
-        }
-      ],
       "working_capital": [
         {
           "id": "scope.249",
@@ -809,25 +705,6 @@
         {
           "id": "scope.256",
           "text": "Payroll related funding and timing of cash flows; and"
-        },
-        {
-          "id": "scope.257",
-          "text": "Large or unusual non-recurring items that may have impacted normal working capital trends including potential items identified within the quality of earnings analysis noted above."
-        },
-        {
-          "id": "scope.258",
-          "text": "Summarize and normalize historical working capital in the business including:",
-          "children": [
-            {
-              "text": "Commenting on the working capital trends, for the respective period;"
-            },
-            {
-              "text": "Understanding key drivers (i.e., seasonality, accounts payable days, days sales outstanding, days inventory outstanding); and"
-            },
-            {
-              "text": "Identifying large or unusual non-recurring items that may have impacted normal working capital trends including potential items identified within the quality of earnings analysis noted above."
-            }
-          ]
         }
       ],
       "accounts_receivable": [
@@ -892,6 +769,164 @@
               "text": "Cadence and consistency of bonus and other incentive compensation; and"
             }
           ]
+        }
+      ],
+      "capital_expenditure_requirements": [
+        {
+          "id": "scope.266",
+          "text": "Fixed asset continuity schedule showing additions and depreciation;"
+        },
+        {
+          "id": "scope.267",
+          "text": "Significant near-term required capex and deferred capex, if any; and"
+        },
+        {
+          "id": "scope.268",
+          "text": "Historical capital expenditures segregated between growth and maintenance."
+        },
+        {
+          "id": "scope.269",
+          "text": "Significant near-term require capex and deferred capex, if any; and"
+        },
+        {
+          "id": "scope.270",
+          "text": "Obtain and read an analysis of Target's existing capital costs and inquire about:",
+          "children": [
+            {
+              "text": "Historical growth vs. maintenance capex;"
+            },
+            {
+              "text": "If any deferred and planned capital expenditures; and"
+            },
+            {
+              "text": "Impairment write-downs and issues."
+            }
+          ]
+        }
+      ],
+      "commitments_and_contingencies": [
+        {
+          "id": "scope.274",
+          "text": "Significant purchase commitments and product financing arrangements with customers and/or suppliers;"
+        },
+        {
+          "id": "scope.275",
+          "text": "Operating leases;"
+        },
+        {
+          "id": "scope.276",
+          "text": "Earn-out arrangements and commitments relating to previous acquisitions;"
+        },
+        {
+          "id": "scope.277",
+          "text": "Pending or threatened litigation or investigations."
+        },
+        {
+          "id": "scope.278",
+          "text": "Minimum purchase commitments under long-term supply and/or manufacturing contracts;"
+        },
+        {
+          "id": "scope.279",
+          "text": "Incentive compensation and employee pension and post-retirement benefit obligations;"
+        },
+        {
+          "id": "scope.280",
+          "text": "Lease obligations to related parties and 3rd parties (if applicable);"
+        },
+        {
+          "id": "scope.281",
+          "text": "Pending or threatened litigation relating to infringement of intellectual property, regulatory, etc.; and"
+        },
+        {
+          "id": "scope.282",
+          "text": "Pending or threatened litigations by regulatory or other authorities and by employees;"
+        },
+        {
+          "id": "scope.283",
+          "text": "Incentive compensation and employee benefit obligations; and"
+        },
+        {
+          "id": "scope.284",
+          "text": "Significant lease and purchase obligations."
+        }
+      ],
+      "net_debt": [
+        {
+          "id": "scope.271",
+          "text": "Summarize and comment on net debt items presented by Management and other potential debt-like items; and"
+        },
+        {
+          "id": "scope.272",
+          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt."
+        },
+        {
+          "id": "scope.273",
+          "text": "Summarize and comment on net debt items (on and off balance sheet) presented by management and other potential debt-like items; and"
+        }
+      ],
+      "vdd_report_review": [
+        {
+          "id": "scope.231",
+          "text": "Read the VDD Report and any available updates and discuss with sell-side advisor and comment on significant areas including the following:",
+          "children": [
+            {
+              "text": "Management proposed adjustments to reported EBITDA (i.e. market rent, non-recurring items, customer chargebacks, contracted services, director fees, bad debt expenses etc.);"
+            },
+            {
+              "text": "Completeness of the scope of work, any scope restrictions encountered, and out-of-scope areas;"
+            },
+            {
+              "text": "Transaction perimeter;"
+            },
+            {
+              "text": "Extent of access to management, quality of information available, and depth of analysis performed;"
+            },
+            {
+              "text": "Procedures performed to form views on the appropriateness of Target's inventory valuation methodologies;"
+            },
+            {
+              "text": "Views on the perceived accuracy of the monthly/annual cut-off process; and"
+            },
+            {
+              "text": "Key financial risks and uncertainties with potential impact to value."
+            }
+          ]
+        }
+      ],
+      "normalized_ebitda_bridges": [
+        {
+          "id": "scope.244",
+          "text": "Summarize and prepared normalized EBITDA bridges from:",
+          "children": [
+            {
+              "text": "the Historical Period to the Historical Period;"
+            },
+            {
+              "text": "YTD23 to YTD24;"
+            },
+            {
+              "text": "YTD24 to the Historical Period forecast; and"
+            },
+            {
+              "text": "the Historical Period forecast to the Historical Period budget."
+            }
+          ]
+        }
+      ],
+      "forecast_and_budget_analysis": [
+        {
+          "id": "scope.245",
+          "text": "Obtain and read the Historical Period forecast and the Historical Period budget and:"
+        },
+        {
+          "id": "scope.246",
+          "text": "Summarize the assumptions used by Management which underpin the achievement of the forecasts; and"
+        }
+      ],
+      "budget_vs_actual": [
+        {
+          "id": "scope.248",
+          "text": "Obtain the historical, latest interim financial information available and forecast for the rest of the year. Compare actual results to budget and forecast results to prior year. Interview management about the reasons for significant fluctuations between periods and with budget. Discuss and bridge to full-year the Historical Period forecast with management. Comment on predictability of current year's performance and level of confidence in achieving the Historical Period budget."
         }
       ],
       "inventory": [
@@ -968,99 +1003,6 @@
           ]
         }
       ],
-      "capital_expenditure_requirements": [
-        {
-          "id": "scope.266",
-          "text": "Fixed asset continuity schedule showing additions and depreciation;"
-        },
-        {
-          "id": "scope.267",
-          "text": "Significant near-term required capex and deferred capex, if any; and"
-        },
-        {
-          "id": "scope.268",
-          "text": "Historical capital expenditures segregated between growth and maintenance."
-        },
-        {
-          "id": "scope.269",
-          "text": "Significant near-term require capex and deferred capex, if any; and"
-        },
-        {
-          "id": "scope.270",
-          "text": "Obtain and read an analysis of Target's existing capital costs and inquire about:",
-          "children": [
-            {
-              "text": "Historical growth vs. maintenance capex;"
-            },
-            {
-              "text": "If any deferred and planned capital expenditures; and"
-            },
-            {
-              "text": "Impairment write-downs and issues."
-            }
-          ]
-        }
-      ],
-      "net_debt": [
-        {
-          "id": "scope.271",
-          "text": "Summarize and comment on net debt items presented by Management and other potential debt-like items; and"
-        },
-        {
-          "id": "scope.272",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt."
-        },
-        {
-          "id": "scope.273",
-          "text": "Summarize and comment on net debt items (on and off balance sheet) presented by management and other potential debt-like items; and"
-        }
-      ],
-      "commitments_and_contingencies": [
-        {
-          "id": "scope.274",
-          "text": "Significant purchase commitments and product financing arrangements with customers and/or suppliers;"
-        },
-        {
-          "id": "scope.275",
-          "text": "Operating leases;"
-        },
-        {
-          "id": "scope.276",
-          "text": "Earn-out arrangements and commitments relating to previous acquisitions;"
-        },
-        {
-          "id": "scope.277",
-          "text": "Pending or threatened litigation or investigations."
-        },
-        {
-          "id": "scope.278",
-          "text": "Minimum purchase commitments under long-term supply and/or manufacturing contracts;"
-        },
-        {
-          "id": "scope.279",
-          "text": "Incentive compensation and employee pension and post-retirement benefit obligations;"
-        },
-        {
-          "id": "scope.280",
-          "text": "Lease obligations to related parties and 3rd parties (if applicable);"
-        },
-        {
-          "id": "scope.281",
-          "text": "Pending or threatened litigation relating to infringement of intellectual property, regulatory, etc.; and"
-        },
-        {
-          "id": "scope.282",
-          "text": "Pending or threatened litigations by regulatory or other authorities and by employees;"
-        },
-        {
-          "id": "scope.283",
-          "text": "Incentive compensation and employee benefit obligations; and"
-        },
-        {
-          "id": "scope.284",
-          "text": "Significant lease and purchase obligations."
-        }
-      ],
       "prepaids": [
         {
           "id": "scope.285",
@@ -1082,7 +1024,7 @@
           "text": "Review financial information and financial statements to gain an understanding of Target's key accounting policies and practices. Summarize any potential adjustments between ASPE and IFRS/US GAAP that may impact historical EBITDA or balance sheet accounts."
         }
       ],
-      "related_party_transactions": [
+      "related_parties": [
         {
           "id": "scope.288",
           "text": "Inquire about and summarize related party transactions including:",
@@ -1153,5 +1095,69 @@
     "common_threshold": "8 of 11",
     "total_sections_found": 55,
     "total_bullets_cataloged": 1064
+  },
+  "review_tracking": {
+    "source": "docs/Scope Review/deletion-optional-tracker.md",
+    "entries_for_industry": [
+      {
+        "scope_id": "scope.003",
+        "path": "common.accounting_overview.scope.003",
+        "short_text": "Analyze the accounting policies as disclosed in the audited financial statements and perform...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Parent/jurisdiction-specific IFRS framing."
+      },
+      {
+        "scope_id": "scope.225",
+        "path": "manufacturing.quality_of_earnings.scope.225",
+        "short_text": "Based on the analysis and discussion with the sell-side due diligence advisor, comment on Ma...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Sell-side advisor framing in reusable baseline."
+      },
+      {
+        "scope_id": "scope.226",
+        "path": "manufacturing.quality_of_earnings.scope.226",
+        "short_text": "Perform a traffic light assessment of Management and sell-side proposed adjustments; and",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Sell-side framing in reusable baseline."
+      },
+      {
+        "scope_id": "scope.227",
+        "path": "manufacturing.quality_of_earnings.scope.227",
+        "short_text": "Propose any significant adjustments identified that are not reflected in the sell-side Quali...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "Sell-side framing in reusable baseline."
+      },
+      {
+        "scope_id": "scope.229",
+        "path": "manufacturing.quality_of_earnings.scope.229",
+        "short_text": "Summarize potential adjustments identified regarding the earnings of Target in the form of a...",
+        "current_status": "REMOVED_CANONICAL",
+        "recommended_disposition": "EXCLUDE_REUSABLE_OR_REWRITE",
+        "notes": "VDD/sell-side framing in reusable baseline."
+      }
+    ],
+    "counts": {
+      "entries_total": 5,
+      "removed_canonical": 5,
+      "optional_candidates": 0,
+      "pending_review_delete": 0
+    }
+  },
+  "applicability": {
+    "source": "docs/scope-library/section-applicability.json",
+    "excluded_common_sections": [],
+    "replaced_common_sections": [
+      "audit_work_paper",
+      "capital_expenditure_requirements",
+      "net_debt",
+      "revenue_analysis",
+      "working_capital"
+    ],
+    "replaced_industry_sections": [],
+    "added_industry_sections": []
   }
 }
