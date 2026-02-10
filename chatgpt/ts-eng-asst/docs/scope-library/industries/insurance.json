@@ -367,6 +367,18 @@
         {
           "id": "scope.527",
           "text": "Understand regulatory environment and reporting requirements applicable to the business."
+        },
+        {
+          "id": "scope.537",
+          "text": "Understand carrier relationships, including concentration, key terms, and dependency risks."
+        },
+        {
+          "id": "scope.538",
+          "text": "Understand cooperative/cluster structures and economics where applicable."
+        },
+        {
+          "id": "scope.539",
+          "text": "Understand other significant third-party relationships that are important to the business model."
         }
       ],
       "accounting_overview": [
@@ -381,6 +393,114 @@
         {
           "id": "scope.530",
           "text": "Understand fair value measurement and investment accounting policies where applicable."
+        }
+      ],
+      "quality_of_earnings": [
+        {
+          "id": "scope.540",
+          "text": "Assess the impact of acquisitions/disposals, including office openings/closings, on normalized EBITDA."
+        },
+        {
+          "id": "scope.541",
+          "text": "Assess the impact of new/lost clients and significant changes in contract terms with clients and/or carriers."
+        },
+        {
+          "id": "scope.542",
+          "text": "Assess non-cash revenue and expense items, including setup/release/reversal of provisions and reserves."
+        },
+        {
+          "id": "scope.543",
+          "text": "Assess costs that may not be at market rates and related-party charges, including excess compensation to management/shareholders."
+        }
+      ],
+      "revenue_analysis": [
+        {
+          "id": "scope.544",
+          "text": "Obtain and read an analysis of commission and fee income trends and recognition, including contingent commissions by carrier."
+        },
+        {
+          "id": "scope.545",
+          "text": "Assess service and other fee income, including cancellation provisions where applicable."
+        },
+        {
+          "id": "scope.546",
+          "text": "Evaluate treatment of interest income, commission splits, and revenue cut-off."
+        },
+        {
+          "id": "scope.547",
+          "text": "Review pro forma revenue bridge separating organic versus acquired growth, and subsequent acquisition performance versus acquisition-date projections."
+        }
+      ],
+      "operating_expenses": [
+        {
+          "id": "scope.548",
+          "text": "Obtain and read an analysis of employee compensation, including incentive bonuses, producer draws, and deferred compensation."
+        },
+        {
+          "id": "scope.549",
+          "text": "Review producer concentration and compensation trends by office/department, including headcount trends."
+        },
+        {
+          "id": "scope.550",
+          "text": "Assess deferred consideration provided to acquired producer groups and transaction expenses."
+        },
+        {
+          "id": "scope.551",
+          "text": "Review operating and non-operating expenses with focus on expense cut-off."
+        }
+      ],
+      "working_capital": [
+        {
+          "id": "scope.552",
+          "text": "Obtain an analysis of monthly working capital components for the last two fiscal years and latest year-to-date period, and comment on working capital needs, seasonality, and trends, including premiums receivable/payable cycles and trust cash timing."
+        }
+      ],
+      "accounts_receivable": [
+        {
+          "id": "scope.553",
+          "text": "Obtain and read an analysis of premiums and commissions receivable and other assets, and assess aging by carrier/office and cancellation patterns due to premium delinquency."
+        },
+        {
+          "id": "scope.554",
+          "text": "Assess carrier advances and other receivable balances, including prepaid expenses and other non-trade receivables."
+        }
+      ],
+      "accounts_payable_and_accrued_liabilities": [
+        {
+          "id": "scope.555",
+          "text": "Obtain and read an analysis of premiums due to insurance companies, including aging and settlement patterns."
+        },
+        {
+          "id": "scope.556",
+          "text": "Review deferred compensation accruals and commission/incentive true-up liabilities."
+        },
+        {
+          "id": "scope.557",
+          "text": "Assess trust cash balances and processes for monitoring net fiduciary asset position."
+        }
+      ],
+      "commitments_and_contingencies": [
+        {
+          "id": "scope.558",
+          "text": "Inquire about self-insurance programs, post-retirement/unfunded pension obligations, and incentive programs including change-of-control provisions."
+        },
+        {
+          "id": "scope.559",
+          "text": "Review deferred/contingent acquisition costs and earnout-related obligations."
+        },
+        {
+          "id": "scope.560",
+          "text": "Evaluate significant contract commitments (employment, carrier/supplier, debt, lease, equity-related) including change-of-control provisions and restrictions on use of assets."
+        }
+      ],
+      "net_debt": [
+        {
+          "id": "scope.561",
+          "text": "Analyze contingent earnout liabilities from historical acquisitions, including rollforward and expected payout scenarios based on current and projected performance."
+        },
+        {
+          "id": "scope.562",
+          "text": "Summarize items identified through diligence that may be considered debt-like for valuation purposes."
         }
       ],
       "underwriting_and_loss_reserves": [

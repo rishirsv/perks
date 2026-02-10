@@ -98,6 +98,25 @@ Notes:
 - Applicability config is docs-review behavior only until canonicalized in `dist/scope-library.json`.
 - Prefer replacements over layered additions when duplicate/overlapping bullets appear in the same section.
 
+## Scope Curation Learnings (Current)
+
+- Scope assembly is currently `common + industry` and is not side-specific at the scope-bullet layer.
+  - Do not assume buy-side/sell-side gating for bullets unless explicitly implemented.
+  - Keep default industry bullets side-neutral; move side-specific language (for example, sell-side advisor phrasing) to optional sections or rewrite.
+
+- Keep industry modules incremental to common.
+  - If an industry bullet repeats common intent, remove the industry duplicate.
+  - If an industry section fully supersedes common for that industry, exclude the common section for that industry in applicability and keep only the industry section.
+
+- Prefer one canonical bullet per intent inside an industry section.
+  - Merge near-duplicate bullets into one clean parent bullet with children.
+  - Remove orphan bullets that end with `including:` or `; and` without proper continuation.
+
+- Treat advanced analyses as optional by default unless user requests otherwise.
+  - Typical optional examples: VDD report review, normalized EBITDA bridges, forecast/budget analysis, budget-vs-actual bridges, operational cost/margin assessment, and GAAP conversion assessments.
+
+- When editing review-surface files, keep `docs/scope-library/industries/<industry>.json` and `.md` in sync in the same change.
+
 ## Banking Revenue Drafting Standard
 
 For banking-oriented revenue wording, prefer income-stream framing over generic product sales framing.
