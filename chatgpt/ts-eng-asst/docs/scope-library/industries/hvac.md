@@ -109,7 +109,6 @@ Each section below shows common skeleton bullets and then industry-specific bull
   - Updated pricing agreements with customers;
   - Quantifiable synergies identified by management that are applicable (e.g., from prior acquisitions);
   - Retained costs sitting within Corporate
-- (scope.137) Understand impact of Quality of Earnings adjustments on the Historical Period budget
 - (scope.139) Understand application of revenue recognition policies, specifically POC, including consistency of application and period end true-ups that may skew financial results; and
 - (scope.140) Understand any timing differences between revenue recognition, cash collections and accrual adjustments.
 - (scope.142) The impact of any changes to pricing models;
@@ -360,7 +359,7 @@ _Not in common skeleton._
 
 #### Industry (`hvac`)
 
-- (scope.187) The purpose of this section is to perform detailed analysis on the drivers of revenue and margin growth, marketing performance, and operations to understand upside opportunities and communicate an effective story in conjunction with the Quality of Earnings. The outputs will be a PowerPoint trend report, highlighting key insights; a Power BI dashboard that / sell-side advisor can use to 'slice & dice' and extract visuals, this can also be shared with select buyers; and a consolidated Excel sales cube. Steps below are dependent on data from the brands
+_No industry-specific bullets._
 
 ### Revenue And Profitability Analysis Da (`revenue_and_profitability_analysis_da`)
 
@@ -375,7 +374,6 @@ _Not in common skeleton._
 - (scope.190) Perform a service-level line item analysis to understand profitability (including price, volume, and mix calculations; low margin service areas; basket analysis, etc.), opportunities to optimize pricing, areas to rationalize, reflect cost increases, drive cross-sell / improve baskets, etc.
 - (scope.191) Extract and identify top brands / OEMs used in servicing customers and understand any opportunities to harmonize pricing across different business that might result in upside
 - (scope.192) Where available, link above sales / job data to technician utilization and salary to understand performance opportunities
-- (scope.194) Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer
 
 ### Customer Base Health Da (`customer_base_health_da`)
 
@@ -385,10 +383,8 @@ _Not in common skeleton._
 
 #### Industry (`hvac`)
 
-- (scope.195) Building on the previous step, the phase evaluates the health of the customer base; how sustainable and recurring (or re-occurring) in nature are the customers; covers last fiscal years (the Historical Period) and TTM (the most recent period)
 - (scope.196) Analyze health of the customer base across the three entities, in terms of revenue / profitability by customer, type of customer (residential, commercial, etc.) any customer contracts, etc.; overall retention, growth patterns, renewal history, cohort (vintage); new, loss, existing; customer concentration; etc. including associated services and categories these customers purchase to understand patterns and insights
 - (scope.197) Analyze type of revenue and mix (one-time versus recurring), across different streams (e.g., revenues from HVAC & Electrical, from Repair Services, from Extended Warranty, and Construction), and understand any performance trending insights
-- (scope.198) Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer
 
 ### Marketing And Advertising Performance Da (`marketing_and_advertising_performance_da`)
 
@@ -400,7 +396,6 @@ _Not in common skeleton._
 
 - (scope.199) Evaluates the performance of marketing and advertising; data is analyzed in conjunction with the revenue and customer analysis to understand any trends / insights in relation to how marketing and advertising drives performance; covers last fiscal years (the Historical Period) and TTM (the most recent period)
 - (scope.200) Analyzes trends and insights related to revenue, customers, average revenue/margin per job, recurring nature of customers, high value products, etc. by lead source /channel by brand and advertising spend by lead source / channel by brand
-- (scope.201) Extracts insights into drivers of profitability and opportunities for value creation / optimization by the next buyer
 - (scope.202) Analyzes the sales funnel and conversion metrics by lead source / channel by brand, including leads generated, quotes, and sales conversion rates; ties this to revenue and customer analysis in the previous steps to understand insights to drive the business
 - (scope.203) Analyzes revenue generating job (e.g., service visit, install, replacement, etc.) and ties back to performance
 

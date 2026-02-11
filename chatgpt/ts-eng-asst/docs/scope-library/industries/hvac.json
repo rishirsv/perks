@@ -454,10 +454,6 @@
           ]
         },
         {
-          "id": "scope.137",
-          "text": "Understand impact of Quality of Earnings adjustments on the Historical Period budget"
-        },
-        {
           "id": "scope.139",
           "text": "Understand application of revenue recognition policies, specifically POC, including consistency of application and period end true-ups that may skew financial results; and"
         },
@@ -773,12 +769,7 @@
           "text": "Understand the nature and extent of related party transactions and basis for pricing arrangements."
         }
       ],
-      "data_and_analytics": [
-        {
-          "id": "scope.187",
-          "text": "The purpose of this section is to perform detailed analysis on the drivers of revenue and margin growth, marketing performance, and operations to understand upside opportunities and communicate an effective story in conjunction with the Quality of Earnings. The outputs will be a PowerPoint trend report, highlighting key insights; a Power BI dashboard that / sell-side advisor can use to 'slice & dice' and extract visuals, this can also be shared with select buyers; and a consolidated Excel sales cube. Steps below are dependent on data from the brands"
-        }
-      ],
+      "data_and_analytics": [],
       "revenue_and_profitability_analysis_da": [
         {
           "id": "scope.188",
@@ -799,17 +790,9 @@
         {
           "id": "scope.192",
           "text": "Where available, link above sales / job data to technician utilization and salary to understand performance opportunities"
-        },
-        {
-          "id": "scope.194",
-          "text": "Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer"
         }
       ],
       "customer_base_health_da": [
-        {
-          "id": "scope.195",
-          "text": "Building on the previous step, the phase evaluates the health of the customer base; how sustainable and recurring (or re-occurring) in nature are the customers; covers last fiscal years (the Historical Period) and TTM (the most recent period)"
-        },
         {
           "id": "scope.196",
           "text": "Analyze health of the customer base across the three entities, in terms of revenue / profitability by customer, type of customer (residential, commercial, etc.) any customer contracts, etc.; overall retention, growth patterns, renewal history, cohort (vintage); new, loss, existing; customer concentration; etc. including associated services and categories these customers purchase to understand patterns and insights"
@@ -817,10 +800,6 @@
         {
           "id": "scope.197",
           "text": "Analyze type of revenue and mix (one-time versus recurring), across different streams (e.g., revenues from HVAC & Electrical, from Repair Services, from Extended Warranty, and Construction), and understand any performance trending insights"
-        },
-        {
-          "id": "scope.198",
-          "text": "Extract and understand any patterns and trends that might inform value creation and optimization opportunities for the next buyer"
         }
       ],
       "marketing_and_advertising_performance_da": [
@@ -831,10 +810,6 @@
         {
           "id": "scope.200",
           "text": "Analyzes trends and insights related to revenue, customers, average revenue/margin per job, recurring nature of customers, high value products, etc. by lead source /channel by brand and advertising spend by lead source / channel by brand"
-        },
-        {
-          "id": "scope.201",
-          "text": "Extracts insights into drivers of profitability and opportunities for value creation / optimization by the next buyer"
         },
         {
           "id": "scope.202",

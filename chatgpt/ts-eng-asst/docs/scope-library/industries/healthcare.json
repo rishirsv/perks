@@ -413,12 +413,6 @@
           "text": "Summarize potential adjustments identified regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact EBITDA, including:",
           "children": [
             {
-              "text": "Management identified adjustments;"
-            },
-            {
-              "text": "Non-recurring revenue and expenses;"
-            },
-            {
               "text": "Significant out of period revenue and expense (e.g., cash to accrual accounting impact); and"
             },
             {
@@ -744,6 +738,7 @@
       "net_debt",
       "operating_expenses",
       "purchase_and_sale_agreement",
+      "quality_of_earnings",
       "revenue_analysis",
       "store_portfolio_analysis",
       "waterfall_revenue_analysis",

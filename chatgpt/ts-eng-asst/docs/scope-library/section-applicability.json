@@ -493,6 +493,20 @@
           ]
         }
       ],
+      "quality_of_earnings": [
+        {
+          "id": "scope.082",
+          "text": "Summarize potential adjustments identified regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact EBITDA, including:",
+          "children": [
+            {
+              "text": "Significant out of period revenue and expense (e.g., cash to accrual accounting impact); and"
+            },
+            {
+              "text": "Pro forma impacts for items such as recent de novo."
+            }
+          ]
+        }
+      ],
       "revenue_analysis": [
         {
           "id": "scope.087",
@@ -708,6 +722,53 @@
       "purchase_and_sale_agreement": [],
       "assistance_with_transaction_documentation": [],
       "audit_work_paper": []
+    },
+    "insurance": {
+      "revenue_analysis": [
+        {
+          "id": "scope.544",
+          "text": "Obtain and read an analysis of commission and fee income trends and recognition, including contingent commissions by carrier."
+        },
+        {
+          "id": "scope.545",
+          "text": "Assess service and other fee income, including cancellation provisions where applicable."
+        },
+        {
+          "id": "scope.546",
+          "text": "Evaluate treatment of interest income, commission splits, and revenue cut-off."
+        }
+      ]
+    },
+    "manufacturing": {
+      "quality_of_earnings": [
+        {
+          "id": "scope.230",
+          "text": "Identify potential adjustments to reported earnings before interest, income taxes, depreciation, and amortization (EBITDA) by considering the impact of:",
+          "children": [
+            {
+              "text": "The impact of acquisitions (for example: acquired businesses);"
+            },
+            {
+              "text": "The impact of supply chain disruptions, if any;"
+            },
+            {
+              "text": "The impact of research and development expenditures and capitalization policies;"
+            },
+            {
+              "text": "The timing of true-ups and other adjustments made less frequently than monthly;"
+            },
+            {
+              "text": "The impact of commodity/raw material cost fluctuations and any associated hedging programs;"
+            },
+            {
+              "text": "The impact of key supplier cost arrangements, including assessment of hedged versus market prices and illustrative impacts to EBITDA; and"
+            },
+            {
+              "text": "The impact of lease renewal."
+            }
+          ]
+        }
+      ]
     },
     "prof_services": {
       "business_overview": [

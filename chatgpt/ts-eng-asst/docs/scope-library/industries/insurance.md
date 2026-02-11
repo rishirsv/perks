@@ -23,7 +23,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `revenue_analysis`
 
 ## Section Review (Common + Industry)
 
@@ -44,9 +44,6 @@ Each section below shows common skeleton bullets and then industry-specific bull
 - (scope.525) Gain an understanding of lines of business, distribution channels, and geographic footprint.
 - (scope.526) Understand premium growth drivers, retention, and pricing actions over the Historical Period.
 - (scope.527) Understand regulatory environment and reporting requirements applicable to the business.
-- (scope.537) Understand carrier relationships, including concentration, key terms, and dependency risks.
-- (scope.538) Understand cooperative/cluster structures and economics where applicable.
-- (scope.539) Understand other significant third-party relationships that are important to the business model.
 
 ### Accounting overview (`accounting_overview`)
 
@@ -86,10 +83,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`insurance`)
 
-- (scope.540) Assess the impact of acquisitions/disposals, including office openings/closings, on normalized EBITDA.
-- (scope.541) Assess the impact of new/lost clients and significant changes in contract terms with clients and/or carriers.
-- (scope.542) Assess non-cash revenue and expense items, including setup/release/reversal of provisions and reserves.
-- (scope.543) Assess costs that may not be at market rates and related-party charges, including excess compensation to management/shareholders.
+_No industry-specific bullets._
 
 ### Revenue analysis (`revenue_analysis`)
 
@@ -114,7 +108,6 @@ Each section below shows common skeleton bullets and then industry-specific bull
 - (scope.544) Obtain and read an analysis of commission and fee income trends and recognition, including contingent commissions by carrier.
 - (scope.545) Assess service and other fee income, including cancellation provisions where applicable.
 - (scope.546) Evaluate treatment of interest income, commission splits, and revenue cut-off.
-- (scope.547) Review pro forma revenue bridge separating organic versus acquired growth, and subsequent acquisition performance versus acquisition-date projections.
 
 ### Operating expenses (`operating_expenses`)
 
@@ -130,10 +123,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`insurance`)
 
-- (scope.548) Obtain and read an analysis of employee compensation, including incentive bonuses, producer draws, and deferred compensation.
-- (scope.549) Review producer concentration and compensation trends by office/department, including headcount trends.
-- (scope.550) Assess deferred consideration provided to acquired producer groups and transaction expenses.
-- (scope.551) Review operating and non-operating expenses with focus on expense cut-off.
+_No industry-specific bullets._
 
 ### Working capital (`working_capital`)
 
@@ -147,7 +137,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`insurance`)
 
-- (scope.552) Obtain an analysis of monthly working capital components for the last two fiscal years and latest year-to-date period, and comment on working capital needs, seasonality, and trends, including premiums receivable/payable cycles and trust cash timing.
+_No industry-specific bullets._
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -161,8 +151,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`insurance`)
 
-- (scope.553) Obtain and read an analysis of premiums and commissions receivable and other assets, and assess aging by carrier/office and cancellation patterns due to premium delinquency.
-- (scope.554) Assess carrier advances and other receivable balances, including prepaid expenses and other non-trade receivables.
+_No industry-specific bullets._
 
 ### Accounts payable and accrued liabilities (`accounts_payable_and_accrued_liabilities`)
 
@@ -176,9 +165,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`insurance`)
 
-- (scope.555) Obtain and read an analysis of premiums due to insurance companies, including aging and settlement patterns.
-- (scope.556) Review deferred compensation accruals and commission/incentive true-up liabilities.
-- (scope.557) Assess trust cash balances and processes for monitoring net fiduciary asset position.
+_No industry-specific bullets._
 
 ### Capital expenditure requirements (`capital_expenditure_requirements`)
 
@@ -207,9 +194,7 @@ _No industry-specific bullets._
 
 #### Industry (`insurance`)
 
-- (scope.558) Inquire about self-insurance programs, post-retirement/unfunded pension obligations, and incentive programs including change-of-control provisions.
-- (scope.559) Review deferred/contingent acquisition costs and earnout-related obligations.
-- (scope.560) Evaluate significant contract commitments (employment, carrier/supplier, debt, lease, equity-related) including change-of-control provisions and restrictions on use of assets.
+_No industry-specific bullets._
 
 ### Net debt (`net_debt`)
 
@@ -220,8 +205,7 @@ _No industry-specific bullets._
 
 #### Industry (`insurance`)
 
-- (scope.561) Analyze contingent earnout liabilities from historical acquisitions, including rollforward and expected payout scenarios based on current and projected performance.
-- (scope.562) Summarize items identified through diligence that may be considered debt-like for valuation purposes.
+_No industry-specific bullets._
 
 ### Audit work paper (`audit_work_paper`)
 

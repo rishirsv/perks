@@ -27,7 +27,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: `accounting_overview`, `accounts_payable_and_accrued_liabilities`, `accounts_receivable`, `assistance_with_transaction_documentation`, `audit_work_paper`, `capital_expenditure_requirements`, `commitments_and_contingencies`, `net_debt`, `operating_expenses`, `purchase_and_sale_agreement`, `revenue_analysis`, `store_portfolio_analysis`, `waterfall_revenue_analysis`, `working_capital`
+- Replaced industry sections: `accounting_overview`, `accounts_payable_and_accrued_liabilities`, `accounts_receivable`, `assistance_with_transaction_documentation`, `audit_work_paper`, `capital_expenditure_requirements`, `commitments_and_contingencies`, `net_debt`, `operating_expenses`, `purchase_and_sale_agreement`, `quality_of_earnings`, `revenue_analysis`, `store_portfolio_analysis`, `waterfall_revenue_analysis`, `working_capital`
 
 ## Section Review (Common + Industry)
 
@@ -96,8 +96,6 @@ Each section below shows common skeleton bullets and then industry-specific bull
 #### Industry (`healthcare`)
 
 - (scope.082) Summarize potential adjustments identified regarding the profit and loss performance of Target in the form of a quality of earnings analysis, summarizing the risks that may impact EBITDA, including:
-  - Management identified adjustments;
-  - Non-recurring revenue and expenses;
   - Significant out of period revenue and expense (e.g., cash to accrual accounting impact); and
   - Pro forma impacts for items such as recent de novo.
 
