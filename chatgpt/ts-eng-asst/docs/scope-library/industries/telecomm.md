@@ -23,7 +23,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `audit_work_paper`, `business_overview`, `capital_expenditure_requirements`, `commitments_and_contingencies`, `revenue_analysis`
 
 ## Section Review (Common + Industry)
 
@@ -41,9 +41,9 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`telecomm`)
 
-- (scope.498) Gain an understanding of the product and service portfolio, customer segments, and go-to-market channels.
-- (scope.499) Understand network/infrastructure model (owned vs leased) and key third-party dependencies.
-- (scope.500) Understand key commercial arrangements (carriers/partners, wholesale, roaming, etc.) where applicable.
+- (scope.498) Gain an understanding of the telecom product/service portfolio, customer segments, and go-to-market channels.
+- (scope.499) Understand network and infrastructure model (owned versus leased) and key third-party dependencies.
+- (scope.500) Understand key commercial arrangements (for example: carriers, wholesale, and roaming), where applicable.
 
 ### Accounting overview (`accounting_overview`)
 
@@ -103,9 +103,10 @@ _No industry-specific bullets._
 
 #### Industry (`telecomm`)
 
-- (scope.501) Analyze revenue trends by product line and customer segment, including recurring vs usage-based components.
-- (scope.502) Assess churn, ARPU, net adds, retention, and other subscriber/customer KPIs where available.
-- (scope.503) Understand pricing, discounting, promotions, and contract terms driving revenue sustainability.
+- (scope.501) Analyze telecom revenue quality and trends, including:
+  - Revenue by service line and recurring versus usage-based components;
+  - Churn, ARPU, net adds, retention, and related subscriber/customer KPIs; and
+  - Pricing, discounting, promotions, and contract terms driving revenue sustainability.
 
 ### Operating expenses (`operating_expenses`)
 
@@ -175,9 +176,10 @@ _No industry-specific bullets._
 
 #### Industry (`telecomm`)
 
-- (scope.504) Assess capex intensity and planned network/infrastructure investments.
-- (scope.505) Understand timing and drivers of capex programs and any deferral/backlog dynamics.
-- (scope.506) Review lease-versus-buy considerations for infrastructure and related cash flow impacts.
+- (scope.504) Assess telecom capex profile and requirements, including:
+  - Capex intensity and planned network/infrastructure investment programs;
+  - Timing and drivers of capex deployment and deferral/backlog dynamics; and
+  - Lease-versus-buy considerations for infrastructure and related cash-flow effects.
 
 ### Commitments and contingencies (`commitments_and_contingencies`)
 
@@ -194,9 +196,10 @@ _No industry-specific bullets._
 
 #### Industry (`telecomm`)
 
-- (scope.507) Review key long-term commitments (network leases, tower/site leases, capacity commitments, vendor agreements).
-- (scope.508) Assess regulatory and licensing exposure (including spectrum-related commitments if applicable).
-- (scope.509) Review material customer credits, service-level penalties, and dispute exposure.
+- (scope.507) Assess telecom-specific commitments and contingencies, including:
+  - Long-term network/site/capacity commitments and key vendor agreements;
+  - Regulatory and licensing exposure (including spectrum-related commitments, where applicable); and
+  - Material customer credits, service-level penalties, and dispute exposure.
 
 ### Net debt (`net_debt`)
 

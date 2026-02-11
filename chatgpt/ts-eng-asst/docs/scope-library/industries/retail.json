@@ -376,7 +376,7 @@
         },
         {
           "id": "scope.463",
-          "text": "Analyze price-volume-mix drivers including promotional activity, markdowns, returns, and discounting."
+          "text": "Assess retail-specific margin drivers, including promotional cadence, markdown architecture, returns behavior, and discounting mix."
         },
         {
           "id": "scope.464",
@@ -400,35 +400,29 @@
       "working_capital": [
         {
           "id": "scope.468",
-          "text": "Analyze inventory turns, aged inventory, stock availability, and shrink/obsolescence trends."
-        },
-        {
-          "id": "scope.469",
-          "text": "Review vendor terms, rebates/allowances, and accounts payable practices."
-        },
-        {
-          "id": "scope.470",
-          "text": "Assess customer liabilities and other working capital items (gift cards, loyalty liabilities, customer deposits)."
-        }
-      ],
-      "inventory": [
-        {
-          "id": "scope.471",
-          "text": "Obtain and read an analysis of inventory and inquire and comment on:",
+          "text": "Analyze inventory-related working capital drivers, including:",
           "children": [
             {
               "text": "Inventory composition by category and location/channel;"
             },
             {
-              "text": "Inventory valuation methodology and reserves;"
+              "text": "Inventory turns, aged inventory, stock availability, and shrink/obsolescence trends;"
             },
             {
-              "text": "Stock shrinkage, obsolescence, and write-downs; and"
+              "text": "Inventory valuation methodology and reserve adequacy; and"
             },
             {
               "text": "Returns, damages, and vendor return programs."
             }
           ]
+        },
+        {
+          "id": "scope.469",
+          "text": "Review vendor rebates/allowances and payment-term structures, and assess their impact on cash conversion."
+        },
+        {
+          "id": "scope.470",
+          "text": "Assess customer-liability working capital drivers, including gift card and loyalty program liabilities."
         }
       ]
     }
@@ -468,7 +462,11 @@
       "revenue_analysis",
       "working_capital"
     ],
-    "replaced_industry_sections": [],
+    "replaced_industry_sections": [
+      "inventory",
+      "revenue_analysis",
+      "working_capital"
+    ],
     "added_industry_sections": []
   }
 }

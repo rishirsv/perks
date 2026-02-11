@@ -25,7 +25,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `assistance_with_transaction_documentation`, `audit_work_paper`, `business_overview`, `capital_expenditure_requirements`, `net_debt`, `operating_expenses`, `supporting_analysis_for_quality_of_earnings`, `working_capital`
 
 ## Section Review (Common + Industry)
 
@@ -43,8 +43,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`supermarket`)
 
-- (scope.358) Understand Target’s accounting of intercompany transactions and consolidation process; and
-- (scope.359) Significant accounting policies and estimates and contemplated changes.
+_No industry-specific bullets._
 
 ### Accounting overview (`accounting_overview`)
 
@@ -120,14 +119,10 @@ _No industry-specific bullets._
 
 #### Industry (`supermarket`)
 
-- (scope.376) Obtain and read an analysis of the Target’s selling, general and administration expenses and inquire about:
-  - Salaries and wages (including headcount by area and function, if possible);
-  - General and administrative expenses;
-  - Information systems expenses;
-  - Corporate costs;
-  - Extraordinary expenses;
-  - Rent and leases; and
-  - Miscellaneous and other expenses.
+- (scope.376) Obtain and read an analysis of supermarket operating expenses and inquire about:
+  - Store labour and support-function cost trends;
+  - Information-systems and corporate overhead cost allocations, where applicable; and
+  - Occupancy costs (including rent and lease-related cost drivers).
 
 ### Working capital (`working_capital`)
 
@@ -141,12 +136,10 @@ _No industry-specific bullets._
 
 #### Industry (`supermarket`)
 
-- (scope.377) Obtain details of the monthly net working capital and comment on the following for Retail, Wholesale, and Corporate Overhead to the extent they can be bifurcated:
-  - The composition of individual working capital accounts (e.g. trade receivables, accounts payable and accruals, inventory and inventory provisions, etc.);
-  - Monthly working capital trends and impact on reported metrics (e.g. days sales outstanding, inventory turns, days payables outstanding, net working capital as a percentage of revenues, etc.);
-  - Large, unusual, or non-operating items and current or upcoming initiatives that may affect normal working capital trends, (such as accruals for bonuses, capital projects, understanding non-trade balances, etc.);
-  - Working capital seasonality and implications on cash flow and working capital peg; and
-  - Understanding the accounting impact of allowance for uncollectible accounts and write-offs, inventory reserve, reserves for sales returns and allowances, and other accruals requiring judgment.
+- (scope.377) Assess supermarket-specific working capital drivers by retail, wholesale, and corporate streams (to the extent separable), including:
+  - Segment-level working capital composition and trade-ratio trends;
+  - Inventory reserves, sales returns/allowances, and other judgmental accruals; and
+  - Seasonality implications for cash flow and working capital peg setting.
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -186,11 +179,10 @@ _No industry-specific bullets._
 
 #### Industry (`supermarket`)
 
-- (scope.383) Obtain details of historical capital expenditures, classified as growth and maintenance, by asset category, and comment on:
-- (scope.384) Understand Target’s real estate profile including owned vs leased;
-- (scope.385) Growth vs. maintenance capital expenditures, in particular for new store builds, renovations, e-Commerce, IT/Cybersecurity, DCs, and production units
-- (scope.386) Committed capital expenditures, including recent monthly spending versus budget; and
-- (scope.387) Historical and planned capital expenditures.
+- (scope.383) Assess supermarket capex profile and requirements, including:
+  - Growth versus maintenance capex for stores, renovations, eCommerce, IT/cybersecurity, distribution centers, and production units;
+  - Committed capex and near-term spending versus budget; and
+  - Historical and planned capital expenditure cadence.
 
 ### Commitments and contingencies (`commitments_and_contingencies`)
 
@@ -218,11 +210,7 @@ _No industry-specific bullets._
 
 #### Industry (`supermarket`)
 
-- (scope.378) For each of Retail, Wholesale, and Corporate Overhead (to the extent they can be bifurcated):
-- (scope.379) Analyze reported current and non-current debt and other debt-like items on the balance sheet;
-- (scope.380) Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt;
-- (scope.381) Understand whether there are any off-balance sheet liabilities (e.g. incentive plans, legal claims, guarantees, purchase commitments, etc.); and
-- (scope.382) Other purchase commitments (operating leases) and contingencies (legal matters).
+_No industry-specific bullets._
 
 ### Audit work paper (`audit_work_paper`)
 
@@ -236,41 +224,4 @@ _No industry-specific bullets._
 
 #### Industry (`supermarket`)
 
-- (scope.388) Access Target’s Historical Period audit work papers and identified audit matters including unrecorded audit differences, control matters, and other salient findings.
-
-### Supporting Analysis For Quality Of Earnings (`supporting_analysis_for_quality_of_earnings`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`supermarket`)
-
-- (scope.361) Obtain and read an analysis of sales and expenses, and enquire about, to the extent available:
-  - Sales and COGS adjustments (including sales returns, markdowns, stock shrinkage, obsolescence, discounts, rebates, other income);
-  - For Retail, understand sales and growth by tonnage;
-  - For Wholesale, understand sales and growth by customer account
-  - Store costs analyzed as a percentage of sales, square footage, or other applicable metric
-- (scope.362) Evaluate and understand the key trends and dynamics that impact sustainability of revenue and margins;
-- (scope.363) Evaluate product mix by revenue, costs, and margin to extract key trends that impact revenue forecasts and store performance for both the retail business and the wholesale business
-- (scope.364) Analyze cross-sell, upsell, retention; cohorts of product category and typical purchasing behaviors (e.g., bundling, etc.)
-- (scope.365) Understand impact of any private label brands on margin; any differences by location
-- (scope.366) Evaluate by location to understand gross margin contributions
-- (scope.367) Analyze business performance, trends, revenue, costs, and margin by location; including typical product category offered at locations that impact the differences in performance – informs locations to rationalize / expand
-- (scope.368) Evaluate local competitive presence (e.g., number of competitors within 5 or 10km radius circles) that might impact store performance
-- (scope.369) Integrate with insights from conducting product category analysis
-- (scope.370) Conduct a ramp-up analysis for recent locations to evaluate any relevant EBITDA adjustments that were identified
-- (scope.371) Analyze the health of the customer base, including purchasing patterns (e.g., every few days, or week, etc.) and typical purchased / bucketed categories
-- (scope.372) Leverage target’s customer data (e.g., anonymized) to analyze retention, growth, margin, average order side (AOS), impact of loyalty program, etc.
-- (scope.373) Analyze metrics such as order frequency, new customers as a percentage of active customers, etc. to understand the health of the customer base
-- (scope.374) Understand Target’s central production unit and the current sales it supports
-
-### Assistance With Transaction Documentation (`assistance_with_transaction_documentation`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`supermarket`)
-
-- (scope.389) Read relevant asset purchase agreement definitions (e.g. net working capital and debt-like item definitions and adjustment procedures).
+_No industry-specific bullets._

@@ -20,7 +20,16 @@ This report audits the current reusable **FDD scope library** and related scope-
 
 ---
 
-## Implementation Progress Tracker (Updated: 2026-02-09)
+## Implementation Progress Tracker (Updated: 2026-02-11)
+
+### Status Note (Current)
+
+- The full industry cleanup pass is now complete in the **docs-layer review surface**:
+  - `docs/scope-library/section-applicability.json`
+  - `docs/scope-library/industries/*.json`
+  - `docs/scope-library/industries/*.md`
+- Industry-specific `audit_work_paper` sections are now removed globally (common-only).
+- Remaining work is **canonical merge into `dist/scope-library.json`** plus final regression validation.
 
 ### Phase A (completed) — Establish a clear source of truth
 
@@ -59,13 +68,15 @@ This phase addresses larger structural risk (key drift + default over-inclusion)
   - [x] 4.1 Canonicals approved: `audit_work_paper`, `inventory`, `related_parties`, `work_in_progress`
   - [x] 4.2 Update bucket mappings + aliases for approved families
   - [x] 4.3 Migrate section keys in `scope-library.json` and preserve underlying bullets per industry
-- [ ] 4.4 Normalize remaining key families (`supporting_analysis_*`, prepaids/other-assets cluster)
-  - [ ] 4.4.1 Choose canonical keys for remaining families
-  - [ ] 4.4.2 Apply key migration + alias back-compat
-- [ ] 5.0 Separate Core vs Optional vs Excluded scope content
-  - [ ] 5.1 Finalize default inclusion policy
-  - [ ] 5.2 Implement generator/UI behavior for optional-by-default sections
-  - [ ] 5.3 Regression test generated letters across industries
+- [x] 4.4 Apply section-level normalization and incremental-only rewrites across all industry modules in docs-layer (`section-applicability.json`)
+  - [x] 4.4.1 Remove redundant industry bullets already covered by common skeleton
+  - [x] 4.4.2 Remove industry-specific `audit_work_paper` across all industries
+  - [x] 4.4.3 Remove optional/deal-specific artifacts from default industry modules (kept out of baseline)
+  - [x] 4.4.4 Regenerate all industry exports for review (`docs/scope-library/industries/*`)
+- [ ] 5.0 Merge docs-layer decisions into canonical dist library
+  - [ ] 5.1 Port approved replacements/exclusions into `dist/scope-library.json`
+  - [ ] 5.2 Regenerate docs exports from updated dist
+  - [ ] 5.3 Run regression checks (JSON validity, spelling QA, export validation, sample generation)
 
 ### Canonicalization policy for underlying bullets (applied)
 

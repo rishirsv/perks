@@ -23,7 +23,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `accounting_overview`, `audit_work_paper`, `balance_sheet`, `operating_expenses`, `quality_of_earnings`
 
 ## Section Review (Common + Industry)
 
@@ -61,9 +61,10 @@ _No industry-specific bullets._
 
 #### Industry (`real_estate`)
 
-- (scope.318) Understand and summarize the financial statement preparation process, including:
-  - Significant accounting policies and estimates and contemplated changes; and
-  - Reporting methodology (structure and process) and consolidation process, period ending process and related party transactions.
+- (scope.318) Discuss real-estate-specific accounting considerations with management, including:
+  - Lease-related accounting policies (for example: straight-line rent, incentives/abatements, and common-area maintenance recoveries);
+  - Tenant receivable provisioning and write-off policies specific to rent/recoveries; and
+  - Investment property and joint-venture accounting/valuation approach, where applicable.
 
 ### Quality of earnings (`quality_of_earnings`)
 
@@ -81,15 +82,10 @@ _No industry-specific bullets._
 
 #### Industry (`real_estate`)
 
-- (scope.319) Summarize potential adjustments to historical Net operating income (“NOI”) on a consolidated basis by considering:
-  - Management’s proposed adjustments to reported NOI and inquire about the nature and rationale of such adjustments and supporting documentation, if any;
-  - The impact of any changes to senior management or team structure;
-  - The elimination of public company costs;
-- (scope.320) Consider the pro forma impact of new units, lost units, acquired, developed, sold properties and expiring leases;
-- (scope.321) The pro forma impact consideration is contingent on readily available information from Target that summarizes its business trends such as revenue and margins by location, by community, by type, occupancy rates, lease rates, etc. for which the information has been reconciled to the Target’s financial statements and can be used to formulate the potential pro forma consideration. To the extent the information is not readily available or not transferrable to calculate a potential impact, we will discuss with Client the applicability of the impact and potential time effort to analyze accordingly.
-- (scope.322) The impact of provisions, management estimates, or adjusting entries on the reported results;
-- (scope.323) Any other unusual or non-recurring events (revenue or expenses) or transactions that may have distorted results; and
-- (scope.324) Other potential items discovered in the due diligence process.
+- (scope.319) Summarize potential adjustments to historical net operating income (NOI) on a consolidated basis by considering:
+  - Management's proposed adjustments to reported NOI and supporting rationale;
+  - Elimination of public company costs, where applicable; and
+  - Potential impact of new, lost, acquired, developed, or sold properties and expiring leases.
 
 ### Revenue analysis (`revenue_analysis`)
 
@@ -127,13 +123,10 @@ _No industry-specific bullets._
 
 #### Industry (`real_estate`)
 
-- (scope.325) Obtain and read an analysis of the Company’s operating expenses and inquire about
-- (scope.326) Primary components of property operating costs, property tax expenses;
-- (scope.327) Rent bad debt expense trends;
-- (scope.328) Wages, payroll taxes and benefits, by operating segment and function, if possible;
-- (scope.329) Incentive based compensation;
-- (scope.330) General and administrative expenses;
-- (scope.331) Sales and marketing and other expenses.
+- (scope.325) Obtain and read an analysis of the Company's operating expenses and inquire about:
+  - Primary components of property operating costs, including property tax expense;
+  - Rent bad debt expense trends; and
+  - Other property-level cost drivers unique to the ownership/management model, where applicable.
 
 ### Working capital (`working_capital`)
 
@@ -229,10 +222,7 @@ _No industry-specific bullets._
 
 #### Industry (`real_estate`)
 
-- (scope.341) Obtain and read the Company’s audit working paper files and management letters for the latest fiscal year:
-- (scope.342) Summarize audit matters, if any;
-- (scope.343) Comment on the nature and volume of audit differences (adjustments), use of accounting estimates, any changes in accounting policies or methods and their implications; and
-- (scope.344) Read analytical reviews for trends, unusual practices, internal control matters.
+_No industry-specific bullets._
 
 ### Balance Sheet (`balance_sheet`)
 
@@ -242,22 +232,11 @@ _Not in common skeleton._
 
 #### Industry (`real_estate`)
 
-- (scope.332) Summarize and understand Target’s balance sheet profile:
-- (scope.333) Comment on the working capital trends, for the respective periods including unusual trends, unusual balances.
-- (scope.334) Accounts receivable: Obtain and read an analysis of the Company’s accounts receivable and inquire about Rent receivable profile including aging analysis and provisions; other non-trade receivable balances.
-- (scope.335) Other assets (i.e., prepaid expenses and deposits):
-  - Accounts payable and accrued liabilities:
-- (scope.336) Obtain and read an analysis of the Company’s accounts payable and accrued expenses and inquire about:
-  - AP aging analysis, terms of trade with major vendors, days payables outstanding and trade payables aging analysis;
-  - Accrued expenses; and
-  - Tenant rental deposits
-  - If applicable, consider normalization adjustments to working capital.
-- (scope.337) Understand the nature of investment properties and joint ventures;
-- (scope.338) Analyze historical capital expenditure trends
-- (scope.339) Understand the components of indebtedness including:
-  - Net debt items presented by management and other potential debt-like items;
-  - Analysis of remaining liabilities surrounding contingent considerations; and
-  - Significant lease and purchase obligations.
+- (scope.332) Summarize and understand Target's real-estate-specific balance sheet profile, including:
+  - Rent receivable profile (including aging/provisions) and other non-trade receivable balances;
+  - Tenant rental deposits and related liabilities;
+  - Nature of investment properties and joint ventures; and
+  - Any unusual real-estate-specific balance sheet items identified during due diligence.
 
 ### Operating Cash Flow Funds From Operations (`operating_cash_flow_funds_from_operations`)
 

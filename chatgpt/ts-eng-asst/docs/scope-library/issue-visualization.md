@@ -11,15 +11,32 @@ flowchart LR
   A --> D[Issue 3<br/>Duplicate bullets<br/>Mapped: I-004]
   A --> E[Issue 4+<br/>Optionality + artifacts<br/>Mapped: I-002/I-003]
   A --> F[Issue 5<br/>Alias coverage hardening<br/>Mapped: I-005]
+  A --> G[Merge to Dist<br/>Canonicalization run]
 
-  B --> B1[In Progress]
+  B --> B1[Done]
   C --> C1[Done]
   D --> D1[Done]
-  E --> E1[Next]
+  E --> E1[Done in docs-layer]
   F --> F1[Deferred]
+  G --> G1[Pending]
 ```
 
-## 2) I-001 Canonical Key Map (Applied)
+## 2) Section Applicability Mechanics (How Cleanup Is Applied)
+
+```mermaid
+flowchart TD
+  A[dist/scope-library.json] --> B[export-scope-library.py]
+  C[docs/scope-library/section-applicability.json] --> B
+  B --> D[Apply common section exclusions]
+  B --> E[Apply industry section replacements]
+  B --> F[Apply industry section additions]
+  D --> G[Render docs/scope-library/industries/*.json]
+  E --> G
+  F --> G
+  G --> H[Render docs/scope-library/industries/*.md]
+```
+
+## 3) I-001 Canonical Key Map (Applied)
 
 ```mermaid
 flowchart TB
@@ -45,7 +62,7 @@ flowchart TB
   F --> F8[prepaid_materials_and_other_assets]
 ```
 
-## 3) I-004 Duplicate Hotspot (Resolved)
+## 4) I-004 Duplicate Hotspot (Resolved)
 
 ```mermaid
 flowchart LR
@@ -58,7 +75,7 @@ flowchart LR
 
 Duplicate detector status: `0` duplicate sections remaining.
 
-## 4) Issue Decision Funnel (I-001/I-002/I-003/I-005)
+## 5) Issue Decision Funnel (I-001/I-002/I-003/I-005)
 
 ```mermaid
 flowchart TD
@@ -71,7 +88,7 @@ flowchart TD
   F -->|No| H[Merge/Normalize taxonomy]
 ```
 
-## 5) Key Sets By Issue Number
+## 6) Key Sets By Issue Number
 
 ### I-001 applied key migrations
 
@@ -86,13 +103,13 @@ flowchart TD
 - Removed `manufacturing.working_capital.scope.257`
 - Removed `manufacturing.working_capital.scope.258`
 
-### I-003 artifact review set (next)
+### I-003 artifact review set (applied in docs-layer)
 
 - `financial_due_diligence`
 - `optional_fdd_procedures`
 - `phase_2_post_bid_support`
 - `phase_1_gaap_considerations`
-- `assistance_with_transaction_documentation`
+- `assistance_with_transaction_documentation` (removed from default where applicable)
 
 ### I-005 alias-coverage gap set (deprioritized; address after scope cleanup)
 
@@ -127,9 +144,11 @@ flowchart TD
 - `supporting_analysis_to_quality_of_earnings`
 - `waterfall_revenue_analysis`
 
-## 6) Completed Visual Pack (Current Data)
+## 7) Visual Pack (Legacy Snapshot Before Dist Merge)
 
-### 6.1 I-001 + I-005 Key-to-Bucket Matrix (`section_to_bucket`)
+These tables are useful for reference but represent pre-merge snapshots. Recompute after dist canonicalization for final metrics.
+
+### 7.1 I-001 + I-005 Key-to-Bucket Matrix (`section_to_bucket`)
 
 | Bucket key | Issue link | Key count | Keys |
 |---|---|---:|---|
@@ -142,14 +161,14 @@ flowchart TD
 
 Alias-coverage snapshot (I-005): `25`/`55` keys have direct alias mapping; `30` keys currently do not.
 
-### 6.2 I-004 Duplicate-Text Detector Output
+### 7.2 I-004 Duplicate-Text Detector Output
 
 | Metric | Value |
 |---|---:|
 | Duplicate hotspot sections | 0 |
 | Duplicate groups | 0 |
 
-### 6.3 I-001 Canonical-vs-Variant Status Table
+### 7.3 I-001 Canonical-vs-Variant Status Table
 
 | Family | Canonical key | Variant keys | Status |
 |---|---|---|---|
@@ -160,7 +179,7 @@ Alias-coverage snapshot (I-005): `25`/`55` keys have direct alias mapping; `30` 
 | Supporting analysis QoE | _TBD_ | `supporting_analysis_for_quality_of_earnings`, `supporting_analysis_to_quality_of_earnings` | Pending |
 | Other assets/prepaids cluster | _TBD_ | `other_*`, `prepaid_*`, `prepaids*` | Pending |
 
-### 6.4 I-002 Industry Scope Heatmap (Section Counts + Bullet Load)
+### 7.4 I-002 Industry Scope Heatmap (Section Counts + Bullet Load)
 
 Top-level bullet count includes common skeleton + selected industry module.
 
@@ -184,11 +203,11 @@ Top-level bullet count includes common skeleton + selected industry module.
 | `telecomm` | 4 | 28 | `#####` |
 | `transportation` | 11 | 36 | `######` |
 
-## 7) Fast Navigation By Issue Number
+## 8) Fast Navigation By Issue Number
 
-- I-001: sections 2, 5 (applied migrations), 6.1, 6.3
-- I-002: section 6.4
-- I-003: section 5 (artifact review set), section 6.1 (`transaction_support_and_reporting`)
-- I-004: section 3, section 5 (applied removals), section 6.2
-- I-005: section 5 (alias-gap set), section 6.1 alias snapshot (deferred)
+- I-001: sections 3, 6 (applied migrations), 7.1, 7.3
+- I-002: section 7.4
+- I-003: section 6 (artifact review set), section 7.1 (`transaction_support_and_reporting`)
+- I-004: section 4, section 6 (applied removals), section 7.2
+- I-005: section 6 (alias-gap set), section 7.1 alias snapshot (deferred)
 - I-006: tracked in `docs/issues.md`; text defects resolved in prior phase

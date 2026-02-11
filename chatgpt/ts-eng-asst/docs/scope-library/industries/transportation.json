@@ -355,48 +355,19 @@
   ],
   "industry_modules": {
     "transportation": {
-      "accounting_overview": [
-        {
-          "id": "scope.439",
-          "text": "Revenue recognition;"
-        },
-        {
-          "id": "scope.440",
-          "text": "Significant accounting estimates (e.g. inventory costing, allowance for doubtful accounts, etc.);"
-        },
-        {
-          "id": "scope.441",
-          "text": "Recent or contemplated changes in accounting principles, procedures or estimates and provisions."
-        }
-      ],
       "revenue_analysis": [
         {
           "id": "scope.442",
-          "text": "Obtain and read an analysis of Target's revenue and margins and inquire about:",
+          "text": "Obtain and read an analysis of transportation revenue and margins and inquire about:",
           "children": [
             {
-              "text": "Revenue and profitability by significant customer;"
+              "text": "Revenue and profitability by customer, customer type, and route/trip type;"
             },
             {
-              "text": "Revenue and profitability by customer type;"
+              "text": "Volume and utilization KPIs (for example: trip counts/load factors), including seasonality effects; and"
             },
             {
-              "text": "Revenue and profitability by customer profile (e.g., related party vs. third party);"
-            },
-            {
-              "text": "Revenue and profitability by trip type (e.g., tours, day trips, etc.);"
-            },
-            {
-              "text": "Impact of seasonality, if any;"
-            },
-            {
-              "text": "Any non-recurring components of revenue; and"
-            },
-            {
-              "text": "Cut off procedures."
-            },
-            {
-              "text": "For each of the above items a) – d), inquire about key performance indicators such as volume (e.g., number of trips, etc.)."
+              "text": "Transportation-specific cut-off timing considerations and non-recurring revenue components."
             }
           ]
         }
@@ -404,19 +375,16 @@
       "operating_expenses": [
         {
           "id": "scope.443",
-          "text": "Obtain and read an analysis of expenses and inquire about:",
+          "text": "Assess transportation operating-cost drivers, including:",
           "children": [
             {
-              "text": "Direct costs (labour and benefits, etc.);"
+              "text": "Driver/labour costs and benefits;"
             },
             {
-              "text": "Rent and utilities expense;"
+              "text": "Fuel, maintenance, repair, and other fleet operating costs; and"
             },
             {
-              "text": "Historical operating expense trend as a % of revenue; and"
-            },
-            {
-              "text": "Unusual and extraordinary items."
+              "text": "Fixed versus variable cost behavior across key expense categories."
             }
           ]
         }
@@ -424,35 +392,16 @@
       "working_capital": [
         {
           "id": "scope.444",
-          "text": "Comment on working capital trends for the past 24 months;"
-        },
-        {
-          "id": "scope.445",
-          "text": "Adjust working capital for any significant items which are considered to be non-recurring in nature;"
-        },
-        {
-          "id": "scope.446",
-          "text": "Comment on the seasonality of working capital;"
-        },
-        {
-          "id": "scope.447",
-          "text": "Comment on cash management procedures; and"
-        },
-        {
-          "id": "scope.448",
-          "text": "Understand trade ratio trends."
-        }
-      ],
-      "accounts_receivable": [
-        {
-          "id": "scope.449",
-          "text": "Obtain and read an analysis of accounts receivable and inquire and comment on:",
+          "text": "Assess transportation-specific working capital considerations, including:",
           "children": [
             {
-              "text": "Aging analysis and turnover analysis; and"
+              "text": "Seasonality effects and cash-management procedures;"
             },
             {
-              "text": "Allowance for uncollectible accounts, write-offs and reserves."
+              "text": "Trade-ratio trends and timing effects around receivables/payables; and"
+            },
+            {
+              "text": "Normalization of significant non-recurring working capital items."
             }
           ]
         }
@@ -460,80 +409,39 @@
       "capital_expenditure_requirements": [
         {
           "id": "scope.452",
-          "text": "Obtain and read an analysis of historic and future capital cost requirements including:",
+          "text": "Assess transportation capex requirements, including:",
           "children": [
             {
-              "text": "Other historical, deferred, and planned capital expenditures;"
+              "text": "Fleet replacement cycle and related capital intensity;"
             },
             {
-              "text": "Historical replacement cycle and costs;"
+              "text": "Unit utilization and operating impact on replacement timing; and"
             },
             {
-              "text": "Utilization per unit; and"
-            },
-            {
-              "text": "Impairment write-downs and other issues."
+              "text": "Deferred/planned capex and impairment considerations."
             }
           ]
-        }
-      ],
-      "commitments_and_contingencies": [
-        {
-          "id": "scope.455",
-          "text": "Off-balance sheet liabilities;"
-        },
-        {
-          "id": "scope.456",
-          "text": "Purchase commitments;"
-        },
-        {
-          "id": "scope.457",
-          "text": "Operating and capital leases;"
-        },
-        {
-          "id": "scope.458",
-          "text": "Pending or threatened litigation or investigations."
         }
       ],
       "net_debt": [
         {
           "id": "scope.453",
-          "text": "Prepare a summary of debt and debt-like items (e.g. notes payable, letters of credit, capital vendor payables, etc.), other assets, and liabilities and comment on unusual items, significant fluctuations and significant balances."
+          "text": "Summarize transportation-specific debt and debt-like items, including letters of credit, capital vendor payables, and fleet-related financing obligations."
         }
       ],
       "inventory": [
         {
           "id": "scope.450",
-          "text": "Obtain and read an analysis of inventory accounts and inquire and comment on:",
+          "text": "Obtain and read an analysis of transportation inventory balances and inquire about:",
           "children": [
             {
-              "text": "Costing methodology;"
+              "text": "Composition (for example: fuel, parts, supplies, and finished goods where applicable);"
             },
             {
-              "text": "Composition (e.g. raw materials, supplies, finished goods etc.); and"
+              "text": "Costing methodology and turnover/aging; and"
             },
             {
-              "text": "Turnover, aging and provisions."
-            }
-          ]
-        }
-      ],
-      "other_assets_and_liabilities": [
-        {
-          "id": "scope.451",
-          "text": "Prepare a summary of other assets and liabilities (including prepaid expenses and deposits, deferred revenue and customer deposits) and comment on unusual items, significant fluctuations and significant balances."
-        }
-      ],
-      "related_parties": [
-        {
-          "id": "scope.454",
-          "text": "Inquire about and summarize related party transactions including:",
-          "children": [
-            {
-              "text": "Nature and extent of related party transactions; and"
-            },
-            {
-              "text": "Basis of pricing for arrangements with related parties."
+              "text": "Provisioning for obsolete or slow-moving inventory."
             }
           ]
         }
@@ -575,7 +483,20 @@
       "revenue_analysis",
       "working_capital"
     ],
-    "replaced_industry_sections": [],
+    "replaced_industry_sections": [
+      "accounting_overview",
+      "accounts_receivable",
+      "audit_work_paper",
+      "capital_expenditure_requirements",
+      "commitments_and_contingencies",
+      "inventory",
+      "net_debt",
+      "operating_expenses",
+      "other_assets_and_liabilities",
+      "related_parties",
+      "revenue_analysis",
+      "working_capital"
+    ],
     "added_industry_sections": []
   }
 }

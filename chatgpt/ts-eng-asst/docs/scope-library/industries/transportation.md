@@ -23,7 +23,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `accounting_overview`, `accounts_receivable`, `audit_work_paper`, `capital_expenditure_requirements`, `commitments_and_contingencies`, `inventory`, `net_debt`, `operating_expenses`, `other_assets_and_liabilities`, `related_parties`, `revenue_analysis`, `working_capital`
 
 ## Section Review (Common + Industry)
 
@@ -61,9 +61,7 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.439) Revenue recognition;
-- (scope.440) Significant accounting estimates (e.g. inventory costing, allowance for doubtful accounts, etc.);
-- (scope.441) Recent or contemplated changes in accounting principles, procedures or estimates and provisions.
+_No industry-specific bullets._
 
 ### Quality of earnings (`quality_of_earnings`)
 
@@ -103,15 +101,10 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.442) Obtain and read an analysis of Target's revenue and margins and inquire about:
-  - Revenue and profitability by significant customer;
-  - Revenue and profitability by customer type;
-  - Revenue and profitability by customer profile (e.g., related party vs. third party);
-  - Revenue and profitability by trip type (e.g., tours, day trips, etc.);
-  - Impact of seasonality, if any;
-  - Any non-recurring components of revenue; and
-  - Cut off procedures.
-  - For each of the above items a) – d), inquire about key performance indicators such as volume (e.g., number of trips, etc.).
+- (scope.442) Obtain and read an analysis of transportation revenue and margins and inquire about:
+  - Revenue and profitability by customer, customer type, and route/trip type;
+  - Volume and utilization KPIs (for example: trip counts/load factors), including seasonality effects; and
+  - Transportation-specific cut-off timing considerations and non-recurring revenue components.
 
 ### Operating expenses (`operating_expenses`)
 
@@ -127,11 +120,10 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.443) Obtain and read an analysis of expenses and inquire about:
-  - Direct costs (labour and benefits, etc.);
-  - Rent and utilities expense;
-  - Historical operating expense trend as a % of revenue; and
-  - Unusual and extraordinary items.
+- (scope.443) Assess transportation operating-cost drivers, including:
+  - Driver/labour costs and benefits;
+  - Fuel, maintenance, repair, and other fleet operating costs; and
+  - Fixed versus variable cost behavior across key expense categories.
 
 ### Working capital (`working_capital`)
 
@@ -145,11 +137,10 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.444) Comment on working capital trends for the past 24 months;
-- (scope.445) Adjust working capital for any significant items which are considered to be non-recurring in nature;
-- (scope.446) Comment on the seasonality of working capital;
-- (scope.447) Comment on cash management procedures; and
-- (scope.448) Understand trade ratio trends.
+- (scope.444) Assess transportation-specific working capital considerations, including:
+  - Seasonality effects and cash-management procedures;
+  - Trade-ratio trends and timing effects around receivables/payables; and
+  - Normalization of significant non-recurring working capital items.
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -163,9 +154,7 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.449) Obtain and read an analysis of accounts receivable and inquire and comment on:
-  - Aging analysis and turnover analysis; and
-  - Allowance for uncollectible accounts, write-offs and reserves.
+_No industry-specific bullets._
 
 ### Accounts payable and accrued liabilities (`accounts_payable_and_accrued_liabilities`)
 
@@ -191,11 +180,10 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.452) Obtain and read an analysis of historic and future capital cost requirements including:
-  - Other historical, deferred, and planned capital expenditures;
-  - Historical replacement cycle and costs;
-  - Utilization per unit; and
-  - Impairment write-downs and other issues.
+- (scope.452) Assess transportation capex requirements, including:
+  - Fleet replacement cycle and related capital intensity;
+  - Unit utilization and operating impact on replacement timing; and
+  - Deferred/planned capex and impairment considerations.
 
 ### Commitments and contingencies (`commitments_and_contingencies`)
 
@@ -212,10 +200,7 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.455) Off-balance sheet liabilities;
-- (scope.456) Purchase commitments;
-- (scope.457) Operating and capital leases;
-- (scope.458) Pending or threatened litigation or investigations.
+_No industry-specific bullets._
 
 ### Net debt (`net_debt`)
 
@@ -226,7 +211,7 @@ _No industry-specific bullets._
 
 #### Industry (`transportation`)
 
-- (scope.453) Prepare a summary of debt and debt-like items (e.g. notes payable, letters of credit, capital vendor payables, etc.), other assets, and liabilities and comment on unusual items, significant fluctuations and significant balances.
+- (scope.453) Summarize transportation-specific debt and debt-like items, including letters of credit, capital vendor payables, and fleet-related financing obligations.
 
 ### Audit work paper (`audit_work_paper`)
 
@@ -250,29 +235,7 @@ _Not in common skeleton._
 
 #### Industry (`transportation`)
 
-- (scope.450) Obtain and read an analysis of inventory accounts and inquire and comment on:
-  - Costing methodology;
-  - Composition (e.g. raw materials, supplies, finished goods etc.); and
-  - Turnover, aging and provisions.
-
-### Other Assets And Liabilities (`other_assets_and_liabilities`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`transportation`)
-
-- (scope.451) Prepare a summary of other assets and liabilities (including prepaid expenses and deposits, deferred revenue and customer deposits) and comment on unusual items, significant fluctuations and significant balances.
-
-### Related Parties (`related_parties`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`transportation`)
-
-- (scope.454) Inquire about and summarize related party transactions including:
-  - Nature and extent of related party transactions; and
-  - Basis of pricing for arrangements with related parties.
+- (scope.450) Obtain and read an analysis of transportation inventory balances and inquire about:
+  - Composition (for example: fuel, parts, supplies, and finished goods where applicable);
+  - Costing methodology and turnover/aging; and
+  - Provisioning for obsolete or slow-moving inventory.

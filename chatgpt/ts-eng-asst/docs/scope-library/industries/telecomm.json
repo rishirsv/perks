@@ -358,57 +358,66 @@
       "business_overview": [
         {
           "id": "scope.498",
-          "text": "Gain an understanding of the product and service portfolio, customer segments, and go-to-market channels."
+          "text": "Gain an understanding of the telecom product/service portfolio, customer segments, and go-to-market channels."
         },
         {
           "id": "scope.499",
-          "text": "Understand network/infrastructure model (owned vs leased) and key third-party dependencies."
+          "text": "Understand network and infrastructure model (owned versus leased) and key third-party dependencies."
         },
         {
           "id": "scope.500",
-          "text": "Understand key commercial arrangements (carriers/partners, wholesale, roaming, etc.) where applicable."
+          "text": "Understand key commercial arrangements (for example: carriers, wholesale, and roaming), where applicable."
         }
       ],
       "revenue_analysis": [
         {
           "id": "scope.501",
-          "text": "Analyze revenue trends by product line and customer segment, including recurring vs usage-based components."
-        },
-        {
-          "id": "scope.502",
-          "text": "Assess churn, ARPU, net adds, retention, and other subscriber/customer KPIs where available."
-        },
-        {
-          "id": "scope.503",
-          "text": "Understand pricing, discounting, promotions, and contract terms driving revenue sustainability."
+          "text": "Analyze telecom revenue quality and trends, including:",
+          "children": [
+            {
+              "text": "Revenue by service line and recurring versus usage-based components;"
+            },
+            {
+              "text": "Churn, ARPU, net adds, retention, and related subscriber/customer KPIs; and"
+            },
+            {
+              "text": "Pricing, discounting, promotions, and contract terms driving revenue sustainability."
+            }
+          ]
         }
       ],
       "capital_expenditure_requirements": [
         {
           "id": "scope.504",
-          "text": "Assess capex intensity and planned network/infrastructure investments."
-        },
-        {
-          "id": "scope.505",
-          "text": "Understand timing and drivers of capex programs and any deferral/backlog dynamics."
-        },
-        {
-          "id": "scope.506",
-          "text": "Review lease-versus-buy considerations for infrastructure and related cash flow impacts."
+          "text": "Assess telecom capex profile and requirements, including:",
+          "children": [
+            {
+              "text": "Capex intensity and planned network/infrastructure investment programs;"
+            },
+            {
+              "text": "Timing and drivers of capex deployment and deferral/backlog dynamics; and"
+            },
+            {
+              "text": "Lease-versus-buy considerations for infrastructure and related cash-flow effects."
+            }
+          ]
         }
       ],
       "commitments_and_contingencies": [
         {
           "id": "scope.507",
-          "text": "Review key long-term commitments (network leases, tower/site leases, capacity commitments, vendor agreements)."
-        },
-        {
-          "id": "scope.508",
-          "text": "Assess regulatory and licensing exposure (including spectrum-related commitments if applicable)."
-        },
-        {
-          "id": "scope.509",
-          "text": "Review material customer credits, service-level penalties, and dispute exposure."
+          "text": "Assess telecom-specific commitments and contingencies, including:",
+          "children": [
+            {
+              "text": "Long-term network/site/capacity commitments and key vendor agreements;"
+            },
+            {
+              "text": "Regulatory and licensing exposure (including spectrum-related commitments, where applicable); and"
+            },
+            {
+              "text": "Material customer credits, service-level penalties, and dispute exposure."
+            }
+          ]
         }
       ]
     }
@@ -448,7 +457,13 @@
       "revenue_analysis",
       "working_capital"
     ],
-    "replaced_industry_sections": [],
+    "replaced_industry_sections": [
+      "audit_work_paper",
+      "business_overview",
+      "capital_expenditure_requirements",
+      "commitments_and_contingencies",
+      "revenue_analysis"
+    ],
     "added_industry_sections": []
   }
 }

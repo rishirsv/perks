@@ -23,7 +23,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `accounts_payable_and_accrued_liabilities`, `accounts_receivable`, `audit_work_paper`, `business_overview`, `capital_expenditure_requirements`, `net_debt`, `operating_expenses`, `prepaid_expenses_and_other_assets`, `quality_of_earnings`, `revenue_analysis`
 
 ## Section Review (Common + Industry)
 
@@ -41,9 +41,7 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`service`)
 
-- (scope.345) Understand the Company's financial statement preparation process, including:
-  - Finance function, financial reporting framework, and management reporting relationships (including processes, timing, structure of financial reporting, and interaction with the information/accounting systems); and
-  - Recent or contemplated changes in accounting principles, procedures, or estimates.
+_No industry-specific bullets._
 
 ### Accounting overview (`accounting_overview`)
 
@@ -81,13 +79,9 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.346) Propose potential adjustments to consolidated historical Earnings before Interest, Taxes, Depreciation and Amortization ("EBITDA") by considering:
-  - The Company's proposed adjustments (i.e., Management, Pro forma, Due diligence and Run rate adjustments) including recent acquisitions, if any, restructuring initiatives, and other.
-  - The impact of significant new and lost customer relationships and service offerings;
-  - Pro forma impact of changes in headcount and vacancies, if any;
-  - The impact from related party transactions, if any;
-  - The impact of any changes in accounting policies (revenue recognition, provisions, management estimates, capitalization or adjusting entries on the reported results); and
-  - Large, unusual, or non-recurring events or transactions that may have distorted results.
+- (scope.346) Assess service-model earnings impacts not fully captured in common quality-of-earnings procedures, including:
+  - Significant new/lost customer relationships and service-offering changes; and
+  - Capacity and utilization effects from headcount vacancies or ramp-up/ramp-down.
 
 ### Revenue analysis (`revenue_analysis`)
 
@@ -109,9 +103,10 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.347) Obtain and read an analysis of the Company's revenue and inquire about:
-  - Revenue by product, customer, geography (i.e., by province / other); and
-  - Annual recurring revenue, retention rates, customer churn, length of relationship, etc.
+- (scope.347) Assess recurring-revenue quality metrics, including:
+  - Annual recurring revenue composition;
+  - Retention and churn trends; and
+  - Customer relationship tenure patterns.
 
 ### Operating expenses (`operating_expenses`)
 
@@ -127,11 +122,10 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.348) Obtain and read an analysis of the Company's operating expenses, commenting on:
-  - Key components and trends of cost of revenue (i.e., software, data center, merchant service fees, marketing agreements, etc.);
-  - Personnel expenses, including salaried and hourly labour, contractor costs, payroll-related costs, headcount, and average compensation costs by department (sales, marketing, general and administrative etc.);
-  - Capitalization of employee expenses, software and development costs and commissions; and
-  - Research and development and potential future costs savings.
+- (scope.348) Obtain and read an analysis of service-model operating expenses and inquire about:
+  - Key components and trends of cost of revenue specific to service delivery (for example: software, data center, merchant service, and platform fees);
+  - Capitalization of employee expenses, software/development costs, and commissions; and
+  - Research and development cost profile and accounting treatment.
 
 ### Working capital (`working_capital`)
 
@@ -159,7 +153,7 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.349) Obtain and read an analysis of the Company's accounts receivable and inquire about bad debt reserve, write-offs, adjustments, aging, and non-trade balances.
+_No industry-specific bullets._
 
 ### Accounts payable and accrued liabilities (`accounts_payable_and_accrued_liabilities`)
 
@@ -173,10 +167,7 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.351) Obtain and read an analysis of the Company's accounts payables and accrued liabilities and inquire about:
-  - Terms of trade with major vendors, aging analysis;
-  - Accrued liabilities, other current and non-current liabilities; and
-  - Deferred revenue/unearned revenue profile and recognition.
+- (scope.351) Assess deferred revenue / unearned revenue balances and recognition unwind profile.
 
 ### Capital expenditure requirements (`capital_expenditure_requirements`)
 
@@ -188,9 +179,7 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.352) Obtain and read an analysis of the Company's existing capital costs and inquire about:
-  - Capitalized labour trends (labour, software development and commission); and
-  - Other historical, deferred, and planned capital expenditures.
+- (scope.352) Assess capitalized labour/software/commission trends and related amortization profile.
 
 ### Commitments and contingencies (`commitments_and_contingencies`)
 
@@ -218,7 +207,7 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.353) Commitment and contingencies.
+_No industry-specific bullets._
 
 ### Audit work paper (`audit_work_paper`)
 
@@ -232,9 +221,7 @@ _No industry-specific bullets._
 
 #### Industry (`service`)
 
-- (scope.354) Obtain and read audit working papers for the last two fiscal years and perform the following:
-- (scope.355) Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, any changes in accounting policies or methods; and
-- (scope.356) Read Management reports prepared by the external auditors and comment on control issues, and if applicable, discuss with auditor, accounting matters, or audit issues, if any.
+_No industry-specific bullets._
 
 ### Prepaid Expenses And Other Assets (`prepaid_expenses_and_other_assets`)
 
@@ -244,4 +231,4 @@ _Not in common skeleton._
 
 #### Industry (`service`)
 
-- (scope.350) Obtain and read an analysis of the Company's prepaid and other assets and comment on unusual items, significant fluctuations, and the existence of other balances to be potentially excluded from working capital.
+- (scope.350) Obtain and read an analysis of the Company's prepaid and other assets and comment on unusual items, significant fluctuations, and balances potentially excluded from working capital.

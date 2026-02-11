@@ -355,42 +355,20 @@
   ],
   "industry_modules": {
     "supermarket": {
-      "business_overview": [
-        {
-          "id": "scope.358",
-          "text": "Understand Target’s accounting of intercompany transactions and consolidation process; and"
-        },
-        {
-          "id": "scope.359",
-          "text": "Significant accounting policies and estimates and contemplated changes."
-        }
-      ],
       "quality_of_earnings": [],
       "operating_expenses": [
         {
           "id": "scope.376",
-          "text": "Obtain and read an analysis of the Target’s selling, general and administration expenses and inquire about:",
+          "text": "Obtain and read an analysis of supermarket operating expenses and inquire about:",
           "children": [
             {
-              "text": "Salaries and wages (including headcount by area and function, if possible);"
+              "text": "Store labour and support-function cost trends;"
             },
             {
-              "text": "General and administrative expenses;"
+              "text": "Information-systems and corporate overhead cost allocations, where applicable; and"
             },
             {
-              "text": "Information systems expenses;"
-            },
-            {
-              "text": "Corporate costs;"
-            },
-            {
-              "text": "Extraordinary expenses;"
-            },
-            {
-              "text": "Rent and leases; and"
-            },
-            {
-              "text": "Miscellaneous and other expenses."
+              "text": "Occupancy costs (including rent and lease-related cost drivers)."
             }
           ]
         }
@@ -398,22 +376,16 @@
       "working_capital": [
         {
           "id": "scope.377",
-          "text": "Obtain details of the monthly net working capital and comment on the following for Retail, Wholesale, and Corporate Overhead to the extent they can be bifurcated:",
+          "text": "Assess supermarket-specific working capital drivers by retail, wholesale, and corporate streams (to the extent separable), including:",
           "children": [
             {
-              "text": "The composition of individual working capital accounts (e.g. trade receivables, accounts payable and accruals, inventory and inventory provisions, etc.);"
+              "text": "Segment-level working capital composition and trade-ratio trends;"
             },
             {
-              "text": "Monthly working capital trends and impact on reported metrics (e.g. days sales outstanding, inventory turns, days payables outstanding, net working capital as a percentage of revenues, etc.);"
+              "text": "Inventory reserves, sales returns/allowances, and other judgmental accruals; and"
             },
             {
-              "text": "Large, unusual, or non-operating items and current or upcoming initiatives that may affect normal working capital trends, (such as accruals for bonuses, capital projects, understanding non-trade balances, etc.);"
-            },
-            {
-              "text": "Working capital seasonality and implications on cash flow and working capital peg; and"
-            },
-            {
-              "text": "Understanding the accounting impact of allowance for uncollectible accounts and write-offs, inventory reserve, reserves for sales returns and allowances, and other accruals requiring judgment."
+              "text": "Seasonality implications for cash flow and working capital peg setting."
             }
           ]
         }
@@ -421,129 +393,18 @@
       "capital_expenditure_requirements": [
         {
           "id": "scope.383",
-          "text": "Obtain details of historical capital expenditures, classified as growth and maintenance, by asset category, and comment on:"
-        },
-        {
-          "id": "scope.384",
-          "text": "Understand Target’s real estate profile including owned vs leased;"
-        },
-        {
-          "id": "scope.385",
-          "text": "Growth vs. maintenance capital expenditures, in particular for new store builds, renovations, e-Commerce, IT/Cybersecurity, DCs, and production units"
-        },
-        {
-          "id": "scope.386",
-          "text": "Committed capital expenditures, including recent monthly spending versus budget; and"
-        },
-        {
-          "id": "scope.387",
-          "text": "Historical and planned capital expenditures."
-        }
-      ],
-      "net_debt": [
-        {
-          "id": "scope.378",
-          "text": "For each of Retail, Wholesale, and Corporate Overhead (to the extent they can be bifurcated):"
-        },
-        {
-          "id": "scope.379",
-          "text": "Analyze reported current and non-current debt and other debt-like items on the balance sheet;"
-        },
-        {
-          "id": "scope.380",
-          "text": "Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt;"
-        },
-        {
-          "id": "scope.381",
-          "text": "Understand whether there are any off-balance sheet liabilities (e.g. incentive plans, legal claims, guarantees, purchase commitments, etc.); and"
-        },
-        {
-          "id": "scope.382",
-          "text": "Other purchase commitments (operating leases) and contingencies (legal matters)."
-        }
-      ],
-      "audit_work_paper": [
-        {
-          "id": "scope.388",
-          "text": "Access Target’s Historical Period audit work papers and identified audit matters including unrecorded audit differences, control matters, and other salient findings."
-        }
-      ],
-      "supporting_analysis_for_quality_of_earnings": [
-        {
-          "id": "scope.361",
-          "text": "Obtain and read an analysis of sales and expenses, and enquire about, to the extent available:",
+          "text": "Assess supermarket capex profile and requirements, including:",
           "children": [
             {
-              "text": "Sales and COGS adjustments (including sales returns, markdowns, stock shrinkage, obsolescence, discounts, rebates, other income);"
+              "text": "Growth versus maintenance capex for stores, renovations, eCommerce, IT/cybersecurity, distribution centers, and production units;"
             },
             {
-              "text": "For Retail, understand sales and growth by tonnage;"
+              "text": "Committed capex and near-term spending versus budget; and"
             },
             {
-              "text": "For Wholesale, understand sales and growth by customer account"
-            },
-            {
-              "text": "Store costs analyzed as a percentage of sales, square footage, or other applicable metric"
+              "text": "Historical and planned capital expenditure cadence."
             }
           ]
-        },
-        {
-          "id": "scope.362",
-          "text": "Evaluate and understand the key trends and dynamics that impact sustainability of revenue and margins;"
-        },
-        {
-          "id": "scope.363",
-          "text": "Evaluate product mix by revenue, costs, and margin to extract key trends that impact revenue forecasts and store performance for both the retail business and the wholesale business"
-        },
-        {
-          "id": "scope.364",
-          "text": "Analyze cross-sell, upsell, retention; cohorts of product category and typical purchasing behaviors (e.g., bundling, etc.)"
-        },
-        {
-          "id": "scope.365",
-          "text": "Understand impact of any private label brands on margin; any differences by location"
-        },
-        {
-          "id": "scope.366",
-          "text": "Evaluate by location to understand gross margin contributions"
-        },
-        {
-          "id": "scope.367",
-          "text": "Analyze business performance, trends, revenue, costs, and margin by location; including typical product category offered at locations that impact the differences in performance – informs locations to rationalize / expand"
-        },
-        {
-          "id": "scope.368",
-          "text": "Evaluate local competitive presence (e.g., number of competitors within 5 or 10km radius circles) that might impact store performance"
-        },
-        {
-          "id": "scope.369",
-          "text": "Integrate with insights from conducting product category analysis"
-        },
-        {
-          "id": "scope.370",
-          "text": "Conduct a ramp-up analysis for recent locations to evaluate any relevant EBITDA adjustments that were identified"
-        },
-        {
-          "id": "scope.371",
-          "text": "Analyze the health of the customer base, including purchasing patterns (e.g., every few days, or week, etc.) and typical purchased / bucketed categories"
-        },
-        {
-          "id": "scope.372",
-          "text": "Leverage target’s customer data (e.g., anonymized) to analyze retention, growth, margin, average order side (AOS), impact of loyalty program, etc."
-        },
-        {
-          "id": "scope.373",
-          "text": "Analyze metrics such as order frequency, new customers as a percentage of active customers, etc. to understand the health of the customer base"
-        },
-        {
-          "id": "scope.374",
-          "text": "Understand Target’s central production unit and the current sales it supports"
-        }
-      ],
-      "assistance_with_transaction_documentation": [
-        {
-          "id": "scope.389",
-          "text": "Read relevant asset purchase agreement definitions (e.g. net working capital and debt-like item definitions and adjustment procedures)."
         }
       ]
     }
@@ -599,7 +460,16 @@
       "revenue_analysis",
       "working_capital"
     ],
-    "replaced_industry_sections": [],
+    "replaced_industry_sections": [
+      "assistance_with_transaction_documentation",
+      "audit_work_paper",
+      "business_overview",
+      "capital_expenditure_requirements",
+      "net_debt",
+      "operating_expenses",
+      "supporting_analysis_for_quality_of_earnings",
+      "working_capital"
+    ],
     "added_industry_sections": []
   }
 }

@@ -33,7 +33,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `accounting_overview`, `arr_drivers`, `audit_work_paper`, `business_overview`, `locked_box`, `net_debt`, `operating_expenses`, `phase_1_gaap_considerations`, `quality_of_earnings`, `revenue_analysis`, `supporting_analysis_to_quality_of_earnings`, `working_capital`
 
 ## Section Review (Common + Industry)
 
@@ -51,20 +51,10 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`tech`)
 
-- (scope.390) Gain an understanding of the business, including:
-  - Legal and organizational structure;
-  - Revenue streams;
-  - Cost base, employee base and infrastructure; and
-  - Key management team.
-- (scope.391) Understand the business' accounting function, including:
-  - key accounting practices, policies, procedures, and methodologies;
-  - internal financial controls; and
-  - financial reporting.
-- (scope.392) Gain a general understanding of the services, customers, operations and entities in the business, including:
-  - Organization structure, including Target's position within the broader Parent;
-  - Key revenue streams (Professional Services, Managed Services, Perpetual License, Third Party Revenue); and
-  - Key milestones in the Target's recent history, including key operational and financial developments of note (new service offerings / revenue streams / geographical expansion, cost investment, changes in key management).
-- (scope.393) Understand points of contact with the broader Parent, including intergroup transactions, shared services and resources, shared customers, and allocated costs.
+- (scope.390) Gain an understanding of the technology business model and operating footprint, including:
+  - Product and service portfolio with delivery/revenue model (for example: subscription, managed services, and project-based offerings);
+  - Customer concentration and key end-market exposure; and
+  - Dependencies on Parent/shared services, intercompany arrangements, and stand-alone separation points, where applicable.
 
 ### Accounting overview (`accounting_overview`)
 
@@ -84,14 +74,10 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`tech`)
 
-- (scope.395) Gain an understanding of the business' finance function, financial reporting framework and internal control environment (e.g. finance team set-up and reporting, key financials systems used, use of external accountant, reliance on shared Parent resources).
-- (scope.396) Understand significant accounting policies applied and, where applicable, understand changes in accounting policies over the Historical Period and the potential financial impact. In particular, understand:
-  - Revenue recognition, in particular recognition of recurring revenues and deferral of revenues;
-  - Matching of revenue and costs (including deferral of staff sales commissions);
-  - Capitalization policy;
-  - Monthly vs year-end policies; and
-  - Adjustments, entries, or areas of improvement suggested by the business' external accountant.
-- (scope.397) Identify components of EBITDA which are incurred entirely within Target (i.e. stand-alone costs) and costs that are allocated to / from Parent, and compare to understanding of intra-group points of contact with broader Parent.
+- (scope.395) Understand incremental technology accounting considerations, including:
+  - Recurring revenue, deferred revenue, and contract modification practices;
+  - Capitalization/amortization of development costs and sales commissions; and
+  - Stand-alone versus allocated/shared Parent cost treatment, where applicable.
 
 ### Quality of earnings (`quality_of_earnings`)
 
@@ -109,18 +95,10 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`tech`)
 
-- (scope.406) Perform an analysis of adjusted EBITDA compared to free cash flow and set out key considerations in relation to EBITDA to cash flow conversion.
-- (scope.407) In support of the quality of earnings analysis, consider:
-  - Information made available by the seller including vendor due diligence materials, internal and external financial statements or MD&A material, board presentations, management Q&A, and other relevant information provided;
-  - Monthly trending of income statement captions;
-  - Balance sheet support provided by the seller; and
-  - The results of the quality of revenue analysis.
-- (scope.408) Consider items with a full year EBITDA impact, and quantify where possible, including:
-  - Latest ARR (including consideration of churned and booked-not-billed customers); and
-  - Investment or changes in the cost base of the business.
-- (scope.412) Present an adjusted income statement showing revenues, costs and EBITDA on an adjusted basis.
-- (scope.413) Consider the quantum of recurring non-capital cash costs outside of EBITDA in the Historical Period (e.g. capitalized labour costs relating to IT / R&D projects, etc.).
-- (scope.417) In the event that you determine that additional work is required to consider the appropriateness of the stand alone costs, the future target operating model, one-off separation costs and / or stranded costs, we will discuss this with you and agree additional procedures under separate cover.
+- (scope.406) Assess technology-specific earnings quality considerations not fully captured in common quality-of-earnings procedures, including:
+  - EBITDA-to-cash conversion in recurring-revenue models;
+  - ARR/churn and booked-not-billed dynamics affecting run-rate earnings; and
+  - Impact of product/development investment and capitalized labour on comparability.
 
 ### Revenue analysis (`revenue_analysis`)
 
@@ -142,14 +120,10 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`tech`)
 
-- (scope.400) Understand the business' revenue streams and related accounting policies and practice. To include understanding of:
-  - cash / billing cycle;
-  - typical contract terms;
-  - timing of price increases; and
-  - calculation of deferred revenue.
-- (scope.401) Understand what work has been performed to reconcile reported revenues, cash income, and ARR.
-- (scope.402) Consider methodology used by the seller in presenting ARR and associated KPIs (upsell, downsell, churn, ARR per license / per logo, key account concentration)
-- (scope.403) identify key anomalies or items of concern relating to calculation methodology and / or resulting trends.
+- (scope.400) Assess recurring-revenue quality and sustainability, including:
+  - Reconciliation of billing/cash/GL and deferred revenue balances;
+  - ARR and key recurring KPIs (new/lost/expansion customers, churn, and retention); and
+  - Contract terms affecting price realization and revenue timing.
 
 ### Operating expenses (`operating_expenses`)
 
@@ -165,12 +139,10 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`tech`)
 
-- (scope.423) Based on analysis performed by you:
-- (scope.424) Comment on the development of the revenue and gross profit of the business addressing:
-  - Growth in revenues, including by customer, by product, and split between subscription vs other one-time revenues (such as set-up / consulting fees); and
-  - Development of margins and relationship between direct costs and revenues.
-- (scope.425) Consider the line item/detailed breakdown of COGS and operating expenses for the historical period addressing costs by function / division, and comment on key movements and drivers of changes (e.g. trends in headcount and cost per head by function) (analysis to be performed by you).
-- (scope.426) Present an analysis bridging EBITDA development from the Historical Period to TTM, summarizing the key drivers identified, such as price and volume metrics and/or profitability by revenue type / division (analysis to be performed by you).
+- (scope.423) Assess technology cost-base drivers, including:
+  - Cloud/hosting/data-center and third-party platform/software cost trends;
+  - Sales and customer-acquisition costs, including commission capitalization and amortization; and
+  - Research and development / engineering spend mix between expensed and capitalized costs.
 
 ### Working capital (`working_capital`)
 
@@ -184,16 +156,10 @@ Each section below shows common skeleton bullets and then industry-specific bull
 
 #### Industry (`tech`)
 
-- (scope.427) Consider the net working capital analysis provided by the seller, and consider a potential buy-side position. To consider:
-  - Historical working capital turnover KPIs (e.g. DSO, DPO, deferred revenue days);
-  - Accounting for key working capital balances including deferred revenue, accounts receivable and accounts payable;
-  - Completeness of historical accruals and payables; and
-  - Monthly vs annual accounting for judgmental balances such as bonuses.
-- (scope.428) Understand cash and working capital cycle, including the impact of government RFPs and payment terms on working capital balances.
-- (scope.429) Consider the components of net working capital, monthly trends (including days), key drivers and seasonality (analysis to be performed by you).
-- (scope.430) Present and comment on the average level of working capital and its development over the Historical Period for consideration when setting a working capital target. Consider one off / non-business items in reported working capital, 'allocated' balances within working capital, and the potential impact of stand-alone working capital balances when Target is no longer part of the Parent (analysis to be performed by you).
-- (scope.431) Discuss whether additional net working capital adjustments might be considered, in addition to those already identified in your analysis.
-- (scope.432) Consider the aging of trade payables and receivables.
+- (scope.427) Assess recurring-revenue working capital effects, including:
+  - Deferred revenue and billing cadence implications for cash conversion;
+  - DSO/DPO and receivable/payable aging trends, where relevant; and
+  - Completeness of accruals and judgmental balances with monthly versus annual treatment.
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -261,10 +227,7 @@ _No industry-specific bullets._
 
 #### Industry (`tech`)
 
-- (scope.434) Present an analysis of the balance sheet for Target as at the last two fiscal year ends and the latest available date.
-- (scope.435) Consider your analysis stratifying the components of the balance sheet into net working capital, net cash / debt balances, fixed assets, and 'other' balances (analysis to be performed by you).
-- (scope.436) Discuss whether additional net working capital adjustments / net debt adjustments might be considered, in addition to those already identified in your analysis.
-- (scope.437) Summarize and comment on net debt considerations as at the latest balance sheet date, including contingent liabilities (e.g. ongoing or pending litigation), constructive liabilities (e.g. unaccrued bonuses) and other obligations (e.g., deferred or committed capex) – including balances relating to the broader Parent that could remain in the legal entity being acquired.
+_No industry-specific bullets._
 
 ### Audit work paper (`audit_work_paper`)
 
@@ -279,55 +242,3 @@ _No industry-specific bullets._
 #### Industry (`tech`)
 
 _No industry-specific bullets._
-
-### Supporting Analysis To Quality Of Earnings (`supporting_analysis_to_quality_of_earnings`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`tech`)
-
-_No industry-specific bullets._
-
-### Arr Drivers (`arr_drivers`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`tech`)
-
-- (scope.419) Using analysis performed by you:
-  - Present an analysis of revenues split between one-time (e.g. implementation) and recurring (analysis to be performed by you).
-  - Present an analysis and comment on the development of recurring revenues, including a reconciliation of revenues over time (new / lost / existing revenues) (analysis to be performed by you).
-- (scope.420) Review a reconciliation of annual recurring revenues (ARR) per the underlying "customer cube" of subscription revenues to reported revenue and deferred revenue per the internal financial information (analysis to be performed by you).
-- (scope.421) Comment on trends in key KPIs for recurring revenues as monitored by management (e.g. ARR by product type, customer count, churn, volume, upsell).
-- (scope.422) Summarize and comment on customer retention (churn) rates for recurring revenue streams by customer, by cohort, and by type (professional service vs managed service) (analysis to be performed by you).
-
-### Locked Box (`locked_box`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`tech`)
-
-- (scope.433) Consider the locked box analysis provided by the seller, and consider a potential buy-side position. To consider:
-  - Adjustments to working capital balances based on quality of earnings and net working capital analysis performed (e.g. calculation of deferred revenue; recoverability of accounts receivable);
-  - Amounts owed to / owed from shareholders;
-  - Tax exposures identified by your tax due diligence team; and
-  - Other debt and debt-like balances that could be included in the locked box.
-
-### Phase 1 Gaap Considerations (`phase_1_gaap_considerations`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`tech`)
-
-- (scope.438) We will conduct a high-level analysis to identify and evaluate the differences between the target's financial statement results prepared in accordance with Spanish GAAP and US GAAP. This analysis will encompass the following:
-  - Comparison of significant accounting policies and practices.
-  - Identification of GAAP differences between Spanish GAAP and US GAAP
-  - Assessment of the potential impact of these differences on the overall financial statements.

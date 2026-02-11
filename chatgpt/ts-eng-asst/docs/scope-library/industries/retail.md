@@ -23,7 +23,7 @@ Rules source: `docs/scope-library/section-applicability.json`.
 - Excluded common sections: _None_
 - Replaced common sections: `audit_work_paper`, `capital_expenditure_requirements`, `net_debt`, `revenue_analysis`, `working_capital`
 - Added industry sections: _None_
-- Replaced industry sections: _None_
+- Replaced industry sections: `inventory`, `revenue_analysis`, `working_capital`
 
 ## Section Review (Common + Industry)
 
@@ -104,7 +104,7 @@ _No industry-specific bullets._
 #### Industry (`retail`)
 
 - (scope.462) Analyze revenue and gross margin trends by channel and major product category.
-- (scope.463) Analyze price-volume-mix drivers including promotional activity, markdowns, returns, and discounting.
+- (scope.463) Assess retail-specific margin drivers, including promotional cadence, markdown architecture, returns behavior, and discounting mix.
 - (scope.464) Assess customer metrics where available (traffic, conversion, basket size, repeat rate/loyalty).
 
 ### Operating expenses (`operating_expenses`)
@@ -137,9 +137,13 @@ _No industry-specific bullets._
 
 #### Industry (`retail`)
 
-- (scope.468) Analyze inventory turns, aged inventory, stock availability, and shrink/obsolescence trends.
-- (scope.469) Review vendor terms, rebates/allowances, and accounts payable practices.
-- (scope.470) Assess customer liabilities and other working capital items (gift cards, loyalty liabilities, customer deposits).
+- (scope.468) Analyze inventory-related working capital drivers, including:
+  - Inventory composition by category and location/channel;
+  - Inventory turns, aged inventory, stock availability, and shrink/obsolescence trends;
+  - Inventory valuation methodology and reserve adequacy; and
+  - Returns, damages, and vendor return programs.
+- (scope.469) Review vendor rebates/allowances and payment-term structures, and assess their impact on cash conversion.
+- (scope.470) Assess customer-liability working capital drivers, including gift card and loyalty program liabilities.
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -222,17 +226,3 @@ _No industry-specific bullets._
 #### Industry (`retail`)
 
 _No industry-specific bullets._
-
-### Inventory (`inventory`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`retail`)
-
-- (scope.471) Obtain and read an analysis of inventory and inquire and comment on:
-  - Inventory composition by category and location/channel;
-  - Inventory valuation methodology and reserves;
-  - Stock shrinkage, obsolescence, and write-downs; and
-  - Returns, damages, and vendor return programs.
