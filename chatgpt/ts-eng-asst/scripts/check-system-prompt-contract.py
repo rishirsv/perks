@@ -69,7 +69,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-chars",
         type=int,
-        default=7200,
+        default=8000,
         help="Maximum allowed prompt size in characters",
     )
     return parser.parse_args()

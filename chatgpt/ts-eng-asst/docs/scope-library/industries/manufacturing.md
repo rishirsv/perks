@@ -47,7 +47,7 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 
 - (scope.221) Meet with the Company's officers and management in order to develop an understanding of the Company, including its:
   - History, organization structure, proposed transaction perimeter and management reporting relationships;
-  - Start-up costs, capital expenditures, and status of operations in Morocco;
+  - Start-up costs, capital expenditures, and status of operations in significant sites/geographies.
   - Intercompany transactions;
   - Production sites/ lines capacity, utilization rates;
   - Details of pricing methodology; key contractual terms with key customers (incl. ability to pass cost increases to customers);
@@ -174,86 +174,7 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 
 #### Industry (`manufacturing`)
 
-- (scope.249) Working capital trends and trade-ratio drivers (including DSO, DIO, and DPO), including seasonality effects.
-- (scope.250) Large or non-recurring items affecting working capital comparability (including acquisition-related impacts).
 - (scope.256) Payroll-related funding and cash timing impacts relevant to working capital normalization and peg setting.
-
-### Accounts receivable (`accounts_receivable`)
-
-#### Common
-
-- (scope.011) Obtain and read an analysis of the Target’s accounts receivable and inquire and comment on:
-  - Billed/unbilled aging analysis, turnover and days sales outstanding;
-  - Credit terms;
-  - Trade and non-trade balances;
-  - Allowance for uncollectible accounts and write-offs.
-
-### Accounts payable and accrued liabilities (`accounts_payable_and_accrued_liabilities`)
-
-#### Common
-
-- (scope.012) Obtain and read an analysis of accounts payable, accrued liabilities and customer deposits and inquire about:
-  - Accounts payable aging and days outstanding;
-  - Accrued liabilities;
-  - Supplier settlement terms; and
-  - Other current and non-current liabilities.
-
-#### Industry (`manufacturing`)
-
-- (scope.261) Accounts payable aging and vendor settlement terms for key suppliers.
-- (scope.262) Accrued liabilities profile (including payroll, bonuses/incentives, and other significant operating accruals).
-- (scope.608) Other current and non-current liability balances with potential working-capital or debt-like implications.
-
-### Capital expenditure requirements (`capital_expenditure_requirements`)
-
-#### Common
-
-- (scope.013) Obtain and read an analysis of existing and future capital cost requirements including:
-  - Maintenance versus growth capital expenditures;
-  - Other historical, deferred, and planned capital expenditures.
-
-#### Industry (`manufacturing`)
-
-- (scope.266) Fixed-asset continuity and significant additions/disposals.
-- (scope.267) Near-term required capex and deferred capex backlog, where applicable.
-- (scope.270) Growth versus maintenance capex profile and related impairment/write-down considerations.
-
-### Commitments and contingencies (`commitments_and_contingencies`)
-
-#### Common
-
-- (scope.014) Inquire about significant commitments and contingent liabilities including:
-  - Pending or threatened litigation or investigations by regulatory or other authorities; and
-  - Contractual obligations, including leases;
-  - Purchase commitments; and
-  - Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);
-  - Incentive compensation and employee benefit obligations;
-  - Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and
-  - Other off-balance sheet transactions.
-
-#### Industry (`manufacturing`)
-
-- (scope.274) Minimum purchase or supply commitments under long-term commercial arrangements.
-- (scope.275) Earn-out obligations and other contingent consideration from historical acquisitions, where applicable.
-- (scope.276) Lease obligations and related commitments with third parties and related parties, where applicable.
-- (scope.277) Pending or threatened litigation and regulatory matters (including intellectual-property-related exposures, where applicable).
-
-### Net debt (`net_debt`)
-
-#### Common
-
-- (scope.015) Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;
-- (scope.016) Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt.
-
-### Audit work paper (`audit_work_paper`)
-
-#### Common
-
-- (scope.114) If required, obtain and read the auditor's working papers for the latest fiscal year.
-- (scope.115) Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods.
-- (scope.116) Comment on control issues identified by the external auditors, if applicable.
-- (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
-- (scope.118) Review audit committee reporting and presentations from the audit firm.
 
 ### Inventory (`inventory`)
 
@@ -278,6 +199,60 @@ _Not in common skeleton._
 - (scope.285) Composition and trend analysis of significant prepaid balances.
 - (scope.286) Timing of cash outflows versus expense recognition for material prepaid categories.
 
+### Accounts receivable (`accounts_receivable`)
+
+#### Common
+
+- (scope.011) Obtain and read an analysis of the Target’s accounts receivable and inquire and comment on:
+  - Billed/unbilled aging analysis, turnover and days sales outstanding;
+  - Credit terms;
+  - Trade and non-trade balances;
+  - Allowance for uncollectible accounts and write-offs.
+
+### Accounts payable and accrued liabilities (`accounts_payable_and_accrued_liabilities`)
+
+#### Common
+
+- (scope.012) Obtain and read an analysis of accounts payable, accrued liabilities and customer deposits and inquire about:
+  - Accounts payable aging and days outstanding;
+  - Accrued liabilities;
+  - Supplier settlement terms; and
+  - Other current and non-current liabilities.
+
+#### Industry (`manufacturing`)
+
+- (scope.262) Accrued liabilities profile (including payroll, bonuses/incentives, and other significant operating accruals).
+
+### Capital expenditure requirements (`capital_expenditure_requirements`)
+
+#### Common
+
+- (scope.013) Obtain and read an analysis of existing and future capital cost requirements including:
+  - Maintenance versus growth capital expenditures;
+  - Other historical, deferred, and planned capital expenditures.
+
+#### Industry (`manufacturing`)
+
+- (scope.266) Fixed-asset continuity and significant additions/disposals.
+- (scope.267) Near-term required capex and deferred capex backlog, where applicable.
+
+### Commitments and contingencies (`commitments_and_contingencies`)
+
+#### Common
+
+- (scope.014) Inquire about significant commitments and contingent liabilities including:
+  - Pending or threatened litigation or investigations by regulatory or other authorities; and
+  - Contractual obligations, including leases;
+  - Purchase commitments; and
+  - Employee agreements (e.g. transaction/retention bonuses, change-in-control, deferred compensation, or severance agreements, etc.);
+  - Incentive compensation and employee benefit obligations;
+  - Expected or contingent liabilities (e.g. environmental, litigation, regulatory and tax); and
+  - Other off-balance sheet transactions.
+
+#### Industry (`manufacturing`)
+
+- (scope.275) Earn-out obligations and other contingent consideration from historical acquisitions, where applicable.
+
 ### Related Parties (`related_parties`)
 
 #### Common
@@ -289,3 +264,20 @@ _Not in common skeleton._
 - (scope.288) Inquire about and summarize related party transactions including:
   - Nature and extent of related party transactions; and
   - Basis of pricing for arrangements with related parties.
+
+### Net debt (`net_debt`)
+
+#### Common
+
+- (scope.015) Summarize and comment on net debt items (on and off-balance sheet) presented by Management and other potential debt-like items;
+- (scope.016) Consider whether elements of working capital have the nature of and may be reclassified as net debt, and if so, summarize the potential impact of these adjustments on working capital and net debt.
+
+### Audit work paper (`audit_work_paper`)
+
+#### Common
+
+- (scope.114) If required, obtain and read the auditor's working papers for the latest fiscal year.
+- (scope.115) Comment on the nature and volume of audit differences (recorded and unrecorded adjustments), use of accounting estimates, and any changes in accounting policies or methods.
+- (scope.116) Comment on control issues identified by the external auditors, if applicable.
+- (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
+- (scope.118) Review audit committee reporting and presentations from the audit firm.

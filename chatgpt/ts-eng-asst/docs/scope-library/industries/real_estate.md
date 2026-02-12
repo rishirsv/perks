@@ -39,6 +39,16 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Historical growth by geography; and
   - Finance function, financial reporting framework and internal control environment.
 
+### Operating Cash Flow Funds From Operations (`operating_cash_flow_funds_from_operations`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`real_estate`)
+
+- (scope.340) Analyze the Company’s historical operating cash flow / FFO trends incorporating the impact of adjusted NOI trends from the quality of earnings analysis, the Company’s net working capital profile, and capital expenditures trends.
+
 ### Accounting overview (`accounting_overview`)
 
 #### Common
@@ -137,6 +147,20 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and
   - Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment.
 
+### Balance Sheet (`balance_sheet`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`real_estate`)
+
+- (scope.332) Summarize and understand Target's real-estate-specific balance sheet profile, including:
+  - Rent receivable profile (including aging/provisions) and other non-trade receivable balances;
+  - Tenant rental deposits and related liabilities;
+  - Nature of investment properties and joint ventures; and
+  - Any unusual real-estate-specific balance sheet items identified during due diligence.
+
 ### Accounts receivable (`accounts_receivable`)
 
 #### Common
@@ -200,27 +224,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Balance Sheet (`balance_sheet`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`real_estate`)
-
-- (scope.332) Summarize and understand Target's real-estate-specific balance sheet profile, including:
-  - Rent receivable profile (including aging/provisions) and other non-trade receivable balances;
-  - Tenant rental deposits and related liabilities;
-  - Nature of investment properties and joint ventures; and
-  - Any unusual real-estate-specific balance sheet items identified during due diligence.
-
-### Operating Cash Flow Funds From Operations (`operating_cash_flow_funds_from_operations`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`real_estate`)
-
-- (scope.340) Analyze the Company’s historical operating cash flow / FFO trends incorporating the impact of adjusted NOI trends from the quality of earnings analysis, the Company’s net working capital profile, and capital expenditures trends.

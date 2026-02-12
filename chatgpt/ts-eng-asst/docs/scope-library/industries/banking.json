@@ -239,48 +239,6 @@
           ]
         }
       ],
-      "loan_portfolio_and_credit_quality": [
-        {
-          "id": "scope.516",
-          "text": "Obtain and analyze loan portfolio composition by product, geography, industry, and risk rating."
-        },
-        {
-          "id": "scope.517",
-          "text": "Review delinquency, non-performing assets, charge-offs, recoveries, and vintage/loss trends."
-        },
-        {
-          "id": "scope.518",
-          "text": "Assess concentrations (single-name, sector, geographic) and underwriting/credit policy changes over the Historical Period."
-        }
-      ],
-      "allowance_for_credit_losses": [
-        {
-          "id": "scope.519",
-          "text": "Understand allowance methodology, inputs, and model governance (if applicable)."
-        },
-        {
-          "id": "scope.520",
-          "text": "Review qualitative overlays, management adjustments, and sensitivity to macro assumptions."
-        },
-        {
-          "id": "scope.521",
-          "text": "Reconcile allowance movements over time and assess coverage ratios versus peer/portfolio risk."
-        }
-      ],
-      "regulatory_capital_and_liquidity": [
-        {
-          "id": "scope.522",
-          "text": "Understand regulatory capital metrics and drivers (risk-weighted assets, capital buffers) where applicable."
-        },
-        {
-          "id": "scope.523",
-          "text": "Review liquidity profile and stress testing framework where applicable."
-        },
-        {
-          "id": "scope.524",
-          "text": "Assess the impact of off-balance sheet exposures and commitments on capital/liquidity."
-        }
-      ],
       "operating_expenses": [
         {
           "id": "scope.540",
@@ -398,14 +356,58 @@
             }
           ]
         }
+      ],
+      "loan_portfolio_and_credit_quality": [
+        {
+          "id": "scope.516",
+          "text": "Obtain and analyze loan portfolio composition by product, geography, industry, and risk rating."
+        },
+        {
+          "id": "scope.517",
+          "text": "Review delinquency, non-performing assets, charge-offs, recoveries, and vintage/loss trends."
+        },
+        {
+          "id": "scope.518",
+          "text": "Assess concentrations (single-name, sector, geographic) and underwriting/credit policy changes over the Historical Period."
+        }
+      ],
+      "allowance_for_credit_losses": [
+        {
+          "id": "scope.519",
+          "text": "Understand allowance methodology, inputs, and model governance (if applicable)."
+        },
+        {
+          "id": "scope.520",
+          "text": "Review qualitative overlays, management adjustments, and sensitivity to macro assumptions."
+        },
+        {
+          "id": "scope.521",
+          "text": "Reconcile allowance movements over time and assess coverage ratios versus peer/portfolio risk."
+        }
+      ],
+      "regulatory_capital_and_liquidity": [
+        {
+          "id": "scope.522",
+          "text": "Understand regulatory capital metrics and drivers (risk-weighted assets, capital buffers) where applicable."
+        },
+        {
+          "id": "scope.523",
+          "text": "Review liquidity profile and stress testing framework where applicable."
+        },
+        {
+          "id": "scope.524",
+          "text": "Assess the impact of off-balance sheet exposures and commitments on capital/liquidity."
+        }
       ]
     }
   },
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

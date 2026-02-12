@@ -130,6 +130,19 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Trade-ratio trends and timing effects around receivables/payables; and
   - Normalization of significant non-recurring working capital items.
 
+### Inventory (`inventory`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`transportation`)
+
+- (scope.450) Obtain and read an analysis of transportation inventory balances and inquire about:
+  - Composition (for example: fuel, parts, supplies, and finished goods where applicable);
+  - Costing methodology and turnover/aging; and
+  - Provisioning for obsolete or slow-moving inventory.
+
 ### Accounts receivable (`accounts_receivable`)
 
 #### Common
@@ -198,16 +211,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Inventory (`inventory`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`transportation`)
-
-- (scope.450) Obtain and read an analysis of transportation inventory balances and inquire about:
-  - Composition (for example: fuel, parts, supplies, and finished goods where applicable);
-  - Costing methodology and turnover/aging; and
-  - Provisioning for obsolete or slow-moving inventory.

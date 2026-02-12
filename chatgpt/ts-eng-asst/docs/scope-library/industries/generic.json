@@ -355,10 +355,12 @@
   ],
   "industry_modules": {},
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

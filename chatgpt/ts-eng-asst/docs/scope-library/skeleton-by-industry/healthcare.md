@@ -126,10 +126,10 @@ Use it to compare against the full per-industry file.
 - `operating_expenses`
 - `working_capital`
 - `accounts_receivable`
-- `inventory`
-- `other_assets`
 - `accounts_payable_and_accrued_liabilities`
 - `capital_expenditure_requirements`
-- `net_debt`
 - `commitments_and_contingencies`
+- `net_debt`
+- `inventory`
+- `other_assets`
 - `waterfall_revenue_analysis`

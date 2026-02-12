@@ -131,6 +131,24 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - De novo start-up costs; and
   - Components of other income and expense that may impact EBITDA.
 
+### Waterfall Revenue Analysis (`waterfall_revenue_analysis`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`healthcare`)
+
+- (scope.112) If available, obtain patient/encounter-level detail from billing and collections systems to perform a claims-level revenue analysis reflecting net cash received on closed claims and estimated cash expected on open claims (based on historical reimbursement trends). Discuss with management:
+  - Drivers of monthly/quarterly/annual net revenue trends by location, significant payor, and significant service code;
+  - Reimbursement trends by payor, service, and location;
+  - Pricing/volume trends by location, payor, and service;
+  - Payor mix trends in total and by location;
+  - Trends and drivers of fluctuation in the cash collection cycle;
+  - Reconciliation of cash collections reported in the billing system to third-party bank statements (on a sample basis); and
+  - Reconciliation of billing and collection information to financial statements.
+- (scope.113) Bridge revenue for changes in patient volumes, same-store/de novo/acquired facilities, and changes in direct and indirect operating expenses.
+
 ### Operating expenses (`operating_expenses`)
 
 #### Common
@@ -167,6 +185,30 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 #### Industry (`healthcare`)
 
 - (scope.091) Obtain and read an analysis of working capital on a monthly basis and inquire about historical trends, including seasonality, fluctuations in days revenue outstanding and days payable outstanding, working capital as a percent of trailing revenue, and other significant items.
+
+### Inventory (`inventory`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`healthcare`)
+
+- (scope.094) Obtain and read an analysis of Target's inventory and inquire and comment on:
+  - The inventory valuation methodology (e.g. standard costing);
+  - Significant vendor allowances, rebates, allowances and/or purchase commitments and related programs;
+  - Return to vendor provisions;
+  - Inventory aging and estimated provision, if any (i.e. slow-moving inventory).
+
+### Other Assets (`other_assets`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`healthcare`)
+
+- (scope.095) Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances.
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -261,45 +303,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Inventory (`inventory`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`healthcare`)
-
-- (scope.094) Obtain and read an analysis of Target's inventory and inquire and comment on:
-  - The inventory valuation methodology (e.g. standard costing);
-  - Significant vendor allowances, rebates, allowances and/or purchase commitments and related programs;
-  - Return to vendor provisions;
-  - Inventory aging and estimated provision, if any (i.e. slow-moving inventory).
-
-### Other Assets (`other_assets`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`healthcare`)
-
-- (scope.095) Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances.
-
-### Waterfall Revenue Analysis (`waterfall_revenue_analysis`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`healthcare`)
-
-- (scope.112) If available, obtain patient/encounter-level detail from billing and collections systems to perform a claims-level revenue analysis reflecting net cash received on closed claims and estimated cash expected on open claims (based on historical reimbursement trends). Discuss with management:
-  - Drivers of monthly/quarterly/annual net revenue trends by location, significant payor, and significant service code;
-  - Reimbursement trends by payor, service, and location;
-  - Pricing/volume trends by location, payor, and service;
-  - Payor mix trends in total and by location;
-  - Trends and drivers of fluctuation in the cash collection cycle;
-  - Reconciliation of cash collections reported in the billing system to third-party bank statements (on a sample basis); and
-  - Reconciliation of billing and collection information to financial statements.
-- (scope.113) Bridge revenue for changes in patient volumes, same-store/de novo/acquired facilities, and changes in direct and indirect operating expenses.

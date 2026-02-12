@@ -126,8 +126,8 @@ Use it to compare against the full per-industry file.
 - `operating_expenses`
 - `working_capital`
 - `accounts_payable_and_accrued_liabilities`
-- `inventory`
 - `capital_expenditure_requirements`
 - `commitments_and_contingencies`
+- `inventory`
 - `prepaids`
 - `related_parties`

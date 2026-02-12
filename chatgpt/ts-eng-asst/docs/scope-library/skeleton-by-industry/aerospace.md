@@ -117,5 +117,5 @@ Use it to compare against the full per-industry file.
 
 - `business_overview`
 - `revenue_analysis`
-- `inventory`
 - `capital_expenditure_requirements`
+- `inventory`

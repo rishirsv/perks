@@ -163,6 +163,30 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Understanding key drivers (i.e., seasonality, accounts payable days, days sales outstanding, inventory days); and
   - Identifying large or unusual non-recurring items that may have impacted normal working capital trends including potential items identified within the quality of earnings analysis noted above.
 
+### Inventory (`inventory`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`hvac`)
+
+- (scope.169) Obtain and read an analysis of Target's inventory and inquire about:
+  - Aging analysis by component
+  - Historical write-offs
+  - Inventory provision roll forward including methodology and calculation
+
+### Prepaids And Other Current Assets (`prepaids_and_other_current_assets`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`hvac`)
+
+- (scope.170) Obtain and read an analysis of Target's prepaids and other current assets including composition
+- (scope.171) Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances.
+
 ### Accounts receivable (`accounts_receivable`)
 
 #### Common
@@ -231,6 +255,16 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.179) Significant lease and purchase obligations; and
 - (scope.180) Inquire about other off-balance sheet transactions.
 
+### Related Parties (`related_parties`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`hvac`)
+
+- (scope.185) Understand the nature and extent of related party transactions and basis for pricing arrangements.
+
 ### Net debt (`net_debt`)
 
 #### Common
@@ -247,47 +281,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Balance Sheet (`balance_sheet`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`hvac`)
-
-- (scope.163) Perform quality of the Target's net assets at year-end the Historical Period and the most current period end, with a focus upon the nature, composition and basis of valuation of key balance sheet accounts (including but not limited to, accounts receivable, inventory, accounts payable and accruals, other current assets and liabilities, including cash reconciliations, etc.)
-
-### Inventory (`inventory`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`hvac`)
-
-- (scope.169) Obtain and read an analysis of Target's inventory and inquire about:
-  - Aging analysis by component
-  - Historical write-offs
-  - Inventory provision roll forward including methodology and calculation
-
-### Prepaids And Other Current Assets (`prepaids_and_other_current_assets`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`hvac`)
-
-- (scope.170) Obtain and read an analysis of Target's prepaids and other current assets including composition
-- (scope.171) Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances.
-
-### Related Parties (`related_parties`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`hvac`)
-
-- (scope.185) Understand the nature and extent of related party transactions and basis for pricing arrangements.

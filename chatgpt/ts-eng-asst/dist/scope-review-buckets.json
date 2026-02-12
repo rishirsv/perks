@@ -32,54 +32,31 @@
     "accounts_payable_and_accrued_liabilities": "balance_sheet_analysis",
     "accounts_receivable": "balance_sheet_analysis",
     "allowance_for_credit_losses": "financial_services_specialty_analysis",
-    "arr_drivers": "operational_and_commercial_analysis",
-    "aspe_to_ifrs_us_gaap_assessment": "transaction_support_and_reporting",
-    "assistance_with_transaction_documentation": "transaction_support_and_reporting",
     "audit_work_paper": "transaction_support_and_reporting",
     "balance_sheet": "balance_sheet_analysis",
-    "budget": "operational_and_commercial_analysis",
-    "budget_vs_actual": "operational_and_commercial_analysis",
     "business_overview": "core_financial_performance",
     "capital_expenditure_requirements": "balance_sheet_analysis",
     "claims_and_reinsurance": "financial_services_specialty_analysis",
     "commitments_and_contingencies": "transaction_support_and_reporting",
-    "customer_base_health_da": "operational_and_commercial_analysis",
-    "data_and_analytics": "operational_and_commercial_analysis",
-    "financial_due_diligence": "core_financial_performance",
-    "forecast_and_budget_analysis": "operational_and_commercial_analysis",
     "inventory": "balance_sheet_analysis",
     "loan_portfolio_and_credit_quality": "financial_services_specialty_analysis",
-    "locked_box": "balance_sheet_analysis",
-    "marketing_and_advertising_performance_da": "operational_and_commercial_analysis",
     "net_debt": "balance_sheet_analysis",
-    "normalized_ebitda_bridges": "core_financial_performance",
     "operating_cash_flow_funds_from_operations": "core_financial_performance",
     "operating_expenses": "operational_and_commercial_analysis",
-    "operational_cost_margin_assessment": "operational_and_commercial_analysis",
-    "operations_performance_da": "operational_and_commercial_analysis",
-    "optional_fdd_procedures": "transaction_support_and_reporting",
     "other_assets": "balance_sheet_analysis",
-    "other_assets_and_liabilities": "balance_sheet_analysis",
     "other_current_assets": "balance_sheet_analysis",
     "other_current_assets_liabilities": "balance_sheet_analysis",
-    "phase_1_gaap_considerations": "transaction_support_and_reporting",
-    "phase_2_post_bid_support": "transaction_support_and_reporting",
     "prepaid_expenses_and_other_assets": "balance_sheet_analysis",
     "prepaid_materials_and_other_assets": "balance_sheet_analysis",
     "prepaids": "balance_sheet_analysis",
     "prepaids_and_other_current_assets": "balance_sheet_analysis",
-    "purchase_and_sale_agreement": "transaction_support_and_reporting",
     "quality_of_earnings": "core_financial_performance",
     "quality_of_revenue_and_receivables_and_cash_proof": "core_financial_performance",
     "regulatory_capital_and_liquidity": "financial_services_specialty_analysis",
     "related_parties": "transaction_support_and_reporting",
     "revenue_analysis": "operational_and_commercial_analysis",
-    "revenue_and_profitability_analysis_da": "operational_and_commercial_analysis",
-    "store_portfolio_analysis": "operational_and_commercial_analysis",
-    "supporting_analysis_for_quality_of_earnings": "core_financial_performance",
     "supporting_analysis_to_quality_of_earnings": "core_financial_performance",
     "underwriting_and_loss_reserves": "financial_services_specialty_analysis",
-    "vdd_report_review": "transaction_support_and_reporting",
     "waterfall_revenue_analysis": "operational_and_commercial_analysis",
     "work_in_progress": "balance_sheet_analysis",
     "working_capital": "balance_sheet_analysis"
@@ -103,7 +80,6 @@
     "accrued liabilities": "accounts_payable_and_accrued_liabilities",
     "allowance for credit losses": "allowance_for_credit_losses",
     "ar": "accounts_receivable",
-    "arr drivers": "arr_drivers",
     "balance sheet": "balance_sheet",
     "business overview": "business_overview",
     "capex": "capital_expenditure_requirements",
@@ -115,7 +91,6 @@
     "contingencies": "commitments_and_contingencies",
     "credit quality": "loan_portfolio_and_credit_quality",
     "inventory": "inventory",
-    "locked box": "locked_box",
     "loan portfolio": "loan_portfolio_and_credit_quality",
     "net debt": "net_debt",
     "operating expenses": "operating_expenses",
@@ -126,9 +101,7 @@
     "regulatory capital and liquidity": "regulatory_capital_and_liquidity",
     "revenue": "revenue_analysis",
     "revenue analysis": "revenue_analysis",
-    "store portfolio": "store_portfolio_analysis",
     "underwriting and loss reserves": "underwriting_and_loss_reserves",
-    "vdd report review": "vdd_report_review",
     "wc": "working_capital",
     "working capital": "working_capital",
     "audit work paper": "audit_work_paper",
@@ -139,18 +112,76 @@
     "related parties": "related_parties",
     "work in progress and backlog": "work_in_progress",
     "wip and backlog": "work_in_progress",
-    "work in progress": "work_in_progress"
+    "work in progress": "work_in_progress",
+    "operating cash flow": "operating_cash_flow_funds_from_operations",
+    "funds from operations": "operating_cash_flow_funds_from_operations",
+    "ffo": "operating_cash_flow_funds_from_operations",
+    "other assets": "other_assets",
+    "other current assets": "other_current_assets",
+    "other current assets and liabilities": "other_current_assets_liabilities",
+    "prepaid expenses": "prepaid_expenses_and_other_assets",
+    "prepaid expenses and other assets": "prepaid_expenses_and_other_assets",
+    "prepaid materials": "prepaid_materials_and_other_assets",
+    "prepaid materials and other assets": "prepaid_materials_and_other_assets",
+    "prepaids": "prepaids",
+    "prepaids and other current assets": "prepaids_and_other_current_assets",
+    "quality of revenue and receivables": "quality_of_revenue_and_receivables_and_cash_proof",
+    "cash proof": "quality_of_revenue_and_receivables_and_cash_proof",
+    "waterfall revenue": "waterfall_revenue_analysis",
+    "waterfall revenue analysis": "waterfall_revenue_analysis",
+    "supporting analysis to qoe": "supporting_analysis_to_quality_of_earnings",
+    "supporting analysis to quality of earnings": "supporting_analysis_to_quality_of_earnings"
   },
   "concept_to_sections": {
     "debt_concept": [
-      "net_debt",
-      "locked_box"
+      "net_debt"
     ]
   },
   "concept_aliases": {
     "debt": "debt_concept",
     "debt-like": "debt_concept",
     "net debt concept": "debt_concept"
+  },
+  "section_ordering": {
+    "description": "Optional ordering hints for rendering scope sections. Rules are best-effort and skipped when sections are not active.",
+    "anchor_rules": [
+      {
+        "section": "balance_sheet",
+        "after": "operating_expenses"
+      },
+      {
+        "section": "inventory",
+        "after": "working_capital"
+      },
+      {
+        "section": "work_in_progress",
+        "after": "inventory"
+      },
+      {
+        "section": "accounts_receivable",
+        "after": "inventory"
+      },
+      {
+        "section": "accounts_payable_and_accrued_liabilities",
+        "after": "accounts_receivable"
+      },
+      {
+        "section": "prepaids",
+        "after": "inventory"
+      },
+      {
+        "section": "prepaids_and_other_current_assets",
+        "after": "inventory"
+      },
+      {
+        "section": "prepaid_expenses_and_other_assets",
+        "after": "inventory"
+      },
+      {
+        "section": "prepaid_materials_and_other_assets",
+        "after": "inventory"
+      }
+    ]
   },
   "fallback_bucket_key": "industry_specific_analysis"
 }

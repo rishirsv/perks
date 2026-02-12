@@ -105,14 +105,13 @@ Use it to compare against the full per-industry file.
 
 ## Industry section keys (for comparison)
 
-- `revenue_analysis`
 - `working_capital`
-- `prepaid_materials_and_other_assets`
-- `inventory`
+- `accounts_receivable`
 - `accounts_payable_and_accrued_liabilities`
 - `capital_expenditure_requirements`
-- `net_debt`
-- `related_parties`
 - `commitments_and_contingencies`
-- `accounting_overview`
-- `accounts_receivable`
+- `net_debt`
+- `revenue_analysis`
+- `prepaid_materials_and_other_assets`
+- `inventory`
+- `related_parties`

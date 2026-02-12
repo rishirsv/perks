@@ -460,6 +460,39 @@
           ]
         }
       ],
+      "waterfall_revenue_analysis": [
+        {
+          "id": "scope.112",
+          "text": "If available, obtain patient/encounter-level detail from billing and collections systems to perform a claims-level revenue analysis reflecting net cash received on closed claims and estimated cash expected on open claims (based on historical reimbursement trends). Discuss with management:",
+          "children": [
+            {
+              "text": "Drivers of monthly/quarterly/annual net revenue trends by location, significant payor, and significant service code;"
+            },
+            {
+              "text": "Reimbursement trends by payor, service, and location;"
+            },
+            {
+              "text": "Pricing/volume trends by location, payor, and service;"
+            },
+            {
+              "text": "Payor mix trends in total and by location;"
+            },
+            {
+              "text": "Trends and drivers of fluctuation in the cash collection cycle;"
+            },
+            {
+              "text": "Reconciliation of cash collections reported in the billing system to third-party bank statements (on a sample basis); and"
+            },
+            {
+              "text": "Reconciliation of billing and collection information to financial statements."
+            }
+          ]
+        },
+        {
+          "id": "scope.113",
+          "text": "Bridge revenue for changes in patient volumes, same-store/de novo/acquired facilities, and changes in direct and indirect operating expenses."
+        }
+      ],
       "operating_expenses": [
         {
           "id": "scope.089",
@@ -498,6 +531,32 @@
         {
           "id": "scope.091",
           "text": "Obtain and read an analysis of working capital on a monthly basis and inquire about historical trends, including seasonality, fluctuations in days revenue outstanding and days payable outstanding, working capital as a percent of trailing revenue, and other significant items."
+        }
+      ],
+      "inventory": [
+        {
+          "id": "scope.094",
+          "text": "Obtain and read an analysis of Target's inventory and inquire and comment on:",
+          "children": [
+            {
+              "text": "The inventory valuation methodology (e.g. standard costing);"
+            },
+            {
+              "text": "Significant vendor allowances, rebates, allowances and/or purchase commitments and related programs;"
+            },
+            {
+              "text": "Return to vendor provisions;"
+            },
+            {
+              "text": "Inventory aging and estimated provision, if any (i.e. slow-moving inventory)."
+            }
+          ]
+        }
+      ],
+      "other_assets": [
+        {
+          "id": "scope.095",
+          "text": "Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances."
         }
       ],
       "accounts_receivable": [
@@ -591,73 +650,16 @@
           "id": "scope.100",
           "text": "Obtain, read, and discuss with management net debt and debt-like items, whether recorded on-balance sheet or off-balance sheet (for example: notes payable, capital vendor payables, deferred purchase price of property or services, accrued bonuses, and capital lease obligations), including expected future payout timing and amounts."
         }
-      ],
-      "inventory": [
-        {
-          "id": "scope.094",
-          "text": "Obtain and read an analysis of Target's inventory and inquire and comment on:",
-          "children": [
-            {
-              "text": "The inventory valuation methodology (e.g. standard costing);"
-            },
-            {
-              "text": "Significant vendor allowances, rebates, allowances and/or purchase commitments and related programs;"
-            },
-            {
-              "text": "Return to vendor provisions;"
-            },
-            {
-              "text": "Inventory aging and estimated provision, if any (i.e. slow-moving inventory)."
-            }
-          ]
-        }
-      ],
-      "other_assets": [
-        {
-          "id": "scope.095",
-          "text": "Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances."
-        }
-      ],
-      "waterfall_revenue_analysis": [
-        {
-          "id": "scope.112",
-          "text": "If available, obtain patient/encounter-level detail from billing and collections systems to perform a claims-level revenue analysis reflecting net cash received on closed claims and estimated cash expected on open claims (based on historical reimbursement trends). Discuss with management:",
-          "children": [
-            {
-              "text": "Drivers of monthly/quarterly/annual net revenue trends by location, significant payor, and significant service code;"
-            },
-            {
-              "text": "Reimbursement trends by payor, service, and location;"
-            },
-            {
-              "text": "Pricing/volume trends by location, payor, and service;"
-            },
-            {
-              "text": "Payor mix trends in total and by location;"
-            },
-            {
-              "text": "Trends and drivers of fluctuation in the cash collection cycle;"
-            },
-            {
-              "text": "Reconciliation of cash collections reported in the billing system to third-party bank statements (on a sample basis); and"
-            },
-            {
-              "text": "Reconciliation of billing and collection information to financial statements."
-            }
-          ]
-        },
-        {
-          "id": "scope.113",
-          "text": "Bridge revenue for changes in patient volumes, same-store/de novo/acquired facilities, and changes in direct and indirect operating expenses."
-        }
       ]
     }
   },
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

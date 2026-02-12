@@ -120,8 +120,8 @@ Use it to compare against the full per-industry file.
 - `revenue_analysis`
 - `operating_expenses`
 - `working_capital`
-- `work_in_progress`
 - `accounts_payable_and_accrued_liabilities`
-- `other_current_assets_liabilities`
-- `net_debt`
 - `capital_expenditure_requirements`
+- `net_debt`
+- `work_in_progress`
+- `other_current_assets_liabilities`

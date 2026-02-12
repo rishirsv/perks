@@ -42,6 +42,34 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Historical growth by geography; and
   - Finance function, financial reporting framework and internal control environment.
 
+### Supporting Analysis To Quality Of Earnings (`supporting_analysis_to_quality_of_earnings`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`eyecare`)
+
+- (scope.051) Key performance metrics:
+  - By clinic analysis: Revenue and direct costs (such as doctor/compensation, rent) by location;
+  - Revenue by type and pricing trends;
+  - Per visit trends;
+  - Physician production.
+
+### Quality Of Revenue And Receivables And Cash Proof (`quality_of_revenue_and_receivables_and_cash_proof`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`eyecare`)
+
+- (scope.059) Using the underlying billing data, develop a revenue waterfall analysis and understand the following:
+  - Historical collection profile;
+  - Variances between implied accrual revenue and the Company's internal records; and
+  - Accounts receivable profile.
+- (scope.060) Compare the Company's cash receipts and disbursements to bank statement inflows and outflows.
+
 ### Accounting overview (`accounting_overview`)
 
 #### Common
@@ -116,6 +144,26 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Historical trends in key working capital metrics (DSO, DIO, DPO), including payor-driven effects; and
   - Factors that may have distorted the current or historical working capital position.
 
+### Inventory (`inventory`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`eyecare`)
+
+- (scope.065) Understand Target's underlying process for recording inventory and comment on unusual items.
+
+### Other Current Assets (`other_current_assets`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`eyecare`)
+
+- (scope.066) Obtain and read an analysis of Target's other current assets and comment on unusual items, significant fluctuations, and balances potentially excluded from working capital (for example: income taxes recoverable and deferred finance costs).
+
 ### Accounts receivable (`accounts_receivable`)
 
 #### Common
@@ -188,51 +236,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Supporting Analysis To Quality Of Earnings (`supporting_analysis_to_quality_of_earnings`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`eyecare`)
-
-- (scope.051) Key performance metrics:
-  - By clinic analysis: Revenue and direct costs (such as doctor/compensation, rent) by location;
-  - Revenue by type and pricing trends;
-  - Per visit trends;
-  - Physician production.
-
-### Quality Of Revenue And Receivables And Cash Proof (`quality_of_revenue_and_receivables_and_cash_proof`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`eyecare`)
-
-- (scope.059) Using the underlying billing data, develop a revenue waterfall analysis and understand the following:
-  - Historical collection profile;
-  - Variances between implied accrual revenue and the Company's internal records; and
-  - Accounts receivable profile.
-- (scope.060) Compare the Company's cash receipts and disbursements to bank statement inflows and outflows.
-
-### Inventory (`inventory`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`eyecare`)
-
-- (scope.065) Understand Target's underlying process for recording inventory and comment on unusual items.
-
-### Other Current Assets (`other_current_assets`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`eyecare`)
-
-- (scope.066) Obtain and read an analysis of Target's other current assets and comment on unusual items, significant fluctuations, and balances potentially excluded from working capital (for example: income taxes recoverable and deferred finance costs).

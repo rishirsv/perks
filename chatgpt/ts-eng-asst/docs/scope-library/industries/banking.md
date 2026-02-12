@@ -123,42 +123,6 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
 
-### Loan Portfolio And Credit Quality (`loan_portfolio_and_credit_quality`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`banking`)
-
-- (scope.516) Obtain and analyze loan portfolio composition by product, geography, industry, and risk rating.
-- (scope.517) Review delinquency, non-performing assets, charge-offs, recoveries, and vintage/loss trends.
-- (scope.518) Assess concentrations (single-name, sector, geographic) and underwriting/credit policy changes over the Historical Period.
-
-### Allowance For Credit Losses (`allowance_for_credit_losses`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`banking`)
-
-- (scope.519) Understand allowance methodology, inputs, and model governance (if applicable).
-- (scope.520) Review qualitative overlays, management adjustments, and sensitivity to macro assumptions.
-- (scope.521) Reconcile allowance movements over time and assess coverage ratios versus peer/portfolio risk.
-
-### Regulatory Capital And Liquidity (`regulatory_capital_and_liquidity`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`banking`)
-
-- (scope.522) Understand regulatory capital metrics and drivers (risk-weighted assets, capital buffers) where applicable.
-- (scope.523) Review liquidity profile and stress testing framework where applicable.
-- (scope.524) Assess the impact of off-balance sheet exposures and commitments on capital/liquidity.
-
 ### Operating Expenses (`operating_expenses`)
 
 #### Common
@@ -218,3 +182,39 @@ _Not in common skeleton._
     - Cost of funding.
   - Non-interest income and non-interest margin - trends therein, key drivers, and one-time / non-cash items.
   - Other income (including fee income and commissions) - trends therein and noted one-time / non-cash items.
+
+### Loan Portfolio And Credit Quality (`loan_portfolio_and_credit_quality`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`banking`)
+
+- (scope.516) Obtain and analyze loan portfolio composition by product, geography, industry, and risk rating.
+- (scope.517) Review delinquency, non-performing assets, charge-offs, recoveries, and vintage/loss trends.
+- (scope.518) Assess concentrations (single-name, sector, geographic) and underwriting/credit policy changes over the Historical Period.
+
+### Allowance For Credit Losses (`allowance_for_credit_losses`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`banking`)
+
+- (scope.519) Understand allowance methodology, inputs, and model governance (if applicable).
+- (scope.520) Review qualitative overlays, management adjustments, and sensitivity to macro assumptions.
+- (scope.521) Reconcile allowance movements over time and assess coverage ratios versus peer/portfolio risk.
+
+### Regulatory Capital And Liquidity (`regulatory_capital_and_liquidity`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`banking`)
+
+- (scope.522) Understand regulatory capital metrics and drivers (risk-weighted assets, capital buffers) where applicable.
+- (scope.523) Review liquidity profile and stress testing framework where applicable.
+- (scope.524) Assess the impact of off-balance sheet exposures and commitments on capital/liquidity.

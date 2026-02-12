@@ -477,6 +477,33 @@
           ]
         }
       ],
+      "inventory": [
+        {
+          "id": "scope.169",
+          "text": "Obtain and read an analysis of Target's inventory and inquire about:",
+          "children": [
+            {
+              "text": "Aging analysis by component"
+            },
+            {
+              "text": "Historical write-offs"
+            },
+            {
+              "text": "Inventory provision roll forward including methodology and calculation"
+            }
+          ]
+        }
+      ],
+      "prepaids_and_other_current_assets": [
+        {
+          "id": "scope.170",
+          "text": "Obtain and read an analysis of Target's prepaids and other current assets including composition"
+        },
+        {
+          "id": "scope.171",
+          "text": "Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances."
+        }
+      ],
       "accounts_receivable": [
         {
           "id": "scope.168",
@@ -545,39 +572,6 @@
           "text": "Inquire about other off-balance sheet transactions."
         }
       ],
-      "balance_sheet": [
-        {
-          "id": "scope.163",
-          "text": "Perform quality of the Target's net assets at year-end the Historical Period and the most current period end, with a focus upon the nature, composition and basis of valuation of key balance sheet accounts (including but not limited to, accounts receivable, inventory, accounts payable and accruals, other current assets and liabilities, including cash reconciliations, etc.)"
-        }
-      ],
-      "inventory": [
-        {
-          "id": "scope.169",
-          "text": "Obtain and read an analysis of Target's inventory and inquire about:",
-          "children": [
-            {
-              "text": "Aging analysis by component"
-            },
-            {
-              "text": "Historical write-offs"
-            },
-            {
-              "text": "Inventory provision roll forward including methodology and calculation"
-            }
-          ]
-        }
-      ],
-      "prepaids_and_other_current_assets": [
-        {
-          "id": "scope.170",
-          "text": "Obtain and read an analysis of Target's prepaids and other current assets including composition"
-        },
-        {
-          "id": "scope.171",
-          "text": "Obtain a summary of and comment on unusual items, significant fluctuations, and significant balances."
-        }
-      ],
       "related_parties": [
         {
           "id": "scope.185",
@@ -587,10 +581,12 @@
     }
   },
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

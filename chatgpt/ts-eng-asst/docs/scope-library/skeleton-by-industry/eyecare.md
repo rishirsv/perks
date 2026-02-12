@@ -104,12 +104,12 @@ Use it to compare against the full per-industry file.
 ## Industry section keys (for comparison)
 
 - `quality_of_earnings`
-- `supporting_analysis_to_quality_of_earnings`
 - `operating_expenses`
-- `quality_of_revenue_and_receivables_and_cash_proof`
 - `working_capital`
 - `accounts_receivable`
-- `inventory`
-- `other_current_assets`
 - `accounts_payable_and_accrued_liabilities`
 - `net_debt`
+- `supporting_analysis_to_quality_of_earnings`
+- `quality_of_revenue_and_receivables_and_cash_proof`
+- `inventory`
+- `other_current_assets`

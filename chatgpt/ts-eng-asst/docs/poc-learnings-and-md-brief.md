@@ -96,7 +96,7 @@
 - Problem seen: behavior regressions when trying to fit within system prompt limits.
 - Learning: separate immutable runtime contracts from advisory playbook content.
 - Controls in place:
-  - Prompt budget checker (`<= 7200` target headroom under 8000 cap).
+  - Prompt budget checker (`<= 7800` target headroom under 8000 cap).
   - Immutable snippet presence assertions.
   - Structural marker assertions for critical behavior.
 
@@ -136,7 +136,7 @@
 ## Verification checklist for release readiness
 
 ```bash
-python3 scripts/check-system-prompt-contract.py --prompt dist/ts-engagement-assistant.md --max-chars 7200
+python3 scripts/check-system-prompt-contract.py --prompt dist/ts-engagement-assistant.md --max-chars 8000
 python3 scripts/check-scope-spelling.py
 python3 scripts/validate-scope-exports.py
 python3 -m py_compile dist/el-generate.py

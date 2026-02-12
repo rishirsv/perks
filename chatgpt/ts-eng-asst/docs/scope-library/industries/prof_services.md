@@ -151,6 +151,26 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Retainers and client deposits recorded as deferred revenue or other liabilities; and
   - Disputed billings and write-off trends by service line.
 
+### Work In Progress (`work_in_progress`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`prof_services`)
+
+- (scope.310) Obtain a summary of work in progress (amounts recoverable on contracts) by project/customer and comment on unusual items, fluctuations, and significant balances.
+
+### Other Current Assets Liabilities (`other_current_assets_liabilities`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`prof_services`)
+
+- (scope.312) Understand the nature of other current assets and liabilities, and the valuation principles applied thereto.
+
 ### Accounts receivable (`accounts_receivable`)
 
 #### Common
@@ -230,23 +250,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Work In Progress (`work_in_progress`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`prof_services`)
-
-- (scope.310) Obtain a summary of work in progress (amounts recoverable on contracts) by project/customer and comment on unusual items, fluctuations, and significant balances.
-
-### Other Current Assets Liabilities (`other_current_assets_liabilities`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`prof_services`)
-
-- (scope.312) Understand the nature of other current assets and liabilities, and the valuation principles applied thereto.

@@ -117,8 +117,8 @@ Use it to compare against the full per-industry file.
 
 - `accounting_overview`
 - `quality_of_earnings`
+- `revenue_analysis`
 - `operating_expenses`
+- `commitments_and_contingencies`
 - `balance_sheet`
 - `operating_cash_flow_funds_from_operations`
-- `revenue_analysis`
-- `commitments_and_contingencies`

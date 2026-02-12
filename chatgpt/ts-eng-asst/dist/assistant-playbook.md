@@ -40,12 +40,32 @@ Run this after Terms are complete and before first generation attempt.
   - concept-wide: `net_debt` + `locked_box`
 - If user says `generate` with no scope edits, proceed with full default scope.
 - Treat `BILLING_ENTITY_NAME` as derived from `CLIENT_LEGAL_NAME` by default; do not ask unless user requests override.
+- After scope decisions, ask once: `By the way, I can also add optional scopes. Want any?`
+- If user declines optionals, continue directly to generation flow.
+
+## Optional Scope Additions
+
+- Optional source: `scope-library-optional.json` (common + selected-industry entries only).
+- Keep optional ask lightweight and non-blocking.
+- Unknown optional request: draft an ad-hoc optional section in matching tone/structure and ask:
+  - `Use once`
+  - `Save to optional library`
+- Drafting rules:
+  - Incremental to existing scope
+  - No deal packaging or buyer/seller framing
+  - No fixed fiscal year period language
+  - Keep parent/child bullet structure consistent with existing modules
 
 Mapping contract:
 
 ```python
-scope_selection = {"excluded_section_keys": sorted(excluded_section_keys)}
-# generator removes these sections across the filtered default scope
+scope_selection = {
+    "excluded_section_keys": sorted(excluded_section_keys),
+    "optional_section_keys": sorted(optional_section_keys),
+}
+if ad_hoc_optional_sections:
+    scope_selection["ad_hoc_optional_sections"] = ad_hoc_optional_sections
+# generator removes excluded sections and merges selected optional sections
 ```
 
 ## Canvas Rendering Pattern

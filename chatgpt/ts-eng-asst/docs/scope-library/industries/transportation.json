@@ -406,6 +406,23 @@
           ]
         }
       ],
+      "inventory": [
+        {
+          "id": "scope.450",
+          "text": "Obtain and read an analysis of transportation inventory balances and inquire about:",
+          "children": [
+            {
+              "text": "Composition (for example: fuel, parts, supplies, and finished goods where applicable);"
+            },
+            {
+              "text": "Costing methodology and turnover/aging; and"
+            },
+            {
+              "text": "Provisioning for obsolete or slow-moving inventory."
+            }
+          ]
+        }
+      ],
       "capital_expenditure_requirements": [
         {
           "id": "scope.452",
@@ -428,31 +445,16 @@
           "id": "scope.453",
           "text": "Summarize transportation-specific debt and debt-like items, including letters of credit, capital vendor payables, and fleet-related financing obligations."
         }
-      ],
-      "inventory": [
-        {
-          "id": "scope.450",
-          "text": "Obtain and read an analysis of transportation inventory balances and inquire about:",
-          "children": [
-            {
-              "text": "Composition (for example: fuel, parts, supplies, and finished goods where applicable);"
-            },
-            {
-              "text": "Costing methodology and turnover/aging; and"
-            },
-            {
-              "text": "Provisioning for obsolete or slow-moving inventory."
-            }
-          ]
-        }
       ]
     }
   },
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

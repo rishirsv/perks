@@ -364,7 +364,7 @@
               "text": "History, organization structure, proposed transaction perimeter and management reporting relationships;"
             },
             {
-              "text": "Start-up costs, capital expenditures, and status of operations in Morocco;"
+              "text": "Start-up costs, capital expenditures, and status of operations in significant sites/geographies."
             },
             {
               "text": "Intercompany transactions;"
@@ -520,62 +520,8 @@
       ],
       "working_capital": [
         {
-          "id": "scope.249",
-          "text": "Working capital trends and trade-ratio drivers (including DSO, DIO, and DPO), including seasonality effects."
-        },
-        {
-          "id": "scope.250",
-          "text": "Large or non-recurring items affecting working capital comparability (including acquisition-related impacts)."
-        },
-        {
           "id": "scope.256",
           "text": "Payroll-related funding and cash timing impacts relevant to working capital normalization and peg setting."
-        }
-      ],
-      "accounts_payable_and_accrued_liabilities": [
-        {
-          "id": "scope.261",
-          "text": "Accounts payable aging and vendor settlement terms for key suppliers."
-        },
-        {
-          "id": "scope.262",
-          "text": "Accrued liabilities profile (including payroll, bonuses/incentives, and other significant operating accruals)."
-        },
-        {
-          "id": "scope.608",
-          "text": "Other current and non-current liability balances with potential working-capital or debt-like implications."
-        }
-      ],
-      "capital_expenditure_requirements": [
-        {
-          "id": "scope.266",
-          "text": "Fixed-asset continuity and significant additions/disposals."
-        },
-        {
-          "id": "scope.267",
-          "text": "Near-term required capex and deferred capex backlog, where applicable."
-        },
-        {
-          "id": "scope.270",
-          "text": "Growth versus maintenance capex profile and related impairment/write-down considerations."
-        }
-      ],
-      "commitments_and_contingencies": [
-        {
-          "id": "scope.274",
-          "text": "Minimum purchase or supply commitments under long-term commercial arrangements."
-        },
-        {
-          "id": "scope.275",
-          "text": "Earn-out obligations and other contingent consideration from historical acquisitions, where applicable."
-        },
-        {
-          "id": "scope.276",
-          "text": "Lease obligations and related commitments with third parties and related parties, where applicable."
-        },
-        {
-          "id": "scope.277",
-          "text": "Pending or threatened litigation and regulatory matters (including intellectual-property-related exposures, where applicable)."
         }
       ],
       "inventory": [
@@ -602,6 +548,28 @@
           "text": "Timing of cash outflows versus expense recognition for material prepaid categories."
         }
       ],
+      "accounts_payable_and_accrued_liabilities": [
+        {
+          "id": "scope.262",
+          "text": "Accrued liabilities profile (including payroll, bonuses/incentives, and other significant operating accruals)."
+        }
+      ],
+      "capital_expenditure_requirements": [
+        {
+          "id": "scope.266",
+          "text": "Fixed-asset continuity and significant additions/disposals."
+        },
+        {
+          "id": "scope.267",
+          "text": "Near-term required capex and deferred capex backlog, where applicable."
+        }
+      ],
+      "commitments_and_contingencies": [
+        {
+          "id": "scope.275",
+          "text": "Earn-out obligations and other contingent consideration from historical acquisitions, where applicable."
+        }
+      ],
       "related_parties": [
         {
           "id": "scope.288",
@@ -619,10 +587,12 @@
     }
   },
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

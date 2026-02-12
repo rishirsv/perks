@@ -87,6 +87,25 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Repairs and maintenance expense;
   - Unusual and extraordinary items (if any).
 
+### Revenue Analysis (`revenue_analysis`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`construction`)
+
+- (scope.027) To the extent available, obtain and review an analysis of Target's revenues and margins and inquire about:
+  - Revenue stream (civil work, special projects, services, and equipment rental);
+  - Customer;
+  - Geography; and
+  - End market/industry.
+- (scope.028) Analyze revenue, margin, pricing, and average project length on a project basis, where available.
+- (scope.029) Understand Target's job costing methodology, including margin components and periodic true-ups.
+- (scope.030) Understand Target's revenue recognition and billing process (for example: percentage-of-completion, periodic and contract-completion true-ups and variability, loss-provision process, policy controls/escalations, and lifecycle timing impacts on EBITDA).
+- (scope.031) Understand the profile and exposure of major projects/contracts, including customer concentration and key contractual risk terms.
+- (scope.032) Obtain and analyze backlog and active backlog as of the latest available date (including backlog margin on a project basis and historical backlog conversion).
+
 ### Working capital (`working_capital`)
 
 #### Common
@@ -104,6 +123,26 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.035) Monthly trending and fluctuations in working capital and impact on reported metrics (for example: days sales/payables/inventory outstanding and net working capital as a percentage of revenues).
 - (scope.036) Large, unusual, or non-operating items and current/upcoming initiatives that may affect normalized working capital trends (such as exited businesses, settlements, capital projects, and non-trade balances).
 - (scope.037) Nature of the Company's unearned revenue.
+
+### Inventory (`inventory`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`construction`)
+
+- (scope.039) Prepare a summary of inventory and obtain an understanding of the Company's inventory costing methodology, inventory tracking, work-in-progress accounting interface, and obsolescence reserves.
+
+### Prepaid Materials And Other Assets (`prepaid_materials_and_other_assets`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`construction`)
+
+- (scope.038) Prepare a summary of other assets (including prepaid materials and prepaid assets) and comment on unusual items, significant fluctuations, and significant balances.
 
 ### Accounts receivable (`accounts_receivable`)
 
@@ -177,6 +216,16 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Pending or threatened litigation or investigation by regulatory or other authorities; and
   - Other off-balance sheet transactions (including contingencies and guarantees).
 
+### Related Parties (`related_parties`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`construction`)
+
+- (scope.044) Inquire about Target’s transactions (e.g. income statement and balance sheet impacts) with related parties including subsidiaries, holding companies, joint ventures, variable interest entities, and other entities under common ownership.
+
 ### Net debt (`net_debt`)
 
 #### Common
@@ -198,52 +247,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Revenue Analysis (`revenue_analysis`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`construction`)
-
-- (scope.027) To the extent available, obtain and review an analysis of Target's revenues and margins and inquire about:
-  - Revenue stream (civil work, special projects, services, and equipment rental);
-  - Customer;
-  - Geography; and
-  - End market/industry.
-- (scope.028) Analyze revenue, margin, pricing, and average project length on a project basis, where available.
-- (scope.029) Understand Target's job costing methodology, including margin components and periodic true-ups.
-- (scope.030) Understand Target's revenue recognition and billing process (for example: percentage-of-completion, periodic and contract-completion true-ups and variability, loss-provision process, policy controls/escalations, and lifecycle timing impacts on EBITDA).
-- (scope.031) Understand the profile and exposure of major projects/contracts, including customer concentration and key contractual risk terms.
-- (scope.032) Obtain and analyze backlog and active backlog as of the latest available date (including backlog margin on a project basis and historical backlog conversion).
-
-### Prepaid Materials And Other Assets (`prepaid_materials_and_other_assets`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`construction`)
-
-- (scope.038) Prepare a summary of other assets (including prepaid materials and prepaid assets) and comment on unusual items, significant fluctuations, and significant balances.
-
-### Inventory (`inventory`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`construction`)
-
-- (scope.039) Prepare a summary of inventory and obtain an understanding of the Company's inventory costing methodology, inventory tracking, work-in-progress accounting interface, and obsolescence reserves.
-
-### Related Parties (`related_parties`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`construction`)
-
-- (scope.044) Inquire about Target’s transactions (e.g. income statement and balance sheet impacts) with related parties including subsidiaries, holding companies, joint ventures, variable interest entities, and other entities under common ownership.

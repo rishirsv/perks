@@ -129,6 +129,16 @@ Each section below shows common skeleton bullets and industry-specific bullets w
   - Large, unusual, or non-operating items that may have affected normal working capital trends (such as accruals for bonuses, capital accruals, month end vs quarter end differences, etc.); and
   - Understanding the accounting impact of allowance for uncollectible amounts and other accruals requiring judgment.
 
+### Prepaid Expenses And Other Assets (`prepaid_expenses_and_other_assets`)
+
+#### Common
+
+_Not in common skeleton._
+
+#### Industry (`service`)
+
+- (scope.350) Obtain and read an analysis of the Company's prepaid and other assets and comment on unusual items, significant fluctuations, and balances potentially excluded from working capital.
+
 ### Accounts receivable (`accounts_receivable`)
 
 #### Common
@@ -194,13 +204,3 @@ Each section below shows common skeleton bullets and industry-specific bullets w
 - (scope.116) Comment on control issues identified by the external auditors, if applicable.
 - (scope.117) Comment on any additional red flags or key risks identified in the provided audit materials.
 - (scope.118) Review audit committee reporting and presentations from the audit firm.
-
-### Prepaid Expenses And Other Assets (`prepaid_expenses_and_other_assets`)
-
-#### Common
-
-_Not in common skeleton._
-
-#### Industry (`service`)
-
-- (scope.350) Obtain and read an analysis of the Company's prepaid and other assets and comment on unusual items, significant fluctuations, and balances potentially excluded from working capital.

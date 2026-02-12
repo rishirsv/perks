@@ -127,7 +127,7 @@ Use it to compare against the full per-industry file.
 
 - `business_overview`
 - `accounting_overview`
-- `revenue_analysis`
 - `quality_of_earnings`
+- `revenue_analysis`
 - `operating_expenses`
 - `working_capital`

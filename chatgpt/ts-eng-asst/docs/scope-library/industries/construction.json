@@ -301,6 +301,46 @@
   ],
   "industry_modules": {
     "construction": {
+      "revenue_analysis": [
+        {
+          "id": "scope.027",
+          "text": "To the extent available, obtain and review an analysis of Target's revenues and margins and inquire about:",
+          "children": [
+            {
+              "text": "Revenue stream (civil work, special projects, services, and equipment rental);"
+            },
+            {
+              "text": "Customer;"
+            },
+            {
+              "text": "Geography; and"
+            },
+            {
+              "text": "End market/industry."
+            }
+          ]
+        },
+        {
+          "id": "scope.028",
+          "text": "Analyze revenue, margin, pricing, and average project length on a project basis, where available."
+        },
+        {
+          "id": "scope.029",
+          "text": "Understand Target's job costing methodology, including margin components and periodic true-ups."
+        },
+        {
+          "id": "scope.030",
+          "text": "Understand Target's revenue recognition and billing process (for example: percentage-of-completion, periodic and contract-completion true-ups and variability, loss-provision process, policy controls/escalations, and lifecycle timing impacts on EBITDA)."
+        },
+        {
+          "id": "scope.031",
+          "text": "Understand the profile and exposure of major projects/contracts, including customer concentration and key contractual risk terms."
+        },
+        {
+          "id": "scope.032",
+          "text": "Obtain and analyze backlog and active backlog as of the latest available date (including backlog margin on a project basis and historical backlog conversion)."
+        }
+      ],
       "working_capital": [
         {
           "id": "scope.033",
@@ -321,6 +361,18 @@
         {
           "id": "scope.037",
           "text": "Nature of the Company's unearned revenue."
+        }
+      ],
+      "inventory": [
+        {
+          "id": "scope.039",
+          "text": "Prepare a summary of inventory and obtain an understanding of the Company's inventory costing methodology, inventory tracking, work-in-progress accounting interface, and obsolescence reserves."
+        }
+      ],
+      "prepaid_materials_and_other_assets": [
+        {
+          "id": "scope.038",
+          "text": "Prepare a summary of other assets (including prepaid materials and prepaid assets) and comment on unusual items, significant fluctuations, and significant balances."
         }
       ],
       "accounts_receivable": [
@@ -401,6 +453,12 @@
           ]
         }
       ],
+      "related_parties": [
+        {
+          "id": "scope.044",
+          "text": "Inquire about Target’s transactions (e.g. income statement and balance sheet impacts) with related parties including subsidiaries, holding companies, joint ventures, variable interest entities, and other entities under common ownership."
+        }
+      ],
       "net_debt": [
         {
           "id": "scope.042",
@@ -410,72 +468,16 @@
           "id": "scope.043",
           "text": "Summary of lease right-of-use assets and liabilities."
         }
-      ],
-      "revenue_analysis": [
-        {
-          "id": "scope.027",
-          "text": "To the extent available, obtain and review an analysis of Target's revenues and margins and inquire about:",
-          "children": [
-            {
-              "text": "Revenue stream (civil work, special projects, services, and equipment rental);"
-            },
-            {
-              "text": "Customer;"
-            },
-            {
-              "text": "Geography; and"
-            },
-            {
-              "text": "End market/industry."
-            }
-          ]
-        },
-        {
-          "id": "scope.028",
-          "text": "Analyze revenue, margin, pricing, and average project length on a project basis, where available."
-        },
-        {
-          "id": "scope.029",
-          "text": "Understand Target's job costing methodology, including margin components and periodic true-ups."
-        },
-        {
-          "id": "scope.030",
-          "text": "Understand Target's revenue recognition and billing process (for example: percentage-of-completion, periodic and contract-completion true-ups and variability, loss-provision process, policy controls/escalations, and lifecycle timing impacts on EBITDA)."
-        },
-        {
-          "id": "scope.031",
-          "text": "Understand the profile and exposure of major projects/contracts, including customer concentration and key contractual risk terms."
-        },
-        {
-          "id": "scope.032",
-          "text": "Obtain and analyze backlog and active backlog as of the latest available date (including backlog margin on a project basis and historical backlog conversion)."
-        }
-      ],
-      "prepaid_materials_and_other_assets": [
-        {
-          "id": "scope.038",
-          "text": "Prepare a summary of other assets (including prepaid materials and prepaid assets) and comment on unusual items, significant fluctuations, and significant balances."
-        }
-      ],
-      "inventory": [
-        {
-          "id": "scope.039",
-          "text": "Prepare a summary of inventory and obtain an understanding of the Company's inventory costing methodology, inventory tracking, work-in-progress accounting interface, and obsolescence reserves."
-        }
-      ],
-      "related_parties": [
-        {
-          "id": "scope.044",
-          "text": "Inquire about Target’s transactions (e.g. income statement and balance sheet impacts) with related parties including subsidiaries, holding companies, joint ventures, variable interest entities, and other entities under common ownership."
-        }
       ]
     }
   },
   "metadata": {
-    "industries_analyzed": 11,
-    "common_threshold": "8 of 11",
-    "total_sections_found": 55,
-    "total_bullets_cataloged": 1064
+    "industries_analyzed": 17,
+    "common_threshold": "legacy: 8 of 11",
+    "total_sections_found": 32,
+    "total_bullets_cataloged": 610,
+    "metadata_counts_basis": "current-dist-structure",
+    "metadata_last_refreshed_utc": "2026-02-11T20:05:53.894491+00:00"
   },
   "review_tracking": {
     "source": "docs/Scope Review/deletion-optional-tracker.md",

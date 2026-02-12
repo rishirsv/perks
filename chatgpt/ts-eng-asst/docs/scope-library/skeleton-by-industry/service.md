@@ -118,6 +118,6 @@ Use it to compare against the full per-industry file.
 - `quality_of_earnings`
 - `revenue_analysis`
 - `operating_expenses`
-- `prepaid_expenses_and_other_assets`
 - `accounts_payable_and_accrued_liabilities`
 - `capital_expenditure_requirements`
+- `prepaid_expenses_and_other_assets`
