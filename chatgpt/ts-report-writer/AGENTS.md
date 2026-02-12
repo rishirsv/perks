@@ -15,6 +15,8 @@
 - Exclude table text and chart/table numeric grids.
 - Exclude footer/header noise, legal boilerplate, disclaimers, and navigation pages unless required for section context.
 - Exclude image OCR; do not convert images to text.
+- For `Net Working Capital` and `Net Debt` sections, capture both overview and adjustment detail explicitly where source text appears.
+- If adjustment detail exists only in tables/charts and is excluded, preserve surrounding explanatory lines and add: `Table- or chart-based adjustment details were excluded per extraction policy.`
 4. Map content into canonical sections in `docs/report-mining/verbatim-report-extraction-template.md`.
 - If section names differ, place content into the closest matching canonical section.
 - If a section has no non-table body text, write `Not present in source report`.

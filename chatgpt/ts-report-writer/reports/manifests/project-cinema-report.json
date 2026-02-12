@@ -1,0 +1,45 @@
+{
+  "report_id": "project-cinema-report",
+  "source_file": "Project Cinema Report.pdf",
+  "source_path": "reports/Project Cinema Report.pdf",
+  "source_format": "pdf",
+  "method_used": "manual_verbatim_body_text",
+  "total_pages": 53,
+  "line_count": 768,
+  "section_counts": {
+    "Executive Summary": 26,
+    "Key Findings": 16,
+    "Business Overview": 25,
+    "Summary Financials": 7,
+    "Profit and Loss Overview / Financial Performance": 53,
+    "Quality of Earnings": 25,
+    "Income Statement": 13,
+    "Balance Sheet": 99,
+    "Net Working Capital": 226,
+    "Net Debt (Cash)": 82,
+    "Cash Flows": 1,
+    "Related Parties": 1,
+    "Reporting Environment": 69,
+    "Forecast Trading": 37,
+    "Industry Analysis": 31,
+    "Quality of Net Assets": 0,
+    "Gross Margin by LOB": 0,
+    "Appendices": 0
+  },
+  "missing_sections": [
+    "Quality of Net Assets",
+    "Gross Margin by LOB",
+    "Appendices"
+  ],
+  "exclusion_stats": {
+    "table_text_excluded": true,
+    "legal_footer_navigation_excluded": true,
+    "image_text_excluded": true
+  },
+  "warnings": [],
+  "verification_status": "pass",
+  "reviewer": "codex",
+  "reviewed_at": "2026-02-12T21:11:58.511257+00:00",
+  "review_notes": "Manual body-text extraction with table/figure text intentionally excluded and appended under table notes.",
+  "updated_at": "2026-02-12T21:11:58.511257+00:00"
+}

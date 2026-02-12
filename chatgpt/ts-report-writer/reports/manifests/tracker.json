@@ -3,14 +3,70 @@
     "source_file": "Example report_Private Equity lender_Project Garrison.pptx",
     "report_id": "example-report-private-equity-lender-project-garrison",
     "status": "pass",
-    "output_file": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/extracted/example-report-private-equity-lender-project-garrison.md",
+    "output_file": "reports/extracted/example-report-private-equity-lender-project-garrison.md",
     "notes": "manual verbatim extraction complete; table text excluded"
   },
   {
     "source_file": "Project Ascend - Report.pptx",
     "report_id": "project-ascend-report",
     "status": "pass",
-    "output_file": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/extracted/project-ascend-report.md",
+    "output_file": "reports/extracted/project-ascend-report.md",
     "notes": "manual verbatim extraction complete; table text excluded"
+  },
+  {
+    "source_file": "Project Autobahn - Report.pptx",
+    "report_id": "project-autobahn-report",
+    "status": "pass",
+    "output_file": "reports/extracted/project-autobahn-report.md",
+    "notes": "manual verbatim extraction complete; table/chart text excluded"
+  },
+  {
+    "source_file": "Project Blue Jay - Simulated Report 2025.pdf",
+    "report_id": "project-blue-jay-simulated-report-2025",
+    "status": "blocked",
+    "output_file": "reports/extracted/project-blue-jay-simulated-report-2025.md",
+    "notes": "No extractable body text detected; image-only PDF."
+  },
+  {
+    "source_file": "Project Cherry - Simulated Report 2025.pdf",
+    "report_id": "project-cherry-simulated-report-2025",
+    "status": "pass",
+    "output_file": "reports/extracted/project-cherry-simulated-report-2025.md",
+    "notes": "manual verbatim extraction complete; table and chart text excluded"
+  },
+  {
+    "source_file": "Project Cinema Report.pdf",
+    "report_id": "project-cinema-report",
+    "status": "pass",
+    "output_file": "reports/extracted/project-cinema-report.md",
+    "notes": "manual verbatim extraction complete; table and chart text excluded"
+  },
+  {
+    "source_file": "Project Coffee_buy side_FDD (Consumer & Retail - F&B).pptx",
+    "report_id": "project-coffee-buy-side-fdd-consumer-retail-f-b",
+    "status": "blocked",
+    "output_file": "reports/extracted/project-coffee-buy-side-fdd-consumer-retail-f-b.md",
+    "notes": "Source is CDFV2 Encrypted and non-extractable by extraction flow."
+  },
+  {
+    "source_file": "Project Dental_Report_25July2025_vS.pdf",
+    "report_id": "project-dental-report-25july2025-vs",
+    "status": "pass",
+    "output_file": "reports/extracted/project-dental-report-25july2025-vs.md",
+    "notes": "manual_verbatim_body_text; table text excluded"
+  },
+  {
+    "source_file": "Project Ed_buy side_FDD.pptx",
+    "report_id": "project-ed-buy-side-fdd",
+    "status": "pass",
+    "output_file": "reports/extracted/project-ed-buy-side-fdd.md",
+    "notes": "manual_verbatim_body_text; table text excluded"
+  },
+  {
+    "source_file": "Project Emerald - Simulated Report 2025.pdf",
+    "report_id": "project-emerald-simulated-report-2025",
+    "status": "pass",
+    "output_file": "reports/extracted/project-emerald-simulated-report-2025.md",
+    "notes": "manual_verbatim_body_text; table text excluded; appendices listed"
   }
 ]

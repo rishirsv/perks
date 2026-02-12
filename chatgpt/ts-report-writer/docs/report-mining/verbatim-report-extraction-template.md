@@ -102,6 +102,9 @@ Use this as the default top-level order:
 2. <Adjustment Name>: <Verbatim Adjustment Text>
 3. <Adjustment Name>: <Verbatim Adjustment Text>
 
+If adjustment items are only presented in tables/charts and excluded by policy, capture any surrounding explanatory lines and add:
+`Table- or chart-based adjustment details were excluded per extraction policy.`
+
 # Net Debt (Cash)
 ## Overview
 <Verbatim Text>
@@ -110,6 +113,9 @@ Use this as the default top-level order:
 1. <Adjustment Name>: <Verbatim Adjustment Text>
 2. <Adjustment Name>: <Verbatim Adjustment Text>
 3. <Adjustment Name>: <Verbatim Adjustment Text>
+
+If debt-like/working-capital adjustments are only in tables/charts, add:
+`Table- or chart-based adjustment details were excluded per extraction policy.`
 
 # Cash Flows
 - <Verbatim Bullet 1>

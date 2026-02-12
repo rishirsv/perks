@@ -1,0 +1,36 @@
+{
+  "report_id": "project-ed-buy-side-fdd",
+  "source_file": "Project Ed_buy side_FDD.pptx",
+  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/Project Ed_buy side_FDD.pptx",
+  "source_format": "pptx",
+  "method_used": "manual_verbatim_body_text",
+  "total_pages": 178,
+  "line_count": 3740,
+  "section_counts": {
+    "Executive Summary": 504,
+    "Key Findings": 214,
+    "Business Overview": 136,
+    "Summary Financials": 27,
+    "Profit and Loss Overview / Financial Performance": 118,
+    "Quality of Earnings": 453,
+    "Income Statement": 194,
+    "Balance Sheet": 377,
+    "Net Working Capital": 363,
+    "Net Debt (Cash)": 274,
+    "Cash Flows": 52,
+    "Related Parties": 284,
+    "Reporting Environment": 125,
+    "Forecast Trading": 23,
+    "Industry Analysis": 5,
+    "Quality of Net Assets": 61,
+    "Gross Margin by LOB": 0,
+    "Appendices": 530
+  },
+  "missing_sections": [
+    "Gross Margin by LOB"
+  ],
+  "exclusion_stats": {},
+  "warnings": [],
+  "verification_status": "pass",
+  "updated_at": "2026-02-12T21:19:05.340962+00:00"
+}

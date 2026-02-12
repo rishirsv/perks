@@ -1,0 +1,46 @@
+{
+  "report_id": "project-dental-report-25july2025-vs",
+  "source_file": "Project Dental_Report_25July2025_vS.pdf",
+  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/Project Dental_Report_25July2025_vS.pdf",
+  "source_format": "pdf",
+  "method_used": "manual_verbatim_body_text",
+  "total_pages": 40,
+  "line_count": 925,
+  "section_counts": {
+    "Executive Summary": 6,
+    "Key Findings": 5,
+    "Business Overview": 7,
+    "Summary Financials": 7,
+    "Profit and Loss Overview / Financial Performance": 5,
+    "Quality of Earnings": 6,
+    "Income Statement": 1,
+    "Balance Sheet": 5,
+    "Net Working Capital": 7,
+    "Net Debt (Cash)": 4,
+    "Cash Flows": 0,
+    "Reporting Environment": 1,
+    "Related Parties": 1,
+    "Industry Analysis": 6,
+    "Forecast Trading": 1,
+    "Quality of Net Assets": 1,
+    "Gross Margin by LOB": 1,
+    "Appendices": 28
+  },
+  "missing_sections": [
+    "Cash Flows"
+  ],
+  "exclusion_stats": {
+    "header_footer_zone": 381,
+    "table_region": 1451,
+    "empty": 9,
+    "navigation": 5,
+    "short_noise": 242,
+    "table_like": 10,
+    "legal": 9,
+    "numeric_stub": 289,
+    "source_footnote": 23
+  },
+  "warnings": [],
+  "verification_status": "pass",
+  "updated_at": "2026-02-12T21:14:12.599050+00:00"
+}

@@ -1,0 +1,53 @@
+{
+  "report_id": "project-cherry-simulated-report-2025",
+  "source_file": "Project Cherry - Simulated Report 2025.pdf",
+  "status": "pass",
+  "page_count": 55,
+  "markdown_path": "reports/extracted/project-cherry-simulated-report-2025.md",
+  "montage_files": [
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-01.png",
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-02.png",
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-03.png",
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-04.png",
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-05.png",
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-06.png",
+    "reports/verification/project-cherry-simulated-report-2025/montage/montage-07.png"
+  ],
+  "section_coverage": {
+    "Executive Summary": 9,
+    "Key Findings": 4,
+    "Business Overview": 6,
+    "Summary Financials": 4,
+    "Profit and Loss Overview / Financial Performance": 3,
+    "Quality of Earnings": 4,
+    "Income Statement": 3,
+    "Balance Sheet": 3,
+    "Net Working Capital": 4,
+    "Net Debt (Cash)": 3,
+    "Cash Flows": 0,
+    "Related Parties": 0,
+    "Reporting Environment": 5,
+    "Forecast Trading": 0,
+    "Industry Analysis": 0,
+    "Quality of Net Assets": 0,
+    "Gross Margin by LOB": 3,
+    "Appendices": 10
+  },
+  "missing_sections": [
+    "Cash Flows",
+    "Related Parties",
+    "Forecast Trading",
+    "Industry Analysis",
+    "Quality of Net Assets"
+  ],
+  "line_count": 143,
+  "source_format": "pdf",
+  "method_used": "manual_verbatim_body_text",
+  "warnings": [],
+  "reviewer": "codex",
+  "reviewed_at": "2026-02-12T21:11:50.044126+00:00",
+  "review_notes": "Manual cross-check completed using montage images in this directory.",
+  "review_notes_file": "reports/verification/project-cherry-simulated-report-2025/review-notes.md",
+  "created_at": "2026-02-12T21:11:50.044126+00:00",
+  "updated_at": "2026-02-12T21:11:50.044126+00:00"
+}

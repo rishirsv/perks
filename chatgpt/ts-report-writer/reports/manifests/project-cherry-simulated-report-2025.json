@@ -1,0 +1,47 @@
+{
+  "report_id": "project-cherry-simulated-report-2025",
+  "source_file": "Project Cherry - Simulated Report 2025.pdf",
+  "source_path": "reports/Project Cherry - Simulated Report 2025.pdf",
+  "source_format": "pdf",
+  "method_used": "manual_verbatim_body_text",
+  "total_pages": 55,
+  "line_count": 143,
+  "section_counts": {
+    "Executive Summary": 9,
+    "Key Findings": 4,
+    "Business Overview": 6,
+    "Summary Financials": 4,
+    "Profit and Loss Overview / Financial Performance": 3,
+    "Quality of Earnings": 4,
+    "Income Statement": 3,
+    "Balance Sheet": 3,
+    "Net Working Capital": 4,
+    "Net Debt (Cash)": 3,
+    "Cash Flows": 0,
+    "Related Parties": 0,
+    "Reporting Environment": 5,
+    "Forecast Trading": 0,
+    "Industry Analysis": 0,
+    "Quality of Net Assets": 0,
+    "Gross Margin by LOB": 3,
+    "Appendices": 10
+  },
+  "missing_sections": [
+    "Cash Flows",
+    "Related Parties",
+    "Forecast Trading",
+    "Industry Analysis",
+    "Quality of Net Assets"
+  ],
+  "exclusion_stats": {
+    "table_text_excluded": true,
+    "legal_footer_navigation_excluded": true,
+    "image_text_excluded": true
+  },
+  "warnings": [],
+  "verification_status": "pass",
+  "reviewer": "codex",
+  "reviewed_at": "2026-02-12T21:11:50.044126+00:00",
+  "review_notes": "Manual body-text extraction with tables and image text excluded.",
+  "updated_at": "2026-02-12T21:11:50.044126+00:00"
+}

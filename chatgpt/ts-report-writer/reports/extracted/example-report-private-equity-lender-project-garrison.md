@@ -49,10 +49,10 @@
 - The non-interest cost base consists principally of employee compensation and benefits.
 
 ## Key Drivers
-1. `Origination, Syndication and New Business Returns`: Originations in 2014 totaled $17 billion, compared to $18.2 billion in 2013.
-2. `Upfront Fees`: In 2014, upfront fees totaled $172 million, up from $158 million in 2013 due to higher syndication volumes in the year.
-3. `Management Fees`: Management fees increased from $54 million in 2013 to $70 million in 2014.
-4. `Sweeps`: Unamortized amounts swept into interest income increased from $29 million in 2013 to $42 million in 2014.
+- 1. `Origination, Syndication and New Business Returns`: Originations in 2014 totaled $17 billion, compared to $18.2 billion in 2013.
+- 2. `Upfront Fees`: In 2014, upfront fees totaled $172 million, up from $158 million in 2013 due to higher syndication volumes in the year.
+- 3. `Management Fees`: Management fees increased from $54 million in 2013 to $70 million in 2014.
+- 4. `Sweeps`: Unamortized amounts swept into interest income increased from $29 million in 2013 to $42 million in 2014.
 
 # Quality of Earnings
 ## Overview
@@ -61,11 +61,11 @@
 - Finally, we have made adjustments to bring reported pre-tax income to pre-tax cash flows available to service debt.
 
 ## Quality of earnings adjustments
-1. `Cost of funds`: Target’s source of funds is from GE’s Corporate Treasury.
-2. `Revenue from excluded portfolios`: the adjustment proposes to adjust 2013 and 2014 pre-tax income to exclude revenue associated with these segments of Target’s earnings.
-3. `Non-core activities`: Tag-along equity investments represent an activity that is peripheral to Target’s core business activities.
-4. `FAS 91 adjustment for preceding years`: if the 2015 forecast is used as a proxy for normal annual amortization, the adjustments to reflect the retroactive adoption of FAS 91 would be a $46 million reduction to interest income in 2013 and a $22 million reduction to interest income in 2014.
-5. `Amortization adjustment`: amortized amounts should be removed from pre-tax income and replaced with the net cash flows in a given year.
+- 1. `Cost of funds`: Target’s source of funds is from GE’s Corporate Treasury.
+- 2. `Revenue from excluded portfolios`: the adjustment proposes to adjust 2013 and 2014 pre-tax income to exclude revenue associated with these segments of Target’s earnings.
+- 3. `Non-core activities`: Tag-along equity investments represent an activity that is peripheral to Target’s core business activities.
+- 4. `FAS 91 adjustment for preceding years`: if the 2015 forecast is used as a proxy for normal annual amortization, the adjustments to reflect the retroactive adoption of FAS 91 would be a $46 million reduction to interest income in 2013 and a $22 million reduction to interest income in 2014.
+- 5. `Amortization adjustment`: amortized amounts should be removed from pre-tax income and replaced with the net cash flows in a given year.
 
 # Income Statement
 - Compensation and benefit expense increased from $140.6 million in 2013 to $151.8 million in 2014, primarily due to an 18% year-over-year increase in headcount.
@@ -79,13 +79,21 @@
 - Loans are evaluated for impairment collectively (e.g. general reserve) and individually (e.g. specific reserve) on a monthly basis.
 
 # Net Working Capital
+## Overview
 - Assets held-for-sale are loans held temporarily on Target’s books until they are sold down to syndication partners.
 - You should consider the short-term working capital needs associated with these held-for-sale assets.
 
+## Net working capital adjustments
+- Not present in source report.
+
 # Net Debt (Cash)
+## Overview
 - Target currently utilizes between $1 billion and $3 billion of liquidity from GE Corporate Treasury to fund loan commitments under the current business strategy.
 - Management has estimated normal cash needs on a go-forward basis is approximately $2.5 billion.
 - Target has significant unfunded commitments given the magnitude and nature of certain product offerings.
+
+## Net debt / cash adjustments
+- Not present in source report.
 
 # Cash Flows
 - In order to arrive at true cash flows, amortized amounts should be removed from pre-tax income and replaced with the net cash flows in a given year.
@@ -108,7 +116,7 @@
 - Target management’s forecasts for 2015, 2016 and 2017, prepared on the basis that it will continue to operate under current ownership.
 
 # Industry Analysis
-Not present in source report
+- Not present in source report
 
 # Quality of Net Assets
 - We understand that an AcquirorCo would be set up to effect the acquisition of Target.
@@ -116,7 +124,7 @@ Not present in source report
 - Goodwill is not amortized, but is subject to annual evaluation for impairment.
 
 # Gross Margin by LOB
-Not present in source report
+- Not present in source report
 
 # Appendices
 ## Appendix 1: Scope of work
@@ -139,10 +147,10 @@ Not present in source report
 - Given the importance of the Commercial function to Target’s ability to generate earnings, we recommend that you consider whether the current compensation structure with no bonus deferral mechanism provides key employees with sufficient and adequate incentives to continue with the business in the longer term.
 
 ## Appendix 4: Employee retention arrangements
-Not present in source report
+- Not present in source report
 
 ## Appendix 5: SG&A costs and carve-out / shared services
-Not present in source report
+- Not present in source report
 
 ## Appendix 6: Originations
 - In determining the profit-maximizing split between on-book volume and syndication on a go-forward basis, we recommend that in addition to the credit risk associated with retaining commitments on-book, you consider the fact that while yields are declining, they represent an ongoing source of revenue compared to one-time skim / upfront fees on syndications.
@@ -156,13 +164,13 @@ Not present in source report
 - Fee Recognition in a Loan Participation.
 
 ## Appendix 8: Quarterly balance sheet
-Not present in source report
+- Not present in source report
 
 ## Appendix 9: Debt portfolio
-Not present in source report
+- Not present in source report
 
 ## Appendix 10: Equity co-investments
-Not present in source report
+- Not present in source report
 
 ## Appendix 11: Portfolio yield
 - Reconciliation - "Historical Platform Yield" to Source.
@@ -179,10 +187,10 @@ Not present in source report
 - Loan administration fee to Target – $50,000 / year.
 
 ## Appendix 13: Unfunded and funded commitments
-Not present in source report
+- Not present in source report
 
 ## Appendix 14: Asset quality
-Not present in source report
+- Not present in source report
 
 ## Appendix 15: Budgets and projections
 - Summary projected operating data.
