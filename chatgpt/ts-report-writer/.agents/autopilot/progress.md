@@ -222,3 +222,57 @@ Run: 20260213-142610-36275 (iteration 9)
 - Attempted: Ran single-file strict pipeline extraction for only this report and explicit strict `scripts/extract_source_text.py` export to `extracted/verification/project-ed-buy-side-fdd-igh-education/source-text`; both point to unreadable encrypted Office container.
 - Recommendation: Replace `reports/Project Ed_buy side_FDD (IGH - Education).pptx` with an unlocked `.pptx` (or export to an unencrypted `.pdf`) and rerun story 9.0.
 
+## [2026-02-13 15:27 EST] - 10.0: Extract and fully clean Project Ed_buy side_FDD.pptx
+
+Run: 20260213-142610-36275 (iteration 11)
+
+- Guardrails reviewed: yes
+- Commit: b243c10583299ece355186ba8d9538f8cd7f3522 10.0: extract and fully clean project-ed-buy-side-fdd report
+- Verification: `./.venv/bin/python scripts/qa_provenance.py --markdown extracted/project-ed-buy-side-fdd.md --source-manifest extracted/verification/project-ed-buy-side-fdd/source-text/manifest.json --out-dir extracted/verification/project-ed-buy-side-fdd/qa && ./.venv/bin/python scripts/qa_gates.py --report-id project-ed-buy-side-fdd` -> PASS
+- Files changed:
+  - extracted/project-ed-buy-side-fdd.md
+  - extracted/manifests/project-ed-buy-side-fdd.json
+  - extracted/verification/project-ed-buy-side-fdd/source-text/manifest.json
+  - extracted/verification/project-ed-buy-side-fdd/qa/provenance.json
+  - extracted/verification/project-ed-buy-side-fdd/qa/gates.json
+  - extracted/verification/project-ed-buy-side-fdd/review-notes.md
+  - AGENTS.md
+  - .agents/autopilot/prd.json
+- What was implemented:
+  - Ran single-report strict extraction for `reports/Project Ed_buy side_FDD.pptx` and generated full verification artifacts including montage/pages/source-text.
+  - Executed full-report cleanup by pruning noisy fragment/legal lines from selected source-backed lines and regenerating markdown/render-trace/section-map/section-accounting in sync.
+  - Added required source-evidence metadata and source-to-extraction coverage map in markdown, completed manual review checklist with slide-level montage reconciliation evidence, and reran fail-closed QA to pass.
+  - Updated PRD story `10.0` to `passes=true` (`blocked=false`, empty blocked reason) and appended reusable learning in `AGENTS.md`.
+- **Learnings:**
+  - Adding template metadata sections before content requires re-aligning `render-trace.json` markdown line numbers; otherwise `markdown_trace_sync` fails even when extracted lines are correct.
+  - For PPTX cleanup, use strict source-text + montage reconciliation together; provenance-only pass is insufficient for final sign-off.
+
+---
+## [2026-02-13 15:34 EST] - 11.0: Extract and fully clean Project Emerald - Simulated Report 2025.pdf
+
+Run: 20260213-142610-36275 (iteration 12)
+
+- Guardrails reviewed: yes
+- Commit: f3b51d9 11.0: extract and clean project emerald simulated report
+- Verification: `./.venv/bin/python scripts/qa_provenance.py --markdown extracted/project-emerald-simulated-report-2025.md --source-manifest extracted/verification/project-emerald-simulated-report-2025/source-text/manifest.json --out-dir extracted/verification/project-emerald-simulated-report-2025/qa && ./.venv/bin/python scripts/qa_gates.py --report-id project-emerald-simulated-report-2025` -> PASS
+- Files changed:
+  - AGENTS.md
+  - extracted/project-emerald-simulated-report-2025.md
+  - extracted/manifests/project-emerald-simulated-report-2025.json
+  - extracted/verification/project-emerald-simulated-report-2025/review-notes.md
+  - extracted/verification/project-emerald-simulated-report-2025/source-text/manifest.json
+  - extracted/verification/project-emerald-simulated-report-2025/qa/provenance.json
+  - extracted/verification/project-emerald-simulated-report-2025/qa/gates.json
+  - .agents/autopilot/prd.json
+  - .agents/autopilot/working.md
+  - .agents/autopilot/guardrails.md
+- What was implemented:
+  - Ran single-report strict extraction for `Project Emerald - Simulated Report 2025.pdf` only.
+  - Generated strict source-text artifacts using `scripts/extract_source_text.py`.
+  - Performed full-report cleanup and rebuilt markdown/mapping/render artifacts from exact source-backed lines.
+  - Added required source-evidence metadata and source-to-extraction coverage map; completed review checklist with page-level montage evidence.
+  - Reran provenance and fail-closed gates and marked report review status `pass`.
+- **Learnings:**
+  - For strict PDF cleanup, keep `selected-lines.jsonl` section assignments synchronized with rendered section placement or `section_completeness` fails despite clean provenance.
+
+---
