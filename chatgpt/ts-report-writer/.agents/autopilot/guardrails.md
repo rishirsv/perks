@@ -36,3 +36,15 @@ When you encounter a recurring failure:
 - **Trigger**: `scripts/qa_gates.py` fails `cleanup_quality` with `cleanup_quality_fragment` issues after provenance already passes.
 - **Instruction**: Perform a full-report cleanup pass to remove trailing sentence fragments/navigation bullets, regenerate render-trace + selected-lines + section mapping artifacts together, then rerun provenance and gates.
 - **Added after**: Iteration 5 - project-cinema-report passed provenance but initially failed fail-closed cleanup quality.
+
+### Sign: Provenance Pass Can Still Hide Wrong Section Placement
+
+- **Trigger**: Extracted markdown lines are verbatim but section semantics are wrong when compared to montage flow (for example, subsection text placed as executive summary).
+- **Instruction**: Run manual montage reconciliation before pass, record page IDs in review-notes, and remap lines by nearest canonical section without rewriting text.
+- **Added after**: Cinema cleanup follow-up where markdown quality looked clean but section alignment vs PNG was still incorrect.
+
+### Sign: Single-Report Rerun Can Regress Cleaned Output
+
+- **Trigger**: Re-running strict pipeline for a report that was already manually cleaned causes large fragment-heavy markdown/regressions in provenance and cleanup gates.
+- **Instruction**: Preserve or restore the last QA-passing artifact set before continuing; if rerun is required for compliance, immediately rerun provenance + gates and keep the cleaned version unless you also complete a full cleanup pass again.
+- **Added after**: Iteration 8 - cinema single-file rerun overwrote cleaned markdown and required restoration before final pass.

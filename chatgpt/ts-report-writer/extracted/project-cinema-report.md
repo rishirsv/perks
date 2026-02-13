@@ -5,7 +5,7 @@
 - `SOURCE_FILE`: Project Cinema Report.pdf
 - `REPORT_ID`: project-cinema-report
 - `SOURCE_PATH`: reports/Project Cinema Report.pdf
-- `EXTRACTION_STATUS`: extracted_pending_verification
+- `EXTRACTION_STATUS`: pass
 - `EXTRACTION_DATE`: 2026-02-13T19:52:25.150115+00:00
 - `VERBATIM_MODE`: strict
 - `EVIDENCE_PROFILE`: full

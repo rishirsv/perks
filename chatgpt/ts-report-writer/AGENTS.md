@@ -117,6 +117,13 @@ Required verification artifacts include:
 
 - Date: 2026-02-13
 - Report ID: `project-cinema-report`
+- Issue observed: rerunning strict single-report pipeline regenerated noisy fragment-heavy markdown and temporarily regressed provenance/gates despite prior cleanup artifacts.
+- Root cause: raw pipeline rerender replaced manually cleaned output; cleanup and review artifacts were not preserved before rerun.
+- Fix applied: restored clean source-backed artifacts, reran provenance + fail-closed gates, and documented montage page-level reconciliation evidence in review notes before final pass.
+- Prevention rule: when a story requires rerunning extraction after cleanup, preserve/verify the cleaned artifact set and re-run QA immediately; do not keep raw rerender output unless a full cleanup pass is redone.
+
+- Date: 2026-02-13
+- Report ID: `project-cinema-report`
 - Issue observed: markdown looked cleaner and source-backed, but section placement still mismatched montage flow in follow-up review.
 - Root cause: provenance exact-match was treated as sufficient while manual montage-to-section reconciliation was incomplete.
 - Fix applied: remapped sections from page-level source artifacts and strengthened autopilot docs to require montage page-ID evidence before pass.
