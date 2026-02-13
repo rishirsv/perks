@@ -21,24 +21,24 @@
     "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-coffee-buy-side-fdd/montage/montage-14.png"
   ],
   "section_coverage": {
-    "Executive Summary": 91,
-    "Key Findings": 178,
-    "Business Overview": 31,
+    "Executive Summary": 288,
+    "Key Findings": 304,
+    "Business Overview": 37,
     "Summary Financials": 1,
-    "Profit and Loss Overview / Financial Performance": 60,
-    "Quality of Earnings": 80,
-    "Income Statement": 29,
-    "Balance Sheet": 121,
-    "Net Working Capital": 33,
-    "Net Debt (Cash)": 6,
+    "Profit and Loss Overview / Financial Performance": 114,
+    "Quality of Earnings": 123,
+    "Income Statement": 41,
+    "Balance Sheet": 181,
+    "Net Working Capital": 77,
+    "Net Debt (Cash)": 13,
     "Cash Flows": 0,
-    "Related Parties": 44,
+    "Related Parties": 190,
     "Reporting Environment": 0,
     "Forecast Trading": 0,
     "Industry Analysis": 0,
     "Quality of Net Assets": 0,
     "Gross Margin by LOB": 0,
-    "Appendices": 736
+    "Appendices": 1034
   },
   "section_disposition": {
     "Executive Summary": "present",
@@ -79,6 +79,6 @@
   },
   "reviewer": null,
   "review_notes_file": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-coffee-buy-side-fdd/review-notes.md",
-  "created_at": "2026-02-13T20:00:33.657512+00:00",
-  "updated_at": "2026-02-13T20:02:27.261172+00:00"
+  "created_at": "2026-02-13T21:43:30.946113+00:00",
+  "updated_at": "2026-02-13T21:43:30.946123+00:00"
 }

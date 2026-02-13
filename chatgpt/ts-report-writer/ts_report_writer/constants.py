@@ -76,6 +76,13 @@ LEGAL_EXCLUSION_PATTERNS = [
         r"\bdocument classification\b",
         r"\byours faithfully\b",
         r"\byours sincerely\b",
+        r"\bengagement agreement\b",
+        r"\bprepared solely for\b",
+        r"\bany such reliance shall be at recipient'?s sole risk\b",
+        r"\bdoes not authorize\b",
+        r"\bno liability or responsibility\b",
+        r"\bindicative purposes only\b",
+        r"\bthere is no authoritative literature or common standard\b",
     ]
 ]
 
@@ -103,3 +110,18 @@ class Thresholds:
 
 
 THRESHOLDS = Thresholds()
+
+
+FORBIDDEN_OUTPUT_CLASSES = {
+    "empty",
+    "short_noise",
+    "numeric_stub",
+    "page_number",
+    "legal",
+    "navigation",
+    "source_footnote",
+    "table_like",
+    "table_region",
+    "header_footer_zone",
+    "repeated_header_footer",
+}

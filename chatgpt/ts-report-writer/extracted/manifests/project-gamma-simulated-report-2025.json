@@ -1,7 +1,7 @@
 {
   "report_id": "project-gamma-simulated-report-2025",
   "source_file": "Project Gamma - Simulated Report 2025.pdf",
-  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/Project Gamma - Simulated Report 2025.pdf",
+  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/tmp/final-verbatim-project-gamma-simulated-report-2025/reports/Project Gamma - Simulated Report 2025.pdf",
   "source_format": "pdf",
   "method_used": "fitz_pdf_catalog",
   "verbatim_mode": "strict",
@@ -85,8 +85,6 @@
     "review_notes": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-gamma-simulated-report-2025/review-notes.md",
     "qa_gates": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-gamma-simulated-report-2025/qa/gates.json"
   },
-  "verification_status": "pass",
-  "updated_at": "2026-02-13T20:39:35.876909+00:00",
-  "reviewer": "codex-autopilot",
-  "reviewed_at": "2026-02-13T20:39:35.876908+00:00"
+  "verification_status": "pending_second_pass",
+  "updated_at": "2026-02-13T21:42:50.074236+00:00"
 }

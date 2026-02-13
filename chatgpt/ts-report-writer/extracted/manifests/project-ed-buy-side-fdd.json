@@ -1,7 +1,7 @@
 {
   "report_id": "project-ed-buy-side-fdd",
   "source_file": "Project Ed_buy side_FDD.pptx",
-  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/Project Ed_buy side_FDD.pptx",
+  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/tmp/rebuild-project-ed-buy-side-fdd/reports/Project Ed_buy side_FDD.pptx",
   "source_format": "pptx",
   "method_used": "presentation_dual_source_catalog",
   "verbatim_mode": "strict",
@@ -87,5 +87,5 @@
     "qa_gates": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-ed-buy-side-fdd/qa/gates.json"
   },
   "verification_status": "pending_second_pass",
-  "updated_at": "2026-02-13T20:21:48.841971+00:00"
+  "updated_at": "2026-02-13T21:45:42.275765+00:00"
 }

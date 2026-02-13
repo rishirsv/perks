@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
+import html
 import json
 import math
 from pathlib import Path
@@ -13,22 +14,24 @@ import re
 import shutil
 import subprocess
 from typing import Any
+from xml.etree import ElementTree
+from zipfile import ZipFile
 
 import fitz  # type: ignore
 from PIL import Image  # type: ignore
-from pptx import Presentation  # type: ignore
-from pptx.enum.shapes import MSO_SHAPE_TYPE  # type: ignore
-from rapidfuzz import fuzz, process  # type: ignore
 
+from .catalog import CatalogLine, normalize_for_match, write_json, write_jsonl
 from .constants import (
     CANONICAL_SECTION_ORDER,
+    FORBIDDEN_OUTPUT_CLASSES,
     LEGAL_EXCLUSION_PATTERNS,
-    PLACEHOLDER_EXCLUSION_TYPES,
     SECTION_ALIASES,
     THRESHOLDS,
 )
+from .mapping import MappingThresholds, assign_sections
+from .render import RenderOutput, render_markdown
 
-# Silence verbose MuPDF structure warnings; they are captured in manifests via status.
+# Silence verbose MuPDF structure warnings; warnings are captured in manifests.
 try:
     fitz.TOOLS.mupdf_display_warnings(False)
 except Exception:
@@ -39,33 +42,30 @@ SUPPORTED_EXTENSIONS = {".pdf", ".pptx", ".ppt"}
 
 
 @dataclass
-class ExtractedLine:
-    """Single extracted line with source location."""
-
-    text: str
-    page_num: int
-
-
-@dataclass
-class ExtractionResult:
-    """Extraction result for one report."""
-
+class ExtractionBundle:
     report_id: str
     source_file: str
     source_format: str
     method_used: str
-    lines: list[ExtractedLine]
+    catalog_lines: list[CatalogLine]
+    selected_lines: list[CatalogLine]
     total_pages: int
     exclusion_stats: dict[str, int]
     warnings: list[str]
+    preferred_source_kind: str
+    source_counts: dict[str, int]
+
+
+@dataclass(frozen=True)
+class PipelineConfig:
+    evidence_profile: str
+    verbatim_mode: str
+    fail_closed: bool
+    allow_ocr_primary: bool
 
 
 def utc_now() -> str:
     return datetime.now(tz=timezone.utc).isoformat()
-
-
-def normalize_space(text: str) -> str:
-    return " ".join(text.split()).strip()
 
 
 def slugify_report_id(filename: str) -> str:
@@ -81,8 +81,7 @@ def ensure_dependencies() -> None:
         if shutil.which(cmd) is None:
             missing_cmds.append(cmd)
     if missing_cmds:
-        joined = ", ".join(missing_cmds)
-        raise RuntimeError(f"Missing required system dependencies: {joined}")
+        raise RuntimeError(f"Missing required system dependencies: {', '.join(missing_cmds)}")
 
 
 def list_report_files(reports_dir: Path, exclude_substrings: list[str] | None = None) -> list[Path]:
@@ -110,9 +109,7 @@ def looks_like_table_row(text: str) -> bool:
         return False
     if len(tokens) <= 3:
         num_like = sum(
-            1
-            for t in tokens
-            if re.fullmatch(r"[\(\-]?\$?\d[\d,.\)%\-]*", t.replace("'", ""))
+            1 for t in tokens if re.fullmatch(r"[\(\-]?\$?\d[\d,.\)%\-]*", t.replace("'", ""))
         )
         if num_like >= 1:
             return True
@@ -173,7 +170,7 @@ def should_exclude_line(text: str) -> tuple[bool, str]:
         return True, "legal"
     if is_navigation_line(text):
         return True, "navigation"
-    if text.lower().startswith("source:"):
+    if re.match(r"^source\s*:", text.lower()):
         return True, "source_footnote"
     if looks_like_table_row(text):
         return True, "table_like"
@@ -208,10 +205,88 @@ def likely_body_zone(y0: float, y1: float, page_h: float) -> bool:
     return top_ok and bottom_ok
 
 
-def extract_pdf_body_lines(pdf_path: Path) -> tuple[list[ExtractedLine], int, dict[str, int]]:
-    doc = fitz.open(str(pdf_path))
-    raw: list[dict[str, Any]] = []
+def _derive_exclusion_reason(text_norm: str, class_flags: list[str]) -> str | None:
+    for flag in ("table_region", "header_footer_zone", "repeated_header_footer"):
+        if flag in class_flags:
+            return flag
+
+    excluded, reason = should_exclude_line(text_norm)
+    if excluded:
+        return reason
+    return None
+
+
+def _finalize_pdf_rows(
+    rows: list[dict[str, Any]],
+    source_file: str,
+    source_kind: str,
+    page_count: int,
+) -> tuple[list[CatalogLine], dict[str, int]]:
     exclusion_stats = Counter()
+    repeated: set[str] = set()
+    pages_by_text: dict[str, set[int]] = defaultdict(set)
+    for row in rows:
+        pages_by_text[row["text_norm"].lower()].add(row["page_num"])
+
+    min_pages = max(
+        THRESHOLDS.repeated_line_min_pages,
+        math.ceil(max(page_count, 1) * THRESHOLDS.repeated_line_page_ratio),
+    )
+    for key, pages in pages_by_text.items():
+        if len(pages) >= min_pages:
+            repeated.add(key)
+
+    counters: dict[int, int] = defaultdict(int)
+    catalog: list[CatalogLine] = []
+    for row in rows:
+        page_num = int(row["page_num"])
+        counters[page_num] += 1
+
+        class_flags = list(row.get("class_flags", []))
+        low = row["text_norm"].lower()
+        y0 = float(row.get("y0", 0.0))
+        y1 = float(row.get("y1", 0.0))
+        page_h = float(row.get("page_height", 0.0))
+        if low in repeated and (
+            y0 <= THRESHOLDS.header_zone_ratio * max(page_h, 1.0)
+            or y1 >= THRESHOLDS.footer_zone_ratio * max(page_h, 1.0)
+        ):
+            class_flags.append("repeated_header_footer")
+
+        exclusion_reason = _derive_exclusion_reason(row["text_norm"], class_flags)
+        if exclusion_reason:
+            class_flags.append(exclusion_reason)
+            exclusion_stats[exclusion_reason] += 1
+        class_flags = sorted(set(class_flags))
+
+        included_candidate = exclusion_reason is None and not any(
+            f in FORBIDDEN_OUTPUT_CLASSES for f in class_flags
+        )
+        line_id = f"{source_kind}:{page_num:03d}:{counters[page_num]:04d}"
+        catalog.append(
+            CatalogLine(
+                line_id=line_id,
+                text_raw=row["text_raw"],
+                text_norm=row["text_norm"],
+                source_kind=source_kind,
+                source_file=source_file,
+                page_or_slide=page_num,
+                bbox=row.get("bbox"),
+                class_flags=class_flags,
+                included_candidate=included_candidate,
+                exclusion_reason=exclusion_reason,
+            )
+        )
+    return catalog, dict(exclusion_stats)
+
+
+def extract_pdf_catalog_lines(
+    pdf_path: Path,
+    source_file: str,
+    source_kind: str = "pdf_text",
+) -> tuple[list[CatalogLine], int, dict[str, int]]:
+    doc = fitz.open(str(pdf_path))
+    rows: list[dict[str, Any]] = []
 
     for page_idx in range(doc.page_count):
         page = doc[page_idx]
@@ -225,60 +300,37 @@ def extract_pdf_body_lines(pdf_path: Path) -> tuple[list[ExtractedLine], int, di
             for line in block.get("lines", []):
                 bbox = line.get("bbox", (0, 0, 0, 0))
                 line_bbox = (float(bbox[0]), float(bbox[1]), float(bbox[2]), float(bbox[3]))
-                if any(bbox_intersects(line_bbox, tb) for tb in table_boxes):
-                    exclusion_stats["table_region"] += 1
-                    continue
-                if not likely_body_zone(line_bbox[1], line_bbox[3], page_height):
-                    exclusion_stats["header_footer_zone"] += 1
-                    continue
                 spans = line.get("spans", [])
-                txt = normalize_space("".join(span.get("text", "") for span in spans))
-                if not txt:
-                    exclusion_stats["empty"] += 1
+                raw_text = "".join(span.get("text", "") for span in spans)
+                text_raw = raw_text.strip()
+                text_norm = normalize_for_match(text_raw)
+                if not text_norm:
                     continue
-                raw.append(
+
+                class_flags: list[str] = []
+                if any(bbox_intersects(line_bbox, tb) for tb in table_boxes):
+                    class_flags.append("table_region")
+                if not likely_body_zone(line_bbox[1], line_bbox[3], page_height):
+                    class_flags.append("header_footer_zone")
+
+                rows.append(
                     {
-                        "text": txt,
+                        "text_raw": text_raw,
+                        "text_norm": text_norm,
                         "page_num": page_idx + 1,
                         "y0": line_bbox[1],
                         "y1": line_bbox[3],
                         "page_height": page_height,
+                        "bbox": line_bbox,
+                        "class_flags": class_flags,
                     }
                 )
 
-    repeated: set[str] = set()
-    pages_by_text: dict[str, set[int]] = defaultdict(set)
-    for rec in raw:
-        key = rec["text"].lower()
-        pages_by_text[key].add(rec["page_num"])
-    min_pages = max(THRESHOLDS.repeated_line_min_pages, math.ceil(doc.page_count * THRESHOLDS.repeated_line_page_ratio))
-    for key, pages in pages_by_text.items():
-        if len(pages) >= min_pages:
-            repeated.add(key)
+    if rows:
+        catalog, stats = _finalize_pdf_rows(rows, source_file, source_kind, doc.page_count)
+        return catalog, doc.page_count, stats
 
-    lines: list[ExtractedLine] = []
-    for rec in raw:
-        text = rec["text"]
-        low = text.lower()
-        y0 = rec["y0"]
-        y1 = rec["y1"]
-        page_h = rec["page_height"]
-
-        if low in repeated and (y0 <= THRESHOLDS.header_zone_ratio * page_h or y1 >= THRESHOLDS.footer_zone_ratio * page_h):
-            exclusion_stats["repeated_header_footer"] += 1
-            continue
-
-        excluded, reason = should_exclude_line(text)
-        if excluded:
-            exclusion_stats[reason] += 1
-            continue
-
-        lines.append(ExtractedLine(text=text, page_num=int(rec["page_num"])))
-
-    if lines:
-        return lines, doc.page_count, dict(exclusion_stats)
-
-    # Fallback for documents where block extraction returns empty content.
+    # Fallback for documents where structured extraction returns no text rows.
     proc = subprocess.run(
         ["pdftotext", str(pdf_path), "-"],
         capture_output=True,
@@ -287,27 +339,84 @@ def extract_pdf_body_lines(pdf_path: Path) -> tuple[list[ExtractedLine], int, di
         check=False,
     )
     pages = (proc.stdout or "").split("\f")
-    fallback_lines: list[ExtractedLine] = []
-    for idx, page_text in enumerate(pages, start=1):
+    for page_idx, page_text in enumerate(pages, start=1):
         for raw_line in page_text.splitlines():
-            text = normalize_space(raw_line)
-            if not text:
-                exclusion_stats["empty"] += 1
+            text_raw = raw_line.strip()
+            text_norm = normalize_for_match(text_raw)
+            if not text_norm:
                 continue
-            excluded, reason = should_exclude_line(text)
-            if excluded:
-                exclusion_stats[reason] += 1
-                continue
-            fallback_lines.append(ExtractedLine(text=text, page_num=idx))
+            rows.append(
+                {
+                    "text_raw": text_raw,
+                    "text_norm": text_norm,
+                    "page_num": page_idx,
+                    "y0": 0.0,
+                    "y1": 0.0,
+                    "page_height": 1.0,
+                    "bbox": None,
+                    "class_flags": [],
+                }
+            )
 
-    return fallback_lines, doc.page_count, dict(exclusion_stats)
+    catalog, stats = _finalize_pdf_rows(rows, source_file, source_kind, len(pages))
+    return catalog, len(pages), stats
+
+
+def extract_pptx_xml_catalog_lines(
+    pptx_path: Path,
+    source_file: str,
+) -> tuple[list[CatalogLine], dict[str, int]]:
+    catalog: list[CatalogLine] = []
+    exclusion_stats = Counter()
+
+    with ZipFile(pptx_path, "r") as zf:
+        slide_paths = sorted(
+            [name for name in zf.namelist() if re.match(r"^ppt/slides/slide\d+\.xml$", name)],
+            key=lambda x: int(re.search(r"slide(\d+)\.xml$", x).group(1)),
+        )
+        for slide_name in slide_paths:
+            slide_num = int(re.search(r"slide(\d+)\.xml$", slide_name).group(1))
+            xml_data = zf.read(slide_name)
+            root = ElementTree.fromstring(xml_data)
+            line_idx = 0
+            for node in root.iter():
+                if not node.tag.endswith("}t"):
+                    continue
+                text_raw = html.unescape(node.text or "").strip()
+                text_norm = normalize_for_match(text_raw)
+                if not text_norm:
+                    continue
+
+                line_idx += 1
+                excluded, reason = should_exclude_line(text_norm)
+                class_flags: list[str] = []
+                if excluded:
+                    class_flags.append(reason)
+                    exclusion_stats[reason] += 1
+
+                included_candidate = not excluded and not any(
+                    f in FORBIDDEN_OUTPUT_CLASSES for f in class_flags
+                )
+                catalog.append(
+                    CatalogLine(
+                        line_id=f"pptx_xml:{slide_num:03d}:{line_idx:04d}",
+                        text_raw=text_raw,
+                        text_norm=text_norm,
+                        source_kind="pptx_xml",
+                        source_file=source_file,
+                        page_or_slide=slide_num,
+                        bbox=None,
+                        class_flags=class_flags,
+                        included_candidate=included_candidate,
+                        exclusion_reason=reason if excluded else None,
+                    )
+                )
+    return catalog, dict(exclusion_stats)
 
 
 def run_soffice_convert_to_pdf(source_path: Path, out_dir: Path) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     attempted: list[Path] = [source_path]
-
-    # Some legacy binary PPT files are mislabeled as .pptx.
     if source_path.suffix.lower() == ".pptx":
         alt = out_dir / f"{source_path.stem}.ppt"
         shutil.copyfile(source_path, alt)
@@ -334,237 +443,125 @@ def run_soffice_convert_to_pdf(source_path: Path, out_dir: Path) -> Path:
         pdfs = sorted(out_dir.glob("*.pdf"), key=lambda p: p.stat().st_mtime, reverse=True)
         if pdfs:
             return pdfs[0]
-
     raise RuntimeError(f"soffice conversion produced no PDF for {source_path.name}. Last output: {last_err}")
 
 
-def extract_strings_body_lines(path: Path) -> tuple[list[ExtractedLine], int, dict[str, int]]:
-    proc = subprocess.run(
-        ["strings", str(path)],
-        capture_output=True,
-        text=True,
-        errors="ignore",
-        check=False,
-    )
-    exclusion_stats = Counter()
-    lines: list[ExtractedLine] = []
-    for raw in proc.stdout.splitlines():
-        text = normalize_space(raw)
-        if len(text) < 6:
-            exclusion_stats["short_noise"] += 1
+def select_render_lines(
+    catalog_lines: list[CatalogLine], source_format: str, allow_ocr_primary: bool
+) -> tuple[list[CatalogLine], str]:
+    preferred_order = ["pdf_text"]
+    if source_format == "pptx":
+        preferred_order = ["pptx_xml", "pdf_text"]
+    elif source_format == "ppt":
+        preferred_order = ["pdf_text"]
+
+    preferred_source_kind = preferred_order[0]
+    selected_pool: list[CatalogLine] = []
+    for kind in preferred_order:
+        subset = [line for line in catalog_lines if line.source_kind == kind]
+        if subset:
+            preferred_source_kind = kind
+            selected_pool = subset
+            break
+    if not selected_pool:
+        selected_pool = catalog_lines
+
+    selected: list[CatalogLine] = []
+    for line in selected_pool:
+        if not line.included_candidate:
             continue
-        if sum(ch.isalpha() for ch in text) < 4:
-            exclusion_stats["non_alpha_noise"] += 1
+        if line.source_kind == "ocr" and not allow_ocr_primary:
             continue
-        excluded, reason = should_exclude_line(text)
-        if excluded:
-            exclusion_stats[reason] += 1
+        if any(flag in FORBIDDEN_OUTPUT_CLASSES for flag in line.class_flags):
             continue
-        lines.append(ExtractedLine(text=text, page_num=1))
-    return lines, 1, dict(exclusion_stats)
+        if selected and selected[-1].text_norm == line.text_norm:
+            continue
+        selected.append(line)
+    return selected, preferred_source_kind
 
 
-def _touch_pptx_native_for_healthcheck(pptx_path: Path) -> None:
-    """Optional sanity check for OOXML content; extraction still uses PDF-first path."""
-    try:
-        _ = Presentation(str(pptx_path))
-    except Exception:
-        return
+def transform_for_verbatim_mode(lines: list[CatalogLine], verbatim_mode: str) -> list[CatalogLine]:
+    if verbatim_mode == "strict":
+        return lines
+    if verbatim_mode == "normalized":
+        transformed: list[CatalogLine] = []
+        for line in lines:
+            transformed.append(replace(line, text_raw=line.text_norm))
+        return transformed
+    return lines
 
 
-def extract_report_text(report_path: Path, tmp_dir: Path) -> ExtractionResult:
+def extract_report_catalog(report_path: Path, tmp_dir: Path, config: PipelineConfig) -> ExtractionBundle:
     source_format = report_path.suffix.lower().lstrip(".")
     report_id = slugify_report_id(report_path.name)
     warnings: list[str] = []
 
     if source_format == "pdf":
-        lines, pages, stats = extract_pdf_body_lines(report_path)
-        if not lines:
-            warnings.append("No extractable body text detected in PDF (likely image-based or restricted text layer).")
-        return ExtractionResult(
+        pdf_lines, pages, pdf_stats = extract_pdf_catalog_lines(
+            report_path, source_file=report_path.name, source_kind="pdf_text"
+        )
+        selected, preferred_kind = select_render_lines(pdf_lines, source_format, config.allow_ocr_primary)
+        selected = transform_for_verbatim_mode(selected, config.verbatim_mode)
+        if not selected:
+            warnings.append("No renderable body text detected in PDF source.")
+        return ExtractionBundle(
             report_id=report_id,
             source_file=report_path.name,
             source_format=source_format,
-            method_used="fitz_pdf",
-            lines=lines,
+            method_used="fitz_pdf_catalog",
+            catalog_lines=pdf_lines,
+            selected_lines=selected,
             total_pages=pages,
-            exclusion_stats=stats,
+            exclusion_stats=pdf_stats,
             warnings=warnings,
+            preferred_source_kind=preferred_kind,
+            source_counts={
+                "pdf_text": sum(1 for line in pdf_lines if line.source_kind == "pdf_text"),
+            },
         )
 
     if source_format in {"pptx", "ppt"}:
+        xml_lines: list[CatalogLine] = []
+        xml_stats: dict[str, int] = {}
         if source_format == "pptx":
-            _touch_pptx_native_for_healthcheck(report_path)
+            xml_lines, xml_stats = extract_pptx_xml_catalog_lines(report_path, source_file=report_path.name)
 
         converted_pdf = run_soffice_convert_to_pdf(report_path, tmp_dir)
-        lines, pages, stats = extract_pdf_body_lines(converted_pdf)
-        if not lines:
-            warnings.append("No extractable body text detected after presentation-to-PDF conversion.")
-        return ExtractionResult(
+        pdf_lines, pages, pdf_stats = extract_pdf_catalog_lines(
+            converted_pdf, source_file=report_path.name, source_kind="pdf_text"
+        )
+        catalog_lines = pdf_lines + xml_lines
+        selected, preferred_kind = select_render_lines(catalog_lines, source_format, config.allow_ocr_primary)
+        selected = transform_for_verbatim_mode(selected, config.verbatim_mode)
+
+        combined_stats = Counter(pdf_stats)
+        combined_stats.update(xml_stats)
+        if not selected:
+            warnings.append("No renderable body text detected after presentation extraction.")
+
+        return ExtractionBundle(
             report_id=report_id,
             source_file=report_path.name,
             source_format=source_format,
-            method_used="presentation_to_pdf_then_text_extract",
-            lines=lines,
+            method_used="presentation_dual_source_catalog",
+            catalog_lines=catalog_lines,
+            selected_lines=selected,
             total_pages=pages,
-            exclusion_stats=stats,
+            exclusion_stats=dict(combined_stats),
             warnings=warnings,
+            preferred_source_kind=preferred_kind,
+            source_counts={
+                "pdf_text": sum(1 for line in catalog_lines if line.source_kind == "pdf_text"),
+                "pptx_xml": sum(1 for line in catalog_lines if line.source_kind == "pptx_xml"),
+            },
         )
 
     raise ValueError(f"Unsupported source format: {source_format}")
 
 
-def clean_heading(text: str) -> str:
-    cleaned = text.strip().lower()
-    cleaned = re.sub(r"^\d+(\.\d+)*\s*[-:)]?\s*", "", cleaned)
-    cleaned = re.sub(r"\s+", " ", cleaned)
-    return cleaned.strip(" :")
-
-
-def build_alias_lookup() -> tuple[list[str], dict[str, str]]:
-    phrases: list[str] = []
-    mapping: dict[str, str] = {}
-    for section in CANONICAL_SECTION_ORDER:
-        candidates = [section.lower(), *SECTION_ALIASES.get(section, [])]
-        for phrase in candidates:
-            if phrase not in mapping:
-                phrases.append(phrase)
-                mapping[phrase] = section
-    return phrases, mapping
-
-
-ALIAS_PHRASES, ALIAS_TO_SECTION = build_alias_lookup()
-
-
-def map_heading_to_section(text: str) -> tuple[str, int, bool]:
-    cleaned = clean_heading(text)
-    if not cleaned:
-        return CANONICAL_SECTION_ORDER[0], 0, False
-
-    for section in CANONICAL_SECTION_ORDER:
-        exact_candidates = {section.lower(), *SECTION_ALIASES.get(section, [])}
-        if cleaned in exact_candidates:
-            return section, 100, True
-
-    for phrase in ALIAS_PHRASES:
-        if phrase and phrase in cleaned:
-            return ALIAS_TO_SECTION[phrase], 95, False
-
-    matched = process.extractOne(cleaned, ALIAS_PHRASES, scorer=fuzz.token_set_ratio)
-    if matched:
-        phrase, score, _idx = matched
-        return ALIAS_TO_SECTION[phrase], int(score), False
-
-    return CANONICAL_SECTION_ORDER[0], 0, False
-
-
-def looks_like_heading(text: str) -> bool:
-    txt = normalize_space(text)
-    if not txt:
-        return False
-    if len(txt) > THRESHOLDS.heading_max_chars:
-        return False
-    words = txt.split()
-    if len(words) > THRESHOLDS.heading_max_words:
-        return False
-    digit_count = sum(ch.isdigit() for ch in txt)
-    if digit_count / max(len(txt), 1) > THRESHOLDS.heading_max_digit_ratio:
-        return False
-    if txt.endswith("."):
-        return False
-    low = clean_heading(txt)
-    for alias in ALIAS_PHRASES:
-        if alias in low:
-            return True
-    if txt.isupper():
-        return True
-    if ":" in txt and len(words) <= 8:
-        return True
-    return False
-
-
-def assign_sections(lines: list[ExtractedLine]) -> dict[str, list[tuple[str, str]]]:
-    buckets: dict[str, list[tuple[str, str]]] = {section: [] for section in CANONICAL_SECTION_ORDER}
-    current = CANONICAL_SECTION_ORDER[0]
-
-    for ln in lines:
-        text = ln.text
-        if looks_like_heading(text):
-            mapped, _score, _exact = map_heading_to_section(text)
-            current = mapped
-            continue
-
-        items = buckets[current]
-        if items and items[-1] == ("text", text):
-            continue
-        items.append(("text", text))
-
-    return buckets
-
-
-def render_appendices(entries: list[tuple[str, str]]) -> list[str]:
-    sections: list[dict[str, Any]] = [{"name": "Appendix 1: Extracted Appendix Content", "lines": []}]
-
-    for kind, text in entries:
-        low = text.lower()
-        if "appendix" in low and len(sections) < 3:
-            sections.append({"name": f"Appendix {len(sections) + 1}: {text}", "lines": []})
-            continue
-        sections[-1]["lines"].append(f"- {text}")
-
-    while len(sections) < 3:
-        sections.append({"name": f"Appendix {len(sections) + 1}: Not present", "lines": ["Not present in source report"]})
-
-    out: list[str] = []
-    for section in sections[:3]:
-        out.append(f"## {section['name']}")
-        if section["lines"]:
-            out.extend(section["lines"])
-        else:
-            out.append("Not present in source report")
-        out.append("")
-    return out
-
-
-def render_markdown(result: ExtractionResult, sections: dict[str, list[tuple[str, str]]]) -> str:
-    out: list[str] = []
-    out.append(f"# Report Extraction: {result.report_id}")
-    out.append("")
-    out.append("## Report Metadata")
-    out.append("")
-    out.append(f"- `SOURCE_FILE`: {result.source_file}")
-    out.append(f"- `REPORT_ID`: {result.report_id}")
-    out.append(f"- `SOURCE_PATH`: reports/{result.source_file}")
-    out.append("- `EXTRACTION_STATUS`: extracted_pending_verification")
-    out.append(f"- `EXTRACTION_DATE`: {utc_now()}")
-    out.append("")
-
-    for section in CANONICAL_SECTION_ORDER:
-        out.append(f"# {section}")
-        entries = sections.get(section, [])
-        if section == "Appendices":
-            out.extend(render_appendices(entries))
-            continue
-
-        if not entries:
-            out.append("Not present in source report")
-            out.append("")
-            continue
-
-        for _kind, text in entries:
-            if len(text.split()) < 3:
-                continue
-            out.append(f"- {text}")
-        out.append("")
-
-    return "\n".join(out).rstrip() + "\n"
-
-
 def _page_sort_key(path: Path) -> int:
     m = re.search(r"(\d+)$", path.stem)
-    if not m:
-        return 0
-    return int(m.group(1))
+    return int(m.group(1)) if m else 0
 
 
 def render_pdf_pages_to_ppm(pdf_path: Path, pages_dir: Path, dpi: int = 160) -> list[Path]:
@@ -632,11 +629,6 @@ def source_to_pdf_for_verification(source_path: Path, tmp_dir: Path) -> Path:
     return run_soffice_convert_to_pdf(source_path, tmp_dir)
 
 
-def write_json(path: Path, payload: dict[str, Any] | list[Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-
-
 def write_review_notes(path: Path, report_id: str, source_file: str) -> None:
     content = f"""# Verification Notes: {report_id}
 
@@ -652,7 +644,9 @@ def write_review_notes(path: Path, report_id: str, source_file: str) -> None:
 - [ ] Confirmed table text is excluded
 - [ ] Confirmed image-derived text is excluded
 - [ ] Confirmed legal/footer/navigation noise is excluded
-- [ ] Confirmed incremental sections are captured under nearest canonical section
+- [ ] Completed source-to-extraction coverage map
+- [ ] Ran `scripts/qa_provenance.py` and reviewed results
+- [ ] Ran `scripts/qa_gates.py` and confirmed all gates passed
 
 ## Notes
 
@@ -662,29 +656,104 @@ def write_review_notes(path: Path, report_id: str, source_file: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
-def section_counts(sections: dict[str, list[tuple[str, str]]]) -> dict[str, int]:
-    return {section: sum(1 for kind, _ in items if kind == "text") for section, items in sections.items()}
+def section_counts(sections: dict[str, list[CatalogLine]]) -> dict[str, int]:
+    return {section: len(items) for section, items in sections.items()}
+
+
+def build_section_accounting(
+    sections: dict[str, list[CatalogLine]],
+    render_trace: list[dict[str, Any]],
+) -> dict[str, Any]:
+    expected_by_section: dict[str, list[str]] = {}
+    expected_text_by_line_id: dict[str, str] = {}
+    for section, items in sections.items():
+        expected_ids: list[str] = []
+        for item in items:
+            if section == "Appendices" and "appendix" in item.text_raw.lower():
+                continue
+            expected_ids.append(item.line_id)
+            expected_text_by_line_id[item.line_id] = item.text_raw
+        expected_by_section[section] = expected_ids
+
+    rendered_by_section: dict[str, list[str]] = defaultdict(list)
+    for row in render_trace:
+        section = str(row.get("section", ""))
+        line_id = str(row.get("line_id", ""))
+        if not section or not line_id:
+            continue
+        rendered_by_section[section].append(line_id)
+
+    sections_payload: dict[str, Any] = {}
+    total_expected = 0
+    total_rendered = 0
+    total_missing = 0
+    total_unexpected = 0
+
+    for section in CANONICAL_SECTION_ORDER:
+        expected_ids = expected_by_section.get(section, [])
+        rendered_ids = rendered_by_section.get(section, [])
+        expected_set = set(expected_ids)
+        rendered_set = set(rendered_ids)
+
+        missing_ids = sorted(expected_set - rendered_set)
+        unexpected_ids = sorted(rendered_set - expected_set)
+
+        total_expected += len(expected_ids)
+        total_rendered += len(rendered_ids)
+        total_missing += len(missing_ids)
+        total_unexpected += len(unexpected_ids)
+
+        sections_payload[section] = {
+            "expected_line_ids": expected_ids,
+            "rendered_line_ids": rendered_ids,
+            "missing_line_ids": missing_ids,
+            "unexpected_line_ids": unexpected_ids,
+            "missing_text_sample": [expected_text_by_line_id.get(line_id, "") for line_id in missing_ids[:20]],
+        }
+
+    status = "pass" if total_missing == 0 and total_unexpected == 0 else "needs_revision"
+    return {
+        "status": status,
+        "summary": {
+            "expected_lines": total_expected,
+            "rendered_lines": total_rendered,
+            "missing_lines": total_missing,
+            "unexpected_lines": total_unexpected,
+        },
+        "sections": sections_payload,
+    }
 
 
 def build_report_manifest(
-    result: ExtractionResult,
-    sections: dict[str, list[tuple[str, str]]],
+    extraction: ExtractionBundle,
+    section_counts_map: dict[str, int],
+    render_output: RenderOutput,
     verification_status: str,
     source_path: Path,
+    config: PipelineConfig,
+    artifact_paths: dict[str, str],
 ) -> dict[str, Any]:
-    counts = section_counts(sections)
     return {
-        "report_id": result.report_id,
-        "source_file": result.source_file,
-        "source_path": str(source_path),
-        "source_format": result.source_format,
-        "method_used": result.method_used,
-        "total_pages": result.total_pages,
-        "line_count": len(result.lines),
-        "section_counts": counts,
-        "missing_sections": [sec for sec, c in counts.items() if c == 0],
-        "exclusion_stats": result.exclusion_stats,
-        "warnings": result.warnings,
+        "report_id": extraction.report_id,
+        "source_file": extraction.source_file,
+        "source_path": str(source_path.resolve()),
+        "source_format": extraction.source_format,
+        "method_used": extraction.method_used,
+        "verbatim_mode": config.verbatim_mode,
+        "evidence_profile": config.evidence_profile,
+        "fail_closed": config.fail_closed,
+        "allow_ocr_primary": config.allow_ocr_primary,
+        "preferred_source_kind": extraction.preferred_source_kind,
+        "source_counts": extraction.source_counts,
+        "total_pages": extraction.total_pages,
+        "line_count": sum(section_counts_map.values()),
+        "catalog_line_count": len(extraction.catalog_lines),
+        "section_counts": section_counts_map,
+        "section_disposition": render_output.section_disposition,
+        "missing_sections": [sec for sec, status in render_output.section_disposition.items() if status == "not_present"],
+        "exclusion_stats": extraction.exclusion_stats,
+        "warnings": extraction.warnings,
+        "artifact_paths": artifact_paths,
         "verification_status": verification_status,
         "updated_at": utc_now(),
     }
@@ -728,6 +797,7 @@ def process_one_report(
     verification_root: Path,
     manifests_dir: Path,
     tmp_root: Path,
+    config: PipelineConfig,
 ) -> dict[str, str]:
     report_id = slugify_report_id(source_path.name)
     tmp_dir = tmp_root / report_id
@@ -736,19 +806,76 @@ def process_one_report(
     tmp_dir.mkdir(parents=True, exist_ok=True)
 
     try:
-        extraction = extract_report_text(source_path, tmp_dir)
-        sections = assign_sections(extraction.lines)
-        md = render_markdown(extraction, sections)
+        extraction = extract_report_catalog(source_path, tmp_dir, config)
+        mapping_result = assign_sections(
+            lines=extraction.selected_lines,
+            canonical_sections=CANONICAL_SECTION_ORDER,
+            section_aliases=SECTION_ALIASES,
+            thresholds=MappingThresholds(
+                heading_fuzzy_match_min=THRESHOLDS.heading_fuzzy_match_min,
+                heading_max_words=THRESHOLDS.heading_max_words,
+                heading_max_chars=THRESHOLDS.heading_max_chars,
+                heading_max_digit_ratio=THRESHOLDS.heading_max_digit_ratio,
+            ),
+        )
+        render_output = render_markdown(
+            report_id=report_id,
+            source_file=source_path.name,
+            sections=mapping_result.sections,
+            heading_hits=mapping_result.heading_hits,
+            section_order=CANONICAL_SECTION_ORDER,
+            extra_metadata={
+                "VERBATIM_MODE": config.verbatim_mode,
+                "EVIDENCE_PROFILE": config.evidence_profile,
+                "FAIL_CLOSED": str(config.fail_closed).lower(),
+            },
+        )
+        section_accounting = build_section_accounting(mapping_result.sections, render_output.trace)
+
         output_md = extracted_dir / f"{report_id}.md"
         output_md.parent.mkdir(parents=True, exist_ok=True)
-        output_md.write_text(md, encoding="utf-8")
+        output_md.write_text(render_output.markdown, encoding="utf-8")
 
         verification_dir = verification_root / report_id
         pages_dir = verification_dir / "pages"
         montage_dir = verification_dir / "montage"
+        catalog_dir = verification_dir / "catalog"
+        mapping_dir = verification_dir / "mapping"
+        render_dir = verification_dir / "render"
+        qa_dir = verification_dir / "qa"
         verification_dir.mkdir(parents=True, exist_ok=True)
 
-        counts = section_counts(sections)
+        write_jsonl(catalog_dir / "line-catalog.jsonl", extraction.catalog_lines)
+        if config.evidence_profile == "full":
+            write_jsonl(
+                catalog_dir / "excluded-lines.jsonl",
+                [line for line in extraction.catalog_lines if not line.included_candidate],
+            )
+            write_jsonl(catalog_dir / "selected-lines.jsonl", extraction.selected_lines)
+        write_json(render_dir / "render-trace.json", render_output.trace)
+        write_json(mapping_dir / "section-accounting.json", section_accounting)
+        write_json(
+            mapping_dir / "section-map.json",
+            {
+                "report_id": report_id,
+                "heading_hits": mapping_result.heading_hits,
+                "heading_events": mapping_result.heading_events,
+                "unresolved_headings": mapping_result.unresolved_headings,
+                "section_disposition": render_output.section_disposition,
+                "section_accounting_status": section_accounting["status"],
+            },
+        )
+        write_json(
+            qa_dir / "gates.json",
+            {
+                "status": "pending",
+                "report_id": report_id,
+                "generated_at": utc_now(),
+                "notes": "Run scripts/qa_gates.py to evaluate fail-closed gates.",
+            },
+        )
+
+        counts = section_counts(mapping_result.sections)
         verification_payload = {
             "report_id": report_id,
             "source_file": source_path.name,
@@ -757,7 +884,21 @@ def process_one_report(
             "markdown_path": str(output_md),
             "montage_files": [],
             "section_coverage": counts,
+            "section_disposition": render_output.section_disposition,
             "missing_sections": [sec for sec, count in counts.items() if count == 0],
+            "artifact_paths": {
+                "catalog": str(catalog_dir / "line-catalog.jsonl"),
+                "excluded_catalog": str(catalog_dir / "excluded-lines.jsonl")
+                if config.evidence_profile == "full"
+                else None,
+                "selected_catalog": str(catalog_dir / "selected-lines.jsonl")
+                if config.evidence_profile == "full"
+                else None,
+                "section_map": str(mapping_dir / "section-map.json"),
+                "section_accounting": str(mapping_dir / "section-accounting.json"),
+                "render_trace": str(render_dir / "render-trace.json"),
+                "qa_gates": str(qa_dir / "gates.json"),
+            },
             "reviewer": None,
             "review_notes_file": str(verification_dir / "review-notes.md"),
             "created_at": utc_now(),
@@ -779,11 +920,30 @@ def process_one_report(
         write_json(verification_dir / "verification.json", verification_payload)
         write_review_notes(verification_dir / "review-notes.md", report_id, source_path.name)
 
+        artifact_paths = {
+            "markdown": str(output_md),
+            "catalog": str(catalog_dir / "line-catalog.jsonl"),
+            "excluded_catalog": str(catalog_dir / "excluded-lines.jsonl")
+            if config.evidence_profile == "full"
+            else "",
+            "selected_catalog": str(catalog_dir / "selected-lines.jsonl")
+            if config.evidence_profile == "full"
+            else "",
+            "section_map": str(mapping_dir / "section-map.json"),
+            "section_accounting": str(mapping_dir / "section-accounting.json"),
+            "render_trace": str(render_dir / "render-trace.json"),
+            "verification": str(verification_dir / "verification.json"),
+            "review_notes": str(verification_dir / "review-notes.md"),
+            "qa_gates": str(qa_dir / "gates.json"),
+        }
         manifest_payload = build_report_manifest(
-            result=extraction,
-            sections=sections,
+            extraction=extraction,
+            section_counts_map=counts,
+            render_output=render_output,
             verification_status=verification_status,
             source_path=source_path,
+            config=config,
+            artifact_paths=artifact_paths,
         )
         write_json(manifests_dir / f"{report_id}.json", manifest_payload)
 
@@ -809,6 +969,7 @@ def run_pipeline(
     start_index: int,
     skip_existing: bool,
     exclude_substrings: list[str] | None,
+    config: PipelineConfig,
 ) -> None:
     ensure_dependencies()
 
@@ -824,8 +985,8 @@ def run_pipeline(
     tmp_root.mkdir(parents=True, exist_ok=True)
 
     _order = write_processing_order(files, manifests_dir)
-
     tracker_rows: list[dict[str, str]] = []
+
     for source in files:
         report_id = slugify_report_id(source.name)
         output_md = extracted_dir / f"{report_id}.md"
@@ -849,13 +1010,13 @@ def run_pipeline(
                 verification_root=verification_dir,
                 manifests_dir=manifests_dir,
                 tmp_root=tmp_root,
+                config=config,
             )
         except Exception as exc:
-            report_id = slugify_report_id(source.name)
             error_payload = {
                 "report_id": report_id,
                 "source_file": source.name,
-                "source_path": str(source),
+                "source_path": str(source.resolve()),
                 "verification_status": "blocked",
                 "error": str(exc),
                 "updated_at": utc_now(),
@@ -928,6 +1089,30 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         help="Exclude reports whose filenames contain this substring (case-insensitive). Repeatable.",
     )
+    run.add_argument(
+        "--evidence-profile",
+        choices=["full", "lean"],
+        default="full",
+        help="Artifact verbosity profile. Full keeps all evidence artifacts.",
+    )
+    run.add_argument(
+        "--verbatim-mode",
+        choices=["strict", "normalized"],
+        default="strict",
+        help="Rendering fidelity mode (strict keeps raw extracted line text).",
+    )
+    run.add_argument(
+        "--fail-closed",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="If enabled, quality gates are expected before report can be marked pass.",
+    )
+    run.add_argument(
+        "--allow-ocr-primary",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Allow OCR-backed lines as primary render source.",
+    )
 
     review = sub.add_parser("mark-reviewed", help="Mark verification outcome for a report")
     review.add_argument("--report-id", required=True, help="Report id (slug)")
@@ -953,6 +1138,12 @@ def main() -> None:
         return
 
     if args.command == "run":
+        config = PipelineConfig(
+            evidence_profile=args.evidence_profile,
+            verbatim_mode=args.verbatim_mode,
+            fail_closed=bool(args.fail_closed),
+            allow_ocr_primary=bool(args.allow_ocr_primary),
+        )
         run_pipeline(
             reports_dir=Path(args.reports_dir).resolve(),
             extracted_dir=Path(args.extracted_dir).resolve(),
@@ -963,6 +1154,7 @@ def main() -> None:
             start_index=args.start_index,
             skip_existing=bool(args.skip_existing),
             exclude_substrings=list(args.exclude_substring or []),
+            config=config,
         )
         print("Pipeline completed.")
         return

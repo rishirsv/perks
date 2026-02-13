@@ -1,7 +1,7 @@
 {
   "report_id": "project-dental-report-25july2025-vs",
   "source_file": "Project Dental_Report_25July2025_vS.pdf",
-  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/reports/Project Dental_Report_25July2025_vS.pdf",
+  "source_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/tmp/rebuild-project-dental-report-25july2025-vs/reports/Project Dental_Report_25July2025_vS.pdf",
   "source_format": "pdf",
   "method_used": "fitz_pdf_catalog",
   "verbatim_mode": "strict",
@@ -90,8 +90,6 @@
     "review_notes": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-dental-report-25july2025-vs/review-notes.md",
     "qa_gates": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-dental-report-25july2025-vs/qa/gates.json"
   },
-  "verification_status": "pass",
-  "updated_at": "2026-02-13T20:14:31.712491+00:00",
-  "reviewer": "autopilot-agent",
-  "reviewed_at": "2026-02-13T20:14:31.712489+00:00"
+  "verification_status": "pending_second_pass",
+  "updated_at": "2026-02-13T21:44:14.666724+00:00"
 }

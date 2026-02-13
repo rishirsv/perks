@@ -25,6 +25,22 @@ reviewer="$2"
 status="$3"
 notes="${4:-}"
 
+if [[ "${status}" == "pass" ]]; then
+  qa_json="${PROJECT_ROOT}/extracted/verification/${report_id}/qa/gates.json"
+  if [[ ! -f "${qa_json}" ]]; then
+    echo "Cannot mark pass: missing QA gate file at ${qa_json}"
+    echo "Run scripts/qa_gates.py first."
+    exit 1
+  fi
+
+  qa_status="$("${PYTHON_BIN}" -c 'import json,sys; print(json.load(open(sys.argv[1]))["status"])' "${qa_json}")"
+  if [[ "${qa_status}" != "pass" ]]; then
+    echo "Cannot mark pass: QA gate status is '${qa_status}', expected 'pass'."
+    echo "Review ${qa_json} and resolve failing gates."
+    exit 1
+  fi
+fi
+
 "${PYTHON_BIN}" -m ts_report_writer.pipeline mark-reviewed \
   --report-id "${report_id}" \
   --reviewer "${reviewer}" \

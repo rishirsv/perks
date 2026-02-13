@@ -55,6 +55,15 @@ Use this as the default top-level order:
   - `true/false`
 - `OCR_SLIDES`:
   - `[]` or `[16, 17, 22]`
+- `OCR_ARTIFACTS_DIR`: (e.g. `extracted/verification/<report-id>/source-text/ocr`)
+- `OCR_RUN_METADATA`: (e.g. `extracted/verification/<report-id>/source-text/ocr/ocr-run.json`)
+- `PROVENANCE_QA_JSON`: (e.g. `extracted/verification/<report-id>/qa/provenance.json`)
+- `PROVENANCE_STATUS`: (`pass` or `needs_revision`)
+- `GATES_QA_JSON`: (e.g. `extracted/verification/<report-id>/qa/gates.json`)
+- `GATES_STATUS`: (`pass` or `needs_revision`)
+- `SECTION_MAP_JSON`: (e.g. `extracted/verification/<report-id>/mapping/section-map.json`)
+- `SECTION_ACCOUNTING_JSON`: (e.g. `extracted/verification/<report-id>/mapping/section-accounting.json`)
+- `RENDER_TRACE_JSON`: (e.g. `extracted/verification/<report-id>/render/render-trace.json`)
 
 ## Source-to-Extraction Coverage Map
 
@@ -178,14 +187,28 @@ If debt-like/working-capital adjustments are only in tables/charts, add:
 ## Appendix 3: <Appendix Name>
 <Verbatim Text>
 
+## Appendix 4: <Appendix Name>
+<Verbatim Text>
+
+Continue numbering for all appendix sections found in source.
+
 ---
 
 ## Extraction QA Checklist
 
 - [ ] All copied content is verbatim (no paraphrase)
+- [ ] Content organization is manually reviewed against source-text artifacts (scripts are guardrails, not substitutes)
+- [ ] Cleanup pass completed (no engagement-letter/legal/cover/glossary/navigation boilerplate in content sections)
 - [ ] All major sections attempted
 - [ ] Missing sections explicitly marked
 - [ ] Adjustment lists include exact source wording
-- [ ] Appendices are labeled as `Appendix 1/2/3: <Appendix Name>`
+- [ ] Appendices are labeled as `Appendix <N>: <Appendix Name>` for all appendices present
 - [ ] Each extracted paragraph/bullet has source IDs recorded in the Coverage Map
+- [ ] `scripts/qa_provenance.py` reports `pass` with zero unmatched lines
+- [ ] `scripts/qa_gates.py` reports `pass` with all fail-closed gates green
+- [ ] `markdown_trace_sync` gate is `pass`
+- [ ] `section_completeness` gate is `pass`
+- [ ] `executive_summary_cleanup` gate is `pass`
+- [ ] `cleanup_quality` gate is `pass`
+- [ ] No final markdown line is OCR-only backed (unless explicitly approved for special OCR mode)
 - [ ] Metadata fields completed

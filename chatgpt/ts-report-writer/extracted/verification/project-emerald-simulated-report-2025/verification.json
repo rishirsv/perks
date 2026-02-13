@@ -1,7 +1,7 @@
 {
   "report_id": "project-emerald-simulated-report-2025",
   "source_file": "Project Emerald - Simulated Report 2025.pdf",
-  "status": "pass",
+  "status": "pending_second_pass",
   "page_count": 113,
   "markdown_path": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/project-emerald-simulated-report-2025.md",
   "montage_files": [
@@ -77,9 +77,8 @@
     "render_trace": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-emerald-simulated-report-2025/render/render-trace.json",
     "qa_gates": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-emerald-simulated-report-2025/qa/gates.json"
   },
-  "reviewer": "codex-autopilot",
+  "reviewer": null,
   "review_notes_file": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/verification/project-emerald-simulated-report-2025/review-notes.md",
-  "created_at": "2026-02-13T20:29:44.423348+00:00",
-  "updated_at": "2026-02-13T20:33:52.591942+00:00",
-  "reviewed_at": "2026-02-13T20:33:52.591932+00:00"
+  "created_at": "2026-02-13T21:42:26.745948+00:00",
+  "updated_at": "2026-02-13T21:42:26.745952+00:00"
 }

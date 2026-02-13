@@ -3471,6 +3471,11 @@
       "score": 38
     },
     {
+      "line_id": "pptx_xml:005:0015",
+      "text": "(“[GROUP NAME]”)",
+      "score": 31
+    },
+    {
       "line_id": "pptx_xml:005:0016",
       "text": "[ENTITY 1 FULL NAME] (“[ENTITY 1]”)",
       "score": 33
@@ -3551,9 +3556,29 @@
       "score": 30
     },
     {
+      "line_id": "pptx_xml:005:0058",
+      "text": "LOGO",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:006:0007",
+      "text": "Location:",
+      "score": 50
+    },
+    {
       "line_id": "pptx_xml:006:0008",
       "text": "[ADDRESS]",
       "score": 42
+    },
+    {
+      "line_id": "pptx_xml:006:0009",
+      "text": "Rental fee:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:006:0011",
+      "text": "Lessor:",
+      "score": 43
     },
     {
       "line_id": "pptx_xml:006:0012",
@@ -3561,14 +3586,64 @@
       "score": 34
     },
     {
+      "line_id": "pptx_xml:006:0013",
+      "text": "Location:",
+      "score": 50
+    },
+    {
       "line_id": "pptx_xml:006:0014",
       "text": "[ADDRESS]",
       "score": 42
     },
     {
+      "line_id": "pptx_xml:006:0015",
+      "text": "Rental fee:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:006:0017",
+      "text": "Lessor:",
+      "score": 43
+    },
+    {
+      "line_id": "pptx_xml:006:0024",
+      "text": "Rental fee:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:006:0026",
+      "text": "Lessor:",
+      "score": 43
+    },
+    {
       "line_id": "pptx_xml:006:0029",
       "text": "[ADDRESS]",
       "score": 42
+    },
+    {
+      "line_id": "pptx_xml:006:0030",
+      "text": "Rental fee:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:006:0035",
+      "text": "Rental fee:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:006:0037",
+      "text": "Lessor:",
+      "score": 43
+    },
+    {
+      "line_id": "pptx_xml:006:0045",
+      "text": "Rental fee:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:006:0047",
+      "text": "Lessor:",
+      "score": 43
     },
     {
       "line_id": "pptx_xml:007:0008",
@@ -3581,6 +3656,166 @@
       "score": 64
     },
     {
+      "line_id": "pptx_xml:007:0018",
+      "text": ", FY",
+      "score": 30
+    },
+    {
+      "line_id": "pptx_xml:007:0024",
+      "text": ", FY",
+      "score": 30
+    },
+    {
+      "line_id": "pptx_xml:008:0009",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:008:0016",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:008:0024",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:008:0037",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:008:0046",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:008:0052",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:008:0061",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:008:0070",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:009:0009",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:009:0016",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:009:0021",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:009:0030",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:009:0033",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:009:0038",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:009:0049",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:010:0010",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:010:0014",
+      "text": "(USD)",
+      "score": 30
+    },
+    {
+      "line_id": "pptx_xml:010:0016",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:010:0025",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:010:0035",
+      "text": "FDD",
+      "score": 26
+    },
+    {
+      "line_id": "pptx_xml:010:0042",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:011:0061",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:012:0026",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:012:0032",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:013:0006",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:014:0032",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:014:0035",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:015:0029",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:016:0028",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:017:0009",
+      "text": "SPA",
+      "score": 40
+    },
+    {
       "line_id": "pptx_xml:017:0016",
       "text": "[ADDRESS]",
       "score": 42
@@ -3591,14 +3826,39 @@
       "score": 42
     },
     {
+      "line_id": "pptx_xml:018:0030",
+      "text": "SPA",
+      "score": 40
+    },
+    {
       "line_id": "pptx_xml:019:0004",
       "text": "[MR./MRS.] [FAMILY MEMBER 3] [SURNAME]",
       "score": 39
     },
     {
+      "line_id": "pptx_xml:019:0016",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:019:0033",
+      "text": "(USD)",
+      "score": 30
+    },
+    {
       "line_id": "pptx_xml:021:0018",
       "text": "Initial opportunity assessment:",
       "score": 55
+    },
+    {
+      "line_id": "pptx_xml:021:0021",
+      "text": "Targeted analysis:",
+      "score": 64
+    },
+    {
+      "line_id": "pptx_xml:021:0031",
+      "text": "SPA",
+      "score": 40
     },
     {
       "line_id": "pptx_xml:037:0002",
@@ -3609,6 +3869,11 @@
       "line_id": "pptx_xml:038:0001",
       "text": "[ENTITY 2]: Revenue by product type (2/3)",
       "score": 35
+    },
+    {
+      "line_id": "pptx_xml:038:0007",
+      "text": "Bundle promotion:",
+      "score": 53
     },
     {
       "line_id": "pptx_xml:038:0011",
@@ -3624,6 +3889,16 @@
       "line_id": "pptx_xml:038:0017",
       "text": "Local store marketing promotion:",
       "score": 50
+    },
+    {
+      "line_id": "pptx_xml:038:0019",
+      "text": "Voucher pack:",
+      "score": 44
+    },
+    {
+      "line_id": "pptx_xml:038:0021",
+      "text": "Loyalty program:",
+      "score": 44
     },
     {
       "line_id": "pptx_xml:039:0001",
@@ -3711,6 +3986,11 @@
       "score": 37
     },
     {
+      "line_id": "pptx_xml:056:0003",
+      "text": "- [ENTITY 1]",
+      "score": 36
+    },
+    {
       "line_id": "pptx_xml:057:0002",
       "text": "[MONTH]",
       "score": 26
@@ -3759,6 +4039,11 @@
       "line_id": "pptx_xml:067:0003",
       "text": "[ENTITY 1]: Key suppliers (2/2)",
       "score": 40
+    },
+    {
+      "line_id": "pptx_xml:068:0001",
+      "text": "SG&A",
+      "score": 36
     },
     {
       "line_id": "pptx_xml:069:0001",
@@ -3826,6 +4111,11 @@
       "score": 37
     },
     {
+      "line_id": "pptx_xml:082:0027",
+      "text": "SG&A",
+      "score": 36
+    },
+    {
       "line_id": "pptx_xml:089:0016",
       "text": "[MR./MRS.]",
       "score": 35
@@ -3836,9 +4126,24 @@
       "score": 40
     },
     {
+      "line_id": "pptx_xml:101:0063",
+      "text": "CAGR",
+      "score": 36
+    },
+    {
       "line_id": "pptx_xml:103:0003",
       "text": "Product sophistication:",
       "score": 50
+    },
+    {
+      "line_id": "pptx_xml:103:0006",
+      "text": "rice point:",
+      "score": 50
+    },
+    {
+      "line_id": "pptx_xml:104:0005",
+      "text": "LFL",
+      "score": 33
     },
     {
       "line_id": "pptx_xml:104:0028",
@@ -3856,6 +4161,21 @@
       "score": 47
     },
     {
+      "line_id": "pptx_xml:104:0048",
+      "text": "Negative decline:",
+      "score": 50
+    },
+    {
+      "line_id": "pptx_xml:104:0050",
+      "text": "Positive decline:",
+      "score": 48
+    },
+    {
+      "line_id": "pptx_xml:104:0052",
+      "text": "Gainer:",
+      "score": 42
+    },
+    {
       "line_id": "pptx_xml:105:0010",
       "text": "Timeline to implement: 6 - 12 months",
       "score": 38
@@ -3864,6 +4184,21 @@
       "line_id": "pptx_xml:115:0006",
       "text": "[DATE]",
       "score": 42
+    },
+    {
+      "line_id": "pptx_xml:116:0011",
+      "text": "DATE]",
+      "score": 46
+    },
+    {
+      "line_id": "pptx_xml:116:0016",
+      "text": "DATE]",
+      "score": 46
+    },
+    {
+      "line_id": "pptx_xml:116:0018",
+      "text": "DATE]",
+      "score": 46
     },
     {
       "line_id": "pptx_xml:120:0007",
@@ -3901,6 +4236,166 @@
       "score": 36
     },
     {
+      "line_id": "pptx_xml:120:0027",
+      "text": "EUR",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:120:0029",
+      "text": "FYXX",
+      "score": 25
+    },
+    {
+      "line_id": "pptx_xml:120:0031",
+      "text": "USD",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:120:0035",
+      "text": "USD",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:120:0040",
+      "text": "ALRO",
+      "score": 46
+    },
+    {
+      "line_id": "pptx_xml:120:0048",
+      "text": "BOM",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:120:0050",
+      "text": "COGS",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:120:0055",
+      "text": "COO",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:120:0059",
+      "text": "DIO",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:120:0061",
+      "text": "DPO",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:120:0063",
+      "text": "DSO",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:120:0065",
+      "text": "EBIT",
+      "score": 50
+    },
+    {
+      "line_id": "pptx_xml:120:0067",
+      "text": "EBITDA",
+      "score": 42
+    },
+    {
+      "line_id": "pptx_xml:120:0069",
+      "text": "EBITDAR",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:120:0071",
+      "text": "EBO",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:120:0073",
+      "text": "FIFO",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:121:0002",
+      "text": "FTE",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:121:0006",
+      "text": "KPI",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:121:0008",
+      "text": "LFL",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:121:0015",
+      "text": "MLR",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:121:0017",
+      "text": "MOR",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:121:0023",
+      "text": "NAV",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:121:0047",
+      "text": "ROU",
+      "score": 33
+    },
+    {
+      "line_id": "pptx_xml:121:0049",
+      "text": "SG&A",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:121:0051",
+      "text": "SKU",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:121:0053",
+      "text": "SME",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:121:0055",
+      "text": "SPA",
+      "score": 40
+    },
+    {
+      "line_id": "pptx_xml:121:0057",
+      "text": "TAS",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:121:0061",
+      "text": "TFRS",
+      "score": 50
+    },
+    {
+      "line_id": "pptx_xml:121:0063",
+      "text": "VAT",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:121:0067",
+      "text": "WHT",
+      "score": 36
+    },
+    {
+      "line_id": "pptx_xml:121:0069",
+      "text": "WIP",
+      "score": 33
+    },
+    {
       "line_id": "pptx_xml:122:0004",
       "text": "[ADDRESS LINE 1]",
       "score": 45
@@ -3913,6 +4408,11 @@
     {
       "line_id": "pptx_xml:122:0006",
       "text": "[CONTACT NO.]",
+      "score": 41
+    },
+    {
+      "line_id": "pptx_xml:122:0007",
+      "text": "Contact us:",
       "score": 41
     },
     {
