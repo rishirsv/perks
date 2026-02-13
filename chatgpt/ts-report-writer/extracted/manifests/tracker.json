@@ -1,9 +1,9 @@
 [
   {
-    "source_file": "Example report_Private Equity lender_Project Garrison.pptx",
-    "report_id": "example-report-private-equity-lender-project-garrison",
-    "status": "pass",
-    "output_file": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/example-report-private-equity-lender-project-garrison.md",
-    "notes": "presentation_dual_source_catalog; reviewed pass"
+    "source_file": "Project Cherry - Simulated Report 2025.pdf",
+    "report_id": "project-cherry-simulated-report-2025",
+    "status": "done_pending_review",
+    "output_file": "/Users/rishi/Code/ai-tools/chatgpt/ts-report-writer/extracted/project-cherry-simulated-report-2025.md",
+    "notes": "fitz_pdf_catalog"
   }
 ]

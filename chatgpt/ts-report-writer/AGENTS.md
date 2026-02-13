@@ -115,6 +115,13 @@ Required verification artifacts include:
 ### Learnings (Newest First)
 
 - Date: 2026-02-13
+- Report ID: `project-cherry-simulated-report-2025`
+- Issue observed: initial strict pipeline rendering mixed engagement/cover fragments and many non-verbatim extractor-line splits that failed provenance exact-match.
+- Root cause: rendered bullets were sourced from catalog lines not guaranteed to match strict `source-text` artifacts exactly, and cover/legal fragments were still selected.
+- Fix applied: regenerated report output from a cleaned exact-match subset (only lines present in `source-text` files), completed full canonical cleanup + coverage map, and reran provenance/fail-closed gates to pass.
+- Prevention rule: for dense PDF reports, constrain final bullets to lines with exact `source-text` matches before QA; otherwise provenance will fail even when text appears visually similar.
+
+- Date: 2026-02-13
 - Report ID: `project-blue-jay-simulated-report-2025`
 - Issue observed: strict PDF extraction produced empty page text artifacts (`page-001.txt` ... `page-108.txt` all zero-length), leaving no machine-readable body lines for canonical sections.
 - Root cause: source PDF pages are image-only/non-selectable text, so strict text extraction returns no non-OCR lines.
