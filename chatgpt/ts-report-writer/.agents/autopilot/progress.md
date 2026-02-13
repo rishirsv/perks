@@ -276,3 +276,31 @@ Run: 20260213-142610-36275 (iteration 12)
   - For strict PDF cleanup, keep `selected-lines.jsonl` section assignments synchronized with rendered section placement or `section_completeness` fails despite clean provenance.
 
 ---
+## [2026-02-13 15:41:10 EST] - 12.0: Extract and fully clean Project Gamma - Simulated Report 2025.pdf
+
+Run: 20260213-142610-36275 (iteration 13)
+
+- Guardrails reviewed: yes
+- Commit: bb9eed8 12.0: extract and fully clean project gamma simulated report
+- Verification: `./.venv/bin/python scripts/qa_provenance.py --markdown extracted/project-gamma-simulated-report-2025.md --source-manifest extracted/verification/project-gamma-simulated-report-2025/source-text/manifest.json --out-dir extracted/verification/project-gamma-simulated-report-2025/qa && ./.venv/bin/python scripts/qa_gates.py --report-id project-gamma-simulated-report-2025` -> PASS
+- Files changed:
+  - AGENTS.md
+  - .agents/autopilot/prd.json
+  - .agents/autopilot/working.md
+  - extracted/project-gamma-simulated-report-2025.md
+  - extracted/manifests/project-gamma-simulated-report-2025.json
+  - extracted/manifests/processing-order.json
+  - extracted/manifests/tracker.json
+  - extracted/manifests/tracker.md
+  - extracted/verification/project-gamma-simulated-report-2025/*
+- What was implemented:
+  - Ran strict single-report extraction for `reports/Project Gamma - Simulated Report 2025.pdf` only.
+  - Generated strict source-text artifacts with `scripts/extract_source_text.py` at `extracted/verification/project-gamma-simulated-report-2025/source-text`.
+  - Performed full-report cleanup across canonical sections, removed legal/cover/navigation/appendix scope fragments, and synchronized `selected-lines`, `section-map`, `section-accounting`, and `render-trace` artifacts.
+  - Completed review checklist with page-level montage reconciliation evidence and marked review `pass`.
+  - Updated PRD story metadata to `passes=true`, `blocked=false`, `blockedReason=""`.
+- **Learnings:**
+  - Strict PDF runs can appear content-rich but still fail provenance broadly; if legal/appendix text dominates, reset selected lines and sync mapping/trace artifacts before rerunning QA.
+  - `manual_checklist_complete` remains fail-closed until all review-note placeholders are replaced and every checklist item is checked.
+
+---
