@@ -915,10 +915,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     run = sub.add_parser("run", help="Run sequential extraction pipeline")
     run.add_argument("--reports-dir", default="reports", help="Source reports directory")
-    run.add_argument("--extracted-dir", default="reports/extracted", help="Markdown output directory")
-    run.add_argument("--verification-dir", default="reports/verification", help="Verification output directory")
-    run.add_argument("--manifests-dir", default="reports/manifests", help="Manifest output directory")
-    run.add_argument("--tmp-dir", default="reports/tmp", help="Temporary working directory")
+    run.add_argument("--extracted-dir", default="extracted", help="Markdown output directory")
+    run.add_argument("--verification-dir", default="extracted/verification", help="Verification output directory")
+    run.add_argument("--manifests-dir", default="extracted/manifests", help="Manifest output directory")
+    run.add_argument("--tmp-dir", default="extracted/tmp", help="Temporary working directory")
     run.add_argument("--max-reports", type=int, default=None, help="Optional max reports to process")
     run.add_argument("--start-index", type=int, default=0, help="Optional 0-based start index in ordered queue")
     run.add_argument("--skip-existing", action="store_true", help="Skip reports with existing markdown outputs")
@@ -934,8 +934,8 @@ def build_parser() -> argparse.ArgumentParser:
     review.add_argument("--reviewer", required=True, help="Reviewer name/id")
     review.add_argument("--status", choices=["pass", "needs_revision", "blocked"], required=True)
     review.add_argument("--notes", default=None, help="Optional review notes")
-    review.add_argument("--verification-dir", default="reports/verification", help="Verification directory")
-    review.add_argument("--manifests-dir", default="reports/manifests", help="Manifest directory")
+    review.add_argument("--verification-dir", default="extracted/verification", help="Verification directory")
+    review.add_argument("--manifests-dir", default="extracted/manifests", help="Manifest directory")
 
     preflight = sub.add_parser("preflight", help="Check required dependencies")
     _ = preflight

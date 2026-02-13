@@ -215,7 +215,7 @@ For your next call:
 1. Confirm user's seat (Buyer/Seller/Advisor)
 2. Identify 1-3 priority terms
 3. Extract current position from SPA language
-4. Pull standard arguments from `deal-terms.md` and numeric anchors from `docs/market-benchmarks.md`
+4. Pull standard arguments from `deal-terms.md` and numeric anchors from `../docs/knowledge/market-benchmarks.md`
 5. Draft: Opening ask → Anticipated pushback → Counter → Fallback
 6. Build trade package
 7. Anchor with market benchmarks
@@ -274,7 +274,7 @@ For your next call:
 ### References
 
 - Use `deal-terms.md` for general negotiation positioning (risk allocation, MAE, indemnity structure).
-- Use `docs/market-benchmarks.md` for numeric negotiation anchors.
+- Use `../docs/knowledge/market-benchmarks.md` for numeric negotiation anchors.
 
 ---
 

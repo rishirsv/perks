@@ -45,6 +45,29 @@ Use this as the default top-level order:
 - `EXTRACTION_STATUS`:
 - `EXTRACTION_DATE`:
 
+## Required Source Evidence
+
+- `SOURCE_TEXT_DIR`: (e.g. `extracted/verification/<report-id>/source-text/pptx` or `.../pdf`)
+- `MONTAGE_DIR`: (e.g. `extracted/verification/<report-id>/montage`)
+- `SOURCE_ARTIFACTS`:
+  - `slide-01.txt` or `page-01.txt` ...
+- `OCR_USED`:
+  - `true/false`
+- `OCR_SLIDES`:
+  - `[]` or `[16, 17, 22]`
+
+## Source-to-Extraction Coverage Map
+
+Use this section to prove every extracted item is verbatim-backed by source text.
+
+| Canonical Section | Source slide/page IDs | Source evidence files | Extracted reference(s) | Notes |
+|---|---|---|---|---|
+| Quality of Earnings | 16,17,18,19,20,21,22 | `slide-16.txt`, `slide-17.txt` | `## Quality of earnings adjustments` list items 1-13 | `[x]` |
+
+If any line in the extracted report is shortened, summarized, or paraphrased, set `Notes` to explain and keep status as `needs_revision` until corrected.
+
+If OCR was used, source artifacts will include an `"[OCR_EXTRACTED_TEXT]"` section; keep those entries for audit only and ensure they are not copied into normal extracted markdown unless source text is proven required.
+
 ---
 
 # Executive Summary
@@ -164,4 +187,5 @@ If debt-like/working-capital adjustments are only in tables/charts, add:
 - [ ] Missing sections explicitly marked
 - [ ] Adjustment lists include exact source wording
 - [ ] Appendices are labeled as `Appendix 1/2/3: <Appendix Name>`
+- [ ] Each extracted paragraph/bullet has source IDs recorded in the Coverage Map
 - [ ] Metadata fields completed
