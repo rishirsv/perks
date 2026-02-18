@@ -23,4 +23,4 @@ Lean security and misuse-resistance baseline.
 - Threat-model touched surfaces.
 - Verify input/output boundaries.
 - Verify sensitive data handling in logs/errors.
-- Track security issues in `ISSUES.md`.
+- Track security issues in `docs/ISSUES.md`.

@@ -161,3 +161,5 @@ Include these sections only when needed:
 Say:
 
 > "Research saved to `<path>`. Next: `$plan`."
+
+Then summarize the key points for the user and design recommendations.

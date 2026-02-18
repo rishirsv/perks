@@ -22,7 +22,7 @@ Lean reliability policy for user-critical behavior and release decisions.
 6. Repeat until clean.
 
 ## Incident Handling
-- Append issue to `ISSUES.md` with severity.
+- Append issue to `docs/ISSUES.md` with severity.
 - Track execution in `docs/exec-plans/active/<feature-slug>-plan.md`.
 - Move to `docs/exec-plans/completed/<feature-slug>-plan.md` when done.
 - Carry unresolved structural follow-ups to `docs/exec-plans/tech-debt-tracker.md`.

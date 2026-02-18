@@ -44,6 +44,6 @@ Product strategy and prioritization rules.
 
 ## Operating Links
 - Priorities and queue: `TODOS.md`
-- Defect intake: `ISSUES.md`
+- Defect intake: `docs/ISSUES.md`
 - Execution lifecycle: `docs/PLANS.md`
 - Architecture constraints: `ARCHITECTURE.md`

@@ -34,5 +34,5 @@ Rules and conventions for feature planning lifecycle.
 
 ## Related Files
 - `TODOS.md`
-- `ISSUES.md`
+- `docs/ISSUES.md`
 - `docs/exec-plans/tech-debt-tracker.md`

@@ -26,5 +26,5 @@ description: Durable product/UX/engineering principles for docs/design-docs/core
 
 ## Documentation
 - Priorities: `TODOS.md`
-- Issues: `ISSUES.md`
+- Issues: `docs/ISSUES.md`
 - Planning lifecycle: `docs/PLANS.md`

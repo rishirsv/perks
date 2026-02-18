@@ -1,6 +1,6 @@
 ---
 name: issues
-description: Canonical issue registry template for ISSUES.md.
+description: Canonical issue registry template for docs/ISSUES.md.
 ---
 
 # ISSUES.md
