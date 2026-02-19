@@ -1,49 +1,42 @@
 ---
-name: product-sense
-description: Product strategy and prioritization template for docs/PRODUCT_SENSE.md.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 90
+source-of-truth: "docs/PRODUCT_SENSE.md"
+verification-state: unverified
+stakeholders: []
 ---
 
 # PRODUCT_SENSE.md
 
 ## Purpose
-Product strategy and prioritization rules.
+Defines prioritization logic and product decision boundaries.
 
 ## Product Thesis
-- <one paragraph describing core value and target outcome>
+- <core value proposition>
 
 ## Core Principles
-1. <principle>
-2. <principle>
-3. <principle>
-4. <principle>
+- <principle>
+- <principle>
 
-## Target User
-- <primary user and key context>
+## Non-Goals
+- <explicit non-goal>
+- <explicit non-goal>
 
-## Strategic Scope (Current)
-- Core: <must-ship focus>
-- Secondary: <important but not core>
-- Deferred: <post-v1 or later>
-- Out of scope: <explicitly excluded>
+## Decision Rubric
+Use these dimensions to choose between options:
+- user impact
+- strategic alignment
+- implementation risk
+- time to value
 
-## Success Signals
-- <signal>
-- <signal>
-- <signal>
+## Metric Definitions
+| Metric | Definition | Why it matters |
+|---|---|---|
+| `<metric>` | <definition> | <reason> |
 
-## Prioritization Heuristics
-1. <heuristic>
-2. <heuristic>
-3. <heuristic>
-4. <heuristic>
-
-## Tradeoff Guardrails
-- <guardrail>
-- <guardrail>
-- <guardrail>
-
-## Operating Links
-- Priorities and queue: `TODOS.md`
-- Defect intake: `docs/ISSUES.md`
-- Execution lifecycle: `docs/PLANS.md`
-- Architecture constraints: `ARCHITECTURE.md`
+## Example Tradeoff Decision
+- Decision: <choice>
+- Alternative: <other option>
+- Rationale: <why this won>

@@ -1,85 +1,40 @@
----
-name: readme
-description: Repo README that gets a reader to first success quickly.
----
-
 # <Project Name>
 
 ## Description
+<what this project does and who it serves>
 
-<A short paragraph describing what the project is and why someone would use it.>
-
-## Overview
-
-<2–6 bullets: the core capabilities and constraints.>
-
-## Who this is for (optional)
-
-- <Primary audience>
-- <Secondary audience>
-
-## Quick start
-
+## Quickstart
 ```bash
-# Prerequisites
-<what you need installed / accounts needed>
+# prerequisites
+<command or requirement>
 
-# Install
-<install command>
+# install
+<command>
 
-# Run
-<run command>
+# run
+<command>
 ```
 
-What success looks like:
+Success signal:
+- <deterministic result>
 
-- <URL you can open / output you should see>
-
-## Usage
-
-| Task | Command | Result |
+## Common Workflows
+| Workflow | Command | Success signal |
 |---|---|---|
-| <Common workflow 1> | `<command>` | <What happens / what you see> |
-| <Common workflow 2> | `<command>` | <What happens / what you see> |
+| Build | `<command>` | <result> |
+| Test | `<command>` | <result> |
+| Lint | `<command>` | <result> |
+| Format | `<command>` | <result> |
+| Run one package/module | `<command>` | <result> |
 
 ## Configuration
+- Config location: <path>
+- Required env vars: <list>
 
-Where config lives:
-
-- <.env location / config file path>
-
-Required environment variables:
-
-- `<ENV_VAR>` — <what it controls>
-
-## Testing
-
-```bash
-<test command>
-<lint command>    # optional
-<build command>   # optional
-```
-
-## Documentation
-
-- `AGENTS.md` — repository operating contract
-- `ARCHITECTURE.md` — system boundaries and invariants
-- `TODOS.md` — roadmap + active queue
-- `docs/ISSUES.md` — issue intake and severity tracking
-- `docs/README.md` — docs index
-- `docs/PLANS.md` — planning lifecycle rules
-- `docs/exec-plans/active/` — active implementation plans
-- `docs/exec-plans/completed/` — completed implementation plans
-
-## Troubleshooting (optional)
-
-- <Common error> → <what to do>
-- <Common error> → <what to do>
-
-## Support (optional)
-
-- Where to ask: <Slack/email/issues>
+## Where Docs Live
+- `AGENTS.md` - operating guidance
+- `docs/README.md` - docs index
 
 ## Verification
-
-<Commands/URLs a reader should run/open to confirm the Quick start works, plus what they should see.>
+- `<command>`
+- expected output: <result>

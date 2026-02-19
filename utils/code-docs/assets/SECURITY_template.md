@@ -1,26 +1,39 @@
 ---
-name: security
-description: Security baseline template for docs/SECURITY.md.
+owner: "<team-or-role-or-unassigned>"
+security-owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 90
+source-of-truth: "docs/SECURITY.md"
+verification-state: unverified
 ---
 
 # SECURITY.md
 
 ## Purpose
-Lean security and misuse-resistance baseline.
+Defines security boundaries, controls, and response expectations.
+
+## Threat Model Summary
+- Assets: <sensitive assets>
+- Trust boundaries: <boundaries>
+- Top threats: <list>
+- Mitigations: <list>
+
+## Data Classification
+- Classification scheme: <link-or-summary>
+- Sensitive data handling rules: <rules>
 
 ## Baseline Controls
-- Least privilege for capabilities and tools.
-- Validate and sanitize inputs before persistence and critical decisions.
-- Avoid leaking sensitive data in logs, errors, and docs.
-- Keep dependencies and runtime surfaces up to date.
+- least privilege
+- input/output validation
+- secret handling and redaction
+- dependency update policy
 
-## Agent/Tooling Safety
-- Treat tool access as scoped capability, not default trust.
-- Use explicit checks before high-impact actions.
-- Preserve traceability for critical decisions.
+## Supply Chain Checks (Optional)
+- lockfile policy
+- provenance or signature checks
+- review gates for dependency updates
 
-## Security Review Checklist
-- Threat-model touched surfaces.
-- Verify input/output boundaries.
-- Verify sensitive data handling in logs/errors.
-- Track security issues in `docs/ISSUES.md`.
+## Detection And Response
+- Detection methods: <scanner/CI/checklist>
+- Response path: <incident + rotation + escalation>

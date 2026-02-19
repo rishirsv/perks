@@ -1,40 +1,46 @@
 ---
-name: db-schema
-description: Database schema digest template for docs/DB-SCHEMA.md.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 30
+source-of-truth: "<migrations|db|mixed>"
+verification-state: unverified
+last-generated: YYYY-MM-DD
 ---
 
 # DB-SCHEMA.md
 
 ## Purpose
-Human-readable digest of the current database schema and data invariants.
+Human-readable schema digest focused on critical entities and invariants.
 
-## Source of Truth
-- Schema definitions: `<path/to/schema-source>`
-- Migrations: `<path/to/migrations>`
+## Regeneration Contract
+- Schema source mode: `migrations` | `db` | `mixed`
+- Generation command/process: `<command-or-process>`
+- Generated artifacts (if any): `docs/generated/<artifact>.md`
 
-## Update Policy
-- Update this file whenever schema or migration contracts change.
-- Keep table/column names exact.
-- Keep constraints and indexes explicit.
+## ERD (At A Glance)
+```mermaid
+erDiagram
+  ENTITY_A ||--o{ ENTITY_B : relates_to
+```
 
-## Core Invariants
-- <invariant>
-- <invariant>
-- <invariant>
+## Data Classification and PII Boundaries (Optional)
+- Classification policy: <link-or-summary>
+- PII-bearing entities: <list>
+- Logging restrictions: <summary>
 
-## Tables
+## Core Entities
+| Entity | Purpose | Owner |
+|---|---|---|
+| `<entity>` | <summary> | <team/role> |
 
-### `<table_name>`
-- Purpose: <one line>
-- Primary key: `<column>`
-- Foreign keys: `<column> -> <table.column>`
+## Critical Constraints
+- <constraint>
+- <constraint>
 
-| Column | Type | Nullable | Default | Notes |
-|---|---|---|---|---|
-| `<column>` | `<type>` | `no` | `<default>` | <notes> |
+## Critical Invariants (5-10)
+- <testable invariant>
+- <testable invariant>
 
-## Indexes
-- `<index_name>` on `<table>(<columns>)` — <reason>
-
-## Triggers (if any)
-- `<trigger_name>` — <behavior>
+## Verification
+- Validate schema invariants: `<command/test/check>`

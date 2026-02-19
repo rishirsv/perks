@@ -1,30 +1,36 @@
 ---
-name: core-beliefs
-description: Durable product/UX/engineering principles for docs/design-docs/core-beliefs.md.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 180
+source-of-truth: "docs/design-docs/core-beliefs.md"
+verification-state: unverified
 ---
 
 # Core Beliefs
 
-## Product
-- <belief>
-- <belief>
-- <belief>
+## Product Beliefs
+- <one sentence belief>
+- Example in practice: <how this appears in shipped behavior>
 
-## UX
-- <belief>
-- <belief>
-- <belief>
+## UX Beliefs
+- <one sentence belief>
+- Example in practice: <how this appears in UI>
 
-## Engineering
-- <belief>
-- <belief>
-- <belief>
+## Engineering Beliefs
+- <one sentence belief>
+- Example in practice: <how this appears in code/docs>
 
-## Data and State
-- <belief>
-- <belief>
+## Anti-Beliefs
+- We do not optimize for <non-goal>.
+- We do not accept <undesired behavior>.
 
-## Documentation
-- Priorities: `TODOS.md`
-- Issues: `docs/ISSUES.md`
-- Planning lifecycle: `docs/PLANS.md`
+## Examples We Follow
+- `<reference doc/pr/decision>`
+- `<reference doc/pr/decision>`
+
+## Update Triggers
+Update this document when any of the following occurs:
+- incident with product or reliability impact
+- major refactor that changes system behavior boundaries
+- security/reliability policy change

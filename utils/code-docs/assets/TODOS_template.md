@@ -1,41 +1,26 @@
 ---
-name: todos
-description: Canonical roadmap and active queue template for TODOS.md.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 14
+source-of-truth: "TODOS.md"
+verification-state: unverified
 ---
 
 # TODOS.md
 
 ## Purpose
-Primary roadmap and execution queue.
+Single actionable queue for near-term execution.
 
-## Usage
-- Keep roadmap entries strategic (`what` + `why`).
-- Keep queue items actionable (`what next`), not implementation plans.
-- Move shipped items to `Recently Done` with path anchors.
+## Aging Policy
+- Items older than `<N>` days must be refreshed, closed, or moved.
 
-## Roadmap Now
-- <priority initiative>
-- <priority initiative>
-
-## Roadmap Next
-- <next initiative>
-- <next initiative>
-
-## Roadmap Later
-- <later initiative>
-- <later initiative>
-
-## Current Priority Queue
-- [ ] <task>
-  Anchor: `<path or doc>`.
-- [ ] <task>
-  Anchor: `<path or doc>`.
-
-## Plan Links
-- `docs/PLANS.md`
-- `docs/exec-plans/active/`
-- `docs/exec-plans/tech-debt-tracker.md`
+## Queue
+| Item | Owner | Priority | Target Date | Link (spec/plan/issue) | Next Action | Success Condition |
+|---|---|---|---|---|---|---|
+| `<task>` | <owner> | <P0-P3> | YYYY-MM-DD | <path/link> | <single action> | <done signal> |
 
 ## Recently Done
-- [x] <completed item>
-  Anchor: `<path or doc>`.
+| Item | Completed | Link |
+|---|---|---|
+| `<completed task>` | YYYY-MM-DD | <path/link> |

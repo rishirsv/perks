@@ -1,94 +1,59 @@
 ---
-name: product-spec
-description: Comprehensive and concise feature spec template for docs/product-specs/<feature-slug>-spec.md.
+owner: "<team-or-role-or-unassigned>"
+status: draft
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 30
+source-of-truth: "docs/product-specs/<feature-slug>-spec.md"
+verification-state: unverified
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+related-plans: []
+related-issues: []
 ---
 
 # Feature: <feature-name>
 
 ## TL;DR
-- **Problem:** <one sentence>
-- **Outcome:** <2-3 bullets describing user-visible change>
-- **Success signal:** <how we will know this worked>
+- Problem: <one sentence>
+- Outcome: <2-3 user-visible changes>
+- Success signal: <what improved>
+
+## Assumptions
+- <assumption>
+- <assumption>
 
 ## Scope
-- **In:**
-  - <included behavior>
-  - <included behavior>
-- **Out:**
-  - <explicit non-goal>
-  - <explicit non-goal>
+- In: <behavior>
+- Out: <non-goal>
 
-## What We're Building
-<2-4 concise paragraphs or bullets describing the experience and behavior contracts.>
-
-## User Stories (Optional)
-### User Story 1: <title>
-- As a <user>, I want <capability> so that <value>.
+## What We Are Building
+<concise behavior contract>
 
 ## Requirements
 - [ ] <requirement>
 - [ ] <requirement>
-- [ ] <requirement>
 
-## UX / Interaction Notes (Optional)
-- Entry points/routes:
-  - `<route-or-path>`
-- Primary flow:
-  1. <step>
-  2. <step>
-- Key states:
-  - Loading:
-  - Empty:
-  - Error:
-- Accessibility notes:
-  - <keyboard/screen-reader/dynamic-type/contrast note>
-
-## Implementation Notes (Optional)
-- Owner files/modules:
-  - `path/to/file`
-  - `path/to/file`
-- Data/contracts:
-  - <data model, API, or query rule>
-- Dependencies and constraints:
-  - <constraint>
-- Rollout/migration notes:
-  - <rollout rule>
-
-## Acceptance Criteria
+## Acceptance Criteria (3-10)
 - Given <state>, when <action>, then <outcome>.
 - Given <state>, when <action>, then <outcome>.
 - Given <state>, when <action>, then <outcome>.
 
-## Success Metrics (Optional)
-- <product or behavior metric>
-- <quality metric>
+## Risk And Failure Analysis
+- <risk>
+- <mitigation>
 
-## Resolved Decisions (Optional)
-- <locked decision>
-- <locked decision>
+## Rollout And Rollback
+- Rollout: <strategy>
+- Rollback: <strategy>
 
-## Validation (Optional)
-- Manual checks:
-  - <check + expected result>
-- Automated checks:
-  - `<command/test suite>`
+## Verification
+- Manual checks: <checks>
+- Automated checks: `<commands/tests>`
+- Verification evidence (required if `verification-state: verified`): <links/outputs>
 
-## Context (Optional)
-- Related docs:
-  - `docs/path.md`
-- Related code:
-  - `path/to/file`
-- References:
-  - <issue/link>
+## Open Questions
+- <question>
 
-## Open Questions (Optional)
-- <question and why it matters>
-
-## Post-Implementation Update Notes (Optional)
-- Shipped behavior summary:
-  - <what is now live>
-- Differences from prior spec:
-  - <changed/descoped behavior>
-- Follow-ups:
-  - `docs/exec-plans/active/<feature-slug>-plan.md`
-  - `docs/exec-plans/tech-debt-tracker.md`
+## Post-Implementation Notes
+- Shipped behavior summary: <short summary>
+- Differences from initial scope: <changes>

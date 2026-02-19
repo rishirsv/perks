@@ -35,7 +35,7 @@ Always apply the `Frontend Aesthetics Guidelines` section in this file while imp
 
 0. Optional: load repo UI context for iterative design
 
-- Use `references/repo-ui-init-and-context.md` for `.design/` context files.
+- Use `references/design-init.md` for `.design/` context files.
 - Use `references/design-token-sync.md` for theme token extraction when needed.
 - Run `init design context` only when the user explicitly asks to create design context files.
 - Run `update design context` only when the user explicitly asks to refresh design context files.

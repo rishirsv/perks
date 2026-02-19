@@ -1,63 +1,43 @@
 ---
-name: solution
-description: Capture a solved problem as a searchable solution doc.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 90
+source-of-truth: "docs/solutions/<solution-slug>.md"
+verification-state: unverified
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+related-issue: <path-or-none>
+related-pr: <link-or-none>
 ---
 
 # Solution: <clear-title>
 
 ## Problem Signature
-- Surface: <where this appears>
+- Surface: <where it appears>
 - Trigger: <when it appears>
 - Severity: <P0|P1|P2|P3>
-- Affected paths:
-  - `<path>`
-  - `<path>`
 
-## Search Keywords
-- `<error message>`
-- `<feature area>`
-- `<component/module>`
-- `<symptom phrase>`
-
-## Summary
-<1-3 sentences: what broke and what fixed it.>
-
-## Symptoms
-- ...
+## Reproduction
+- <repro steps>
 
 ## Root Cause
-- ...
+- <cause>
 
 ## Fix Applied
-- ...
+- <fix summary>
 
-## Why This Works
-- ...
+## Signals That Confirm The Fix
+- <signal>
+- <signal>
 
-## Guardrails
-- How to detect regression:
-  - `<check>`
-- What not to do:
-  - `<anti-pattern>`
-
-## Prevention Checklist
-- [ ] Add/adjust automated check to catch this class of issue.
-- [ ] Add/adjust contract test or verification script coverage.
-- [ ] Update relevant policy docs so future changes follow the safe pattern.
-- [ ] Verify no neighboring surfaces still use the broken pattern.
+## Regression Tests Added
+- <test name/path>
 
 ## Verification
-```bash
-<commands to confirm the fix>
-```
+- `<command or check>`
+- expected result: <result>
 
-<What you should see.>
-
-## Rollback (optional)
-- <How to undo safely if needed.>
-
-## References
-- `path/to/file.ts:123`
-- `path/to/file.ts:456`
-- PR/commit (optional): ...
-- External link (optional): ...
+## Prevention
+- <guardrail>
+- <follow-up>

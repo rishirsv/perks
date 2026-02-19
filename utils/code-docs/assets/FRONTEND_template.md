@@ -1,41 +1,41 @@
 ---
-name: frontend
-description: Frontend contracts template for docs/FRONTEND.md.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 60
+source-of-truth: "docs/FRONTEND.md"
+verification-state: unverified
+stack: "<framework + router + state + styling>"
+platforms: "<web|ios|android|desktop>"
 ---
 
 # FRONTEND.md
 
 ## Purpose
-Frontend implementation contracts for React Native + Expo Router.
+Frontend contracts for architecture, ownership boundaries, and verification loops.
 
-## Core Stack Contracts
-- Expo Router typed routes are enabled.
-- Root stack owns top-level pushed flows.
-- Use a single owner surface per interaction set.
+## Fill-In Fields
+- Framework/runtime: <value>
+- Router/navigation: <value>
+- State management: <value>
+- Data fetching: <value>
+- Styling/theming: <value>
+- App structure: <value>
+- Performance budget: <value>
 
-## Navigation Contracts
-- Canonical workout open path: `/workout`.
-- Canonical workout history detail path: `/progress/history/[id]`.
-- Use centralized safe-navigation helpers for cross-stack opens.
-- Do not globally intercept native back behavior.
+## Context Boundaries
+- Frontend owns: <view layer, client state, routing, etc.>
+- Backend owns: <business logic, persistence, server validation, etc.>
+- Shared contracts: <API schema, types, auth contract>
 
-## Styling Contracts
-- Use `className` for static styling.
-- Use `style` for dynamic/measured/animated values.
+## Component Conventions
+- Component organization: <pattern>
+- Reuse policy: <pattern>
+- Error and empty states: <pattern>
 
-## Insets and Bottom Chrome
-- Keep one source of truth for bottom insets.
-- Avoid duplicate inset ownership across tabs/accessories.
-
-## Interactive Verification
-For new or changed controls, verify:
-- primary action,
-- long-press/context behavior,
-- secondary actions,
-- safe-area edge geometry,
-- keyboard overlap/cutoff.
-
-## Related Docs
-- `AGENTS.md`
-- `ARCHITECTURE.md`
-- `docs/DESIGN.md`
+## Verification Loop
+- Unit checks: `<command>`
+- Integration checks: `<command>`
+- End-to-end checks: `<command>`
+- Accessibility baseline: <standard>
+- Performance baseline: <budget + measurement method>

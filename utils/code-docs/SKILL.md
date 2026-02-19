@@ -6,20 +6,14 @@ description: Create or update canonical docs structure, policy docs, reference d
 # Code Docs
 
 ## Objective
-Create or update repository documentation using canonical structure and naming.
-
-Architecture docs must follow a high-signal pattern:
-- bird's-eye view,
-- codemap by major modules,
-- explicit architectural invariants,
-- clear boundaries and cross-cutting concerns.
+Create or update repository documentation using canonical structure and naming. Keep docs agent-legible, layered, and mechanically verifiable.
 
 ## Scope
 This skill manages:
 - root docs (`AGENTS.md`, `ARCHITECTURE.md`, `TODOS.md`)
-- docs policy/reference docs
-- docs structure/index files
+- docs policy/reference docs and index files
 - product specs (`docs/product-specs/*`) for planning and post-implementation documentation
+- execution planning docs (`docs/exec-plans/*`)
 - solution knowledge docs (optional, when explicitly requested)
 
 This skill does not own execution of feature code changes. It can inspect source code to document behavior and contracts.
@@ -27,20 +21,31 @@ This skill does not own execution of feature code changes. It can inspect source
 ## Hard Rules
 - Edit docs only (`.md`, `.txt`) unless user says otherwise.
 - Do not modify source code/tests/config/dependencies.
-- Create files only when user asks.
+- Create files only when user asks, except when updating an existing scaffold where matching index links are required.
 - Use canonical names/paths by default.
 - Do not create legacy alias paths.
-- Ground implementation-derived spec content in repository evidence; avoid guessing.
+- Ground implementation-derived content in repository evidence; avoid guessing.
+- Do not include looks-real product specifics in templates. Use placeholders unless explicitly marked as examples.
+- Respect layered instruction ecosystems:
+  - If repo already uses `CLAUDE.md` and/or `.github/copilot-instructions.md`, do not create competing guidance by default.
+  - If nested `AGENTS.md` files exist, preserve precedence and keep root guidance high-level.
+- For canonical docs/specs, use metadata frontmatter fields:
+  - `owner`
+  - `status`
+  - `last-reviewed`
+  - `review-cycle-days`
+  - `source-of-truth`
+  - `verification-state`
 
-## Canonical Paths
+## Canonical Paths (when scaffolding exists)
 Root:
 - `AGENTS.md`
 - `ARCHITECTURE.md`
 - `TODOS.md`
 
 `docs/`:
-- `docs/ISSUES.md`
 - `docs/README.md`
+- `docs/ISSUES.md`
 - `docs/DESIGN.md`
 - `docs/FRONTEND.md`
 - `docs/PLANS.md`
@@ -58,32 +63,28 @@ Root:
 - `docs/research/*`
 - `docs/artifacts/*`
 
-## Feature Lifecycle Reference (do not generate by default)
-- Spec: `docs/product-specs/<feature-slug>-spec.md`
-- Active plan: `docs/exec-plans/active/<feature-slug>-plan.md`
-- Completed plan: `docs/exec-plans/completed/<feature-slug>-plan.md`
-
-## Structure Confirmation
-If repository structure choice is not explicit, ask:
-- "Use canonical docs structure (`AGENTS.md`, `ARCHITECTURE.md`, `TODOS.md` + `docs/ISSUES.md` + `docs/*`) for this repo?"
-
 ## Defaults
 - If user provides path, use it.
-- If user provides doc type only, use canonical path.
-- Preserve existing structure/tone unless user asks for rewrite.
+- If user provides doc type only, use canonical path when scaffold exists.
+- If scaffold is absent, do not force-create missing files; keep requested docs self-contained.
+- Preserve existing structure and tone unless user asks for rewrite.
 
-Solution-doc default path (optional):
-- `docs/solutions/<solution-slug>.md`
+## Metadata Semantics
+- `status`: `draft` | `active` | `deprecated`
+- `verification-state`: `unverified` | `partially-verified` | `verified`
+- A doc marked `verification-state: verified` must include at least one concrete verification method.
+
+## Scaffolding-Aware AGENTS Behavior
+When creating/updating `AGENTS.md`:
+1. Detect if full scaffolding exists.
+2. If scaffolding exists, include a concise table of contents with valid links.
+3. If scaffolding does not exist, keep `AGENTS.md` standalone and add optional suggested docs as recommendations only.
+4. Never require missing files unless the user explicitly asks to create them.
 
 ## Issues Handling
-- Use `docs/ISSUES.md` as single issue registry.
-- Append issue blocks using `assets/issue_template.md` format.
-- Do not create per-issue files unless explicitly requested.
-
-## Solution Handling
-- Use `assets/solution_template.md` for solved-problem runbooks.
-- A solution doc records stable diagnosis/fix knowledge.
-- It does not replace issue intake (`docs/ISSUES.md`) or execution planning lifecycle (`docs/exec-plans/*`).
+- Use `docs/ISSUES.md` as single issue registry by default.
+- Append issue blocks using `assets/issue-block_template.md` format.
+- Create per-issue files only when explicitly requested, using `assets/issue-file_template.md`.
 
 ## Product Specs Handling
 - Canonical path: `docs/product-specs/<feature-slug>-spec.md`.
@@ -97,13 +98,13 @@ Solution-doc default path (optional):
   2. Identify user-visible behavior, constraints, and non-goals.
   3. Map requirements and acceptance criteria to shipped behavior.
   4. Record references to relevant code and docs paths.
-- If uncertain, put unknowns in `Open Questions` and state what evidence is missing.
-- Keep specs concise and decision-oriented; avoid long narrative prose.
+- If uncertain, put unknowns in `Open Questions` and state missing evidence.
+- Keep specs concise and decision-oriented.
 
 ## Cross-Skill Alignment
-- `ideate` is the interactive discovery/brainstorming intake.
-- `code-docs` is the canonical spec-writing and spec-maintenance path, including post-implementation updates.
-- Use the same core section shape (TL;DR, Scope, What We're Building, Requirements, Acceptance Criteria) for consistency.
+- `ideate` handles discovery and brainstorming.
+- `code-docs` handles canonical spec/doc writing and maintenance.
+- `designer` can own full design detail; `code-docs` keeps durable design map placeholders when requested.
 
 ## Assets
 | Document Type | Asset | Canonical Path |
@@ -112,10 +113,14 @@ Solution-doc default path (optional):
 | Repo guidelines | `assets/AGENTS_template.md` | `AGENTS.md` |
 | Architecture | `assets/ARCHITECTURE_template.md` | `ARCHITECTURE.md` |
 | Todos | `assets/TODOS_template.md` | `TODOS.md` |
-| Issues registry | `assets/ISSUES_template.md` + `assets/issue_template.md` | `docs/ISSUES.md` |
-| Design policy | `assets/DESIGN_template.md` | `docs/DESIGN.md` |
-| Frontend policy | `assets/FRONTEND_template.md` | `docs/FRONTEND.md` |
+| Docs index | `assets/docs-README_template.md` | `docs/README.md` |
+| Issues registry | `assets/ISSUES_template.md` | `docs/ISSUES.md` |
+| Issue block | `assets/issue-block_template.md` | append to `docs/ISSUES.md` |
+| Per-issue file (optional) | `assets/issue-file_template.md` | `docs/issues/<id>.md` |
+| Design policy placeholder | `assets/DESIGN_template.md` | `docs/DESIGN.md` |
+| Frontend contracts | `assets/FRONTEND_template.md` | `docs/FRONTEND.md` |
 | Plans rules | `assets/PLANS_template.md` | `docs/PLANS.md` |
+| Exec plan file | `assets/exec-plan_template.md` | `docs/exec-plans/active/<feature-slug>-plan.md` |
 | Product sense | `assets/PRODUCT_SENSE_template.md` | `docs/PRODUCT_SENSE.md` |
 | Reliability policy | `assets/RELIABILITY_template.md` | `docs/RELIABILITY.md` |
 | Security policy | `assets/SECURITY_template.md` | `docs/SECURITY.md` |
@@ -128,8 +133,8 @@ Solution-doc default path (optional):
 
 ## Workflow
 1. Confirm requested docs and scope.
-2. Discover existing conventions in repo docs.
-3. If product-spec work is requested, choose mode (`planning` or `post-implementation`) and collect feature evidence from docs + code.
-4. Apply matching assets to requested targets.
-5. Keep docs concise and path-anchored.
+2. Discover existing conventions and detect scaffolding/layered instruction files.
+3. Select matching assets.
+4. Apply assets with required metadata and path-anchored references.
+5. Ensure quality checks are represented (verification method, ownership, next actions).
 6. Return save summary (paths only).

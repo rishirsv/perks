@@ -1,38 +1,37 @@
 ---
-name: plans
-description: Planning lifecycle rules template for docs/PLANS.md.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 30
+source-of-truth: "docs/PLANS.md"
+verification-state: unverified
 ---
 
 # PLANS.md
 
 ## Purpose
-Rules and conventions for feature planning lifecycle.
+Defines the execution plan lifecycle and required structure for plan files.
 
 ## Canonical Paths
 - Product specs: `docs/product-specs/<feature-slug>-spec.md`
-- Active execution plans: `docs/exec-plans/active/<feature-slug>-plan.md`
-- Completed execution plans: `docs/exec-plans/completed/<feature-slug>-plan.md`
+- Active plans: `docs/exec-plans/active/<feature-slug>-plan.md`
+- Completed plans: `docs/exec-plans/completed/<feature-slug>-plan.md`
+- Plan template: `assets/exec-plan_template.md`
 - Tech debt tracker: `docs/exec-plans/tech-debt-tracker.md`
 
-## Naming Rules
-- `feature-slug` must be kebab-case.
-- Use the same `feature-slug` between spec and plan files.
+## Required Headings For Every Plan File
+1. Metadata
+2. Description and user impact
+3. Scope and non-goals
+4. Acceptance criteria
+5. Task checklist
+6. Verification steps
+7. Decision log
+8. Risks and rollback
 
-## Lifecycle Rules
-- Spec ideation belongs in `docs/product-specs/<feature-slug>-spec.md`.
-- Implementation starts from `docs/exec-plans/active/<feature-slug>-plan.md`.
-- Completion is user-determined.
-- On completion, move the plan file to `docs/exec-plans/completed/<feature-slug>-plan.md`.
-
-## Minimum Plan Sections
-1. Description and user impact
-2. Scope and non-goals
-3. Constraints and invariants
-4. Task checklist
-5. Validation approach
-6. Risks and rollback notes
-
-## Related Files
-- `TODOS.md`
-- `docs/ISSUES.md`
-- `docs/exec-plans/tech-debt-tracker.md`
+## Definition Of Done
+A plan is complete when:
+- acceptance criteria are satisfied
+- verification is documented
+- related docs are updated
+- follow-up debt is captured (if any)

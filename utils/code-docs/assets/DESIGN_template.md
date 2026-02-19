@@ -1,120 +1,91 @@
 ---
-name: design
-description: Design system and UI guidelines for docs/DESIGN.md.
+owner: "<team-or-role-or-unassigned>"
+design-owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 60
+source-of-truth: "<figma|repo|mixed>"
+verification-state: unverified
 ---
 
-# Design: [Project Name]
+# DESIGN.md
 
-Last updated: YYYY-MM-DD
+## Purpose
+Design operating contract for this repo: source of truth, system map, agent editing boundaries, and verification guidance.
 
-## Description
+## Source of Truth
+- Primary: <figma-link-or-repo-path>
+- Secondary: <tokens package / style system / docs path>
+- Decision owner: <team-or-role>
 
-<A short paragraph describing the intended look/feel and what “good” looks like in this product.>
+## Design System Map
+- Tokens source: <path-or-link>
+- Typography source: <path-or-link>
+- Spacing/layout source: <path-or-link>
+- Component library source: <path-or-link>
+- Iconography/illustration source: <path-or-link>
+- Motion system source: <path-or-link>
 
-## Design style
+## Repo UI Context Map (`.design/`)
+Use this section to connect high-level design policy to repo-grounded context files.
 
-- Direction: <e.g., Minimal, Neo-brutal, Modern, …>
-- Keywords: <3–6 adjectives that should be true of the UI>
+Required context files when enabled:
+- `.design/components.md`
+- `.design/layouts.md`
+- `.design/routes.md`
+- `.design/theme.md`
 
-## Design principles
+### `.design/components.md`
+Must capture:
+- shared/reusable primitives and major feature components
+- purpose, key exports/APIs, dependencies, interaction risks
+- targeted snippets with source path + line anchors
 
-- <Principle 1: what to do, in one sentence>
-- <Principle 2>
-- <Principle 3>
+### `.design/layouts.md`
+Must capture:
+- app/layout shells and ownership boundaries
+- route/surface contracts
+- risky geometry/safe-area/inset behavior
+- targeted snippets with anchors
 
-## Tokens
+### `.design/routes.md`
+Must capture:
+- route map: path, file, layout relation
+- navigation contracts and ownership notes
+- risky transitions and cross-surface openings
 
-### Color tokens
+### `.design/theme.md`
+Must capture:
+- tokens and design-system digest
+- raw-value fidelity for global styles/config sources
+- focused snippets with anchors
 
-| Token | Value | Usage | Notes |
-|---|---|---|---|
-| `--color-bg` | `#...` | App background | <…> |
-| `--color-surface` | `#...` | Cards, panels | <…> |
-| `--color-text` | `#...` | Primary text | <…> |
-| `--color-primary` | `#...` | Primary actions | <…> |
-| `--color-danger` | `#...` | Destructive actions | <…> |
+## Context Refresh Contract
+- `init design context`: create `.design/` files.
+- `update design context`: refresh `.design/*.md` from current repo sources.
+- Run only when explicitly requested.
+- For iterative tasks, read relevant existing `.design/*.md` first.
 
-### Typography tokens
+## Hybrid Context Format Rules
+For each context entry include:
+- path
+- purpose/ownership
+- key contracts and dependencies
+- interaction risks
+- targeted high-signal snippets with line anchors
 
-| Role | Font | Size/weight | Usage |
-|---|---|---|---|
-| H1 | <…> | <…> | Page titles |
-| H2 | <…> | <…> | Section titles |
-| Body | <…> | <…> | Main content |
-| Mono | <…> | <…> | Code, IDs |
+Snippet guidance:
+- 8-30 lines per snippet
+- 3-8 snippets per high-value file entry
+- pointer-only entries for low-risk boilerplate
 
-### Spacing scale
+## Agent Editing Policy
+- Agents may update references, links, and verified constraints.
+- Agents may update `.design/*` context files when explicitly requested.
+- Agents must not redefine core visual language without approval from design owner.
+- Large visual system rewrites require explicit sign-off.
 
-| Token | Value | Usage |
-|---|---:|---|
-| `--space-1` | <px> | Tight spacing |
-| `--space-2` | <px> | Default spacing |
-| `--space-3` | <px> | Comfortable spacing |
-
-### Breakpoints
-
-| Name | Min width | Notes |
-|---|---:|---|
-| Mobile | <px> | <…> |
-| Tablet | <px> | <…> |
-| Desktop | <px> | <…> |
-
-## Layout
-
-- Grid: <columns/gutters/max-width>
-- Content rhythm: <how sections should be spaced>
-
-## Components
-
-### Buttons
-
-| Do | Don’t |
-|---|---|
-| <Describe correct primary button usage> | <Anti-pattern> |
-| <Describe disabled/loading behavior> | <Anti-pattern> |
-
-States:
-- Default / Hover / Active / Disabled / Loading: <notes>
-
-### Forms
-
-| Do | Don’t |
-|---|---|
-| <Clear labels and helpful errors> | <Errors only on submit with no guidance> |
-| <Visible focus states> | <Removing focus outlines without replacement> |
-
-### Cards / surfaces
-
-| Do | Don’t |
-|---|---|
-| <Use surface + border to separate content> | <Overuse heavy shadows everywhere> |
-
-### Navigation
-
-- Pattern: <tabs / sidebar / top-nav>
-- Active state: <what it looks like>
-
-## Motion
-
-| Use case | Duration | Easing | Notes |
-|---|---:|---|---|
-| Small UI feedback | 150ms | ease-out | <…> |
-| Page transitions | 250ms | ease-out | <…> |
-
-## Accessibility
-
-- Contrast: meet WCAG AA for text and controls.
-- Keyboard: focus is visible and logical.
-- Touch targets: minimum 44×44px.
-- Forms: labels and errors are clear.
-
-## Implementation notes (optional)
-
-- Technologies: <UI library / design tokens / CSS approach>
-- Performance: <rules of thumb>
-
-## Resources
-
-- Figma: <link>
-- Assets: <link>
-- Related docs: <links>
+## Validation Notes
+- How to validate UI changes: <checklist or command>
+- How to validate design token sync: <process/command>
+- Accessibility baseline: <contrast/focus/target-size expectation>

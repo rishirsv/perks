@@ -1,59 +1,64 @@
 ---
-name: agents
-description: Repo guidelines and workflow instructions for agents and contributors.
+owner: "<team-or-role-or-unassigned>"
+status: active
+last-reviewed: YYYY-MM-DD
+review-cycle-days: 30
+source-of-truth: "AGENTS.md"
+verification-state: unverified
+applies-to: "/"
 ---
 
-# Repository Guidelines
+# AGENTS.md
 
-<1–2 sentences: what this repo is and how to work in it safely.>
+## Purpose
+
+This file is the navigation layer for how agents and contributors work in this repo. Keep it short, operational, and easy to scan.
+
+## Keep This File Short
+
+- Target length: about 100-150 lines.
+- Keep policy detail in dedicated docs.
+- Link out instead of embedding long rule blocks.
+
+## Layering and Precedence
+
+- Root `AGENTS.md` sets global defaults.
+- Nested `AGENTS.md` files may override or extend rules for subdirectories.
+- If `CLAUDE.md` already exists, treat them as peer instruction sources and avoid contradictory guidance.
+
+## Table of Contents
+
+Use links that exist in this repo. If a doc is missing, mark it `not in this repo`.
+
+- `AGENTS.md` - contributor and agent operating contract.
+- `ARCHITECTURE.md` - system boundaries and invariants. (`not in this repo`)
+- `TODOS.md` - priorities and queue. (`not in this repo`)
+- `docs/README.md` - docs index. (`not in this repo`)
+- `docs/ISSUES.md` - issue registry. (`not in this repo`)
+- `docs/PLANS.md` - planning lifecycle rules. (`not in this repo`)
 
 ## Scope
 
-- In scope: <what changes are OK>
-- Out of scope: <what not to change>
+- In scope: <what changes are acceptable>
+- Out of scope: <what to avoid>
 
-## Project Structure & Modules
+## Safety Boundaries
 
-```text
-<repo>/
-  docs/                      # documentation
-  src/                       # main code
-```
+- Do not touch: <generated files / secrets / production data / regulated surfaces>
 
-## Build, Test, and Development Commands
+## Verifiable Loop
 
-Run commands from:
+Run concrete checks before handoff and iterate until they pass.
 
-```bash
-cd <path>
-```
+| Purpose | Command     | Expected signal    |
+| ------- | ----------- | ------------------ |
+| Build   | `<command>` | No build errors    |
+| Test    | `<command>` | Tests pass         |
+| Lint    | `<command>` | No lint violations |
 
-| Purpose | Command | Notes |
-|---|---|---|
-| Install | `<cmd>` | <package manager / setup notes> |
-| Dev | `<cmd>` | <how to run locally> |
-| Tests | `<cmd>` | <what it runs> |
-| Lint (optional) | `<cmd>` | <when to run> |
-| Build (optional) | `<cmd>` | <when to run> |
+## Workflow
 
-## Workflow (Spec → Plan → Execute → Review)
-
-- Spec: `docs/product-specs/<feature-slug>-spec.md`
-- Plan: `docs/exec-plans/active/<feature-slug>-plan.md`
-- Execute: implement the plan and update task checkboxes
-- Complete: move plan to `docs/exec-plans/completed/<feature-slug>-plan.md` when user determines done
-- Review notes (optional): `docs/exec-plans/completed/<feature-slug>-implementation-notes.md`
-
-## Defaults
-
-- Prefer minimal diffs unless asked for a rewrite.
-- Match existing repo conventions (paths, naming, tone).
-- Include verification steps (commands + expected output) for any doc that instructs actions.
-
-## Safety boundaries
-
-- <Don’t-touch zones (generated files, prod data, etc.)>
-
-## Verification
-
-<How to validate changes in this repo (commands + expected results).>
+- Read request and identify affected files.
+- Prefer minimal diffs.
+- Ground decisions in repo evidence.
+- Record assumptions when evidence is missing.

@@ -1,6 +1,8 @@
-# Repo UI init and context files
+# Design init and repo UI context files
 
 Use this when the task is iterative design on an existing repo UI.
+
+This guide aligns `.design/*` context generation with `docs/DESIGN.md` so high-level design policy and repo-grounded evidence stay in sync.
 
 ## Explicit trigger phrases (natural language)
 
@@ -24,6 +26,16 @@ Required files:
 - `.design/layouts.md`
 - `.design/routes.md`
 - `.design/theme.md`
+
+## Sync with `docs/DESIGN.md`
+
+When `docs/DESIGN.md` exists, keep these sections aligned with `.design/*` context:
+- `Design System Map`
+- `Repo UI Context Map (.design/)`
+- `Context Refresh Contract`
+- `Validation Notes`
+
+If `docs/DESIGN.md` is missing, generate `.design/*` only and do not create new docs unless explicitly requested.
 
 ## Hybrid context format (required)
 
