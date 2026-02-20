@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpmg-slidegen.local/skills/deckSpec.schema.json",
+  "title": "DeckSpec (Skill Contract)",
+  "description": "Skill-facing alias to the canonical deck spec contract.",
+  "allOf": [
+    {
+      "$ref": "../../../../schemas/deckSpec.schema.json"
+    }
+  ]
+}

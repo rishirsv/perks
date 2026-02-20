@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-import template from '../templates/kpmg-diligence/template.js';
-import { validateDeckSpec } from './validate.js';
 import { checkDeckOverlaps, writeOverlapReport } from './strict/overlap.js';
+import { validateDeckSpecWithTemplate, renderDeck } from './runtime/render-deck.js';
+import { loadTemplatePackage } from './runtime/template-package.js';
 import {
   recordMissingSlot,
   recordOverlapSummary,
@@ -24,11 +24,11 @@ function isMissingSlotValue(value) {
   return false;
 }
 
-function collectMissingSlots(deckSpec) {
+function collectMissingSlots(deckSpec, templatePackage) {
   const missing = [];
   const slides = Array.isArray(deckSpec?.slides) ? deckSpec.slides : [];
   slides.forEach((slideSpec, idx) => {
-    const layout = template.LAYOUTS?.[slideSpec.type];
+    const layout = templatePackage?.layouts?.types?.[slideSpec.type];
     const slots = layout?.slots || {};
     for (const [slotName, slotDef] of Object.entries(slots)) {
       if (!slotDef?.required) continue;
@@ -38,6 +38,73 @@ function collectMissingSlots(deckSpec) {
     }
   });
   return missing;
+}
+
+function getQaPath(outPath, overridePath) {
+  if (overridePath) return overridePath;
+  if (/\.pptx$/i.test(outPath)) return outPath.replace(/\.pptx$/i, '.qa.json');
+  return `${outPath}.qa.json`;
+}
+
+function writeQaReport(qaPath, qaReport) {
+  fs.mkdirSync(path.dirname(qaPath), { recursive: true });
+  fs.writeFileSync(qaPath, JSON.stringify(qaReport, null, 2));
+}
+
+function getOverlapReportPath(qaPath, options = {}) {
+  if (options.overlapReportPath) return options.overlapReportPath;
+  if (options.strictDir) return path.join(options.strictDir, 'overlap-report.json');
+  if (/\.json$/i.test(qaPath)) return qaPath.replace(/\.json$/i, '.overlap.json');
+  return `${qaPath}.overlap.json`;
+}
+
+function dedupeList(items = [], keyFn = (v) => JSON.stringify(v)) {
+  const out = [];
+  const seen = new Set();
+  for (const item of items) {
+    const key = keyFn(item);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+  }
+  return out;
+}
+
+function buildOverflowRepairSuggestions(overflowEvents = []) {
+  return overflowEvents
+    .filter((event) => Number(event?.splitInto || 0) > 1)
+    .map((event) => ({
+      slideType: event.slideType,
+      slot: null,
+      hook: 'splitSlide',
+      severity: 'info',
+      issueCode: 'auto_split',
+      suggestedRemedy: `Slide was auto-split into ${event.splitInto} pages; keep as split or tighten bullet text.`,
+    }));
+}
+
+function buildOverflowRisks(overflowEvents = []) {
+  return overflowEvents
+    .filter((event) => Number(event?.splitInto || 0) > 1)
+    .map((event) => ({
+      slideIndex: event?.slideIndex,
+      slideType: event?.slideType,
+      mode: event?.mode || 'unknown',
+      splitInto: Number(event?.splitInto || 0),
+      severity: Number(event?.splitInto || 0) >= 3 ? 'warning' : 'info',
+      reason: 'auto_split',
+      suggestedRemedy: `Slide was auto-split into ${event?.splitInto} pages; keep split or tighten content.`,
+    }));
+}
+
+function buildDensitySummary(findings = []) {
+  const summary = { ok: 0, thin: 0, sparse: 0 };
+  for (const finding of findings) {
+    if (finding?.status === 'OK') summary.ok += 1;
+    else if (finding?.status === 'thin but acceptable') summary.thin += 1;
+    else if (finding?.status === 'too sparse, should be repaired or flagged') summary.sparse += 1;
+  }
+  return summary;
 }
 
 function runStrictOverflow(pptxPath, outDir) {
@@ -61,18 +128,13 @@ function runStrictOverflow(pptxPath, outDir) {
 }
 
 export async function generateToFile(deckSpec, outPath, options = {}) {
-  const v = validateDeckSpec(deckSpec);
-  if (!v.valid) {
-    throw new Error(v.errors.join('\n'));
-  }
-  const useDiagnostics = Boolean(options.strict);
-  if (useDiagnostics) {
-    startDiagnostics();
-    const missing = collectMissingSlots(deckSpec);
-    for (const m of missing) {
-      recordMissingSlot(m.slideIndex, m.slideType, m.slot);
-    }
-  }
+  const templatePackage =
+    options.templatePackage || loadTemplatePackage(options.template || 'kpmg-diligence');
+  const qaPath = getQaPath(outPath, options.qaPath);
+  startDiagnostics();
+  const v = validateDeckSpecWithTemplate(deckSpec, templatePackage, {
+    allowSparse: options.allowSparse,
+  });
 
   if (v.warnings?.length) {
     for (const w of v.warnings) {
@@ -80,14 +142,53 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
       recordWarning(w);
     }
   }
+  for (const m of v?.qa?.missingSlots || collectMissingSlots(deckSpec, templatePackage)) {
+    recordMissingSlot(m.slideIndex, m.slideType, m.slot);
+  }
 
-  const pptx = template.generateDeck(deckSpec);
+  if (!v.valid) {
+    const diag = stopDiagnostics() || {};
+    const baseRepair = v?.qa?.repairSuggestions || [];
+    const qaReport = {
+      generatedAt: new Date().toISOString(),
+      template: templatePackage.templateName,
+      valid: false,
+      errors: v.errors || [],
+      warnings: dedupeList(v.warnings || [], (item) => String(item)),
+      densityFindings: v?.qa?.densityFindings || [],
+      densitySummary: buildDensitySummary(v?.qa?.densityFindings || []),
+      missingSlots: v?.qa?.missingSlots || [],
+      thinSlides: v?.qa?.thinSlides || [],
+      sparseSlides: v?.qa?.sparseSlides || [],
+      slotIssues: v?.qa?.slotIssues || [],
+      slotMetrics: v?.qa?.slotMetrics || [],
+      repairSuggestions: dedupeList(baseRepair, (item) =>
+        `${item?.slideIndex ?? ''}|${item?.slideType ?? ''}|${item?.slot ?? ''}|${item?.hook ?? ''}|${item?.suggestedRemedy ?? ''}`,
+      ),
+      pagination: [],
+      overflowRisks: [],
+      masterApplied: [],
+      paginationDecisions: [],
+      overflowEvents: [],
+      fallbacks: diag?.fallbacks || [],
+      overlapSummary: null,
+      strictOverflow: null,
+      inputSlideCount: Array.isArray(deckSpec?.slides) ? deckSpec.slides.length : 0,
+      outputPptx: outPath,
+    };
+    writeQaReport(qaPath, qaReport);
+    throw new Error(v.errors.join('\n'));
+  }
+
+  const { pptx, qa: renderQa } = renderDeck(deckSpec, templatePackage, {
+    allowSparse: options.allowSparse,
+  });
 
   let overlapReport = null;
-  if (options.strict && options.strictDir) {
+  if (options.enforceOverlap !== false) {
     overlapReport = checkDeckOverlaps(pptx);
     recordOverlapSummary(overlapReport.summary);
-    writeOverlapReport(overlapReport, path.join(options.strictDir, 'overlap-report.json'));
+    writeOverlapReport(overlapReport, getOverlapReportPath(qaPath, options));
   }
 
   // Ensure output directory exists before writing the PPTX.
@@ -100,28 +201,54 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
     overflowStatus = runStrictOverflow(outPath, overflowDir);
   }
 
-  let strictSummary = null;
-  if (useDiagnostics) {
-    const report = stopDiagnostics();
-    strictSummary = {
-      overlaps: overlapReport?.summary || null,
-      overflow: overflowStatus,
-      warnings: report?.warnings || [],
-      missingSlots: report?.missingSlots || [],
-      fallbacks: report?.fallbacks || [],
-    };
-    if (options.strictDir) {
-      fs.mkdirSync(options.strictDir, { recursive: true });
-      fs.writeFileSync(
-        path.join(options.strictDir, 'strict-summary.json'),
-        JSON.stringify(strictSummary, null, 2),
-      );
-    }
+  const report = stopDiagnostics() || {};
+  const densityFindings = renderQa?.densityFindings || v?.qa?.densityFindings || [];
+  const overflowRepairSuggestions = buildOverflowRepairSuggestions(renderQa?.overflowEvents || []);
+  const overflowRisks = renderQa?.overflowRisks || buildOverflowRisks(renderQa?.overflowEvents || []);
+  const baseRepairSuggestions = renderQa?.repairSuggestions || v?.qa?.repairSuggestions || [];
+  const pagination = renderQa?.pagination || renderQa?.paginationDecisions || [];
+  const qaReport = {
+    generatedAt: new Date().toISOString(),
+    template: templatePackage.templateName,
+    valid: true,
+    errors: [],
+    warnings: dedupeList([...(v.warnings || []), ...(report?.warnings || [])], (item) => String(item)),
+    densityFindings,
+    densitySummary: buildDensitySummary(densityFindings),
+    missingSlots: v?.qa?.missingSlots || [],
+    thinSlides: v?.qa?.thinSlides || [],
+    sparseSlides: v?.qa?.sparseSlides || [],
+    slotIssues: v?.qa?.slotIssues || [],
+    slotMetrics: renderQa?.slotMetrics || v?.qa?.slotMetrics || [],
+    repairSuggestions: dedupeList(
+      [...baseRepairSuggestions, ...overflowRepairSuggestions],
+      (item) =>
+        `${item?.slideIndex ?? ''}|${item?.slideType ?? ''}|${item?.slot ?? ''}|${item?.hook ?? ''}|${item?.suggestedRemedy ?? ''}`,
+    ),
+    pagination,
+    overflowRisks,
+    masterApplied: renderQa?.masterApplied || [],
+    paginationDecisions: renderQa?.paginationDecisions || [],
+    overflowEvents: renderQa?.overflowEvents || [],
+    fallbacks: report?.fallbacks || [],
+    overlapSummary: overlapReport?.summary || null,
+    strictOverflow: overflowStatus,
+    inputSlideCount: Array.isArray(deckSpec?.slides) ? deckSpec.slides.length : 0,
+    outputPptx: outPath,
+  };
+  writeQaReport(qaPath, qaReport);
+
+  if (options.strictDir) {
+    fs.mkdirSync(options.strictDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(options.strictDir, 'strict-summary.json'),
+      JSON.stringify(qaReport, null, 2),
+    );
   }
 
   const strictFailed =
     options.strict && ((overlapReport?.summary?.severeCount || 0) > 0 || overflowStatus.status !== 0);
-  return { strictFailed, strictSummary };
+  return { strictFailed, strictSummary: qaReport, qaPath };
 }
 
 export async function main(argv = process.argv.slice(2)) {
@@ -141,20 +268,36 @@ export async function main(argv = process.argv.slice(2)) {
 
   const inPath = args.get('in');
   const outPath = args.get('out');
+  const qaOutPath = args.get('qa-out');
+  const templateName = args.get('template') || 'kpmg-diligence';
+  const allowSparse = Boolean(args.get('allow-sparse'));
   if (!inPath || !outPath) {
-    console.error('Usage: node generator/index.js --in <deck.json> --out <out.pptx> [--strict]');
+    console.error(
+      'Usage: node generator/index.js --in <deck.json> --out <out.pptx> [--qa-out <out.qa.json>] [--allow-sparse] [--strict] [--skip-overlap] [--template <name>]',
+    );
     process.exit(2);
   }
 
   const deckSpec = readJson(inPath);
+  const templatePackage = loadTemplatePackage(templateName);
   const strict = Boolean(args.get('strict'));
+  const skipOverlap = Boolean(args.get('skip-overlap'));
   const runId = new Date().toISOString().replace(/[:.]/g, '-');
   const strictDir = strict ? path.join('outputs', 'strict', runId) : null;
-  const result = await generateToFile(deckSpec, outPath, { strict, strictDir });
+  const result = await generateToFile(deckSpec, outPath, {
+    strict,
+    enforceOverlap: !skipOverlap,
+    strictDir,
+    template: templateName,
+    templatePackage,
+    qaPath: qaOutPath,
+    allowSparse,
+  });
   if (strict && result.strictFailed) {
     process.exit(1);
   }
   console.log(`Generated: ${outPath}`);
+  console.log(`QA report: ${result.qaPath || getQaPath(outPath, qaOutPath)}`);
 }
 
 if (import.meta.url === `file://${path.resolve(process.argv[1])}`) {

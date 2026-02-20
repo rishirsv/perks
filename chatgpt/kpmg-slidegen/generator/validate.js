@@ -1,37 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import template from '../templates/kpmg-diligence/template.js';
+import { loadTemplatePackage } from './runtime/template-package.js';
+import { validateDeckSpecWithTemplate } from './runtime/render-deck.js';
 
 export function validateDeckSpec(deckSpec) {
-  const errors = [];
-  const warnings = [];
-
-  if (!deckSpec || typeof deckSpec !== 'object') {
-    return { valid: false, errors: ['Deck spec must be an object'], warnings: [] };
-  }
-
-  if (!Array.isArray(deckSpec.slides)) {
-    return { valid: false, errors: ['Deck spec missing `slides` array'], warnings: [] };
-  }
-
-  deckSpec.slides.forEach((slideSpec, idx) => {
-    if (!slideSpec || typeof slideSpec !== 'object') {
-      errors.push(`slides[${idx}] must be an object`);
-      return;
-    }
-    if (!slideSpec.type || typeof slideSpec.type !== 'string') {
-      errors.push(`slides[${idx}] missing string 'type'`);
-      return;
-    }
-    const v = template.validateSlideContent(slideSpec.type, slideSpec);
-    if (!v.valid) {
-      for (const e of v.errors) errors.push(`slides[${idx}]: ${e}`);
-    }
-    for (const w of v.warnings || []) warnings.push(`slides[${idx}]: ${w}`);
+  const templatePackage = loadTemplatePackage('kpmg-diligence');
+  return validateDeckSpecWithTemplate(deckSpec, templatePackage, {
+    allowSparse: Boolean(deckSpec?.metadata?.allowSparse),
   });
-
-  return { valid: errors.length === 0, errors, warnings };
 }
 
 export function readJson(filePath) {
@@ -43,20 +20,30 @@ export async function main(argv = process.argv.slice(2)) {
   const args = new Map();
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a.startsWith('--')) {
-      args.set(a.slice(2), argv[i + 1]);
+    if (!a.startsWith('--')) continue;
+    const key = a.slice(2);
+    const next = argv[i + 1];
+    if (next && !next.startsWith('--')) {
+      args.set(key, next);
       i++;
+    } else {
+      args.set(key, true);
     }
   }
 
   const inPath = args.get('in');
+  const templateName = args.get('template') || 'kpmg-diligence';
+  const allowSparse = Boolean(args.get('allow-sparse'));
   if (!inPath) {
-    console.error('Usage: node generator/validate.js --in <deck.json>');
+    console.error(
+      'Usage: node generator/validate.js --in <deck.json> [--template <name>] [--allow-sparse]',
+    );
     process.exit(2);
   }
 
   const deckSpec = readJson(inPath);
-  const result = validateDeckSpec(deckSpec);
+  const templatePackage = loadTemplatePackage(templateName);
+  const result = validateDeckSpecWithTemplate(deckSpec, templatePackage, { allowSparse });
 
   if (!result.valid) {
     for (const e of result.errors) console.error(e);
@@ -70,4 +57,3 @@ export async function main(argv = process.argv.slice(2)) {
 if (import.meta.url === `file://${path.resolve(process.argv[1])}`) {
   main();
 }
-

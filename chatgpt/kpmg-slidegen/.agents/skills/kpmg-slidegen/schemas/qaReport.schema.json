@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpmg-slidegen.local/skills/qaReport.schema.json",
+  "title": "QA Report (Skill Contract)",
+  "description": "Skill-facing alias to the canonical QA report contract.",
+  "allOf": [
+    {
+      "$ref": "../../../../schemas/qaReport.schema.json"
+    }
+  ]
+}

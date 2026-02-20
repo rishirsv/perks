@@ -1,0 +1,1140 @@
+{
+  "template": "diligence-plus",
+  "status": "active",
+  "generatedFrom": "../kpmg-diligence/package/layouts.json",
+  "version": "0.2.0",
+  "slides": [
+    {
+      "type": "cover",
+      "name": "Cover",
+      "description": "Title slide with subtitle and cover image treatment.",
+      "builder": "cover.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.65
+      },
+      "slots": {
+        "subtitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 200,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 100,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "cover",
+          "subtitle": "Sample text",
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "contents",
+      "name": "Contents",
+      "description": "Table of contents with ten section blocks and page ranges.",
+      "builder": "contents.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.8
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 6,
+          "maxChars": 40,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sections": {
+          "kind": "contentsSections",
+          "required": true,
+          "minItems": 8,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "contents",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "contents",
+          "title": "Sample text",
+          "sections": [
+            {
+              "number": "01",
+              "title": "Executive summary",
+              "pageRange": "p. 3-10",
+              "items": [
+                "Summary financials"
+              ]
+            },
+            {
+              "number": "02",
+              "title": "Historical trading",
+              "pageRange": "p. 11-20",
+              "items": [
+                "Profit and loss overview"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "analysisWideChartTableTextScaffold",
+      "name": "Profit and Loss Overview",
+      "description": "Scaffold slide with long strapline bar, chart area, table area, and note/source region.",
+      "builder": "profit-loss-overview.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.55
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 90,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "heading": {
+          "kind": "text",
+          "required": false,
+          "minChars": 6,
+          "maxChars": 120,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "body": {
+          "kind": "textArray",
+          "required": false,
+          "minItems": 1,
+          "minChars": 40,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "medium"
+          }
+        },
+        "chart": {
+          "kind": "chart",
+          "required": false,
+          "minItems": 1,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "chart",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "table": {
+          "kind": "table",
+          "required": false,
+          "minItems": 3,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "table",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "noteSource": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "analysisWideChartTableTextScaffold",
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "dividerDark",
+      "name": "Dark Divider",
+      "description": "Dark section divider with section number and title.",
+      "builder": "divider-dark.ts",
+      "masterVariant": "sectionDark",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      },
+      "slots": {
+        "sectionNumber": {
+          "kind": "text",
+          "required": true,
+          "minChars": 2,
+          "maxChars": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "label",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sectionTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 6,
+          "maxChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "dividerDark",
+          "sectionNumber": "01",
+          "sectionTitle": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Dark Divider",
+      "description": "Primary dark divider alias used by generator.",
+      "builder": "divider-dark.ts",
+      "masterVariant": "sectionDark",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      },
+      "slots": {
+        "sectionNumber": {
+          "kind": "text",
+          "required": true,
+          "minChars": 2,
+          "maxChars": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "label",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sectionTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 6,
+          "maxChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "divider",
+          "sectionNumber": "01",
+          "sectionTitle": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "dividerLight",
+      "name": "Light Divider",
+      "description": "Light section divider variant for white-background section transitions.",
+      "builder": "divider-light.ts",
+      "masterVariant": "sectionLight",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      },
+      "slots": {
+        "sectionNumber": {
+          "kind": "text",
+          "required": true,
+          "minChars": 2,
+          "maxChars": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "label",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sectionTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 6,
+          "maxChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "dividerLight",
+          "sectionNumber": "01",
+          "sectionTitle": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "summaryFinancials",
+      "name": "Summary Financials",
+      "description": "Summary financials scaffold with top and bottom panel placeholders.",
+      "builder": "summary-financials.ts",
+      "masterVariant": "summary",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.5
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 90,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sectionsTop": {
+          "kind": "stringArray",
+          "required": false,
+          "minItems": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "list",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "sectionsBottom": {
+          "kind": "stringArray",
+          "required": false,
+          "minItems": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "list",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "source": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "summaryFinancials",
+          "title": "Sample text",
+          "sectionsTop": [
+            "Quality of earnings",
+            "Net working capital",
+            "Net debt"
+          ],
+          "sectionsBottom": [
+            "Cash conversion",
+            "Other value bridge"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "analysisWideChart2ColsText",
+      "name": "Analysis Wide Chart Two Columns",
+      "description": "Narrative analysis slide with chart and two text columns.",
+      "builder": "analysis-wide-chart-two-columns.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      },
+      "slots": {
+        "body": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 4,
+          "minChars": 180,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "chart": {
+          "kind": "chart",
+          "required": true,
+          "minItems": 1,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "chart",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "analysisWideChart2ColsText",
+          "body": [
+            "First point",
+            "Second point"
+          ],
+          "chart": {
+            "type": "bar",
+            "data": [
+              {
+                "name": "Series 1",
+                "labels": [
+                  "Q1",
+                  "Q2",
+                  "Q3"
+                ],
+                "values": [
+                  10,
+                  20,
+                  30
+                ]
+              }
+            ]
+          },
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "analysisWideChartTableText",
+      "name": "Analysis Wide Chart Table Text",
+      "description": "Narrative analysis slide with chart plus text/table context.",
+      "builder": "analysis-wide-chart-table-text.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      },
+      "slots": {
+        "body": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 4,
+          "minChars": 180,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "chart": {
+          "kind": "chart",
+          "required": true,
+          "minItems": 1,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "chart",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "analysisWideChartTableText",
+          "body": [
+            "First point",
+            "Second point"
+          ],
+          "chart": {
+            "type": "bar",
+            "data": [
+              {
+                "name": "Series 1",
+                "labels": [
+                  "Q1",
+                  "Q2",
+                  "Q3"
+                ],
+                "values": [
+                  10,
+                  20,
+                  30
+                ]
+              }
+            ]
+          },
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "analysisNarrowTable",
+      "name": "Analysis Narrow Table",
+      "description": "Narrow table on left with commentary notes and strapline.",
+      "builder": "analysis-narrow-table.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.72
+      },
+      "slots": {
+        "notes": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "table": {
+          "kind": "table",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "table",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "analysisNarrowTable",
+          "table": {
+            "headers": [
+              "Metric",
+              "FY23",
+              "FY24"
+            ],
+            "rows": [
+              [
+                "Revenue",
+                100,
+                120
+              ],
+              [
+                "EBITDA",
+                20,
+                25
+              ],
+              [
+                "Margin",
+                "20%",
+                "21%"
+              ]
+            ]
+          },
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "twoColumnText",
+      "name": "Two Column Text",
+      "description": "Balanced two-column body text with title and optional strapline.",
+      "builder": "two-column-text.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.72
+      },
+      "slots": {
+        "leftBody": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 2,
+          "minChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "rightBody": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 2,
+          "minChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "twoColumnText",
+          "leftBody": [
+            "First point",
+            "Second point"
+          ],
+          "rightBody": [
+            "First point",
+            "Second point"
+          ],
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "analysis2ColumnsText",
+      "name": "Analysis Two Columns Text",
+      "description": "Analysis version of two-column text layout.",
+      "builder": "analysis-two-columns-text.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.72
+      },
+      "slots": {
+        "leftBody": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 2,
+          "minChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "rightBody": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 2,
+          "minChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "analysis2ColumnsText",
+          "leftBody": [
+            "First point",
+            "Second point"
+          ],
+          "rightBody": [
+            "First point",
+            "Second point"
+          ],
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "oneColumnText",
+      "name": "One Column Text",
+      "description": "Single-column narrative text slide with optional strapline.",
+      "builder": "one-column-text.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.72
+      },
+      "slots": {
+        "body": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "minChars": 180,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "oneColumnText",
+          "body": [
+            "First point",
+            "Second point"
+          ],
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "titleStrapline4TextBoxes",
+      "name": "Title Strapline Four Text Boxes",
+      "description": "Title + strapline with four equal text boxes.",
+      "builder": "title-strapline-four-text-boxes.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 4,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "columns",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "titleStrapline4TextBoxes",
+          "columns": [
+            {
+              "heading": "Column 1",
+              "body": [
+                "Point 1",
+                "Point 2"
+              ]
+            },
+            {
+              "heading": "Column 2",
+              "body": [
+                "Point 1",
+                "Point 2"
+              ]
+            },
+            {
+              "heading": "Column 3",
+              "body": [
+                "Point 1",
+                "Point 2"
+              ]
+            },
+            {
+              "heading": "Column 4",
+              "body": [
+                "Point 1",
+                "Point 2"
+              ]
+            }
+          ],
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "qualityOfEarnings",
+      "name": "Quality of Earnings",
+      "description": "QoE scaffold with default large content block and optional narrative.",
+      "builder": "quality-of-earnings.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.55
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "body": {
+          "kind": "textArray",
+          "required": false,
+          "minItems": 1,
+          "minChars": 50,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
+        "source": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "qualityOfEarnings",
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "summaryFinancialsScaffold",
+      "name": "Summary Financials Scaffold",
+      "description": "Scaffold preview with top and bottom section cards.",
+      "builder": "summary-financials-scaffold.ts",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.5
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 90,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sectionsTop": {
+          "kind": "stringArray",
+          "required": false,
+          "minItems": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "list",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "sectionsBottom": {
+          "kind": "stringArray",
+          "required": false,
+          "minItems": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "list",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "source": {
+          "kind": "text",
+          "required": false,
+          "minChars": 12,
+          "maxChars": 700,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "summaryFinancialsScaffold",
+          "title": "Sample text"
+        }
+      ]
+    },
+    {
+      "type": "backCover",
+      "name": "Back Cover",
+      "description": "Closing gradient slide with disclaimer and URL.",
+      "builder": "back-cover.ts",
+      "masterVariant": "closing",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0
+      },
+      "slots": {
+        "disclaimer": {
+          "kind": "text",
+          "required": false,
+          "minChars": 80,
+          "maxChars": 700,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "paragraph",
+            "keepTogether": true,
+            "priority": "low"
+          }
+        },
+        "url": {
+          "kind": "text",
+          "required": false,
+          "minChars": 5,
+          "maxChars": 60,
+          "allowEmpty": true,
+          "renderingHints": {
+            "mode": "label",
+            "keepTogether": true,
+            "priority": "low"
+          }
+        }
+      },
+      "examples": [
+        {
+          "type": "backCover"
+        }
+      ]
+    }
+  ]
+}

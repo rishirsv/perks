@@ -11,15 +11,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import PptxGenJS from 'pptxgenjs';
 
-import { addCover } from '../../generator/builders/cover.js';
-import { addDivider } from '../../generator/builders/divider.js';
-import { addTwoColumnTextWithStrapline } from '../../generator/builders/two-column.js';
-import { addAnalysisNarrowTable } from '../../generator/builders/table.js';
-import { addAnalysisWideChart2ColsText, addAnalysisWideChartTableText } from '../../generator/builders/text-chart.js';
-import { addSummaryFinancials } from '../../generator/builders/summary.js';
-import { addTitleStrapline4TextBoxes } from '../../generator/builders/process.js';
-import { addBackCover } from '../../generator/builders/back-cover.js';
-import { addOneColumnText } from '../../generator/builders/one-column.js';
+import { addCover } from '../../generator/builders/cover-slide.js';
+import { addDivider } from '../../generator/builders/divider-slide.js';
+import { addTwoColumnTextWithStrapline } from '../../generator/builders/two-column-text.js';
+import { addAnalysisNarrowTable } from '../../generator/builders/analysis-narrow-table.js';
+import { addAnalysisWideChart2ColsText, addAnalysisWideChartTableText } from '../../generator/builders/analysis-wide-chart-text.js';
+import { addSummaryFinancials } from '../../generator/builders/summary-financials.js';
+import { addTitleStrapline4TextBoxes } from '../../generator/builders/title-strapline-4-boxes.js';
+import { addBackCover } from '../../generator/builders/back-cover-slide.js';
+import { addOneColumnText } from '../../generator/builders/one-column-text.js';
 import { paginateDeckSpec } from '../../generator/runtime/paginate.js';
 import { svgToDataUri } from '../../generator/helpers/svg.js';
 

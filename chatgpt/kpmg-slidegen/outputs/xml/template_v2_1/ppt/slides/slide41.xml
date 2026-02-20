@@ -1,0 +1,2347 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:graphicFrame>
+        <p:nvGraphicFramePr>
+          <p:cNvPr id="12" name="Object 11" hidden="1">
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{20F78EF8-D89E-48B8-AF71-972207512D48}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvGraphicFramePr>
+            <a:graphicFrameLocks noChangeAspect="1"/>
+          </p:cNvGraphicFramePr>
+          <p:nvPr>
+            <p:custDataLst>
+              <p:tags r:id="rId1"/>
+            </p:custDataLst>
+            <p:extLst>
+              <p:ext uri="{D42A27DB-BD31-4B8C-83A1-F6EECF244321}">
+                <p14:modId xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main" val="2082351836"/>
+              </p:ext>
+            </p:extLst>
+          </p:nvPr>
+        </p:nvGraphicFramePr>
+        <p:xfrm>
+          <a:off x="1589" y="1589"/>
+          <a:ext cx="1588" cy="1588"/>
+        </p:xfrm>
+        <a:graphic>
+          <a:graphicData uri="http://schemas.openxmlformats.org/presentationml/2006/ole">
+            <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+              <mc:Choice xmlns:v="urn:schemas-microsoft-com:vml" Requires="v">
+                <p:oleObj name="think-cell Slide" r:id="rId3" imgW="395" imgH="394" progId="TCLayout.ActiveDocument.1">
+                  <p:embed/>
+                </p:oleObj>
+              </mc:Choice>
+              <mc:Fallback>
+                <p:oleObj name="think-cell Slide" r:id="rId3" imgW="395" imgH="394" progId="TCLayout.ActiveDocument.1">
+                  <p:embed/>
+                  <p:pic>
+                    <p:nvPicPr>
+                      <p:cNvPr id="12" name="Object 11" hidden="1">
+                        <a:extLst>
+                          <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                            <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{20F78EF8-D89E-48B8-AF71-972207512D48}"/>
+                          </a:ext>
+                        </a:extLst>
+                      </p:cNvPr>
+                      <p:cNvPicPr/>
+                      <p:nvPr/>
+                    </p:nvPicPr>
+                    <p:blipFill>
+                      <a:blip r:embed="rId4"/>
+                      <a:stretch>
+                        <a:fillRect/>
+                      </a:stretch>
+                    </p:blipFill>
+                    <p:spPr>
+                      <a:xfrm>
+                        <a:off x="1589" y="1589"/>
+                        <a:ext cx="1588" cy="1588"/>
+                      </a:xfrm>
+                      <a:prstGeom prst="rect">
+                        <a:avLst/>
+                      </a:prstGeom>
+                    </p:spPr>
+                  </p:pic>
+                </p:oleObj>
+              </mc:Fallback>
+            </mc:AlternateContent>
+          </a:graphicData>
+        </a:graphic>
+      </p:graphicFrame>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Title 1">
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{767CDDA0-48F4-4ED8-B64D-52043303CE32}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="title"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="1003200" y="432000"/>
+            <a:ext cx="10185600" cy="518400"/>
+          </a:xfrm>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr vert="horz"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:r>
+              <a:rPr lang="en-US"/>
+              <a:t>Important notice (1/2)</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:graphicFrame>
+        <p:nvGraphicFramePr>
+          <p:cNvPr id="4" name="Table 10">
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{EFBA4731-CE6C-ABD7-03FD-D3D90705E6A6}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvGraphicFramePr>
+            <a:graphicFrameLocks noGrp="1"/>
+          </p:cNvGraphicFramePr>
+          <p:nvPr>
+            <p:extLst>
+              <p:ext uri="{D42A27DB-BD31-4B8C-83A1-F6EECF244321}">
+                <p14:modId xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main" val="3165190284"/>
+              </p:ext>
+            </p:extLst>
+          </p:nvPr>
+        </p:nvGraphicFramePr>
+        <p:xfrm>
+          <a:off x="932737" y="142211"/>
+          <a:ext cx="9295208" cy="154623"/>
+        </p:xfrm>
+        <a:graphic>
+          <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table">
+            <a:tbl>
+              <a:tblPr firstRow="1" bandRow="1">
+                <a:tableStyleId>{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}</a:tableStyleId>
+              </a:tblPr>
+              <a:tblGrid>
+                <a:gridCol w="1254838">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="4194968147"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="1104900">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="3480804512"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="1083310">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="1508802548"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="952500">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="1380669789"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="777240">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="3717172380"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="693420">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="2348796435"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="954405">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="3209140028"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="936625">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="2651425576"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="630238">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="3903366463"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+                <a:gridCol w="907732">
+                  <a:extLst>
+                    <a:ext uri="{9D8B030D-6E8A-4147-A177-3AD203B41FA5}">
+                      <a16:colId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="3859409627"/>
+                    </a:ext>
+                  </a:extLst>
+                </a:gridCol>
+              </a:tblGrid>
+              <a:tr h="144000">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr marL="0" marR="0" lvl="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" fontAlgn="auto" latinLnBrk="0" hangingPunct="1">
+                        <a:lnSpc>
+                          <a:spcPct val="110000"/>
+                        </a:lnSpc>
+                        <a:spcBef>
+                          <a:spcPts val="0"/>
+                        </a:spcBef>
+                        <a:spcAft>
+                          <a:spcPts val="600"/>
+                        </a:spcAft>
+                        <a:buClrTx/>
+                        <a:buSzTx/>
+                        <a:buFontTx/>
+                        <a:buNone/>
+                        <a:tabLst/>
+                        <a:defRPr/>
+                      </a:pPr>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Executive summary</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="FFFFFF">
+                            <a:lumMod val="75000"/>
+                          </a:srgbClr>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Historical trading</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="FFFFFF">
+                            <a:lumMod val="75000"/>
+                          </a:srgbClr>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr marL="0" marR="0" lvl="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" fontAlgn="auto" latinLnBrk="0" hangingPunct="1">
+                        <a:lnSpc>
+                          <a:spcPct val="110000"/>
+                        </a:lnSpc>
+                        <a:spcBef>
+                          <a:spcPts val="0"/>
+                        </a:spcBef>
+                        <a:spcAft>
+                          <a:spcPts val="600"/>
+                        </a:spcAft>
+                        <a:buClrTx/>
+                        <a:buSzTx/>
+                        <a:buFontTx/>
+                        <a:buNone/>
+                        <a:tabLst/>
+                        <a:defRPr/>
+                      </a:pPr>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Forecast trading</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr marL="0" marR="0" lvl="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" fontAlgn="auto" latinLnBrk="0" hangingPunct="1">
+                        <a:lnSpc>
+                          <a:spcPct val="100000"/>
+                        </a:lnSpc>
+                        <a:spcBef>
+                          <a:spcPts val="0"/>
+                        </a:spcBef>
+                        <a:spcAft>
+                          <a:spcPts val="0"/>
+                        </a:spcAft>
+                        <a:buClrTx/>
+                        <a:buSzTx/>
+                        <a:buFontTx/>
+                        <a:buNone/>
+                        <a:tabLst/>
+                        <a:defRPr/>
+                      </a:pPr>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Balance sheet</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="FFFFFF">
+                            <a:lumMod val="75000"/>
+                          </a:srgbClr>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr marL="0" marR="0" lvl="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" fontAlgn="auto" latinLnBrk="0" hangingPunct="1">
+                        <a:lnSpc>
+                          <a:spcPct val="100000"/>
+                        </a:lnSpc>
+                        <a:spcBef>
+                          <a:spcPts val="0"/>
+                        </a:spcBef>
+                        <a:spcAft>
+                          <a:spcPts val="0"/>
+                        </a:spcAft>
+                        <a:buClrTx/>
+                        <a:buSzTx/>
+                        <a:buFontTx/>
+                        <a:buNone/>
+                        <a:tabLst/>
+                        <a:defRPr/>
+                      </a:pPr>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Cash flows</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Reporting</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="FFFFFF">
+                            <a:lumMod val="75000"/>
+                          </a:srgbClr>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Value creation</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="FFFFFF">
+                            <a:lumMod val="75000"/>
+                          </a:srgbClr>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Pre-Deal PPA</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="FFFFFF">
+                              <a:lumMod val="75000"/>
+                            </a:srgbClr>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Taxation</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="0" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="FFFFFF">
+                            <a:lumMod val="75000"/>
+                          </a:srgbClr>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:r>
+                        <a:rPr kumimoji="0" lang="en-US" sz="1000" b="1" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0" noProof="0">
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                          <a:solidFill>
+                            <a:srgbClr val="00338D"/>
+                          </a:solidFill>
+                          <a:effectLst/>
+                          <a:uLnTx/>
+                          <a:uFillTx/>
+                          <a:latin typeface="+mn-lt"/>
+                          <a:ea typeface="+mn-ea"/>
+                          <a:cs typeface="+mn-cs"/>
+                        </a:rPr>
+                        <a:t>Appendices</a:t>
+                      </a:r>
+                      <a:endParaRPr kumimoji="0" lang="en-US" sz="1000" b="1" i="0" u="none" strike="noStrike" kern="1200" cap="none" spc="0" normalizeH="0" baseline="0">
+                        <a:ln>
+                          <a:noFill/>
+                        </a:ln>
+                        <a:solidFill>
+                          <a:srgbClr val="00338D"/>
+                        </a:solidFill>
+                        <a:effectLst/>
+                        <a:uLnTx/>
+                        <a:uFillTx/>
+                        <a:latin typeface="+mn-lt"/>
+                        <a:ea typeface="+mn-ea"/>
+                        <a:cs typeface="+mn-cs"/>
+                      </a:endParaRPr>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr marL="72000" marR="72000" marT="0" marB="0">
+                    <a:lnL w="12700" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="BFBFBF"/>
+                      </a:solidFill>
+                      <a:prstDash val="solid"/>
+                      <a:round/>
+                      <a:headEnd type="none" w="med" len="med"/>
+                      <a:tailEnd type="none" w="med" len="med"/>
+                    </a:lnL>
+                    <a:lnR w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnR>
+                    <a:lnT w="12700" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnT>
+                    <a:lnB w="38100" cmpd="sng">
+                      <a:noFill/>
+                    </a:lnB>
+                    <a:lnTlToBr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnTlToBr>
+                    <a:lnBlToTr w="12700" cmpd="sng">
+                      <a:noFill/>
+                      <a:prstDash val="solid"/>
+                    </a:lnBlToTr>
+                    <a:noFill/>
+                  </a:tcPr>
+                </a:tc>
+                <a:extLst>
+                  <a:ext uri="{0D108BD9-81ED-4DB2-BD59-A6C34878D82A}">
+                    <a16:rowId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" val="4164010282"/>
+                  </a:ext>
+                </a:extLst>
+              </a:tr>
+            </a:tbl>
+          </a:graphicData>
+        </a:graphic>
+      </p:graphicFrame>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="5" name="Rectangle 4">
+            <a:hlinkClick r:id="rId5" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{544BB6B3-5A78-7A8F-D8D4-A984546F1746}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="9341324" y="140055"/>
+            <a:ext cx="792000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="6" name="Rectangle 5">
+            <a:hlinkClick r:id="rId6" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{22265DF3-B198-F24E-69C8-B45DC2466F4D}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="2199335" y="140055"/>
+            <a:ext cx="1080000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="7" name="Rectangle 6">
+            <a:hlinkClick r:id="rId7" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{F0CAFAF0-E30E-411B-E9D6-5192D3C54D2B}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="4394875" y="140055"/>
+            <a:ext cx="900000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="8" name="Rectangle 7">
+            <a:hlinkClick r:id="" action="ppaction://noaction"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{F837FBD2-44C7-858C-9A76-C212CD540DBF}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="7770170" y="140055"/>
+            <a:ext cx="900000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="22" name="Rectangle 21">
+            <a:hlinkClick r:id="rId8" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{F2577E1E-3D25-4797-F574-F54EFF433C23}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="5358436" y="140055"/>
+            <a:ext cx="720000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="23" name="Rectangle 22">
+            <a:hlinkClick r:id="rId9" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{61C80271-65F6-0281-8529-888C35D95112}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="983489" y="140055"/>
+            <a:ext cx="1188000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="24" name="Rectangle 23">
+            <a:hlinkClick r:id="rId10" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{F3BDB334-DA5B-AFB0-5AC6-304E716C4797}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="3305911" y="140055"/>
+            <a:ext cx="1044000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="25" name="Rectangle 24">
+            <a:hlinkClick r:id="rId11" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{C8DE3530-23BC-75AA-4023-B5E1F5DC00E2}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="6126735" y="140055"/>
+            <a:ext cx="648000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="26" name="Rectangle 25">
+            <a:hlinkClick r:id="" action="ppaction://noaction"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{56622718-ED88-5CEF-773D-B9CF77F187A7}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="6828337" y="140055"/>
+            <a:ext cx="900000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500" err="1">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="27" name="Rectangle 26">
+            <a:hlinkClick r:id="rId12" action="ppaction://hlinksldjump"/>
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{55101E8B-D3EF-38AA-412E-B455C31F8BD7}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="8720283" y="140055"/>
+            <a:ext cx="576000" cy="162000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="2">
+            <a:schemeClr val="accent1">
+              <a:shade val="50000"/>
+            </a:schemeClr>
+          </a:lnRef>
+          <a:fillRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr lIns="54611" tIns="54611" rIns="54611" bIns="54611" rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="l"/>
+            <a:endParaRPr lang="fi-FI" sz="1500">
+              <a:solidFill>
+                <a:schemeClr val="bg1"/>
+              </a:solidFill>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="13" name="Text Placeholder 8">
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{EBA2ECD1-B1EC-9D70-D6F9-2A125ED6F22E}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr txBox="1">
+            <a:spLocks/>
+          </p:cNvSpPr>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr bwMode="gray">
+          <a:xfrm>
+            <a:off x="1003199" y="1179513"/>
+            <a:ext cx="5023837" cy="4697414"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr vert="horz" lIns="0" tIns="0" rIns="0" bIns="0" rtlCol="0" anchor="t" anchorCtr="0">
+            <a:noAutofit/>
+          </a:bodyPr>
+          <a:lstStyle>
+            <a:lvl1pPr marL="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buFontTx/>
+              <a:buNone/>
+              <a:defRPr sz="1000" b="0" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl1pPr>
+            <a:lvl2pPr marL="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buFontTx/>
+              <a:buNone/>
+              <a:defRPr sz="1000" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl2pPr>
+            <a:lvl3pPr marL="180970" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClrTx/>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1000" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl3pPr>
+            <a:lvl4pPr marL="361942" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClrTx/>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="-"/>
+              <a:defRPr sz="1000" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl4pPr>
+            <a:lvl5pPr marL="542912" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClrTx/>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1000" kern="1200" baseline="0">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl5pPr>
+            <a:lvl6pPr marL="719121" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClr>
+                <a:schemeClr val="tx2"/>
+              </a:buClr>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="-"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl6pPr>
+            <a:lvl7pPr marL="896916" indent="-177796" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClr>
+                <a:schemeClr val="tx2"/>
+              </a:buClr>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl7pPr>
+            <a:lvl8pPr marL="1074712" indent="-177796" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClr>
+                <a:schemeClr val="tx2"/>
+              </a:buClr>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="-"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl8pPr>
+            <a:lvl9pPr marL="1257269" indent="-182558" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="90000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="500"/>
+              </a:spcBef>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl9pPr>
+          </a:lstStyle>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" b="1" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="1E49E2"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>General</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>Our report is for the benefit and information only of those parties who have accepted the terms and conditions of our Engagement Letter and should not be copied, referred to or disclosed, in whole or in part, without our prior written consent, except as specifically permitted in our Engagement Letter. To the fullest extent permitted by law, we will not accept responsibility or liability to any other party (including those parties&#8217; legal and other professional advisers) in respect of our work or the report.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>Our work commenced on [</a:t>
+            </a:r>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="FD349C"/>
+                </a:solidFill>
+                <a:highlight>
+                  <a:srgbClr val="FFFF00"/>
+                </a:highlight>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>date</a:t>
+            </a:r>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>] and our fieldwork for this report was completed on [</a:t>
+            </a:r>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="FD349C"/>
+                </a:solidFill>
+                <a:highlight>
+                  <a:srgbClr val="FFFF00"/>
+                </a:highlight>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>date</a:t>
+            </a:r>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>]. We have not undertaken to update our report for events or circumstances arising after that date.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>In preparing our report, our primary source has been Target&#8217;s internal management information and representations made to us by Management of Target. We do not accept responsibility for such information which remains the responsibility of Management. Details of our principal information sources are set out in the basis of preparation and we have satisfied ourselves, so far as possible, that the information presented in our report is consistent with other information that was made available to us in the course of our work in accordance with the terms of our Engagement Letter. We have not, however, sought to establish the reliability of the sources by reference to other evidence.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>This engagement is not an assurance engagement conducted in accordance with any generally accepted assurance standards and consequently no assurance opinion is expressed.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>The contents of this report have not been reviewed by the Management of Target and the factual accuracy of this report has not been confirmed by the Management./[</a:t>
+            </a:r>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="FF0000"/>
+                </a:solidFill>
+                <a:highlight>
+                  <a:srgbClr val="FFFF00"/>
+                </a:highlight>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>The contents of this report have been reviewed by the Management of Target and the factual accuracy of this report has been confirmed.</a:t>
+            </a:r>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>]</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>We accept no responsibility or liability for the findings or reports of legal and other professional advisers, even though we have referred to their findings and/or reports in our report.</a:t>
+            </a:r>
+            <a:endParaRPr lang="en-US" sz="800">
+              <a:solidFill>
+                <a:srgbClr val="00338D"/>
+              </a:solidFill>
+              <a:latin typeface="Arial"/>
+            </a:endParaRPr>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="14" name="Text Placeholder 9">
+            <a:extLst>
+              <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                <a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{B51DDC0E-B5EA-CEF5-7122-66C8ACBE4287}"/>
+              </a:ext>
+            </a:extLst>
+          </p:cNvPr>
+          <p:cNvSpPr txBox="1">
+            <a:spLocks/>
+          </p:cNvSpPr>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr bwMode="gray">
+          <a:xfrm>
+            <a:off x="6160242" y="1179513"/>
+            <a:ext cx="5028557" cy="4697414"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr vert="horz" lIns="0" tIns="0" rIns="0" bIns="0" rtlCol="0" anchor="t" anchorCtr="0">
+            <a:noAutofit/>
+          </a:bodyPr>
+          <a:lstStyle>
+            <a:lvl1pPr marL="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buFontTx/>
+              <a:buNone/>
+              <a:defRPr sz="1000" b="0" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl1pPr>
+            <a:lvl2pPr marL="0" indent="0" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buFontTx/>
+              <a:buNone/>
+              <a:defRPr sz="1000" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl2pPr>
+            <a:lvl3pPr marL="180970" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClrTx/>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1000" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl3pPr>
+            <a:lvl4pPr marL="361942" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClrTx/>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="-"/>
+              <a:defRPr sz="1000" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl4pPr>
+            <a:lvl5pPr marL="542912" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClrTx/>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1000" kern="1200" baseline="0">
+                <a:solidFill>
+                  <a:schemeClr val="tx1"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl5pPr>
+            <a:lvl6pPr marL="719121" indent="-180970" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClr>
+                <a:schemeClr val="tx2"/>
+              </a:buClr>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="-"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl6pPr>
+            <a:lvl7pPr marL="896916" indent="-177796" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClr>
+                <a:schemeClr val="tx2"/>
+              </a:buClr>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl7pPr>
+            <a:lvl8pPr marL="1074712" indent="-177796" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="100000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="0"/>
+              </a:spcBef>
+              <a:spcAft>
+                <a:spcPts val="600"/>
+              </a:spcAft>
+              <a:buClr>
+                <a:schemeClr val="tx2"/>
+              </a:buClr>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="-"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl8pPr>
+            <a:lvl9pPr marL="1257269" indent="-182558" algn="l" defTabSz="914377" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1">
+              <a:lnSpc>
+                <a:spcPct val="90000"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPts val="500"/>
+              </a:spcBef>
+              <a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>
+              <a:buChar char="&#8226;"/>
+              <a:defRPr sz="1500" kern="1200">
+                <a:solidFill>
+                  <a:schemeClr val="tx2"/>
+                </a:solidFill>
+                <a:latin typeface="+mn-lt"/>
+                <a:ea typeface="+mn-ea"/>
+                <a:cs typeface="+mn-cs"/>
+              </a:defRPr>
+            </a:lvl9pPr>
+          </a:lstStyle>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" b="1" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="1E49E2"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>KPMG approach</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>Our report makes reference to &#8216;KPMG Analysis&#8217;; this indicates only that we have (where specified) undertaken certain analytical activities on the underlying data to arrive at the information presented; we do not accept responsibility for the underlying data.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>The analysis of 'normalized'/'underlying&#8216; earnings and working capital is for indicative purposes only. We have sought to illustrate the effect on EBITDA/working capital of adjusting for those items identified in the course of our work that may be considered to be 'non-recurring' or 'exceptional' using criteria established by the Vendors/Target. However the selection and quantification of such adjustments are necessarily judgmental. Because there is no authoritative literature or common standard with respect to the calculation of 'normalized'/'underlying' earnings/working capital, there is no basis to state whether all appropriate and comparable adjustments have been made. In addition, while the adjustments may indeed relate to items which are 'non-recurring' or 'exceptional' or otherwise unrepresentative of the trend, it is possible that earnings/working capital for future periods may be affected by such items, which may be different from the historical items.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>The last twelve months/LTM run rate analysis has been prepared for illustrative purposes. There is no authoritative literature or common standard with respect to the calculation of 'run rate' EBITDA, and therefore there is no basis on which to state whether, in the illustrative analysis of 'run rate&#8216; EBITDA, all appropriate and comparable adjustments have been made. We have set out in our report the basis on which items have been included in or excluded from the run rate calculations for particular years. It is for you to satisfy yourselves as to whether the items included or excluded are appropriate for your purposes. The decision as to what items should be included in or excluded from the calculation of 'run rate' EBITDA is highly judgmental; you may choose to interpret the information presented differently.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="just">
+              <a:lnSpc>
+                <a:spcPts val="900"/>
+              </a:lnSpc>
+              <a:spcAft>
+                <a:spcPts val="300"/>
+              </a:spcAft>
+              <a:defRPr/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="800" spc="-20">
+                <a:solidFill>
+                  <a:srgbClr val="00338D"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>The prospective financial information set out within our report has been prepared by Target; we do not accept responsibility for such information. We must emphasize that the realization of the prospective financial information is dependent on the continuing validity of the assumptions on which it is based. The assumptions will need to be reviewed and revised to reflect any such changes in trading patterns, cost structures or the direction of the business as they emerge. We accept no responsibility for the realization of the prospective financial information. Actual results are likely to be different from those shown in the prospective financial information because events and circumstances frequently do not occur as expected, and the differences may be material.</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+    <p:extLst>
+      <p:ext uri="{BB962C8B-B14F-4D97-AF65-F5344CB8AC3E}">
+        <p14:creationId xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main" val="1704508770"/>
+      </p:ext>
+    </p:extLst>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>

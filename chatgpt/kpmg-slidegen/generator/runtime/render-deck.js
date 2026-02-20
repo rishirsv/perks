@@ -1,0 +1,1007 @@
+import PptxGenJS from 'pptxgenjs';
+
+import { addCover } from '../builders/cover-slide.js';
+import { addDivider } from '../builders/divider-slide.js';
+import { addTwoColumnTextWithStrapline } from '../builders/two-column-text.js';
+import { addAnalysisNarrowTable } from '../builders/analysis-narrow-table.js';
+import {
+  addAnalysisWideChart2ColsText,
+  addAnalysisWideChartTableText,
+} from '../builders/analysis-wide-chart-text.js';
+import { addSummaryFinancials, addSummaryFinancialsScaffold } from '../builders/summary-financials.js';
+import { addTitleStrapline4TextBoxes } from '../builders/title-strapline-4-boxes.js';
+import { addBackCover } from '../builders/back-cover-slide.js';
+import { addOneColumnText } from '../builders/one-column-text.js';
+import { addContentsSlide } from '../builders/contents-slide.js';
+import { addProfitLossOverview } from '../builders/profit-loss-overview.js';
+import { paginateDeckSpec } from './paginate.js';
+
+function deepClone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+const DENSITY_STATUS = Object.freeze({
+  ok: 'OK',
+  thin: 'thin but acceptable',
+  sparse: 'too sparse, should be repaired or flagged',
+});
+
+function isPlainObject(value) {
+  return Boolean(value && typeof value === 'object' && !Array.isArray(value));
+}
+
+function extractText(value) {
+  if (typeof value === 'string') return value.trim();
+  if (isPlainObject(value) && typeof value.text === 'string') return value.text.trim();
+  return '';
+}
+
+function isMissingSlotValue(value, def = {}) {
+  if (value === null || value === undefined) return true;
+  const kind = def?.kind;
+  if (kind === 'text') return extractText(value).length === 0;
+  if (kind === 'textArray' || kind === 'stringArray' || kind === 'kpiArray' || kind === 'columns' || kind === 'contentsSections') {
+    return !Array.isArray(value) || value.length === 0;
+  }
+  if (kind === 'table') return !isPlainObject(value) || !Array.isArray(value.rows) || value.rows.length === 0;
+  if (kind === 'chart') return !isPlainObject(value) || !Array.isArray(value.data) || value.data.length === 0;
+  if (Array.isArray(value)) return value.length === 0;
+  if (typeof value === 'string') return value.trim().length === 0;
+  return false;
+}
+
+function countCharacters(value, kind = 'text') {
+  if (kind === 'text') return extractText(value).length;
+  if (Array.isArray(value)) {
+    return value.map((v) => extractText(v)).join(' ').trim().length;
+  }
+  if (kind === 'table' && isPlainObject(value) && Array.isArray(value.rows)) {
+    const headers = Array.isArray(value.headers) ? value.headers.join(' ') : '';
+    const rows = value.rows
+      .map((row) => (Array.isArray(row) ? row.join(' ') : ''))
+      .join(' ');
+    return `${headers} ${rows}`.trim().length;
+  }
+  if (kind === 'chart' && isPlainObject(value) && Array.isArray(value.data)) {
+    return value.data
+      .map((series) =>
+        [
+          extractText(series?.name),
+          Array.isArray(series?.labels) ? series.labels.join(' ') : '',
+          Array.isArray(series?.values) ? series.values.join(' ') : '',
+        ].join(' '),
+      )
+      .join(' ')
+      .trim().length;
+  }
+  return 0;
+}
+
+function getSlotQuantity(def, value) {
+  const kind = def?.kind;
+  if (kind === 'text') return countCharacters(value, kind);
+  if (kind === 'textArray' || kind === 'stringArray' || kind === 'kpiArray' || kind === 'columns' || kind === 'contentsSections') {
+    return Array.isArray(value) ? value.length : 0;
+  }
+  if (kind === 'table') return Array.isArray(value?.rows) ? value.rows.length : 0;
+  if (kind === 'chart') return Array.isArray(value?.data) ? value.data.length : 0;
+  return isMissingSlotValue(value, def) ? 0 : 1;
+}
+
+function isCharDrivenSlot(def = {}) {
+  return def.kind === 'text' || def.kind === 'textArray' || def.kind === 'stringArray';
+}
+
+function suggestRemedy(def = {}, code) {
+  const kind = def?.kind;
+  if (kind === 'chart') {
+    return {
+      hook: 'insertPlaceholderChartCaption',
+      suggestedRemedy: 'Insert placeholder chart caption and add at least one chart data series.',
+    };
+  }
+  if (kind === 'table') {
+    return {
+      hook: 'addTableRows',
+      suggestedRemedy: 'Add table headers and rows; if content is large, split across two slides.',
+    };
+  }
+  if (kind === 'kpiArray') {
+    return { hook: 'addKpiItems', suggestedRemedy: 'Add KPI cards with value and label text.' };
+  }
+  if (kind === 'contentsSections') {
+    return {
+      hook: 'addContentsSections',
+      suggestedRemedy: 'Add section number, title, page range, and items for each contents block.',
+    };
+  }
+  if (kind === 'columns') {
+    return {
+      hook: 'addColumns',
+      suggestedRemedy: 'Add text to each column; keep each column balanced for readability.',
+    };
+  }
+  if (code === 'below_min_chars') {
+    return { hook: 'addBullets', suggestedRemedy: 'Add bullets or paragraph text to reach the minimum content density.' };
+  }
+  return { hook: 'addBullets', suggestedRemedy: 'Add bullets and supporting text to this slot.' };
+}
+
+function buildSlotIssue(slotName, def, code, message, severity, extra = {}) {
+  const remedy = suggestRemedy(def, code);
+  return {
+    slot: slotName,
+    kind: def?.kind || 'unknown',
+    code,
+    message,
+    severity,
+    hook: remedy.hook,
+    suggestedRemedy: remedy.suggestedRemedy,
+    ...extra,
+  };
+}
+
+function validateTypedSlotValue(slotName, def, value) {
+  const errors = [];
+  const warnings = [];
+  const kind = def?.kind;
+  const quantity = getSlotQuantity(def, value);
+  const charCount = countCharacters(value, kind);
+
+  const fail = (message) => errors.push(`${slotName} ${message}`);
+  const warn = (message) => warnings.push(`${slotName} ${message}`);
+
+  if (kind === 'text') {
+    if (typeof value !== 'string') fail('must be a string');
+    return { errors, warnings, quantity, charCount };
+  }
+
+  if (kind === 'textArray' || kind === 'stringArray') {
+    if (!Array.isArray(value)) {
+      fail('must be an array');
+      return { errors, warnings, quantity, charCount };
+    }
+    const blankEntries = value.filter((item) => extractText(item).length === 0).length;
+    if (blankEntries === value.length && value.length > 0) {
+      fail('array has no non-whitespace text items');
+    } else if (blankEntries > 0) {
+      warn(`contains ${blankEntries} empty text item(s)`);
+    }
+    return { errors, warnings, quantity, charCount };
+  }
+
+  if (kind === 'kpiArray') {
+    if (!Array.isArray(value)) {
+      fail('must be an array');
+      return { errors, warnings, quantity, charCount };
+    }
+    value.forEach((item, idx) => {
+      if (!isPlainObject(item)) {
+        fail(`contains non-object item at index ${idx}`);
+        return;
+      }
+      if (extractText(item.value).length === 0) warn(`item ${idx} missing KPI value`);
+      if (extractText(item.label).length === 0) warn(`item ${idx} missing KPI label`);
+    });
+    return { errors, warnings, quantity, charCount };
+  }
+
+  if (kind === 'columns') {
+    if (!Array.isArray(value)) {
+      fail('must be an array');
+      return { errors, warnings, quantity, charCount };
+    }
+    value.forEach((item, idx) => {
+      if (!isPlainObject(item)) {
+        fail(`contains non-object item at index ${idx}`);
+        return;
+      }
+      const heading = extractText(item.heading || item.title);
+      const body = Array.isArray(item.body) ? item.body : [];
+      if (!heading && body.length === 0) warn(`column ${idx} has no heading and no body items`);
+    });
+    return { errors, warnings, quantity, charCount };
+  }
+
+  if (kind === 'contentsSections') {
+    if (!Array.isArray(value)) {
+      fail('must be an array');
+      return { errors, warnings, quantity, charCount };
+    }
+    value.forEach((item, idx) => {
+      if (!isPlainObject(item)) {
+        fail(`contains non-object section at index ${idx}`);
+        return;
+      }
+      if (!extractText(item.number)) warn(`section ${idx} missing number`);
+      if (!extractText(item.title)) warn(`section ${idx} missing title`);
+      if (item.items !== undefined && !Array.isArray(item.items)) {
+        fail(`section ${idx} has non-array items`);
+      }
+    });
+    return { errors, warnings, quantity, charCount };
+  }
+
+  if (kind === 'table') {
+    if (!isPlainObject(value)) {
+      fail('must be an object');
+      return { errors, warnings, quantity, charCount };
+    }
+    if (!Array.isArray(value.headers)) fail('must include headers array');
+    if (!Array.isArray(value.rows)) fail('must include rows array');
+    if (Array.isArray(value.rows)) {
+      const invalidRows = value.rows.filter((row) => !Array.isArray(row)).length;
+      if (invalidRows > 0) fail(`contains ${invalidRows} non-array row(s)`);
+    }
+    return { errors, warnings, quantity, charCount };
+  }
+
+  if (kind === 'chart') {
+    if (!isPlainObject(value)) {
+      fail('must be an object');
+      return { errors, warnings, quantity, charCount };
+    }
+    if (!Array.isArray(value.data)) {
+      fail('must include data array');
+      return { errors, warnings, quantity, charCount };
+    }
+    value.data.forEach((series, idx) => {
+      if (!isPlainObject(series)) {
+        fail(`series ${idx} must be an object`);
+        return;
+      }
+      if (!Array.isArray(series.values) || series.values.length === 0) {
+        fail(`series ${idx} must include values array`);
+      }
+    });
+    return { errors, warnings, quantity, charCount };
+  }
+
+  return { errors, warnings, quantity, charCount };
+}
+
+function slotValidationResult(
+  slotName,
+  def,
+  value,
+  { allowSparse = false, hasValue = false, enforceMinimums = true } = {},
+) {
+  const errors = [];
+  const warnings = [];
+  const slotIssues = [];
+  const missing = isMissingSlotValue(value, def);
+  const priority = def?.renderingHints?.priority || 'medium';
+  const shouldWarnOnly = allowSparse || priority === 'low';
+  const addIssue = (code, message, severity, extra = {}) => {
+    slotIssues.push(buildSlotIssue(slotName, def, code, message, severity, extra));
+  };
+
+  if (def.required && missing) {
+    const message = `Missing required: ${slotName}`;
+    errors.push(message);
+    addIssue('missing_required', message, 'error');
+    return { errors, warnings, missingRequired: true, quantity: 0, charCount: 0, slotIssues };
+  }
+  if (missing) {
+    if (hasValue && def.allowEmpty === false) {
+      const message = `Slot "${slotName}" may not be empty`;
+      const severity = shouldWarnOnly ? 'warning' : 'error';
+      (severity === 'warning' ? warnings : errors).push(message);
+      addIssue('empty_not_allowed', message, severity);
+    }
+    return { errors, warnings, missingRequired: false, quantity: 0, charCount: 0, slotIssues };
+  }
+
+  const typed = validateTypedSlotValue(slotName, def, value);
+  for (const e of typed.errors) {
+    errors.push(e);
+    addIssue('type_mismatch', e, 'error');
+  }
+  for (const w of typed.warnings) warnings.push(w);
+
+  if (typeof value === 'string') {
+    const maxChars = def.maxChars || def.maxLength;
+    if (maxChars && value.length > maxChars) {
+      warnings.push(`${slotName} exceeds maxChars (${maxChars}), may shrink to fit`);
+    }
+    if (def.pattern && !(new RegExp(def.pattern).test(value))) {
+      const message = `${slotName} doesn't match pattern: ${def.pattern}`;
+      errors.push(message);
+      addIssue('pattern_mismatch', message, 'error');
+    }
+  }
+
+  const quantity = typed.quantity;
+  const charCount = typed.charCount;
+  if (enforceMinimums && def.minItems && quantity < def.minItems) {
+    const message = `${slotName} requires at least ${def.minItems} item(s)`;
+    const severity = shouldWarnOnly ? 'warning' : 'error';
+    (severity === 'warning' ? warnings : errors).push(message);
+    addIssue('below_min_items', message, severity, { actual: quantity, target: def.minItems });
+  }
+
+  if (enforceMinimums && def.minChars && charCount < def.minChars) {
+    const message = `${slotName} below minChars (${def.minChars})`;
+    const severity = shouldWarnOnly ? 'warning' : 'error';
+    (severity === 'warning' ? warnings : errors).push(message);
+    addIssue('below_min_chars', message, severity, { actual: charCount, target: def.minChars });
+  }
+
+  return { errors, warnings, missingRequired: false, quantity, charCount, slotIssues };
+}
+
+function computeDensity(layout, slotMetrics = []) {
+  const densityTarget = layout?.densityTarget || {};
+  const minScore = Number(densityTarget.minScore || 0);
+  if (minScore <= 0) {
+    return {
+      minScore,
+      score: 1,
+      acceptableFloor: 1,
+      status: DENSITY_STATUS.ok,
+      thin: false,
+      tooSparse: false,
+      shouldRepair: false,
+    };
+  }
+
+  let weightedActual = 0;
+  let weightedTarget = 0;
+  for (const m of slotMetrics) {
+    const priority = m?.priority || 'medium';
+    const weight = priority === 'high' ? 1 : priority === 'low' ? 0.35 : 0.65;
+    const target = Number(m?.target || 0);
+    if (target <= 0) continue;
+    weightedTarget += target * weight;
+    weightedActual += Math.min(target, Number(m?.actual || 0)) * weight;
+  }
+
+  const score = weightedTarget > 0 ? weightedActual / weightedTarget : 1;
+  const acceptableFloor = Number(
+    densityTarget.acceptableFloor || Math.max(0.45, Number((minScore * 0.85).toFixed(3))),
+  );
+  const status =
+    score >= minScore
+      ? DENSITY_STATUS.ok
+      : score >= acceptableFloor
+        ? DENSITY_STATUS.thin
+        : DENSITY_STATUS.sparse;
+  return {
+    minScore,
+    score,
+    acceptableFloor,
+    status,
+    thin: status !== DENSITY_STATUS.ok,
+    tooSparse: status === DENSITY_STATUS.sparse,
+    shouldRepair: status === DENSITY_STATUS.sparse,
+  };
+}
+
+function dedupeRepairSuggestions(items = []) {
+  const seen = new Set();
+  const out = [];
+  for (const item of items) {
+    const key = `${item?.slot || ''}|${item?.hook || ''}|${item?.suggestedRemedy || ''}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+  }
+  return out;
+}
+
+function dedupeSlotIssueRows(items = []) {
+  const seen = new Set();
+  const out = [];
+  for (const item of items) {
+    const key = `${item?.slideIndex ?? ''}|${item?.slideType ?? ''}|${item?.slot ?? ''}|${item?.code ?? ''}|${item?.message ?? ''}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+  }
+  return out;
+}
+
+function normalizeSlideSpec(slideSpec) {
+  const s = deepClone(slideSpec || {});
+  if (s.type === 'qualityOfEarnings') {
+    if (!Array.isArray(s.body) || s.body.length === 0) {
+      s.body = ['Quality of earnings narrative placeholder.'];
+    }
+  }
+  if (s.type === 'contents' && !Array.isArray(s.sections)) {
+    s.sections = [];
+  }
+  if (s.type === 'analysisWideChartTableTextScaffold') {
+    if (!Array.isArray(s.body) || s.body.length === 0) {
+      s.body = ['Add text here'];
+    }
+  }
+  return s;
+}
+
+export function validateSlideContent(type, content, templatePackage, options = {}) {
+  const layout = templatePackage?.layouts?.types?.[type];
+  if (!layout) return { valid: false, errors: [`Unknown type: ${type}`], warnings: [] };
+
+  const allowSparse = Boolean(options.allowSparse);
+  const enforceMinimums = options.enforceDensity !== false;
+  const errors = [];
+  const warnings = [];
+  const slots = layout.slots || {};
+  const missingSlots = [];
+  const slotIssues = [];
+  const slotMetrics = [];
+
+  for (const [name, def] of Object.entries(slots)) {
+    const hasValue = Object.prototype.hasOwnProperty.call(content || {}, name);
+    const value = content?.[name];
+    const res = slotValidationResult(name, def, value, {
+      allowSparse,
+      hasValue,
+      enforceMinimums,
+    });
+    for (const e of res.errors) errors.push(e);
+    for (const w of res.warnings) warnings.push(w);
+    for (const issue of res.slotIssues || []) slotIssues.push(issue);
+    if (res.missingRequired) {
+      missingSlots.push(name);
+    }
+
+    const target = isCharDrivenSlot(def)
+      ? Number(def.minChars || 0)
+      : Number(def.minItems || 0);
+    const actual = isCharDrivenSlot(def) ? res.charCount : res.quantity;
+    const includeInDensity = def.required || hasValue;
+    slotMetrics.push({
+      slot: name,
+      kind: def.kind,
+      actual,
+      target: includeInDensity ? target : 0,
+      priority: def?.renderingHints?.priority || 'medium',
+    });
+  }
+
+  const density = computeDensity(layout, slotMetrics);
+  if (options.enforceDensity !== false && density.tooSparse) {
+    const message = `Slide content ${DENSITY_STATUS.sparse} (density ${density.score.toFixed(2)} < ${density.acceptableFloor.toFixed(2)})`;
+    (allowSparse ? warnings : errors).push(message);
+    slotIssues.push(
+      buildSlotIssue(
+        '_slide',
+        { kind: 'textArray' },
+        'density_too_sparse',
+        message,
+        allowSparse ? 'warning' : 'error',
+        { actual: Number(density.score.toFixed(3)), target: density.minScore },
+      ),
+    );
+  } else if (options.enforceDensity !== false && density.status === DENSITY_STATUS.thin) {
+    warnings.push(
+      `Slide content ${DENSITY_STATUS.thin} (density ${density.score.toFixed(2)} < ${density.minScore.toFixed(2)})`,
+    );
+  }
+
+  if (layout.templateLayout) {
+    const detected = templatePackage?.layouts?.detectedLayoutSlots?.[layout.templateLayout];
+    if (detected && detected.slotTypes) {
+      for (const [name, def] of Object.entries(slots)) {
+        if (def.kind === 'chart' && !detected.slotTypes.chart) {
+          warnings.push(
+            `Template layout "${layout.templateLayout}" has no chart placeholder; slot "${name}" may not render as intended`,
+          );
+        }
+      }
+    }
+  }
+
+  const repairSuggestions = dedupeRepairSuggestions(
+    slotIssues.map((issue) => ({
+      slot: issue.slot,
+      hook: issue.hook,
+      severity: issue.severity,
+      issueCode: issue.code,
+      suggestedRemedy: issue.suggestedRemedy,
+    })),
+  );
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+    qa: {
+      missingSlots,
+      slotIssues,
+      slotMetrics,
+      density,
+      repairSuggestions,
+    },
+  };
+}
+
+export function validateDeckSpecWithTemplate(deckSpec, templatePackage, options = {}) {
+  const errors = [];
+  const warnings = [];
+  const densityFindings = [];
+  const thinSlides = [];
+  const sparseSlides = [];
+  const missingSlots = [];
+  const slotIssues = [];
+  const slotMetrics = [];
+  const repairSuggestions = [];
+  const allowSparse = Boolean(options.allowSparse || deckSpec?.metadata?.allowSparse);
+
+  if (!deckSpec || typeof deckSpec !== 'object') {
+    return {
+      valid: false,
+      errors: ['Deck spec must be an object'],
+      warnings: [],
+      qa: {
+        densityFindings,
+        thinSlides,
+        sparseSlides,
+        missingSlots,
+        slotIssues,
+        slotMetrics,
+        repairSuggestions,
+      },
+    };
+  }
+  if (!Array.isArray(deckSpec.slides)) {
+    return {
+      valid: false,
+      errors: ['Deck spec missing `slides` array'],
+      warnings: [],
+      qa: {
+        densityFindings,
+        thinSlides,
+        sparseSlides,
+        missingSlots,
+        slotIssues,
+        slotMetrics,
+        repairSuggestions,
+      },
+    };
+  }
+
+  deckSpec.slides.forEach((rawSlideSpec, idx) => {
+    const slideSpec = normalizeSlideSpec(rawSlideSpec);
+    if (!slideSpec || typeof slideSpec !== 'object') {
+      errors.push(`slides[${idx}] must be an object`);
+      return;
+    }
+    if (!slideSpec.type || typeof slideSpec.type !== 'string') {
+      errors.push(`slides[${idx}] missing string 'type'`);
+      return;
+    }
+    const v = validateSlideContent(slideSpec.type, slideSpec, templatePackage, {
+      enforceDensity: true,
+      allowSparse,
+    });
+    if (!v.valid) {
+      for (const e of v.errors) errors.push(`slides[${idx}]: ${e}`);
+    }
+    for (const w of v.warnings || []) warnings.push(`slides[${idx}]: ${w}`);
+    for (const slot of v?.qa?.missingSlots || []) {
+      missingSlots.push({ slideIndex: idx, slideType: slideSpec.type, slot });
+    }
+    if (v?.qa?.density) {
+      const status = v.qa.density.status;
+      const finding = {
+        slideIndex: idx,
+        slideType: slideSpec.type,
+        status,
+        score: Number(v.qa.density.score.toFixed(3)),
+        minScore: v.qa.density.minScore,
+        acceptableFloor: v.qa.density.acceptableFloor,
+        shouldRepair: Boolean(v.qa.density.shouldRepair),
+      };
+      densityFindings.push(finding);
+      if (status === DENSITY_STATUS.thin) thinSlides.push(finding);
+      if (status === DENSITY_STATUS.sparse) sparseSlides.push(finding);
+    }
+    for (const issue of v?.qa?.slotIssues || []) {
+      slotIssues.push({
+        slideIndex: idx,
+        slideType: slideSpec.type,
+        slot: issue.slot,
+        kind: issue.kind,
+        code: issue.code,
+        message: issue.message,
+        severity: issue.severity,
+        actual: issue.actual ?? null,
+        target: issue.target ?? null,
+        hook: issue.hook,
+        suggestedRemedy: issue.suggestedRemedy,
+      });
+    }
+    for (const suggestion of v?.qa?.repairSuggestions || []) {
+      repairSuggestions.push({
+        slideIndex: idx,
+        slideType: slideSpec.type,
+        slot: suggestion.slot || null,
+        hook: suggestion.hook,
+        severity: suggestion.severity || 'warning',
+        issueCode: suggestion.issueCode || 'general',
+        suggestedRemedy: suggestion.suggestedRemedy,
+      });
+    }
+    for (const metric of v?.qa?.slotMetrics || []) {
+      slotMetrics.push({
+        slideIndex: idx,
+        slideType: slideSpec.type,
+        slot: metric.slot,
+        kind: metric.kind,
+        actual: Number(metric.actual || 0),
+        target: Number(metric.target || 0),
+        priority: metric.priority || 'medium',
+      });
+      if (metric.target > 0 && metric.actual < metric.target) {
+        const slotIssue = slotIssues.find(
+          (candidate) =>
+            candidate.slideIndex === idx &&
+            candidate.slideType === slideSpec.type &&
+            candidate.slot === metric.slot &&
+            candidate.code !== 'density_too_sparse',
+        );
+        if (!slotIssue) {
+          slotIssues.push({
+            slideIndex: idx,
+            slideType: slideSpec.type,
+            slot: metric.slot,
+            kind: metric.kind,
+            code: 'below_target',
+            message: `${metric.slot} is below density target (${metric.actual} < ${metric.target})`,
+            severity: 'warning',
+            actual: metric.actual,
+            target: metric.target,
+            hook: suggestRemedy({ kind: metric.kind }, 'below_min_chars').hook,
+            suggestedRemedy: suggestRemedy({ kind: metric.kind }, 'below_min_chars').suggestedRemedy,
+          });
+        }
+      }
+    }
+  });
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+    qa: {
+      densityFindings,
+      thinSlides,
+      sparseSlides,
+      missingSlots,
+      slotIssues: dedupeSlotIssueRows(slotIssues),
+      slotMetrics,
+      repairSuggestions: dedupeRepairSuggestions(repairSuggestions),
+    },
+  };
+}
+
+function addMasterOverlayObjects(templatePackage, variantConfig) {
+  const objects = [];
+  for (const overlay of variantConfig?.overlays || []) {
+    const imagePath = templatePackage.resolveAssetPath(overlay.assetKey);
+    if (!imagePath) continue;
+    objects.push({ image: { path: imagePath, x: overlay.x, y: overlay.y, w: overlay.w, h: overlay.h } });
+  }
+  return objects;
+}
+
+function addFooterChromeObjects(templatePackage, footerChrome) {
+  const objects = [];
+  const logoPath = templatePackage.resolveAssetPath('logoSvg');
+  if (logoPath && footerChrome?.logo) {
+    objects.push({ image: { path: logoPath, ...footerChrome.logo } });
+  }
+  if (footerChrome?.legalText) {
+    objects.push({
+      text: {
+        text: footerChrome.legalText.text,
+        options: {
+          x: footerChrome.legalText.x,
+          y: footerChrome.legalText.y,
+          w: footerChrome.legalText.w,
+          h: footerChrome.legalText.h,
+          fontFace: footerChrome.legalText.fontFace,
+          fontSize: footerChrome.legalText.fontSize,
+          color: footerChrome.legalText.color,
+          valign: 'mid',
+        },
+      },
+    });
+  }
+  if (footerChrome?.officeContactText?.text) {
+    objects.push({
+      text: {
+        text: footerChrome.officeContactText.text,
+        options: {
+          x: footerChrome.officeContactText.x,
+          y: footerChrome.officeContactText.y,
+          w: footerChrome.officeContactText.w,
+          h: footerChrome.officeContactText.h,
+          fontFace: footerChrome.officeContactText.fontFace,
+          fontSize: footerChrome.officeContactText.fontSize,
+          color: footerChrome.officeContactText.color,
+          align: footerChrome.officeContactText.align || 'left',
+          valign: 'mid',
+        },
+      },
+    });
+  }
+  if (footerChrome?.classificationText) {
+    objects.push({
+      text: {
+        text: footerChrome.classificationText.text,
+        options: {
+          x: footerChrome.classificationText.x,
+          y: footerChrome.classificationText.y,
+          w: footerChrome.classificationText.w,
+          h: footerChrome.classificationText.h,
+          fontFace: footerChrome.classificationText.fontFace,
+          fontSize: footerChrome.classificationText.fontSize,
+          color: footerChrome.classificationText.color,
+          align: footerChrome.classificationText.align || 'right',
+          valign: 'mid',
+        },
+      },
+    });
+  }
+  if (footerChrome?.separatorLine) {
+    objects.push({
+      line: {
+        x: footerChrome.separatorLine.x,
+        y: footerChrome.separatorLine.y,
+        w: footerChrome.separatorLine.w,
+        h: footerChrome.separatorLine.h,
+        line: footerChrome.separatorLine.line,
+      },
+    });
+  }
+  return objects;
+}
+
+function defineMasters(pptx, templatePackage) {
+  const masters = templatePackage.layouts?.masters || {};
+  const variants = masters.variants || {};
+  const footerChrome = masters.footerChrome || null;
+
+  for (const variantConfig of Object.values(variants)) {
+    const objects = [
+      ...addMasterOverlayObjects(templatePackage, variantConfig),
+      ...(variantConfig.includeFooter ? addFooterChromeObjects(templatePackage, footerChrome) : []),
+    ];
+
+    pptx.defineSlideMaster({
+      title: variantConfig.masterName,
+      background: { color: variantConfig.backgroundColor || 'FFFFFF' },
+      ...(objects.length ? { objects } : {}),
+    });
+  }
+}
+
+function getMasterNameForSlide(slideSpec, templatePackage) {
+  const variants = templatePackage.layouts?.masters?.variants || {};
+  if (slideSpec.type === 'cover') return variants.cover?.masterName || 'KPMG_COVER';
+  if (slideSpec.type === 'backCover') return variants.closing?.masterName || 'KPMG_CLOSING';
+  if (slideSpec.type === 'summaryFinancials') return variants.summary?.masterName || 'KPMG_SUMMARY';
+  if (slideSpec.type === 'dividerLight') return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
+  if (slideSpec.type === 'dividerDark' || slideSpec.type === 'divider') {
+    if (slideSpec.variant === 'light') return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
+    return variants.sectionDark?.masterName || 'KPMG_SECTION_DARK';
+  }
+  return variants.white?.masterName || 'KPMG_WHITE';
+}
+
+function getVariantByMasterName(templatePackage, masterName) {
+  const variants = templatePackage.layouts?.masters?.variants || {};
+  return Object.values(variants).find((v) => v?.masterName === masterName) || null;
+}
+
+function shouldRenderLogicalPageNumber(slideSpec, templatePackage) {
+  const excluded = new Set(['cover', 'backCover', 'divider', 'dividerDark', 'dividerLight']);
+  if (excluded.has(slideSpec?.type)) return false;
+  const masterName = getMasterNameForSlide(slideSpec, templatePackage);
+  const variant = getVariantByMasterName(templatePackage, masterName);
+  return Boolean(variant?.includeFooter);
+}
+
+function addLogicalPageNumber(slide, templatePackage, pageNumber) {
+  const page = templatePackage.layouts?.masters?.footerChrome?.slideNumber;
+  if (!slide || !page || !Number.isFinite(pageNumber) || pageNumber <= 0) return;
+  slide.addText(String(pageNumber), {
+    x: page.x,
+    y: page.y,
+    w: page.w,
+    h: page.h,
+    fontFace: page.fontFace,
+    fontSize: page.fontSize,
+    color: page.color,
+    align: page.align || 'right',
+    valign: 'mid',
+    margin: 0,
+  });
+}
+
+function buildSlide(pptx, rawSlideSpec, templatePackage) {
+  const slideSpec = normalizeSlideSpec(rawSlideSpec);
+  const masterName = getMasterNameForSlide(slideSpec, templatePackage);
+  const layouts = templatePackage.layouts?.types || {};
+  const layout = layouts[slideSpec.type] || null;
+  const geometry = layout?.geometry || null;
+
+  if (slideSpec.type === 'cover') {
+    return addCover(pptx, {
+      title: slideSpec.title,
+      subtitle: slideSpec.subtitle,
+      masterName,
+      geometry,
+      assets: {
+        logoWhite: templatePackage.resolveAssetPath('logoWhitePng') || templatePackage.resolveAssetPath('logoWhiteSvg'),
+        coverPhoto: templatePackage.resolveAssetPath('coverPhoto'),
+      },
+    });
+  }
+  if (slideSpec.type === 'divider' || slideSpec.type === 'dividerDark' || slideSpec.type === 'dividerLight') {
+    return addDivider(pptx, {
+      sectionNumber: slideSpec.sectionNumber,
+      sectionTitle: slideSpec.sectionTitle,
+      masterName,
+      geometry,
+      assets: { gradientDivider: templatePackage.resolveAssetPath('gradientDividerWindow') },
+      textStyles:
+        slideSpec.type === 'dividerLight' || slideSpec.variant === 'light'
+          ? { sectionNumber: { color: '00338D' }, sectionTitle: { color: '00338D' } }
+          : null,
+    });
+  }
+  if (slideSpec.type === 'contents') {
+    return addContentsSlide(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'twoColumnText' || slideSpec.type === 'analysis2ColumnsText') {
+    return addTwoColumnTextWithStrapline(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'oneColumnText' || slideSpec.type === 'qualityOfEarnings') {
+    const slide = addOneColumnText(pptx, { ...slideSpec, masterName, geometry });
+    if (slideSpec.type === 'qualityOfEarnings' && geometry?.scaffoldLargeTextBox) {
+      slide.addShape(pptx.ShapeType.rect, {
+        ...geometry.scaffoldLargeTextBox,
+        line: { color: '00338D', pt: 1 },
+        fill: { color: 'A5C7E5', transparency: 0 },
+      });
+    }
+    return slide;
+  }
+  if (slideSpec.type === 'analysisNarrowTable') {
+    return addAnalysisNarrowTable(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'analysisWideChart2ColsText') {
+    return addAnalysisWideChart2ColsText(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'analysisWideChartTableText') {
+    return addAnalysisWideChartTableText(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'summaryFinancials') {
+    return addSummaryFinancials(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'analysisWideChartTableTextScaffold') {
+    return addProfitLossOverview(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'summaryFinancialsScaffold') {
+    return addSummaryFinancialsScaffold(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'titleStrapline4TextBoxes') {
+    return addTitleStrapline4TextBoxes(pptx, { ...slideSpec, masterName, geometry });
+  }
+  if (slideSpec.type === 'backCover') {
+    return addBackCover(pptx, {
+      ...slideSpec,
+      masterName,
+      geometry,
+      assets: { gradientBackCover: templatePackage.resolveAssetPath('gradientBackCover') },
+    });
+  }
+  throw new Error(`Unknown type: ${slideSpec.type}`);
+}
+
+export function renderDeck(deckSpec, templatePackage, options = {}) {
+  const allowSparse = Boolean(options.allowSparse || deckSpec?.metadata?.allowSparse);
+  const validation = validateDeckSpecWithTemplate(deckSpec, templatePackage, {
+    allowSparse,
+  });
+  if (!validation.valid) {
+    throw new Error(validation.errors.join('\n'));
+  }
+
+  const pptx = new PptxGenJS();
+  const dims = templatePackage.tokens?.dimensions || { w: 13.333, h: 7.5 };
+  pptx.defineLayout({ name: 'KPMG_WIDE', width: dims.w, height: dims.h });
+  pptx.layout = 'KPMG_WIDE';
+
+  if (deckSpec.metadata) {
+    if (deckSpec.metadata.author) pptx.author = deckSpec.metadata.author;
+    if (deckSpec.metadata.company) pptx.company = deckSpec.metadata.company;
+    if (deckSpec.metadata.title) pptx.title = deckSpec.metadata.title;
+    if (deckSpec.metadata.subject) pptx.subject = deckSpec.metadata.subject;
+  }
+
+  const headFontFace = templatePackage.tokens?.fonts?.heading || 'Arial';
+  const bodyFontFace = templatePackage.tokens?.fonts?.body || 'Arial';
+  pptx.theme = { headFontFace, bodyFontFace };
+
+  defineMasters(pptx, templatePackage);
+
+  const normalized = {
+    ...deckSpec,
+    slides: (deckSpec.slides || []).map(normalizeSlideSpec),
+  };
+  const paginated = paginateDeckSpec(normalized, templatePackage.layouts?.types || {});
+  const paginationDecisions = paginated?.paginationDecisions || [];
+  const overflowEvents = paginated?.overflowEvents || [];
+  const pagination = paginationDecisions.map((event) => ({ ...event }));
+  const overflowRisks = overflowEvents
+    .filter((event) => Number(event?.splitInto || 0) > 1)
+    .map((event) => ({
+      slideIndex: event.slideIndex,
+      slideType: event.slideType,
+      mode: event.mode,
+      splitInto: event.splitInto,
+      severity: Number(event.splitInto) >= 3 ? 'warning' : 'info',
+      reason: 'auto_split',
+      suggestedRemedy: `Slide was auto-split into ${event.splitInto} pages; keep split or tighten content.`,
+    }));
+  const masterApplied = [];
+  let logicalPageNumber = 0;
+  for (const slideSpec of paginated?.slides || []) {
+    const v = validateSlideContent(slideSpec.type, slideSpec, templatePackage, {
+      enforceDensity: false,
+      allowSparse,
+    });
+    if (!v.valid) throw new Error(v.errors.join(', '));
+
+    if ((slideSpec.type === 'divider' || slideSpec.type === 'dividerDark' || slideSpec.type === 'dividerLight') && slideSpec.sectionTitle) {
+      pptx.addSection({ title: slideSpec.sectionTitle });
+    }
+
+    const expectedMaster = getMasterNameForSlide(slideSpec, templatePackage);
+    const slide = buildSlide(pptx, slideSpec, templatePackage);
+    const appliedMaster = slide?._slideLayout?._name || slide?._name || expectedMaster;
+    masterApplied.push({
+      slideIndex: masterApplied.length,
+      slideType: slideSpec.type,
+      expectedMaster,
+      appliedMaster,
+      matched: expectedMaster === appliedMaster,
+    });
+    if (shouldRenderLogicalPageNumber(slideSpec, templatePackage)) {
+      logicalPageNumber += 1;
+      addLogicalPageNumber(slide, templatePackage, logicalPageNumber);
+    }
+    if (slideSpec.notes && slide) slide.addNotes(slideSpec.notes);
+  }
+  const masterMismatches = masterApplied.filter((item) => !item.matched);
+  if (masterMismatches.length > 0 && options.failOnMasterMismatch !== false) {
+    const details = masterMismatches
+      .map((item) => `slides[${item.slideIndex}] ${item.slideType}: expected ${item.expectedMaster}, got ${item.appliedMaster}`)
+      .join('; ');
+    throw new Error(`Master mismatch detected: ${details}`);
+  }
+  return {
+    pptx,
+    warnings: validation.warnings || [],
+    qa: {
+      pagination,
+      paginationDecisions,
+      overflowEvents,
+      overflowRisks,
+      masterApplied,
+      densityFindings: validation?.qa?.densityFindings || [],
+      thinSlides: validation?.qa?.thinSlides || [],
+      sparseSlides: validation?.qa?.sparseSlides || [],
+      missingSlots: validation?.qa?.missingSlots || [],
+      slotIssues: validation?.qa?.slotIssues || [],
+      slotMetrics: validation?.qa?.slotMetrics || [],
+      repairSuggestions: validation?.qa?.repairSuggestions || [],
+    },
+  };
+}

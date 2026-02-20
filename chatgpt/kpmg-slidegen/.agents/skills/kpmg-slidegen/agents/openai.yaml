@@ -1,0 +1,3 @@
+display_name: KPMG SlideGen
+short_description: Deterministic Diligence+ deck orchestration with strict contracts and QA repair loops
+default_prompt: Build a schema-valid contentPack, deckPlan, and deckSpec from source docs; render, inspect qaReport, and repair until missing/sparse/master issues are resolved or explicitly accepted.

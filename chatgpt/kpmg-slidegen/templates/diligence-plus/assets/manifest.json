@@ -1,0 +1,13 @@
+{
+  "template": "diligence-plus",
+  "status": "scaffold",
+  "notes": "Path-only asset manifest. Replace paths if canonical template locations move.",
+  "items": {
+    "kpmgLogo": "../../kpmg-diligence/assets/kpmg-logo.svg",
+    "kpmgLogoWhite": "../../kpmg-diligence/assets/kpmg-logo-white.svg",
+    "coverPhoto": "../../kpmg-diligence/assets/cover-photo.jpeg",
+    "gradientAccentChip": "../../kpmg-diligence/assets/gradient_accent_chip_300dpi.png",
+    "gradientBackCover": "../../kpmg-diligence/assets/gradient_back_cover_300dpi.png",
+    "gradientDividerWindow": "../../kpmg-diligence/assets/gradient_divider_window_300dpi.png"
+  }
+}

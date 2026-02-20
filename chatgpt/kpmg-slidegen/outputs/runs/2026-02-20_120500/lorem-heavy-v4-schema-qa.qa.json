@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-02-20T00:49:53.146Z",
+  "template": "kpmg-diligence",
+  "valid": true,
+  "errors": [],
+  "warnings": [
+    "slides[4]: Template layout \"Summary financials_3\" has no chart placeholder; slot \"chart\" may not render as intended",
+    "slides[13]: strapline exceeds maxChars (700), may shrink to fit",
+    "slides[15]: disclaimer below minChars (80)",
+    "slides[4]: Template layout \"Summary financials_3\" has no chart placeholder; slot \"chart\" may not render as intended",
+    "slides[13]: strapline exceeds maxChars (700), may shrink to fit",
+    "slides[15]: disclaimer below minChars (80)"
+  ],
+  "missingSlots": [],
+  "thinSlides": [],
+  "slotIssues": [
+    {
+      "slideIndex": 15,
+      "slideType": "backCover",
+      "slot": "disclaimer",
+      "actual": 76,
+      "target": 80
+    }
+  ],
+  "paginationDecisions": [
+    {
+      "slideType": "analysisWideChart2ColsText",
+      "mode": "text-with-chart",
+      "originalCount": 10,
+      "splitInto": 2
+    },
+    {
+      "slideType": "analysisWideChartTableText",
+      "mode": "text-with-chart",
+      "originalCount": 10,
+      "splitInto": 2
+    }
+  ],
+  "overflowEvents": [
+    {
+      "slideType": "analysisWideChart2ColsText",
+      "event": "auto_split",
+      "mode": "text-with-chart",
+      "originalCount": 10,
+      "splitInto": 2
+    },
+    {
+      "slideType": "analysisWideChartTableText",
+      "event": "auto_split",
+      "mode": "text-with-chart",
+      "originalCount": 10,
+      "splitInto": 2
+    }
+  ],
+  "fallbacks": [
+    {
+      "layout": "twoColumnTextWithStrapline",
+      "reason": "invalid_extracted_columns",
+      "details": {
+        "left": null,
+        "right": null
+      }
+    },
+    {
+      "layout": "titleStrapline4TextBoxes",
+      "reason": "invalid_extracted_columns",
+      "details": {
+        "columns": [
+          {
+            "h": 0.5275590551181102,
+            "w": 11.14643372703412,
+            "x": 1.088540026246719,
+            "y": 1.2899311023622047
+          },
+          {
+            "h": 0.2755905511811024,
+            "w": 5.5078740157480315,
+            "x": 1.088540026246719,
+            "y": 1.9155555555555555
+          },
+          {
+            "h": 1.9291338582677164,
+            "w": 5.5078740157480315,
+            "x": 1.088540026246719,
+            "y": 2.191147200349956
+          },
+          {
+            "h": 0.2755905511811024,
+            "w": 5.5078740157480315,
+            "x": 1.088540026246719,
+            "y": 4.219412729658792
+          }
+        ]
+      }
+    }
+  ],
+  "overlapSummary": null,
+  "strictOverflow": {
+    "status": 0
+  },
+  "inputSlideCount": 16,
+  "outputPptx": "outputs/runs/2026-02-20_120500/lorem-heavy-v4-schema-qa.pptx"
+}

@@ -1,0 +1,200 @@
+{
+  "metadata": {
+    "title": "ZoomInfo Due Diligence - Draft",
+    "subject": "Commercial and financial diligence",
+    "author": "Deep Research",
+    "company": "ZoomInfo Technologies Inc.",
+    "assumptions": [
+      "Forecast beyond FY2026 guidance requires assumption: Base case assumes low-single-digit revenue growth in FY2027–FY2028 driven by stabilization in SMB, continued Upmarket expansion, and incremental AI product adoption; margins assumed broadly stable with modest efficiency gains.",
+      "Net debt presentation assumes 'net debt' = gross debt (incl. current portion) less cash and restricted cash; TRA liability treated as a separate quasi-debt obligation.",
+      "Where only point-in-time metrics are disclosed (e.g., net revenue retention as of year-end), the deck treats the disclosed value as representative of the period-end run-rate."
+    ],
+    "placeholders": [
+      "FY2027–FY2028 revenue and margin forecast values (Assumption required; use conservative low-single-digit growth until management provides outlook).",
+      "Working capital normalization (Assumption required; subscription billings and unearned revenue dynamics can distort operating working capital).",
+      "Standalone vs. take-private cost structure (Assumption required; quantify public company cost removals and PE operating model changes with management)."
+    ]
+  },
+  "slides": [
+    { "type": "cover", "title": "ZoomInfo Due Diligence", "subtitle": "Hypothetical take-private scenario" },
+    {
+      "type": "contents",
+      "title": "Contents",
+      "sections": [
+        { "number": "01", "title": "Executive summary", "pageRange": "(p. 3-10)", "items": ["Business overview", "Summary financials", "Key findings"] },
+        { "number": "02", "title": "Historical trading", "pageRange": "(p. 11-18)", "items": ["Profit & loss overview", "Quality of earnings"] },
+        { "number": "03", "title": "Forecast trading", "pageRange": "(p. 19-24)", "items": ["Forecast overview", "Forecast assumptions"] },
+        { "number": "04", "title": "Balance sheet", "pageRange": "(p. 25-29)", "items": ["Working capital", "Net debt"] },
+        { "number": "05", "title": "Cash flows", "pageRange": "(p. 30-34)", "items": ["Operating cash flow", "Cash conversion"] },
+        { "number": "06", "title": "Reporting", "pageRange": "(p. 35-39)", "items": ["Financial reporting environment", "Accounting policies"] },
+        { "number": "07", "title": "Value creation", "pageRange": "(p. 40-44)", "items": ["Margin levers", "Commercial opportunities"] },
+        { "number": "08", "title": "Pre-Deal PPA", "pageRange": "(p. 45-49)", "items": ["Key intangibles", "Methodology"] },
+        { "number": "09", "title": "Taxation", "pageRange": "(p. 50-54)", "items": ["Tax profile", "Key risks"] },
+        { "number": "10", "title": "Appendices", "pageRange": "(p. 55-60)", "items": ["Source register", "Supporting analysis"] }
+      ]
+    },
+    {
+      "type": "analysisWideChartTableTextScaffold",
+      "title": "Profit & loss overview",
+      "strapline": "FY2025 returned to modest growth with resilient non-GAAP margins; GAAP margins are sensitive to restructuring, litigation, and other episodic items.",
+      "heading": "FY2025 highlights: $1.25B revenue, ~84% gross margin, $446M adjusted operating income; FY2026 guidance implies low growth",
+      "body": [
+        "GAAP revenue increased from $1,214.3m in FY2024 to $1,249.5m in FY2025 (+3% YoY).",
+        "Gross profit was $1,049.9m in FY2025 (gross margin ~84% per company disclosure).",
+        "Non-GAAP adjusted operating income was $445.9m in FY2025 (36% margin); key add-backs include SBC, amortization of acquired intangibles, restructuring, and litigation settlements.",
+        "FY2026 guidance (issued February 9, 2026) calls for revenue of $1.247B–$1.267B and adjusted operating income of $456M–$466M."
+      ],
+      "table": {
+        "headers": ["Metric", "FY2024", "FY2025"],
+        "rows": [
+          ["Revenue (GAAP, $m)", "1,214.3", "1,249.5"],
+          ["Gross profit (GAAP, $m)", "1,024.5", "1,049.9"],
+          ["Adjusted EBITDA (Non-GAAP, $m)", "452.4", "475.7"]
+        ]
+      },
+      "chart": {
+        "type": "bar",
+        "data": [
+          {
+            "name": "FY2025 Revenue by quarter (GAAP, $m)",
+            "labels": ["Q1", "Q2", "Q3", "Q4"],
+            "values": [305.7, 306.7, 318.0, 319.1]
+          }
+        ]
+      },
+      "noteSource": "S1 (FY2025 Form 10-K filed Feb 12, 2026) and S2–S5 (FY2025 quarterly earnings releases filed via Form 8-K)."
+    },
+    {
+      "type": "summaryFinancials",
+      "title": "Summary financials",
+      "sectionsTop": ["Quality of earnings", "Net working capital", "Net debt"],
+      "sectionsBottom": ["Cash conversion", "Other value bridge"],
+      "source": "S1, S2 (FY2025 Form 10-K and Feb 9, 2026 earnings release)."
+    },
+    {
+      "type": "analysisWideChart2ColsText",
+      "title": "Historical trading analysis",
+      "strapline": "Revenue growth decelerated post-2022; profitability remains strong on a non-GAAP basis, while GAAP margins reflect episodic items.",
+      "body": [
+        "GAAP revenue increased materially from FY2021 to FY2023, then contracted in FY2024 before returning to growth in FY2025; this pattern is consistent with macro pressure and normalization after earlier growth.",
+        "Non-GAAP adjusted operating income remains substantial, but the bridge includes recurring items (e.g., stock-based compensation) and acquisition-related amortization.",
+        "Operating cash flow is consistently high relative to GAAP net income, aided by advance billing and subscription contract structure.",
+        "Key lens for take-private: stress-test renewal/expansion assumptions vs. net revenue retention in the high-80s to ~90% and assess exposure to AI-driven seat compression."
+      ],
+      "chart": {
+        "type": "bar",
+        "data": [
+          {
+            "name": "Revenue (GAAP, $m)",
+            "labels": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025"],
+            "values": [747.2, 1098.0, 1239.5, 1214.3, 1249.5]
+          }
+        ]
+      }
+    },
+    {
+      "type": "analysisWideChartTableText",
+      "title": "Forecast overview",
+      "strapline": "Company provides FY2026 guidance; FY2027–FY2028 require conservative assumptions until management provides multi-year outlook.",
+      "body": [
+        "FY2026 guidance (February 9, 2026): revenue $1.247B–$1.267B, adjusted operating income $456M–$466M, and unlevered free cash flow $435M–$465M.",
+        "Base case (Assumption required) extends a low-growth profile into FY2027–FY2028 with modest retention improvement driven by Upmarket mix and AI product adoption.",
+        "Downside case includes continued seat compression and pricing pressure, holding net revenue retention near ~90% or below and limiting expansion.",
+        "Upside case assumes faster monetization of AI-enabled workflows, improved renewal/retention, and incremental international penetration."
+      ],
+      "chart": {
+        "type": "bar",
+        "data": [
+          {
+            "name": "Base-case revenue (GAAP, $m) — guidance + assumptions",
+            "labels": ["FY2026E", "FY2027E", "FY2028E", "3-yr trend"],
+            "values": [1257.0, 1295.0, 1345.0, 0]
+          }
+        ]
+      }
+    },
+    {
+      "type": "analysisNarrowTable",
+      "title": "Key operating metrics",
+      "strapline": "Retention and Upmarket mix improved through 2025; contracted coverage and deferred revenue support durability, but <100% NRR remains a key risk.",
+      "table": {
+        "headers": ["Metric", "FY2024", "FY2025", "Commentary"],
+        "rows": [
+          ["Net revenue retention (as of year-end)", "87%", "90%", "Improved vs FY2024; still below 100%, implying cohort contraction without new logo/expansion offsets."],
+          ["Customers with >$100k ACV (as of year-end)", "1,867", "1,921", "Upmarket customer count grew; concentration in larger customers can improve durability but can increase deal-size volatility."],
+          ["Remaining performance obligations (RPO) at year-end ($m)", "1,156.9", "1,252.4", "RPO provides forward revenue coverage; $887.4m expected to be recognized within one year as of Dec 31, 2025."],
+          ["International revenue exposure (% of total revenue)", "~12%", "~12%", "Rest of world revenue was $145.8m in FY2025; business remains predominantly U.S.-centric."]
+        ]
+      }
+    },
+    {
+      "type": "twoColumnText",
+      "title": "Commercial diligence findings",
+      "strapline": "Key lenses: durability of subscription renewal base, macro sensitivity of SMB, and competitive positioning as AI reshapes GTM workflows.",
+      "leftBody": [
+        "Durability positives: Subscription-heavy model; contracts typically 1–3 years and non-cancelable; meaningful RPO balance supports near-term revenue visibility.",
+        "Durability risks: Net revenue retention below 100%; management cites macro pressure and expects NRR to be influenced by Upmarket motion; AI-driven seat compression risk is explicitly disclosed."
+      ],
+      "rightBody": [
+        "Competitive dynamics: Company identifies competition from free sources, internal databases, niche providers, and potential entrants including LLM/generative AI players and large ecosystems (CRM/business software).",
+        "Commercial opportunity: Continued Upmarket penetration (reported 74% of ACV Upmarket as of Dec 31, 2025) and embedding data/agents into customer workflows could support retention and ARPA."
+      ]
+    },
+    {
+      "type": "analysis2ColumnsText",
+      "title": "Operational diligence findings",
+      "strapline": "Operating model combines AI/ML data engine with human-in-the-loop QA; diligence should focus on data sourcing rights, opt-out scalability, and integration resilience.",
+      "leftBody": [
+        "Data engine thesis: Company describes an AI/ML engine gathering billions of data points from millions of sources, supported by research analysts and data scientists for quality assurance and gap-filling.",
+        "Data quality / liability: Company discloses a contractual data quality guarantee that may create reimbursement/termination risk if accuracy falls below threshold."
+      ],
+      "rightBody": [
+        "Privacy/compliance: Expansion of state privacy laws and public opt-out tooling (e.g., California DROP) may elevate opt-out rates and pressure dataset breadth; multiple privacy-adjacent litigations were disclosed in FY2025 filings.",
+        "Ecosystem dependencies: Integrations into CRM and marketing systems are described as critically important; loss of API access by platform operators could disrupt customer workflows and retention."
+      ]
+    },
+    {
+      "type": "oneColumnText",
+      "title": "Investment highlights and concerns",
+      "strapline": "Board-level view of key upside and downside factors for a sponsor-led take-private.",
+      "body": [
+        "Highlights: High gross margin profile and strong cash generation (FY2025 OCF $465m and unlevered FCF $455m); subscription model with meaningful RPO; Upmarket momentum and improving NRR through 2025.",
+        "Concerns / red flags: FY2026 guidance implies a low growth ceiling near-term; NRR remains below 100% and disclosures explicitly flag AI-driven seat compression and LLM-driven competitive risk.",
+        "Structuring considerations: Large TRA liability (~$2.7B at Dec 31, 2025) and material deferred tax assets subject to realizability judgments; both can impact equity value, cash flow, and diligence priorities."
+      ]
+    },
+    {
+      "type": "titleStrapline4TextBoxes",
+      "title": "Value creation plan",
+      "strapline": "Sponsor value creation levers prioritize retention uplift, product-led expansion into workflows, and cost discipline while hardening privacy posture.",
+      "columns": [
+        { "heading": "Retention & expansion", "body": ["Drive NRR toward 100%+ via Upmarket renewals, seat-value packaging, and customer success playbooks tied to measurable pipeline ROI."] },
+        { "heading": "AI monetization", "body": ["Productize AI/agent workflows into priced modules; mitigate seat compression by shifting pricing toward outcomes/usage where feasible."] },
+        { "heading": "Margin discipline", "body": ["Sustain non-GAAP operating margin mid-30%s; reduce episodic restructuring by completing real-estate footprint optimization and stabilizing org design."] },
+        { "heading": "Privacy & data resilience", "body": ["Industrialize opt-out handling (DROP readiness), strengthen data sourcing rights, and reduce litigation surface area through governance, disclosures, and auditability."] }
+      ]
+    },
+    {
+      "type": "qualityOfEarnings",
+      "title": "Quality of earnings",
+      "strapline": "Non-GAAP profitability is strong but depends on recurring adjustments; diligence should quantify sustainable run-rate margin and cash conversion.",
+      "body": [
+        "Key recurring adjustments in FY2025 include stock-based compensation ($116m) and amortization of acquired technology/intangibles (~$59m).",
+        "Episodic items include restructuring/transaction-related expenses ($40m in FY2025; $102m in FY2024) and litigation settlement charges (notably FY2024).",
+        "Cash flow remains robust (OCF $465m in FY2025), supported by advance billing mechanics and unearned revenue; confirm sustainability under slower growth and higher opt-out rates."
+      ]
+    },
+    {
+      "type": "summaryFinancialsScaffold",
+      "title": "Summary financials",
+      "sectionsTop": ["Revenue quality", "Margin bridge", "Net debt"],
+      "sectionsBottom": ["Cash conversion", "Working capital"],
+      "source": "S1–S6 (Forms 10-K / 10-Q / 8-K as cited in source register)."
+    },
+    {
+      "type": "backCover",
+      "disclaimer": "This draft diligence content is prepared for illustrative purposes for a hypothetical sponsor-led take-private scenario. It relies exclusively on publicly available information and may omit material non-public facts. All forward-looking values beyond published company guidance are explicitly labeled as assumptions requiring management confirmation.",
+      "url": "Public sources only (see Source Register)."
+    }
+  ]
+}

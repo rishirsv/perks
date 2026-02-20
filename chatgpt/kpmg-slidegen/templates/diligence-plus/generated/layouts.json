@@ -1,0 +1,6 @@
+{
+  "template": "diligence-plus",
+  "status": "scaffold",
+  "sourcePath": "../../kpmg-diligence/package/layouts.json",
+  "notes": "Generated layout contract placeholder. Run template package build to populate this file."
+}

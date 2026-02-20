@@ -1,7 +1,7 @@
 {
   "assets": {
-    "assetsBase64": "templates/kpmg-diligence/assets/assets-base64.json",
-    "gradientDataUris": "templates/kpmg-diligence/assets/gradient_data_uris.json"
+    "coverPhoto": "templates/kpmg-diligence/assets/cover-photo.jpeg",
+    "logoSvg": "templates/kpmg-diligence/assets/kpmg-logo.svg"
   },
   "colors": {
     "clrMap": {
@@ -1014,7 +1014,7 @@
       "chart": null,
       "logo": {
         "h": 0.4028280839895013,
-        "w": 1.0,
+        "w": 1,
         "x": 1.0919466316710411,
         "y": 0.4060706474190726
       },
@@ -1304,7 +1304,7 @@
       "chart": null,
       "logo": {
         "h": 0.4028280839895013,
-        "w": 1.0,
+        "w": 1,
         "x": 1.0919466316710411,
         "y": 0.4060706474190726
       },
@@ -1343,7 +1343,7 @@
       "chart": null,
       "logo": {
         "h": 0.4028280839895013,
-        "w": 1.0,
+        "w": 1,
         "x": 1.0919466316710411,
         "y": 0.4060706474190726
       },
@@ -3288,7 +3288,7 @@
     "h": 7.5,
     "w": 13.333
   },
-  "sourcePptx": "templates/kpmg-diligence/Diligence+ Reporting Template_Widescreen v2.1.pptx",
+  "sourcePptx": "pptx-templates/kpmg-diligence/Diligence+ Reporting Template_Widescreen v2.1.pptx",
   "usedLayouts": {
     "Analysis_2 columns text": 2,
     "Analysis_50-50 table+text": 3,

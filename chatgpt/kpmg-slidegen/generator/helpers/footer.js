@@ -4,13 +4,10 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { svgToDataUri } from './svg.js';
+import { resolveTemplateAssetsDir } from '../runtime/template-roots.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const LOGO_PATH = path.join(__dirname, '..', '..', 'templates', 'kpmg-diligence', 'assets', 'kpmg-logo.svg');
+const LOGO_PATH = path.join(resolveTemplateAssetsDir('kpmg-diligence'), 'kpmg-logo.svg');
 export const FOOTER_LOGO_BOX = { x: 1.097, y: 6.854, w: 0.53, h: 0.213 };
 export const FOOTER_SAFE_TOP = FOOTER_LOGO_BOX.y - 0.1;
 let cachedLogo = null;

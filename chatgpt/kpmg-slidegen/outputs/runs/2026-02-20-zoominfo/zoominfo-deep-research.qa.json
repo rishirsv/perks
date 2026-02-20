@@ -1,0 +1,766 @@
+{
+  "generatedAt": "2026-02-20T04:07:45.789Z",
+  "template": "kpmg-diligence",
+  "valid": true,
+  "errors": [],
+  "warnings": [
+    "slides[2]: heading exceeds maxChars (120), may shrink to fit"
+  ],
+  "densityFindings": [
+    {
+      "slideIndex": 0,
+      "slideType": "cover",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.65,
+      "acceptableFloor": 0.552,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 1,
+      "slideType": "contents",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.8,
+      "acceptableFloor": 0.68,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.55,
+      "acceptableFloor": 0.468,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 3,
+      "slideType": "summaryFinancials",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.5,
+      "acceptableFloor": 0.45,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 4,
+      "slideType": "analysisWideChart2ColsText",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.75,
+      "acceptableFloor": 0.637,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 5,
+      "slideType": "analysisWideChartTableText",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.75,
+      "acceptableFloor": 0.637,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 6,
+      "slideType": "analysisNarrowTable",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.72,
+      "acceptableFloor": 0.612,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 7,
+      "slideType": "twoColumnText",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.72,
+      "acceptableFloor": 0.612,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 8,
+      "slideType": "analysis2ColumnsText",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.72,
+      "acceptableFloor": 0.612,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 9,
+      "slideType": "oneColumnText",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.72,
+      "acceptableFloor": 0.612,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 10,
+      "slideType": "titleStrapline4TextBoxes",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.75,
+      "acceptableFloor": 0.637,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 11,
+      "slideType": "qualityOfEarnings",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.55,
+      "acceptableFloor": 0.468,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 12,
+      "slideType": "summaryFinancialsScaffold",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0.5,
+      "acceptableFloor": 0.45,
+      "shouldRepair": false
+    },
+    {
+      "slideIndex": 13,
+      "slideType": "backCover",
+      "status": "OK",
+      "score": 1,
+      "minScore": 0,
+      "acceptableFloor": 1,
+      "shouldRepair": false
+    }
+  ],
+  "densitySummary": {
+    "ok": 14,
+    "thin": 0,
+    "sparse": 0
+  },
+  "missingSlots": [],
+  "thinSlides": [],
+  "sparseSlides": [],
+  "slotIssues": [],
+  "slotMetrics": [
+    {
+      "slideIndex": 0,
+      "slideType": "cover",
+      "slot": "subtitle",
+      "kind": "text",
+      "actual": 34,
+      "target": 12,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 0,
+      "slideType": "cover",
+      "slot": "title",
+      "kind": "text",
+      "actual": 22,
+      "target": 8,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 1,
+      "slideType": "contents",
+      "slot": "title",
+      "kind": "text",
+      "actual": 8,
+      "target": 6,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 1,
+      "slideType": "contents",
+      "slot": "sections",
+      "kind": "contentsSections",
+      "actual": 10,
+      "target": 8,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "title",
+      "kind": "text",
+      "actual": 22,
+      "target": 8,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 148,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "heading",
+      "kind": "text",
+      "actual": 121,
+      "target": 6,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "body",
+      "kind": "textArray",
+      "actual": 466,
+      "target": 40,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "chart",
+      "kind": "chart",
+      "actual": 1,
+      "target": 1,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "table",
+      "kind": "table",
+      "actual": 3,
+      "target": 3,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "slot": "noteSource",
+      "kind": "text",
+      "actual": 107,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 3,
+      "slideType": "summaryFinancials",
+      "slot": "title",
+      "kind": "text",
+      "actual": 18,
+      "target": 8,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 3,
+      "slideType": "summaryFinancials",
+      "slot": "sectionsTop",
+      "kind": "stringArray",
+      "actual": 48,
+      "target": 0,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 3,
+      "slideType": "summaryFinancials",
+      "slot": "sectionsBottom",
+      "kind": "stringArray",
+      "actual": 34,
+      "target": 0,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 3,
+      "slideType": "summaryFinancials",
+      "slot": "source",
+      "kind": "text",
+      "actual": 59,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 4,
+      "slideType": "analysisWideChart2ColsText",
+      "slot": "body",
+      "kind": "textArray",
+      "actual": 676,
+      "target": 180,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 4,
+      "slideType": "analysisWideChart2ColsText",
+      "slot": "chart",
+      "kind": "chart",
+      "actual": 1,
+      "target": 1,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 4,
+      "slideType": "analysisWideChart2ColsText",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 130,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 4,
+      "slideType": "analysisWideChart2ColsText",
+      "slot": "title",
+      "kind": "text",
+      "actual": 27,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 5,
+      "slideType": "analysisWideChartTableText",
+      "slot": "body",
+      "kind": "textArray",
+      "actual": 584,
+      "target": 180,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 5,
+      "slideType": "analysisWideChartTableText",
+      "slot": "chart",
+      "kind": "chart",
+      "actual": 1,
+      "target": 1,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 5,
+      "slideType": "analysisWideChartTableText",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 126,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 5,
+      "slideType": "analysisWideChartTableText",
+      "slot": "title",
+      "kind": "text",
+      "actual": 17,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 6,
+      "slideType": "analysisNarrowTable",
+      "slot": "notes",
+      "kind": "text",
+      "actual": 0,
+      "target": 0,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 6,
+      "slideType": "analysisNarrowTable",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 144,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 6,
+      "slideType": "analysisNarrowTable",
+      "slot": "table",
+      "kind": "table",
+      "actual": 4,
+      "target": 3,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 6,
+      "slideType": "analysisNarrowTable",
+      "slot": "title",
+      "kind": "text",
+      "actual": 21,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 7,
+      "slideType": "twoColumnText",
+      "slot": "leftBody",
+      "kind": "textArray",
+      "actual": 353,
+      "target": 80,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 7,
+      "slideType": "twoColumnText",
+      "slot": "rightBody",
+      "kind": "textArray",
+      "actual": 402,
+      "target": 80,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 7,
+      "slideType": "twoColumnText",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 136,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 7,
+      "slideType": "twoColumnText",
+      "slot": "title",
+      "kind": "text",
+      "actual": 29,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 8,
+      "slideType": "analysis2ColumnsText",
+      "slot": "leftBody",
+      "kind": "textArray",
+      "actual": 366,
+      "target": 80,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 8,
+      "slideType": "analysis2ColumnsText",
+      "slot": "rightBody",
+      "kind": "textArray",
+      "actual": 426,
+      "target": 80,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 8,
+      "slideType": "analysis2ColumnsText",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 166,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 8,
+      "slideType": "analysis2ColumnsText",
+      "slot": "title",
+      "kind": "text",
+      "actual": 30,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 9,
+      "slideType": "oneColumnText",
+      "slot": "body",
+      "kind": "textArray",
+      "actual": 600,
+      "target": 180,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 9,
+      "slideType": "oneColumnText",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 83,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 9,
+      "slideType": "oneColumnText",
+      "slot": "title",
+      "kind": "text",
+      "actual": 34,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 10,
+      "slideType": "titleStrapline4TextBoxes",
+      "slot": "columns",
+      "kind": "columns",
+      "actual": 4,
+      "target": 4,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 10,
+      "slideType": "titleStrapline4TextBoxes",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 149,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 10,
+      "slideType": "titleStrapline4TextBoxes",
+      "slot": "title",
+      "kind": "text",
+      "actual": 19,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 11,
+      "slideType": "qualityOfEarnings",
+      "slot": "title",
+      "kind": "text",
+      "actual": 19,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 11,
+      "slideType": "qualityOfEarnings",
+      "slot": "strapline",
+      "kind": "text",
+      "actual": 145,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 11,
+      "slideType": "qualityOfEarnings",
+      "slot": "body",
+      "kind": "textArray",
+      "actual": 467,
+      "target": 50,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 11,
+      "slideType": "qualityOfEarnings",
+      "slot": "source",
+      "kind": "text",
+      "actual": 0,
+      "target": 0,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 12,
+      "slideType": "summaryFinancialsScaffold",
+      "slot": "title",
+      "kind": "text",
+      "actual": 18,
+      "target": 8,
+      "priority": "high"
+    },
+    {
+      "slideIndex": 12,
+      "slideType": "summaryFinancialsScaffold",
+      "slot": "sectionsTop",
+      "kind": "stringArray",
+      "actual": 38,
+      "target": 0,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 12,
+      "slideType": "summaryFinancialsScaffold",
+      "slot": "sectionsBottom",
+      "kind": "stringArray",
+      "actual": 31,
+      "target": 0,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 12,
+      "slideType": "summaryFinancialsScaffold",
+      "slot": "source",
+      "kind": "text",
+      "actual": 60,
+      "target": 12,
+      "priority": "medium"
+    },
+    {
+      "slideIndex": 13,
+      "slideType": "backCover",
+      "slot": "disclaimer",
+      "kind": "text",
+      "actual": 350,
+      "target": 80,
+      "priority": "low"
+    },
+    {
+      "slideIndex": 13,
+      "slideType": "backCover",
+      "slot": "url",
+      "kind": "text",
+      "actual": 42,
+      "target": 5,
+      "priority": "low"
+    }
+  ],
+  "repairSuggestions": [],
+  "pagination": [],
+  "overflowRisks": [],
+  "masterApplied": [
+    {
+      "slideIndex": 0,
+      "slideType": "cover",
+      "expectedMaster": "KPMG_COVER",
+      "appliedMaster": "KPMG_COVER",
+      "matched": true
+    },
+    {
+      "slideIndex": 1,
+      "slideType": "contents",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 2,
+      "slideType": "analysisWideChartTableTextScaffold",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 3,
+      "slideType": "summaryFinancials",
+      "expectedMaster": "KPMG_SUMMARY",
+      "appliedMaster": "KPMG_SUMMARY",
+      "matched": true
+    },
+    {
+      "slideIndex": 4,
+      "slideType": "analysisWideChart2ColsText",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 5,
+      "slideType": "analysisWideChartTableText",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 6,
+      "slideType": "analysisNarrowTable",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 7,
+      "slideType": "twoColumnText",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 8,
+      "slideType": "analysis2ColumnsText",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 9,
+      "slideType": "oneColumnText",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 10,
+      "slideType": "titleStrapline4TextBoxes",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 11,
+      "slideType": "qualityOfEarnings",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 12,
+      "slideType": "summaryFinancialsScaffold",
+      "expectedMaster": "KPMG_WHITE",
+      "appliedMaster": "KPMG_WHITE",
+      "matched": true
+    },
+    {
+      "slideIndex": 13,
+      "slideType": "backCover",
+      "expectedMaster": "KPMG_CLOSING",
+      "appliedMaster": "KPMG_CLOSING",
+      "matched": true
+    }
+  ],
+  "paginationDecisions": [],
+  "overflowEvents": [],
+  "fallbacks": [
+    {
+      "layout": "twoColumnTextWithStrapline",
+      "reason": "invalid_extracted_columns",
+      "details": {
+        "left": null,
+        "right": null
+      }
+    },
+    {
+      "layout": "titleStrapline4TextBoxes",
+      "reason": "invalid_extracted_columns",
+      "details": {
+        "columns": [
+          {
+            "h": 0.5275590551181102,
+            "w": 11.14643372703412,
+            "x": 1.088540026246719,
+            "y": 1.2899311023622047
+          },
+          {
+            "h": 0.2755905511811024,
+            "w": 5.5078740157480315,
+            "x": 1.088540026246719,
+            "y": 1.9155555555555555
+          },
+          {
+            "h": 1.9291338582677164,
+            "w": 5.5078740157480315,
+            "x": 1.088540026246719,
+            "y": 2.191147200349956
+          },
+          {
+            "h": 0.2755905511811024,
+            "w": 5.5078740157480315,
+            "x": 1.088540026246719,
+            "y": 4.219412729658792
+          }
+        ]
+      }
+    }
+  ],
+  "overlapSummary": {
+    "slideCount": 14,
+    "overlapCount": 28,
+    "severeCount": 10,
+    "warningCount": 18,
+    "containmentCount": 0
+  },
+  "strictOverflow": {
+    "status": 0
+  },
+  "inputSlideCount": 14,
+  "outputPptx": "outputs/runs/2026-02-20-zoominfo/zoominfo-deep-research.pptx"
+}

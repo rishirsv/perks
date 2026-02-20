@@ -7,6 +7,7 @@
 // Goal: never overlap; prefer continuation slides vs. tiny fonts.
 
 import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
+const BODY_FONT_SIZE = 10;
 
 function clone(obj) {
   return obj ? JSON.parse(JSON.stringify(obj)) : obj;
@@ -78,8 +79,8 @@ function estimateCharsPerLine(boxWInches, fontSizePt) {
 function estimateMaxLines(boxHInches, fontSizePt) {
   // Convert to points (72 pt/in). Use a slightly generous line-height to avoid overlap.
   const hPt = (boxHInches || 0) * 72;
-  // Our decks use 9pt body with PowerPoint-like spacing; approximate ~12pt line height.
-  const lineHeight = Math.max(10, (fontSizePt || 9) + 3);
+  // Our decks use 10pt body with PowerPoint-like spacing.
+  const lineHeight = Math.max(11, (fontSizePt || BODY_FONT_SIZE) + 3);
   // Keep a small top/bottom safety buffer.
   return Math.max(1, Math.floor(hPt / lineHeight) - 1);
 }
@@ -133,7 +134,7 @@ function paginateTwoColumn(slideSpec, geometry, { footerSafe = false, fallbackLe
   const safeLeft = applyFooterSafe(leftBox, footerSafe);
   const safeRight = applyFooterSafe(rightBox, footerSafe);
 
-  const fontSize = 9;
+  const fontSize = BODY_FONT_SIZE;
   const leftChunks = chunkBullets(slideSpec.leftBody, {
     maxLines: estimateMaxLines(safeLeft.h, fontSize),
     charsPerLine: estimateCharsPerLine(safeLeft.w, fontSize),
@@ -159,7 +160,7 @@ function paginateOneColumnBullets(slideSpec, geometry, fieldName, { footerSafe =
   const g = geometry || {};
   const box = g.body || g.topText || g.leftText || fallbackBox || { w: 11.0, h: 5.0, y: 1.6 };
   const safeBox = applyFooterSafe(box, footerSafe);
-  const fontSize = 9;
+  const fontSize = BODY_FONT_SIZE;
   const chunks = chunkBullets(slideSpec[fieldName], {
     maxLines: estimateMaxLines(safeBox.h, fontSize),
     charsPerLine: estimateCharsPerLine(safeBox.w, fontSize),
@@ -183,7 +184,7 @@ function paginateTableRows(slideSpec, geometry, { footerSafe = false, fallbackBo
   const box = g.table || fallbackBox || { w: 11.0, h: 3.0, y: 1.9 };
   const safeBox = applyFooterSafe(box, footerSafe);
 
-  // Use a generous height estimate — the table.js builder always uses full-width
+  // Use a generous height estimate — the analysis-narrow-table.js builder always uses full-width
   // layout now, and autoPage handles overflow within PptxGenJS. Our job here is to
   // split content into reasonable chunks so each slide has enough content.
   // Use ~0.30in per row for compact 8-10pt tables.
@@ -219,9 +220,35 @@ function paginateTableRows(slideSpec, geometry, { footerSafe = false, fallbackBo
 export function paginateDeckSpec(deckSpec, layouts) {
   const spec = deckSpec && typeof deckSpec === 'object' ? deckSpec : { slides: [] };
   const slides = Array.isArray(spec.slides) ? spec.slides : [];
-  const out = { ...spec, slides: [] };
+  const out = {
+    ...spec,
+    slides: [],
+    paginationDecisions: [],
+    overflowEvents: [],
+  };
 
-  for (const slideSpec of slides) {
+  function recordSplit(slideIndex, type, mode, originalCount, pages, details = {}) {
+    if (pages <= 1) return;
+    out.paginationDecisions.push({
+      slideIndex,
+      slideType: type,
+      mode,
+      originalCount,
+      splitInto: pages,
+      ...details,
+    });
+    out.overflowEvents.push({
+      slideIndex,
+      slideType: type,
+      event: 'auto_split',
+      mode,
+      originalCount,
+      splitInto: pages,
+    });
+  }
+
+  for (let slideIndex = 0; slideIndex < slides.length; slideIndex++) {
+    const slideSpec = slides[slideIndex];
     const type = slideSpec?.type;
     const layout = (layouts && type && layouts[type]) || null;
     const geom = layout?.geometry || null;
@@ -232,23 +259,27 @@ export function paginateDeckSpec(deckSpec, layouts) {
     }
 
     if (type === 'twoColumnText' || type === 'analysis2ColumnsText') {
-      out.slides.push(
-        ...paginateTwoColumn(slideSpec, geom, {
-          footerSafe: true,
-          fallbackLeft: { w: 5.7, h: 5.7, y: 1.5 },
-          fallbackRight: { w: 5.2, h: 5.7, y: 1.5 },
-        }),
-      );
+      const paged = paginateTwoColumn(slideSpec, geom, {
+        footerSafe: true,
+        fallbackLeft: { w: 5.7, h: 5.7, y: 1.5 },
+        fallbackRight: { w: 5.2, h: 5.7, y: 1.5 },
+      });
+      const originalCount =
+        (Array.isArray(slideSpec.leftBody) ? slideSpec.leftBody.length : 0) +
+        (Array.isArray(slideSpec.rightBody) ? slideSpec.rightBody.length : 0);
+      recordSplit(slideIndex, type, 'two-column-bullets', originalCount, paged.length);
+      out.slides.push(...paged);
       continue;
     }
 
     if (type === 'oneColumnText') {
-      out.slides.push(
-        ...paginateOneColumnBullets(slideSpec, geom, 'body', {
-          footerSafe: true,
-          fallbackBox: { w: 11.1596, h: 5.6, y: 1.6 },
-        }),
-      );
+      const paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
+        footerSafe: true,
+        fallbackBox: { w: 11.1596, h: 5.6, y: 1.6 },
+      });
+      const originalCount = Array.isArray(slideSpec.body) ? slideSpec.body.length : 0;
+      recordSplit(slideIndex, type, 'one-column-bullets', originalCount, paged.length);
+      out.slides.push(...paged);
       continue;
     }
 
@@ -258,22 +289,24 @@ export function paginateDeckSpec(deckSpec, layouts) {
         type === 'analysisWideChartTableText'
           ? { w: 11.1596, h: 2.2, y: 1.6 }
           : { w: 5.6, h: 5.4, y: 1.6 };
-      out.slides.push(
-        ...paginateOneColumnBullets(slideSpec, geom, 'body', {
-          footerSafe: true,
-          fallbackBox,
-        }),
-      );
+      const paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
+        footerSafe: true,
+        fallbackBox,
+      });
+      const originalCount = Array.isArray(slideSpec.body) ? slideSpec.body.length : 0;
+      recordSplit(slideIndex, type, 'text-with-chart', originalCount, paged.length);
+      out.slides.push(...paged);
       continue;
     }
 
     if (type === 'analysisNarrowTable') {
-      out.slides.push(
-        ...paginateTableRows(slideSpec, geom, {
-          footerSafe: true,
-          fallbackBox: { w: 11.1596, h: 4.5, y: 1.9 },
-        }),
-      );
+      const paged = paginateTableRows(slideSpec, geom, {
+        footerSafe: true,
+        fallbackBox: { w: 11.1596, h: 4.5, y: 1.9 },
+      });
+      const originalCount = Array.isArray(slideSpec?.table?.rows) ? slideSpec.table.rows.length : 0;
+      recordSplit(slideIndex, type, 'table-rows', originalCount, paged.length);
+      out.slides.push(...paged);
       continue;
     }
 

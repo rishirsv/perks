@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:properties xmlns:p="http://schemas.microsoft.com/office/2006/metadata/properties" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls">
+  <documentManagement>
+    <lcf76f155ced4ddcb4097134ff3c332f xmlns="da1207d4-a4a2-4134-936f-07aa70b91ff6">
+      <Terms xmlns="http://schemas.microsoft.com/office/infopath/2007/PartnerControls"/>
+    </lcf76f155ced4ddcb4097134ff3c332f>
+    <TaxCatchAll xmlns="d84d88f0-d431-497b-82de-83cf50d55861" xsi:nil="true"/>
+    <SharedWithUsers xmlns="d84d88f0-d431-497b-82de-83cf50d55861">
+      <UserInfo>
+        <DisplayName/>
+        <AccountId xsi:nil="true"/>
+        <AccountType/>
+      </UserInfo>
+    </SharedWithUsers>
+  </documentManagement>
+</p:properties>

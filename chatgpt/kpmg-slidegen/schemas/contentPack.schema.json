@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpmg-slidegen.local/schemas/contentPack.schema.json",
+  "title": "ContentPack",
+  "type": "object",
+  "required": ["version", "slides"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^v?[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": ".*\\S.*"
+        },
+        "engagement": {
+          "type": "string",
+          "pattern": ".*\\S.*"
+        },
+        "company": {
+          "type": "string",
+          "pattern": ".*\\S.*"
+        },
+        "date": {
+          "type": "string",
+          "pattern": ".*\\S.*"
+        }
+      }
+    },
+    "globals": {
+      "type": "object",
+      "description": "Optional global values that can be referenced by slot transformations.",
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Optional cross-slide evidence pointers used during repair and citation.",
+      "items": {
+        "type": "object",
+        "required": ["id", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": ".*\\S.*" },
+          "source": { "type": "string", "pattern": ".*\\S.*" },
+          "locator": { "type": "string", "pattern": ".*\\S.*" },
+          "note": { "type": "string", "pattern": ".*\\S.*" }
+        }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/slideContent" }
+    }
+  },
+  "$defs": {
+    "slotValue": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "number" },
+              { "type": "boolean" },
+              { "type": "object", "additionalProperties": true }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
+    },
+    "slideContent": {
+      "type": "object",
+      "required": ["type", "slots"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": ".*\\S.*" },
+        "type": { "type": "string", "pattern": ".*\\S.*" },
+        "notes": {
+          "oneOf": [
+            { "type": "string", "pattern": ".*\\S.*" },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string", "pattern": ".*\\S.*" }
+            }
+          ]
+        },
+        "slots": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "$ref": "#/$defs/slotValue" }
+        }
+      }
+    }
+  }
+}

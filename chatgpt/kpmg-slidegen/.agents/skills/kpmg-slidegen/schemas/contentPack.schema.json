@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kpmg-slidegen.local/skills/contentPack.schema.json",
+  "title": "ContentPack (Skill Contract)",
+  "description": "Skill-facing alias to the canonical content pack contract.",
+  "allOf": [
+    {
+      "$ref": "../../../../schemas/contentPack.schema.json"
+    }
+  ]
+}
