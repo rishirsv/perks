@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-20T20:03:20.692Z",
+  "generatedAt": "2026-02-21T03:45:53.098Z",
   "types": {
     "analysis2ColumnsText": {
       "description": "Two-column text (analysis)",
@@ -713,103 +713,6 @@
         "minScore": 0.72
       }
     },
-    "summaryFinancials": {
-      "description": "Summary financials scaffold with quality of earnings panels",
-      "templateLayout": "Summary financials_3",
-      "geometry": {
-        "title": {
-          "x": 1.092,
-          "y": 0.472,
-          "w": 11.15,
-          "h": 0.583
-        },
-        "bodyBoxes": [
-          {
-            "h": 0.2755905511811024,
-            "w": 3.6119925634295713,
-            "x": 1.0885411198600174,
-            "y": 1.2899311023622047
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 3.6119925634295713,
-            "x": 4.857378608923884,
-            "y": 1.2899311023622047
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 3.6119925634295713,
-            "x": 8.62621609798775,
-            "y": 1.2899311023622047
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 5.5078740157480315,
-            "x": 1.088540026246719,
-            "y": 3.9170570866141734
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 5.5078740157480315,
-            "x": 6.7362204724409445,
-            "y": 3.9170570866141734
-          }
-        ],
-        "panelHeight": 2.512
-      },
-      "slots": {
-        "title": {
-          "kind": "text",
-          "required": true,
-          "minChars": 8,
-          "maxChars": 90,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "heading",
-            "keepTogether": true,
-            "priority": "high"
-          }
-        },
-        "sectionsTop": {
-          "kind": "stringArray",
-          "required": false,
-          "minItems": 2,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "list",
-            "keepTogether": true,
-            "priority": "high"
-          }
-        },
-        "sectionsBottom": {
-          "kind": "stringArray",
-          "required": false,
-          "minItems": 2,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "list",
-            "keepTogether": true,
-            "priority": "high"
-          }
-        },
-        "source": {
-          "kind": "text",
-          "required": false,
-          "minChars": 12,
-          "maxChars": 700,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "paragraph",
-            "keepTogether": true,
-            "priority": "medium"
-          }
-        }
-      },
-      "densityTarget": {
-        "mode": "balanced",
-        "minScore": 0.5
-      }
-    },
     "titleStrapline4TextBoxes": {
       "description": "Title + strapline + 4 text boxes",
       "geometry": {
@@ -1467,103 +1370,6 @@
       "densityTarget": {
         "mode": "balanced",
         "minScore": 0.55
-      }
-    },
-    "summaryFinancialsScaffold": {
-      "description": "Summary financials scaffold with quality of earnings panels",
-      "templateLayout": "Summary financials_3",
-      "geometry": {
-        "title": {
-          "x": 1.092,
-          "y": 0.472,
-          "w": 11.15,
-          "h": 0.583
-        },
-        "bodyBoxes": [
-          {
-            "h": 0.2755905511811024,
-            "w": 3.6119925634295713,
-            "x": 1.0885411198600174,
-            "y": 1.2899311023622047
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 3.6119925634295713,
-            "x": 4.857378608923884,
-            "y": 1.2899311023622047
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 3.6119925634295713,
-            "x": 8.62621609798775,
-            "y": 1.2899311023622047
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 5.5078740157480315,
-            "x": 1.088540026246719,
-            "y": 3.9170570866141734
-          },
-          {
-            "h": 0.2755905511811024,
-            "w": 5.5078740157480315,
-            "x": 6.7362204724409445,
-            "y": 3.9170570866141734
-          }
-        ],
-        "panelHeight": 2.512
-      },
-      "slots": {
-        "title": {
-          "kind": "text",
-          "required": true,
-          "minChars": 8,
-          "maxChars": 90,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "heading",
-            "keepTogether": true,
-            "priority": "high"
-          }
-        },
-        "sectionsTop": {
-          "kind": "stringArray",
-          "required": false,
-          "minItems": 2,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "list",
-            "keepTogether": true,
-            "priority": "medium"
-          }
-        },
-        "sectionsBottom": {
-          "kind": "stringArray",
-          "required": false,
-          "minItems": 2,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "list",
-            "keepTogether": true,
-            "priority": "medium"
-          }
-        },
-        "source": {
-          "kind": "text",
-          "required": false,
-          "minChars": 12,
-          "maxChars": 700,
-          "allowEmpty": false,
-          "renderingHints": {
-            "mode": "paragraph",
-            "keepTogether": true,
-            "priority": "medium"
-          }
-        }
-      },
-      "densityTarget": {
-        "mode": "balanced",
-        "minScore": 0.5
       }
     }
   },
@@ -4813,7 +4619,6 @@
     }
   },
   "densityRules": {
-    "summaryFinancials": {},
     "twoColumnText": {
       "minLeftBodyItems": 2
     },

@@ -134,11 +134,6 @@ const SLOT_PATH_OVERRIDES = {
   'oneColumnText.body': { minItems: 3, minChars: 180, allowEmpty: false, renderingHints: { priority: 'high' } },
   'qualityOfEarnings.body': { minItems: 1, minChars: 50, allowEmpty: true, renderingHints: { priority: 'high' } },
   'titleStrapline4TextBoxes.columns': { minItems: 4, allowEmpty: false, renderingHints: { priority: 'high' } },
-  'summaryFinancials.sectionsTop': { minItems: 2, allowEmpty: false, renderingHints: { priority: 'high' } },
-  'summaryFinancials.sectionsBottom': { minItems: 2, allowEmpty: false, renderingHints: { priority: 'high' } },
-  'summaryFinancials.source': { minChars: 12, maxChars: 700, allowEmpty: false, renderingHints: { priority: 'medium' } },
-  'summaryFinancials.title': { minChars: 8, maxChars: 90, allowEmpty: false, renderingHints: { mode: 'heading', priority: 'high' } },
-  'summaryFinancialsScaffold.title': { minChars: 8, maxChars: 90, allowEmpty: false, renderingHints: { mode: 'heading', priority: 'high' } },
   'analysisWideChartTableTextScaffold.title': { minChars: 8, maxChars: 90, allowEmpty: false, renderingHints: { mode: 'heading', priority: 'high' } },
   'analysisWideChartTableTextScaffold.body': { minItems: 1, minChars: 40, allowEmpty: true, renderingHints: { priority: 'medium' } },
   'analysisWideChartTableTextScaffold.heading': {
@@ -159,8 +154,6 @@ const DENSITY_TARGETS = {
   divider: 0.75,
   dividerDark: 0.75,
   dividerLight: 0.75,
-  summaryFinancials: 0.5,
-  summaryFinancialsScaffold: 0.5,
   analysisWideChart2ColsText: 0.75,
   analysisWideChartTableText: 0.75,
   analysisWideChartTableTextScaffold: 0.55,
@@ -220,6 +213,10 @@ function enrichLayouts(template) {
       : null;
     layouts[type] = mergeLayoutGeometry(layout, detected);
   }
+
+  // Retire summaryFinancials variants from the active contract.
+  delete layouts.summaryFinancials;
+  delete layouts.summaryFinancialsScaffold;
 
   const dividerBase = layouts.divider || {};
   layouts.dividerDark = {
@@ -329,46 +326,6 @@ function enrichLayouts(template) {
     },
   };
 
-  layouts.summaryFinancialsScaffold = {
-    description: 'Summary financials scaffold with quality of earnings panels',
-    templateLayout: 'Summary financials_3',
-    geometry: {
-      title: { x: 1.092, y: 0.472, w: 11.15, h: 0.583 },
-      bodyBoxes:
-        layouts.summaryFinancials?.geometry?.bodyBoxes ||
-        template.DETECTED_LAYOUT_GEOMETRY?.['Summary financials_3']?.bodyBoxes ||
-        null,
-      panelHeight: 2.512,
-    },
-    slots: {
-      title: { kind: 'text', required: true },
-      sectionsTop: { kind: 'stringArray', required: false },
-      sectionsBottom: { kind: 'stringArray', required: false },
-      source: { kind: 'text', required: false },
-    },
-  };
-
-  // Keep `summaryFinancials` as a legacy alias, but make it canonical scaffold
-  // so we do not render the old custom KPI-card composition anymore.
-  layouts.summaryFinancials = {
-    description: 'Summary financials scaffold with quality of earnings panels',
-    templateLayout: 'Summary financials_3',
-    geometry: {
-      title: { x: 1.092, y: 0.472, w: 11.15, h: 0.583 },
-      bodyBoxes:
-        layouts.summaryFinancialsScaffold?.geometry?.bodyBoxes ||
-        template.DETECTED_LAYOUT_GEOMETRY?.['Summary financials_3']?.bodyBoxes ||
-        null,
-      panelHeight: 2.512,
-    },
-    slots: {
-      title: { kind: 'text', required: true },
-      sectionsTop: { kind: 'stringArray', required: false },
-      sectionsBottom: { kind: 'stringArray', required: false },
-      source: { kind: 'text', required: false },
-    },
-  };
-
   applySlotSchemaContracts(layouts);
   return layouts;
 }
@@ -382,7 +339,6 @@ function buildLayoutPackage(template) {
     detectedLayoutSlots: template.DETECTED_LAYOUT_SLOTS || {},
     detectedLayoutGeometry: template.DETECTED_LAYOUT_GEOMETRY || {},
     densityRules: {
-      summaryFinancials: {},
       twoColumnText: { minLeftBodyItems: 2 },
       analysis2ColumnsText: { minLeftBodyItems: 2 },
       oneColumnText: { minBodyItems: 3 },

@@ -47,14 +47,14 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph SkillLayer[Skill Layer]
-      S1[.agents/skills/kpmg-slidegen/SKILL.md]
+      S1[skills/kpmg-slidegen/SKILL.md]
       S2[agents/openai.yaml default_prompt]
-      P1[prompts/intake.md]
-      P2[prompts/content_pack.md]
-      P3[prompts/deck_plan.md]
-      P4[prompts/deck_spec.md]
-      P5[prompts/repair.md]
-      C1[schemas/*.schema.json aliases]
+      P1[prompts/00_intake.md]
+      P2[prompts/10_content_pack.md]
+      P3[prompts/20_deck_plan.md]
+      P4[prompts/30_deck_spec.md]
+      P5[prompts/40_repair.md]
+      C1[schemas/*.schema.json self-contained]
     end
 
     subgraph RuntimeLayer[Runtime Layer]
@@ -92,7 +92,7 @@ flowchart TD
 
 ### Orchestrator
 
-Primary file: `.agents/skills/kpmg-slidegen/agents/openai.yaml`
+Primary file: `skills/kpmg-slidegen/agents/openai.yaml`
 
 Responsibilities:
 
@@ -111,7 +111,7 @@ Hard rules:
 
 Primary references:
 
-- Prompt: `.agents/skills/kpmg-slidegen/prompts/deck_plan.md`
+- Prompt: `skills/kpmg-slidegen/prompts/20_deck_plan.md`
 - Schema: `schemas/deckPlan.schema.json`
 
 Responsibilities:
@@ -131,7 +131,7 @@ Minimum contract:
 
 Primary references:
 
-- Prompt: `.agents/skills/kpmg-slidegen/prompts/deck_spec.md`
+- Prompt: `skills/kpmg-slidegen/prompts/30_deck_spec.md`
 - Canonical schema: `schemas/deckSpec.schema.json`
 
 Responsibilities:
@@ -167,7 +167,7 @@ Responsibilities:
 Primary references:
 
 - Canonical schema: `schemas/qaReport.schema.json`
-- Repair prompt: `.agents/skills/kpmg-slidegen/prompts/repair.md`
+- Repair prompt: `skills/kpmg-slidegen/prompts/40_repair.md`
 
 Responsibilities:
 
@@ -181,10 +181,10 @@ Responsibilities:
 
 | Artifact | Produced By | Core Purpose | Validation |
 |---|---|---|---|
-| `intake.json` | `prompts/intake.md` | Normalize user goal, scope, constraints | Prompt contract |
-| `contentPack.json` | `prompts/content_pack.md` | Structured evidence and slot-ready raw content | `schemas/contentPack.schema.json` |
-| `deckPlan.json` | `prompts/deck_plan.md` | Narrative and slide-type plan | `schemas/deckPlan.schema.json` |
-| `deckSpec.json` | `prompts/deck_spec.md` | Fully renderable slide slot payloads | `schemas/deckSpec.schema.json` |
+| `intake.json` | `prompts/00_intake.md` | Normalize user goal, scope, constraints | Prompt contract |
+| `contentPack.json` | `prompts/10_content_pack.md` | Structured evidence and slot-ready raw content | `schemas/contentPack.schema.json` |
+| `deckPlan.json` | `prompts/20_deck_plan.md` | Narrative and slide-type plan | `schemas/deckPlan.schema.json` |
+| `deckSpec.json` | `prompts/30_deck_spec.md` | Fully renderable slide slot payloads | `schemas/deckSpec.schema.json` |
 | `deck.pptx` | Renderer | Final output deck | Runtime + QA checks |
 | `qaReport.json` | Renderer/QA | Findings, risks, and repair hooks | `schemas/qaReport.schema.json` |
 
@@ -262,14 +262,15 @@ For `analysisWideChartTableText` and `analysisWideChartTableTextScaffold`, table
 
 ## Source-of-Truth File Map
 
-- Skill overview: `.agents/skills/kpmg-slidegen/SKILL.md`
-- Orchestrator workflow: `.agents/skills/kpmg-slidegen/agents/openai.yaml`
+- Skill overview: `skills/kpmg-slidegen/SKILL.md`
+- Orchestrator workflow: `skills/kpmg-slidegen/agents/openai.yaml`
+- Harness mirror (generated copy): `.agents/skills/kpmg-slidegen/`
 - Stage prompts:
-  - `.agents/skills/kpmg-slidegen/prompts/intake.md`
-  - `.agents/skills/kpmg-slidegen/prompts/content_pack.md`
-  - `.agents/skills/kpmg-slidegen/prompts/deck_plan.md`
-  - `.agents/skills/kpmg-slidegen/prompts/deck_spec.md`
-  - `.agents/skills/kpmg-slidegen/prompts/repair.md`
+  - `skills/kpmg-slidegen/prompts/00_intake.md`
+  - `skills/kpmg-slidegen/prompts/10_content_pack.md`
+  - `skills/kpmg-slidegen/prompts/20_deck_plan.md`
+  - `skills/kpmg-slidegen/prompts/30_deck_spec.md`
+  - `skills/kpmg-slidegen/prompts/40_repair.md`
 - Canonical schemas:
   - `schemas/contentPack.schema.json`
   - `schemas/deckPlan.schema.json`

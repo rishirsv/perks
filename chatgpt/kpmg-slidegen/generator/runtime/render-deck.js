@@ -8,7 +8,6 @@ import {
   addAnalysisWideChart2ColsText,
   addAnalysisWideChartTableText,
 } from '../builders/analysis-wide-chart-text.js';
-import { addSummaryFinancials, addSummaryFinancialsScaffold } from '../builders/summary-financials.js';
 import { addTitleStrapline4TextBoxes } from '../builders/title-strapline-4-boxes.js';
 import { addBackCover } from '../builders/back-cover-slide.js';
 import { addOneColumnText } from '../builders/one-column-text.js';
@@ -401,6 +400,32 @@ function dedupeSlotIssueRows(items = []) {
   return out;
 }
 
+function collectRepeatedBodyLineWarnings(slides = []) {
+  const lineMap = new Map();
+  slides.forEach((slideSpec, slideIndex) => {
+    const body = Array.isArray(slideSpec?.body) ? slideSpec.body : [];
+    body.forEach((item) => {
+      const text = extractText(item).replace(/\s+/g, ' ').trim();
+      if (!text || text.length < 40) return;
+      const key = text.toLowerCase();
+      if (!lineMap.has(key)) {
+        lineMap.set(key, { text, slides: new Set() });
+      }
+      lineMap.get(key).slides.add(slideIndex);
+    });
+  });
+
+  const warnings = [];
+  for (const entry of lineMap.values()) {
+    if (entry.slides.size <= 2) continue;
+    const preview = entry.text.length > 88 ? `${entry.text.slice(0, 85)}...` : entry.text;
+    warnings.push(
+      `Repeated body line appears on ${entry.slides.size} slides: "${preview}"`,
+    );
+  }
+  return warnings;
+}
+
 function normalizeSlideSpec(slideSpec) {
   const s = deepClone(slideSpec || {});
   if (s.type === 'qualityOfEarnings') {
@@ -662,6 +687,10 @@ export function validateDeckSpecWithTemplate(deckSpec, templatePackage, options 
     }
   });
 
+  for (const repetitionWarning of collectRepeatedBodyLineWarnings(deckSpec.slides || [])) {
+    warnings.push(repetitionWarning);
+  }
+
   return {
     valid: errors.length === 0,
     errors,
@@ -901,7 +930,6 @@ function getMasterNameForSlide(slideSpec, templatePackage) {
   const variants = templatePackage.layouts?.masters?.variants || {};
   if (slideSpec.type === 'cover') return variants.cover?.masterName || 'KPMG_COVER';
   if (slideSpec.type === 'backCover') return variants.closing?.masterName || 'KPMG_CLOSING';
-  if (slideSpec.type === 'summaryFinancials') return variants.summary?.masterName || 'KPMG_SUMMARY';
   if (slideSpec.type === 'dividerLight') return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
   if (slideSpec.type === 'dividerDark' || slideSpec.type === 'divider') {
     if (slideSpec.variant === 'light') return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
@@ -990,14 +1018,8 @@ function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
   if (slideSpec.type === 'analysisWideChartTableText') {
     return addAnalysisWideChartTableText(pptx, { ...slideSpec, masterName, geometry });
   }
-  if (slideSpec.type === 'summaryFinancials') {
-    return addSummaryFinancials(pptx, { ...slideSpec, masterName, geometry });
-  }
   if (slideSpec.type === 'analysisWideChartTableTextScaffold') {
     return addProfitLossOverview(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'summaryFinancialsScaffold') {
-    return addSummaryFinancialsScaffold(pptx, { ...slideSpec, masterName, geometry });
   }
   if (slideSpec.type === 'titleStrapline4TextBoxes') {
     return addTitleStrapline4TextBoxes(pptx, { ...slideSpec, masterName, geometry });

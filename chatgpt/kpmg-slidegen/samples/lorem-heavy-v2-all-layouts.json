@@ -24,7 +24,7 @@
       "sectionTitle": "Long-Form Text and Layout Stress Test"
     },
     {
-      "type": "summaryFinancials",
+      "type": "analysisNarrowTable",
       "title": "Summary Financials — Lorem Scenario",
       "sectionsTop": [
         "Quality of earnings",
@@ -34,7 +34,31 @@
       "sectionsBottom": [
         "Cash conversion",
         "Other value bridge"
-      ]
+      ],
+      "table": {
+        "headers": [
+          "Metric",
+          "Value",
+          "Delta"
+        ],
+        "rows": [
+          [
+            "Quality of earnings",
+            "See notes",
+            ""
+          ],
+          [
+            "Net working capital",
+            "See notes",
+            ""
+          ],
+          [
+            "Net debt",
+            "See notes",
+            ""
+          ]
+        ]
+      }
     },
     {
       "type": "analysisWideChart2ColsText",
@@ -331,7 +355,7 @@
       "source": "Synthetic placeholder narrative for layout stress testing"
     },
     {
-      "type": "summaryFinancialsScaffold",
+      "type": "analysisWideChartTableTextScaffold",
       "title": "Summary financials (Scaffold Preview)",
       "sectionsTop": [
         "Quality of earnings",
@@ -342,7 +366,10 @@
         "Cash conversion",
         "Other bridge"
       ],
-      "source": "Placeholder scaffold only"
+      "source": "Placeholder scaffold only",
+      "body": [
+        "Use this placeholder to add a concise narrative summary tied to the adjacent chart and table."
+      ]
     },
     {
       "type": "backCover",

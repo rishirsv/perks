@@ -146,7 +146,7 @@ export function addAnalysisWideChart2ColsText(pptx, { title, strapline, body, ch
 
 export function addAnalysisWideChartTableText(
   pptx,
-  { title, strapline, heading, body, chart, table, noteSource, showSummaryChart = false, showChart = false, geometry, masterName } = {},
+  { title, strapline, heading, body, chart, table, noteSource, showSummaryChart = false, geometry, masterName } = {},
 ) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const g = geometry || TOKENS.geometry;
@@ -166,8 +166,15 @@ export function addAnalysisWideChartTableText(
   const hasMeasuredStrapline = Boolean(g.strapline || g.bodyBoxes?.[0]);
   const yShift = strapline && !hasMeasuredStrapline ? STRAPLINE_SHIFT : 0;
   const topBase = g.body || g.rightBody || g.bodyBoxes?.[2] || g.topText || TOKENS.geometry.topText;
-  const shouldRenderChart = Boolean(showChart || showSummaryChart);
-  const chartBase = shouldRenderChart ? (g.chart || g.bottomChart || g.summaryChart || null) : null;
+  const hasChartData = Boolean(chart?.type && Array.isArray(chart?.data) && chart.data.length > 0);
+  const hasTableData = Boolean(table?.headers && Array.isArray(table?.rows) && table.rows.length > 0);
+  // Render charts whenever data is available; flags only influence preferred chart slot.
+  const shouldRenderChart = hasChartData;
+  const chartBase = shouldRenderChart
+    ? hasTableData
+      ? (showSummaryChart ? (g.summaryChart || g.chart || g.bottomChart || null) : (g.chart || g.bottomChart || g.summaryChart || null))
+      : (g.table || g.chart || g.bottomChart || g.summaryChart || null)
+    : null;
   const tableBase = g.table || null;
   const headingBase = g.heading || g.bodyBoxes?.[1] || null;
   const textBox = yShift ? { ...topBase, y: topBase.y + yShift, h: topBase.h - yShift } : topBase;
@@ -189,7 +196,7 @@ export function addAnalysisWideChartTableText(
 
   addHeadingBand(pptx, slide, heading, headingBase);
 
-  if (safeTableBox && table?.headers && Array.isArray(table?.rows)) {
+  if (safeTableBox && hasTableData) {
     addAnalysisTable(slide, table, {
       x: safeTableBox.x,
       y: safeTableBox.y,
@@ -202,7 +209,7 @@ export function addAnalysisWideChartTableText(
   }
 
   slide.addText(toBulletRuns(body), { ...safeTextBox, ...TOKENS.textStyles.body, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
-  if (safeChartBox && chart?.type && Array.isArray(chart?.data) && chart.data.length > 0) {
+  if (safeChartBox && hasChartData) {
     addChart(pptx, slide, chart, safeChartBox);
   }
   if (noteSource && g.note) {

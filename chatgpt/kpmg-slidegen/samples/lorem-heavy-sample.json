@@ -24,7 +24,7 @@
       "sectionTitle": "Long-Form Text and Layout Stress Test"
     },
     {
-      "type": "summaryFinancials",
+      "type": "analysisNarrowTable",
       "title": "Summary Financials — Lorem Scenario",
       "sectionsTop": [
         "Quality of earnings",
@@ -34,7 +34,31 @@
       "sectionsBottom": [
         "Cash conversion",
         "Other value bridge"
-      ]
+      ],
+      "table": {
+        "headers": [
+          "Metric",
+          "Value",
+          "Delta"
+        ],
+        "rows": [
+          [
+            "Quality of earnings",
+            "See notes",
+            ""
+          ],
+          [
+            "Net working capital",
+            "See notes",
+            ""
+          ],
+          [
+            "Net debt",
+            "See notes",
+            ""
+          ]
+        ]
+      }
     },
     {
       "type": "analysisWideChart2ColsText",
