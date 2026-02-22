@@ -1,329 +1,349 @@
-# KPMG Slide Generator (Plain-English Guide)
+# KPMG Slide Generator (Minimal Runtime Edition)
 
-This project turns structured slide input into KPMG-style PowerPoint decks using a deterministic generator.
+This repository is the **runtime-minimal** version of the KPMG slide generator.
+It contains only the files required to turn a `deckSpec` JSON into a `.pptx` file with a QA report.
 
-## What this system does
+Use this document as the single source explaining how everything fits together.
 
-- You provide a `deckSpec` (what slides you want and what content goes in each slot).
-- The renderer applies the KPMG Diligence+ layout package (tokens, geometry, assets, masters).
-- The system produces two outputs every run: a `.pptx` and a `.qa.json` report.
+## 1) What This Repo Does
 
-## Simple end-to-end flow
+Input:
+- A deck JSON file in `decks/input.deckSpec.json` format.
 
-1. Read the template package (`tokens`, `layouts`, and assets manifest).
-2. Validate each slide against strict slot rules and density thresholds.
-3. Auto-paginate long text/table content to avoid collisions.
-4. Render each slide with the correct builder and master chrome.
-5. Run QA diagnostics (including overlap checks by default).
-6. Save `deck.pptx` and `deck.qa.json`.
+Output:
+- A PowerPoint file (`.pptx`).
+- A QA report (`.json`) with validation and overlap checks.
 
-## Core file tree (clean view)
+Core command:
 
-```text
-/Users/rishi/Code/ai-tools/chatgpt/kpmg-slidegen
-├─ generator/
-│  ├─ index.js
-│  ├─ validate.js
-│  ├─ tokens.js
-│  ├─ runtime/
-│  │  ├─ render-deck.js
-│  │  ├─ paginate.js
-│  │  ├─ template-package.js
-│  │  ├─ template-roots.js
-│  │  └─ diagnostics.js
-│  ├─ strict/
-│  │  └─ overlap.js
-│  ├─ scripts/
-│  │  ├─ build-template-package.js
-│  │  └─ build-layout-catalog-spec.js
-│  ├─ helpers/
-│  │  ├─ title.js
-│  │  ├─ text.js
-│  │  ├─ bullets.js
-│  │  ├─ chart.js
-│  │  ├─ geometry.js
-│  │  ├─ footer.js
-│  │  ├─ media.js
-│  │  └─ svg.js
-│  └─ builders/
-│     ├─ cover-slide.js
-│     ├─ contents-slide.js
-│     ├─ divider-slide.js
-│     ├─ summary-financials.js
-│     ├─ analysis-wide-chart-text.js
-│     ├─ analysis-narrow-table.js
-│     ├─ two-column-text.js
-│     ├─ one-column-text.js
-│     ├─ title-strapline-4-boxes.js
-│     ├─ profit-loss-overview.js
-│     └─ back-cover-slide.js
-├─ templates/
-│  ├─ kpmg-diligence/package/
-│  │  ├─ tokens.json
-│  │  ├─ layouts.json
-│  │  └─ assets/manifest.json
-│  └─ diligence-plus/runtime/masters.ts
-├─ schemas/
-│  ├─ deckSpec.schema.json
-│  ├─ contentPack.schema.json
-│  ├─ deckPlan.schema.json
-│  └─ qaReport.schema.json
-└─ renderer/
-   ├─ validate.ts
-   ├─ density.ts
-   └─ qa.ts
+```bash
+cd /Users/rishi/Code/ai-tools/chatgpt/kpmg-slidegen
+node generator/index.js \
+  --in decks/input.deckSpec.json \
+  --out outputs/my-run/deck.pptx \
+  --qa-out outputs/my-run/qa.json
 ```
 
-## File-by-file guide
+---
+
+## 2) End-to-End Flow
+
+```mermaid
+flowchart LR
+    A["deckSpec JSON"] --> B["generator/index.js"]
+    B --> C["loadTemplatePackage()"]
+    B --> D["validateDeckSpecWithTemplate()"]
+    D --> E["renderDeck()"]
+    E --> F["paginateDeckSpec()"]
+    E --> G["buildSlide() dispatch"]
+    G --> H["builders/*"]
+    H --> I["PptxGenJS slide objects"]
+    I --> J["deck.pptx"]
+    B --> K["strict/overlap.js"]
+    K --> L["qa.json + overlap report"]
+```
+
+### Render Sequence
+
+```mermaid
+sequenceDiagram
+    participant U as "User/Operator"
+    participant CLI as "generator/index.js"
+    participant TP as "runtime/template-package.js"
+    participant RD as "runtime/render-deck.js"
+    participant PG as "runtime/paginate.js"
+    participant BLD as "builders/*"
+    participant QA as "strict/overlap.js"
+
+    U->>CLI: "Run with --in/--out/--qa-out"
+    CLI->>TP: "Load layouts/tokens/assets manifest"
+    CLI->>RD: "Validate + render request"
+    RD->>PG: "Auto-split overflowing slides"
+    RD->>BLD: "Render each slide type"
+    BLD-->>RD: "Pptx slide objects"
+    RD-->>CLI: "pptx + runtime QA metadata"
+    CLI->>QA: "Check overlaps"
+    CLI-->>U: "Write deck.pptx + qa.json"
+```
+
+---
+
+## 3) Folder Structure
+
+```text
+/Users/rishi/Code/ai-tools/chatgpt/kpmg-slidegen/
+├── README.md
+├── decks/
+│   └── input.deckSpec.json
+├── generator/
+│   ├── index.js
+│   ├── tokens.js
+│   ├── builders/
+│   ├── helpers/
+│   ├── runtime/
+│   └── strict/
+├── templates/
+│   └── kpmg-diligence/
+│       ├── assets/
+│       └── package/
+│           ├── layouts.json
+│           ├── tokens.json
+│           └── assets/manifest.json
+└── node_modules/
+```
+
+---
+
+## 4) File-by-File Responsibilities
+
+## Deck Input
+- `decks/input.deckSpec.json`
+  - The current deck specification.
+  - Contains deck metadata and ordered `slides[]`.
+  - Each slide has a `type` plus type-specific fields (for example `title`, `body`, `chart`, `table`, `sectionNumber`).
+
+## Main Entry
+- `generator/index.js`
+  - CLI entry point.
+  - Reads input JSON, loads template package, validates content, renders PPTX, runs overlap checks, writes QA report.
+  - Primary exports: `generateToFile()`, `main()`.
+
+## Runtime Layer
+- `generator/runtime/render-deck.js`
+  - Core orchestration logic.
+  - Validates each slide against template slot expectations.
+  - Defines slide masters from template config.
+  - Applies pagination output.
+  - Dispatches each slide type to the proper builder.
+  - Adds logical page numbers and optional notes.
+
+- `generator/runtime/paginate.js`
+  - Heuristic pagination engine.
+  - Splits large text/table content into continuation slides to avoid overlap.
+  - Tracks `paginationDecisions` and `overflowEvents`.
+
+- `generator/runtime/template-package.js`
+  - Loads template package files:
+    - `templates/kpmg-diligence/package/tokens.json`
+    - `templates/kpmg-diligence/package/layouts.json`
+    - `templates/kpmg-diligence/package/assets/manifest.json`
+  - Exposes `resolveAssetPath()` for builders.
 
-### `generator/index.js`
+- `generator/runtime/template-roots.js`
+  - Resolves repository-relative template paths.
+  - Primary source of template directory resolution.
 
-- This is the main command-line entry point used to generate decks.
-- It validates input, renders the deck, runs QA checks, and writes output files.
-- It now runs overlap checks by default and supports `--skip-overlap` when needed.
+- `generator/runtime/diagnostics.js`
+  - Collects runtime warnings/fallbacks/missing-slot diagnostics.
+  - Used by `index.js` when producing QA output.
 
-### `generator/validate.js`
+## Strict QA
+- `generator/strict/overlap.js`
+  - Detects slide element overlap risk.
+  - Produces overlap summary/report written by `index.js`.
 
-- This is the standalone validator command for quick preflight checks.
-- It loads the template package and validates a `deckSpec` without writing a deck.
-- It is useful in CI when you want to fail fast before rendering.
+## Builders (Slide Renderers)
+- `generator/builders/cover-slide.js`
+  - Renders cover slide.
 
-### `generator/tokens.js`
+- `generator/builders/divider-slide.js`
+  - Renders divider section slides (dark/light variants).
 
-- This centralizes core style defaults (fonts, colors, sizes, chart palette).
-- Builders read these tokens so styling stays consistent across slide types.
-- Body text is now standardized to Arial 10.
+- `generator/builders/contents-slide.js`
+  - Renders contents/index slide.
+
+- `generator/builders/one-column-text.js`
+  - Renders single-column text narrative slides.
+
+- `generator/builders/two-column-text.js`
+  - Renders two-column narrative slides.
+
+- `generator/builders/analysis-narrow-table.js`
+  - Renders table-first analytical slides (with optional notes/side narrative depending on spec).
 
-### `generator/runtime/render-deck.js`
+- `generator/builders/analysis-wide-chart-text.js`
+  - Renders chart+text analytical slides:
+    - `analysisWideChart2ColsText`
+    - `analysisWideChartTableText`
+
+- `generator/builders/profit-loss-overview.js`
+  - Renders scaffold variant currently mapped from `analysisWideChartTableTextScaffold`.
+
+- `generator/builders/title-strapline-4-boxes.js`
+  - Renders title + strapline + 4 text box layout.
+
+- `generator/builders/back-cover-slide.js`
+  - Renders the hardcoded closing/back-cover slide.
+
+## Helpers (Shared Utilities)
+- `generator/helpers/title.js`
+  - Shared title rendering helper.
+
+- `generator/helpers/text.js`
+  - Text sanitization and sizing helpers.
+
+- `generator/helpers/bullets.js`
+  - Bullet run conversion helpers.
 
-- This is the runtime “brain” that maps each slide type to the right builder.
-- It enforces strict, type-aware slot validation and density scoring before render.
-- It also controls master selection, deterministic page numbering, and QA payload assembly.
+- `generator/helpers/chart.js`
+  - Chart visual helper utilities.
 
-### `generator/runtime/paginate.js`
+- `generator/helpers/geometry.js`
+  - Geometry checks and layout safety helpers.
 
-- This file splits content deterministically when text or tables are too long.
-- It avoids overlap by creating continuation slides in predictable ways.
-- It records pagination decisions and overflow events for the QA report.
+- `generator/helpers/footer.js`
+  - Footer logo/safe-area utilities used by pagination/layout logic.
 
-### `generator/runtime/template-package.js`
+- `generator/helpers/media.js`
+  - Image/source normalization and sizing helpers.
 
-- This loader reads generated template package JSON data from disk.
-- It resolves assets through the manifest instead of hardcoded base64 blobs.
-- It gives runtime code a single, stable object for tokens/layouts/assets.
+- `generator/helpers/svg.js`
+  - SVG sanitization and data-URI conversion helpers.
 
-### `generator/runtime/template-roots.js`
+## Design Tokens
+- `generator/tokens.js`
+  - Code-level design constants for typography, colors, chart palettes, sizing, and bullet settings.
 
-- This holds helper logic for locating template roots and asset directories.
-- It keeps path resolution consistent across local scripts and runtime use.
-- It helps avoid hardcoded relative path mistakes.
+## Template Package (Contract + Assets)
+- `templates/kpmg-diligence/package/layouts.json`
+  - Runtime layout contract.
+  - Defines `types` (slide types), geometry boxes, slot requirements, density rules, and master variant configuration.
 
-### `generator/runtime/diagnostics.js`
+- `templates/kpmg-diligence/package/tokens.json`
+  - Extracted template-level tokens (dimensions, fonts, colors, styles).
 
-- This tracks warnings, missing slots, and fallback events during generation.
-- It gives structured diagnostics that feed into `deck.qa.json`.
-- It keeps QA collection separate from rendering logic.
+- `templates/kpmg-diligence/package/assets/manifest.json`
+  - Logical asset key to file path map (for `resolveAssetPath`).
 
-### `generator/strict/overlap.js`
+## Template Assets (Physical Files)
+- `templates/kpmg-diligence/assets/kpmg-logo.svg`
+- `templates/kpmg-diligence/assets/kpmg-logo-white.svg`
+- `templates/kpmg-diligence/assets/kpmg-logo-white.png`
+- `templates/kpmg-diligence/assets/cover-photo.jpeg`
+- `templates/kpmg-diligence/assets/gradient_divider_window_300dpi.png`
+- `templates/kpmg-diligence/assets/gradient_back_cover_300dpi.png`
+- `templates/kpmg-diligence/assets/gradient_accent_chip_300dpi.png`
+- `templates/kpmg-diligence/assets/closing-logo-white.png`
+- `templates/kpmg-diligence/assets/closing-social-twitter.png`
+- `templates/kpmg-diligence/assets/closing-social-linkedin.png`
+- `templates/kpmg-diligence/assets/closing-social-facebook.png`
+- `templates/kpmg-diligence/assets/closing-social-instagram.png`
+- `templates/kpmg-diligence/assets/closing-social-youtube.png`
+- `templates/kpmg-diligence/assets/closing-nav-icons.png`
 
-- This inspects rendered slide objects to detect overlap and containment risk.
-- It classifies issues and returns summary counts for reporting.
-- It now runs by default in generation flows unless explicitly skipped.
+## Runtime Dependencies
+- `node_modules/`
+  - Vendored dependencies required at runtime (for example `pptxgenjs`, `image-size`, and transitive packages).
+  - This minimal repo currently depends on these being present.
 
-### `generator/scripts/build-template-package.js`
+---
 
-- This script builds the template data package from canonical template sources.
-- It emits data-first outputs like `tokens.json`, `layouts.json`, and asset manifest references.
-- It keeps runtime code stable by regenerating data, not runtime logic.
+## 5) Slide Type to Builder Mapping
 
-### `generator/scripts/build-layout-catalog-spec.js`
+The dispatch happens in `generator/runtime/render-deck.js`.
 
-- This script generates a deck spec containing all supported slide layouts.
-- It is mainly for visual catalog/testing runs and layout QA.
-- It helps quickly compare current generator output vs template expectations.
+| Slide Type | Builder |
+|---|---|
+| `cover` | `addCover` |
+| `divider`, `dividerDark`, `dividerLight` | `addDivider` |
+| `contents` | `addContentsSlide` |
+| `twoColumnText`, `analysis2ColumnsText` | `addTwoColumnTextWithStrapline` |
+| `oneColumnText`, `qualityOfEarnings` | `addOneColumnText` |
+| `analysisNarrowTable` | `addAnalysisNarrowTable` |
+| `analysisWideChart2ColsText` | `addAnalysisWideChart2ColsText` |
+| `analysisWideChartTableText` | `addAnalysisWideChartTableText` |
+| `analysisWideChartTableTextScaffold` | `addProfitLossOverview` |
+| `titleStrapline4TextBoxes` | `addTitleStrapline4TextBoxes` |
+| `backCover` | `addBackCover` |
 
-### `generator/helpers/title.js`
+---
 
-- This helper renders slide titles in a consistent visual style.
-- It centralizes title spacing/format behavior used by multiple builders.
-- It reduces repeated code in layout-specific files.
+## 6) Data Contracts and Validation
 
-### `generator/helpers/text.js`
+Validation path:
+1. `index.js` calls `validateDeckSpecWithTemplate()`.
+2. Validation uses `layouts.json` slot definitions per slide type.
+3. Missing/invalid slots, density issues, and repair hints are aggregated into QA.
 
-- This helper sanitizes text and calculates practical text box behavior.
-- It provides reusable text-height and line-wrap safety utilities.
-- It helps builders avoid accidental overflow and bad formatting.
+Important runtime checks include:
+- Required slot presence.
+- Slot type/shape checks (`text`, `textArray`, `table`, `chart`, etc.).
+- Density thresholds (`ok`, `thin but acceptable`, `too sparse, should be repaired or flagged`).
+- Repeated body-line warnings.
 
-### `generator/helpers/bullets.js`
+---
 
-- This helper transforms raw bullet input into PowerPoint text runs.
-- It supports consistent bullet styling and mixed run behavior.
-- It keeps bullet rendering predictable across all text-heavy slides.
+## 7) Pagination Model
 
-### `generator/helpers/chart.js`
+Pagination is automatic and conservative:
+- Long bullet bodies are split into continuation slides (`(cont.)`).
+- Table rows are split over multiple pages if they exceed geometry budget.
+- Chart+text slides keep chart context while text continues.
 
-- This helper contains chart-related utility logic and color decisions.
-- It standardizes chart label/color behavior used by chart builders.
-- It avoids duplicated chart setup logic.
+This is done in `generator/runtime/paginate.js`, before final slide rendering.
 
-### `generator/helpers/geometry.js`
+---
 
-- This helper validates and clamps geometry boxes to safe layout bounds.
-- It prevents invalid template-extracted geometry from breaking slides.
-- It supports fallback handling when extracted positions are incomplete.
+## 8) Masters, Footer, and Logical Page Numbers
 
-### `generator/helpers/footer.js`
+`render-deck.js` defines masters from `layouts.json` (`masters.variants`) and overlays footer chrome where configured.
 
-- This helper stores footer safety constants and shared footer logic.
-- Pagination and builders use it to keep content above footer chrome.
-- It reduces footer collisions and keeps layout output cleaner.
+Logical page numbers:
+- Excludes cover/divider/backCover from numbering.
+- Adds page number only where master variant includes footer.
 
-### `generator/helpers/media.js`
+---
 
-- This helper normalizes image/media sources before insertion.
-- It supports consistent handling of local path-based assets.
-- It keeps media rendering logic centralized.
+## 9) Output Artifacts
 
-### `generator/helpers/svg.js`
+Given:
 
-- This helper converts SVG files into compatible data URIs where needed.
-- It supports legacy template paths and logo handling.
-- It keeps SVG conversion out of builder-specific code.
+```bash
+--out outputs/my-run/deck.pptx --qa-out outputs/my-run/qa.json
+```
 
-### `generator/builders/cover-slide.js`
+You will get:
+- `outputs/my-run/deck.pptx`
+- `outputs/my-run/qa.json`
+- optional overlap report path based on QA naming rules
 
-- Builds the cover slide using the Diligence+ cover geometry and assets.
-- Renders title/subtitle with cover-specific placement and styling.
-- Handles cover image/logo behaviors consistently.
+---
 
-### `generator/builders/contents-slide.js`
+## 10) Operational Notes
 
-- Builds the table-of-contents slide from section blocks.
-- Supports section number/title/page range/item lists.
-- Matches the expected two-row contents grid style.
+- This minimal repo intentionally omits orchestration skills, prompt stages, and external docs.
+- It is a direct renderer runtime.
+- `node_modules` is required in this trimmed state.
+- `generator/index.js --strict` references `qa/strict_overflow.py`; that script is not part of this minimal cut, so avoid strict-overflow mode unless you add that script back.
 
-### `generator/builders/divider-slide.js`
+---
 
-- Builds section divider slides for dark and light variants.
-- Uses the appropriate background/gradient and text colors by variant.
-- Supports section numbering and section title placement.
+## 11) Quick Troubleshooting
 
-### `generator/builders/summary-financials.js`
+`ERR_MODULE_NOT_FOUND: pptxgenjs`
+- Ensure `node_modules/pptxgenjs` exists.
 
-- Builds the summary financials slide and scaffold variant.
-- Supports KPI cards, strapline, and summary chart region.
-- Encodes the baseline “summary page” look for repeatable outputs.
+`Unknown type: <type>`
+- The slide type is not mapped in `buildSlide()` in `generator/runtime/render-deck.js`.
 
-### `generator/builders/analysis-wide-chart-text.js`
+`Missing required: <slot>`
+- Check the slide type contract in `templates/kpmg-diligence/package/layouts.json` and fill required fields in `decks/input.deckSpec.json`.
 
-- Builds the wide-chart analysis slide families.
-- Supports both chart + two-column text and chart + table + text layouts.
-- Reuses common chart/text patterns so behavior is consistent.
+`Master mismatch detected`
+- The slide was rendered on a different master than expected; check `getMasterNameForSlide()` and master definitions in `layouts.json`.
 
-### `generator/builders/analysis-narrow-table.js`
+---
 
-- Builds the analysis slide with a narrow table and commentary area.
-- Handles dense table rendering with practical defaults.
-- Includes layout-safe behavior for large tables.
+## 12) One-Page Mental Model
 
-### `generator/builders/two-column-text.js`
+```mermaid
+flowchart TD
+    A["decks/input.deckSpec.json"] --> B["validate against layouts.json slots"]
+    B --> C["paginate long content"]
+    C --> D["dispatch slide types to builders"]
+    D --> E["compose pptx via PptxGenJS"]
+    E --> F["run overlap QA"]
+    F --> G["write deck.pptx + qa.json"]
+```
 
-- Builds two-column text slides with optional strapline.
-- Handles column fallback geometry when extracted boxes are weak.
-- Uses text safety helpers to reduce overlap risk.
-
-### `generator/builders/one-column-text.js`
-
-- Builds one-column text slides, including QoE-style narrative pages.
-- Supports strapline + body bullet text flows.
-- Uses footer-safe bounds to reduce collisions with chrome.
-
-### `generator/builders/title-strapline-4-boxes.js`
-
-- Builds the four-column text box layout under a title + strapline.
-- Applies consistent column handling and fallback geometry.
-- Keeps this frequently reused structure deterministic.
-
-### `generator/builders/profit-loss-overview.js`
-
-- Builds the Profit & Loss overview scaffold layout.
-- Supports strapline, summary chart area, table area, heading bar, and notes.
-- Provides placeholders when chart/table content is missing.
-
-### `generator/builders/back-cover-slide.js`
-
-- Builds the closing/back-cover slide with gradient and disclaimer content.
-- Applies final-page text styles and placement rules.
-- Keeps ending slide output brand-consistent.
-
-### `templates/kpmg-diligence/package/tokens.json`
-
-- Data-only design tokens extracted for runtime use.
-- Stores fonts, colors, dimensions, and style primitives.
-- Runtime reads this instead of hardcoding style constants.
-
-### `templates/kpmg-diligence/package/layouts.json`
-
-- Data-only layout catalog with slot contracts and geometry.
-- Defines slide types, required slots, density targets, and master mappings.
-- This is the contract runtime validation and rendering follow.
-
-### `templates/kpmg-diligence/package/assets/manifest.json`
-
-- Data-only map of asset keys to file paths.
-- Keeps runtime references clean and review-friendly.
-- Avoids embedding large base64 assets in source code.
-
-### `templates/diligence-plus/runtime/masters.ts`
-
-- Defines richer master chrome variants and shared footer/header elements.
-- Documents the intended master model for runtime parity work.
-- Acts as the TypeScript reference for master behavior.
-
-### `schemas/deckSpec.schema.json`
-
-- Formal schema for deck specs the renderer accepts.
-- Defines slide shape, required fields, and content object types.
-- Helps enforce stable contracts between orchestration and rendering.
-
-### `schemas/contentPack.schema.json`
-
-- Formal schema for structured content packs before deck assembly.
-- Defines slide content payload shape and slot value expectations.
-- Helps keep ingest and composition predictable.
-
-### `schemas/deckPlan.schema.json`
-
-- Formal schema for narrative and slide-type planning output.
-- Defines required planning fields (`title`, `type`, `intent`) per slide.
-- Keeps planning contracts aligned with renderable layout types.
-
-### `schemas/qaReport.schema.json`
-
-- Formal schema for `deck.qa.json` output.
-- Defines density findings, slot issues, repair suggestions, and QA metadata.
-- Makes QA output machine-checkable and consistent.
-
-### `generator/scripts/check-slot-contract-sync.js`
-
-- Contract sync checker that compares schema contracts with template layout contracts.
-- Fails fast on type enum drift and required-slot drift between `schemas/*` and `templates/.../layouts.json`.
-- Should be run after any layout/slot/schema edits to keep one effective source of truth.
-
-### `renderer/validate.ts`
-
-- TypeScript validator module that mirrors strict runtime validation rules.
-- Performs type-aware slot validation and emits structured issues.
-- Produces repair suggestions that orchestration can act on.
-
-### `renderer/density.ts`
-
-- TypeScript density scoring module with explicit status labels.
-- Classifies slides as `OK`, `thin but acceptable`, or `too sparse...`.
-- Gives deterministic thresholds so sparse content is easy to flag.
-
-### `renderer/qa.ts`
-
-- TypeScript QA helper module for repair hooks and deduping.
-- Turns issues and overflow events into actionable remedy suggestions.
-- Keeps QA guidance consistent and reusable.
+If you understand those seven steps, you understand the full minimal system.

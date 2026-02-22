@@ -1,4 +1,0 @@
-interface:
-  display_name: "KPMG GPT Inventory"
-  short_description: "Add GPTs to the master inventory deck, generate PPTX, render PNGs, and flag layout issues."
-

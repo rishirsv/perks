@@ -1,4 +1,0 @@
-interface:
-  display_name: "KPMG SlideGen"
-  short_description: "Deterministic KPMG deck generation and repair"
-  default_prompt: "Use $kpmg-slidegen to generate a schema-valid KPMG Diligence+ deck with deterministic render and QA repair."

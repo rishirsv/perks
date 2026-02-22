@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ascii"?>
-<p188:authorLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p188="http://schemas.microsoft.com/office/powerpoint/2018/8/main">
-  <p188:author id="{CBA0F91C-AF45-BA66-55A7-A671E9C82DDF}" name="Cooney, Adrienne" initials="CA" userId="S::acooney@kpmg.ca::dfa8859b-b536-4c02-8ac3-9f1ee9926b4a" providerId="AD"/>
-  <p188:author id="{B9CE512D-C315-6F6E-63ED-6F83D2531740}" name="Durante, Lisa" initials="DL" userId="S::ldurante@kpmg.ca::7799ab81-b12b-43c4-8525-2b7b59935438" providerId="AD"/>
-  <p188:author id="{810A1F44-6C3B-0ACC-0867-DAB669F2D070}" name="ZarreenZehra Naqvi" initials="ZN" userId="S::Zarreen.Naqvi@evalueserve.com::dcba1773-da4f-4fea-91f1-47ed161f7334" providerId="AD"/>
-  <p188:author id="{59199ABB-4CD3-9724-602D-EB9C2E3B430B}" name="Lindholm, Jani" initials="LJ" userId="S::Jani.Lindholm@kpmg.fi::ab23701a-bf79-48be-9783-cb99c04db22b" providerId="AD"/>
-  <p188:author id="{B7BFBACA-F9C5-DED3-56F1-4F0052E2274C}" name="Ankit Singh Bhandari" initials="ASB" userId="S::Ankit.Bhandari@evalueserve.com::b50e9234-db7b-4706-bd30-27610cd66a18" providerId="AD"/>
-</p188:authorLst>
