@@ -1,4 +1,4 @@
-# KPMG Slide Generator (Minimal Runtime Edition)
+# KPMG Slide Generator
 
 This repository is the **runtime-minimal** version of the KPMG slide generator.
 It contains only the files required to turn a `deckSpec` JSON into a `.pptx` file with a QA report.
@@ -8,11 +8,14 @@ Use this document as the single source explaining how everything fits together.
 ## 1) What This Repo Does
 
 Input:
+
 - A deck JSON file in `decks/input.deckSpec.json` format.
 
 Output:
+
 - A PowerPoint file (`.pptx`).
 - A single QA report (`.json`) with validation, overlap checks, and a top-level summary.
+- Optional postprocess artifacts (preview PNGs, montage PNG, visual overflow diagnostics) when requested.
 
 Core command:
 
@@ -22,6 +25,18 @@ node generator/index.js \
   --in decks/input.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json
+```
+
+Optional postprocess command:
+
+```bash
+node generator/index.js \
+  --in decks/input.deckSpec.json \
+  --out outputs/my-run/deck.pptx \
+  --qa-out outputs/my-run/qa.json \
+  --with-preview \
+  --with-montage \
+  --with-visual-overflow
 ```
 
 ---
@@ -97,18 +112,21 @@ sequenceDiagram
 ## 4) File-by-File Responsibilities
 
 ## Deck Input
+
 - `decks/input.deckSpec.json`
   - The current deck specification.
   - Contains deck metadata and ordered `slides[]`.
   - Each slide has a `type` plus type-specific fields (for example `title`, `body`, `chart`, `table`, `sectionNumber`).
 
 ## Main Entry
+
 - `generator/index.js`
   - CLI entry point.
   - Reads input JSON, loads template package, validates content, renders PPTX, runs overlap checks, writes QA report.
   - Primary exports: `generateToFile()`, `main()`.
 
 ## Runtime Layer
+
 - `generator/runtime/render-deck.js`
   - Core orchestration logic.
   - Validates each slide against template slot expectations.
@@ -138,11 +156,13 @@ sequenceDiagram
   - Used by `index.js` when producing QA output.
 
 ## Strict QA
+
 - `generator/strict/overlap.js`
   - Detects slide element overlap risk.
   - Produces overlap diagnostics embedded into the single QA JSON.
 
 ## Builders (Slide Renderers)
+
 - `generator/builders/cover-slide.js`
   - Renders cover slide.
 
@@ -176,6 +196,7 @@ sequenceDiagram
   - Renders the hardcoded closing/back-cover slide.
 
 ## Helpers (Shared Utilities)
+
 - `generator/helpers/title.js`
   - Shared title rendering helper.
 
@@ -201,10 +222,12 @@ sequenceDiagram
   - SVG sanitization and data-URI conversion helpers.
 
 ## Design Tokens
+
 - `generator/tokens.js`
   - Code-level design constants for typography, colors, chart palettes, sizing, and bullet settings.
 
 ## Template Package (Contract + Assets)
+
 - `templates/kpmg-diligence/package/layouts.json`
   - Runtime layout contract.
   - Defines `types` (slide types), geometry boxes, slot requirements, density rules, and master variant configuration.
@@ -216,6 +239,7 @@ sequenceDiagram
   - Logical asset key to file path map (for `resolveAssetPath`).
 
 ## Template Assets (Physical Files)
+
 - `templates/kpmg-diligence/assets/kpmg-logo.svg`
 - `templates/kpmg-diligence/assets/kpmg-logo-white.svg`
 - `templates/kpmg-diligence/assets/kpmg-logo-white.png`
@@ -232,6 +256,7 @@ sequenceDiagram
 - `templates/kpmg-diligence/assets/closing-nav-icons.png`
 
 ## Runtime Dependencies
+
 - `node_modules/`
   - Vendored dependencies required at runtime (for example `pptxgenjs`, `image-size`, and transitive packages).
   - This minimal repo currently depends on these being present.
@@ -242,30 +267,32 @@ sequenceDiagram
 
 The dispatch happens in `generator/runtime/render-deck.js`.
 
-| Slide Type | Builder |
-|---|---|
-| `cover` | `addCover` |
-| `divider`, `dividerDark`, `dividerLight` | `addDivider` |
-| `contents` | `addContentsSlide` |
-| `twoColumnText`, `analysis2ColumnsText` | `addTwoColumnTextWithStrapline` |
-| `oneColumnText`, `qualityOfEarnings` | `addOneColumnText` |
-| `analysisNarrowTable` | `addAnalysisNarrowTable` |
-| `analysisWideChart2ColsText` | `addAnalysisWideChart2ColsText` |
-| `analysisWideChartTableText` | `addAnalysisWideChartTableText` |
-| `analysisWideChartTableTextScaffold` | `addProfitLossOverview` |
-| `titleStrapline4TextBoxes` | `addTitleStrapline4TextBoxes` |
-| `backCover` | `addBackCover` |
+| Slide Type                               | Builder                         |
+| ---------------------------------------- | ------------------------------- |
+| `cover`                                  | `addCover`                      |
+| `divider`, `dividerDark`, `dividerLight` | `addDivider`                    |
+| `contents`                               | `addContentsSlide`              |
+| `twoColumnText`, `analysis2ColumnsText`  | `addTwoColumnTextWithStrapline` |
+| `oneColumnText`, `qualityOfEarnings`     | `addOneColumnText`              |
+| `analysisNarrowTable`                    | `addAnalysisNarrowTable`        |
+| `analysisWideChart2ColsText`             | `addAnalysisWideChart2ColsText` |
+| `analysisWideChartTableText`             | `addAnalysisWideChartTableText` |
+| `analysisWideChartTableTextScaffold`     | `addProfitLossOverview`         |
+| `titleStrapline4TextBoxes`               | `addTitleStrapline4TextBoxes`   |
+| `backCover`                              | `addBackCover`                  |
 
 ---
 
 ## 6) Data Contracts and Validation
 
 Validation path:
+
 1. `index.js` calls `validateDeckSpecWithTemplate()`.
 2. Validation uses `layouts.json` slot definitions per slide type.
 3. Missing/invalid slots, density issues, and repair hints are aggregated into QA.
 
 Important runtime checks include:
+
 - Required slot presence.
 - Slot type/shape checks (`text`, `textArray`, `table`, `chart`, etc.).
 - Density thresholds (`ok`, `thin but acceptable`, `too sparse, should be repaired or flagged`).
@@ -276,6 +303,7 @@ Important runtime checks include:
 ## 7) Pagination Model
 
 Pagination is automatic and conservative:
+
 - Long bullet bodies are split into continuation slides (`(cont.)`).
 - Table rows are split over multiple pages if they exceed geometry budget.
 - Chart+text slides keep chart context while text continues.
@@ -289,6 +317,7 @@ This is done in `generator/runtime/paginate.js`, before final slide rendering.
 `render-deck.js` defines masters from `layouts.json` (`masters.variants`) and overlays footer chrome where configured.
 
 Logical page numbers:
+
 - Excludes cover/divider/backCover from numbering.
 - Adds page number only where master variant includes footer.
 
@@ -303,13 +332,17 @@ Given:
 ```
 
 You will get:
+
 - `outputs/my-run/deck.pptx`
 - `outputs/my-run/qa.json`
 
 `qa.json` includes:
+
 - `summary` (quick pass/fail + counts + strict status)
 - `overlapSummary` (deck-level overlap totals)
 - `overlapFindings` (slide-level overlap snippets)
+- Optional `postprocess` block (availability, preview/montage/visual overflow results)
+- Optional `summary.postprocess` counters (`previewAttempted`, `previewFailed`, etc.)
 
 ---
 
@@ -318,22 +351,28 @@ You will get:
 - This minimal repo intentionally omits orchestration skills, prompt stages, and external docs.
 - It is a direct renderer runtime.
 - `node_modules` is required in this trimmed state.
-- `generator/index.js --strict` references `qa/strict_overflow.py`; that script is not part of this minimal cut, so avoid strict-overflow mode unless you add that script back.
+- `--with-preview`, `--with-montage`, and `--with-visual-overflow` are optional postprocess steps.
+- Postprocess steps are non-blocking for base deck generation; failures are recorded in QA warnings.
+- `--strict` now prefers visual overflow checking when available and otherwise safely skips missing strict checkers with explicit QA reasons.
 
 ---
 
 ## 11) Quick Troubleshooting
 
 `ERR_MODULE_NOT_FOUND: pptxgenjs`
+
 - Ensure `node_modules/pptxgenjs` exists.
 
 `Unknown type: <type>`
+
 - The slide type is not mapped in `buildSlide()` in `generator/runtime/render-deck.js`.
 
 `Missing required: <slot>`
+
 - Check the slide type contract in `templates/kpmg-diligence/package/layouts.json` and fill required fields in `decks/input.deckSpec.json`.
 
 `Master mismatch detected`
+
 - The slide was rendered on a different master than expected; check `getMasterNameForSlide()` and master definitions in `layouts.json`.
 
 ---
@@ -351,3 +390,44 @@ flowchart TD
 ```
 
 If you understand those seven steps, you understand the full minimal system.
+
+---
+
+## 13) Postprocess Flags
+
+- `--with-preview`
+  - Render generated deck to PNG slides (requires embedded slides skill/runtime availability).
+- `--with-montage`
+  - Build one montage PNG from preview images.
+- `--with-visual-overflow`
+  - Run visual overflow checks against rendered images.
+- `--preview-width <px>`
+  - Preview width target (default `1600`).
+- `--preview-height <px>`
+  - Preview height target (default `900`).
+- `--preview-dir <path>`
+  - Preview output directory (default `<out-dir>/preview`).
+- `--montage-out <path>`
+  - Montage output path (default `<out-dir>/montage.png`).
+- `--montage-cols <n>`
+  - Montage column count (default `5`).
+- `--montage-label-mode <number|filename|none>`
+  - Montage label style (default `number`).
+- `--visual-overflow-pad-px <px>`
+  - Padding used by visual overflow checker (default `100`).
+
+---
+
+## 14) Validation Scripts
+
+Smoke generation:
+
+```bash
+node scripts/smoke-generate.mjs
+```
+
+Postprocess flow tests (success/failure/unavailable):
+
+```bash
+node scripts/test-postprocess-flows.mjs
+```
