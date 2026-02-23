@@ -2,7 +2,7 @@ import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
 import { clampBoxToBottom, isValidColumnGeometry } from '../helpers/geometry.js';
-import { calcTextBoxHeight, sanitizeText } from '../helpers/text.js';
+import { computeDynamicStraplineBox, sanitizeText } from '../helpers/text.js';
 import { recordFallback } from '../runtime/diagnostics.js';
 import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
 import fs from 'node:fs';
@@ -17,14 +17,6 @@ export const TOKENS = {
     right: { x: 7.0415, y: 1.2899, w: 5.2, h: 5.9101 },
   },
   textStyles: {
-    title: {
-      fontFace: FONTS.heading,
-      fontSize: TYPE_SIZES.slideTitle,
-      color: COLORS.kpmgBlue,
-      bold: true,
-      align: 'left',
-      valign: 'top',
-    },
     body: {
       fontFace: FONTS.body,
       fontSize: TYPE_SIZES.body,
@@ -189,19 +181,15 @@ export function addTwoColumnTextWithStrapline(
       x: titleGeo.x,
       y: TOKENS.geometry.title.y + TOKENS.geometry.title.h + 0.05,
       w: titleGeo.w,
-      h: calcTextBoxHeight(TYPE_SIZES.strapline, 1),
+      h: TOKENS.geometry.strapline.h,
     };
-    const strapWidth = strapBase.w || titleGeo.w;
-    const estimatedCharsPerLine = Math.max(30, Math.floor(strapWidth * 12));
-    const estimatedLines = Math.max(1, Math.ceil(sanitizeText(strapText).length / estimatedCharsPerLine));
-    const dynamicHeight = calcTextBoxHeight(TYPE_SIZES.strapline, Math.min(8, estimatedLines), 1.1, 0.12);
-    strapBox = {
-      ...strapBase,
-      x: strapBase.x ?? titleGeo.x,
-      y: strapBase.y ?? TOKENS.geometry.strapline.y,
-      w: strapWidth,
-      h: Math.max(strapBase.h || TOKENS.geometry.strapline.h, dynamicHeight),
-    };
+    strapBox = computeDynamicStraplineBox({
+      strapline: strapText,
+      titleGeo,
+      strapBase,
+      defaultStrapGeo: TOKENS.geometry.strapline,
+      fontSize: style?.straplineFontSize ?? TYPE_SIZES.strapline,
+    });
     slide.addText(sanitizeText(strapText), {
       ...strapBox,
       fontFace: FONTS.body,
@@ -235,7 +223,7 @@ export function addTwoColumnTextWithStrapline(
     valign: 'top',
   });
 
-  // Optional enhancements (used by the TS Custom GPTs portfolio deck):
+  // Optional enhancements:
   // - `icon`: add an icon chip at the top-right of the right column
   // - `screenshotPlaceholder`: render a framed screenshot placeholder in the right column
   const iconInRightColumn = Boolean(icon) && !iconInTitle;

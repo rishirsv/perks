@@ -1,7 +1,7 @@
 import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
-import { calcTextBoxHeight, sanitizeText } from '../helpers/text.js';
+import { computeDynamicStraplineBox, sanitizeText } from '../helpers/text.js';
 import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
 import { clampBoxToBottom } from '../helpers/geometry.js';
 
@@ -31,17 +31,13 @@ export function addOneColumnText(pptx, { title, strapline, body, source, bodySty
   if (strapText) {
     const titleGeo = g.title || TOKENS.geometry.title;
     const strapBase = g.strapline || TOKENS.geometry.strapline;
-    const strapWidth = strapBase.w || titleGeo.w || TOKENS.geometry.strapline.w;
-    const estimatedCharsPerLine = Math.max(30, Math.floor(strapWidth * 12));
-    const estimatedLines = Math.max(1, Math.ceil(sanitizeText(strapText).length / estimatedCharsPerLine));
-    const dynamicHeight = calcTextBoxHeight(TYPE_SIZES.strapline, Math.min(8, estimatedLines), 1.1, 0.12);
-    strapGeo = {
-      ...strapBase,
-      x: strapBase.x ?? titleGeo.x,
-      y: strapBase.y ?? TOKENS.geometry.strapline.y,
-      w: strapWidth,
-      h: Math.max(strapBase.h || TOKENS.geometry.strapline.h, dynamicHeight),
-    };
+    strapGeo = computeDynamicStraplineBox({
+      strapline: strapText,
+      titleGeo,
+      strapBase,
+      defaultStrapGeo: TOKENS.geometry.strapline,
+      fontSize: TYPE_SIZES.strapline,
+    });
     slide.addText(sanitizeText(strapText), {
       ...strapGeo,
       ...TOKENS.textStyles.strapline,

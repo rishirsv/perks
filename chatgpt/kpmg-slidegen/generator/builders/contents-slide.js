@@ -97,7 +97,7 @@ function chunkFive(arr) {
   return [a.slice(0, 5), a.slice(5, 10)];
 }
 
-function sectionBox(row, col, rowGeo) {
+function sectionBox(col, rowGeo) {
   const gap = 0.18;
   const colW = (rowGeo.w - gap * 4) / 5;
   return { x: rowGeo.x + (colW + gap) * col, y: rowGeo.y, w: colW, h: rowGeo.h };
@@ -110,10 +110,10 @@ export function addContentsSlide(pptx, { title, sections, geometry, masterName }
 
   const [top, bottom] = chunkFive(sections);
   top.forEach((section, idx) =>
-    addSectionBlock(pptx, slide, section, sectionBox(0, idx, g.topRow || TOKENS.geometry.topRow)),
+    addSectionBlock(pptx, slide, section, sectionBox(idx, g.topRow || TOKENS.geometry.topRow)),
   );
   bottom.forEach((section, idx) =>
-    addSectionBlock(pptx, slide, section, sectionBox(1, idx, g.bottomRow || TOKENS.geometry.bottomRow)),
+    addSectionBlock(pptx, slide, section, sectionBox(idx, g.bottomRow || TOKENS.geometry.bottomRow)),
   );
 
   return slide;

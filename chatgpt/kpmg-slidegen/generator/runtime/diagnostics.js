@@ -67,11 +67,3 @@ export function recordOverlapSummary(summary) {
   if (!activeDiagnostics) return;
   activeDiagnostics.overlaps = summary;
 }
-
-/**
- * Get the current diagnostics object.
- * @returns {object|null}
- */
-export function getDiagnostics() {
-  return activeDiagnostics;
-}

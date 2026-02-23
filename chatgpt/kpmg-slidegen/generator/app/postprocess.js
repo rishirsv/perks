@@ -15,7 +15,7 @@ export function parsePositiveInt(raw, fallback) {
  * @param {object} availability
  * @returns {object}
  */
-export function createInitialPostprocessReport(availability = {}) {
+function createInitialPostprocessReport(availability = {}) {
   return {
     availability: {
       slidesSkill: Boolean(availability?.available),

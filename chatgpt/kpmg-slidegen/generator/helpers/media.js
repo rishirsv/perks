@@ -10,7 +10,7 @@ import { svgToDataUri } from './svg.js';
  * @param {string} value
  * @returns {boolean}
  */
-export function isDataUri(value) {
+function isDataUri(value) {
   return typeof value === 'string' && value.startsWith('data:');
 }
 
@@ -19,7 +19,7 @@ export function isDataUri(value) {
  * @param {string} value
  * @returns {boolean}
  */
-export function isSvgString(value) {
+function isSvgString(value) {
   return typeof value === 'string' && value.includes('<svg');
 }
 
@@ -40,7 +40,7 @@ export function normalizeImageSource(source) {
  * @param {string|Buffer} source
  * @returns {{buffer: Buffer, type: string}}
  */
-export function readInputAsBuffer(source) {
+function readInputAsBuffer(source) {
   if (!source) throw new Error('Image source is empty');
   if (Buffer.isBuffer(source)) return { buffer: source, type: 'buffer' };
   if (typeof source === 'string') {
@@ -50,10 +50,10 @@ export function readInputAsBuffer(source) {
       const payload = comma !== -1 ? source.slice(comma + 1) : source;
       try {
         return { buffer: Buffer.from(payload, 'base64'), type };
-      } catch (_e) {
+      } catch {
         try {
           return { buffer: Buffer.from(decodeURIComponent(payload), 'utf8'), type };
-        } catch (_e2) {
+        } catch {
           return { buffer: Buffer.from(payload, 'utf8'), type };
         }
       }
@@ -267,98 +267,5 @@ export function getImageDimensions(source) {
     height: meta.height,
     aspectRatio,
     type: meta.type,
-  };
-}
-
-/**
- * Compute crop-to-cover sizing for an image.
- * @param {string|Buffer} source
- * @param {number} x
- * @param {number} y
- * @param {number} w
- * @param {number} h
- * @param {number} [cx]
- * @param {number} [cy]
- * @param {number} [cw]
- * @param {number} [ch]
- * @returns {object}
- */
-export function imageSizingCrop(source, x, y, w, h, cx, cy, cw, ch) {
-  const { aspectRatio } = getImageDimensions(source);
-  const boxAspect = w / h;
-
-  if (cx === undefined || cy === undefined || cw === undefined || ch === undefined) {
-    let cropXFrac;
-    let cropYFrac;
-    let cropWFrac;
-    let cropHFrac;
-    if (aspectRatio >= boxAspect) {
-      cropHFrac = 1;
-      cropWFrac = boxAspect / aspectRatio;
-      cropXFrac = (1 - cropWFrac) / 2;
-      cropYFrac = 0;
-    } else {
-      cropWFrac = 1;
-      cropHFrac = aspectRatio / boxAspect;
-      cropXFrac = 0;
-      cropYFrac = (1 - cropHFrac) / 2;
-    }
-    cx = cropXFrac;
-    cy = cropYFrac;
-    cw = cropWFrac;
-    ch = cropHFrac;
-  }
-
-  let virtualW = w / cw;
-  let virtualH = virtualW / aspectRatio;
-  const eps = 1e-6;
-  if (Math.abs(virtualH * ch - h) > eps) {
-    virtualH = h / ch;
-    virtualW = virtualH * aspectRatio;
-  }
-
-  const cropXIn = cx * virtualW;
-  const cropYIn = cy * virtualH;
-  return {
-    x,
-    y,
-    w: virtualW,
-    h: virtualH,
-    sizing: {
-      type: 'crop',
-      x: cropXIn,
-      y: cropYIn,
-      w: w,
-      h: h,
-    },
-  };
-}
-
-/**
- * Compute contain sizing for an image.
- * @param {string|Buffer} source
- * @param {number} x
- * @param {number} y
- * @param {number} w
- * @param {number} h
- * @returns {object}
- */
-export function imageSizingContain(source, x, y, w, h) {
-  const { aspectRatio } = getImageDimensions(source);
-  let w2;
-  let h2;
-  const boxAspect = w / h;
-  if (aspectRatio >= boxAspect) {
-    w2 = w;
-    h2 = w2 / aspectRatio;
-  } else {
-    h2 = h;
-    w2 = h2 * aspectRatio;
-  }
-  return {
-    x: x + (w - w2) / 2,
-    y: y + (h - h2) / 2,
-    w: w2,
-    h: h2,
   };
 }

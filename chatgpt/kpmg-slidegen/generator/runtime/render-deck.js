@@ -671,6 +671,7 @@ export function validateDeckSpecWithTemplate(deckSpec, templatePackage, options 
             candidate.code !== 'density_too_sparse',
         );
         if (!slotIssue) {
+          const remedy = suggestRemedy({ kind: metric.kind }, 'below_min_chars');
           slotIssues.push({
             slideIndex: idx,
             slideType: slideSpec.type,
@@ -681,8 +682,8 @@ export function validateDeckSpecWithTemplate(deckSpec, templatePackage, options 
             severity: 'warning',
             actual: metric.actual,
             target: metric.target,
-            hook: suggestRemedy({ kind: metric.kind }, 'below_min_chars').hook,
-            suggestedRemedy: suggestRemedy({ kind: metric.kind }, 'below_min_chars').suggestedRemedy,
+            hook: remedy.hook,
+            suggestedRemedy: remedy.suggestedRemedy,
           });
         }
       }
@@ -932,11 +933,10 @@ function getMasterNameForSlide(slideSpec, templatePackage) {
   const variants = templatePackage.layouts?.masters?.variants || {};
   if (slideSpec.type === 'cover') return variants.cover?.masterName || 'KPMG_COVER';
   if (slideSpec.type === 'backCover') return variants.closing?.masterName || 'KPMG_CLOSING';
-  if (slideSpec.type === 'dividerLight') return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
-  if (slideSpec.type === 'dividerDark' || slideSpec.type === 'divider') {
-    if (slideSpec.variant === 'light') return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
-    return variants.sectionDark?.masterName || 'KPMG_SECTION_DARK';
+  if (slideSpec.type === 'dividerLight' || (slideSpec.type === 'divider' && slideSpec.variant === 'light')) {
+    return variants.sectionLight?.masterName || 'KPMG_SECTION_LIGHT';
   }
+  if (slideSpec.type === 'dividerDark' || slideSpec.type === 'divider') return variants.sectionDark?.masterName || 'KPMG_SECTION_DARK';
   return variants.white?.masterName || 'KPMG_WHITE';
 }
 
@@ -1014,27 +1014,17 @@ function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
           : null,
     });
   }
-  if (slideSpec.type === 'contents') {
-    return addContentsSlide(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'twoColumnText') {
-    return addTwoColumnTextWithStrapline(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'oneColumnText') {
-    return addOneColumnText(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'analysisNarrowTable') {
-    return addAnalysisNarrowTable(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'analysisWideChart2ColsText') {
-    return addAnalysisWideChart2ColsText(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'analysisWideChartTableText') {
-    return addAnalysisWideChartTableText(pptx, { ...slideSpec, masterName, geometry });
-  }
-  if (slideSpec.type === 'titleStrapline4TextBoxes') {
-    return addTitleStrapline4TextBoxes(pptx, { ...slideSpec, masterName, geometry });
-  }
+  const builderByType = {
+    contents: addContentsSlide,
+    twoColumnText: addTwoColumnTextWithStrapline,
+    oneColumnText: addOneColumnText,
+    analysisNarrowTable: addAnalysisNarrowTable,
+    analysisWideChart2ColsText: addAnalysisWideChart2ColsText,
+    analysisWideChartTableText: addAnalysisWideChartTableText,
+    titleStrapline4TextBoxes: addTitleStrapline4TextBoxes,
+  };
+  const builder = builderByType[slideSpec.type];
+  if (builder) return builder(pptx, { ...slideSpec, masterName, geometry });
   if (slideSpec.type === 'backCover') {
     const gradientBackCover = requireAssetPath(
       templatePackage.resolveAssetPath('gradientBackCover'),

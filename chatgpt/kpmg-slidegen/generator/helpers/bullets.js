@@ -55,6 +55,7 @@ export function toBulletRuns(lines) {
     const paraOpts = {
       bullet: { indent: BULLETS.indentPt },
       ...(indentLevel ? { indentLevel } : {}),
+      paraSpaceBefore: BULLETS.paraSpaceBeforePt,
       paraSpaceAfter: BULLETS.paraSpaceAfterPt,
       lineSpacing: BULLETS.lineSpacingPt,
       ...baseStyle,
@@ -80,6 +81,7 @@ export function toBulletRuns(lines) {
           bold: true,
           color: COLORS.kpmgBlue,
           ...(gapBefore ? { paraSpaceBefore: 14 } : {}),
+          ...(!gapBefore ? { paraSpaceBefore: BULLETS.paraSpaceBeforePt } : {}),
           paraSpaceAfter: BULLETS.paraSpaceAfterPt,
           breakLine: true,
         },
@@ -158,6 +160,7 @@ export function toParagraphRuns(lines) {
     runs.push({
       text: safeText(text),
       options: {
+        paraSpaceBefore: BULLETS.paraSpaceBeforePt,
         paraSpaceAfter: BULLETS.paraSpaceAfterPt,
         lineSpacing: BULLETS.lineSpacingPt,
         breakLine: true,

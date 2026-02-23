@@ -36,12 +36,22 @@ function extractSchemaTypes() {
 
 function extractRuntimeTypes() {
   const source = fs.readFileSync(path.join(process.cwd(), 'generator/runtime/render-deck.js'), 'utf8');
-  const matches = source.matchAll(/slideSpec\.type === '([^']+)'/g);
-  const types = [];
-  for (const match of matches) {
-    if (match[1]) types.push(match[1]);
+  const types = new Set();
+
+  const conditionalMatches = source.matchAll(/slideSpec\.type === '([^']+)'/g);
+  for (const match of conditionalMatches) {
+    if (match[1]) types.add(match[1]);
   }
-  return sortedUnique(types);
+
+  // Also capture object-map dispatch entries in buildSlide.
+  const mapMatch = source.match(/const builderByType = \{([\s\S]*?)\n\s*\};/);
+  if (mapMatch?.[1]) {
+    const keyMatches = mapMatch[1].matchAll(/^\s*([A-Za-z0-9_]+)\s*:/gm);
+    for (const match of keyMatches) {
+      if (match[1]) types.add(match[1]);
+    }
+  }
+  return sortedUnique(Array.from(types));
 }
 
 function printMismatch(header, items) {

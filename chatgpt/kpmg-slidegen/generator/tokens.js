@@ -7,7 +7,6 @@
 export const FONTS = {
   heading: 'Arial',
   body: 'Arial',
-  fallback: 'Arial',
 };
 
 export const COLORS = {
@@ -21,10 +20,6 @@ export const COLORS = {
   white: 'FFFFFF',
   black: '000000',
   lightGrey: 'E5E5E5',
-  textDark: '000000',
-  textLight: 'FFFFFF',
-  bgLight: 'FFFFFF',
-  bgAlt: 'E5E5E5',
   green: '00A651',
   mediumBlue: '005EB8',
   orange: 'FF6D00',
@@ -50,8 +45,6 @@ function cmToPt(cm) {
 export const TYPE_SIZES = {
   // Per KPMG PPT standard (from user-provided reference deck):
   slideTitle: 32,
-  slideTitleCondensed: 30,
-  sectionHeading: 24,
   strapline: 10,
   body: 10,
   source: 6,
@@ -69,9 +62,8 @@ export const BULLETS = {
   // PowerPoint: Before text 0.63cm, Special: Hanging 0.63cm
   // PptxGenJS exposes bullet indent (points) which maps closest to the hanging indent.
   indentPt: cmToPt(0.63),
-  // PowerPoint: Spacing After 3pt; Line Spacing Exactly 12pt
-  paraSpaceAfterPt: 3,
+  // PowerPoint: Spacing Before 0pt; Spacing After 6pt; Line Spacing Exactly 12pt
+  paraSpaceBeforePt: 0,
+  paraSpaceAfterPt: 6,
   lineSpacingPt: 12,
 };
-
-export const STRAPLINE_SHIFT = 0.25;

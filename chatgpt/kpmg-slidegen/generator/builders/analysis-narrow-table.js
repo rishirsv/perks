@@ -25,17 +25,6 @@ const TWO_COL = {
   rightBody: { x: 6.73622, y: 2.19115, w: 5.50787, h: 4.23228 },
 };
 
-function numOrNull(s) {
-  const t = String(s ?? '').trim();
-  if (!t || /^n\/a$/i.test(t) || t === '—') return null;
-  // Keep negative via parentheses, and strip common financial formatting.
-  const isParenNeg = /^\(.*\)$/.test(t);
-  const cleaned = t.replace(/[(),$%xX+]/g, '').trim();
-  const n = Number.parseFloat(cleaned);
-  if (Number.isFinite(n)) return isParenNeg ? -n : n;
-  return null;
-}
-
 function findRow(table, labelPrefix) {
   const rows = Array.isArray(table?.rows) ? table.rows : [];
   const pfx = String(labelPrefix).toLowerCase();
@@ -91,7 +80,7 @@ function insightsForAnalysisTable(title, table) {
     bullets.push(`Use as a working view; confirm all figures during confirmatory diligence.`);
   }
 
-  // Ensure we always have some content (demo mode).
+  // Ensure we always have baseline content, even when table-specific signals are sparse.
   while (bullets.length < 4) bullets.push(`Add diligence commentary to contextualize table outcomes and implications.`);
   return bullets.slice(0, 6);
 }
@@ -100,8 +89,8 @@ function insightsForAnalysisTable(title, table) {
 // Generic analysis table (matches the prompt's data schema)
 // ----
 // Full content-area width — always use this for table layout regardless of
-// template geometry (the extracted "narrow table" width of ~4" is the template's
-// placeholder width, not the intended data table width).
+// template geometry (the extracted "narrow table" width of ~4" reflects a
+// template shape width, not the intended data table width).
 const FULL_TABLE_W = 11.1596;
 const TABLE_CHROME = {
   titleBarFill: T.kpmgDarkBlue,
@@ -147,7 +136,6 @@ function computeColMeta(headers, rows) {
       isNumericCol,
       isPriorityCol: headerEquals(h, ['priority']),
       isDirectionCol: headerEquals(h, ['direction']),
-      isTextCol: !isNumericCol,
     });
   }
   return colMeta;
@@ -159,7 +147,7 @@ function computeColW({ w, headers, rows }) {
 
   const meta = computeColMeta(headers, rows);
 
-  // High-signal special cases for the NVIDIA deck table types.
+  // High-signal special cases for common diligence table structures.
   // 1) Priority/Data Request/Rationale => narrow priority + wide text columns.
   if (
     cols === 3 &&
@@ -174,7 +162,6 @@ function computeColW({ w, headers, rows }) {
   }
 
   // 2) First column is a label, remaining are mostly numeric => give label more room.
-  const first = meta[0];
   const restNumeric = meta.slice(1).every((m) => m.isNumericCol) && cols >= 4;
   if (restNumeric) {
     const labelW = Math.min(Math.max(2.4, w * 0.22), 3.1);
@@ -218,11 +205,7 @@ function computeColAlignments(headers, rows) {
   const aligns = [];
   for (let i = 0; i < cols; i++) {
     const m = meta[i];
-    if (m.isPriorityCol) {
-      aligns.push('center');
-      continue;
-    }
-    if (m.isDirectionCol) {
+    if (m.isPriorityCol || m.isDirectionCol) {
       aligns.push('center');
       continue;
     }
@@ -260,7 +243,7 @@ function estimateRowHeight(row, colW, fontSize = 9) {
   return Math.max(0.19, Math.min(0.85, maxLines * lineHeight + 0.04));
 }
 
-function estimateTableHeight({ headers, rows, colW, fontSize = 9 }) {
+function estimateTableHeight({ rows, colW, fontSize = 9 }) {
   const bodyRows = Array.isArray(rows) ? rows : [];
   const headerH = 0.32;
   const chromeH = TABLE_CHROME.titleBarHeight + TABLE_CHROME.separatorHeight;
@@ -513,7 +496,6 @@ export function addAnalysisNarrowTable(
     const twoColTableBox = { ...TWO_COL.table, y: TWO_COL.table.y + yShift };
     const twoColColW = computeColW({ w: twoColTableBox.w, headers: table.headers, rows: table.rows });
     const estimatedTwoColHeight = estimateTableHeight({
-      headers: table.headers,
       rows: table.rows,
       colW: twoColColW,
       fontSize: cols >= 6 ? 8 : 9,

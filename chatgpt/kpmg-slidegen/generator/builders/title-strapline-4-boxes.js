@@ -49,9 +49,7 @@ export function addTitleStrapline4TextBoxes(
     });
   }
 
-  // In the legacy baseline, "Proposed Diligence Timeline" uses a slightly smaller title.
-  const titleOverrides = String(title ?? '').trim() === 'Proposed Diligence Timeline' ? { fontSize: TYPE_SIZES.slideTitleCondensed } : {};
-  addTitle(slide, title, g.title || TOKENS.geometry.title, titleOverrides);
+  addTitle(slide, title, g.title || TOKENS.geometry.title);
   let straplineBox = null;
   if (strapText && (g.strapline || TOKENS.geometry.strapline)) {
     straplineBox = g.strapline || TOKENS.geometry.strapline;

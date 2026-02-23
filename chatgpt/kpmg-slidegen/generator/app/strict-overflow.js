@@ -3,7 +3,7 @@
  * @param {object|null} visualOverflow
  * @returns {object|null}
  */
-export function strictStatusFromVisualOverflow(visualOverflow) {
+function strictStatusFromVisualOverflow(visualOverflow) {
   if (!visualOverflow) return null;
   if (visualOverflow.status === 'pass') {
     return { status: 0, mode: 'visual_overflow', failingSlides: [] };

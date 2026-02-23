@@ -7,7 +7,7 @@ import { parsePositiveInt } from './postprocess.js';
  * @param {string[]} argv
  * @returns {Map<string, string|boolean>}
  */
-export function parseArgMap(argv = []) {
+function parseArgMap(argv = []) {
   const args = new Map();
   for (let i = 0; i < argv.length; i++) {
     const token = argv[i];

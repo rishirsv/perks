@@ -48,7 +48,7 @@ export const TOKENS = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ASSETS (use placeholder base64 or file paths)
+// ASSETS (use file paths or data URIs)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TEMPLATE_ASSETS_DIR = resolveTemplateAssetsDir('kpmg-diligence');
