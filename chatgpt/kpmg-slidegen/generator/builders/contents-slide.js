@@ -3,7 +3,8 @@ import { addTitle } from '../helpers/title.js';
 
 const TOKENS = {
   geometry: {
-    title: { x: 1.089, y: 0.472, w: 3.0, h: 0.62 },
+    // 28.31cm x 1.57cm title box for long contents headings.
+    title: { x: 1.089, y: 0.472, w: 11.1457, h: 0.6181 },
     topRow: { x: 1.089, y: 1.38, w: 11.153, h: 2.35 },
     bottomRow: { x: 1.089, y: 4.04, w: 11.153, h: 2.35 },
   },

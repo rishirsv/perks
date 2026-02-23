@@ -12,7 +12,6 @@ import { addTitleStrapline4TextBoxes } from '../builders/title-strapline-4-boxes
 import { addBackCover } from '../builders/back-cover-slide.js';
 import { addOneColumnText } from '../builders/one-column-text.js';
 import { addContentsSlide } from '../builders/contents-slide.js';
-import { addProfitLossOverview } from '../builders/profit-loss-overview.js';
 import { paginateDeckSpec } from './paginate.js';
 
 function deepClone(value) {
@@ -301,7 +300,15 @@ function slotValidationResult(
   if (typeof value === 'string') {
     const maxChars = def.maxChars || def.maxLength;
     if (maxChars && value.length > maxChars) {
-      warnings.push(`${slotName} exceeds maxChars (${maxChars}), may shrink to fit`);
+      const message = `${slotName} exceeds maxChars (${maxChars})`;
+      const hardLimit = slotName === 'title' || def.enforceMaxChars === true;
+      if (hardLimit) {
+        errors.push(message);
+        addIssue('exceeds_max_chars', message, 'error', { actual: value.length, target: maxChars });
+      } else {
+        warnings.push(`${message}, may shrink to fit`);
+        addIssue('exceeds_max_chars', message, 'warning', { actual: value.length, target: maxChars });
+      }
     }
     if (def.pattern && !(new RegExp(def.pattern).test(value))) {
       const message = `${slotName} doesn't match pattern: ${def.pattern}`;
@@ -428,18 +435,13 @@ function collectRepeatedBodyLineWarnings(slides = []) {
 
 function normalizeSlideSpec(slideSpec) {
   const s = deepClone(slideSpec || {});
-  if (s.type === 'qualityOfEarnings') {
-    if (!Array.isArray(s.body) || s.body.length === 0) {
-      s.body = ['Quality of earnings narrative placeholder.'];
-    }
+  if (typeof s.bodyStyle === 'string') {
+    const normalized = s.bodyStyle.trim().toLowerCase();
+    if (normalized === 'paragraph' || normalized === 'paragraphs') s.bodyStyle = 'paragraphs';
+    else if (normalized === 'bullet' || normalized === 'bullets') s.bodyStyle = 'bullets';
   }
   if (s.type === 'contents' && !Array.isArray(s.sections)) {
     s.sections = [];
-  }
-  if (s.type === 'analysisWideChartTableTextScaffold') {
-    if (!Array.isArray(s.body) || s.body.length === 0) {
-      s.body = ['Add text here'];
-    }
   }
   return s;
 }
@@ -968,6 +970,11 @@ function addLogicalPageNumber(slide, templatePackage, pageNumber) {
   });
 }
 
+function requireAssetPath(assetPath, assetKey, slideType) {
+  if (assetPath) return assetPath;
+  throw new Error(`Missing required template asset "${assetKey}" for slide type "${slideType}"`);
+}
+
 function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
   const slideSpec = normalizeSlideSpec(rawSlideSpec);
   const masterName = getMasterNameForSlide(slideSpec, templatePackage);
@@ -976,15 +983,22 @@ function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
   const geometry = layout?.geometry || null;
 
   if (slideSpec.type === 'cover') {
+    const logoWhite = requireAssetPath(
+      templatePackage.resolveAssetPath('logoWhitePng') || templatePackage.resolveAssetPath('logoWhiteSvg'),
+      'logoWhitePng/logoWhiteSvg',
+      'cover',
+    );
+    const coverPhoto = requireAssetPath(
+      templatePackage.resolveAssetPath('coverPhoto'),
+      'coverPhoto',
+      'cover',
+    );
     return addCover(pptx, {
       title: slideSpec.title,
       subtitle: slideSpec.subtitle,
       masterName,
       geometry,
-      assets: {
-        logoWhite: templatePackage.resolveAssetPath('logoWhitePng') || templatePackage.resolveAssetPath('logoWhiteSvg'),
-        coverPhoto: templatePackage.resolveAssetPath('coverPhoto'),
-      },
+      assets: { logoWhite, coverPhoto },
     });
   }
   if (slideSpec.type === 'divider' || slideSpec.type === 'dividerDark' || slideSpec.type === 'dividerLight') {
@@ -1003,10 +1017,10 @@ function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
   if (slideSpec.type === 'contents') {
     return addContentsSlide(pptx, { ...slideSpec, masterName, geometry });
   }
-  if (slideSpec.type === 'twoColumnText' || slideSpec.type === 'analysis2ColumnsText') {
+  if (slideSpec.type === 'twoColumnText') {
     return addTwoColumnTextWithStrapline(pptx, { ...slideSpec, masterName, geometry });
   }
-  if (slideSpec.type === 'oneColumnText' || slideSpec.type === 'qualityOfEarnings') {
+  if (slideSpec.type === 'oneColumnText') {
     return addOneColumnText(pptx, { ...slideSpec, masterName, geometry });
   }
   if (slideSpec.type === 'analysisNarrowTable') {
@@ -1018,18 +1032,20 @@ function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
   if (slideSpec.type === 'analysisWideChartTableText') {
     return addAnalysisWideChartTableText(pptx, { ...slideSpec, masterName, geometry });
   }
-  if (slideSpec.type === 'analysisWideChartTableTextScaffold') {
-    return addProfitLossOverview(pptx, { ...slideSpec, masterName, geometry });
-  }
   if (slideSpec.type === 'titleStrapline4TextBoxes') {
     return addTitleStrapline4TextBoxes(pptx, { ...slideSpec, masterName, geometry });
   }
   if (slideSpec.type === 'backCover') {
+    const gradientBackCover = requireAssetPath(
+      templatePackage.resolveAssetPath('gradientBackCover'),
+      'gradientBackCover',
+      'backCover',
+    );
     return addBackCover(pptx, {
       ...slideSpec,
       masterName,
       geometry,
-      assets: { gradientBackCover: templatePackage.resolveAssetPath('gradientBackCover') },
+      assets: { gradientBackCover },
       footerValues: runtimeContext.footerValues || {},
       resolveAssetPath: templatePackage.resolveAssetPath,
     });
@@ -1039,9 +1055,11 @@ function buildSlide(pptx, rawSlideSpec, templatePackage, runtimeContext = {}) {
 
 export function renderDeck(deckSpec, templatePackage, options = {}) {
   const allowSparse = Boolean(options.allowSparse || deckSpec?.metadata?.allowSparse);
-  const validation = validateDeckSpecWithTemplate(deckSpec, templatePackage, {
-    allowSparse,
-  });
+  const validation =
+    options.validationResult ||
+    validateDeckSpecWithTemplate(deckSpec, templatePackage, {
+      allowSparse,
+    });
   if (!validation.valid) {
     throw new Error(validation.errors.join('\n'));
   }

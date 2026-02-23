@@ -1,5 +1,5 @@
-import { FONTS, COLORS, CHART_COLORS, TYPE_SIZES, TEXT_BOX, STRAPLINE_SHIFT } from '../tokens.js';
-import { toBulletRuns } from '../helpers/bullets.js';
+import { FONTS, COLORS, CHART_COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
+import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
 import { pickDataLabelColor } from '../helpers/chart.js';
 import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
@@ -8,7 +8,7 @@ import { addAnalysisTable } from './analysis-narrow-table.js';
 
 const TOKENS = {
   geometry: {
-    title: { x: 1.0919, y: 0.6, w: 11.1596, h: 0.6 },
+    title: { x: 1.0919, y: 0.4722, w: 11.1596, h: 0.5833 },
     strapline: { x: 1.0919, y: 1.2, w: 11.1596, h: 0.35 },
     leftText: { x: 1.0919, y: 1.6, w: 5.6, h: 5.4 },
     rightChart: { x: 7.0, y: 1.6, w: 5.25, h: 5.0 },
@@ -112,49 +112,17 @@ function addHeadingBand(pptx, slide, heading, geo) {
   });
 }
 
-export function addAnalysisWideChart2ColsText(pptx, { title, strapline, body, chart, geometry, masterName } = {}) {
+export function addAnalysisWideChart2ColsText(pptx, { title, strapline, body, bodyStyle, chart, geometry, masterName } = {}) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const g = geometry || TOKENS.geometry;
+  const strapText = strapline;
+  const effectiveBodyStyle = bodyStyle || 'bullets';
+  let straplineBox = null;
 
   addTitle(slide, title, g.title || TOKENS.geometry.title);
-  if (strapline && (g.strapline || TOKENS.geometry.strapline)) {
-    slide.addText(String(strapline), {
-      ...(g.strapline || TOKENS.geometry.strapline),
-      ...TOKENS.textStyles.strapline,
-      wrap: TEXT_BOX.wrap,
-      margin: TEXT_BOX.marginPt,
-      valign: 'top',
-    });
-  }
-
-  const hasMeasuredStrapline = Boolean(g.strapline);
-  const yShift = strapline && !hasMeasuredStrapline ? STRAPLINE_SHIFT : 0;
-  const leftBase = g.leftText || TOKENS.geometry.leftText;
-  const rightBase = g.rightChart || TOKENS.geometry.rightChart;
-  const textBox = yShift ? { ...leftBase, y: leftBase.y + yShift, h: leftBase.h - yShift } : leftBase;
-  const chartBox = yShift ? { ...rightBase, y: rightBase.y + yShift, h: rightBase.h - yShift } : rightBase;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
-  const safeTextBox = footerSafeTop ? clampBoxToBottom(textBox, footerSafeTop) : textBox;
-  const sourcePad = chart?.source ? 0.3 : 0;
-  const safeChartBox = footerSafeTop ? clampBoxToBottom(chartBox, footerSafeTop - sourcePad) : chartBox;
-
-  slide.addText(toBulletRuns(body), { ...safeTextBox, ...TOKENS.textStyles.body, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
-  addChart(pptx, slide, chart, safeChartBox);
-
-  return slide;
-}
-
-export function addAnalysisWideChartTableText(
-  pptx,
-  { title, strapline, heading, body, chart, table, noteSource, showSummaryChart = false, geometry, masterName } = {},
-) {
-  const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
-  const g = geometry || TOKENS.geometry;
-
-  addTitle(slide, title, g.title || TOKENS.geometry.title);
-  const straplineBox = g.strapline || g.bodyBoxes?.[0] || TOKENS.geometry.strapline;
-  if (strapline && straplineBox) {
-    slide.addText(String(strapline), {
+  if (strapText && (g.strapline || TOKENS.geometry.strapline)) {
+    straplineBox = g.strapline || TOKENS.geometry.strapline;
+    slide.addText(String(strapText), {
       ...straplineBox,
       ...TOKENS.textStyles.strapline,
       wrap: TEXT_BOX.wrap,
@@ -163,9 +131,56 @@ export function addAnalysisWideChartTableText(
     });
   }
 
-  const hasMeasuredStrapline = Boolean(g.strapline || g.bodyBoxes?.[0]);
-  const yShift = strapline && !hasMeasuredStrapline ? STRAPLINE_SHIFT : 0;
+  const leftBase = g.leftText || TOKENS.geometry.leftText;
+  const rightBase = g.rightChart || TOKENS.geometry.rightChart;
+  const yShift = strapText && straplineBox
+    ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - Math.min(leftBase.y, rightBase.y))
+    : 0;
+  const textBox = yShift ? { ...leftBase, y: leftBase.y + yShift, h: leftBase.h - yShift } : leftBase;
+  const chartBox = yShift ? { ...rightBase, y: rightBase.y + yShift, h: rightBase.h - yShift } : rightBase;
+  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
+  const safeTextBox = footerSafeTop ? clampBoxToBottom(textBox, footerSafeTop) : textBox;
+  const sourcePad = chart?.source ? 0.3 : 0;
+  const safeChartBox = footerSafeTop ? clampBoxToBottom(chartBox, footerSafeTop - sourcePad) : chartBox;
+
+  slide.addText(toBodyRuns(body, effectiveBodyStyle), {
+    ...safeTextBox,
+    ...TOKENS.textStyles.body,
+    wrap: TEXT_BOX.wrap,
+    margin: TEXT_BOX.marginPt,
+    valign: 'top',
+  });
+  addChart(pptx, slide, chart, safeChartBox);
+
+  return slide;
+}
+
+export function addAnalysisWideChartTableText(
+  pptx,
+  { title, strapline, heading, body, bodyStyle, chart, table, noteSource, showSummaryChart = false, geometry, masterName } = {},
+) {
+  const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
+  const g = geometry || TOKENS.geometry;
+  const strapText = strapline;
+  const effectiveBodyStyle = bodyStyle || 'bullets';
+  let straplineBox = null;
+
+  addTitle(slide, title, g.title || TOKENS.geometry.title);
+  straplineBox = g.strapline || g.bodyBoxes?.[0] || TOKENS.geometry.strapline;
+  if (strapText && straplineBox) {
+    slide.addText(String(strapText), {
+      ...straplineBox,
+      ...TOKENS.textStyles.strapline,
+      wrap: TEXT_BOX.wrap,
+      margin: TEXT_BOX.marginPt,
+      valign: 'top',
+    });
+  }
+
   const topBase = g.body || g.rightBody || g.bodyBoxes?.[2] || g.topText || TOKENS.geometry.topText;
+  const yShift = strapText && straplineBox
+    ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - topBase.y)
+    : 0;
   const hasChartData = Boolean(chart?.type && Array.isArray(chart?.data) && chart.data.length > 0);
   const hasTableData = Boolean(table?.headers && Array.isArray(table?.rows) && table.rows.length > 0);
   // Render charts whenever data is available; flags only influence preferred chart slot.
@@ -177,16 +192,48 @@ export function addAnalysisWideChartTableText(
     : null;
   const tableBase = g.table || null;
   const headingBase = g.heading || g.bodyBoxes?.[1] || null;
-  const textBox = yShift ? { ...topBase, y: topBase.y + yShift, h: topBase.h - yShift } : topBase;
-  const chartBox = chartBase
+  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
+  let textBox = yShift ? { ...topBase, y: topBase.y + yShift, h: topBase.h - yShift } : topBase;
+  let chartBox = chartBase
     ? (yShift ? { ...chartBase, y: chartBase.y + yShift, h: chartBase.h - yShift } : chartBase)
     : null;
-  const tableBox = tableBase
+  let tableBox = tableBase
     ? yShift
       ? { ...tableBase, y: tableBase.y + yShift, h: tableBase.h - yShift }
       : tableBase
     : null;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
+
+  // Some extracted template variants place chart above the heading and push body/table
+  // to the bottom half. For this layout we rebalance so chart + text sit directly below
+  // the heading band, with table beneath them.
+  const headingBottom = headingBase ? headingBase.y + headingBase.h : null;
+  const isLegacyBottomAnchoredLayout = Boolean(
+    hasChartData &&
+      hasTableData &&
+      headingBottom !== null &&
+      chartBox &&
+      textBox &&
+      tableBox &&
+      chartBox.y + chartBox.h <= headingBottom + 0.05 &&
+      textBox.y >= headingBottom + 1.3,
+  );
+  if (isLegacyBottomAnchoredLayout) {
+    const contentTop = headingBottom + 0.06 + yShift;
+    const contentBottom = (footerSafeTop || 6.75) - (noteSource && g.note ? 0.22 : 0);
+    const available = Math.max(2.8, contentBottom - contentTop);
+    const upperH = Math.max(1.35, Math.min(2.0, available * 0.48));
+    const lowerY = contentTop + upperH + 0.1;
+    const lowerH = Math.max(1.2, available - upperH - 0.1);
+    const leftX = Number.isFinite(tableBox.x) ? tableBox.x : 1.08854;
+    const leftW = Number.isFinite(tableBox.w) ? tableBox.w : 5.50787;
+    const rightX = Number.isFinite(textBox.x) ? textBox.x : 6.73622;
+    const rightW = Number.isFinite(textBox.w) ? textBox.w : 5.50787;
+
+    chartBox = { x: leftX, y: contentTop, w: leftW, h: upperH };
+    textBox = { x: rightX, y: contentTop, w: rightW, h: upperH };
+    tableBox = { x: leftX, y: lowerY, w: leftW, h: lowerH };
+  }
+
   const safeTextBox = footerSafeTop ? clampBoxToBottom(textBox, footerSafeTop) : textBox;
   const sourcePad = chart?.source ? 0.3 : 0;
   const safeChartBox = chartBox
@@ -208,7 +255,13 @@ export function addAnalysisWideChartTableText(
     });
   }
 
-  slide.addText(toBulletRuns(body), { ...safeTextBox, ...TOKENS.textStyles.body, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
+  slide.addText(toBodyRuns(body, effectiveBodyStyle), {
+    ...safeTextBox,
+    ...TOKENS.textStyles.body,
+    wrap: TEXT_BOX.wrap,
+    margin: TEXT_BOX.marginPt,
+    valign: 'top',
+  });
   if (safeChartBox && hasChartData) {
     addChart(pptx, slide, chart, safeChartBox);
   }

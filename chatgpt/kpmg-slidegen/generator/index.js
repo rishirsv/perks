@@ -1,7 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
 
+import { parseCliOptions } from './app/cli.js';
+import {
+  buildPostprocessOptions,
+  buildPostprocessSummary,
+  runPostprocessPipelines,
+} from './app/postprocess.js';
+import { resolveStrictOverflowStatus } from './app/strict-overflow.js';
 import { createSlidesAdapter } from './postprocess/slides-adapter.js';
 import { checkDeckOverlaps } from './strict/overlap.js';
 import { validateDeckSpecWithTemplate, renderDeck } from './runtime/render-deck.js';
@@ -162,312 +168,46 @@ function buildQaSummary(qaReport, { strictRequested = false } = {}) {
   };
 }
 
-/**
- * Build the default postprocess object for a run.
- * @param {object} availability
- * @returns {object}
- */
-function createInitialPostprocessReport(availability = {}) {
-  return {
-    availability: {
-      slidesSkill: Boolean(availability?.available),
-      reason: availability?.reason || null,
-      slidesDir: availability?.slidesDir || null,
-      python: availability?.python || null,
-    },
-    preview: {
-      attempted: false,
-      status: 'not_requested',
-      reason: null,
-      outputDir: null,
-      slideImageCount: 0,
-    },
-    montage: {
-      attempted: false,
-      status: 'not_requested',
-      reason: null,
-      path: null,
-      numCol: null,
-      labelMode: null,
-    },
-    overflowVisual: {
-      attempted: false,
-      status: 'not_requested',
-      reason: null,
-      failingSlides: [],
-      imagePaths: [],
-    },
-  };
-}
-
-/**
- * Convert postprocess status fields into summary counters.
- * @param {object|null} postprocess
- * @returns {object|null}
- */
-function buildPostprocessSummary(postprocess) {
-  if (!postprocess) return null;
-  const sections = [
-    ['preview', postprocess.preview],
-    ['montage', postprocess.montage],
-    ['overflowVisual', postprocess.overflowVisual],
-  ];
-  const out = {};
-  for (const [name, section] of sections) {
-    out[`${name}Attempted`] = Boolean(section?.attempted) ? 1 : 0;
-    out[`${name}Failed`] =
-      section?.status === 'error' || section?.status === 'fail'
-        ? 1
-        : 0;
-    out[`${name}Status`] = section?.status || 'unknown';
-  }
-  return out;
-}
-
-/**
- * Attempt strict-overflow checks through a local legacy script.
- * @param {string} pptxPath
- * @param {string} outDir
- * @returns {object}
- */
-function runStrictOverflowLegacy(pptxPath, outDir) {
-  const scriptPath = path.resolve('qa', 'strict_overflow.py');
-  if (!fs.existsSync(scriptPath)) {
-    const msg =
-      'Strict overflow check skipped: qa/strict_overflow.py is not available in this repo.';
-    console.warn(msg);
-    recordWarning(msg);
-    return { status: 0, skipped: true, reason: 'missing_strict_overflow_script', mode: 'legacy_script' };
-  }
-
-  const result = spawnSync('python3', [scriptPath, pptxPath, '--out', outDir], {
-    encoding: 'utf8',
-  });
-
-  if (result.error) {
-    const msg = `Strict overflow check skipped: ${result.error.message}`;
-    console.warn(msg);
-    recordWarning(msg);
-    return { status: 0, skipped: true, reason: 'strict_overflow_runtime_unavailable', mode: 'legacy_script' };
-  }
-
-  const status = result.status ?? 1;
-  if (status === 0) return { status: 0, mode: 'legacy_script' };
-
-  const combined = `${result.stdout || ''}\n${result.stderr || ''}`;
-  if (/No module named ['"]numpy['"]/.test(combined)) {
-    const msg =
-      'Strict overflow check skipped: optional dependency `numpy` is not installed.';
-    console.warn(msg);
-    recordWarning(msg);
-    return { status: 0, skipped: true, reason: 'missing_numpy', mode: 'legacy_script' };
-  }
-
-  // Show error details for unexpected failures.
-  if (result.stdout) process.stdout.write(result.stdout);
-  if (result.stderr) process.stderr.write(result.stderr);
-  return { status, mode: 'legacy_script' };
-}
-
-/**
- * Translate visual overflow status into strict-overflow status.
- * @param {object|null} visualOverflow
- * @returns {object|null}
- */
-function strictStatusFromVisualOverflow(visualOverflow) {
-  if (!visualOverflow) return null;
-  if (visualOverflow.status === 'pass') {
-    return { status: 0, mode: 'visual_overflow', failingSlides: [] };
-  }
-  if (visualOverflow.status === 'fail') {
-    return {
-      status: 1,
-      mode: 'visual_overflow',
-      failingSlides: visualOverflow.failingSlides || [],
-      imagePaths: visualOverflow.imagePaths || [],
-      reason: visualOverflow.reason || 'overflow_detected',
-    };
-  }
-  if (visualOverflow.status === 'skipped') {
-    return {
-      status: 0,
-      skipped: true,
-      mode: 'visual_overflow',
-      reason: visualOverflow.reason || 'visual_overflow_skipped',
-    };
-  }
-  return null;
-}
-
-/**
- * Execute optional postprocess flows against generated PPTX outputs.
- * @param {object} params
- * @returns {{postprocess: object, strictVisualOverflow: object|null}}
- */
-function runPostprocessPipelines({
-  adapter,
-  outPath,
-  options,
-  onWarning,
-}) {
-  const availability =
-    typeof adapter?.detectAvailability === 'function'
-      ? adapter.detectAvailability()
-      : { available: false, reason: 'missing_adapter_detect_availability' };
-
-  const postprocess = createInitialPostprocessReport(availability);
-  let strictVisualOverflow = null;
-
-  const previewRequested = Boolean(options.withPreview || options.withMontage);
-  if (previewRequested) {
-    postprocess.preview.attempted = true;
-    const previewResult = adapter.renderPreview({
-      pptxPath: outPath,
-      outputDir: options.previewOutputDir,
-      width: options.previewWidth,
-      height: options.previewHeight,
-    });
-    postprocess.preview = {
-      attempted: true,
-      status: previewResult?.status || 'error',
-      reason: previewResult?.reason || null,
-      outputDir: previewResult?.outputDir || options.previewOutputDir,
-      slideImageCount: Number(previewResult?.slideImageCount || 0),
-      width: options.previewWidth,
-      height: options.previewHeight,
-    };
-    if (postprocess.preview.status === 'error') {
-      onWarning(
-        `Postprocess preview failed: ${postprocess.preview.reason || 'unknown_error'}`,
-      );
-    }
-    if (postprocess.preview.status === 'skipped') {
-      onWarning(
-        `Postprocess preview skipped: ${postprocess.preview.reason || 'unavailable'}`,
-      );
-    }
-  }
-
-  if (options.withMontage) {
-    postprocess.montage.attempted = true;
-    if (postprocess.preview.status !== 'ok') {
-      postprocess.montage = {
-        attempted: true,
-        status: 'skipped',
-        reason: 'preview_not_ready',
-        path: options.montageOutputFile,
-        numCol: options.montageCols,
-        labelMode: options.montageLabelMode,
-      };
-      onWarning('Postprocess montage skipped: preview images were not successfully created.');
-    } else {
-      const montageResult = adapter.createMontage({
-        inputDir: postprocess.preview.outputDir,
-        outputFile: options.montageOutputFile,
-        numCol: options.montageCols,
-        labelMode: options.montageLabelMode,
-      });
-      postprocess.montage = {
-        attempted: true,
-        status: montageResult?.status || 'error',
-        reason: montageResult?.reason || null,
-        path: montageResult?.path || options.montageOutputFile,
-        numCol: options.montageCols,
-        labelMode: options.montageLabelMode,
-      };
-      if (postprocess.montage.status === 'error') {
-        onWarning(
-          `Postprocess montage failed: ${postprocess.montage.reason || 'unknown_error'}`,
-        );
-      }
-      if (postprocess.montage.status === 'skipped') {
-        onWarning(
-          `Postprocess montage skipped: ${postprocess.montage.reason || 'unavailable'}`,
-        );
-      }
-    }
-  }
-
-  if (options.withVisualOverflow) {
-    postprocess.overflowVisual.attempted = true;
-    const overflowResult = adapter.runVisualOverflow({
-      pptxPath: outPath,
-      width: options.previewWidth,
-      height: options.previewHeight,
-      padPx: options.visualOverflowPadPx,
-    });
-    postprocess.overflowVisual = {
-      attempted: true,
-      status: overflowResult?.status || 'error',
-      reason: overflowResult?.reason || null,
-      failingSlides: overflowResult?.failingSlides || [],
-      imagePaths: overflowResult?.imagePaths || [],
-    };
-    strictVisualOverflow = postprocess.overflowVisual;
-    if (postprocess.overflowVisual.status === 'error') {
-      onWarning(
-        `Postprocess visual overflow failed: ${postprocess.overflowVisual.reason || 'unknown_error'}`,
-      );
-    }
-    if (postprocess.overflowVisual.status === 'skipped') {
-      onWarning(
-        `Postprocess visual overflow skipped: ${postprocess.overflowVisual.reason || 'unavailable'}`,
-      );
-    }
-  }
-
-  return { postprocess, strictVisualOverflow };
-}
-
-/**
- * Parse a positive integer-like CLI value with fallback.
- * @param {string|boolean|undefined} raw
- * @param {number} fallback
- * @returns {number}
- */
-function parsePositiveInt(raw, fallback) {
-  const n = Number(raw);
-  if (Number.isFinite(n) && n > 0) return Math.floor(n);
-  return fallback;
-}
-
 export async function generateToFile(deckSpec, outPath, options = {}) {
   const templatePackage =
     options.templatePackage || loadTemplatePackage(options.template || 'kpmg-diligence');
   const qaPath = getQaPath(outPath, options.qaPath);
   startDiagnostics();
-  const v = validateDeckSpecWithTemplate(deckSpec, templatePackage, {
+
+  const validation = validateDeckSpecWithTemplate(deckSpec, templatePackage, {
     allowSparse: options.allowSparse,
   });
 
-  if (v.warnings?.length) {
-    for (const w of v.warnings) {
-      console.warn(w);
-      recordWarning(w);
+  if (validation.warnings?.length) {
+    for (const warning of validation.warnings) {
+      console.warn(warning);
+      recordWarning(warning);
     }
   }
-  for (const m of v?.qa?.missingSlots || collectMissingSlots(deckSpec, templatePackage)) {
-    recordMissingSlot(m.slideIndex, m.slideType, m.slot);
+  for (const missing of validation?.qa?.missingSlots || collectMissingSlots(deckSpec, templatePackage)) {
+    recordMissingSlot(missing.slideIndex, missing.slideType, missing.slot);
   }
 
-  if (!v.valid) {
+  if (!validation.valid) {
     const diag = stopDiagnostics() || {};
-    const baseRepair = v?.qa?.repairSuggestions || [];
+    const baseRepair = validation?.qa?.repairSuggestions || [];
     const qaReport = {
       generatedAt: new Date().toISOString(),
       template: templatePackage.templateName,
       valid: false,
-      errors: v.errors || [],
-      warnings: dedupeList(v.warnings || [], (item) => String(item)),
-      densityFindings: v?.qa?.densityFindings || [],
-      densitySummary: buildDensitySummary(v?.qa?.densityFindings || []),
-      missingSlots: v?.qa?.missingSlots || [],
-      thinSlides: v?.qa?.thinSlides || [],
-      sparseSlides: v?.qa?.sparseSlides || [],
-      slotIssues: v?.qa?.slotIssues || [],
-      slotMetrics: v?.qa?.slotMetrics || [],
-      repairSuggestions: dedupeList(baseRepair, (item) =>
-        `${item?.slideIndex ?? ''}|${item?.slideType ?? ''}|${item?.slot ?? ''}|${item?.hook ?? ''}|${item?.suggestedRemedy ?? ''}`,
+      errors: validation.errors || [],
+      warnings: dedupeList(validation.warnings || [], (item) => String(item)),
+      densityFindings: validation?.qa?.densityFindings || [],
+      densitySummary: buildDensitySummary(validation?.qa?.densityFindings || []),
+      missingSlots: validation?.qa?.missingSlots || [],
+      thinSlides: validation?.qa?.thinSlides || [],
+      sparseSlides: validation?.qa?.sparseSlides || [],
+      slotIssues: validation?.qa?.slotIssues || [],
+      slotMetrics: validation?.qa?.slotMetrics || [],
+      repairSuggestions: dedupeList(
+        baseRepair,
+        (item) =>
+          `${item?.slideIndex ?? ''}|${item?.slideType ?? ''}|${item?.slot ?? ''}|${item?.hook ?? ''}|${item?.suggestedRemedy ?? ''}`,
       ),
       pagination: [],
       overflowRisks: [],
@@ -483,11 +223,12 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
     };
     qaReport.summary = buildQaSummary(qaReport, { strictRequested: Boolean(options.strict) });
     writeQaReport(qaPath, qaReport);
-    throw new Error(v.errors.join('\n'));
+    throw new Error(validation.errors.join('\n'));
   }
 
   const { pptx, qa: renderQa } = renderDeck(deckSpec, templatePackage, {
     allowSparse: options.allowSparse,
+    validationResult: validation,
   });
 
   let overlapReport = null;
@@ -496,25 +237,10 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
     recordOverlapSummary(overlapReport.summary);
   }
 
-  // Ensure output directory exists before writing the PPTX.
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   await pptx.writeFile({ fileName: outPath, compression: true });
 
-  const postprocessOptions = {
-    withPreview: Boolean(options?.postprocess?.withPreview),
-    withMontage: Boolean(options?.postprocess?.withMontage),
-    withVisualOverflow: Boolean(options?.postprocess?.withVisualOverflow),
-    previewWidth: parsePositiveInt(options?.postprocess?.previewWidth, 1600),
-    previewHeight: parsePositiveInt(options?.postprocess?.previewHeight, 900),
-    previewOutputDir:
-      options?.postprocess?.previewOutputDir || path.join(path.dirname(outPath), 'preview'),
-    montageOutputFile:
-      options?.postprocess?.montageOutputFile || path.join(path.dirname(outPath), 'montage.png'),
-    montageCols: parsePositiveInt(options?.postprocess?.montageCols, 5),
-    montageLabelMode: options?.postprocess?.montageLabelMode || 'number',
-    visualOverflowPadPx: parsePositiveInt(options?.postprocess?.visualOverflowPadPx, 100),
-  };
-
+  const postprocessOptions = buildPostprocessOptions(options, outPath, { pathModule: path });
   const adapter = options.postprocessAdapter || createSlidesAdapter();
   const postprocessRequested =
     Boolean(options.strict) ||
@@ -523,7 +249,6 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
     postprocessOptions.withVisualOverflow;
 
   let postprocess = null;
-  let strictVisualOverflow = null;
   if (postprocessRequested) {
     const pipeline = runPostprocessPipelines({
       adapter,
@@ -535,55 +260,42 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
       },
     });
     postprocess = pipeline.postprocess;
-    strictVisualOverflow = pipeline.strictVisualOverflow;
-  }
-
-  let overflowStatus = { status: 0 };
-  if (options.strict && options.strictDir) {
-    const overflowDir = path.join(options.strictDir, 'overflow');
-
-    let strictStatus = strictStatusFromVisualOverflow(strictVisualOverflow);
-
-    // If strict mode is on and visual overflow wasn't attempted yet, try it as the primary strict check.
-    if (!strictStatus && postprocess?.availability?.slidesSkill) {
-      const strictVisual = adapter.runVisualOverflow({
-        pptxPath: outPath,
-        width: postprocessOptions.previewWidth,
-        height: postprocessOptions.previewHeight,
-        padPx: postprocessOptions.visualOverflowPadPx,
-      });
-      postprocess.overflowVisual = {
-        attempted: true,
-        status: strictVisual?.status || 'error',
-        reason: strictVisual?.reason || null,
-        failingSlides: strictVisual?.failingSlides || [],
-        imagePaths: strictVisual?.imagePaths || [],
-      };
-      strictStatus = strictStatusFromVisualOverflow(postprocess.overflowVisual);
+    if (pipeline.strictVisualOverflow) {
+      postprocess.overflowVisual = pipeline.strictVisualOverflow;
     }
-
-    overflowStatus = strictStatus || runStrictOverflowLegacy(outPath, overflowDir);
   }
+
+  const { strictOverflow } = resolveStrictOverflowStatus({
+    strictRequested: Boolean(options.strict),
+    adapter,
+    outPath,
+    postprocess,
+    postprocessOptions,
+  });
 
   const report = stopDiagnostics() || {};
-  const densityFindings = renderQa?.densityFindings || v?.qa?.densityFindings || [];
+  const densityFindings = renderQa?.densityFindings || validation?.qa?.densityFindings || [];
   const overflowRepairSuggestions = buildOverflowRepairSuggestions(renderQa?.overflowEvents || []);
   const overflowRisks = renderQa?.overflowRisks || buildOverflowRisks(renderQa?.overflowEvents || []);
-  const baseRepairSuggestions = renderQa?.repairSuggestions || v?.qa?.repairSuggestions || [];
+  const baseRepairSuggestions = renderQa?.repairSuggestions || validation?.qa?.repairSuggestions || [];
   const pagination = renderQa?.pagination || renderQa?.paginationDecisions || [];
+
   const qaReport = {
     generatedAt: new Date().toISOString(),
     template: templatePackage.templateName,
     valid: true,
     errors: [],
-    warnings: dedupeList([...(v.warnings || []), ...(report?.warnings || [])], (item) => String(item)),
+    warnings: dedupeList(
+      [...(validation.warnings || []), ...(report?.warnings || [])],
+      (item) => String(item),
+    ),
     densityFindings,
     densitySummary: buildDensitySummary(densityFindings),
-    missingSlots: v?.qa?.missingSlots || [],
-    thinSlides: v?.qa?.thinSlides || [],
-    sparseSlides: v?.qa?.sparseSlides || [],
-    slotIssues: v?.qa?.slotIssues || [],
-    slotMetrics: renderQa?.slotMetrics || v?.qa?.slotMetrics || [],
+    missingSlots: validation?.qa?.missingSlots || [],
+    thinSlides: validation?.qa?.thinSlides || [],
+    sparseSlides: validation?.qa?.sparseSlides || [],
+    slotIssues: validation?.qa?.slotIssues || [],
+    slotMetrics: renderQa?.slotMetrics || validation?.qa?.slotMetrics || [],
     repairSuggestions: dedupeList(
       [...baseRepairSuggestions, ...overflowRepairSuggestions],
       (item) =>
@@ -597,14 +309,15 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
     fallbacks: report?.fallbacks || [],
     overlapSummary: overlapReport?.summary || null,
     overlapFindings: buildOverlapFindings(overlapReport),
-    strictOverflow: overflowStatus,
+    strictOverflow,
     inputSlideCount: Array.isArray(deckSpec?.slides) ? deckSpec.slides.length : 0,
     outputSlideCount: Array.isArray(pptx?._slides) ? pptx._slides.length : 0,
     outputPptx: outPath,
   };
-  if (postprocess) qaReport.postprocess = postprocess;
 
+  if (postprocess) qaReport.postprocess = postprocess;
   qaReport.summary = buildQaSummary(qaReport, { strictRequested: Boolean(options.strict) });
+
   const postprocessSummary = buildPostprocessSummary(postprocess);
   if (postprocessSummary) {
     qaReport.summary.postprocess = postprocessSummary;
@@ -612,91 +325,41 @@ export async function generateToFile(deckSpec, outPath, options = {}) {
 
   writeQaReport(qaPath, qaReport);
 
-  const strictFailed = qaReport.summary.strict.failed;
-  return { strictFailed, strictSummary: qaReport, qaPath };
+  return {
+    strictFailed: qaReport.summary.strict.failed,
+    strictSummary: qaReport,
+    qaPath,
+  };
 }
 
 export async function main(argv = process.argv.slice(2)) {
-  const args = new Map();
-  for (let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if (!a.startsWith('--')) continue;
-    const key = a.slice(2);
-    const next = argv[i + 1];
-    if (next && !next.startsWith('--')) {
-      args.set(key, next);
-      i++;
-    } else {
-      args.set(key, true);
-    }
-  }
-
-  const inPath = args.get('in');
-  const outPath = args.get('out');
-  const qaOutPath = args.get('qa-out');
-  const templateName = args.get('template') || 'kpmg-diligence';
-  const allowSparse = Boolean(args.get('allow-sparse'));
-  const withPreview = Boolean(args.get('with-preview'));
-  const withMontage = Boolean(args.get('with-montage'));
-  const withVisualOverflow = Boolean(args.get('with-visual-overflow'));
-
-  if (!inPath || !outPath) {
-    console.error(
-      'Usage: node generator/index.js --in <deck.json> --out <out.pptx> [--qa-out <out.qa.json>] [--allow-sparse] [--strict] [--skip-overlap] [--template <name>] [--with-preview] [--with-montage] [--with-visual-overflow] [--preview-width <px>] [--preview-height <px>] [--montage-cols <n>] [--montage-label-mode <number|filename|none>]',
-    );
+  let cli;
+  try {
+    cli = parseCliOptions(argv);
+  } catch (error) {
+    console.error(error.message);
     process.exit(2);
   }
 
-  const montageLabelMode = String(args.get('montage-label-mode') || 'number');
-  if (!['number', 'filename', 'none'].includes(montageLabelMode)) {
-    console.error('Invalid --montage-label-mode. Expected one of: number, filename, none');
-    process.exit(2);
-  }
+  const deckSpec = readJson(cli.inPath);
+  const templatePackage = loadTemplatePackage(cli.templateName);
 
-  const deckSpec = readJson(inPath);
-  const templatePackage = loadTemplatePackage(templateName);
-  const strict = Boolean(args.get('strict'));
-  const skipOverlap = Boolean(args.get('skip-overlap'));
-  const runId = new Date().toISOString().replace(/[:.]/g, '-');
-  const strictDir = strict ? path.join('outputs', 'strict', runId) : null;
-
-  const previewWidth = parsePositiveInt(args.get('preview-width'), 1600);
-  const previewHeight = parsePositiveInt(args.get('preview-height'), 900);
-  const montageCols = parsePositiveInt(args.get('montage-cols'), 5);
-  const visualOverflowPadPx = parsePositiveInt(args.get('visual-overflow-pad-px'), 100);
-  const previewOutputDir =
-    args.get('preview-dir') || path.join(path.dirname(outPath), 'preview');
-  const montageOutputFile =
-    args.get('montage-out') || path.join(path.dirname(outPath), 'montage.png');
-
-  const result = await generateToFile(deckSpec, outPath, {
-    strict,
-    enforceOverlap: !skipOverlap,
-    strictDir,
-    template: templateName,
+  const result = await generateToFile(deckSpec, cli.outPath, {
+    strict: cli.strict,
+    enforceOverlap: !cli.skipOverlap,
+    template: cli.templateName,
     templatePackage,
-    qaPath: qaOutPath,
-    allowSparse,
-    postprocess: {
-      withPreview,
-      withMontage,
-      withVisualOverflow,
-      previewWidth,
-      previewHeight,
-      previewOutputDir,
-      montageOutputFile,
-      montageCols,
-      montageLabelMode,
-      visualOverflowPadPx,
-    },
+    qaPath: cli.qaOutPath,
+    allowSparse: cli.allowSparse,
+    postprocess: cli.postprocess,
   });
 
-  if (strict && result.strictFailed) {
+  if (cli.strict && result.strictFailed) {
     process.exit(1);
   }
 
-  console.log(`Generated: ${outPath}`);
-  console.log(`QA report: ${result.qaPath || getQaPath(outPath, qaOutPath)}`);
+  console.log(`Generated: ${cli.outPath}`);
+  console.log(`QA report: ${result.qaPath || getQaPath(cli.outPath, cli.qaOutPath)}`);
 
   const postprocess = result?.strictSummary?.postprocess;
   if (postprocess?.preview?.status === 'ok') {

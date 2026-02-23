@@ -1,5 +1,5 @@
-import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX, STRAPLINE_SHIFT } from '../tokens.js';
-import { toBulletRuns } from '../helpers/bullets.js';
+import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
+import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
 import { clampBoxToBottom, isValidColumnGeometry } from '../helpers/geometry.js';
 import { calcTextBoxHeight, sanitizeText } from '../helpers/text.js';
@@ -11,7 +11,8 @@ import { svgToDataUri } from '../helpers/svg.js';
 
 export const TOKENS = {
   geometry: {
-    title: { x: 1.0919, y: 0.6, w: 11.1596, h: 0.6 },
+    title: { x: 1.0919, y: 0.4722, w: 11.1596, h: 0.5833 },
+    strapline: { x: 1.0919, y: 1.2, w: 11.1596, h: 0.35 },
     left: { x: 1.0919, y: 1.5, w: 5.7, h: 5.7 },
     right: { x: 7.0415, y: 1.5, w: 5.2, h: 5.7 },
   },
@@ -140,20 +141,9 @@ function addScreenshotPlaceholder(pptx, slide, placeholder, rightGeo, { topGap =
   return true;
 }
 
-export function addTwoColumnText(pptx, { title, leftBody, rightBody } = {}) {
-  const slide = pptx.addSlide();
-
-  addTitle(slide, title, TOKENS.geometry.title);
-
-  slide.addText(toBulletRuns(leftBody), { ...TOKENS.geometry.left, ...TOKENS.textStyles.body, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
-  slide.addText(toBulletRuns(rightBody), { ...TOKENS.geometry.right, ...TOKENS.textStyles.body, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
-
-  return slide;
-}
-
 export function addTwoColumnTextWithStrapline(
   pptx,
-  { title, strapline, leftBody, rightBody, geometry, masterName, icon, iconPlacement, screenshotPlaceholder, style } = {},
+  { title, strapline, leftBody, rightBody, bodyStyle, geometry, masterName, icon, iconPlacement, screenshotPlaceholder, style } = {},
 ) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const candidate = geometry || TOKENS.geometry;
@@ -169,6 +159,8 @@ export function addTwoColumnTextWithStrapline(
   const titleGeo = g.title || TOKENS.geometry.title;
   const iconMode = iconPlacement || 'rightColumn';
   const iconInTitle = icon && (iconMode === 'titleLeft' || iconMode === 'titleRight');
+  const strapText = strapline;
+  const effectiveBodyStyle = bodyStyle || 'bullets';
   const requestedIconSize = style?.iconSize === undefined ? null : Number(style.iconSize);
   const iconSize = Number.isFinite(requestedIconSize)
     ? Math.min(0.75, Math.max(0.4, requestedIconSize))
@@ -190,15 +182,27 @@ export function addTwoColumnTextWithStrapline(
     addIconChip(pptx, slide, icon, { x: titleGeo.x + titleGeo.w - iconSize, y: titleGeo.y + 0.06, w: iconSize, h: iconSize });
   }
 
+  let strapBox = null;
   addTitle(slide, title, adjustedTitleGeo);
-  if (strapline) {
-    const strapBox = g.strapline || {
+  if (strapText) {
+    const strapBase = g.strapline || TOKENS.geometry.strapline || {
       x: titleGeo.x,
-      y: titleGeo.y + titleGeo.h + 0.05,
+      y: TOKENS.geometry.title.y + TOKENS.geometry.title.h + 0.05,
       w: titleGeo.w,
       h: calcTextBoxHeight(TYPE_SIZES.strapline, 1),
     };
-    slide.addText(sanitizeText(strapline), {
+    const strapWidth = strapBase.w || titleGeo.w;
+    const estimatedCharsPerLine = Math.max(30, Math.floor(strapWidth * 12));
+    const estimatedLines = Math.max(1, Math.ceil(sanitizeText(strapText).length / estimatedCharsPerLine));
+    const dynamicHeight = calcTextBoxHeight(TYPE_SIZES.strapline, Math.min(8, estimatedLines), 1.1, 0.12);
+    strapBox = {
+      ...strapBase,
+      x: strapBase.x ?? titleGeo.x,
+      y: strapBase.y ?? TOKENS.geometry.strapline.y,
+      w: strapWidth,
+      h: Math.max(strapBase.h || TOKENS.geometry.strapline.h, dynamicHeight),
+    };
+    slide.addText(sanitizeText(strapText), {
       ...strapBox,
       fontFace: FONTS.body,
       fontSize: style?.straplineFontSize ?? TYPE_SIZES.strapline,
@@ -211,18 +215,25 @@ export function addTwoColumnTextWithStrapline(
     });
   }
 
-  const hasMeasuredStrapline = Boolean(g.strapline);
-  const shift = strapline && !hasMeasuredStrapline ? STRAPLINE_SHIFT : 0;
   const leftBase = g.left || TOKENS.geometry.left;
   const rightBase = g.right || TOKENS.geometry.right;
+  const shift = strapText && strapBox
+    ? Math.max(0, (strapBox.y + strapBox.h + 0.06) - Math.min(leftBase.y, rightBase.y))
+    : 0;
   const leftGeo = shift ? { ...leftBase, y: leftBase.y + shift, h: leftBase.h - shift } : leftBase;
   const rightGeo = shift ? { ...rightBase, y: rightBase.y + shift, h: rightBase.h - shift } : rightBase;
   const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
   const safeLeftGeo = footerSafeTop ? clampBoxToBottom(leftGeo, footerSafeTop) : leftGeo;
   const safeRightGeo = footerSafeTop ? clampBoxToBottom(rightGeo, footerSafeTop) : rightGeo;
 
-  const bodyStyle = { ...TOKENS.textStyles.body, fontSize: style?.bodyFontSize ?? TOKENS.textStyles.body.fontSize };
-  slide.addText(toBulletRuns(leftBody), { ...safeLeftGeo, ...bodyStyle, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
+  const bodyTextStyle = { ...TOKENS.textStyles.body, fontSize: style?.bodyFontSize ?? TOKENS.textStyles.body.fontSize };
+  slide.addText(toBodyRuns(leftBody, effectiveBodyStyle), {
+    ...safeLeftGeo,
+    ...bodyTextStyle,
+    wrap: TEXT_BOX.wrap,
+    margin: TEXT_BOX.marginPt,
+    valign: 'top',
+  });
 
   // Optional enhancements (used by the TS Custom GPTs portfolio deck):
   // - `icon`: add an icon chip at the top-right of the right column
@@ -235,7 +246,13 @@ export function addTwoColumnTextWithStrapline(
     style,
   });
   if (!hasPlaceholder) {
-    slide.addText(toBulletRuns(rightBody), { ...safeRightGeo, ...bodyStyle, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt, valign: 'top' });
+    slide.addText(toBodyRuns(rightBody, effectiveBodyStyle), {
+      ...safeRightGeo,
+      ...bodyTextStyle,
+      wrap: TEXT_BOX.wrap,
+      margin: TEXT_BOX.marginPt,
+      valign: 'top',
+    });
   }
 
   return slide;

@@ -52,7 +52,7 @@ export const TYPE_SIZES = {
   slideTitle: 32,
   slideTitleCondensed: 30,
   sectionHeading: 24,
-  strapline: 9,
+  strapline: 10,
   body: 10,
   source: 6,
 };

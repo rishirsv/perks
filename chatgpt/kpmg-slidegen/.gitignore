@@ -1,0 +1,15 @@
+# OS noise
+.DS_Store
+
+# Runtime outputs
+outputs/my-run/
+outputs/strict/
+outputs/**/preview/
+outputs/**/montage.png
+
+# Temp and debug files
+*.log
+*.tmp
+
+# Dependencies
+node_modules/

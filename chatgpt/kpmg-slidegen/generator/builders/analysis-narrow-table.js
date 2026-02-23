@@ -1,29 +1,8 @@
-/**
- * analysis-narrow-table.js
- *
- * Prototype: replicate a representative table style from the provided template.
- *
- * Representative table chosen:
- *   Template Slide 25 ("Upsides and sensitivities") -> Table 5 (5 rows x 4 cols)
- *   + two arrow shapes over the narrow indicator column.
- *
- * Outputs:
- *   1) table-test.pptx     - generic analysis table using the schema from the prompt
- *   2) slide25-table.pptx  - near 1:1 recreation of Slide 25's table + arrows
- */
-
-import PptxGenJS from 'pptxgenjs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FONTS, COLORS as T, TYPE_SIZES, TEXT_BOX, STRAPLINE_SHIFT } from '../tokens.js';
+import { FONTS, COLORS as T, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { addTitle } from '../helpers/title.js';
 import { toBulletRuns } from '../helpers/bullets.js';
 import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
 import { clampBoxToBottom } from '../helpers/geometry.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const OUT_DIR = path.join(__dirname, '..', '..', 'references', 'pptx');
 
 // ----
 // Palette (derived from central tokens)
@@ -426,20 +405,11 @@ export function addAnalysisTable(slide, tableData, opts = {}) {
       const header = String(headers[cIdx] ?? '').trim().toLowerCase();
       const txt = String(cellText ?? '').trim();
 
-      // Default table styling:
-      // - Metric column in KPMG dark blue and bold
-      // - Other columns black and normal
-      let color = isMetricCol ? COLORS.KPMG_DARK_BLUE : COLORS.BLACK;
-      let bold = isMetricCol;
-
-      // Financial Summary exception (matches baseline deck):
-      // - First column should NOT be bold or blue (black like the rest)
-      // - Only key lines (e.g., gross margin, net income) should be bold
-      if (isFinancialSummary) {
-        color = COLORS.BLACK;
-        bold = false;
-      }
-      if (highlightRow) bold = true;
+      // Body styling: first column should be black and non-bold, matching the
+      // current narrow-table layout review requirement.
+      let color = COLORS.BLACK;
+      let bold = false;
+      if (highlightRow && !isMetricCol) bold = true;
 
       if (header === 'direction') {
         bold = true;
@@ -496,208 +466,21 @@ export function addAnalysisTable(slide, tableData, opts = {}) {
   });
 }
 
-// ----
-// Slide 25: Table 5 recreation (geometry + styling extracted from template)
-// ----
-export function addSlide25UpsidesSensitivitiesTable(slide) {
-  // Geometry (inches) pulled from the template table shape.
-  const X = 1.0918646106736658;
-  const Y = 1.9155555555555555;
-  const W = 11.159608486439195;
-  const H = 2.903145231846019;
-
-  const colW = [
-    2.0731364829396326,
-    6.84471019247594,
-    0.3548720472440945,
-    1.8868897637795275,
-  ];
-
-  const rowH = [
-    0.2958880139982502,
-    0.6518143044619422,
-    0.6518143044619422,
-    0.6518143044619422,
-    0.6518143044619422,
-  ];
-
-  // Helper border shortcuts.
-  const B_NONE = { type: 'none' };
-  const B_WHITE_05 = { type: 'solid', pt: 0.5, color: COLORS.WHITE };
-  const B_BLUE_05 = { type: 'solid', pt: 0.5, color: COLORS.KPMG_DARK_BLUE };
-
-  // Top border used for the first data row (matches template: 0.5pt blue)
-  const B_TOP_BLUE_05 = [B_BLUE_05, B_NONE, B_NONE, B_NONE];
-
-  // Header row.
-  const header = [
-    // A1: intentionally blank/white (matches template)
-    {
-      text: '',
-      options: {
-        fill: COLORS.WHITE,
-        border: [B_NONE, B_NONE, B_BLUE_05, B_NONE],
-        margin: 0,
-      },
-    },
-    {
-      text: 'Detail',
-      options: {
-        fill: COLORS.KPMG_DARK_BLUE,
-        color: COLORS.WHITE,
-        bold: true,
-        fontFace: FONTS.body,
-        fontSize: 10,
-        align: 'left',
-        valign: 'middle',
-        margin: [4, 7, 4, 7],
-        border: [B_NONE, B_WHITE_05, B_BLUE_05, B_NONE],
-      },
-    },
-    {
-      text: '',
-      options: {
-        fill: COLORS.KPMG_DARK_BLUE,
-        margin: 0,
-        border: [B_NONE, B_WHITE_05, B_BLUE_05, B_WHITE_05],
-      },
-    },
-    {
-      text: 'Potential EBITDA impact',
-      options: {
-        fill: COLORS.KPMG_DARK_BLUE,
-        color: COLORS.WHITE,
-        bold: true,
-        fontFace: FONTS.body,
-        fontSize: 10,
-        align: 'right',
-        valign: 'middle',
-        margin: [4, 7, 4, 7],
-        border: [B_NONE, B_NONE, B_BLUE_05, B_WHITE_05],
-      },
-    },
-  ];
-
-  // Body rows.
-  const bandFill = (rowIdx1Based) => (rowIdx1Based % 2 === 0 ? COLORS.KPMG_LIGHT_GREY : COLORS.WHITE);
-
-  const leftCell = (fill, border = B_NONE) => ({
-    text: 'Lorem ipsum dolor sit odio amet',
-    options: {
-      fill,
-      bold: true,
-      fontFace: FONTS.body,
-      fontSize: 10,
-      color: COLORS.KPMG_DARK_BLUE,
-      align: 'left',
-      valign: 'top',
-      margin: [4.25, 4.25, 4.25, 4.25],
-      border,
-    },
-  });
-
-  const bulletCell = (fill, border = B_NONE) => ({
-    text: '\u2022  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \n\u2022  Donec odio. Quisque volutpat mattis eros. Nullam malesuada.',
-    options: {
-      fill,
-      fontFace: FONTS.body,
-      fontSize: 10,
-      color: COLORS.BLACK,
-      align: 'left',
-      valign: 'top',
-      paraSpaceAfter: 6,
-      margin: [4.25, 4.25, 4.25, 4.25],
-      border,
-    },
-  });
-
-  const indicatorCell = (fill, border = B_NONE) => ({
-    text: '',
-    options: {
-      fill,
-      margin: [4.25, 4.25, 4.25, 4.25],
-      border,
-    },
-  });
-
-  const valueCell = (fill, val, border = B_NONE) => ({
-    text: val,
-    options: {
-      fill,
-      fontFace: FONTS.heading,
-      fontSize: 12,
-      bold: true,
-      color: COLORS.KPMG_DARK_BLUE,
-      align: 'right',
-      valign: 'top',
-      margin: [9.92, 7.09, 9.92, 7.09],
-      border,
-    },
-  });
-
-  const rows = [
-    header,
-    // First data row gets a 0.5pt blue top border (template also has the header-bottom border)
-    [leftCell(bandFill(1), B_TOP_BLUE_05), bulletCell(bandFill(1), B_TOP_BLUE_05), indicatorCell(bandFill(1), B_TOP_BLUE_05), valueCell(bandFill(1), '$1.4m', B_TOP_BLUE_05)],
-    [leftCell(bandFill(2)), bulletCell(bandFill(2)), indicatorCell(bandFill(2)), valueCell(bandFill(2), '$(1.1)m')],
-    [leftCell(bandFill(3)), bulletCell(bandFill(3)), indicatorCell(bandFill(3)), valueCell(bandFill(3), '$0.5m')],
-    [leftCell(bandFill(4)), bulletCell(bandFill(4)), indicatorCell(bandFill(4)), valueCell(bandFill(4), '$0.3m')],
-  ];
-
-  // Render the table.
-  slide.addTable(rows, {
-    x: X,
-    y: Y,
-    w: W,
-    h: H,
-    colW,
-    rowH,
-    border: { type: 'none' },
-    fontFace: FONTS.body,
-    fontSize: 10,
-    color: COLORS.BLACK,
-  });
-
-  // Overlay arrows (template uses two upArrow shapes placed over the narrow column).
-  // Geometry extracted from AutoShape 4/6 on Slide 25.
-  const arrowX = 10.002929133858268;
-  const arrowW = 0.3543307086614173;
-  const arrowH = 0.5300787401574803;
-
-  // Row 1: cyan up arrow
-  slide.addShape('upArrow', {
-    x: arrowX,
-    y: 2.2774803149606297,
-    w: arrowW,
-    h: arrowH,
-    fill: { color: COLORS.ACCENT_CYAN },
-    line: { color: COLORS.WHITE, transparency: 100, width: 1 },
-  });
-
-  // Row 2: purple down arrow (rotate 180)
-  slide.addShape('upArrow', {
-    x: arrowX,
-    y: 2.932204724409449,
-    w: arrowW,
-    h: arrowH,
-    rotate: 180,
-    fill: { color: COLORS.ACCENT_PURPLE },
-    line: { color: COLORS.WHITE, transparency: 100, width: 1 },
-  });
-}
-
 export function addAnalysisNarrowTable(
   pptx,
   { title, strapline, table, notes, insightTitle, insights: customInsights, geometry, masterName } = {},
 ) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const g = geometry || {};
+  const strapText = strapline;
+  let straplineBox = null;
 
-  addTitle(slide, title, g.title || { x: 1.0919, y: 0.6, w: 11.1596, h: 0.6 });
+  addTitle(slide, title, g.title || { x: 1.0919, y: 0.4722, w: 11.1596, h: 0.5833 });
 
-  if (strapline) {
-    slide.addText(String(strapline), {
-      ...(g.strapline || { x: 1.0919, y: 1.2, w: 11.1596, h: 0.35 }),
+  if (strapText) {
+    straplineBox = g.strapline || { x: 1.0919, y: 1.2, w: 11.1596, h: 0.35 };
+    slide.addText(String(strapText), {
+      ...straplineBox,
       fontFace: FONTS.body,
       fontSize: TYPE_SIZES.strapline,
       color: COLORS.ACCENT_PURPLE,
@@ -710,8 +493,10 @@ export function addAnalysisNarrowTable(
   }
 
   if (table) {
-    const hasMeasuredStrapline = Boolean(g.strapline);
-    const yShift = strapline && !hasMeasuredStrapline ? STRAPLINE_SHIFT : 0;
+    const tableTop = (g.table || TWO_COL.table).y;
+    const yShift = strapText && straplineBox
+      ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - tableTop)
+      : 0;
     const cols = Array.isArray(table.headers) ? table.headers.length : 0;
     const rows = Array.isArray(table.rows) ? table.rows.length : 0;
     const insights =
@@ -831,32 +616,4 @@ export function addAnalysisNarrowTable(
   }
 
   return slide;
-}
-
-async function main() {
-  const pptx = new PptxGenJS();
-  pptx.defineLayout({ name: 'KPMG_WIDE', width: 13.333, height: 7.5 });
-  pptx.layout = 'KPMG_WIDE';
-
-  addAnalysisNarrowTable(pptx, {
-    title: 'Revenue Bridge Analysis',
-    table: {
-      headers: ['Metric', '2023', '2024', '\u0394'],
-      rows: [
-        ['Revenue', '$45.2M', '$52.1M', '+15%'],
-        ['EBITDA', '$12.3M', '$14.8M', '+20%'],
-        ['Margin', '27.2%', '28.4%', '+120bps'],
-      ],
-    },
-  });
-
-  const slide2 = pptx.addSlide();
-  addSlide25UpsidesSensitivitiesTable(slide2);
-
-  await pptx.writeFile({ fileName: path.join(OUT_DIR, 'table-test.pptx') });
-  console.log(`Generated: ${path.join(OUT_DIR, 'table-test.pptx')}`);
-}
-
-if (process.argv[1] === __filename) {
-  main();
 }

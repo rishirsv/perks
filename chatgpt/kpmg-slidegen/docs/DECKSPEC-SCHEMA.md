@@ -4,17 +4,77 @@ status: active
 last-reviewed: 2026-02-23
 review-cycle-days: 30
 source-of-truth: docs/DECKSPEC-SCHEMA.md
-verification-state: partially-verified
+verification-state: verified-against-template-layouts
 ---
 
-# DeckSpec Schema Guide
+# DeckSpec Schema and Authoring Guide
 
-Use this file to author `deckSpec` input JSON that renders cleanly and passes QA.
+This guide is the single human-readable contract for writing `deckSpec` JSON that is both:
 
-## What this file is
-- A practical schema guide for `decks/*.deckSpec.json`.
-- A layout-by-layout slot reference from `templates/kpmg-diligence/package/layouts.json`.
-- A quick playbook for creating effective slides that avoid overlap and sparse-content warnings.
+- Valid for the runtime validator.
+- Effective for producing polished, client-ready slides.
+
+Use this together with:
+
+- Machine-readable slots schema: `docs/DECKSPEC-SLOTS-SCHEMA.json`
+- Model authoring playbook: `docs/DECK-AUTHORING-PLAYBOOK.md`
+
+## Quick answers
+
+1. Can any slide include a `chart` object?
+No. Only slide types whose slot contract includes `chart` will render charts.
+
+2. Does the renderer infer chart type from body text?
+No. It renders exactly what is provided in `chart.type`, `chart.data`, and `chart.opts`.
+
+3. Are combo/dual-axis charts first-class in this contract?
+No. This schema currently supports one chart object with one `type` per chart slot.
+
+4. Can I include extra fields not listed for a slide type?
+You can include them, but they are not guaranteed to render. Author against slot contracts only.
+
+## Runtime model
+
+The generator takes a typed `deckSpec` JSON and produces:
+
+- a branded `.pptx`
+- a consolidated QA `.json`
+- optional postprocess outputs (preview PNGs, montage PNG, visual-overflow diagnostics)
+
+Reference: `README.md`.
+
+## Top-level deck structure
+
+## Required top-level fields
+
+- `slides`: array of slide objects.
+
+## Optional top-level fields
+
+- `metadata`: document metadata and footer defaults.
+
+## `metadata` fields
+
+- `title`: string
+- `author`: string
+- `company`: string
+- `subject`: string
+- `allowSparse`: boolean
+- `year`: number
+- `jurisdiction`: string
+- `legalStructure`: string
+- `documentClassification`: string
+- `officeContactText`: string
+- `footer`: object with explicit footer values
+
+## `metadata.footer` fields
+
+- `year`: number
+- `legalEntityName`: string
+- `jurisdiction`: string
+- `legalStructure`: string
+- `documentClassification`: string
+- `officeContactText`: string
 
 ## Minimal valid deck
 
@@ -30,202 +90,240 @@ Use this file to author `deckSpec` input JSON that renders cleanly and passes QA
     {
       "type": "cover",
       "title": "Financial Due Diligence",
-      "subtitle": "Target Co - January 2026"
+      "subtitle": "Target Co - February 2026"
     },
     {
-      "type": "divider",
+      "type": "dividerDark",
       "sectionNumber": "01",
       "sectionTitle": "Executive Summary"
     },
     {
       "type": "analysisWideChart2ColsText",
-      "title": "Key Findings",
-      "body": ["Finding 1", "Details...", "Finding 2", "Details..."],
+      "title": "Key Findings and Trend Validation",
+      "strapline": "Headline takeaway in one concise line.",
+      "bodyStyle": "paragraphs",
+      "body": [
+        { "text": "Context", "subheader": true },
+        "Narrative text explaining what the chart proves."
+      ],
       "chart": {
         "type": "bar",
         "data": [
           { "name": "Revenue", "labels": ["FY24", "FY25"], "values": [60.9, 130.5] }
-        ]
+        ],
+        "opts": { "showValue": true },
+        "source": "Source: Company filings"
       }
     }
   ]
 }
 ```
 
-## Top-level schema
-
-## Required
-- `slides`: array of slide objects.
-
-## Optional
-- `metadata`: object for PPT metadata and footer values.
-
-## `metadata` fields
-- `title`: PPT document title.
-- `author`: PPT author.
-- `company`: PPT company.
-- `subject`: PPT subject.
-- `allowSparse`: when `true`, density failures are softened into warnings.
-- `year`: fallback for footer year.
-- `jurisdiction`: fallback for footer jurisdiction.
-- `legalStructure`: fallback for footer legal structure.
-- `documentClassification`: footer classification line.
-- `officeContactText`: footer contact line.
-- `footer`: object with explicit footer fields.
-
-## `metadata.footer` fields
-- `year`
-- `legalEntityName`
-- `jurisdiction`
-- `legalStructure`
-- `documentClassification`
-- `officeContactText`
-
-If `allowSparse` is not enabled, non-demo renders require footer values for year, legal entity, jurisdiction, and legal structure.
-
-## Common slide object pattern
-- Every slide must have `type` (string).
-- Each `type` has its own required and optional slots.
-- Unknown `type` values fail validation.
-
-## Slot value shapes
+## Reusable slot shapes
 
 ## `text`
-- String.
+
+- Plain string.
 
 ## `textArray`
-- Array of strings (or text objects).
-- Used for bullets and narrative blocks.
+
+- Array of:
+  - strings
+  - or text objects in shape `{ "text": "..." }`
+- `textArray` objects can include inline body heading flags:
+  - `{ "text": "Basis of presentation", "subheader": true }`
+  - `{ "text": "Basis of presentation", "header": true }`
+
+Both forms render as inline blue bold body headings above surrounding text.
+
+## `bodyStyle`
+
+- `"bullets"` or `"paragraphs"`
+- Applies to text-array body rendering in supported slide types.
 
 ## `table`
-- Object with `headers` (array) and `rows` (array of arrays).
+
+- Object with:
+  - `headers`: array
+  - `rows`: array of arrays
+- Optional `title` or `heading` can be used by table renderers that expose title bars.
+
+Example:
 
 ```json
 {
-  "headers": ["Metric", "Value", "Delta"],
+  "headers": ["Metric", "FY2024", "FY2025", "FY2026E"],
   "rows": [
-    ["Revenue", "$130.5B", "+114% YoY"],
-    ["Gross Margin", "75.0%", "-570 bps"]
+    ["Revenue", "$142M", "$189M", "$225M"],
+    ["Gross Margin", "41.8%", "43.1%", "42.4%"]
   ]
 }
 ```
 
 ## `chart`
-- Object with `type` and `data`.
-- Each series in `data` should include `values`; labels are strongly recommended.
-- Supported chart types used in builders: `bar`, `bar3d`, `line`, `pie`, `doughnut`, `area`, `scatter`, `radar`.
+
+- Object with:
+  - `type`: one of `bar`, `bar3d`, `line`, `pie`, `doughnut`, `area`, `scatter`, `radar`
+  - `data`: array of chart series
+- Each series should include:
+  - `values`: numeric array (required by validator)
+  - `labels`: category labels (strongly recommended)
+  - `name`: series name (recommended)
+- Optional:
+  - `opts`: chart rendering options passed through to chart renderer
+  - `source`: source text below chart
+
+Example:
 
 ```json
 {
-  "type": "bar",
+  "type": "line",
   "data": [
-    { "name": "Revenue", "labels": ["FY24", "FY25"], "values": [60.9, 130.5] }
+    { "name": "Index", "labels": ["Jan", "Feb", "Mar"], "values": [100, 108, 111] }
   ],
-  "opts": { "showValue": true },
-  "source": "Source: Company filings"
+  "opts": {
+    "showValue": true,
+    "valAxisTitle": "Index"
+  },
+  "source": "Source: Synthetic model output"
 }
 ```
 
 ## `columns`
-- Array (typically 4 items for `titleStrapline4TextBoxes`).
-- Each item should have `heading` (or `title`) and `body` array.
 
-```json
-[
-  { "heading": "Growth", "body": ["Point 1", "Point 2"] },
-  { "heading": "Margins", "body": ["Point 1", "Point 2"] },
-  { "heading": "Cash", "body": ["Point 1", "Point 2"] },
-  { "heading": "Risks", "body": ["Point 1", "Point 2"] }
-]
-```
+- Array of 4+ objects (layout-dependent), each typically:
+  - `heading` or `title`
+  - `body` as `textArray`
 
 ## `contentsSections`
-- Array used by `contents` slide.
-- Each section item typically includes `number`, `title`, optional `items`, optional `pageRange`.
-- `pageRange` can be auto-filled from divider sections.
 
-```json
-[
-  {
-    "number": "01",
-    "title": "Executive Summary",
-    "items": ["Headlines", "Key Risks"]
-  }
-]
-```
+- Array of section objects, typically:
+  - `number`: section number string
+  - `title`: section title string
+  - `items`: optional array of strings
+  - `pageRange`: optional string
 
-## Layout-by-layout slot reference
+## Supported slide types and slot contracts
 
-Legend: `R` = required, `O` = optional.
+Legend:
+
+- `R`: required
+- `O`: optional
 
 | Slide type | Template layout | Required slots | Optional slots |
 |---|---|---|---|
-| `cover` | `Cover page_Right Horizontal Window` | `title` (text, minChars 8, maxChars 100), `subtitle` (text, minChars 12, maxChars 200) | None |
-| `divider` | `Divider slide_5` | `sectionNumber` (text, minChars 2, maxChars 2), `sectionTitle` (text, minChars 6, maxChars 80) | None |
-| `dividerDark` | `Divider slide_5` | `sectionNumber` (text, minChars 2, maxChars 2), `sectionTitle` (text, minChars 6, maxChars 80) | None |
-| `dividerLight` | `Divider slide_2` | `sectionNumber` (text, minChars 2, maxChars 2), `sectionTitle` (text, minChars 6, maxChars 80) | None |
-| `contents` | `Contents` | `title` (text, minChars 6, maxChars 40), `sections` (contentsSections, minItems 8) | None |
-| `oneColumnText` | (no explicit templateLayout key) | `title` (text, minChars 12, maxChars 700), `body` (textArray, minItems 3, minChars 180) | `strapline` (text, minChars 12, maxChars 700) |
-| `qualityOfEarnings` | `One column text` | `title` (text, minChars 12, maxChars 700) | `strapline` (text, minChars 12, maxChars 700), `body` (textArray, minItems 1, minChars 50), `source` (text, minChars 12, maxChars 700) |
-| `twoColumnText` | `Two columns text` | `title` (text, minChars 12, maxChars 700), `leftBody` (textArray, minItems 2, minChars 80), `rightBody` (textArray, minItems 2, minChars 80) | `strapline` (text, minChars 12, maxChars 700) |
-| `analysis2ColumnsText` | `Analysis_2 columns text` | `title` (text, minChars 12, maxChars 700), `leftBody` (textArray, minItems 2, minChars 80), `rightBody` (textArray, minItems 2, minChars 80) | `strapline` (text, minChars 12, maxChars 700) |
-| `analysisNarrowTable` | `Analysis_narrow table` | `title` (text, minChars 12, maxChars 700), `table` (table, minItems 3 rows) | `strapline` (text, minChars 12, maxChars 700), `notes` (text, minChars 12, maxChars 700), `insightTitle` (text, minChars 6, maxChars 80) |
-| `analysisWideChart2ColsText` | `Analysis_wide chart + 2 cols text` | `title` (text, minChars 12, maxChars 700), `body` (textArray, minItems 4, minChars 180), `chart` (chart, minItems 1 series) | `strapline` (text, minChars 12, maxChars 700) |
-| `analysisWideChartTableText` | `Analysis_wide chart+table+text` | `title` (text, minChars 12, maxChars 700), `body` (textArray, minItems 4, minChars 180), `chart` (chart, minItems 1 series) | `strapline` (text, minChars 12, maxChars 700), `heading` (text, minChars 6, maxChars 120), `table` (table, minItems 3 rows), `noteSource` (text, minChars 12, maxChars 700) |
-| `analysisWideChartTableTextScaffold` | `Analysis_wide chart+table+text` | `title` (text, minChars 8, maxChars 90) | `strapline` (text, minChars 12, maxChars 700), `heading` (text, minChars 6, maxChars 120), `body` (textArray, minItems 1, minChars 40), `chart` (chart, minItems 1 series), `table` (table, minItems 3 rows), `noteSource` (text, minChars 12, maxChars 700) |
-| `titleStrapline4TextBoxes` | `Title+strapline+4 text boxes` | `title` (text, minChars 12, maxChars 700), `columns` (columns, minItems 4) | `strapline` (text, minChars 12, maxChars 700) |
-| `backCover` | `Back cover_2` | None | `disclaimer` (text, minChars 80, maxChars 700), `url` (text, minChars 5, maxChars 60) |
+| `cover` | `Cover page_Right Horizontal Window` | `title` (text, min 8, max 100), `subtitle` (text, min 12, max 200) | None |
+| `divider` | `Divider slide_5` | `sectionNumber` (text, `^\d{2}$`), `sectionTitle` (text, min 6, max 80) | None |
+| `dividerDark` | `Divider slide_5` | `sectionNumber` (text, `^\d{2}$`), `sectionTitle` (text, min 6, max 80) | None |
+| `dividerLight` | `Divider slide_2` | `sectionNumber` (text, `^\d{2}$`), `sectionTitle` (text, min 6, max 80) | None |
+| `contents` | `Contents` | `title` (text, min 6, max 40), `sections` (contentsSections, min 8) | None |
+| `oneColumnText` | `(none)` | `title` (text, min 12, max 50), `body` (textArray, min 3, minChars 180) | `strapline` (text, min 12, max 700), `source` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
+| `twoColumnText` | `Two columns text` | `title` (text, min 12, max 50), `leftBody` (textArray, min 2, minChars 80), `rightBody` (textArray, min 2, minChars 80) | `strapline` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
+| `analysisNarrowTable` | `Analysis_narrow table` | `title` (text, min 12, max 50), `table` (table, min 3 rows) | `strapline` (text, min 12, max 700), `notes` (text, min 12, max 700), `insightTitle` (text, min 6, max 80) |
+| `analysisWideChart2ColsText` | `Analysis_wide chart + 2 cols text` | `title` (text, min 12, max 50), `body` (textArray, min 4, minChars 180), `chart` (chart, min 1 series) | `strapline` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
+| `analysisWideChartTableText` | `Analysis_wide chart+table+text` | `title` (text, min 12, max 50), `body` (textArray, min 4, minChars 180), `chart` (chart, min 1 series) | `strapline` (text, min 12, max 700), `heading` (text, min 6, max 120), `table` (table, min 3 rows), `noteSource` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
+| `titleStrapline4TextBoxes` | `Title+strapline+4 text boxes` | `title` (text, min 12, max 50), `columns` (columns, min 4) | `strapline` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
+| `backCover` | `Back cover_2` | None | `disclaimer` (text, min 80, max 700), `url` (text, min 5, max 60) |
 
-## Slide-type to renderer map
-- `cover` -> `addCover`
-- `divider` / `dividerDark` / `dividerLight` -> `addDivider`
-- `contents` -> `addContentsSlide`
-- `twoColumnText` / `analysis2ColumnsText` -> `addTwoColumnTextWithStrapline`
-- `oneColumnText` / `qualityOfEarnings` -> `addOneColumnText`
-- `analysisNarrowTable` -> `addAnalysisNarrowTable`
-- `analysisWideChart2ColsText` -> `addAnalysisWideChart2ColsText`
-- `analysisWideChartTableText` -> `addAnalysisWideChartTableText`
-- `analysisWideChartTableTextScaffold` -> `addProfitLossOverview`
-- `titleStrapline4TextBoxes` -> `addTitleStrapline4TextBoxes`
-- `backCover` -> `addBackCover`
+## Which slides support charts and tables
 
-## Authoring guidance for effective presentations
+## Chart-supporting slide types
 
-## Keep density healthy
-- Match or exceed each slide type's `minItems` and `minChars` targets.
-- For text-heavy slots, prefer fewer, stronger bullets over many short fragments.
-- If repeated long body lines appear across many slides, QA will warn.
+- `analysisWideChart2ColsText` (required chart)
+- `analysisWideChartTableText` (required chart)
 
-## Write for pagination behavior
-- The runtime auto-splits dense `body`, `leftBody/rightBody`, and large `table.rows` into continuation slides.
-- Continuation slides append `(cont.)` to title.
-- Keep each bullet compact to reduce unnecessary auto-splitting.
+## Table-supporting slide types
 
-## Use contents and divider slides together
-- Place divider slides before each section's content slides.
-- Contents page ranges are auto-computed from divider sections and numbered content slides.
+- `analysisNarrowTable` (required table)
+- `analysisWideChartTableText` (optional table)
 
-## Chart and table quality
-- Include chart `source` when possible for auditability.
-- Keep table headers concise and rows consistent in width.
-- For mixed chart+table slides, include a short `heading` to frame the takeaway.
+## Important implication
 
-## Common failure cases
-- Missing `slides` array.
-- Unknown slide `type`.
-- Missing required slots (for example missing `chart` on chart layouts).
-- Wrong slot shape (for example `table.rows` not an array of arrays).
-- Very sparse content when `allowSparse` is not enabled.
+If you put `chart` on `oneColumnText` or `twoColumnText`, it is not part of that slide type contract and should be treated as unsupported authoring.
 
-## Pre-run checklist
-- Deck includes `cover`, section `divider` slides, core analysis slides, and `backCover`.
-- All required slots per slide type are present.
-- `metadata.footer` has non-demo required fields.
-- Chart series include numeric `values`.
-- Table rows are complete and consistently formatted.
+## Slide selection guidance for effective decks
 
-## Verification method
-- Run:
+Use this decision pattern before drafting content:
+
+1. What is the slide trying to prove?
+2. Which evidence shape best matches that claim (narrative, comparison, trend, composition, table)?
+3. Choose slide type that natively supports that evidence.
+4. Fill required slots first.
+5. Use optional slots for emphasis, not for core meaning.
+
+## Intent-to-layout mapping
+
+| Intent | Recommended slide type |
+|---|---|
+| Opening context and headline setup | `cover` + `dividerDark` |
+| Agenda / navigation | `contents` |
+| Single-thread narrative | `oneColumnText` |
+| Side-by-side argument or compare/contrast | `twoColumnText` |
+| Dense KPI/table readout + quick takeaways | `analysisNarrowTable` |
+| Narrative + chart evidence | `analysisWideChart2ColsText` |
+| Integrated chart + table + narrative readout | `analysisWideChartTableText` |
+| Structured four-pillar summary | `titleStrapline4TextBoxes` |
+| Legal/disclaimer close | `backCover` |
+
+## Chart selection guidance (for models)
+
+Choose chart type based on analytical intent:
+
+| Analytical intent | Preferred chart type |
+|---|---|
+| Cross-category comparison | `bar` |
+| Time trend | `line` or `area` |
+| Share of whole (single period) | `pie` or `doughnut` |
+| Correlation/distribution | `scatter` |
+| Radial profile comparison | `radar` |
+
+Guidelines:
+
+1. Use `bar` as default when uncertain.
+2. Keep labels short and consistent.
+3. Keep units explicit in labels or axis title via `chart.opts`.
+4. Include `chart.source` whenever numbers come from external data.
+5. Do not assume combo/secondary-axis behavior; if needed, design a dedicated slide pattern first.
+
+## Narrative quality guidance (for models)
+
+Use this structure on text-bearing slides:
+
+1. `title`: what this slide proves.
+2. `strapline`: one-line argument.
+3. `body`: evidence and interpretation.
+4. Inline subheaders in `body`/`leftBody`/`rightBody` where useful.
+5. `source`/`noteSource` on data-heavy slides.
+
+Content standards:
+
+1. Prefer 3-6 high-signal bullets or compact paragraphs per body region.
+2. Avoid duplicated long body lines across many slides.
+3. Keep numeric claims tied to cited evidence.
+4. Keep titles within hard limits; do not rely on truncation.
+
+## Pagination and continuity behavior
+
+The runtime may split dense content into continuation slides:
+
+- `oneColumnText`: splits large `body`
+- `twoColumnText`: splits large left/right bodies
+- `analysisWideChart2ColsText` and `analysisWideChartTableText`: splits large `body`; chart repeats
+- `analysisNarrowTable`: can split dense table rows
+
+Continuation slides append `(cont.)` to title.
+
+## Validation behavior to know
+
+1. Required slots missing: error.
+2. Slot shape mismatch: error.
+3. Below min char/item thresholds: error or warning depending on slot priority and sparse mode.
+4. Unknown slide type: error.
+5. Extra non-slot fields are not part of contract and should not be relied upon.
+
+## Commands for verification
+
+## Base validation run
 
 ```bash
 node generator/index.js \
@@ -234,4 +332,25 @@ node generator/index.js \
   --qa-out outputs/my-run/qa.json
 ```
 
-- Confirm `qa.json` has no blocking validation errors before sharing the deck.
+## Stress-validation run
+
+```bash
+node generator/index.js \
+  --in decks/lorem-comprehensive.deckSpec.json \
+  --out outputs/lorem/deck.pptx \
+  --qa-out outputs/lorem/qa.json
+```
+
+## Visual validation run
+
+```bash
+npm run validate:visual
+```
+
+## What to use in future model instructions
+
+For model prompting, include all three references:
+
+1. `docs/DECKSPEC-SCHEMA.md` for human policy and deck-quality guidance.
+2. `docs/DECKSPEC-SLOTS-SCHEMA.json` for strict slot-level structure.
+3. `docs/DECK-AUTHORING-PLAYBOOK.md` for narrative and evidence-quality behavior.

@@ -108,7 +108,7 @@ export function toBulletRuns(lines) {
     }
 
     if (typeof item === 'object' && item !== null && item.text !== undefined) {
-      if (item.header) {
+      if (item.header || item.subheader) {
         runs.push(...headerRuns(item.text));
         continue;
       }
@@ -134,4 +134,62 @@ export function toBulletRuns(lines) {
   }
 
   return runs;
+}
+
+function safeText(value) {
+  return String(value ?? '');
+}
+
+function toInlineStyle(item = {}) {
+  return {
+    ...(item.bold !== undefined ? { bold: item.bold } : {}),
+    ...(item.italic !== undefined ? { italic: item.italic } : {}),
+    ...(item.color !== undefined ? { color: item.color } : {}),
+  };
+}
+
+export function toParagraphRuns(lines) {
+  if (!lines) return '';
+  if (typeof lines === 'string') return lines;
+  if (!Array.isArray(lines)) return String(lines ?? '');
+
+  const runs = [];
+  const addParagraph = (text, style = {}) => {
+    runs.push({
+      text: safeText(text),
+      options: {
+        paraSpaceAfter: BULLETS.paraSpaceAfterPt,
+        lineSpacing: BULLETS.lineSpacingPt,
+        breakLine: true,
+        ...style,
+      },
+    });
+  };
+
+  for (const item of lines) {
+    if (Array.isArray(item)) {
+      for (const sub of item) {
+        if (sub && typeof sub === 'object' && sub.text !== undefined) {
+          addParagraph(sub.text, toInlineStyle(sub));
+        } else {
+          addParagraph(sub);
+        }
+      }
+      continue;
+    }
+    if (item && typeof item === 'object' && item.text !== undefined) {
+      const style = item.header || item.subheader ? { bold: true, color: COLORS.kpmgBlue } : toInlineStyle(item);
+      addParagraph(item.text, style);
+      continue;
+    }
+    addParagraph(item);
+  }
+
+  return runs;
+}
+
+export function toBodyRuns(lines, bodyStyle = 'bullets') {
+  return String(bodyStyle || '').toLowerCase() === 'paragraphs'
+    ? toParagraphRuns(lines)
+    : toBulletRuns(lines);
 }

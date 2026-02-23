@@ -110,10 +110,16 @@ function chunkBullets(lines, { maxLines, charsPerLine }) {
   return chunks.length ? chunks : [[]];
 }
 
-function contTitle(title, pageIdx) {
+function contTitle(title, pageIdx, maxChars = null) {
   const t = safeStr(title).trim();
   if (!t) return t;
-  return pageIdx === 0 ? t : `${t} (cont.)`;
+  if (pageIdx === 0) return t;
+  const continued = `${t} (cont.)`;
+  if (Number.isFinite(maxChars) && maxChars > 0 && continued.length > maxChars) {
+    // Respect hard title limits; prefer keeping original title over forced wrap.
+    return t;
+  }
+  return continued;
 }
 
 function applyFooterSafe(box, useFooter) {
@@ -127,7 +133,7 @@ function applyFooterSafe(box, useFooter) {
   return { ...box, h: safeH };
 }
 
-function paginateTwoColumn(slideSpec, geometry, { footerSafe = false, fallbackLeft, fallbackRight } = {}) {
+function paginateTwoColumn(slideSpec, geometry, { footerSafe = false, fallbackLeft, fallbackRight, titleMaxChars = null } = {}) {
   const g = geometry || {};
   const leftBox = g.left || g.leftBody || g.leftText || fallbackLeft || { w: 5.5, h: 5.0, y: 1.5 };
   const rightBox = g.right || g.rightBody || g.rightText || fallbackRight || { w: 5.5, h: 5.0, y: 1.5 };
@@ -148,7 +154,7 @@ function paginateTwoColumn(slideSpec, geometry, { footerSafe = false, fallbackLe
   const out = [];
   for (let p = 0; p < pages; p++) {
     const s = clone(slideSpec);
-    s.title = contTitle(slideSpec.title, p);
+    s.title = contTitle(slideSpec.title, p, titleMaxChars);
     s.leftBody = leftChunks[p] ?? [];
     s.rightBody = rightChunks[p] ?? [];
     out.push(s);
@@ -156,7 +162,7 @@ function paginateTwoColumn(slideSpec, geometry, { footerSafe = false, fallbackLe
   return out;
 }
 
-function paginateOneColumnBullets(slideSpec, geometry, fieldName, { footerSafe = false, fallbackBox } = {}) {
+function paginateOneColumnBullets(slideSpec, geometry, fieldName, { footerSafe = false, fallbackBox, titleMaxChars = null } = {}) {
   const g = geometry || {};
   const box = g.body || g.topText || g.leftText || fallbackBox || { w: 11.0, h: 5.0, y: 1.6 };
   const safeBox = applyFooterSafe(box, footerSafe);
@@ -169,14 +175,14 @@ function paginateOneColumnBullets(slideSpec, geometry, fieldName, { footerSafe =
   const out = [];
   for (let p = 0; p < chunks.length; p++) {
     const s = clone(slideSpec);
-    s.title = contTitle(slideSpec.title, p);
+    s.title = contTitle(slideSpec.title, p, titleMaxChars);
     s[fieldName] = chunks[p];
     out.push(s);
   }
   return out;
 }
 
-function paginateTableRows(slideSpec, geometry, { footerSafe = false, fallbackBox } = {}) {
+function paginateTableRows(slideSpec, geometry, { footerSafe = false, fallbackBox, titleMaxChars = null } = {}) {
   const table = slideSpec.table;
   if (!table || !Array.isArray(table.rows) || table.rows.length <= 0) return [slideSpec];
 
@@ -190,7 +196,7 @@ function paginateTableRows(slideSpec, geometry, { footerSafe = false, fallbackBo
   const headerH = 0.32;
   const showTitleBar =
     table.showTitleBar !== false &&
-    !['analysisWideChartTableText', 'analysisWideChartTableTextScaffold'].includes(slideSpec.type);
+    slideSpec.type !== 'analysisWideChartTableText';
   const titleBarH = showTitleBar ? 0.26 : 0;
   const bodyBudget = Math.max(0.8, Number(safeBox.h || 4.5) - headerH - titleBarH);
 
@@ -242,7 +248,7 @@ function paginateTableRows(slideSpec, geometry, { footerSafe = false, fallbackBo
   const out = [];
   for (const [start, end] of chunks) {
     const s = clone(slideSpec);
-    s.title = contTitle(slideSpec.title, out.length);
+    s.title = contTitle(slideSpec.title, out.length, titleMaxChars);
     s.table = {
       headers,
       rows: table.rows.slice(start, end),
@@ -289,17 +295,19 @@ export function paginateDeckSpec(deckSpec, layouts) {
     const type = slideSpec?.type;
     const layout = (layouts && type && layouts[type]) || null;
     const geom = layout?.geometry || null;
+    const titleMaxChars = Number(layout?.slots?.title?.maxChars || 0) || null;
 
     if (!type || !layout) {
       out.slides.push(slideSpec);
       continue;
     }
 
-    if (type === 'twoColumnText' || type === 'analysis2ColumnsText') {
+    if (type === 'twoColumnText') {
       const paged = paginateTwoColumn(slideSpec, geom, {
         footerSafe: true,
         fallbackLeft: { w: 5.7, h: 5.7, y: 1.5 },
         fallbackRight: { w: 5.2, h: 5.7, y: 1.5 },
+        titleMaxChars,
       });
       const originalCount =
         (Array.isArray(slideSpec.leftBody) ? slideSpec.leftBody.length : 0) +
@@ -313,6 +321,7 @@ export function paginateDeckSpec(deckSpec, layouts) {
       const paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
         footerSafe: true,
         fallbackBox: { w: 11.1596, h: 5.6, y: 1.6 },
+        titleMaxChars,
       });
       const originalCount = Array.isArray(slideSpec.body) ? slideSpec.body.length : 0;
       recordSplit(slideIndex, type, 'one-column-bullets', originalCount, paged.length);
@@ -329,6 +338,7 @@ export function paginateDeckSpec(deckSpec, layouts) {
       const paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
         footerSafe: true,
         fallbackBox,
+        titleMaxChars,
       });
       const originalCount = Array.isArray(slideSpec.body) ? slideSpec.body.length : 0;
       recordSplit(slideIndex, type, 'text-with-chart', originalCount, paged.length);
@@ -340,6 +350,7 @@ export function paginateDeckSpec(deckSpec, layouts) {
       const paged = paginateTableRows(slideSpec, geom, {
         footerSafe: true,
         fallbackBox: { w: 11.1596, h: 4.5, y: 1.9 },
+        titleMaxChars,
       });
       const originalCount = Array.isArray(slideSpec?.table?.rows) ? slideSpec.table.rows.length : 0;
       recordSplit(slideIndex, type, 'table-rows', originalCount, paged.length);

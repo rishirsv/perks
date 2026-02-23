@@ -10,12 +10,13 @@ const DEFAULT_TIMEOUT_MS = 180000;
  */
 function resolveSlidesDir() {
   const envDir = process.env.SLIDES_SKILL_DIR;
+  const repoRelativeSkills = path.resolve(process.cwd(), '..', '..', '.agents', 'skills', 'oai-skills', 'slides');
+  const repoRelativeLegacy = path.resolve(process.cwd(), '..', '..', '.agents', 'oai-skills', 'slides');
   const candidates = [
     envDir,
+    repoRelativeSkills,
+    repoRelativeLegacy,
     '/code/ai-tools/.agents/oai-skills/slides',
-    '/Users/rishi/Code/ai-tools/.agents/oai-skills/slides',
-    '/Users/rishi/Code/ai-tools/.agents/skills/oai-skills/slides',
-    '/Users/rishi/code/ai-tools/.agents/skills/oai-skills/slides',
   ].filter(Boolean);
   for (const dir of candidates) {
     if (!fs.existsSync(dir)) continue;

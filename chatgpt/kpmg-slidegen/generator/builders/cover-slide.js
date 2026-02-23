@@ -1,20 +1,8 @@
-// cover-slide.js
-//
-// Cover slide prototype for the KPMG Diligence Reporting template.
-//
-// Intended for PptxGenJS 4.0.1 (this environment has 4.0.0; the API used here is compatible).
-
-import PptxGenJS from 'pptxgenjs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { COLORS, FONTS } from '../tokens.js';
 import { getImageDimensions, normalizeImageSource } from '../helpers/media.js';
 import { sanitizeText } from '../helpers/text.js';
 import { resolveTemplateAssetsDir } from '../runtime/template-roots.js';
-
-// Resolve local paths when running as an ES module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TOKENS
@@ -158,27 +146,4 @@ export function addCover(pptx, { title, subtitle, assets, geometry, masterName }
   });
 
   return slide;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Test harness
-// ─────────────────────────────────────────────────────────────────────────────
-
-async function main() {
-  const pptx = new PptxGenJS();
-  pptx.defineLayout({ name: 'KPMG_WIDE', width: 13.333, height: 7.5 });
-  pptx.layout = 'KPMG_WIDE';
-
-  addCover(pptx, {
-    title: 'Project Alpha',
-    subtitle: 'Quality of Earnings Analysis\nPrepared for Client Name'
-  });
-
-  const outPath = path.join(__dirname, '..', '..', 'references', 'pptx', 'cover-test.pptx');
-  await pptx.writeFile(outPath);
-  console.log(`Generated: ${outPath}`);
-}
-
-if (process.argv[1] === __filename) {
-  main();
 }

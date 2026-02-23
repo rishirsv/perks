@@ -1,0 +1,20 @@
+{
+  "name": "kpmg-slidegen",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Template-driven PPTX generator with QA and optional visual postprocess checks.",
+  "scripts": {
+    "generate": "node generator/index.js --in decks/input.deckSpec.json --out outputs/my-run/deck.pptx --qa-out outputs/my-run/qa.json",
+    "test:contracts": "node scripts/test-layout-contracts.mjs",
+    "smoke": "node scripts/smoke-generate.mjs",
+    "test:postprocess": "node scripts/test-postprocess-flows.mjs",
+    "validate:visual": "node scripts/validate-visual.mjs",
+    "dev:cover": "node scripts/dev/render-cover-sample.mjs",
+    "dev:analysis-narrow": "node scripts/dev/render-analysis-narrow-sample.mjs"
+  },
+  "dependencies": {
+    "image-size": "^2.0.2",
+    "pptxgenjs": "^4.0.1"
+  }
+}

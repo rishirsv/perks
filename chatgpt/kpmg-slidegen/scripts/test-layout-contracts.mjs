@@ -1,0 +1,72 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+function readJson(relPath) {
+  const absPath = path.join(process.cwd(), relPath);
+  return JSON.parse(fs.readFileSync(absPath, 'utf8'));
+}
+
+function sortedUnique(values) {
+  return Array.from(new Set(values)).sort();
+}
+
+function diff(expected, actual) {
+  const actualSet = new Set(actual);
+  return expected.filter((item) => !actualSet.has(item));
+}
+
+function extractTemplateTypes() {
+  const layouts = readJson('templates/kpmg-diligence/package/layouts.json');
+  return sortedUnique(Object.keys(layouts.types || {}));
+}
+
+function extractSchemaTypes() {
+  const schema = readJson('docs/DECKSPEC-SLOTS-SCHEMA.json');
+  const defs = schema.$defs || {};
+  const types = [];
+  for (const [defName, def] of Object.entries(defs)) {
+    if (defName === 'slide') continue;
+    const typeConst = def?.properties?.type?.const;
+    if (typeof typeConst === 'string' && typeConst.length > 0) {
+      types.push(typeConst);
+    }
+  }
+  return sortedUnique(types);
+}
+
+function extractRuntimeTypes() {
+  const source = fs.readFileSync(path.join(process.cwd(), 'generator/runtime/render-deck.js'), 'utf8');
+  const matches = source.matchAll(/slideSpec\.type === '([^']+)'/g);
+  const types = [];
+  for (const match of matches) {
+    if (match[1]) types.push(match[1]);
+  }
+  return sortedUnique(types);
+}
+
+function printMismatch(header, items) {
+  if (!items.length) return;
+  console.error(`\n${header} (${items.length})`);
+  for (const item of items) console.error(`- ${item}`);
+}
+
+const templateTypes = extractTemplateTypes();
+const schemaTypes = extractSchemaTypes();
+const runtimeTypes = extractRuntimeTypes();
+
+const missingInSchema = diff(templateTypes, schemaTypes);
+const extraInSchema = diff(schemaTypes, templateTypes);
+const missingInRuntime = diff(templateTypes, runtimeTypes);
+const extraInRuntime = diff(runtimeTypes, templateTypes);
+
+if (missingInSchema.length || extraInSchema.length || missingInRuntime.length || extraInRuntime.length) {
+  console.error('Layout contract mismatch detected.');
+  printMismatch('Template types missing in docs schema', missingInSchema);
+  printMismatch('Docs schema types not in template', extraInSchema);
+  printMismatch('Template types missing in runtime dispatch', missingInRuntime);
+  printMismatch('Runtime dispatch types not in template', extraInRuntime);
+  process.exit(1);
+}
+
+console.log('Layout contract check passed.');
+console.log(`Types (${templateTypes.length}): ${templateTypes.join(', ')}`);
