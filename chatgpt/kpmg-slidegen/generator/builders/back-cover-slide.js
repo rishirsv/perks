@@ -26,22 +26,22 @@ function resolveAsset(assets = {}, resolveAssetPath, key, fallbackKey = null) {
 function buildContacts() {
   return [
     {
-      name: 'Rebecca Placeholder',
-      role: 'Job Description',
-      phone: 'T: +1 416 000 0001',
-      email: 'E: rebecca@kpmg.ca',
+      name: 'Firstname Lastname',
+      role: 'Job Title',
+      phone: 'T: +1 000 000 0001',
+      email: 'E: firstname.lastname@kpmg.ca',
     },
     {
-      name: 'Name Placeholder',
-      role: 'Job Description',
-      phone: 'T: +1 416 000 0002',
-      email: 'E: name@kpmg.ca',
+      name: 'Firstname Lastname',
+      role: 'Job Title',
+      phone: 'T: +1 000 000 0002',
+      email: 'E: firstname.lastname@kpmg.ca',
     },
     {
-      name: 'Name Placeholder',
-      role: 'Job Description',
-      phone: 'T: +1 416 000 0003',
-      email: 'E: name2@kpmg.ca',
+      name: 'Firstname Lastname',
+      role: 'Job Title',
+      phone: 'T: +1 000 000 0003',
+      email: 'E: firstname.lastname@kpmg.ca',
     },
   ];
 }

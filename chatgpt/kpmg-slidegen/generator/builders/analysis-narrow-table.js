@@ -1,8 +1,12 @@
 import { FONTS, COLORS as T, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { addTitle } from '../helpers/title.js';
 import { toBulletRuns } from '../helpers/bullets.js';
-import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
-import { clampBoxToBottom } from '../helpers/geometry.js';
+import {
+  clampToMasterFooter,
+  computeStrapShift,
+  footerSafeTopForMaster,
+} from '../helpers/layout.js';
+import { sanitizeText } from '../helpers/text.js';
 
 // ----
 // Palette (derived from central tokens)
@@ -24,66 +28,6 @@ const TWO_COL = {
   rightTitle: { x: 6.73622, y: 1.91555, w: 5.50787, h: 0.27559 },
   rightBody: { x: 6.73622, y: 2.19115, w: 5.50787, h: 4.23228 },
 };
-
-function findRow(table, labelPrefix) {
-  const rows = Array.isArray(table?.rows) ? table.rows : [];
-  const pfx = String(labelPrefix).toLowerCase();
-  for (const r of rows) {
-    const label = String(Array.isArray(r) ? r[0] : '').toLowerCase();
-    if (label.startsWith(pfx)) return r;
-  }
-  return null;
-}
-
-function insightsForAnalysisTable(title, table) {
-  const t = String(title ?? '').toLowerCase();
-  const bullets = [];
-
-  if (t.includes('financial summary')) {
-    const rev = findRow(table, 'revenue');
-    const gm = findRow(table, 'gross margin');
-    const ocf = findRow(table, 'operating cash flow');
-    const inv = findRow(table, 'inventory');
-    if (rev) bullets.push(`Revenue scale step-change (${rev[1]} → ${rev[3]}) with continued momentum into FY2026.`);
-    if (gm) bullets.push(`Margins peaked in FY2025 (${gm[3]}) and moderated in 9M FY2026 (${gm[4]}), requiring mix and provision diligence.`);
-    if (ocf) bullets.push(`Cash generation remains strong (operating cash flow ${ocf[3]}), supporting aggressive capital return.`);
-    if (inv) bullets.push(`Inventory build (${inv[3]} → ${inv[4]}) elevates focus on reserves, backlog quality, and platform transitions.`);
-  } else if (t.includes('peer comparison')) {
-    const evRev = findRow(table, 'ev / revenue');
-    const pe = findRow(table, 'p/e');
-    const growth = findRow(table, 'revenue growth');
-    if (evRev) bullets.push(`Valuation premium is clear: EV/Revenue ${evRev[1]} vs peer median ${evRev[5]}.`);
-    if (pe) bullets.push(`Earnings multiple embeds durability expectations: P/E ${pe[1]} vs peer median ${pe[5]}.`);
-    if (growth) bullets.push(`Premium is underwritten by forward growth assumptions (${growth[1]} vs peers ~${growth[5]}).`);
-    bullets.push(`Key diligence: sustainability of gross margin, customer concentration, and supply chain constraints.`);
-  } else if (t.includes('sensitivity')) {
-    bullets.push(`Range of implied enterprise values is highly sensitive to both normalized EBITDA and multiple selection.`);
-    bullets.push(`Focus analysis on downside cases (mix/price, margin normalization) and upside scenarios (capacity unlocks).`);
-    bullets.push(`Use as a decision framework for valuation guardrails and diligence priorities.`);
-  } else if (t.includes('candidate adjustments')) {
-    const net = findRow(table, 'indicative adj');
-    const sbc = findRow(table, 'sbc');
-    if (sbc) bullets.push(`Largest recurring adjustment driver: stock-based compensation (material and growing).`);
-    if (net) bullets.push(`Indicative EBITDA adjustment impact is meaningful (FY2025: ${net[2]}), concentrated in a few items.`);
-    bullets.push(`Inventory-related normalization requires evidence on reserve methodology and platform obsolescence risk.`);
-    bullets.push(`Prioritize high-impact items first to converge quickly on normalized earnings.`);
-  } else if (t.includes('priority data requests')) {
-    const rows = Array.isArray(table?.rows) ? table.rows : [];
-    const highs = rows.filter((r) => String(r?.[0] ?? '').toLowerCase() === 'high').slice(0, 5);
-    if (highs.length) {
-      bullets.push(`Top priorities center on unit/ASP bridge, customer concentration, supply commitments, and inventory reserves.`);
-    }
-    bullets.push(`Goal is to translate reported revenue into operational drivers and risk-adjusted durability.`);
-    bullets.push(`Sequence requests to unblock valuation model inputs early, then deepen into root-cause drivers.`);
-  } else {
-    bullets.push(`Key takeaways synthesized from the table inputs for quick scan and discussion.`);
-    bullets.push(`Use as a working view; confirm all figures during confirmatory diligence.`);
-  }
-
-  // Ensure we always have baseline content, even when table-specific signals are sparse.
-  while (bullets.length < 4) bullets.push(`Add diligence commentary to contextualize table outcomes and implications.`);
-  return bullets.slice(0, 6);
-}
 
 // ----
 // Generic analysis table (matches the prompt's data schema)
@@ -455,14 +399,14 @@ export function addAnalysisNarrowTable(
 ) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const g = geometry || {};
-  const strapText = strapline;
+  const strapText = sanitizeText(strapline);
   let straplineBox = null;
 
   addTitle(slide, title, g.title || { x: 1.0919, y: 0.4722, w: 11.1596, h: 0.5833 });
 
   if (strapText) {
     straplineBox = g.strapline || { x: 1.0919, y: 1.2899, w: 11.1596, h: 0.5276 };
-    slide.addText(String(strapText), {
+    slide.addText(strapText, {
       ...straplineBox,
       fontFace: FONTS.body,
       fontSize: TYPE_SIZES.strapline,
@@ -477,15 +421,10 @@ export function addAnalysisNarrowTable(
 
   if (table) {
     const tableTop = (g.table || TWO_COL.table).y;
-    const yShift = strapText && straplineBox
-      ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - tableTop)
-      : 0;
+    const yShift = computeStrapShift(straplineBox, tableTop);
     const cols = Array.isArray(table.headers) ? table.headers.length : 0;
     const rows = Array.isArray(table.rows) ? table.rows.length : 0;
-    const insights =
-      Array.isArray(customInsights) && customInsights.length
-        ? customInsights
-        : insightsForAnalysisTable(title, table);
+    const insights = Array.isArray(customInsights) ? customInsights : [];
     const insightsHeading = String(insightTitle || table?.keyTakeawayTitle || 'Key takeaways').trim() || 'Key takeaways';
 
     // Default analysis layout: two columns (table + narrative). This matches how
@@ -502,7 +441,7 @@ export function addAnalysisNarrowTable(
     });
     const useTwoCol = cols > 0 && cols <= 6 && rows <= 14 && estimatedTwoColHeight <= twoColTableBox.h;
 
-    const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
+    const footerSafeTop = footerSafeTopForMaster(masterName);
     if (useTwoCol) {
       const tableBox = twoColTableBox;
       addAnalysisTable(slide, table, {
@@ -513,8 +452,8 @@ export function addAnalysisNarrowTable(
 
       const rightTitleBase = g.rightTitle || TWO_COL.rightTitle;
       const rightBodyBase = g.rightBody || TWO_COL.rightBody;
-      const rightTitleBox = footerSafeTop ? clampBoxToBottom(rightTitleBase, footerSafeTop) : rightTitleBase;
-      const rightBodyBox = footerSafeTop ? clampBoxToBottom(rightBodyBase, footerSafeTop) : rightBodyBase;
+      const rightTitleBox = clampToMasterFooter(rightTitleBase, masterName);
+      const rightBodyBox = clampToMasterFooter(rightBodyBase, masterName);
 
       slide.addText(insightsHeading, {
         ...rightTitleBox,
@@ -578,14 +517,13 @@ export function addAnalysisNarrowTable(
   }
 
   if (notes) {
-    const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
     const notesBox = {
       x: (TWO_COL.table.x ?? 1.0919),
       y: (TWO_COL.table.y + TWO_COL.table.h + 0.15),
       w: (TWO_COL.table.w ?? 5.5),
       h: 0.9,
     };
-    const safeNotes = footerSafeTop ? clampBoxToBottom(notesBox, footerSafeTop) : notesBox;
+    const safeNotes = clampToMasterFooter(notesBox, masterName);
     slide.addText(String(notes), {
       ...safeNotes,
       fontFace: FONTS.body,

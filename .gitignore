@@ -19,6 +19,11 @@ chatgpt/kpmg-pptx-gen/outputs/
 chatgpt/kpmg-pptx-gen/**/__pycache__/
 # ---- /kpmg-pptx-gen ----
 
+# ---- kpmg-slidegen ----
+chatgpt/kpmg-slidegen/outputs/runs/
+.agents/skills/oai-skills/slides/__pycache__/
+# ---- /kpmg-slidegen ----
+
 # Env files
 .env
 .env.*

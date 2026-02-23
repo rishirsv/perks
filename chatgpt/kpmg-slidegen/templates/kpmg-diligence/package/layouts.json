@@ -92,6 +92,18 @@
           },
           "enforceMaxChars": true
         },
+        "insights": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 2,
+          "minChars": 80,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "bullet",
+            "keepTogether": false,
+            "priority": "high"
+          }
+        },
         "insightTitle": {
           "kind": "text",
           "required": false,

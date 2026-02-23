@@ -15,7 +15,7 @@ This repo converts `deckSpec` JSON files into `.pptx` outputs with a consolidate
 ## Scope
 - Edit generation logic only in `generator/`.
 - Keep template contracts in `templates/kpmg-diligence/package/`.
-- Treat `decks/input.deckSpec.json` as an example input, not a schema definition.
+- Treat `decks/lorem-comprehensive.deckSpec.json` and `decks/layout-flex-one-per-layout.deckSpec.json` as example inputs, not schema definitions.
 
 ## Working Rules
 - Preserve runtime-minimal design; avoid adding unnecessary frameworks.
@@ -25,7 +25,7 @@ This repo converts `deckSpec` JSON files into `.pptx` outputs with a consolidate
 ## Quick Start
 ```bash
 node generator/index.js \
-  --in decks/input.deckSpec.json \
+  --in decks/lorem-comprehensive.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json
 ```

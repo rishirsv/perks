@@ -274,13 +274,17 @@
     "slideAnalysisNarrowTable": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "title", "table"],
+      "required": ["type", "title", "table", "insights"],
       "properties": {
         "type": { "const": "analysisNarrowTable" },
         "title": { "type": "string", "minLength": 12, "maxLength": 50 },
         "strapline": { "type": "string", "minLength": 12, "maxLength": 700 },
         "notes": { "type": "string", "minLength": 12, "maxLength": 700 },
         "insightTitle": { "type": "string", "minLength": 6, "maxLength": 80 },
+        "insights": {
+          "$ref": "#/$defs/textArrayMin2",
+          "x-kpmg-minChars": 80
+        },
         "table": { "$ref": "#/$defs/table" }
       }
     },

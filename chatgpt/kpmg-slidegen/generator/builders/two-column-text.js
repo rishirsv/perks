@@ -1,10 +1,15 @@
 import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
-import { clampBoxToBottom, isValidColumnGeometry } from '../helpers/geometry.js';
+import { isValidColumnGeometry } from '../helpers/geometry.js';
 import { computeDynamicStraplineBox, sanitizeText } from '../helpers/text.js';
 import { recordFallback } from '../runtime/diagnostics.js';
-import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
+import {
+  clampToMasterFooter,
+  computeStrapShift,
+  normalizeBodyStyle,
+  shiftBox,
+} from '../helpers/layout.js';
 import fs from 'node:fs';
 import { normalizeImageSource } from '../helpers/media.js';
 import { svgToDataUri } from '../helpers/svg.js';
@@ -53,89 +58,9 @@ function addIconChip(pptx, slide, iconPath, geo) {
   });
 }
 
-function addScreenshotPlaceholder(pptx, slide, placeholder, rightGeo, { topGap = null, style = null } = {}) {
-  if (!placeholder) return false;
-  const caption = placeholder.caption || '';
-  const note = placeholder.note || 'Recommended screenshot: final output view (not the prompt).';
-
-  const size = 0.62;
-  const effectiveTopGap = topGap === null ? size + 0.16 : topGap;
-  const frameX = rightGeo.x;
-  const frameY = rightGeo.y + effectiveTopGap;
-  const frameW = rightGeo.w;
-  const frameH = Math.max(1.5, rightGeo.h - effectiveTopGap);
-
-  slide.addShape(pptx.ShapeType.roundRect, {
-    x: frameX,
-    y: frameY,
-    w: frameW,
-    h: frameH,
-    fill: { color: 'FFFFFF' },
-    line: { color: 'D9D9D9', width: 1 },
-    rectRadius: 0.08,
-  });
-
-  slide.addText('Example (screenshot)', {
-    x: frameX + 0.2,
-    y: frameY + 0.15,
-    w: frameW - 0.4,
-    h: 0.25,
-    fontFace: FONTS.heading,
-    fontSize: style?.placeholderLabelFontSize ?? 11,
-    color: COLORS.kpmgBlue,
-    bold: true,
-    wrap: TEXT_BOX.wrap,
-    margin: TEXT_BOX.marginPt,
-    valign: 'top',
-  });
-
-  slide.addText('Screenshot placeholder (to be added).', {
-    x: frameX + 0.25,
-    y: frameY + 0.95,
-    w: frameW - 0.5,
-    h: Math.max(0.6, frameH - 1.8),
-    fontFace: FONTS.body,
-    fontSize: style?.placeholderBodyFontSize ?? 9,
-    color: '666666',
-    wrap: TEXT_BOX.wrap,
-    margin: TEXT_BOX.marginPt,
-    valign: 'mid',
-    align: 'center',
-  });
-
-  slide.addText(sanitizeText(caption), {
-    x: frameX + 0.2,
-    y: frameY + frameH - 0.75,
-    w: frameW - 0.4,
-    h: 0.35,
-    fontFace: FONTS.body,
-    fontSize: style?.placeholderCaptionFontSize ?? 8,
-    color: COLORS.black,
-    wrap: TEXT_BOX.wrap,
-    margin: TEXT_BOX.marginPt,
-    valign: 'top',
-  });
-
-  slide.addText(sanitizeText(note), {
-    x: frameX + 0.2,
-    y: frameY + frameH - 0.38,
-    w: frameW - 0.4,
-    h: 0.25,
-    fontFace: FONTS.body,
-    fontSize: style?.placeholderNoteFontSize ?? 7,
-    color: '666666',
-    italic: true,
-    wrap: TEXT_BOX.wrap,
-    margin: TEXT_BOX.marginPt,
-    valign: 'top',
-  });
-
-  return true;
-}
-
 export function addTwoColumnTextWithStrapline(
   pptx,
-  { title, strapline, leftBody, rightBody, bodyStyle, geometry, masterName, icon, iconPlacement, screenshotPlaceholder, style } = {},
+  { title, strapline, leftBody, rightBody, bodyStyle, geometry, masterName, icon, iconPlacement, style } = {},
 ) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const candidate = geometry || TOKENS.geometry;
@@ -152,7 +77,7 @@ export function addTwoColumnTextWithStrapline(
   const iconMode = iconPlacement || 'rightColumn';
   const iconInTitle = icon && (iconMode === 'titleLeft' || iconMode === 'titleRight');
   const strapText = strapline;
-  const effectiveBodyStyle = bodyStyle || 'bullets';
+  const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
   const requestedIconSize = style?.iconSize === undefined ? null : Number(style.iconSize);
   const iconSize = Number.isFinite(requestedIconSize)
     ? Math.min(0.75, Math.max(0.4, requestedIconSize))
@@ -205,14 +130,11 @@ export function addTwoColumnTextWithStrapline(
 
   const leftBase = g.left || TOKENS.geometry.left;
   const rightBase = g.right || TOKENS.geometry.right;
-  const shift = strapText && strapBox
-    ? Math.max(0, (strapBox.y + strapBox.h + 0.06) - Math.min(leftBase.y, rightBase.y))
-    : 0;
-  const leftGeo = shift ? { ...leftBase, y: leftBase.y + shift, h: leftBase.h - shift } : leftBase;
-  const rightGeo = shift ? { ...rightBase, y: rightBase.y + shift, h: rightBase.h - shift } : rightBase;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
-  const safeLeftGeo = footerSafeTop ? clampBoxToBottom(leftGeo, footerSafeTop) : leftGeo;
-  const safeRightGeo = footerSafeTop ? clampBoxToBottom(rightGeo, footerSafeTop) : rightGeo;
+  const shift = computeStrapShift(strapBox, Math.min(leftBase.y, rightBase.y));
+  const leftGeo = shiftBox(leftBase, shift);
+  const rightGeo = shiftBox(rightBase, shift);
+  const safeLeftGeo = clampToMasterFooter(leftGeo, masterName);
+  const safeRightGeo = clampToMasterFooter(rightGeo, masterName);
 
   const bodyTextStyle = { ...TOKENS.textStyles.body, fontSize: style?.bodyFontSize ?? TOKENS.textStyles.body.fontSize };
   slide.addText(toBodyRuns(leftBody, effectiveBodyStyle), {
@@ -223,25 +145,16 @@ export function addTwoColumnTextWithStrapline(
     valign: 'top',
   });
 
-  // Optional enhancements:
-  // - `icon`: add an icon chip at the top-right of the right column
-  // - `screenshotPlaceholder`: render a framed screenshot placeholder in the right column
+  // Optional enhancement: `icon` adds an icon chip at the top-right of the right column.
   const iconInRightColumn = Boolean(icon) && !iconInTitle;
   if (iconInRightColumn) addIconChip(pptx, slide, icon, safeRightGeo);
-  const placeholderTopGap = iconInRightColumn ? null : 0.05;
-  const hasPlaceholder = addScreenshotPlaceholder(pptx, slide, screenshotPlaceholder, safeRightGeo, {
-    topGap: placeholderTopGap,
-    style,
+  slide.addText(toBodyRuns(rightBody, effectiveBodyStyle), {
+    ...safeRightGeo,
+    ...bodyTextStyle,
+    wrap: TEXT_BOX.wrap,
+    margin: TEXT_BOX.marginPt,
+    valign: 'top',
   });
-  if (!hasPlaceholder) {
-    slide.addText(toBodyRuns(rightBody, effectiveBodyStyle), {
-      ...safeRightGeo,
-      ...bodyTextStyle,
-      wrap: TEXT_BOX.wrap,
-      margin: TEXT_BOX.marginPt,
-      valign: 'top',
-    });
-  }
 
   return slide;
 }

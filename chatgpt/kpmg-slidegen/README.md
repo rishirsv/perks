@@ -19,7 +19,7 @@ Equivalent direct command:
 
 ```bash
 node generator/index.js \
-  --in decks/input.deckSpec.json \
+  --in decks/lorem-comprehensive.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json
 ```
@@ -28,7 +28,7 @@ node generator/index.js \
 
 ```bash
 node generator/index.js \
-  --in decks/input.deckSpec.json \
+  --in decks/lorem-comprehensive.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json \
   --strict
@@ -38,7 +38,7 @@ node generator/index.js \
 
 ```bash
 node generator/index.js \
-  --in decks/input.deckSpec.json \
+  --in decks/lorem-comprehensive.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json \
   --with-preview \
@@ -76,7 +76,7 @@ kpmg-slidegen/
 ├── TODOS.md
 ├── package.json
 ├── decks/
-│   ├── input.deckSpec.json
+│   ├── layout-flex-one-per-layout.deckSpec.json
 │   └── lorem-comprehensive.deckSpec.json
 ├── docs/
 │   ├── DECKSPEC-SCHEMA.md
@@ -190,6 +190,8 @@ QA report includes:
 
 ```bash
 npm run generate
+npm run generate:layouts
+npm run qa
 ```
 
 `npm run generate` always produces a QA report (`--qa-out`) and is the default day-to-day command.

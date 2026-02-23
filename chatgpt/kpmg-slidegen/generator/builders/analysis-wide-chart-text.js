@@ -2,8 +2,13 @@ import { FONTS, COLORS, CHART_COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js'
 import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
 import { pickDataLabelColor } from '../helpers/chart.js';
-import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
-import { clampBoxToBottom } from '../helpers/geometry.js';
+import {
+  clampToMasterFooter,
+  computeStrapShift,
+  footerSafeTopForMaster,
+  normalizeBodyStyle,
+  shiftBox,
+} from '../helpers/layout.js';
 import { addAnalysisTable } from './analysis-narrow-table.js';
 
 const TOKENS = {
@@ -116,7 +121,7 @@ export function addAnalysisWideChart2ColsText(pptx, { title, strapline, body, bo
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const g = geometry || TOKENS.geometry;
   const strapText = strapline;
-  const effectiveBodyStyle = bodyStyle || 'bullets';
+  const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
   let straplineBox = null;
 
   addTitle(slide, title, g.title || TOKENS.geometry.title);
@@ -133,15 +138,12 @@ export function addAnalysisWideChart2ColsText(pptx, { title, strapline, body, bo
 
   const leftBase = g.leftText || TOKENS.geometry.leftText;
   const rightBase = g.rightChart || TOKENS.geometry.rightChart;
-  const yShift = strapText && straplineBox
-    ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - Math.min(leftBase.y, rightBase.y))
-    : 0;
-  const textBox = yShift ? { ...leftBase, y: leftBase.y + yShift, h: leftBase.h - yShift } : leftBase;
-  const chartBox = yShift ? { ...rightBase, y: rightBase.y + yShift, h: rightBase.h - yShift } : rightBase;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
-  const safeTextBox = footerSafeTop ? clampBoxToBottom(textBox, footerSafeTop) : textBox;
+  const yShift = computeStrapShift(straplineBox, Math.min(leftBase.y, rightBase.y));
+  const textBox = shiftBox(leftBase, yShift);
+  const chartBox = shiftBox(rightBase, yShift);
+  const safeTextBox = clampToMasterFooter(textBox, masterName);
   const sourcePad = chart?.source ? 0.3 : 0;
-  const safeChartBox = footerSafeTop ? clampBoxToBottom(chartBox, footerSafeTop - sourcePad) : chartBox;
+  const safeChartBox = clampToMasterFooter(chartBox, masterName, sourcePad);
 
   slide.addText(toBodyRuns(body, effectiveBodyStyle), {
     ...safeTextBox,
@@ -162,7 +164,7 @@ export function addAnalysisWideChartTableText(
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const g = geometry || TOKENS.geometry;
   const strapText = strapline;
-  const effectiveBodyStyle = bodyStyle || 'bullets';
+  const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
   let straplineBox = null;
 
   addTitle(slide, title, g.title || TOKENS.geometry.title);
@@ -178,9 +180,7 @@ export function addAnalysisWideChartTableText(
   }
 
   const topBase = g.body || g.rightBody || g.bodyBoxes?.[2] || g.topText || TOKENS.geometry.topText;
-  const yShift = strapText && straplineBox
-    ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - topBase.y)
-    : 0;
+  const yShift = computeStrapShift(straplineBox, topBase.y);
   const hasChartData = Boolean(chart?.type && Array.isArray(chart?.data) && chart.data.length > 0);
   const hasTableData = Boolean(table?.headers && Array.isArray(table?.rows) && table.rows.length > 0);
   // Render charts whenever data is available; flags only influence preferred chart slot.
@@ -192,16 +192,10 @@ export function addAnalysisWideChartTableText(
     : null;
   const tableBase = g.table || null;
   const headingBase = g.heading || g.bodyBoxes?.[1] || null;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
-  let textBox = yShift ? { ...topBase, y: topBase.y + yShift, h: topBase.h - yShift } : topBase;
-  let chartBox = chartBase
-    ? (yShift ? { ...chartBase, y: chartBase.y + yShift, h: chartBase.h - yShift } : chartBase)
-    : null;
-  let tableBox = tableBase
-    ? yShift
-      ? { ...tableBase, y: tableBase.y + yShift, h: tableBase.h - yShift }
-      : tableBase
-    : null;
+  const footerSafeTop = footerSafeTopForMaster(masterName);
+  let textBox = shiftBox(topBase, yShift);
+  let chartBox = chartBase ? shiftBox(chartBase, yShift) : null;
+  let tableBox = tableBase ? shiftBox(tableBase, yShift) : null;
 
   // Some extracted template variants place chart above the heading and push body/table
   // to the bottom half. For this layout we rebalance so chart + text sit directly below
@@ -234,12 +228,10 @@ export function addAnalysisWideChartTableText(
     tableBox = { x: leftX, y: lowerY, w: leftW, h: lowerH };
   }
 
-  const safeTextBox = footerSafeTop ? clampBoxToBottom(textBox, footerSafeTop) : textBox;
+  const safeTextBox = clampToMasterFooter(textBox, masterName);
   const sourcePad = chart?.source ? 0.3 : 0;
-  const safeChartBox = chartBox
-    ? (footerSafeTop ? clampBoxToBottom(chartBox, footerSafeTop - sourcePad) : chartBox)
-    : null;
-  const safeTableBox = tableBox && footerSafeTop ? clampBoxToBottom(tableBox, footerSafeTop) : tableBox;
+  const safeChartBox = chartBox ? clampToMasterFooter(chartBox, masterName, sourcePad) : null;
+  const safeTableBox = tableBox ? clampToMasterFooter(tableBox, masterName) : null;
 
   addHeadingBand(pptx, slide, heading, headingBase);
 

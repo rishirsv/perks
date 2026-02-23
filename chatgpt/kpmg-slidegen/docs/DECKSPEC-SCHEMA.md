@@ -219,7 +219,7 @@ Legend:
 | `contents` | `Contents` | `title` (text, min 6, max 40), `sections` (contentsSections, min 8) | None |
 | `oneColumnText` | `(none)` | `title` (text, min 12, max 50), `body` (textArray, min 3, minChars 180) | `strapline` (text, min 12, max 700), `source` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
 | `twoColumnText` | `Two columns text` | `title` (text, min 12, max 50), `leftBody` (textArray, min 2, minChars 80), `rightBody` (textArray, min 2, minChars 80) | `strapline` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
-| `analysisNarrowTable` | `Analysis_narrow table` | `title` (text, min 12, max 50), `table` (table, min 3 rows) | `strapline` (text, min 12, max 700), `notes` (text, min 12, max 700), `insightTitle` (text, min 6, max 80) |
+| `analysisNarrowTable` | `Analysis_narrow table` | `title` (text, min 12, max 50), `table` (table, min 3 rows), `insights` (textArray, min 2, minChars 80) | `strapline` (text, min 12, max 700), `notes` (text, min 12, max 700), `insightTitle` (text, min 6, max 80) |
 | `analysisWideChart2ColsText` | `Analysis_wide chart + 2 cols text` | `title` (text, min 12, max 50), `body` (textArray, min 4, minChars 180), `chart` (chart, min 1 series) | `strapline` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
 | `analysisWideChartTableText` | `Analysis_wide chart+table+text` | `title` (text, min 12, max 50), `body` (textArray, min 4, minChars 180), `chart` (chart, min 1 series) | `strapline` (text, min 12, max 700), `heading` (text, min 6, max 120), `table` (table, min 3 rows), `noteSource` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
 | `titleStrapline4TextBoxes` | `Title+strapline+4 text boxes` | `title` (text, min 12, max 50), `columns` (columns, min 4) | `strapline` (text, min 12, max 700), `bodyStyle` (`bullets`/`paragraphs`) |
@@ -327,7 +327,7 @@ Continuation slides append `(cont.)` to title.
 
 ```bash
 node generator/index.js \
-  --in decks/input.deckSpec.json \
+  --in decks/lorem-comprehensive.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json
 ```

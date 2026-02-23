@@ -2,8 +2,13 @@ import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
 import { computeDynamicStraplineBox, sanitizeText } from '../helpers/text.js';
-import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
-import { clampBoxToBottom } from '../helpers/geometry.js';
+import {
+  clampToMasterFooter,
+  computeStrapShift,
+  footerSafeTopForMaster,
+  normalizeBodyStyle,
+  shiftBox,
+} from '../helpers/layout.js';
 
 const TOKENS = {
   geometry: {
@@ -25,7 +30,7 @@ export function addOneColumnText(pptx, { title, strapline, body, source, bodySty
   let strapGeo = null;
   const strapText = strapline;
   const sourceText = sanitizeText(source);
-  const effectiveBodyStyle = bodyStyle || 'bullets';
+  const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
 
   addTitle(slide, title, g.title || TOKENS.geometry.title);
   if (strapText) {
@@ -48,11 +53,10 @@ export function addOneColumnText(pptx, { title, strapline, body, source, bodySty
   }
 
   const bodyBase = g.body || TOKENS.geometry.body;
-  const shift = strapText && strapGeo ? Math.max(0, (strapGeo.y + strapGeo.h + 0.06) - bodyBase.y) : 0;
-  const bodyGeo = shift ? { ...bodyBase, y: bodyBase.y + shift, h: bodyBase.h - shift } : bodyBase;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
+  const shift = computeStrapShift(strapGeo, bodyBase.y);
+  const bodyGeo = shiftBox(bodyBase, shift);
   const sourcePad = sourceText ? 0.26 : 0;
-  const safeBodyGeo = footerSafeTop ? clampBoxToBottom(bodyGeo, footerSafeTop - sourcePad) : bodyGeo;
+  const safeBodyGeo = clampToMasterFooter(bodyGeo, masterName, sourcePad);
   slide.addText(toBodyRuns(body, effectiveBodyStyle), {
     ...safeBodyGeo,
     ...TOKENS.textStyles.body,
@@ -61,10 +65,11 @@ export function addOneColumnText(pptx, { title, strapline, body, source, bodySty
     valign: 'top',
   });
   if (sourceText) {
+    const safeTop = footerSafeTopForMaster(masterName);
     const sourceGeo =
       g.source ||
-      (footerSafeTop
-        ? { ...TOKENS.geometry.source, x: safeBodyGeo.x, w: safeBodyGeo.w, y: footerSafeTop - 0.2 }
+      (safeTop
+        ? { ...TOKENS.geometry.source, x: safeBodyGeo.x, w: safeBodyGeo.w, y: safeTop - 0.2 }
         : { ...TOKENS.geometry.source, x: safeBodyGeo.x, w: safeBodyGeo.w, y: safeBodyGeo.y + safeBodyGeo.h + 0.03 });
     slide.addText(sourceText, {
       ...sourceGeo,

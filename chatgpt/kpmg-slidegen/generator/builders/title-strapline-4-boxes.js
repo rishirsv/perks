@@ -1,9 +1,13 @@
 import { FONTS, COLORS, TYPE_SIZES, TEXT_BOX } from '../tokens.js';
 import { toBodyRuns } from '../helpers/bullets.js';
 import { addTitle } from '../helpers/title.js';
-import { clampBoxToBottom, isValidColumnGeometry } from '../helpers/geometry.js';
+import { isValidColumnGeometry } from '../helpers/geometry.js';
 import { sanitizeText } from '../helpers/text.js';
-import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
+import {
+  clampToMasterFooter,
+  computeStrapShift,
+  normalizeBodyStyle,
+} from '../helpers/layout.js';
 import { recordFallback } from '../runtime/diagnostics.js';
 
 const TOKENS = {
@@ -25,8 +29,8 @@ const TOKENS = {
 };
 
 // Check if extracted column geometries represent a true 4-column side-by-side layout.
-// The extractor sometimes maps unrelated text placeholders (title, subtitle, body, footer)
-// as "columns" — detect this by checking for distinct x positions.
+// The extractor can map unrelated text boxes (title, subtitle, body, footer)
+// as "columns"; detect this by checking for distinct x positions.
 function isValid4ColumnGeometry(geomColumns) {
   return isValidColumnGeometry(geomColumns, 3);
 }
@@ -37,7 +41,7 @@ export function addTitleStrapline4TextBoxes(
 ) {
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
   const strapText = strapline;
-  const effectiveBodyStyle = bodyStyle || 'bullets';
+  const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
 
   // Validate geometry — fall back to hardcoded 4-column layout if the extracted
   // geometry doesn't represent actual side-by-side columns.
@@ -64,16 +68,13 @@ export function addTitleStrapline4TextBoxes(
 
   const cols = Array.isArray(columns) ? columns : [];
   const firstColumnY = (g.columns && g.columns[0]?.y) || TOKENS.geometry.columns[0].y;
-  const yShift = strapText && straplineBox
-    ? Math.max(0, (straplineBox.y + straplineBox.h + 0.06) - firstColumnY)
-    : 0;
-  const footerSafeTop = masterName === 'KPMG_WHITE' ? FOOTER_SAFE_TOP : null;
+  const yShift = computeStrapShift(straplineBox, firstColumnY);
 
   for (let i = 0; i < 4; i++) {
     const col = cols[i] || {};
     const base = (g.columns && g.columns[i]) || TOKENS.geometry.columns[i];
     const geo = { ...base, y: base.y + yShift, h: base.h - yShift };
-    const safeGeo = footerSafeTop ? clampBoxToBottom(geo, footerSafeTop) : geo;
+    const safeGeo = clampToMasterFooter(geo, masterName);
     if (col.heading) {
       slide.addText(String(col.heading), { x: safeGeo.x, y: safeGeo.y, w: safeGeo.w, h: 0.3, ...TOKENS.textStyles.heading, wrap: TEXT_BOX.wrap, margin: TEXT_BOX.marginPt });
       slide.addText(toBodyRuns(col.body, effectiveBodyStyle), {

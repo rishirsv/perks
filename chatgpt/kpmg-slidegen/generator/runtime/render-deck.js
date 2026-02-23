@@ -12,6 +12,7 @@ import { addTitleStrapline4TextBoxes } from '../builders/title-strapline-4-boxes
 import { addBackCover } from '../builders/back-cover-slide.js';
 import { addOneColumnText } from '../builders/one-column-text.js';
 import { addContentsSlide } from '../builders/contents-slide.js';
+import { normalizeBodyStyle } from '../helpers/layout.js';
 import { paginateDeckSpec } from './paginate.js';
 
 function deepClone(value) {
@@ -23,6 +24,8 @@ const DENSITY_STATUS = Object.freeze({
   thin: 'thin but acceptable',
   sparse: 'too sparse, should be repaired or flagged',
 });
+const DIVIDER_TYPES = new Set(['divider', 'dividerDark', 'dividerLight']);
+const EXCLUDED_FROM_LOGICAL_PAGING = new Set(['cover', 'backCover', ...DIVIDER_TYPES]);
 
 function isPlainObject(value) {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value));
@@ -94,8 +97,8 @@ function suggestRemedy(def = {}, code) {
   const kind = def?.kind;
   if (kind === 'chart') {
     return {
-      hook: 'insertPlaceholderChartCaption',
-      suggestedRemedy: 'Insert placeholder chart caption and add at least one chart data series.',
+      hook: 'addChartSeries',
+      suggestedRemedy: 'Add chart caption/source text and at least one chart data series.',
     };
   }
   if (kind === 'table') {
@@ -435,11 +438,7 @@ function collectRepeatedBodyLineWarnings(slides = []) {
 
 function normalizeSlideSpec(slideSpec) {
   const s = deepClone(slideSpec || {});
-  if (typeof s.bodyStyle === 'string') {
-    const normalized = s.bodyStyle.trim().toLowerCase();
-    if (normalized === 'paragraph' || normalized === 'paragraphs') s.bodyStyle = 'paragraphs';
-    else if (normalized === 'bullet' || normalized === 'bullets') s.bodyStyle = 'bullets';
-  }
+  if (s.bodyStyle !== undefined) s.bodyStyle = normalizeBodyStyle(s.bodyStyle);
   if (s.type === 'contents' && !Array.isArray(s.sections)) {
     s.sections = [];
   }
@@ -514,7 +513,7 @@ export function validateSlideContent(type, content, templatePackage, options = {
       for (const [name, def] of Object.entries(slots)) {
         if (def.kind === 'chart' && !detected.slotTypes.chart) {
           warnings.push(
-            `Template layout "${layout.templateLayout}" has no chart placeholder; slot "${name}" may not render as intended`,
+            `Template layout "${layout.templateLayout}" has no chart target shape; slot "${name}" may not render as intended`,
           );
         }
       }
@@ -897,8 +896,7 @@ function applyAutoContentsPageRanges(slides, templatePackage) {
 
   const list = Array.isArray(slides) ? slides : [];
   for (const slide of list) {
-    const isDivider =
-      slide?.type === 'divider' || slide?.type === 'dividerDark' || slide?.type === 'dividerLight';
+    const isDivider = DIVIDER_TYPES.has(slide?.type);
     if (isDivider) {
       activeSectionNumber = String(slide?.sectionNumber || '').trim();
       activeSectionTitle = normalizeSectionKey(slide?.sectionTitle);
@@ -946,8 +944,7 @@ function getVariantByMasterName(templatePackage, masterName) {
 }
 
 function shouldRenderLogicalPageNumber(slideSpec, templatePackage) {
-  const excluded = new Set(['cover', 'backCover', 'divider', 'dividerDark', 'dividerLight']);
-  if (excluded.has(slideSpec?.type)) return false;
+  if (EXCLUDED_FROM_LOGICAL_PAGING.has(slideSpec?.type)) return false;
   const masterName = getMasterNameForSlide(slideSpec, templatePackage);
   const variant = getVariantByMasterName(templatePackage, masterName);
   return Boolean(variant?.includeFooter);

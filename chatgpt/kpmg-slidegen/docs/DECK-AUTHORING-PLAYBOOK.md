@@ -87,7 +87,7 @@ Rules:
 2. Keep `bodyStyle` exactly `bullets` or `paragraphs`.
 3. For `contents`, supply at least 8 sections.
 4. For chart slides, always include `chart.type` and at least one series with `values`.
-5. For table slides, always include `headers` and `rows`.
+5. For `analysisNarrowTable`, always include both `table` (`headers` + `rows`) and authored `insights`.
 
 ## Common failure patterns to avoid
 

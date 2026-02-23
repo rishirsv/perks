@@ -4,6 +4,7 @@
 # Runtime outputs
 outputs/my-run/
 outputs/strict/
+outputs/runs/
 outputs/**/preview/
 outputs/**/montage.png
 
