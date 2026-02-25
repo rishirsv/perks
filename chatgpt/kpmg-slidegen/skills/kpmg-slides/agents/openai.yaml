@@ -1,4 +1,4 @@
 interface:
   display_name: "KPMG Slides"
-  short_description: "Write and generate diligence decks"
-  default_prompt: "Use $kpmg-slides to draft a high-density diligence deckSpec, generate the PPTX with QA, and summarize the key revisions needed."
+  short_description: "Write and generate KPMG branded PowerPoint presentations"
+  default_prompt: "Use $kpmg-slides to draft a an extensive slide deck"
