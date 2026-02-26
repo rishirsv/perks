@@ -10,6 +10,7 @@ sandbox_mode = "danger-full-access"
 model = "gpt-5.3-codex"
 plan_mode_reasoning_effort = "high"
 personality = "friendly"
+suppress_unstable_features_warning = true
 
 [sandbox_workspace_write]
 writable_roots = []
@@ -64,7 +65,6 @@ exclude = []
 set = {}
 include_only = []
 experimental_use_profile = true
-suppress_unstable_features_warning = true
 
 ################################################################################
 # History (save everything)
