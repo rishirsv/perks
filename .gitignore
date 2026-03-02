@@ -38,3 +38,6 @@ chatgpt/kpmg-slidegen/outputs/runs/
 # Node
 node_modules
 pycache
+
+# slide-gen
+/outputs/
