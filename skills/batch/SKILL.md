@@ -60,6 +60,55 @@ For each agent, the prompt must be fully self-contained. Include:
 
 Use `agent_type: "worker"` unless a more specific agent type fits.
 
+This is the prompt template you should provide to each worker agent, with the placeholders filled in:
+
+```text
+You are implementing a specific task from a development plan.
+
+## Context
+- Plan: [filename]
+- Goals: [relevant overview from plan]
+- Dependencies: [prerequisites for this task]
+- Related tasks: [tasks that depend on or are depended on by this task]
+- Constraints: [risks from plan]
+
+## Your Task
+**Task [ID]: [Name]**
+
+Location: [File paths]
+Description: [Full description]
+
+Acceptance Criteria:
+[List from plan]
+
+Validation:
+[Unit Tests or verification from plan]
+
+## Instructions
+1. Examine working plan and any relevant or dependent files
+2. Implement changes for all acceptance criteria
+3. Keep work **atomic and committable**
+4. For each file: read first, edit carefully, preserve formatting
+5. Run validation if feasible
+6. **ALWAYS mark completed tasks IN THE *-plan.md file AS SOON AS YOU COMPLETE IT!** and update with:
+    - Concise work log
+    - Files modified/created
+    - Errors or gotchas encountered
+7. Commit your work
+   - Note: There are other agents working in parallel to you, so only stage and commit the files you worked on. NEVER PUSH. ONLY COMMIT.
+8. Double Check that you updated the *-plan.md file and committed your work before yielding
+9. Return summary of:
+   - Files modified/created
+   - Changes made
+   - How criteria are satisfied
+   - Validation performed or deferred
+
+## Important
+- Be careful with paths
+- Stop and describe blockers if encountered
+- Focus on this specific task
+```
+
 ## Phase 3: Track Progress
 
 After launching all workers, render an initial status table:
