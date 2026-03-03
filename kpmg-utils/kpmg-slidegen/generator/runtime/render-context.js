@@ -1,5 +1,7 @@
 import { buildLayoutContract } from './layout-contract.js';
 import { buildTheme } from '../helpers/theme.js';
+import { getSlideRegistry, assertRegistryCoversTemplateTypes } from './slide-registry.js';
+import { assertPolicyCoverage, buildPaginationPolicy } from './pagination-policy.js';
 
 function buildFooterSafeTopByMaster(templatePackage = {}) {
   const masters = templatePackage?.layouts?.masters || {};
@@ -19,12 +21,21 @@ function buildFooterSafeTopByMaster(templatePackage = {}) {
 
 export function buildRenderContext(templatePackage = {}) {
   const theme = buildTheme(templatePackage);
-  const layoutContract = buildLayoutContract(templatePackage);
+  const slideRegistry = getSlideRegistry();
+  assertRegistryCoversTemplateTypes(templatePackage?.layouts?.types || {});
+  const paginationPolicy = buildPaginationPolicy(templatePackage);
+  assertPolicyCoverage(slideRegistry, paginationPolicy);
+  const layoutContract = buildLayoutContract(templatePackage, {
+    slideRegistry,
+    dimensions: theme?.dimensions || templatePackage?.tokens?.dimensions || null,
+  });
   const footerSafeTopByMaster = buildFooterSafeTopByMaster(templatePackage);
 
   return {
     theme,
     layoutContract,
+    slideRegistry,
+    paginationPolicy,
     footerSafeTopByMaster,
   };
 }
