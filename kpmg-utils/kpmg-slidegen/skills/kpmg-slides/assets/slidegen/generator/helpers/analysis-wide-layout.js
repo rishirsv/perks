@@ -1,35 +1,42 @@
-import { FOOTER_SAFE_TOP } from './footer.js';
-import { clampToMasterFooter, computeStrapShift, footerSafeTopForMaster, shiftBox } from './layout.js';
+import {
+  clampToMasterFooter,
+  computeStrapShift,
+  footerSafeTopForMaster,
+  resolveLayoutMetrics,
+  shiftBox,
+} from './layout.js';
 import { resolveCalloutLayout } from './callouts.js';
 
-export const ANALYSIS_WIDE_LAYOUT_DEFAULTS = Object.freeze({
-  geometry: {
-    title: { x: 1.0919, y: 0.4722, w: 11.1596, h: 0.5833 },
-    strapline: { x: 1.0919, y: 1.2899, w: 11.1596, h: 0.5276 },
-    leftText: { x: 1.0919, y: 1.6, w: 5.6, h: 5.4 },
-    rightChart: { x: 7.0, y: 1.6, w: 5.25, h: 5.0 },
-    topText: { x: 1.0919, y: 1.6, w: 11.1596, h: 2.2 },
-    bottomChart: { x: 1.0919, y: 3.9, w: 11.1596, h: 3.0 },
-  },
-});
+function requireBox(box, slideType, key) {
+  const ok =
+    box &&
+    Number.isFinite(box.x) &&
+    Number.isFinite(box.y) &&
+    Number.isFinite(box.w) &&
+    Number.isFinite(box.h);
+  if (ok) return box;
+  throw new Error(`Missing required geometry "${key}" for slide type "${slideType}"`);
+}
 
 export function computeAnalysisWideChart2ColsTextGeometry({
   geometry,
   masterName = 'KPMG_WHITE',
   footerSafeTopByMaster = null,
+  theme = null,
   strapline,
   chart = null,
   callouts = [],
 } = {}) {
-  const g = geometry || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry;
+  const g = geometry || {};
+  const layoutMetrics = resolveLayoutMetrics(theme);
   const strapText = strapline;
-  const straplineBox = strapText && (g.strapline || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry.strapline)
-    ? (g.strapline || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry.strapline)
+  const straplineBox = strapText && (g.straplineBox || g.strapline)
+    ? (g.straplineBox || g.strapline)
     : null;
 
-  const leftBase = g.leftText || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry.leftText;
-  const rightBase = g.rightChart || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry.rightChart;
-  const yShift = computeStrapShift(straplineBox, Math.min(leftBase.y, rightBase.y));
+  const leftBase = requireBox(g.textBox || g.leftText, 'analysisWideChart2ColsText', 'textBox');
+  const rightBase = requireBox(g.chartBox || g.rightChart, 'analysisWideChart2ColsText', 'chartBox');
+  const yShift = computeStrapShift(straplineBox, Math.min(leftBase.y, rightBase.y), layoutMetrics.strapGap);
   const textBox = shiftBox(leftBase, yShift);
   const chartBox = shiftBox(rightBase, yShift);
   const safeTextBoxBase = clampToMasterFooter(textBox, masterName, 0, footerSafeTopByMaster);
@@ -58,6 +65,7 @@ export function computeAnalysisWideChartTableTextGeometry({
   geometry,
   masterName = 'KPMG_WHITE',
   footerSafeTopByMaster = null,
+  theme = null,
   strapline,
   chart,
   table,
@@ -65,33 +73,36 @@ export function computeAnalysisWideChartTableTextGeometry({
   showSummaryChart = false,
   callouts = [],
 } = {}) {
-  const g = geometry || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry;
+  const g = geometry || {};
+  const layoutMetrics = resolveLayoutMetrics(theme);
   const strapText = strapline;
-  const straplineBox = g.strapline || g.bodyBoxes?.[0] || ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry.strapline;
+  const straplineBox = g.straplineBox || g.strapline || g.bodyBoxes?.[0] || null;
 
-  const topBase =
-    g.body ||
-    g.rightBody ||
-    g.bodyBoxes?.[2] ||
-    g.topText ||
-    ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry.topText;
-  const yShift = computeStrapShift(straplineBox, topBase.y);
+  const topBase = requireBox(g.textBox || g.body || g.rightBody || g.bodyBoxes?.[2], 'analysisWideChartTableText', 'textBox');
+  const yShift = computeStrapShift(straplineBox, topBase.y, layoutMetrics.strapGap);
   const hasChartData = Boolean(chart?.type && Array.isArray(chart?.data) && chart.data.length > 0);
   const hasTableData = Boolean(table?.headers && Array.isArray(table?.rows) && table.rows.length > 0);
   const shouldRenderChart = hasChartData;
   const chartBase = shouldRenderChart
     ? hasTableData
       ? showSummaryChart
-        ? g.summaryChart || g.chart || g.bottomChart || null
-        : g.chart || g.bottomChart || g.summaryChart || null
-      : g.table || g.chart || g.bottomChart || g.summaryChart || null
+        ? g.summaryChartBox || g.chartBox || g.summaryChart || g.chart || null
+        : g.chartBox || g.chart || g.summaryChartBox || g.summaryChart || null
+      : g.tableBox || g.table || g.chartBox || g.chart || g.summaryChartBox || g.summaryChart || null
     : null;
-  const tableBase = g.table || null;
-  const headingBase = g.heading || g.bodyBoxes?.[1] || null;
-  const footerSafeTop = footerSafeTopForMaster(masterName, footerSafeTopByMaster) || FOOTER_SAFE_TOP;
+  const tableBase = g.tableBox || g.table || null;
+  const headingBase = g.headingBox || g.heading || g.bodyBoxes?.[1] || null;
+  const footerSafeTop = footerSafeTopForMaster(masterName, footerSafeTopByMaster);
+
+  if (shouldRenderChart && !chartBase) {
+    throw new Error('Missing required geometry "chartBox" for slide type "analysisWideChartTableText"');
+  }
+  if (hasTableData && !tableBase) {
+    throw new Error('Missing required geometry "tableBox" for slide type "analysisWideChartTableText"');
+  }
 
   let textBox = shiftBox(topBase, yShift);
-  let chartBox = chartBase ? shiftBox(chartBase, yShift) : null;
+  let chartBox = chartBase ? shiftBox(requireBox(chartBase, 'analysisWideChartTableText', 'chartBox'), yShift) : null;
   let tableBox = tableBase ? shiftBox(tableBase, yShift) : null;
 
   const headingBottom = headingBase ? headingBase.y + headingBase.h : null;
@@ -106,16 +117,22 @@ export function computeAnalysisWideChartTableTextGeometry({
       textBox.y >= headingBottom + 1.3,
   );
   if (isLegacyBottomAnchoredLayout) {
+    if (!Number.isFinite(footerSafeTop)) {
+      throw new Error(`Missing required footer safe-top for master "${masterName}"`);
+    }
     const contentTop = headingBottom + 0.06 + yShift;
     const contentBottom = footerSafeTop - (noteSource && g.note ? 0.22 : 0);
     const available = Math.max(2.8, contentBottom - contentTop);
     const upperH = Math.max(1.35, Math.min(2.0, available * 0.48));
     const lowerY = contentTop + upperH + 0.1;
     const lowerH = Math.max(1.2, available - upperH - 0.1);
-    const leftX = Number.isFinite(tableBox?.x) ? tableBox.x : 1.08854;
-    const leftW = Number.isFinite(tableBox?.w) ? tableBox.w : 5.50787;
-    const rightX = Number.isFinite(textBox?.x) ? textBox.x : 6.73622;
-    const rightW = Number.isFinite(textBox?.w) ? textBox.w : 5.50787;
+    const leftX = tableBox?.x;
+    const leftW = tableBox?.w;
+    const rightX = textBox?.x;
+    const rightW = textBox?.w;
+    if (![leftX, leftW, rightX, rightW].every(Number.isFinite)) {
+      throw new Error('Missing geometry for legacy bottom-anchored analysis-wide chart/table layout');
+    }
 
     chartBox = { x: leftX, y: contentTop, w: leftW, h: upperH };
     textBox = { x: rightX, y: contentTop, w: rightW, h: upperH };

@@ -5,6 +5,7 @@ import {
   clampToMasterFooter,
   computeStrapShift,
   footerSafeTopForMaster,
+  resolveLayoutMetrics,
 } from '../helpers/layout.js';
 import { sanitizeText } from '../helpers/text.js';
 
@@ -464,6 +465,7 @@ export function addAnalysisNarrowTable(
 ) {
   const { title, strapline, table, notes, insightTitle, insights: customInsights } = slideSpec;
   const { geometry, masterName, footerSafeTopByMaster, theme } = ctx;
+  const layoutMetrics = resolveLayoutMetrics(theme);
   const resolvedTheme = resolveTheme(theme);
   const styleTokens = resolveStyleTokens(resolvedTheme);
   const textBox = resolveTextBoxOptions(resolvedTheme);
@@ -494,7 +496,7 @@ export function addAnalysisNarrowTable(
 
   if (table) {
     const tableTop = (g.table || TWO_COL.table).y;
-    const yShift = computeStrapShift(straplineBox, tableTop);
+    const yShift = computeStrapShift(straplineBox, tableTop, layoutMetrics.strapGap);
     const cols = Array.isArray(table.headers) ? table.headers.length : 0;
     const rows = Array.isArray(table.rows) ? table.rows.length : 0;
     const insights = Array.isArray(customInsights) ? customInsights : [];
@@ -570,7 +572,10 @@ export function addAnalysisNarrowTable(
       const rowH = computeRowH({ boxH: fullTableBox.h, rows: table.rows, colW: fullColW, fontSize: cols >= 7 ? 8 : 9 });
       const tableH = (tableTokens.tableChrome.titleBarHeight + tableTokens.tableChrome.separatorHeight) + rowH.reduce((a, b) => a + b, 0);
       const takeY = fullTableBox.y + tableH + 0.18;
-      const safeTop = footerSafeTop ?? 6.7;
+      if (!Number.isFinite(footerSafeTop)) {
+        throw new Error(`Missing required footer safe-top for master "${masterName}"`);
+      }
+      const safeTop = footerSafeTop;
       const takeH = Math.max(0.8, safeTop - takeY);
 
       slide.addText(insightsHeading, {

@@ -17,11 +17,21 @@ const DEFAULT_TEXT_BOX = Object.freeze({
 });
 
 export const DEFAULT_THEME_OVERRIDES = Object.freeze({
+  type: {
+    dividerNumber: 48,
+    dividerTitle: 24,
+  },
   spacing: {
     sectionGap: 0.18,
+    strapGap: 0.06,
+    sourceTopOffset: 0.05,
+    sourceBottomGap: 0.06,
   },
   lines: {
     sectionDividerPt: 1.5,
+  },
+  table: {
+    rowHeightCap: 0.9,
   },
   components: {
     contents: {
@@ -53,12 +63,6 @@ export const DEFAULT_THEME_OVERRIDES = Object.freeze({
       colors: {
         connector: 'A7A9AC',
         baseline: 'C8CDD3',
-      },
-    },
-    dividerSlide: {
-      fontSizes: {
-        sectionNumber: 48,
-        sectionTitle: 24,
       },
     },
     backCover: {
@@ -194,6 +198,24 @@ function mergeObjects(...objs) {
   return out;
 }
 
+function normalizeTablePolicy(theme = {}) {
+  const explicit = theme?.table || {};
+  const rowHeightCap = firstFiniteNumber(explicit.rowHeightCap, DEFAULT_THEME_OVERRIDES.table.rowHeightCap);
+  return {
+    rowHeightCap: rowHeightCap === null ? DEFAULT_THEME_OVERRIDES.table.rowHeightCap : rowHeightCap,
+  };
+}
+
+function normalizeTypeScale(theme = {}) {
+  const explicit = theme?.type || {};
+  const dividerNumber = firstFiniteNumber(explicit.dividerNumber, DEFAULT_THEME_OVERRIDES.type.dividerNumber);
+  const dividerTitle = firstFiniteNumber(explicit.dividerTitle, DEFAULT_THEME_OVERRIDES.type.dividerTitle);
+  return {
+    dividerNumber: dividerNumber === null ? DEFAULT_THEME_OVERRIDES.type.dividerNumber : dividerNumber,
+    dividerTitle: dividerTitle === null ? DEFAULT_THEME_OVERRIDES.type.dividerTitle : dividerTitle,
+  };
+}
+
 export function buildTheme(templatePackage = {}, semanticOverrides = {}) {
   const baseTheme = mergeObjects(DEFAULT_THEME_OVERRIDES, semanticOverrides);
   const tokens = templatePackage?.tokens || {};
@@ -226,6 +248,8 @@ export function resolveTheme(theme = null) {
   const components = mergeObjects(DEFAULT_THEME_OVERRIDES.components, theme?.components || {});
   const spacing = mergeObjects(DEFAULT_THEME_OVERRIDES.spacing, theme?.spacing || {});
   const lines = mergeObjects(DEFAULT_THEME_OVERRIDES.lines, theme?.lines || {});
+  const table = normalizeTablePolicy(theme || {});
+  const type = normalizeTypeScale(theme || {});
   const textStyles = theme?.tokens?.textStyles || {};
 
   // Keep both semantic map and raw tokens for traceability during migration.
@@ -245,6 +269,8 @@ export function resolveTheme(theme = null) {
     },
     spacing,
     lines,
+    table,
+    type,
     components,
   };
 }
@@ -344,6 +370,5 @@ export const THEME_COMPONENT_KEYS = Object.freeze({
   contentsSlide: 'contentsSlide',
   analysisNarrowTable: 'analysisNarrowTable',
   analysisBridge: 'analysisBridge',
-  dividerSlide: 'dividerSlide',
   backCover: 'backCover',
 });

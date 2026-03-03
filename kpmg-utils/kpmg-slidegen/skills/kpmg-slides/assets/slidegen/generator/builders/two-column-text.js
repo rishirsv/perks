@@ -106,6 +106,7 @@ export function addTwoColumnTextWithStrapline(
     geometry: g,
     masterName,
     footerSafeTopByMaster,
+    theme,
     strapline: strapText,
     straplineFontSize: style?.straplineFontSize ?? textStyles.typeSizes.strapline,
   });

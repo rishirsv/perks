@@ -11,6 +11,7 @@ import {
 import {
   clampToMasterFooter,
   computeStrapShift,
+  resolveLayoutMetrics,
   normalizeBodyStyle,
 } from '../helpers/layout.js';
 import { recordFallback } from '../runtime/diagnostics.js';
@@ -52,6 +53,7 @@ export function addTitleStrapline4TextBoxes(
 ) {
   const { title, strapline, columns, bodyStyle } = slideSpec;
   const { geometry, masterName, footerSafeTopByMaster, theme } = ctx;
+  const layoutMetrics = resolveLayoutMetrics(theme);
   const textStyles = resolveTextStyles(theme);
   const textBox = resolveTextBoxOptions(theme);
   const slide = masterName ? pptx.addSlide({ masterName }) : pptx.addSlide();
@@ -77,7 +79,7 @@ export function addTitleStrapline4TextBoxes(
 
   const cols = Array.isArray(columns) ? columns : [];
   const firstColumnY = (g.columns && g.columns[0]?.y) || TOKENS.geometry.columns[0].y;
-  const yShift = computeStrapShift(straplineBox, firstColumnY);
+  const yShift = computeStrapShift(straplineBox, firstColumnY, layoutMetrics.strapGap);
 
   for (let i = 0; i < 4; i++) {
     const col = cols[i] || {};

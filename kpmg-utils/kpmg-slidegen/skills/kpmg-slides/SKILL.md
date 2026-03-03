@@ -83,6 +83,10 @@ When in doubt, treat `references/slide-contract.md`, `references/deckspec.schema
 - Do not exceed title hard limits. Titles are treated as hard limits in validation and most slide types cap title `maxChars` at 50; shorten or rewrite the title instead of formatting around the limit.
 - Omit optional slots instead of emitting empty strings. If a slot exists but is empty and `allowEmpty: false`, validation can warn or error
 - Only set `bodyStyle` to exactly `bullets` or `paragraphs`
+- Treat `contents.sections[].pageRange` as runtime-managed; normally leave it unset in authored `deckSpec`.
+- Treat `metadata.splitPolicy` as advisory for planning workflow only; current runtime does not enforce split modes from this field.
+- Prefer explicit `dividerDark`/`dividerLight` when you need that visual style; reserve neutral `divider` for style-agnostic section breaks.
+- For continuation/drop/recompute behavior, follow `references/slide-contract.md` instead of inferring behavior from older examples.
 
 #### Pagination-aware guardrails (must apply while writing)
 
@@ -265,6 +269,7 @@ Create `<name>.deckSpec.json` in three passes:
 1. Skeleton: copy starter, set final slide `type` + claim title, replace placeholders, align slide count/sections.
 2. Fill: populate only supported slots, keep one-message-per-slide, and use evidence-first layouts (chart/table/bridge) for numeric claims.
 3. Self-check: required slots only, no unsupported slots, valid `bodyStyle`, aligned numeric chart arrays, and full alignment to outline + verbosity contract.
+   - Keep runtime-managed fields (`contents.sections[].pageRange`) out of authored content unless explicitly required.
 
 ## Step 5: Generate `.pptx`
 
