@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import { buildRenderContext } from '../generator/runtime/render-context.js';
 import { renderDeck } from '../generator/runtime/render-deck.js';
+import { resolveSlideGeometry } from '../generator/runtime/layout-contract.js';
 import { loadTemplatePackage } from '../generator/runtime/template-package.js';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
@@ -10,9 +11,47 @@ const ctx = buildRenderContext(templatePackage);
 
 assert.equal(ctx.theme.tokens, templatePackage.tokens, 'theme.tokens should reference raw template tokens');
 assert.ok(ctx.theme.colors.primary, 'theme semantic colors should be present');
+assert.equal(ctx.theme.type.dividerNumber, 48, 'theme.type.dividerNumber should expose divider scale');
+assert.equal(ctx.theme.type.dividerTitle, 24, 'theme.type.dividerTitle should expose divider scale');
 assert.ok(
   ctx.layoutContract.get('contents')?.boxes?.topRow,
   'layout contract should expose named geometry boxes',
+);
+assert.ok(
+  ctx.layoutContract.get('analysisWideChart2ColsText')?.boxes?.textBox,
+  'analysisWideChart2ColsText geometry should normalize to canonical textBox',
+);
+assert.ok(
+  ctx.layoutContract.get('analysisWideChart2ColsText')?.boxes?.title,
+  'analysisWideChart2ColsText geometry should include canonical title box',
+);
+assert.ok(
+  ctx.layoutContract.get('analysisWideChart2ColsText')?.boxes?.chartBox,
+  'analysisWideChart2ColsText geometry should normalize to canonical chartBox',
+);
+assert.ok(
+  ctx.layoutContract.get('analysisWideChartTableText')?.boxes?.textBox,
+  'analysisWideChartTableText geometry should normalize to canonical textBox',
+);
+assert.ok(
+  ctx.layoutContract.get('analysisWideChartTableText')?.boxes?.title,
+  'analysisWideChartTableText geometry should include canonical title box',
+);
+assert.ok(
+  ctx.layoutContract.get('analysisWideChartTableText')?.boxes?.chartBox,
+  'analysisWideChartTableText geometry should normalize to canonical chartBox',
+);
+
+assert.throws(
+  () =>
+    resolveSlideGeometry(
+      {
+        get: () => ({ boxes: { title: { x: 0, y: 0, w: 1, h: 1 } }, templateLayout: 'broken-layout' }),
+      },
+      'analysisWideChart2ColsText',
+    ),
+  /missing required keys/i,
+  'analysisWideChart2ColsText should fail fast when required canonical geometry is absent',
 );
 
 const deckSpec = {
@@ -56,6 +95,27 @@ assert.equal(
   urlRun?.options?.hyperlink?.url,
   'https://example.com',
   'back cover hyperlink should come from deck spec URL',
+);
+
+const dividerDeckSpec = {
+  metadata: deckSpec.metadata,
+  slides: [
+    { type: 'divider', sectionNumber: '01', sectionTitle: 'Divider Typography Check' },
+  ],
+};
+const { pptx: dividerPptx } = renderDeck(dividerDeckSpec, templatePackage, { allowSparse: true });
+const dividerObjects = dividerPptx._slides[0]?._slideObjects || [];
+const dividerTexts = dividerObjects.filter((item) => item?._type === 'text');
+assert.ok(dividerTexts.length >= 2, 'divider slide should render number and title text objects');
+assert.equal(
+  dividerTexts[0]?.options?.fontSize,
+  ctx.theme.type.dividerNumber,
+  'divider number should use theme.type.dividerNumber',
+);
+assert.equal(
+  dividerTexts[1]?.options?.fontSize,
+  ctx.theme.type.dividerTitle,
+  'divider title should use theme.type.dividerTitle',
 );
 
 console.log('Render-context refactor regression passed.');

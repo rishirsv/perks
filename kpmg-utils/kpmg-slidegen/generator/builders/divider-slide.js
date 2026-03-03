@@ -2,7 +2,6 @@ import path from 'node:path';
 import { addImageSmart } from '../helpers/media.js';
 import { sanitizeText } from '../helpers/text.js';
 import {
-  THEME_COMPONENT_KEYS,
   resolveTextBoxOptions,
   resolveTheme,
   resolveTokenTextStyle,
@@ -19,11 +18,14 @@ export const TOKENS = {
 
 function resolveTextStyles(theme = null) {
   const resolvedTheme = resolveTheme(theme);
-  const componentTokens = resolvedTheme.components?.[THEME_COMPONENT_KEYS.dividerSlide] || {};
-  const fontSizes = componentTokens.fontSizes || {};
+  const dividerNumberSize = Number(resolvedTheme?.type?.dividerNumber);
+  const dividerTitleSize = Number(resolvedTheme?.type?.dividerTitle);
+  if (!Number.isFinite(dividerNumberSize) || !Number.isFinite(dividerTitleSize)) {
+    throw new Error('Missing required theme.type divider scale (dividerNumber/dividerTitle)');
+  }
   const sectionNumber = resolveTokenTextStyle(resolvedTheme, 'sectionNumber', {
     fontFace: resolvedTheme.fonts.heading,
-    fontSize: Number(fontSizes.sectionNumber || resolvedTheme.typeSizes.title),
+    fontSize: dividerNumberSize,
     color: resolvedTheme.colors.white,
     bold: true,
   });
@@ -35,7 +37,7 @@ function resolveTextStyles(theme = null) {
     },
     sectionTitle: {
       fontFace: resolvedTheme.fonts.heading,
-      fontSize: Number(fontSizes.sectionTitle || resolvedTheme.typeSizes.h2),
+      fontSize: dividerTitleSize,
       color: resolvedTheme.colors.white,
       bold: true,
       align: 'left',

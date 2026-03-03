@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 
 import { paginateDeckSpec } from '../generator/runtime/paginate.js';
+import { buildRenderContext } from '../generator/runtime/render-context.js';
 import { loadTemplatePackage } from '../generator/runtime/template-package.js';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
 const layouts = templatePackage?.layouts?.types || {};
+const renderContext = buildRenderContext(templatePackage);
 
 assert.ok(layouts.analysisNarrowTable, 'Expected analysisNarrowTable layout to be present');
 
@@ -47,7 +49,7 @@ const deck = {
   ],
 };
 
-const paged = paginateDeckSpec(deck, layouts);
+const paged = paginateDeckSpec(deck, layouts, renderContext);
 
 assert.ok(paged.slides.length > 1, 'Expected analysisNarrowTable scenario to split into continuation slides');
 

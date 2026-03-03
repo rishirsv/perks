@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 
 import { paginateDeckSpec } from '../generator/runtime/paginate.js';
+import { buildRenderContext } from '../generator/runtime/render-context.js';
 import { loadTemplatePackage } from '../generator/runtime/template-package.js';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
 const layouts = templatePackage?.layouts?.types || {};
+const renderContext = buildRenderContext(templatePackage);
 
 assert.ok(layouts.contents, 'Expected contents layout to be present');
 
@@ -37,7 +39,7 @@ function flattenSections(slides) {
     ],
   };
 
-  const paged = paginateDeckSpec(deck, layouts);
+  const paged = paginateDeckSpec(deck, layouts, renderContext);
   assert.equal(paged.slides.length, 2, 'Expected 12 sections to split across 2 contents slides');
   assert.equal(paged.slides[0]?.sections?.length, 10, 'Expected first contents page to hold 10 sections');
   assert.equal(paged.slides[1]?.sections?.length, 2, 'Expected second contents page to hold remaining sections');
@@ -72,7 +74,7 @@ function flattenSections(slides) {
     ],
   };
 
-  const paged = paginateDeckSpec(deck, layouts);
+  const paged = paginateDeckSpec(deck, layouts, renderContext);
   assert.equal(paged.slides.length, 2, 'Expected 11 sections to split across 2 contents slides');
   assert.equal(
     paged.slides[1]?.title,

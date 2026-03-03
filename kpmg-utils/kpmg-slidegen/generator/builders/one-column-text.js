@@ -45,6 +45,7 @@ export function addOneColumnText(pptx, slideSpec = {}, ctx = {}) {
     geometry,
     masterName,
     footerSafeTopByMaster,
+    theme,
     strapline,
     source,
     callouts,

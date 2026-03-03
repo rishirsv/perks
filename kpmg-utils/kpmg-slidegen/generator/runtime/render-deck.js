@@ -1308,7 +1308,7 @@ export function renderDeck(deckSpec, templatePackage, options = {}) {
     ...deckSpec,
     slides: (deckSpec.slides || []).map(normalizeSlideSpec),
   };
-  const paginated = paginateDeckSpec(normalized, templatePackage.layouts?.types || {});
+  const paginated = paginateDeckSpec(normalized, templatePackage.layouts?.types || {}, renderContext);
   const paginatedSlides = applyAutoContentsPageRanges(paginated?.slides || [], templatePackage);
   const paginationDecisions = paginated?.paginationDecisions || [];
   const overflowEvents = paginated?.overflowEvents || [];

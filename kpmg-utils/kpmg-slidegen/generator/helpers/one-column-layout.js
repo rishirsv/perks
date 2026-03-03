@@ -5,6 +5,7 @@ import {
   computeStrapShift,
   estimateSourceTextHeight,
   footerSafeTopForMaster,
+  resolveLayoutMetrics,
   sourceFootprintBelow,
   shiftBox,
 } from './layout.js';
@@ -31,6 +32,7 @@ export function computeOneColumnLayoutGeometry({
   geometry,
   masterName = 'KPMG_WHITE',
   footerSafeTopByMaster = null,
+  theme = null,
   strapline,
   source,
   callouts = [],
@@ -38,6 +40,7 @@ export function computeOneColumnLayoutGeometry({
   sourceFontSize,
 } = {}) {
   const g = geometry || ONE_COLUMN_LAYOUT_DEFAULTS.geometry;
+  const layoutMetrics = resolveLayoutMetrics(theme);
   const typography = ONE_COLUMN_LAYOUT_DEFAULTS.typography;
   const resolvedStraplineSize = Number.isFinite(straplineFontSize)
     ? Number(straplineFontSize)
@@ -62,7 +65,7 @@ export function computeOneColumnLayoutGeometry({
   }
 
   const bodyBase = g.body || ONE_COLUMN_LAYOUT_DEFAULTS.geometry.body;
-  const shift = computeStrapShift(strapGeo, bodyBase.y);
+  const shift = computeStrapShift(strapGeo, bodyBase.y, layoutMetrics.strapGap);
   const bodyGeo = shiftBox(bodyBase, shift);
   const sourcePad = sourceText
     ? sourceFootprintBelow(bodyGeo, sourceText, {

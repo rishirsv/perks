@@ -5,15 +5,10 @@ import { sanitizeText } from '../helpers/text.js';
 import { normalizeBodyStyle } from '../helpers/layout.js';
 import { resolveTextBoxOptions, resolveTheme } from '../helpers/theme.js';
 import {
-  ANALYSIS_WIDE_LAYOUT_DEFAULTS,
   computeAnalysisWideChart2ColsTextGeometry,
   computeAnalysisWideChartTableTextGeometry,
 } from '../helpers/analysis-wide-layout.js';
 import { addAnalysisTable } from './analysis-narrow-table.js';
-
-const TOKENS = {
-  geometry: ANALYSIS_WIDE_LAYOUT_DEFAULTS.geometry,
-};
 
 function resolveStyles(theme = null) {
   const resolvedTheme = resolveTheme(theme);
@@ -74,6 +69,17 @@ function resolveStyles(theme = null) {
 function clamp(value, min, max) {
   if (!Number.isFinite(value)) return min;
   return Math.max(min, Math.min(max, value));
+}
+
+function requireGeometryBox(box, slideType, key) {
+  const ok =
+    box &&
+    Number.isFinite(box.x) &&
+    Number.isFinite(box.y) &&
+    Number.isFinite(box.w) &&
+    Number.isFinite(box.h);
+  if (ok) return box;
+  throw new Error(`Missing required geometry "${key}" for slide type "${slideType}"`);
 }
 
 function normalizeChartAnnotations(raw) {
@@ -256,13 +262,18 @@ export function addAnalysisWideChart2ColsText(
     geometry,
     masterName,
     footerSafeTopByMaster,
+    theme,
     strapline,
     chart,
     callouts,
   });
   const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
+  const titleBox = requireGeometryBox(g.title, 'analysisWideChart2ColsText', 'title');
 
-  addTitle(slide, title, g.title || TOKENS.geometry.title, { theme });
+  addTitle(slide, title, titleBox, { theme });
+  if (strapText && !straplineBox) {
+    throw new Error('Missing required geometry "straplineBox" for slide type "analysisWideChart2ColsText"');
+  }
   addStraplineBlock(slide, strapText, straplineBox, { theme, style: styles.textStyles.strapline, textBox });
   addBodyBlock(slide, body, safeTextBox, { theme, bodyStyle: effectiveBodyStyle, style: styles.textStyles.body, textBox });
   addChart(pptx, slide, chart, safeChartBox, styles);
@@ -314,6 +325,7 @@ export function addAnalysisWideChartTableText(
     geometry,
     masterName,
     footerSafeTopByMaster,
+    theme,
     strapline,
     chart,
     table,
@@ -322,8 +334,15 @@ export function addAnalysisWideChartTableText(
     callouts,
   });
   const effectiveBodyStyle = normalizeBodyStyle(bodyStyle);
+  const titleBox = requireGeometryBox(g.title, 'analysisWideChartTableText', 'title');
 
-  addTitle(slide, title, g.title || TOKENS.geometry.title, { theme });
+  addTitle(slide, title, titleBox, { theme });
+  if (strapText && !straplineBox) {
+    throw new Error('Missing required geometry "straplineBox" for slide type "analysisWideChartTableText"');
+  }
+  if (heading && !headingBase) {
+    throw new Error('Missing required geometry "headingBox" for slide type "analysisWideChartTableText"');
+  }
   addStraplineBlock(slide, strapText, straplineBox, { theme, style: styles.textStyles.strapline, textBox });
   const hasChartData = Boolean(
     chart?.type && Array.isArray(chart?.data) && chart.data.length > 0,

@@ -6,21 +6,37 @@
 //
 // Goal: never overlap; prefer continuation slides vs. tiny fonts.
 
-import { FOOTER_SAFE_TOP } from '../helpers/footer.js';
-import { TYPE_SIZES } from '../tokens.js';
 import { BRIDGE_DEFAULT_ANALYSIS_BOXES, clampBridgePhaseCount, resolveBridgeAnalysisBoxes } from '../helpers/bridge-layout.js';
 import { computeOneColumnLayoutGeometry } from '../helpers/one-column-layout.js';
 import { computeTwoColumnLayoutGeometry } from '../helpers/two-column-layout.js';
 import { isHeaderLine } from '../helpers/bullets.js';
+import { normalizeGeometry } from './layout-contract.js';
+import { resolveTheme } from '../helpers/theme.js';
 import {
   computeAnalysisWideChart2ColsTextGeometry,
   computeAnalysisWideChartTableTextGeometry,
 } from '../helpers/analysis-wide-layout.js';
-const BODY_FONT_SIZE = 10;
 const CONTENTS_SECTIONS_PER_SLIDE = 10;
-const TABLE_ROW_HEIGHT_CAP = 0.9;
 const TABLE_ROW_DENSITY_LINE_THRESHOLD = 7;
 const TABLE_ROW_DENSITY_HEIGHT_THRESHOLD = 0.82;
+
+function requireFiniteMetric(name, value) {
+  const numeric = Number(value);
+  if (Number.isFinite(numeric)) return numeric;
+  throw new Error(`Missing required pagination metric "${name}"`);
+}
+
+function resolvePaginationMetrics(theme = null) {
+  const resolvedTheme = resolveTheme(theme);
+  const bodyFontSize = requireFiniteMetric('typeSizes.body', resolvedTheme?.typeSizes?.body);
+  return {
+    bodyFontSize,
+    straplineFontSize: requireFiniteMetric('typeSizes.strapline', resolvedTheme?.typeSizes?.strapline),
+    sourceFontSize: requireFiniteMetric('typeSizes.source', resolvedTheme?.typeSizes?.source),
+    tableRowHeightCap: requireFiniteMetric('table.rowHeightCap', resolvedTheme?.table?.rowHeightCap),
+    bridgeAnalysisBodyFontSize: Math.max(8, bodyFontSize - 1),
+  };
+}
 
 function clone(obj) {
   return obj ? JSON.parse(JSON.stringify(obj)) : obj;
@@ -103,7 +119,7 @@ function estimateMaxLines(boxHInches, fontSizePt) {
   // Convert to points (72 pt/in). Use a slightly generous line-height to avoid overlap.
   const hPt = (boxHInches || 0) * 72;
   // Our decks use 10pt body with PowerPoint-like spacing.
-  const lineHeight = Math.max(11, (fontSizePt || BODY_FONT_SIZE) + 3);
+  const lineHeight = Math.max(11, (fontSizePt || 10) + 3);
   // Keep a small top/bottom safety buffer.
   return Math.max(1, Math.floor(hPt / lineHeight) - 1);
 }
@@ -153,26 +169,57 @@ function estimateBulletNodeLines(node, charsPerLine, depth = 0) {
   return countWrappedLines(`${prefix}${text}`, charsPerLine);
 }
 
-function takeBulletChunk(lines, { maxLines, charsPerLine, alreadyNormalized = false }) {
+function chunkBulletsByPageBudget(
+  lines,
+  {
+    firstMaxLines,
+    continuationMaxLines,
+    firstCharsPerLine,
+    continuationCharsPerLine,
+    alreadyNormalized = false,
+  },
+) {
   const sourceItems = Array.isArray(lines) ? lines : (lines ? [lines] : []);
   const items = alreadyNormalized ? sourceItems : normalizeBulletPairs(sourceItems);
-  const chunk = [];
-  let used = 0;
-  let consumedCount = 0;
+  const chunks = [];
+  let cursor = 0;
+  let page = 0;
 
-  for (const item of items) {
-    const need = estimateBulletNodeLines(item, charsPerLine, 0);
-    if (need <= 0) {
-      consumedCount += 1;
+  while (cursor < items.length) {
+    const maxLines = page === 0 ? firstMaxLines : continuationMaxLines;
+    const charsPerLine = page === 0 ? firstCharsPerLine : continuationCharsPerLine;
+    const chunk = [];
+    let used = 0;
+
+    while (cursor < items.length) {
+      const need = estimateBulletNodeLines(items[cursor], charsPerLine, 0);
+      if (need <= 0) {
+        cursor += 1;
+        continue;
+      }
+      if (chunk.length && used + need > maxLines) break;
+      // If a single bullet is too large, still include it on its own slide.
+      chunk.push(items[cursor]);
+      used += need;
+      cursor += 1;
+    }
+
+    if (chunk.length > 0) {
+      chunks.push(chunk);
+      page += 1;
       continue;
     }
-    if (chunk.length && used + need > maxLines) break;
-    chunk.push(item);
-    used += need;
-    consumedCount += 1;
+
+    // If all remaining entries were non-renderable we are done.
+    if (cursor >= items.length) break;
+
+    // Safety valve: consume one item to avoid stalling on malformed input.
+    chunks.push([items[cursor]]);
+    cursor += 1;
+    page += 1;
   }
 
-  return { chunk, consumedCount };
+  return chunks.length ? chunks : [[]];
 }
 
 function contTitle(title, pageIdx, maxChars = null) {
@@ -187,29 +234,41 @@ function contTitle(title, pageIdx, maxChars = null) {
   return continued;
 }
 
-function applyFooterSafe(box, useFooter) {
+function applyFooterSafe(box, useFooter, footerSafeTop = null) {
   if (!useFooter || !box) return box;
+  if (!Number.isFinite(footerSafeTop)) {
+    throw new Error('Missing required footer safe-top for pagination');
+  }
   const y = typeof box.y === 'number' ? box.y : null;
   const h = typeof box.h === 'number' ? box.h : null;
   if (y === null || h === null) {
     return { ...box, h: Math.max(0.1, (h || 0) - 0.25) };
   }
-  const safeH = Math.max(0.1, Math.min(h, FOOTER_SAFE_TOP - y));
+  const safeH = Math.max(0.1, Math.min(h, footerSafeTop - y));
   return { ...box, h: safeH };
 }
 
 function paginateTwoColumn(
   slideSpec,
   geometry,
-  { footerSafe = false, fallbackLeft, fallbackRight, titleMaxChars = null, leftBox = null, rightBox = null } = {},
+  {
+    bodyFontSize,
+    footerSafe = false,
+    footerSafeTop = null,
+    fallbackLeft,
+    fallbackRight,
+    titleMaxChars = null,
+    leftBox = null,
+    rightBox = null,
+  } = {},
 ) {
   const g = geometry || {};
   const resolvedLeft = leftBox || g.left || g.leftBody || g.leftText || fallbackLeft || { w: 5.5, h: 5.0, y: 1.5 };
   const resolvedRight = rightBox || g.right || g.rightBody || g.rightText || fallbackRight || { w: 5.5, h: 5.0, y: 1.5 };
-  const safeLeft = applyFooterSafe(resolvedLeft, footerSafe);
-  const safeRight = applyFooterSafe(resolvedRight, footerSafe);
+  const safeLeft = applyFooterSafe(resolvedLeft, footerSafe, footerSafeTop);
+  const safeRight = applyFooterSafe(resolvedRight, footerSafe, footerSafeTop);
 
-  const fontSize = BODY_FONT_SIZE;
+  const fontSize = requireFiniteMetric('typeSizes.body', bodyFontSize);
   const leftChunks = chunkBullets(slideSpec.leftBody, {
     maxLines: estimateMaxLines(safeLeft.h, fontSize),
     charsPerLine: estimateCharsPerLine(safeLeft.w, fontSize),
@@ -235,39 +294,33 @@ function paginateOneColumnBullets(
   slideSpec,
   geometry,
   fieldName,
-  { footerSafe = false, fallbackBox, titleMaxChars = null, bodyBox = null, continuationBodyBox = null } = {},
+  {
+    bodyFontSize,
+    footerSafe = false,
+    footerSafeTop = null,
+    fallbackBox,
+    titleMaxChars = null,
+    bodyBox = null,
+    continuationBodyBox = null,
+  } = {},
 ) {
   const g = geometry || {};
   const firstBox = bodyBox || g.body || g.topText || g.leftText || fallbackBox || { w: 11.0, h: 5.0, y: 1.6 };
   const nextBox = continuationBodyBox || firstBox;
-  const safeFirstBox = applyFooterSafe(firstBox, footerSafe);
-  const safeContinuationBox = applyFooterSafe(nextBox, footerSafe);
-  const fontSize = BODY_FONT_SIZE;
+  const safeFirstBox = applyFooterSafe(firstBox, footerSafe, footerSafeTop);
+  const safeContinuationBox = applyFooterSafe(nextBox, footerSafe, footerSafeTop);
+  const fontSize = requireFiniteMetric('typeSizes.body', bodyFontSize);
   const sourceItems = Array.isArray(slideSpec[fieldName]) ? slideSpec[fieldName] : (slideSpec[fieldName] ? [slideSpec[fieldName]] : []);
   const normalizedItems = normalizeBulletPairs(sourceItems);
-  const chunks = [];
-  let remaining = normalizedItems;
-  let page = 0;
-
-  while (remaining.length > 0) {
-    const box = page === 0 ? safeFirstBox : safeContinuationBox;
-    const { chunk, consumedCount } = takeBulletChunk(remaining, {
-      maxLines: estimateMaxLines(box.h, fontSize),
-      charsPerLine: estimateCharsPerLine(box.w, fontSize),
-      alreadyNormalized: true,
-    });
-    if (chunk.length === 0) {
-      chunks.push([remaining[0]]);
-      remaining = remaining.slice(1);
-    } else {
-      chunks.push(chunk);
-      const consumed = Math.max(chunk.length, consumedCount);
-      remaining = remaining.slice(consumed > 0 ? consumed : chunk.length);
-    }
-    page += 1;
-  }
-
-  if (chunks.length === 0) chunks.push([]);
+  const charsPerLine = estimateCharsPerLine(safeFirstBox.w, fontSize);
+  const continuationCharsPerLine = estimateCharsPerLine(safeContinuationBox.w, fontSize);
+  const chunks = chunkBulletsByPageBudget(normalizedItems, {
+    firstMaxLines: estimateMaxLines(safeFirstBox.h, fontSize),
+    continuationMaxLines: estimateMaxLines(safeContinuationBox.h, fontSize),
+    firstCharsPerLine: charsPerLine,
+    continuationCharsPerLine,
+    alreadyNormalized: true,
+  });
 
   const out = [];
   for (let p = 0; p < chunks.length; p++) {
@@ -288,7 +341,7 @@ function normalizeColumnBody(body) {
   return text ? [text] : [];
 }
 
-function paginateBusinessOverview(slideSpec, geometry, { titleMaxChars = null } = {}) {
+function paginateBusinessOverview(slideSpec, geometry, { bodyFontSize, titleMaxChars = null } = {}) {
   const g = geometry || {};
   const bodyBox = g.overviewBody || { w: 4.62, h: 4.76, y: 1.66 };
   const chartBox = g.chart || { y: 5.08 };
@@ -296,7 +349,7 @@ function paginateBusinessOverview(slideSpec, geometry, { titleMaxChars = null } 
   const firstPageBodyH = hasChart
     ? Math.max(0.6, Math.min(Number(bodyBox.h || 4.76), Number(chartBox.y || 5.08) - Number(bodyBox.y || 1.66) - 0.08))
     : Number(bodyBox.h || 4.76);
-  const bodyFont = BODY_FONT_SIZE;
+  const bodyFont = requireFiniteMetric('typeSizes.body', bodyFontSize);
 
   const chunks = chunkBullets(normalizeColumnBody(slideSpec.overviewBody), {
     maxLines: estimateMaxLines(firstPageBodyH, bodyFont),
@@ -317,17 +370,18 @@ function paginateBusinessOverview(slideSpec, geometry, { titleMaxChars = null } 
   return out;
 }
 
-function paginateBridgeAnalysisColumns(slideSpec, geometry, { titleMaxChars = null } = {}) {
+function paginateBridgeAnalysisColumns(slideSpec, geometry, { bodyFontSize, titleMaxChars = null } = {}) {
   const g = geometry || {};
   const columns = Array.isArray(slideSpec.analysisColumns) ? slideSpec.analysisColumns : [];
   const phaseCount = clampBridgePhaseCount(columns.length || g?.analysisBoxes?.length || BRIDGE_DEFAULT_ANALYSIS_BOXES.length);
   const analysisBoxes = resolveBridgeAnalysisBoxes(g.analysisBoxes, phaseCount);
   const effectiveColumns = analysisBoxes.map((_, idx) => columns[idx] || { heading: `Phase ${idx + 1}`, body: [] });
+  const resolvedBodyFont = requireFiniteMetric('typeSizes.body', bodyFontSize);
   const analysisBodyFont = Math.max(
     6,
-    Number(g?.typography?.analysisBody || Math.max(8, TYPE_SIZES.body - 1)),
+    Number(g?.typography?.analysisBody || Math.max(8, resolvedBodyFont - 1)),
   );
-  const headingReserve = Math.max(0.24, (Number(g?.typography?.analysisHeading || TYPE_SIZES.body) * 1.6) / 72 + 0.1);
+  const headingReserve = Math.max(0.24, (Number(g?.typography?.analysisHeading || resolvedBodyFont) * 1.6) / 72 + 0.1);
 
   const chunksPerColumn = effectiveColumns.map((column, idx) =>
     chunkBullets(normalizeColumnBody(column.body), {
@@ -367,14 +421,22 @@ function paginateContentsSections(slideSpec, { titleMaxChars = null } = {}) {
 function paginateTableRows(
   slideSpec,
   geometry,
-  { footerSafe = false, fallbackBox, titleMaxChars = null, emitWarning = null } = {},
+  {
+    tableRowHeightCap,
+    footerSafe = false,
+    footerSafeTop = null,
+    fallbackBox,
+    titleMaxChars = null,
+    emitWarning = null,
+  } = {},
 ) {
   const table = slideSpec.table;
   if (!table || !Array.isArray(table.rows) || table.rows.length <= 0) return [slideSpec];
 
   const g = geometry || {};
   const box = g.table || fallbackBox || { w: 11.0, h: 3.0, y: 1.9 };
-  const safeBox = applyFooterSafe(box, footerSafe);
+  const safeBox = applyFooterSafe(box, footerSafe, footerSafeTop);
+  const rowHeightCap = requireFiniteMetric('table.rowHeightCap', tableRowHeightCap);
 
   const headers = Array.isArray(table.headers) ? table.headers : [];
   const cols = Math.max(1, headers.length || (Array.isArray(table.rows[0]) ? table.rows[0].length : 1));
@@ -411,8 +473,8 @@ function paginateTableRows(
     const unclampedHeight = maxLines * 0.14 + 0.04;
     return {
       maxLines,
-      rowHeight: Math.max(0.22, Math.min(TABLE_ROW_HEIGHT_CAP, unclampedHeight)),
-      clamped: unclampedHeight > TABLE_ROW_HEIGHT_CAP,
+      rowHeight: Math.max(0.22, Math.min(rowHeightCap, unclampedHeight)),
+      clamped: unclampedHeight > rowHeightCap,
     };
   };
 
@@ -482,7 +544,7 @@ function paginateTableRows(
   return out;
 }
 
-export function paginateDeckSpec(deckSpec, layouts) {
+export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
   const spec = deckSpec && typeof deckSpec === 'object' ? deckSpec : { slides: [] };
   const slides = Array.isArray(spec.slides) ? spec.slides : [];
   const out = {
@@ -492,6 +554,21 @@ export function paginateDeckSpec(deckSpec, layouts) {
     overflowEvents: [],
     tableWarnings: [],
   };
+  const footerSafeTopByMaster = runtimeContext?.footerSafeTopByMaster || null;
+  const paginationMetrics = resolvePaginationMetrics(runtimeContext?.theme || null);
+
+  function resolveMasterFooterSafeTop(masterName, requireSafeTop = false) {
+    if (!footerSafeTopByMaster || typeof footerSafeTopByMaster !== 'object') {
+      if (!requireSafeTop) return null;
+      throw new Error(`Missing footer safe-top configuration for master "${masterName}"`);
+    }
+    const value = footerSafeTopByMaster[masterName];
+    if (value === null || value === undefined) {
+      if (!requireSafeTop) return null;
+      throw new Error(`Missing footer safe-top value for master "${masterName}"`);
+    }
+    return requireFiniteMetric(`footerSafeTopByMaster.${masterName}`, value);
+  }
 
   function recordSplit(slideIndex, type, mode, originalCount, pages, details = {}) {
     if (pages <= 1) return;
@@ -529,7 +606,7 @@ export function paginateDeckSpec(deckSpec, layouts) {
     const slideSpec = slides[slideIndex];
     const type = slideSpec?.type;
     const layout = (layouts && type && layouts[type]) || null;
-    const geom = layout?.geometry || null;
+    const geom = normalizeGeometry(type, layout?.geometry || null).geometry;
     const titleMaxChars = Number(layout?.slots?.title?.maxChars || 0) || null;
 
     if (!type || !layout) {
@@ -539,14 +616,19 @@ export function paginateDeckSpec(deckSpec, layouts) {
 
     if (type === 'twoColumnText') {
       const masterName = slideSpec?.masterName || layout?.masterName || 'KPMG_WHITE';
+      const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
       const twoColLayout = computeTwoColumnLayoutGeometry({
         geometry: geom,
         masterName,
+        footerSafeTopByMaster,
+        theme: runtimeContext?.theme || null,
         strapline: slideSpec?.strapline,
-        straplineFontSize: TYPE_SIZES.strapline,
+        straplineFontSize: paginationMetrics.straplineFontSize,
       });
       const paged = paginateTwoColumn(slideSpec, geom, {
+        bodyFontSize: paginationMetrics.bodyFontSize,
         footerSafe: false,
+        footerSafeTop,
         fallbackLeft: { w: 5.7, h: 5.7, y: 1.5 },
         fallbackRight: { w: 5.2, h: 5.7, y: 1.5 },
         titleMaxChars,
@@ -563,29 +645,36 @@ export function paginateDeckSpec(deckSpec, layouts) {
 
     if (type === 'oneColumnText') {
       const masterName = slideSpec?.masterName || layout?.masterName || 'KPMG_WHITE';
+      const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
       const oneColLayout = computeOneColumnLayoutGeometry({
         geometry: geom,
         masterName,
+        footerSafeTopByMaster,
+        theme: runtimeContext?.theme || null,
         strapline: slideSpec?.strapline,
         source: slideSpec?.source,
         callouts: slideSpec?.callouts,
-        straplineFontSize: TYPE_SIZES.strapline,
-        sourceFontSize: TYPE_SIZES.source,
+        straplineFontSize: paginationMetrics.straplineFontSize,
+        sourceFontSize: paginationMetrics.sourceFontSize,
       });
       const oneColContinuationLayout =
         Array.isArray(slideSpec?.callouts) && slideSpec.callouts.length > 0
           ? computeOneColumnLayoutGeometry({
               geometry: geom,
               masterName,
+              footerSafeTopByMaster,
+              theme: runtimeContext?.theme || null,
               strapline: slideSpec?.strapline,
               source: slideSpec?.source,
               callouts: [],
-              straplineFontSize: TYPE_SIZES.strapline,
-              sourceFontSize: TYPE_SIZES.source,
+              straplineFontSize: paginationMetrics.straplineFontSize,
+              sourceFontSize: paginationMetrics.sourceFontSize,
             })
           : null;
       const paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
+        bodyFontSize: paginationMetrics.bodyFontSize,
         footerSafe: false,
+        footerSafeTop,
         fallbackBox: { w: 11.1596, h: 5.6, y: 1.6 },
         titleMaxChars,
         bodyBox: oneColLayout?.safeBodyGeo || null,
@@ -599,11 +688,14 @@ export function paginateDeckSpec(deckSpec, layouts) {
 
     if (type === 'analysisWideChart2ColsText' || type === 'analysisWideChartTableText') {
       const masterName = slideSpec?.masterName || layout?.masterName || 'KPMG_WHITE';
+      const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
       const wideLayout =
         type === 'analysisWideChartTableText'
           ? computeAnalysisWideChartTableTextGeometry({
               geometry: geom,
               masterName,
+              footerSafeTopByMaster,
+              theme: runtimeContext?.theme || null,
               strapline: slideSpec?.strapline,
               chart: slideSpec?.chart,
               table: slideSpec?.table,
@@ -614,6 +706,8 @@ export function paginateDeckSpec(deckSpec, layouts) {
           : computeAnalysisWideChart2ColsTextGeometry({
               geometry: geom,
               masterName,
+              footerSafeTopByMaster,
+              theme: runtimeContext?.theme || null,
               strapline: slideSpec?.strapline,
               chart: slideSpec?.chart,
               callouts: slideSpec?.callouts,
@@ -624,6 +718,8 @@ export function paginateDeckSpec(deckSpec, layouts) {
             ? computeAnalysisWideChartTableTextGeometry({
                 geometry: geom,
                 masterName,
+                footerSafeTopByMaster,
+                theme: runtimeContext?.theme || null,
                 strapline: slideSpec?.strapline,
                 chart: slideSpec?.chart,
                 table: slideSpec?.table,
@@ -634,13 +730,17 @@ export function paginateDeckSpec(deckSpec, layouts) {
             : computeAnalysisWideChart2ColsTextGeometry({
                 geometry: geom,
                 masterName,
+                footerSafeTopByMaster,
+                theme: runtimeContext?.theme || null,
                 strapline: slideSpec?.strapline,
                 chart: slideSpec?.chart,
                 callouts: [],
               })
           : null;
       const paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
+        bodyFontSize: paginationMetrics.bodyFontSize,
         footerSafe: false,
+        footerSafeTop,
         fallbackBox:
           type === 'analysisWideChartTableText'
             ? { w: 11.1596, h: 2.2, y: 1.6 }
@@ -656,8 +756,12 @@ export function paginateDeckSpec(deckSpec, layouts) {
     }
 
     if (type === 'analysisNarrowTable') {
+      const masterName = slideSpec?.masterName || layout?.masterName || 'KPMG_WHITE';
+      const footerSafeTop = resolveMasterFooterSafeTop(masterName, true);
       const paged = paginateTableRows(slideSpec, geom, {
+        tableRowHeightCap: paginationMetrics.tableRowHeightCap,
         footerSafe: true,
+        footerSafeTop,
         fallbackBox: { w: 11.1596, h: 4.5, y: 1.9 },
         titleMaxChars,
         emitWarning: (warning) => recordTableWarning(slideIndex, type, warning),
@@ -677,7 +781,10 @@ export function paginateDeckSpec(deckSpec, layouts) {
     }
 
     if (type === 'analysisBridge') {
-      const paged = paginateBridgeAnalysisColumns(slideSpec, geom, { titleMaxChars });
+      const paged = paginateBridgeAnalysisColumns(slideSpec, geom, {
+        titleMaxChars,
+        bodyFontSize: paginationMetrics.bridgeAnalysisBodyFontSize,
+      });
       const originalCount = Array.isArray(slideSpec.analysisColumns)
         ? slideSpec.analysisColumns.reduce(
             (sum, col) => sum + (Array.isArray(col?.body) ? col.body.length : String(col?.body || '').trim() ? 1 : 0),
@@ -690,7 +797,10 @@ export function paginateDeckSpec(deckSpec, layouts) {
     }
 
     if (type === 'businessOverview') {
-      const paged = paginateBusinessOverview(slideSpec, geom, { titleMaxChars });
+      const paged = paginateBusinessOverview(slideSpec, geom, {
+        titleMaxChars,
+        bodyFontSize: paginationMetrics.bodyFontSize,
+      });
       const originalCount = Array.isArray(slideSpec.overviewBody) ? slideSpec.overviewBody.length : 0;
       recordSplit(slideIndex, type, 'business-overview-overview-body', originalCount, paged.length);
       out.slides.push(...paged);

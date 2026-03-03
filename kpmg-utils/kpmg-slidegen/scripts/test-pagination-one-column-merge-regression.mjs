@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 
 import { paginateDeckSpec } from '../generator/runtime/paginate.js';
+import { buildRenderContext } from '../generator/runtime/render-context.js';
 import { loadTemplatePackage } from '../generator/runtime/template-package.js';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
 const layouts = templatePackage?.layouts?.types || {};
+const renderContext = buildRenderContext(templatePackage);
 
 assert.ok(layouts.oneColumnText, 'Expected oneColumnText layout to be present');
 
@@ -86,7 +88,7 @@ function paginateOneColumnBody(body, extras = {}) {
       },
     ],
   };
-  return paginateDeckSpec(deck, layouts);
+  return paginateDeckSpec(deck, layouts, renderContext);
 }
 
 {

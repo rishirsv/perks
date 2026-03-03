@@ -7,6 +7,7 @@ const ROOT = process.cwd();
 const TARGET_DIR = path.join(ROOT, 'generator', 'builders');
 const HEX_PATTERN = /['"`]([0-9A-Fa-f]{6})['"`]/g;
 const FONT_SIZE_PATTERN = /\bfontSize\s*:\s*(\d+(?:\.\d+)?)\b/g;
+const ADD_IMAGE_SMART_DEF_PATTERN = /\bfunction\s+addImageSmart\s*\(|\b(?:const|let|var)\s+addImageSmart\s*=\s*/g;
 
 function walkFiles(dir, out = []) {
   if (!fs.existsSync(dir)) return out;
@@ -46,6 +47,13 @@ for (const abs of walkFiles(TARGET_DIR)) {
       file: rel,
       line: lineOf(source, match.index),
       message: `raw fontSize literal ${match[1]}`,
+    });
+  }
+  for (const match of source.matchAll(ADD_IMAGE_SMART_DEF_PATTERN)) {
+    findings.push({
+      file: rel,
+      line: lineOf(source, match.index),
+      message: 'local addImageSmart definition (use helpers/media.js export instead)',
     });
   }
 }
