@@ -49,7 +49,7 @@ const deck = {
   ],
 };
 
-const paged = paginateDeckSpec(deck, layouts, renderContext);
+const paged = paginateDeckSpec(deck, renderContext);
 
 assert.ok(paged.slides.length > 1, 'Expected analysisNarrowTable scenario to split into continuation slides');
 

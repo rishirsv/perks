@@ -1,169 +1,192 @@
+import { addAnalysisBridge } from '../builders/analysis-bridge.js';
+import { addAnalysisNarrowTable } from '../builders/analysis-narrow-table.js';
+import {
+  addAnalysisWideChart2ColsText,
+  addAnalysisWideChartTableText,
+} from '../builders/analysis-wide-chart-text.js';
+import { addBackCover } from '../builders/back-cover-slide.js';
+import { addBusinessOverview } from '../builders/business-overview.js';
+import { addContentsSlide } from '../builders/contents-slide.js';
+import { addCover } from '../builders/cover-slide.js';
+import { addDivider } from '../builders/divider-slide.js';
+import { addOneColumnText } from '../builders/one-column-text.js';
+import { addTitleStrapline4TextBoxes } from '../builders/title-strapline-4-boxes.js';
+import { addTwoColumnTextWithStrapline } from '../builders/two-column-text.js';
+import { wrapLegacyBuilder } from './builder-adapters.js';
+
 const SLIDE_REGISTRY_SCHEMA_VERSION = '2.0.0';
 
 function withGeometryContract(entry) {
-  const geometryContract = {
-    requiredKeys: [...(entry?.geometryContract?.requiredKeys || [])],
-    optionalKeys: [...(entry?.geometryContract?.optionalKeys || [])],
-    optionalDefaults: { ...(entry?.geometryContract?.optionalDefaults || {}) },
-  };
+  const requiredGeometry = Object.freeze([...(entry?.requiredGeometry || [])]);
+  const optionalGeometry = Object.freeze([...(entry?.optionalGeometry || [])]);
+  const optionalDefaults = Object.freeze({ ...(entry?.optionalDefaults || {}) });
+  const geometryContract = Object.freeze({
+    requiredKeys: requiredGeometry,
+    optionalKeys: optionalGeometry,
+    optionalDefaults,
+  });
   return Object.freeze({
     ...entry,
+    requiredGeometry,
+    optionalGeometry,
+    optionalDefaults,
     geometryContract,
-    // Compatibility alias used by existing contract tests.
-    requiredGeometry: geometryContract.requiredKeys,
   });
 }
 
 const REGISTRY = Object.freeze({
   cover: withGeometryContract({
     builderId: 'cover',
-    masterVariant: 'cover',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'subtitleBox', 'photoBox', 'logoBox'],
-    },
+    builder: wrapLegacyBuilder(addCover),
+    master: 'KPMG_COVER',
+    requiredGeometry: ['titleBox', 'subtitleBox', 'photoBox', 'logoBox'],
     paginationPolicyKey: 'none.v1',
     validationHooks: [],
     excludeFromLogicalPaging: true,
   }),
   divider: withGeometryContract({
     builderId: 'divider',
-    masterVariant: 'sectionDark',
-    geometryContract: {
-      requiredKeys: ['numberBox', 'titleBox'],
-      optionalKeys: ['gradientBox'],
-    },
+    builder: wrapLegacyBuilder(addDivider),
+    master: 'KPMG_SECTION_DARK',
+    requiredGeometry: ['numberBox', 'titleBox'],
+    optionalGeometry: ['gradientBox'],
     paginationPolicyKey: 'none.v1',
     validationHooks: [],
     excludeFromLogicalPaging: true,
   }),
   dividerDark: withGeometryContract({
     builderId: 'divider',
-    masterVariant: 'sectionDark',
-    geometryContract: {
-      requiredKeys: ['numberBox', 'titleBox'],
-      optionalKeys: ['gradientBox'],
-    },
+    builder: wrapLegacyBuilder(addDivider),
+    master: 'KPMG_SECTION_DARK',
+    requiredGeometry: ['numberBox', 'titleBox'],
+    optionalGeometry: ['gradientBox'],
     paginationPolicyKey: 'none.v1',
     validationHooks: [],
     excludeFromLogicalPaging: true,
   }),
   dividerLight: withGeometryContract({
     builderId: 'divider',
-    masterVariant: 'sectionLight',
-    geometryContract: {
-      requiredKeys: ['numberBox', 'titleBox'],
-      optionalKeys: ['gradientBox'],
-    },
+    builder: wrapLegacyBuilder(addDivider),
+    master: 'KPMG_SECTION_LIGHT',
+    requiredGeometry: ['numberBox', 'titleBox'],
+    optionalGeometry: ['gradientBox'],
     paginationPolicyKey: 'none.v1',
     validationHooks: [],
     excludeFromLogicalPaging: true,
   }),
   twoColumnText: withGeometryContract({
     builderId: 'twoColumnText',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'straplineBox', 'leftBox', 'rightBox'],
-    },
+    builder: wrapLegacyBuilder(addTwoColumnTextWithStrapline),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'straplineBox', 'leftBox', 'rightBox'],
     paginationPolicyKey: 'text.twoColumn.v1',
     validationHooks: [],
     excludeFromLogicalPaging: false,
   }),
   oneColumnText: withGeometryContract({
     builderId: 'oneColumnText',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'straplineBox', 'bodyBox', 'sourceBox'],
-      optionalKeys: ['calloutBoxes'],
-    },
+    builder: wrapLegacyBuilder(addOneColumnText),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'straplineBox', 'bodyBox', 'sourceBox'],
+    optionalGeometry: ['calloutBoxes'],
     paginationPolicyKey: 'text.oneColumn.v1',
     validationHooks: [],
     excludeFromLogicalPaging: false,
   }),
   analysisNarrowTable: withGeometryContract({
     builderId: 'analysisNarrowTable',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'straplineBox', 'tableBox', 'rightTitleBox', 'rightBodyBox'],
-      optionalKeys: ['noteBox'],
-    },
+    builder: wrapLegacyBuilder(addAnalysisNarrowTable),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'straplineBox', 'tableBox', 'rightTitleBox', 'rightBodyBox'],
+    optionalGeometry: ['noteBox'],
     paginationPolicyKey: 'table.rows.v1',
     validationHooks: ['tableShape'],
     excludeFromLogicalPaging: false,
   }),
   analysisWideChart2ColsText: withGeometryContract({
     builderId: 'analysisWideChart2ColsText',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'straplineBox', 'bodyBox', 'chartBox'],
-      optionalKeys: ['calloutBoxes'],
-    },
+    builder: wrapLegacyBuilder(addAnalysisWideChart2ColsText),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'straplineBox', 'bodyBox', 'chartBox'],
+    optionalGeometry: ['calloutBoxes'],
     paginationPolicyKey: 'text.analysisWide.2cols.v1',
     validationHooks: ['chartShape'],
     excludeFromLogicalPaging: false,
   }),
   analysisWideChartTableText: withGeometryContract({
     builderId: 'analysisWideChartTableText',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'straplineBox', 'headingBox', 'bodyBox', 'chartBox', 'tableBox'],
-      optionalKeys: ['calloutBoxes', 'noteBox'],
-    },
+    builder: wrapLegacyBuilder(addAnalysisWideChartTableText),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'straplineBox', 'headingBox', 'bodyBox', 'chartBox', 'tableBox'],
+    optionalGeometry: ['calloutBoxes', 'noteBox'],
     paginationPolicyKey: 'text.analysisWide.table.v1',
     validationHooks: ['chartShape', 'tableShape'],
     excludeFromLogicalPaging: false,
   }),
   analysisBridge: withGeometryContract({
     builderId: 'analysisBridge',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'chartBox', 'analysisBoxes', 'sourceBox'],
-      optionalKeys: ['typography'],
-    },
+    builder: wrapLegacyBuilder(addAnalysisBridge),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'chartBox', 'analysisBoxes', 'sourceBox'],
+    optionalGeometry: ['typography'],
     paginationPolicyKey: 'bridge.analysisColumns.v1',
     validationHooks: ['bridgeSpec'],
     excludeFromLogicalPaging: false,
   }),
   businessOverview: withGeometryContract({
     builderId: 'businessOverview',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'leftHeadingBox', 'leftBox', 'rightHeadingBox', 'bodyBox', 'chartBox', 'sourceBox'],
-    },
+    builder: wrapLegacyBuilder(addBusinessOverview),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'leftHeadingBox', 'leftBox', 'rightHeadingBox', 'bodyBox', 'chartBox', 'sourceBox'],
     paginationPolicyKey: 'business.overviewBody.v1',
     validationHooks: ['businessStructureSpec'],
     excludeFromLogicalPaging: false,
   }),
   titleStrapline4TextBoxes: withGeometryContract({
     builderId: 'titleStrapline4TextBoxes',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'straplineBox', 'columnBoxes'],
-    },
+    builder: wrapLegacyBuilder(addTitleStrapline4TextBoxes),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'straplineBox', 'columnBoxes'],
     paginationPolicyKey: 'none.v1',
     validationHooks: [],
     excludeFromLogicalPaging: false,
   }),
   contents: withGeometryContract({
     builderId: 'contents',
-    masterVariant: 'white',
-    geometryContract: {
-      requiredKeys: ['titleBox', 'topRowBox', 'bottomRowBox'],
-    },
+    builder: wrapLegacyBuilder(addContentsSlide),
+    master: 'KPMG_WHITE',
+    requiredGeometry: ['titleBox', 'topRowBox', 'bottomRowBox'],
     paginationPolicyKey: 'contents.sections.v1',
     validationHooks: [],
     excludeFromLogicalPaging: false,
   }),
   backCover: withGeometryContract({
     builderId: 'backCover',
-    masterVariant: 'closing',
-    geometryContract: {
-      requiredKeys: ['logoBox', 'headingBox', 'disclaimerBox', 'urlBox'],
-    },
+    builder: wrapLegacyBuilder(addBackCover),
+    master: 'KPMG_CLOSING',
+    requiredGeometry: ['logoBox', 'headingBox', 'disclaimerBox', 'urlBox'],
     paginationPolicyKey: 'none.v1',
     validationHooks: [],
     excludeFromLogicalPaging: true,
   }),
 });
+
+export function validateRegistry() {
+  for (const [type, entry] of Object.entries(REGISTRY)) {
+    if (typeof entry.builder !== 'function') {
+      throw new Error(`registry.${type}: missing builder`);
+    }
+    if (typeof entry.master !== 'string' || entry.master.trim().length === 0) {
+      throw new Error(`registry.${type}: missing master`);
+    }
+    if (!Array.isArray(entry.requiredGeometry)) {
+      throw new Error(`registry.${type}: requiredGeometry must be array`);
+    }
+    if (typeof entry.paginationPolicyKey !== 'string' || entry.paginationPolicyKey.trim().length === 0) {
+      throw new Error(`registry.${type}: missing paginationPolicyKey`);
+    }
+  }
+}
 
 export function resolveRegistryTypeForSlide(slideSpec = {}) {
   if (!slideSpec || typeof slideSpec !== 'object') return null;
@@ -173,6 +196,12 @@ export function resolveRegistryTypeForSlide(slideSpec = {}) {
 
 export function listRegisteredSlideTypes() {
   return Object.keys(REGISTRY);
+}
+
+export function getSlideEntry(type) {
+  const entry = REGISTRY[type];
+  if (!entry) throw new Error(`Unknown slide type '${type}' (registry)`);
+  return entry;
 }
 
 export function getSlideRegistryEntry(type) {
@@ -216,23 +245,19 @@ export function assertRegistryCoversTemplateTypes(templateLayouts = {}) {
   }
 }
 
-export function defaultMasterNameForType(type, templatePackage) {
+export function defaultMasterNameForType(type) {
   const entry = getSlideRegistryEntry(type);
-  const variantKey = entry?.masterVariant || 'white';
-  const variants = templatePackage?.layouts?.masters?.variants || {};
-  const configured = variants?.[variantKey]?.masterName;
-
-  if (typeof configured === 'string' && configured.trim()) return configured.trim();
-
-  if (variantKey === 'cover') return 'KPMG_COVER';
-  if (variantKey === 'closing') return 'KPMG_CLOSING';
-  if (variantKey === 'sectionLight') return 'KPMG_SECTION_LIGHT';
-  if (variantKey === 'sectionDark') return 'KPMG_SECTION_DARK';
-  return 'KPMG_WHITE';
+  const master = entry?.master;
+  if (!master) {
+    throw new Error(`Missing master in slide registry for type "${type}"`);
+  }
+  return master;
 }
 
 export function isExcludedFromLogicalPaging(type) {
   return Boolean(getSlideRegistryEntry(type)?.excludeFromLogicalPaging);
 }
+
+validateRegistry();
 
 export { SLIDE_REGISTRY_SCHEMA_VERSION };

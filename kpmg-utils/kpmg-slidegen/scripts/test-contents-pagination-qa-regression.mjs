@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { generateToFile } from '../generator/index.js';
+import { RECOMPUTE_FIELD_CONTENTS_PAGE_RANGES } from '../generator/helpers/pagination-constants.js';
 import { loadTemplatePackage } from '../generator/runtime/template-package.js';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
@@ -87,7 +88,7 @@ const overflowEvent = (qa?.overflowEvents || []).find(
 );
 assert.ok(overflowEvent, 'Expected contents overflow auto_split event in QA');
 assert.ok(
-  Array.isArray(qa?.recomputeFields) && qa.recomputeFields.includes('contentsPageRanges'),
+  Array.isArray(qa?.recomputeFields) && qa.recomputeFields.includes(RECOMPUTE_FIELD_CONTENTS_PAGE_RANGES),
   'Expected QA recomputeFields to include contentsPageRanges',
 );
 

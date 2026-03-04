@@ -5,8 +5,8 @@ import { buildRenderContext } from '../generator/runtime/render-context.js';
 import { loadTemplatePackage } from '../generator/runtime/template-package.js';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
-const layouts = templatePackage?.layouts?.types || {};
 const renderContext = buildRenderContext({ templatePackage });
+const layouts = templatePackage?.layouts?.types || {};
 
 assert.ok(layouts.oneColumnText, 'Expected oneColumnText layout to be present');
 
@@ -88,7 +88,7 @@ function paginateOneColumnBody(body, extras = {}) {
       },
     ],
   };
-  return paginateDeckSpec(deck, layouts, renderContext);
+  return paginateDeckSpec(deck, renderContext);
 }
 
 {

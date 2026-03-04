@@ -10,17 +10,22 @@ import { BRIDGE_DEFAULT_ANALYSIS_BOXES, clampBridgePhaseCount, resolveBridgeAnal
 import { computeOneColumnLayoutGeometry } from '../helpers/one-column-layout.js';
 import { computeTwoColumnLayoutGeometry } from '../helpers/two-column-layout.js';
 import { isHeaderLine } from '../helpers/bullets.js';
+import {
+  CONTENTS_SECTIONS_PER_SLIDE,
+  RECOMPUTE_FIELD_CONTENTS_PAGE_RANGES,
+} from '../helpers/pagination-constants.js';
 import { resolveSlideGeometry } from './template-contracts.js';
 import { resolveTheme } from '../helpers/theme.js';
 import {
   computeAnalysisWideChart2ColsTextGeometry,
   computeAnalysisWideChartTableTextGeometry,
 } from '../helpers/analysis-wide-layout.js';
-import { resolveRegistryTypeForSlide } from './slide-registry.js';
+import { isExcludedFromLogicalPaging, resolveRegistryTypeForSlide } from './slide-registry.js';
 import { requireGeometryBox } from './geometry-contract.js';
-const CONTENTS_SECTIONS_PER_SLIDE = 10;
+
 const TABLE_ROW_DENSITY_LINE_THRESHOLD = 7;
 const TABLE_ROW_DENSITY_HEIGHT_THRESHOLD = 0.82;
+const includeFooterByMasterCache = new WeakMap();
 
 function requireFiniteMetric(name, value) {
   const numeric = Number(value);
@@ -537,7 +542,111 @@ function paginateTableRows(
   return out;
 }
 
-export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
+function normalizeSectionKey(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function setRange(map, key, page) {
+  if (!key || !Number.isFinite(page) || page <= 0) return;
+  const prev = map.get(key);
+  if (!prev) {
+    map.set(key, { start: page, end: page });
+    return;
+  }
+  map.set(key, { start: Math.min(prev.start, page), end: Math.max(prev.end, page) });
+}
+
+function formatPageRange(start, end) {
+  if (!Number.isFinite(start) || start <= 0) return '';
+  if (!Number.isFinite(end) || end <= 0 || end === start) return `(p. ${start})`;
+  return `(p. ${start}-${end})`;
+}
+
+function getIncludeFooterByMaster(templatePackage = {}) {
+  if (includeFooterByMasterCache.has(templatePackage)) {
+    return includeFooterByMasterCache.get(templatePackage);
+  }
+  const map = new Map();
+  const variants = templatePackage?.layouts?.masters?.variants || {};
+  for (const variant of Object.values(variants)) {
+    if (!variant?.masterName) continue;
+    map.set(variant.masterName, Boolean(variant.includeFooter));
+  }
+  includeFooterByMasterCache.set(templatePackage, map);
+  return map;
+}
+
+function isDividerSlide(slideSpec = {}, runtimeContext = {}) {
+  const type = resolveRegistryTypeForSlide(slideSpec);
+  if (!type) return false;
+  const entry = runtimeContext?.slideRegistry?.get?.(type);
+  return entry?.builderId === 'divider';
+}
+
+export function resolveMasterNameForSlide(slideSpec = {}, runtimeContext = {}) {
+  const type = resolveRegistryTypeForSlide(slideSpec);
+  if (!type) {
+    throw new Error('Unable to resolve slide type for master resolution');
+  }
+  const templateContracts = runtimeContext?.templateContracts;
+  if (!templateContracts?.get) {
+    throw new Error('Missing required template contracts for master resolution');
+  }
+  const resolved = templateContracts.resolveForSlide(slideSpec, type);
+  if (!resolved?.masterName) throw new Error(`Missing template contract masterName for slide type "${type}"`);
+  return resolved.masterName;
+}
+
+export function shouldRenderLogicalPageNumber(slideSpec = {}, runtimeContext = {}, resolvedMasterName = null) {
+  const type = resolveRegistryTypeForSlide(slideSpec);
+  if (!type) return false;
+  if (isExcludedFromLogicalPaging(type)) return false;
+  const templatePackage = runtimeContext?.template;
+  if (!templatePackage) {
+    throw new Error('Missing template package in runtime context for logical page calculation');
+  }
+  const masterName = resolvedMasterName || resolveMasterNameForSlide(slideSpec, runtimeContext);
+  return Boolean(getIncludeFooterByMaster(templatePackage).get(masterName));
+}
+
+function applyAutoContentsPageRanges(slides = [], runtimeContext = {}) {
+  const sectionRangesByNumber = new Map();
+  const sectionRangesByTitle = new Map();
+  let logicalPage = 0;
+  let activeSectionNumber = '';
+  let activeSectionTitle = '';
+
+  for (const slide of slides) {
+    const isDivider = isDividerSlide(slide, runtimeContext);
+    if (isDivider) {
+      activeSectionNumber = String(slide?.sectionNumber || '').trim();
+      activeSectionTitle = normalizeSectionKey(slide?.sectionTitle);
+      continue;
+    }
+    if (!shouldRenderLogicalPageNumber(slide, runtimeContext)) continue;
+    logicalPage += 1;
+    if (slide?.type === 'contents') continue;
+    if (activeSectionNumber) setRange(sectionRangesByNumber, activeSectionNumber, logicalPage);
+    if (activeSectionTitle) setRange(sectionRangesByTitle, activeSectionTitle, logicalPage);
+  }
+
+  return slides.map((slide) => {
+    if (slide?.type !== 'contents' || !Array.isArray(slide.sections)) return slide;
+    const sections = slide.sections.map((section) => {
+      const byNumber = sectionRangesByNumber.get(String(section?.number || '').trim());
+      const byTitle = sectionRangesByTitle.get(normalizeSectionKey(section?.title));
+      const range = byNumber || byTitle;
+      if (!range) return section;
+      return {
+        ...section,
+        pageRange: formatPageRange(range.start, range.end),
+      };
+    });
+    return { ...slide, sections };
+  });
+}
+
+export function paginateDeckSpec(deckSpec, runtimeContext = {}) {
   const spec = deckSpec && typeof deckSpec === 'object' ? deckSpec : { slides: [] };
   const slides = Array.isArray(spec.slides) ? spec.slides : [];
   const out = {
@@ -546,7 +655,9 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
     paginationDecisions: [],
     overflowEvents: [],
     tableWarnings: [],
+    recomputeFields: [],
   };
+  const recomputeFields = new Set();
 
   const templateContracts = runtimeContext?.templateContracts;
   const slideRegistry = runtimeContext?.slideRegistry;
@@ -619,8 +730,7 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
     const slideSpec = slides[slideIndex];
     const rawType = slideSpec?.type;
     const type = resolveRegistryTypeForSlide(slideSpec);
-    const layout = (layouts && rawType && layouts[rawType]) || (layouts && type && layouts[type]) || null;
-    if (!rawType || !layout) {
+    if (!rawType || !type) {
       out.slides.push(slideSpec);
       continue;
     }
@@ -634,14 +744,15 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
     if (!policy) {
       throw new Error(`Missing pagination policy "${policyKey}" for slide type "${type}"`);
     }
+    for (const field of policy.recomputeFields || []) recomputeFields.add(field);
     const geom = resolveSlideGeometry(templateContracts, type);
-    const titleMaxChars = Number(layout?.slots?.title?.maxChars || 0) || null;
-    const mode = policy.mode || policy.strategy;
     const contract = templateContracts.get(type);
-    if (!contract?.masterName) {
-      throw new Error(`Missing template contract masterName for slide type "${type}"`);
+    if (!contract) {
+      throw new Error(`Unknown layout type "${type}" in template layouts.json`);
     }
-    const masterName = contract.masterName;
+    const titleMaxChars = Number(contract?.slots?.title?.maxChars || 0) || null;
+    const mode = policy.mode || policy.strategy;
+    const masterName = resolveMasterNameForSlide(slideSpec, runtimeContext);
 
     if (policy.strategy === 'none') {
       out.slides.push(slideSpec);
@@ -809,6 +920,11 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
     recordSplit(slideIndex, rawType, mode, originalCount, paged.length, { policyKey: policy.key });
     out.slides.push(...paged);
   }
+
+  if (recomputeFields.has(RECOMPUTE_FIELD_CONTENTS_PAGE_RANGES)) {
+    out.slides = applyAutoContentsPageRanges(out.slides, runtimeContext);
+  }
+  out.recomputeFields = [...recomputeFields].sort();
 
   return out;
 }

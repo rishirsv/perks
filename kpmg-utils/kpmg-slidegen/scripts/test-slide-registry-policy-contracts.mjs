@@ -57,8 +57,9 @@ assert.deepEqual(
 for (const type of registryTypes) {
   const entry = ctx.slideRegistry.get(type);
   assert.ok(entry, `registry entry missing for ${type}`);
+  assert.equal(typeof entry.builder, 'function', `builder missing for ${type}`);
   assert.ok(entry.builderId, `builderId missing for ${type}`);
-  assert.ok(entry.masterVariant, `masterVariant missing for ${type}`);
+  assert.equal(typeof entry.master, 'string', `master missing for ${type}`);
   assert.ok(entry.paginationPolicyKey, `paginationPolicyKey missing for ${type}`);
   const policy = ctx.paginationPolicy.get(entry.paginationPolicyKey);
   assert.ok(policy, `pagination policy not found for ${type} (${entry.paginationPolicyKey})`);

@@ -1,33 +1,19 @@
 import PptxGenJS from 'pptxgenjs';
 
-import { addCover } from '../builders/cover-slide.js';
-import { addDivider } from '../builders/divider-slide.js';
-import { addTwoColumnTextWithStrapline } from '../builders/two-column-text.js';
-import { addAnalysisNarrowTable } from '../builders/analysis-narrow-table.js';
-import {
-  addAnalysisWideChart2ColsText,
-  addAnalysisWideChartTableText,
-} from '../builders/analysis-wide-chart-text.js';
-import { addTitleStrapline4TextBoxes } from '../builders/title-strapline-4-boxes.js';
-import { addBackCover } from '../builders/back-cover-slide.js';
-import { addOneColumnText } from '../builders/one-column-text.js';
-import { addContentsSlide } from '../builders/contents-slide.js';
-import { addAnalysisBridge } from '../builders/analysis-bridge.js';
 import { validateBridgeSpec } from '../helpers/bridge.js';
-import { addBusinessOverview } from '../builders/business-overview.js';
 import {
   countBusinessStructureCharacters,
   countBusinessStructureItems,
   validateBusinessStructureSpec,
 } from '../helpers/business-structure.js';
 import { normalizeBodyStyle } from '../helpers/layout.js';
-import { paginateDeckSpec } from './paginate.js';
-import { buildRenderContext } from './render-context.js';
 import {
-  defaultMasterNameForType,
-  isExcludedFromLogicalPaging,
-  resolveRegistryTypeForSlide,
-} from './slide-registry.js';
+  paginateDeckSpec,
+  resolveMasterNameForSlide,
+  shouldRenderLogicalPageNumber,
+} from './paginate.js';
+import { buildRenderContext } from './render-context.js';
+import { resolveRegistryTypeForSlide } from './slide-registry.js';
 
 function deepClone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -38,24 +24,8 @@ const DENSITY_STATUS = Object.freeze({
   thin: 'thin but acceptable',
   sparse: 'too sparse, should be repaired or flagged',
 });
-const DIVIDER_TYPES = new Set(['divider', 'dividerDark', 'dividerLight']);
 const MAX_TEXT_ARRAY_LEVELS = 4;
 const MAX_TEXT_ARRAY_CHILD_DEPTH = MAX_TEXT_ARRAY_LEVELS - 1;
-
-const BUILDER_BY_ID = Object.freeze({
-  cover: addCover,
-  divider: addDivider,
-  contents: addContentsSlide,
-  twoColumnText: addTwoColumnTextWithStrapline,
-  oneColumnText: addOneColumnText,
-  analysisNarrowTable: addAnalysisNarrowTable,
-  analysisWideChart2ColsText: addAnalysisWideChart2ColsText,
-  analysisWideChartTableText: addAnalysisWideChartTableText,
-  analysisBridge: addAnalysisBridge,
-  businessOverview: addBusinessOverview,
-  titleStrapline4TextBoxes: addTitleStrapline4TextBoxes,
-  backCover: addBackCover,
-});
 
 function isPlainObject(value) {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value));
@@ -1099,109 +1069,6 @@ function defineMasters(pptx, templatePackage, footerValues = {}, theme = null) {
   }
 }
 
-function normalizeSectionKey(value) {
-  return String(value || '').trim().toLowerCase();
-}
-
-function setRange(map, key, page) {
-  if (!key || !Number.isFinite(page) || page <= 0) return;
-  const prev = map.get(key);
-  if (!prev) {
-    map.set(key, { start: page, end: page });
-    return;
-  }
-  map.set(key, { start: Math.min(prev.start, page), end: Math.max(prev.end, page) });
-}
-
-function formatPageRange(start, end) {
-  if (!Number.isFinite(start) || start <= 0) return '';
-  if (!Number.isFinite(end) || end <= 0 || end === start) return `(p. ${start})`;
-  return `(p. ${start}-${end})`;
-}
-
-function applyAutoContentsPageRanges(slides, templatePackage) {
-  const sectionRangesByNumber = new Map();
-  const sectionRangesByTitle = new Map();
-  let logicalPage = 0;
-  let activeSectionNumber = '';
-  let activeSectionTitle = '';
-
-  const list = Array.isArray(slides) ? slides : [];
-  for (const slide of list) {
-    const isDivider = DIVIDER_TYPES.has(slide?.type);
-    if (isDivider) {
-      activeSectionNumber = String(slide?.sectionNumber || '').trim();
-      activeSectionTitle = normalizeSectionKey(slide?.sectionTitle);
-      continue;
-    }
-
-    if (!shouldRenderLogicalPageNumber(slide, templatePackage)) continue;
-    logicalPage += 1;
-
-    if (slide?.type === 'contents') continue;
-    if (activeSectionNumber) setRange(sectionRangesByNumber, activeSectionNumber, logicalPage);
-    if (activeSectionTitle) setRange(sectionRangesByTitle, activeSectionTitle, logicalPage);
-  }
-
-  return list.map((slide) => {
-    if (slide?.type !== 'contents' || !Array.isArray(slide.sections)) return slide;
-    const sections = slide.sections.map((section) => {
-      const byNumber = sectionRangesByNumber.get(String(section?.number || '').trim());
-      const byTitle = sectionRangesByTitle.get(normalizeSectionKey(section?.title));
-      const range = byNumber || byTitle;
-      if (!range) return section;
-      return {
-        ...section,
-        pageRange: formatPageRange(range.start, range.end),
-      };
-    });
-    return { ...slide, sections };
-  });
-}
-
-function collectRecomputeFieldsForSlides(slides, runtimeContext) {
-  const fields = new Set();
-  const list = Array.isArray(slides) ? slides : [];
-  const slideRegistry = runtimeContext?.slideRegistry;
-  const paginationPolicy = runtimeContext?.paginationPolicy;
-  if (!slideRegistry?.get || !paginationPolicy?.get) return fields;
-
-  for (const slide of list) {
-    const registryType = resolveRegistryTypeForSlide(slide);
-    const entry = slideRegistry.get(registryType);
-    if (!entry) {
-      throw new Error(`Missing slide-registry entry for slide type "${registryType}"`);
-    }
-    const key = String(entry.paginationPolicyKey || '').trim();
-    const policy = paginationPolicy.get(key);
-    if (!policy) {
-      throw new Error(`Missing pagination policy "${key}" for slide type "${registryType}"`);
-    }
-    for (const field of policy.recomputeFields || []) {
-      fields.add(field);
-    }
-  }
-  return fields;
-}
-
-function getMasterNameForSlide(slideSpec, templatePackage) {
-  const registryType = resolveRegistryTypeForSlide(slideSpec);
-  return defaultMasterNameForType(registryType, templatePackage);
-}
-
-function getVariantByMasterName(templatePackage, masterName) {
-  const variants = templatePackage.layouts?.masters?.variants || {};
-  return Object.values(variants).find((v) => v?.masterName === masterName) || null;
-}
-
-function shouldRenderLogicalPageNumber(slideSpec, templatePackage) {
-  const registryType = resolveRegistryTypeForSlide(slideSpec);
-  if (isExcludedFromLogicalPaging(registryType)) return false;
-  const masterName = getMasterNameForSlide(slideSpec, templatePackage);
-  const variant = getVariantByMasterName(templatePackage, masterName);
-  return Boolean(variant?.includeFooter);
-}
-
 function addLogicalPageNumber(slide, templatePackage, pageNumber) {
   const page = templatePackage.layouts?.masters?.footerChrome?.slideNumber;
   if (!slide || !page || !Number.isFinite(pageNumber) || pageNumber <= 0) return;
@@ -1256,9 +1123,9 @@ function buildSlide(pptx, rawSlideSpec, runtimeContext = {}) {
   if (!registryEntry) {
     throw new Error(`Unknown type: ${slideSpec.type}`);
   }
-  const builder = BUILDER_BY_ID[registryEntry.builderId];
+  const builder = registryEntry.builder;
   if (typeof builder !== 'function') {
-    throw new Error(`No builder implementation registered for "${slideSpec.type}" (${registryEntry.builderId})`);
+    throw new Error(`No builder implementation registered for "${slideSpec.type}" in slide registry`);
   }
   if (typeof runtimeContext?.buildBuilderCtx !== 'function') {
     throw new Error('Missing render context builder ctx factory (buildBuilderCtx)');
@@ -1321,12 +1188,9 @@ export function renderDeck(deckSpec, templatePackage, options = {}) {
     ...deckSpec,
     slides: (deckSpec.slides || []).map(normalizeSlideSpec),
   };
-  const paginated = paginateDeckSpec(normalized, templatePackage.layouts?.types || {}, renderContext);
-  const preRecomputeSlides = paginated?.slides || [];
-  const recomputeFields = collectRecomputeFieldsForSlides(preRecomputeSlides, renderContext);
-  const paginatedSlides = recomputeFields.has('contentsPageRanges')
-    ? applyAutoContentsPageRanges(preRecomputeSlides, templatePackage)
-    : preRecomputeSlides;
+  const paginated = paginateDeckSpec(normalized, renderContext);
+  const paginatedSlides = paginated?.slides || [];
+  const recomputeFields = Array.isArray(paginated?.recomputeFields) ? paginated.recomputeFields : [];
   assertNoReservedBuilderCtxKeysForSlides(paginatedSlides, {
     ...renderContext,
     options: builderOptions,
@@ -1356,7 +1220,7 @@ export function renderDeck(deckSpec, templatePackage, options = {}) {
     });
     if (!v.valid) throw new Error(v.errors.join(', '));
 
-    const expectedMaster = getMasterNameForSlide(slideSpec, templatePackage);
+    const expectedMaster = resolveMasterNameForSlide(slideSpec, renderContext);
     const slide = buildSlide(pptx, slideSpec, {
       builderOptions,
       ...renderContext,
@@ -1369,7 +1233,7 @@ export function renderDeck(deckSpec, templatePackage, options = {}) {
       appliedMaster,
       matched: expectedMaster === appliedMaster,
     });
-    if (shouldRenderLogicalPageNumber(slideSpec, templatePackage)) {
+    if (shouldRenderLogicalPageNumber(slideSpec, renderContext, expectedMaster)) {
       logicalPageNumber += 1;
       addLogicalPageNumber(slide, templatePackage, logicalPageNumber);
     }
@@ -1392,7 +1256,7 @@ export function renderDeck(deckSpec, templatePackage, options = {}) {
       overflowEvents,
       overflowRisks,
       tableWarnings,
-      recomputeFields: [...recomputeFields].sort(),
+      recomputeFields,
       masterApplied,
       densityFindings: validation?.qa?.densityFindings || [],
       thinSlides: validation?.qa?.thinSlides || [],

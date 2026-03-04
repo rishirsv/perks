@@ -79,6 +79,7 @@ export function buildTemplateContracts(templatePackage = {}, { slideRegistry } =
       schemaVersion: CANONICAL_GEOMETRY_SCHEMA_VERSION,
       boxes: validated,
       templateLayout: layout?.templateLayout || null,
+      slots: layout?.slots || {},
       masterName,
       footerSafeTop,
     });

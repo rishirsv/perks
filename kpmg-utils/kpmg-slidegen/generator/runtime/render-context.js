@@ -3,6 +3,7 @@ import { buildTheme } from '../helpers/theme.js';
 import {
   getSlideRegistry,
   assertRegistryCoversTemplateTypes,
+  validateRegistry,
 } from './slide-registry.js';
 import { assertPolicyCoverage, buildPaginationPolicy } from './pagination-policy.js';
 import { buildDiagnosticsRecorder } from './diagnostics.js';
@@ -86,6 +87,7 @@ function resolveAssetsForType(templatePackage = {}, registryType) {
 
 export function buildRenderContext({ templatePackage = {}, deckSpec = null, options = {} } = {}) {
   const theme = buildTheme(templatePackage);
+  validateRegistry();
   const slideRegistry = getSlideRegistry();
   assertRegistryCoversTemplateTypes(templatePackage?.layouts?.types || {});
   const paginationPolicy = buildPaginationPolicy(templatePackage);
