@@ -1,6 +1,6 @@
 ---
 name: code-docs
-description: "Create or update canonical docs structure, policy docs, reference docs, and product specs (including writing/updating specs from implemented features)."
+description: "Create or update canonical docs structure, policy docs, reference docs, product specs, and project specs (including writing/updating specs from implemented features)."
 ---
 
 # Code Docs
@@ -13,6 +13,7 @@ This skill manages:
 - root docs (`AGENTS.md`, `ARCHITECTURE.md`, `TODOS.md`)
 - docs policy/reference docs and index files
 - product specs (`docs/product-specs/*`) for planning and post-implementation documentation
+- project specs (`docs/project-specs/*`) for system/service-level specification work
 - execution planning docs (`docs/exec-plans/*`)
 - solution knowledge docs (optional, when explicitly requested)
 
@@ -57,6 +58,7 @@ Root:
 - `docs/design-docs/index.md`
 - `docs/design-docs/core-beliefs.md`
 - `docs/product-specs/*`
+- `docs/project-specs/*`
 - `docs/exec-plans/active/*`
 - `docs/exec-plans/completed/*`
 - `docs/exec-plans/tech-debt-tracker.md`
@@ -104,6 +106,14 @@ When creating/updating `AGENTS.md`:
 - If evidence is incomplete, state missing evidence explicitly in `Assumptions` or `Context`.
 - Keep specs concise and decision-oriented.
 
+## Project Specs Handling
+- Canonical path: `docs/project-specs/<project-slug>-spec.md`.
+- Default structure: `assets/project-spec_template.md`.
+- Use this when the user requests a project/service/system specification (architecture, operations, integrations, and validation strategy), not a single feature spec.
+- Keep placeholders until concrete project inputs are provided.
+- Preserve the full spec shape from the template (problem statement, goals/non-goals, domain model, workflow/config contracts, failure model, validation matrix, implementation checklist).
+- If implementation-derived evidence is incomplete, call it out explicitly instead of guessing.
+
 ## Cross-Skill Alignment
 - `ideate` handles discovery and brainstorming.
 - `code-docs` handles canonical spec/doc writing and maintenance.
@@ -131,6 +141,7 @@ When creating/updating `AGENTS.md`:
 | Design docs index | `assets/design-docs_index_template.md` | `docs/design-docs/index.md` |
 | Core beliefs | `assets/core-beliefs_template.md` | `docs/design-docs/core-beliefs.md` |
 | Product spec (ideate-aligned, as-built capable) | `assets/product-spec_template.md` | `docs/product-specs/<feature-slug>-spec.md` |
+| Project spec (system/service-level) | `assets/project-spec_template.md` | `docs/project-specs/<project-slug>-spec.md` |
 | Tech debt tracker | `assets/tech-debt-tracker_template.md` | `docs/exec-plans/tech-debt-tracker.md` |
 | Solution runbook (optional) | `assets/solution_template.md` | `docs/solutions/<solution-slug>.md` |
 

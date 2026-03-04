@@ -9,10 +9,13 @@ Use this as the router for the active, forward-only contract system.
 
 ## Section contracts (single source per section)
 
+- [executive-summary.md](executive-summary.md)
 - [business-overview.md](business-overview.md)
+- [historical-financial-performance.md](historical-financial-performance.md)
+- [income-statement.md](income-statement.md)
 - [qoe-and-earnings-adjustments.md](qoe-and-earnings-adjustments.md)
-
-## Canonical section templates (quick scaffolds)
-
-- [section-templates/business-overview.md](section-templates/business-overview.md)
-- [section-templates/qoe-and-earnings-adjustments.md](section-templates/qoe-and-earnings-adjustments.md)
+- [net-working-capital.md](net-working-capital.md)
+- [net-debt.md](net-debt.md)
+- [quality-of-net-assets.md](quality-of-net-assets.md)
+- [balance-sheet.md](balance-sheet.md)
+- [reporting-environment.md](reporting-environment.md)

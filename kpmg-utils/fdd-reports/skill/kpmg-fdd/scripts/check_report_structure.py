@@ -7,7 +7,7 @@ Usage:
   python check_report_structure.py --in report.md --json out.json
 
 What it checks:
-- Presence of key sections (configurable)
+- Presence of key sections (configurable; aligned to canonical section contracts)
 - Obvious placeholder tokens left in draft (<...>, TBD, $[x], [Date])
 - Basic exhibit hygiene (presence of at least one table if QoE section exists)
 
@@ -27,11 +27,10 @@ from typing import List, Dict, Any
 DEFAULT_REQUIRED_SECTIONS = [
     "Executive summary",
     "Business overview",
-    "P&L overview",
-    "Quality of earnings",
-    "Working capital",
-    "Net debt",
-    "Risks",
+    "Historical / financial performance",
+    "QoE and earnings adjustments",
+    "Net working capital",
+    "Net debt and debt-like items",
 ]
 
 PLACEHOLDER_PATTERNS = [
@@ -95,8 +94,17 @@ def run_checks(md_path: Path, required_sections: List[str]) -> CheckResult:
                 })
 
     notes = []
-    if "quality of earnings" in headings_lc and not has_table_near_keyword(text, "quality of earnings"):
-        notes.append("QoE section detected but no markdown table found near it (check for missing bridge exhibit).")
+    qoe_keywords = [
+        "qoe and earnings adjustments",
+        "quality of earnings and adjustments",
+        "quality of earnings",
+    ]
+    if any(k in headings_lc for k in qoe_keywords):
+        if not any(has_table_near_keyword(text, k) for k in qoe_keywords):
+            notes.append("QoE section detected but no markdown table found near it (check for missing bridge exhibit).")
+
+    if "executive summary" in headings_lc and "open items that could move conclusions" not in text.lower():
+        notes.append("Executive summary detected without an 'Open items that could move conclusions' block.")
 
     # Placeholders are allowed by default in this skill workflow.
     # They become actionable notes unless strict mode is requested by caller.

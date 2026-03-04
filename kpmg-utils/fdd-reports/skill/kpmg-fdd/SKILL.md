@@ -1,6 +1,6 @@
 ---
 name: kpmg-fdd
-description: Write and revise financial due diligence (FDD) reports and Quality of Earnings (QoE) narratives. Use when the user asks for an "FDD report", "QoE report", "financial due diligence report", "earnings adjustments", "working capital analysis", "net debt / debt-like review", "capex normalization", "tax diligence", or wants to turn diligence notes/data room findings into a client-ready report. Not for generating .pptx slide decks (use kpmg-slides).
+description: Write and revise financial due diligence (FDD) reports and Quality of Earnings (QoE) narratives. Use when the user asks for an "FDD report", "executive summary", "business overview", "historical financial performance", "QoE report", "earnings adjustments", "working capital analysis", "net debt / debt-like review", "quality of net assets", "balance sheet deep-dive", "reporting environment (accounting policy)", or wants to turn diligence notes/data room findings into a client-ready report. Not for generating .pptx slide decks (use kpmg-slides).
 ---
 
 # KPMG FDD Report Writer
@@ -21,13 +21,13 @@ Use the reference index for deep guidance: [references/INDEX.md](references/INDE
 Pick the first matching mode and follow its workflow:
 
 1. **qc_only** if the user provides a draft report (Markdown or doc text) or asks to "QC/review/check" a report  
-   → Use [references/qc-checklist.md](references/qc-checklist.md) and (optionally) run scripts in `scripts/`.
+   → Use [references/global-writing-conventions.md](references/global-writing-conventions.md) and relevant section contracts from [references/INDEX.md](references/INDEX.md); optionally run scripts in `scripts/`.
 
 2. **section_rewrite** if the user says "update", "revise", "tighten", "rewrite", "incorporate feedback" on an existing section  
    → Use the same structure as the existing draft; change only what’s requested; preserve numbering/headings.
 
 3. **section_only** if the user asks for one or more sections only  
-   → Draft only the requested sections and use canonical naming from [references/report-structure.md](references/report-structure.md).
+   → Draft only the requested sections and use canonical section names from [references/INDEX.md](references/INDEX.md).
 
 4. **exhibit_only** if the user asks for a single table/bridge/exhibit narrative only  
    → If they ask for an actual PowerPoint slide, route to `kpmg-slides`.
@@ -46,25 +46,25 @@ Use this workflow for `full_report`. For other intents above, execute the target
 
 - Which request intent is needed (`full_report`, `section_only`, `section_rewrite`, `qc_only`, `exhibit_only`).
 - Which report sections need to be written.
-- What workstreams are relevant: QoE, Working Capital, Net Debt (default)
+- What workstreams are relevant: Executive summary, Business overview, Historical / financial performance, QoE, Net working capital, Net debt and debt-like (default core set), plus Quality of net assets, Balance sheet, and Reporting environment when in scope.
 
 ### Step 2: Produce an outline before drafting
 
 Create a concise 3-7 bullet point outline that covers:
 
 - Target company, deal context, period(s) covered.
-- Sections to include (use the canonical structure in [references/report-structure.md](references/report-structure.md)).
+- Sections to include (use canonical section names in [references/INDEX.md](references/INDEX.md)).
 - For each major section: the **key question**, expected **evidence**, and likely **exhibits** (table/chart).
 
 Stop after the outline unless the user says “go ahead” or “skip the outline”.
 
-### Step 3: Draft the report using section templates
+### Step 3: Draft the report using section contracts
 
-Draft each section using the templates and writing standards:
+Draft each section using section contracts and global conventions:
 
-- Writing and defensibility standards: [references/writing-standards.md](references/writing-standards.md)
-- Section templates: [references/section-templates/](references/section-templates/)
-- Exhibits and table formatting: [references/exhibits-and-tables.md](references/exhibits-and-tables.md)
+- Writing and defensibility standards: [references/global-writing-conventions.md](references/global-writing-conventions.md)
+- Section contracts (module guidance): [references/INDEX.md](references/INDEX.md)
+- Exhibit structures and formatting expectations are defined inside each section contract.
 
 CRITICAL:
 
@@ -80,12 +80,12 @@ Apply QC across:
 - **Balanced tone** (risks not minimized; uncertainties labeled).
 - **Open items** clearly listed with impact.
 
-Use: [references/qc-checklist.md](references/qc-checklist.md)
+Use: [references/global-writing-conventions.md](references/global-writing-conventions.md) plus the applicable section contract from [references/INDEX.md](references/INDEX.md).
 
 Optional scripts:
 
-- `python scripts/check_report_structure.py --in report.md`
-- `python scripts/extract_numbers.py --in report.md --out numbers.json`
+- `python3 scripts/check_report_structure.py --in report.md`
+- `python3 scripts/extract_numbers.py --in report.md --out numbers.json`
 
 ### Step 5: Finalize output format
 

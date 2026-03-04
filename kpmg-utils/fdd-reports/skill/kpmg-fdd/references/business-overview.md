@@ -3,10 +3,8 @@
 ## Table of contents
 - Core rule
 - Writing guidance
-- Layout options (choose one)
-- Available slot shapes (tool library)
-- Layout-to-slot recipes
-- Industry adaptation examples
+- Layout
+- Available slot shapes
 - Render skeleton
 - Common mistakes (and fixes)
 - Structural preflight rules (must pass)
@@ -28,14 +26,14 @@ Global writing, placeholder, and language rules are defined in `references/globa
 3. Use concrete business mechanics before interpretation.
 4. Link recent changes to likely direction of revenue, margin, or volatility impact.
 5. Keep this section business-driver focused; avoid full financial performance narrative.
+6. Keep bullets as complete, client-ready sentences; avoid clipped fragments and generic marketing language.
 
-## Layout options (choose one)
+## Layout
 
-### `baseline`
-Use when the business has a relatively simple model and one dominant operating pattern.
+Scale the depth of the section based on the complexity of business model, route-to-market, and operating dependencies.
 
 Target length:
-- 260-420 words
+- 260-560 words
 
 Required blocks:
 - `Business model`
@@ -43,31 +41,22 @@ Required blocks:
 - `Operating model`
 - `Recent changes and context for financial trends`
 
-### `diversified`
-Use when the business spans multiple entities, segments, product lines, or service lines.
+Scaling rules:
+- Keep concise for straightforward single-model businesses with one dominant channel and limited structural change.
+- Expand `Business model` with segment or entity composition where earnings are driven by multiple lines of business.
+- Expand `Customers and go-to-market` where channel mix, pricing mechanics, or contract terms are core margin drivers.
+- Expand `Operating model` where shared services, management overlap, or allocation mechanics affect earnings quality.
+- Expand `Recent changes and context for financial trends` when organization, channel, or product changes materially affect forward profile.
 
-Target length:
-- 320-560 words
+Block slot map:
+- `Business model`: 1 `snapshot_bullet` + 2 `driver_bullet` + optional 1-2 `composition_bullet`
+- `Customers and go-to-market`: 1 `snapshot_bullet` + 2 `driver_bullet` + optional 1-2 `composition_bullet`
+- `Operating model`: 1 `snapshot_bullet` + 2 `dependency_bullet` + optional 1 `composition_bullet`
+- `Recent changes and context for financial trends`: 2-4 `change_bullet`
 
-Required blocks:
-- same as `baseline`
-- include segment/entity composition in `Business model`
-- include shared dependency/coordination detail in `Operating model`
+## Available slot shapes
 
-### `commercial_complexity`
-Use when route-to-market, pricing, contract mechanics, or channel composition is a key driver of outcomes.
-
-Target length:
-- 300-520 words
-
-Required blocks:
-- same as `baseline`
-- add commercial composition detail in `Customers and go-to-market`
-- add pricing/contract mechanic detail where relevant
-
-## Available slot shapes (tool library)
-
-Use these as building blocks. Choose only what the selected layout needs.
+Use these as building blocks. Choose only what the section needs.
 
 ### `snapshot_bullet`
 - Purpose: define what the company does and where it operates.
@@ -105,72 +94,36 @@ Use these as building blocks. Choose only what the selected layout needs.
 - Target length: 8-25 words.
 - Placeholders: allowed.
 
-## Layout-to-slot recipes
-
-### `baseline` recipe
-- `Business model`: 1 `snapshot_bullet` + 2 `driver_bullet` + optional `composition_bullet`
-- `Customers and go-to-market`: 1 `snapshot_bullet` + 2 `driver_bullet` + optional `composition_bullet`
-- `Operating model`: 1 `snapshot_bullet` + 2 `dependency_bullet`
-- `Recent changes`: 2-3 `change_bullet`
-
-### `diversified` recipe
-- `Business model`: 1 `snapshot_bullet` + 2 `driver_bullet` + 1-2 `composition_bullet`
-- `Customers and go-to-market`: 1 `snapshot_bullet` + 2 `driver_bullet` + optional `composition_bullet`
-- `Operating model`: 1 `snapshot_bullet` + 2-3 `dependency_bullet`
-- `Recent changes`: 2-3 `change_bullet`
-
-### `commercial_complexity` recipe
-- `Business model`: 1 `snapshot_bullet` + 2 `driver_bullet`
-- `Customers and go-to-market`: 1 `snapshot_bullet` + 2 `composition_bullet` + 1-2 `driver_bullet`
-- `Operating model`: 1 `snapshot_bullet` + 2 `dependency_bullet`
-- `Recent changes`: 2-3 `change_bullet`
-
-## Industry adaptation examples
-
-These examples show how layout choice adapts by business reality, not by industry label.
-
-- Consumer retail brand:
-  - Likely layout: `commercial_complexity`
-  - Why: channel mix, acquisition cost, and pricing cadence can drive margin and cash conversion.
-
-- Healthcare services platform:
-  - Likely layout: `diversified`
-  - Why: multi-site operations, provider model, and payer/service mix often create segment and dependency complexity.
-
-- Industrial distributor:
-  - Likely layout: `baseline` or `commercial_complexity`
-  - Why: choose `baseline` when model is straightforward; use `commercial_complexity` when contract terms and customer concentration are core drivers.
-
 ## Render skeleton
 
 ```markdown
 ## Business overview
 
 ### Business model
-- [snapshot_bullet]
-- [driver_bullet]
-- [driver_bullet]
-- [composition_bullet optional]
+- [Company] operates [business model] across [geography], with revenue generated through [primary products/services].
+- [Entity/segment] contributes approximately [x]% of revenue and is driven by [volume/pricing/utilization] mechanics.
+- Gross margin performance is primarily influenced by [input cost / labor mix / channel mix], with [key factor] acting as the main variability driver.
+- [Optional] Revenue is split across [segment A/B/C] at [x]% / [x]% / [x]%, which affects margin profile and seasonality.
 - Source note: [source_note optional]
 
 ### Customers and go-to-market
-- [snapshot_bullet]
-- [driver_bullet]
-- [composition_bullet optional]
-- [driver_bullet]
+- [Company] serves primarily [customer type] through [direct sales / channel partners / contracts] across [key markets].
+- Revenue concentration is [low/moderate/high], with the top [x] customers accounting for approximately [x]% of sales in [period].
+- Commercial outcomes are most sensitive to [pricing renewal / retention / acquisition cost / throughput], which drives short-term margin movement.
+- [Optional] Channel mix is currently [direct/indirect/online] at [x]% / [x]% / [x]%, with [channel] carrying comparatively [higher/lower] gross margin.
 - Source note: [source_note optional]
 
 ### Operating model
-- [snapshot_bullet]
-- [dependency_bullet]
-- [dependency_bullet]
-- [composition_bullet optional]
+- The business operates through [single entity / multi-entity] structure with [centralized/decentralized] support for finance, HR, procurement, and IT.
+- Shared services and management overlap across [entities/sites] affect cost allocations and standalone comparability of reported margins.
+- Key operating dependencies include [supplier concentration / workforce model / platform dependency], each of which can influence earnings quality and volatility.
+- [Optional] As at [Date], approximately [x] FTEs support more than one business unit, with associated payroll and overhead allocations under [current methodology].
 - Source note: [source_note optional]
 
 ### Recent changes and context for financial trends
-- [change_bullet]
-- [change_bullet]
-- [change_bullet optional]
+- During [period], the business [expanded/restructured/divested] [specific activity], which increased exposure to [new driver] and reduced reliance on [old driver].
+- Management implemented [pricing/go-to-market/operational] changes in [period], with early impact visible in [revenue growth / gross margin / cost base].
+- [Optional] The current structure does not fully align to a standalone post-transaction model, and margin comparability may change after transitional arrangements are normalized.
 - Source note: [source_note optional]
 ```
 
@@ -197,7 +150,8 @@ These examples show how layout choice adapts by business reality, not by industr
 2. No `Open items` or `Data requests` headings appear.
 3. Missing data uses inline placeholders.
 4. Bullet density is within contract range.
-5. Language and tone pass global conventions.
+5. Render skeleton and full example are materially different (template vs worked output).
+6. Language and tone pass global conventions.
 
 ## Split policy rules
 
@@ -212,26 +166,25 @@ These examples show how layout choice adapts by business reality, not by industr
 ## Business overview
 
 ### Business model
-- [GROUP FULL NAME] operates a multi-entity food and beverage platform anchored by branded coffee retail, coffee-product manufacturing, and bakery production.
-- [ENTITY 2] runs the branded coffee shop network through owned, franchise, and co-investment store models across [x] locations nationwide as of [Date].
-- [ENTITY 1] manufactures coffee beans and beverage products and distributes related equipment, supporting both internal demand and third-party customers.
-- [ENTITY 3] produces bakery products under house and OEM labels, with product development services that support both internal stores and external accounts.
-- At a group level, earnings are influenced by same-store sales, franchise royalty mix, and manufacturing utilization across coffee and bakery production lines.
+- Aurora Coffee Group operates an integrated food and beverage platform in Thailand, with revenue generated through branded retail coffee stores, packaged coffee manufacturing, and bakery production.
+- Retail operations represent approximately 58% of group revenue and are primarily driven by same-store traffic, average ticket, and store-level labor efficiency.
+- Manufacturing and bakery segments account for the remaining 42% of revenue and are driven by utilization of production lines, product mix, and commodity input costs.
+- In FY2024, retail generated 58% of revenue, coffee manufacturing generated 24%, and bakery generated 18%; manufacturing carried the highest gross margin profile.
 
 ### Customers and go-to-market
-- The retail channel serves daily-consumption customers through physical stores, while B2B revenue is generated through catering, franchise support, and product supply relationships.
-- Go-to-market execution combines owned-store traffic generation with partner-led expansion in franchise and co-investment formats.
-- Revenue mix is currently weighted toward [retail/franchise/manufacturing], with mix percentages pending confirmation at [x]% / [x]% / [x]%.
-- Commercial performance is sensitive to ticket size, store throughput, and channel mix between direct store sales and contract-based supply arrangements.
+- Urban consumers purchase through a 146-store network, while franchise support, café supply contracts, and catering generate B2B revenue.
+- The top ten B2B customers represented 19% of non-retail revenue in FY2024, indicating moderate concentration in contract-based channels.
+- Commercial performance is most sensitive to product mix and pricing cadence in retail, as well as contract renewal terms in manufacturing supply agreements.
+- In FY2024, direct retail sales represented 63% of channel mix, franchise and supply contracts represented 22%, and catering and events represented 15%; direct retail carried lower margin volatility.
 
 ### Operating model
-- The group operates through separate legal entities with overlapping functional support, including finance, back-office administration, and certain management functions.
-- Management responsibilities across entities are partly centralized within the founding shareholder family structure, which affects how labor and overhead are allocated between operating units.
-- Certain shared services were historically provided without intercompany recharges, which may reduce comparability of standalone entity cost bases.
-- As of [Date], shared functions included approximately [x] FTEs supporting more than one entity, with payroll costs split across [ENTITY 1], [ENTITY 2], and [ENTITY 3].
+- The group operates through three legal entities with centralized finance, procurement, and HR functions managed at holdco level.
+- Shared management responsibilities across entities affect allocation of payroll and overhead, reducing comparability of historical standalone margins by legal entity.
+- A small number of coffee bean and dairy suppliers concentrates procurement dependency and can move gross margin when commodity prices change.
+- As at December 31, 2024, 34 FTEs supported multiple entities, with allocated payroll costs recorded across retail, manufacturing, and bakery entities using management allocation keys.
 
 ### Recent changes and context for financial trends
-- During [FY20XX]-[FY20XX], the business expanded from core coffee retail into adjacent bakery and catering lines, increasing revenue diversification but also adding coordination complexity across entities.
-- Management has indicated that current organizational design does not fully reflect a post-transaction standalone operating model, particularly for shared functions and intercompany service charging.
-- A post-transaction realignment of structure and service-charge mechanics could shift reported margins by entity, even where group-level economics remain directionally consistent.
+- Between FY2022 and FY2024, the group expanded into bakery and contract catering, increasing revenue diversification but also adding operational coordination complexity.
+- In Q3 FY2024, management repriced selected beverage SKUs and renegotiated two key supply contracts, which supported gross margin expansion in H2 FY2024.
+- Management indicated that current intercompany support and service-charge arrangements would require redesign for a standalone post-transaction model, which could shift entity-level margins despite stable group economics.
 ```
