@@ -91,7 +91,8 @@ When in doubt, treat `references/slide-contract.md`, `references/deckspec.schema
 #### Pagination-aware guardrails (must apply while writing)
 
 - Pagination estimates line usage and chunks bullets to avoid overlap.
-- Keep slide copy within canonical layout contracts in `templates/kpmg-diligence/package/layouts.json`; do not rely on fallback geometry assumptions.
+- Pagination uses canonical template geometry contracts from `templates/kpmg-diligence/package/layouts.json`; runtime does not use hardcoded fallback text boxes.
+- If required geometry is missing for a layout, generation fails fast; keep copy concise and prefer intentional split slides for dense content.
 - `analysisBridge` supports dynamic `analysisColumns` (1-4 phases); keep per-phase copy concise to avoid pagination splits.
 - `businessOverview` paginates `overviewBody`; keep right-side bullets concise when chart is present.
 - `analysisNarrowTable` pagination can warn on dense rows and orphan-row splits.
@@ -126,7 +127,7 @@ Use these as generation targets above template minima.
 - `md`: 4-5 bullets, about 14-18 words, 1-2 series chart where comparison is needed.
 - `lg`: 5-6 bullets, about 14-20 words, include explicit "so what" bullet.
 - `xl`: 6-7 bullets, about 16-22 words, include assumptions/source.
-- Guardrail: avoid pushing beyond 7 bullets; body wraps quickly in constrained body areas.
+- Guardrail: avoid pushing beyond 7 bullets; body wraps quickly in fallback geometry.
 
 `analysisWideChartTableText`
 
@@ -266,6 +267,7 @@ Create `<name>.deckSpec.json` in three passes:
 2. Fill: populate only supported slots, keep one-message-per-slide, and use evidence-first layouts (chart/table/bridge) for numeric claims.
 3. Self-check: required slots only, no unsupported slots, valid `bodyStyle`, aligned numeric chart arrays, and full alignment to outline + verbosity contract.
    - Keep runtime-managed fields (`contents.sections[].pageRange`) out of authored content unless explicitly required.
+   - Do not author runtime-reserved slide keys (`masterName`, `geometry`, `assets`).
 
 ## Step 5: Generate `.pptx`
 

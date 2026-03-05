@@ -287,6 +287,7 @@ Each column is typically:
    - `businessOverview`: continuation pages drop `chart`.
 3. `contents.sections[].pageRange` is runtime-managed metadata when pagination recomputes page ranges. Leave it unset in authored `deckSpec` unless you have a specific manual override requirement.
 4. `metadata.splitPolicy` in `deckspec.schema.json` is advisory for authoring workflow only. Current runtime does not enforce split modes from this field.
+5. Do not author runtime-reserved slide keys (`masterName`, `geometry`, `assets`); render context resolves these at runtime.
 
 ## Layout Selection Guardrails (Prevent Bad Fits)
 

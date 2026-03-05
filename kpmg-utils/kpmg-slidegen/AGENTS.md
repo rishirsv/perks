@@ -42,5 +42,6 @@ node generator/index.js \
 - Sync skill bundle with `npm run skill:sync`.
 - Verify portability with `npm run skill:verify`.
 - Skill distributable lives under `skills/kpmg-slides/` and must remain self-contained for generation + postprocess checks.
+- Keep documentation inside `skills/kpmg-slides/` portable for standalone skill users; do not include repo-root maintenance commands (for example `npm run skill:sync` or `npm run skill:verify`) in skill-facing docs.
 - Keep skill references aligned to `slide-contract.md`, `writing-guide.md`, `starter-template-guide.md`, `qa-rules.md`, and `output-examples.md`.
 - QA communication in skill responses should prioritize blocking issues, then one sentence for non-blocking observations.
