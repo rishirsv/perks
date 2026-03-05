@@ -1,49 +1,69 @@
-# KPMG Slide Generator
+# KPMG SlideGen
 
-Runtime-focused generator that converts a typed `deckSpec` JSON into:
-- a branded `.pptx`
-- a consolidated QA `.json`
-- optional visual postprocess artifacts (preview PNGs, montage PNG, visual overflow diagnostics)
+Template-driven generator that converts `deckSpec` JSON inputs into:
+- a branded PowerPoint deck (`.pptx`)
+- a consolidated QA report (`.json`)
+- optional visual artifacts (preview PNGs, montage PNG, visual overflow diagnostics)
 
-## Naming
+## What This Repo Owns
 
-- **KPMG SlideGen** is the engine/repo (this codebase).
-- **KPMG Slides** is the first distributable skill, located at `skills/kpmg-slides/`.
+- Runtime generation pipeline in `generator/`
+- Template contracts in `templates/kpmg-diligence/package/`
+- Skill bundle packaging and portability checks in `skills/kpmg-slides/`
 
-This file is the operational guide. Architecture source-of-truth is `ARCHITECTURE.md`.
+## Contributor Guardrails
 
-## 1) Quick Start
+- Edit generation logic only in `generator/`.
+- Keep template contracts in `templates/kpmg-diligence/package/`.
+- Treat `decks/` as input fixtures (not schema source).
+- Keep runtime minimal; avoid unnecessary frameworks.
+- Keep docs and code aligned when changing slide types, slot rules, or QA shape.
+- Validate with explicit CLI paths (`--in`, `--out`, `--qa-out`).
+- Do not add backward-compatibility fallback paths unless explicitly requested.
 
-## Default generation
+## Prerequisites
+
+- Node.js 18+
+- npm
+
+For strict visual overflow and postprocess flows:
+- Python 3 (`python3` or `PYTHON_BIN`)
+- LibreOffice (`soffice`)
+- Poppler tools (`pdfinfo`, `pdftoppm`)
+- Python packages: `pdf2image`, `Pillow`, `python-pptx`, `numpy`
+
+## Install
 
 ```bash
-npm run generate
+npm install
 ```
 
-Equivalent direct command:
+## Quick Start
+
+Preferred baseline command (explicit input/output paths):
 
 ```bash
 node generator/index.js \
-  --in decks/deckspec-starter-template.deckSpec.json \
+  --in decks/scenario02-saas-mid-diligence.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json
 ```
 
-## Strict generation
+Strict mode (fail-closed overflow gate):
 
 ```bash
 node generator/index.js \
-  --in decks/deckspec-starter-template.deckSpec.json \
+  --in decks/scenario02-saas-mid-diligence.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json \
   --strict
 ```
 
-## Visual postprocess generation
+With visual postprocess artifacts:
 
 ```bash
 node generator/index.js \
-  --in decks/deckspec-starter-template.deckSpec.json \
+  --in decks/scenario02-saas-mid-diligence.deckSpec.json \
   --out outputs/my-run/deck.pptx \
   --qa-out outputs/my-run/qa.json \
   --with-preview \
@@ -51,306 +71,84 @@ node generator/index.js \
   --with-visual-overflow
 ```
 
-## Comprehensive stress deck
+## CLI Reference
 
 ```bash
-node generator/index.js \
-  --in decks/qa-golden-all-layouts.deckSpec.json \
-  --out outputs/stress/deck.pptx \
-  --qa-out outputs/stress/qa.json
+node generator/index.js --in <deck.json> --out <out.pptx> \
+  [--qa-out <out.qa.json>] \
+  [--allow-sparse] \
+  [--strict] \
+  [--skip-overlap] \
+  [--template <name>] \
+  [--with-preview] \
+  [--with-montage] \
+  [--with-visual-overflow] \
+  [--preview-width <px>] \
+  [--preview-height <px>] \
+  [--preview-dir <path>] \
+  [--montage-out <path>] \
+  [--montage-cols <n>] \
+  [--montage-label-mode <number|filename|none>] \
+  [--visual-overflow-pad-px <px>]
 ```
 
-## 2) What Changed in the Current Architecture
+## Common Workflows
 
-- Strict overflow now uses one adapter-backed visual path. The legacy local script fallback was removed.
-- CLI/postprocess/strict logic was split into focused modules under `generator/app/`.
-- Render flow supports passing a precomputed validation result to avoid duplicate full validation passes.
-- Cover and back-cover rendering now require template assets explicitly and fail with clear errors when missing.
-- Builder harness entrypoints were removed from production builder files and replaced with `scripts/dev/*`.
-- A comprehensive stress deck fixture and visual validation script were added.
-- Text-slide title limits are now hard-enforced (`maxChars`) to prevent title wrapping/shrinking.
-- Text slides support `bodyStyle` (`bullets` or `paragraphs`) and inline body subheaders via body text objects.
-- Subheader visual treatment is standardized to KPMG blue, bold Arial, size 10.
+- `npm run smoke`: fast end-to-end generation smoke test.
+- `npm run qa`: contract + registry + smoke + strict drift checks.
+- `npm run test:contracts`: layout contract coverage.
+- `npm run test:contracts:registry`: registry/policy/template parity checks.
+- `npm run test:qa:golden`: QA golden snapshot regression.
+- `UPDATE_GOLDEN=1 npm run test:qa:golden`: refresh QA golden snapshot intentionally.
+- `npm run test:postprocess`: postprocess success/failure/unavailable matrix.
+- `npm run test:strict:overflow-fail-closed`: strict overflow fail-closed behavior.
+- `npm run test:visual:all`: visual regression suites.
+- `npm run validate:visual`: visual runtime dependency preflight.
+- `npm run skill:sync && npm run skill:verify`: skill bundle sync + portability verification.
 
-## 3) Repository Structure
+## Output Artifacts
 
-```text
-kpmg-slidegen/
-├── README.md
-├── ARCHITECTURE.md
-├── TODOS.md
-├── package.json
-├── decks/
-│   ├── deckspec-starter-template.deckSpec.json
-│   ├── layout-flex-one-per-layout.deckSpec.json
-│   ├── qa-golden-all-layouts.deckSpec.json
-│   ├── validation-failing-example.deckSpec.json
-│   └── nvidia.deckSpec.json
-├── outputs/
-│   └── qa-golden-fixture/
-│       ├── deck.pptx
-│       ├── qa.json
-│       └── golden-all-layouts.qa.json
-├── docs/
-│   ├── DECKSPEC-SCHEMA.md
-│   ├── DECKSPEC-SLOTS-SCHEMA.json
-│   ├── DECK-AUTHORING-PLAYBOOK.md
-│   ├── QA-GOLDEN-FIXTURE.md
-│   └── refactor-implementation-plan.md
-├── generator/
-│   ├── index.js
-│   ├── app/
-│   │   ├── cli.js
-│   │   ├── postprocess.js
-│   │   └── strict-overflow.js
-│   ├── builders/
-│   ├── helpers/
-│   ├── postprocess/
-│   │   ├── slides-adapter.js
-│   │   └── slides-runtime/
-│   │       ├── render_slides.py
-│   │       ├── create_montage.py
-│   │       ├── slides_test.py
-│   │       └── ensure_raster_image.py
-│   ├── runtime/
-│   └── strict/
-├── scripts/
-│   ├── smoke-generate.mjs
-│   ├── sync-skill-bundle.mjs
-│   ├── test-qa-golden.mjs
-│   ├── test-validation-failure.mjs
-│   ├── test-postprocess-flows.mjs
-│   ├── validate-visual.mjs
-│   ├── verify-skill-bundle.mjs
-│   └── dev/
-│       ├── render-cover-sample.mjs
-│       └── render-analysis-narrow-sample.mjs
-└── templates/
-    └── kpmg-diligence/
-        ├── assets/
-        └── package/
-            ├── layouts.json
-            ├── tokens.json
-            └── assets/manifest.json
-```
-
-## 4) Runtime Pipeline
-
-```mermaid
-flowchart LR
-  IN[deckSpec JSON] --> CLI[generator/index.js]
-  CLI --> PARSE[app/cli.js]
-  CLI --> VAL[validateDeckSpecWithTemplate]
-  VAL --> REN[renderDeck]
-  REN --> PAG[paginateDeckSpec]
-  PAG --> BLD[builders/*]
-  BLD --> PPTX[Pptx writeFile]
-  CLI --> OVL[strict/overlap.js]
-  CLI --> PP[app/postprocess + slides-adapter]
-  PP --> QAEXT[postprocess block]
-  OVL --> QA[qa.json]
-  QAEXT --> QA
-  PPTX --> OUT[deck.pptx]
-```
-
-## Strict behavior
-
-- `--strict` uses visual overflow status as the strict overflow signal.
-- If visual overflow cannot run, strict overflow is marked `skipped` with explicit reason in QA.
-- Overlap severe findings also contribute to strict failure.
-- No dependency on `qa/strict_overflow.py`.
-
-## 5) Core Modules
-
-- `generator/index.js`
-  - Main orchestration for validation, render, overlap QA, optional postprocess, and final QA report writing.
-- `generator/app/cli.js`
-  - CLI parsing and validation of flags.
-- `generator/app/postprocess.js`
-  - Postprocess option normalization, execution pipeline, summary counters.
-- `generator/app/strict-overflow.js`
-  - Strict status mapping from visual overflow results.
-- `generator/runtime/render-deck.js`
-  - Rendering pipeline, pagination, master application, per-slide dispatch.
-- `generator/postprocess/slides-adapter.js`
-  - Adapter to embedded slides scripts for preview/montage/visual overflow.
-
-## 6) Supported Slide Types
-
-Dispatch happens in `generator/runtime/render-deck.js`.
-
-- `cover` -> `addCover`
-- `divider`, `dividerDark`, `dividerLight` -> `addDivider`
-- `contents` -> `addContentsSlide`
-- `twoColumnText` -> `addTwoColumnTextWithStrapline`
-- `oneColumnText` -> `addOneColumnText`
-- `analysisNarrowTable` -> `addAnalysisNarrowTable`
-- `analysisWideChart2ColsText` -> `addAnalysisWideChart2ColsText`
-- `analysisWideChartTableText` -> `addAnalysisWideChartTableText`
-- `analysisBridge` -> `addAnalysisBridge`
-- `businessOverview` -> `addBusinessOverview`
-- `titleStrapline4TextBoxes` -> `addTitleStrapline4TextBoxes`
-- `backCover` -> `addBackCover`
-
-## 7) Validation and QA Output
-
-Validation sources:
-- Slot contracts and density rules from `templates/kpmg-diligence/package/layouts.json`
-- Overlap analysis from `generator/strict/overlap.js`
-- Optional visual diagnostics from postprocess adapter
+Main outputs per run:
+- `<out>.pptx`
+- `<qa-out>.json` (or `<out>.qa.json` if `--qa-out` is omitted)
 
 QA report includes:
-- `summary`
-- `errors`, `warnings`
-- `missingSlots`, `slotIssues`, `slotMetrics`
-- `densityFindings`, `densitySummary`
+- `summary` and issue counters
+- `errors`, `warnings`, `missingSlots`, `slotIssues`, `slotMetrics`
+- `densityFindings`, `thinSlides`, `sparseSlides`
 - `pagination`, `overflowEvents`, `overflowRisks`
 - `overlapSummary`, `overlapFindings`
 - `strictOverflow`
 - optional `postprocess` and `summary.postprocess`
 
-## 8) Commands
+Optional postprocess artifacts:
+- `preview/slide-<n>.png`
+- `montage.png`
+- overflow diagnostic image paths in QA
 
-## Primary scripts
+## Troubleshooting
 
-```bash
-npm run generate
-npm run generate:layouts
-npm run qa
-```
+- `npm run generate` or `npm run generate:layouts` fails with missing deck file:
+  - Those scripts currently point at fixtures not present in `decks/`; use explicit CLI commands above.
+- `Usage: node generator/index.js --in ... --out ...`:
+  - `--in` and `--out` are required.
+- `Unknown type: <type>`:
+  - Type must exist in both `templates/kpmg-diligence/package/layouts.json` and `generator/runtime/slide-registry.js`.
+- `Missing required template package file: ...`:
+  - Ensure `tokens.json`, `layouts.json`, `pagination-policy.json`, and `assets/manifest.json` exist.
+- `Missing required footer metadata for non-demo render`:
+  - Provide `metadata.footer.year`, `legalEntityName`, `jurisdiction`, and `legalStructure`.
+- Strict mode fails with `visual_overflow_*` reason:
+  - Strict is fail-closed; ensure Python + rasterization dependencies are available.
 
-`npm run generate` always produces a QA report (`--qa-out`) and is the default day-to-day command.
+## Documentation Map
 
-## On-demand validation scripts
-
-Run these only when explicitly needed:
-
-```bash
-npm run test:contracts
-npm run test:qa:golden
-npm run test:validation:failure
-npm run smoke
-npm run test:postprocess
-npm run test:drift:theme:strict
-npm run test:drift:grep:strict
-npm run test:visual:analysis-bridge
-npm run test:visual:business-overview
-npm run test:visual:theme-e2e
-npm run test:visual:all
-npm run validate:visual
-npm run skill:sync
-npm run skill:verify
-```
-
-Golden QA fixture refresh:
-
-```bash
-UPDATE_GOLDEN=1 npm run test:qa:golden
-```
-
-Skill bundle sync and verification:
-
-```bash
-npm run skill:sync
-npm run skill:verify
-```
-
-`skill:sync` is authoritative for managed bundle content and prunes stale files in managed target directories.
-The skill distributable keeps only the smoke fixture under `skills/kpmg-slides/assets/fixtures/`.
-
-Theme visual baseline refresh (only after intentional visual/theme change):
-
-```bash
-npm run test:visual:theme-e2e -- --update-baseline
-```
-
-## Dev builder samples
-
-```bash
-npm run dev:cover
-npm run dev:analysis-narrow
-```
-
-## Postprocess flags
-
-- `--with-preview`
-- `--with-montage`
-- `--with-visual-overflow`
-- `--preview-width <px>` (default `1600`)
-- `--preview-height <px>` (default `900`)
-- `--preview-dir <path>` (default `<out-dir>/preview`)
-- `--montage-out <path>` (default `<out-dir>/montage.png`)
-- `--montage-cols <n>` (default `5`)
-- `--montage-label-mode <number|filename|none>` (default `number`)
-- `--visual-overflow-pad-px <px>` (default `100`)
-
-## 9) Visual Validation Workflow
-
-`node scripts/validate-visual.mjs` performs an integration-style check:
-- Generates `decks/qa-golden-all-layouts.deckSpec.json` into a temp folder.
-- Produces preview PNGs and montage via postprocess adapter.
-- Validates all preview slides exist, are non-empty, and have measurable dimensions.
-- Validates montage exists and is non-empty.
-- Validates overflow result structure and indices.
-
-`npm run test:visual:theme-e2e` is the theme-focused visual gate:
-- renders one representative slide for every registered type from `decks/regression-theme-e2e-all-types.deckSpec.json`
-- requires valid QA and no pagination splits in that fixture run
-- hashes each preview PNG and compares against `testing/visual-baselines/theme-e2e.hashes.json`
-- supports controlled baseline refresh via `--update-baseline`
-
-For deterministic new-layout onboarding against a reference PPTX slide, use:
-
-```bash
-npm run test:visual:reference-parity -- \
-  --reference-pptx /abs/path/reference.pptx \
-  --reference-slide 1 \
-  --candidate-deck decks/<candidate>.deckSpec.json
-```
-
-This gate only passes when candidate and reference slide PNGs have matching dimensions and identical SHA-256 hashes.
-
-## 9.1) Golden QA Contract Workflow
-
-`node scripts/test-qa-golden.mjs` verifies QA report contract shape against a checked-in golden fixture.
-- Uses dense all-layout input fixture: `decks/qa-golden-all-layouts.deckSpec.json`
-- Compares normalized runtime QA output against: `outputs/qa-golden-fixture/golden-all-layouts.qa.json`
-- Normalizes volatile fields (`generatedAt`, absolute paths, `outputPptx`, `postprocess`) to keep diffs stable.
-- Fails on unexpected QA schema or contract drift.
-
-Fixture review artifacts live in `outputs/qa-golden-fixture/`:
-- `deck.pptx` (visual review output)
-- `qa.json` (raw QA output from fixture generation)
-- `golden-all-layouts.qa.json` (normalized contract snapshot used by `test:qa:golden`)
-
-Prerequisites for visual checks:
-- Embedded slides runtime must be discoverable by adapter.
-- Python dependencies used by that runtime must be installed (for example `pdf2image`).
-- Poppler tools must be available (`pdfinfo`, `pdftoppm`).
-
-## 10) Troubleshooting
-
-`Unknown type: <type>`
-- Slide type not mapped in `generator/runtime/render-deck.js`.
-
-`Missing required template asset ...`
-- Required template asset key is absent from manifest or missing on disk.
-
-`Visual validation requires an available slides runtime`
-- Bundled runtime is expected at `generator/postprocess/slides-runtime`.
-- Set `SLIDES_SKILL_DIR` only if you want to override bundled runtime discovery.
-
-`No module named 'pdf2image'`
-- Install dependency into your Python runtime used by slides scripts.
-
-`Master mismatch detected`
-- Check master mapping logic and `templates/.../package/layouts.json` variant definitions.
-
-## 11) Related Docs
-
-- Architecture: `ARCHITECTURE.md`
-- DeckSpec schema guide: `docs/DECKSPEC-SCHEMA.md`
-- Machine-readable slot schema: `docs/DECKSPEC-SLOTS-SCHEMA.json`
-- Model authoring playbook: `docs/DECK-AUTHORING-PLAYBOOK.md`
-- Current implementation checklist: `docs/refactor-implementation-plan.md`
-- Deterministic layout onboarding workflow: `docs/workflows/deterministic-layout-onboarding.md`
+- `ARCHITECTURE.md`: runtime architecture and module boundaries.
+- `docs/project-specs/kpmg-slidegen-spec.md`: system-level specification.
+- `AGENTS.md`: working rules and repo scope.
+- `docs/workflows/add-layout-contract.md`: add/extend layout contract workflow.
+- `docs/workflows/deterministic-layout-onboarding.md`: deterministic layout onboarding.
+- `docs/workflows/golden-regression-fixture.md`: QA golden fixture workflow.
+- `testing/README.md`: data preparation helpers.
+- `testing/manual-test-plan.md`: manual verification plan.
+- `testing/data/SCENARIO_INPUTS.md`: scenario fixture map.
