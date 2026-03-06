@@ -11,7 +11,7 @@ const renderRun = await generateFixture('scenario-saas-mid-diligence', {
 });
 const qa = renderRun.qa;
 
-assert.equal(fs.existsSync(renderRun.outPath), true, 'Render lane should create deck.pptx.');
+assert.equal(fs.existsSync(renderRun.outPath), true, 'Render lane should create a deck file.');
 assert.equal(fs.existsSync(renderRun.qaPath), true, 'Render lane should create qa.json.');
 assert.equal(qa?.schemaVersion, 1, 'QA report should expose schemaVersion.');
 assert.ok(qa?.run, 'QA report should expose run metadata.');
@@ -60,9 +60,21 @@ assert.ok(
   'CLI should default outputs under caller cwd outputs/kpmg-slidegen.',
 );
 assert.equal(
+  path.basename(defaultCli.outPath),
+  'slidegen-gold-standard-regression-deck.pptx',
+  'CLI should derive the default deck filename from the deck topic.',
+);
+assert.equal(
   defaultCli.qaOutPath,
   path.join(path.dirname(defaultCli.outPath), 'qa.json'),
   'CLI should default qa.json beside the generated deck.',
+);
+
+const starterCli = parseCliOptions(['--in', 'presets/authoring/detailed.deckSpec.json']);
+assert.equal(
+  path.basename(starterCli.outPath),
+  'detailed.pptx',
+  'Starter presets should fall back to the input filename when titles are generic placeholders.',
 );
 
 const strictOptions = {

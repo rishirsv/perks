@@ -82,7 +82,6 @@ Completed on 2026-03-06:
 - `node scripts/test-structure.mjs`
 - `node scripts/test-render.mjs`
 - `node scripts/test-visual.mjs`
-- `node scripts/test-onboarding.mjs`
 - `node scripts/test-dist.mjs`
 - `node scripts/test-pr.mjs`
 - `node scripts/test-nightly.mjs`
@@ -147,10 +146,7 @@ This section is the verified baseline as of 2026-03-06.
   - `generate:layouts` points to a missing fixture in [package.json](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/package.json#L9)
 - Broken advertised validation test:
   - `test:validation:failure` depends on a missing deck in [package.json](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/package.json#L14) and [scripts/test-validation-failure.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/test-validation-failure.mjs#L9)
-- Layout scaffolding is still manual and non-portable:
-  - the scaffold emits only a console stub for visual validation in [scripts/new-layout.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/new-layout.mjs#L113)
-  - the scaffold references outdated schema/doc paths in [scripts/new-layout.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/new-layout.mjs#L136)
-  - the scaffold hardcodes a desktop output path in [scripts/new-layout.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/new-layout.mjs#L147)
+- Layout scaffolding is currently unsupported in the repo surface, so any future onboarding path must be reintroduced intentionally instead of relying on stale scaffolds.
 - README accuracy is mixed:
   - it documents missing workflow/spec files in [README.md](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/README.md#L146)
   - it acknowledges broken entrypoints instead of fixing them in [README.md](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/README.md#L131)
@@ -444,7 +440,7 @@ Anyone can see how quality is enforced, what evidence is produced, and how a lay
   - [ ] 5.6 Validation for 5.0: visual coverage grows sublinearly as layout count grows.
 
 - [ ] 6.0 Automate layout onboarding
-  - [ ] 6.1 Replace the current `new:layout` scaffold with a real onboarding harness.
+  - [ ] 6.1 Reintroduce layout onboarding only when the repo is ready to support a real harnessed path.
   - [ ] 6.2 Accept reference assets as first-class inputs: XML extraction, slide PNG, and metadata.
   - [ ] 6.3 Emit a candidate package with required tests, fixtures, and docs.
   - [ ] 6.4 Run bounded repair iterations with structured failure categories.

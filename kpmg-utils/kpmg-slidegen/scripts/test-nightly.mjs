@@ -6,7 +6,6 @@ const lanes = [
   'scripts/test-structure.mjs',
   'scripts/test-render.mjs',
   'scripts/test-visual.mjs',
-  'scripts/test-onboarding.mjs',
   'scripts/test-dist.mjs',
 ];
 

@@ -9,17 +9,21 @@ This skill produces KPMG-branded `.pptx` decks from a `deckSpec` JSON file and g
 
 This skill is a **general-purpose, consulting-grade slide writer** that generates a KPMG-branded PPTX via `deckSpec` and a QA fix loop.
 
+This skill does not support creating or scaffolding new slide layout types. Use only the existing slide types already defined in the bundled template and schema references.
+
 ## Dependencies
 
-- `npm install` - installs `pptxgenjs` and `image-size` used by the generator
-- `python3 -m pip install pdf2image Pillow numpy python-pptx` - preview, montage, and overflow runtime
+- `npm install` - installs `pptxgenjs` and `image-size` from the skill-local `package.json`
+- `python3 -m pip install -r requirements.txt` - installs preview, montage, and overflow runtime dependencies from the skill-local `requirements.txt`
 - LibreOffice (`soffice`) - PPTX to PDF conversion
 - Poppler (`pdftoppm`, `pdfinfo`) - PDF to images
 
 Install location:
 
-- Run `npm install` from the repo root (`kpmg-slidegen/`).
-- `python3 -m pip install pdf2image Pillow numpy python-pptx` can be run from any directory.
+- Run both install commands from the skill root.
+- The skill ships with its own `package.json` and `requirements.txt`; do not depend on any parent repo files or paths.
+- Keep authored `deckSpec` files and generated outputs in the user's working directory, not inside the skill bundle.
+- Treat the skill folder as runtime/tooling only; pass working-directory paths to the runner.
 
 ## Workflow Decision Tree
 
@@ -90,7 +94,7 @@ Start from the matching starter when possible:
 
 #### Non-negotiable validation guardrails
 
-When in doubt, treat `references/slide-contract.md`, `references/deckspec.schema.json`, and `templates/kpmg-diligence/package/layouts.json` as source of truth.
+When in doubt, treat `references/slide-contract.md`, `references/deckspec.schema.json`, and `assets/slidegen/templates/kpmg-diligence/package/layouts.json` as source of truth.
 
 - Do not exceed title hard limits. Titles are treated as hard limits in validation and most slide types cap title `maxChars` at 50; shorten or rewrite the title instead of formatting around the limit.
 - Omit optional slots instead of emitting empty strings. If a slot exists but is empty and `allowEmpty: false`, validation can warn or error
@@ -103,7 +107,7 @@ When in doubt, treat `references/slide-contract.md`, `references/deckspec.schema
 #### Pagination-aware guardrails (must apply while writing)
 
 - Pagination estimates line usage and chunks bullets to avoid overlap.
-- Pagination uses canonical template geometry contracts from `templates/kpmg-diligence/package/layouts.json`; runtime does not use hardcoded fallback text boxes.
+- Pagination uses canonical template geometry contracts from `assets/slidegen/templates/kpmg-diligence/package/layouts.json`; runtime does not use hardcoded fallback text boxes.
 - If required geometry is missing for a layout, generation fails fast; keep copy concise and prefer intentional split slides for dense content.
 - `analysisBridge` supports dynamic `analysisColumns` (1-4 phases); keep per-phase copy concise to avoid pagination splits.
 - `businessOverview` paginates `overviewBody`; keep right-side bullets concise when chart is present.
@@ -270,6 +274,7 @@ Planning questions checklist (ask only missing items):
 ## Step 4: Write content deckSpec
 
 Use `<name>.deckSpec.json` as the standard filename.
+Create and edit that file in the user's working directory, not in the skill folder.
 During draft and self-check, validate against `references/slide-contract.md` and `references/deckspec.schema.json`.
 Apply writing voice and language controls from `references/writing-standards.md`.
 
@@ -284,6 +289,7 @@ Create `<name>.deckSpec.json` in three passes:
 ## Step 5: Generate `.pptx`
 
 1. Run the generator on the current `<name>.deckSpec.json`.
+   - Pass the deckSpec path exactly as it exists in the user's working directory.
 2. Select QA mode (`full` default, `fast` for speed, `skip_subagent_visual` only if user explicitly requests it).
 3. Run QA loop from `references/quality_assurance.md` until pass criteria or loop cap for the selected mode.
 4. Deliver using the standard output contract.
@@ -363,16 +369,18 @@ Requirements: include slide-level changes, reasons tied to request/contract/QA, 
 
 ## Quick commands
 
-Run these from `kpmg-slides/`.
+Use two locations intentionally:
+- Install from the skill root.
+- Create the `deckSpec` and run generation from the user's working directory so relative `--in` and `--out-dir` paths stay local to the work product.
 
-- Copy starter:
-  `cp assets/templates/presets/detailed.deckSpec.json <name>.deckSpec.json`
-- Copy a specific verbosity tier:
-  `cp assets/templates/presets/minimal.deckSpec.json <name>.deckSpec.json`
-  `cp assets/templates/presets/concise.deckSpec.json <name>.deckSpec.json`
-  `cp assets/templates/presets/extensive.deckSpec.json <name>.deckSpec.json`
-- Generate:
-  `scripts/run_kpmg_slides.sh --in <name>.deckSpec.json --out-dir <out-dir>`
+- Copy a starter from the skill bundle into the working directory as `<name>.deckSpec.json`.
+- Preferred starter source files:
+  - `assets/templates/presets/minimal.deckSpec.json`
+  - `assets/templates/presets/concise.deckSpec.json`
+  - `assets/templates/presets/detailed.deckSpec.json`
+  - `assets/templates/presets/extensive.deckSpec.json`
+- Run the skill runner from the working directory and point to the local deckSpec:
+  `<path-to-skill>/scripts/run_kpmg_slides.sh --in <name>.deckSpec.json --out-dir <out-dir>`
 
 ## References
 

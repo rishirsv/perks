@@ -20,6 +20,7 @@ Template-driven generator that converts `deckSpec` JSON inputs into:
 - Keep docs and code aligned when changing slide types, slot rules, or QA shape.
 - Validate with explicit CLI paths when you need deterministic artifact locations.
 - Do not add backward-compatibility fallback paths unless explicitly requested.
+- New slide layout creation and onboarding scaffolds are currently unsupported; work only within the existing layout set.
 
 ## Prerequisites
 
@@ -51,7 +52,7 @@ Explicit fixture run:
 ```bash
 node generator/index.js \
   --in fixtures/harness/scenario/saas-mid-diligence/deckSpec.json \
-  --out outputs/my-run/deck.pptx \
+  --out outputs/my-run/partythrow-tech-mid-market-saas-diligence.pptx \
   --qa-out outputs/my-run/qa.json \
   --with-preview \
   --with-montage \
@@ -87,7 +88,7 @@ node generator/index.js --in <deck.json> [--out <out.pptx> | --out-dir <dir>] \
   [--visual-overflow-pad-px <px>]
 ```
 
-If `--out` is omitted, generation writes to `./outputs/kpmg-slidegen/<timestamp>/`.
+If `--out` is omitted, generation writes to `./outputs/kpmg-slidegen/<timestamp>/<topic>.pptx`, where `<topic>` is derived from the deck content. `qa.json` still lands beside the generated deck.
 
 ## Common Workflows
 
@@ -98,14 +99,13 @@ If `--out` is omitted, generation writes to `./outputs/kpmg-slidegen/<timestamp>
 - `npm run test:structure`: validation, pagination, continuation, and verbosity behavior.
 - `npm run test:render`: end-to-end generation plus normalized `qa.json` assertions.
 - `npm run test:visual`: preview, montage, and visual-overflow lane.
-- `npm run test:onboarding`: reference-parity onboarding scorecard lane.
 - `npm run test:dist`: skill bundle sync, portability, and smoke verification.
 - `npm run test:nightly`: full parent harness sweep.
 
 ## Output Artifacts
 
 Main outputs per run:
-- `<run-root>/deck.pptx`
+- `<run-root>/<topic>.pptx`
 - `<run-root>/qa.json`
 
 QA report includes:

@@ -7,7 +7,11 @@ Usage:
   run_kpmg_slides.sh --in <deckspec.json> [--out-dir <dir>]
 
 Defaults:
-  --out-dir outputs/kpmg-slidegen/<timestamp>
+  --out-dir outputs/kpmg-slidegen/<timestamp> under the caller's current directory
+
+Path handling:
+  Relative --in and --out-dir paths are resolved from the directory where you run this command,
+  not from the skill folder.
 
 This runner always enables visual postprocess:
   --with-preview --with-montage --with-visual-overflow
@@ -73,14 +77,27 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 
+if [[ ! -f "$SKILL_ROOT/package.json" ]]; then
+  echo "Skill package manifest not found: $SKILL_ROOT/package.json" >&2
+  echo "Reinstall or re-copy the standalone kpmg-slides skill bundle." >&2
+  exit 1
+fi
+
+if [[ ! -d "$SKILL_ROOT/node_modules/pptxgenjs" || ! -d "$SKILL_ROOT/node_modules/image-size" ]]; then
+  echo "Skill Node dependencies are not installed in: $SKILL_ROOT/node_modules" >&2
+  echo "Run from the skill root: npm install" >&2
+  exit 1
+fi
+
 if [[ ! -f "$GENERATOR_ENTRY" ]]; then
   echo "Bundled generator not found: $GENERATOR_ENTRY" >&2
-  echo "Run: npm run skill:sync" >&2
+  echo "The skill bundle is incomplete. Reinstall or re-copy the standalone kpmg-slides skill." >&2
   exit 1
 fi
 
 mkdir -p "$OUT_DIR"
-DECK_OUT="$OUT_DIR/deck.pptx"
+DECK_FILENAME="$(node --input-type=module -e "import fs from 'node:fs'; import { buildSuggestedDeckFilename } from './assets/slidegen/generator/app/output-naming.js'; const deckSpec = JSON.parse(fs.readFileSync(process.argv[1], 'utf8')); console.log(buildSuggestedDeckFilename(deckSpec, { inputPath: process.argv[1] }));" "$IN_PATH")"
+DECK_OUT="$OUT_DIR/$DECK_FILENAME"
 QA_OUT="$OUT_DIR/qa.json"
 PREVIEW_DIR="$OUT_DIR/preview"
 MONTAGE_OUT="$OUT_DIR/montage.png"

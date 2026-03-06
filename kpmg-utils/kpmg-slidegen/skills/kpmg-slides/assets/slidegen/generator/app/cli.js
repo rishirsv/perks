@@ -1,5 +1,7 @@
+import fs from 'node:fs';
 import path from 'node:path';
 
+import { buildSuggestedDeckFilename } from './output-naming.js';
 import { parsePositiveInt } from './postprocess.js';
 
 /**
@@ -45,15 +47,24 @@ export function parseCliOptions(argv = []) {
   const resolvedOutDir = outDirArg
     ? (path.isAbsolute(outDirArg) ? outDirArg : path.resolve(process.cwd(), outDirArg))
     : buildDefaultOutDir();
-  const outPath = args.get('out')
-    ? args.get('out')
-    : path.join(resolvedOutDir, 'deck.pptx');
 
   if (!inPath) {
     throw new Error(
       'Usage: node generator/index.js --in <deck.json> [--out <out.pptx> | --out-dir <dir>] [--qa-out <qa.json>] [--allow-sparse] [--strict] [--skip-overlap] [--template <name>] [--with-preview] [--with-montage] [--with-visual-overflow] [--preview-width <px>] [--preview-height <px>] [--montage-cols <n>] [--montage-label-mode <number|filename|none>] [--visual-overflow-pad-px <px>]',
     );
   }
+
+  const resolvedInPath = path.isAbsolute(inPath) ? inPath : path.resolve(process.cwd(), inPath);
+  const inferredDeckSpec =
+    !args.get('out') && fs.existsSync(resolvedInPath)
+      ? JSON.parse(fs.readFileSync(resolvedInPath, 'utf8'))
+      : {};
+  const outPath = args.get('out')
+    ? args.get('out')
+    : path.join(
+        resolvedOutDir,
+        buildSuggestedDeckFilename(inferredDeckSpec, { inputPath: resolvedInPath }),
+      );
 
   const montageLabelMode = String(args.get('montage-label-mode') || 'number');
   if (!['number', 'filename', 'none'].includes(montageLabelMode)) {

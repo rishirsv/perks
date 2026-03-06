@@ -55,16 +55,16 @@ Follow this sequence every time:
 
 ## Phase 1: Engine QA (Generator + qa.json)
 
-Run from `kpmg-slides/`.
+Run generation from the user's working directory so the deckSpec and outputs stay with the project files. The skill folder only provides the runner and bundled assets.
 
 Preferred command:
 
 ```bash
-scripts/run_kpmg_slides.sh --in <deckspec-path>.json --out-dir <out-dir>
+<path-to-skill>/scripts/run_kpmg_slides.sh --in <deckspec-path>.json --out-dir <out-dir>
 ```
 
 Expected artifacts:
-- `<out-dir>/deck.pptx`
+- `<out-dir>/<topic>.pptx`
 - `<out-dir>/qa.json`
 - `<out-dir>/preview/` (slide images)
 - `<out-dir>/montage.png`
@@ -185,7 +185,7 @@ For `full` and `fast` modes, do not declare success until at least one fix-and-v
 ## Converting to Images
 
 Engine-native path (preferred):
-- `run_kpmg_slides.sh` already generates preview images in `<out-dir>/preview/`.
+- `<path-to-skill>/scripts/run_kpmg_slides.sh` already generates preview images in `<out-dir>/preview/`.
 
 Manual conversion path:
 
