@@ -1,205 +1,448 @@
+---
+status: active
+last-reviewed: 2026-03-06
+review-cycle-days: 14
+source-of-truth: repo audit of kpmg-slidegen tests/docs/scripts plus OpenAI evaluation guidance
+verification-state: partially-verified
+---
+
 # Agent Harness Engineering Plan
+
+## Why This Plan Exists
+
+This plan is the operating model for turning `kpmg-slidegen` into a layout platform that can grow from the current 14 layout types to 40+ without quality collapse, heroics, or repeated manual cleanup.
+
+The immediate priority is testing. The harness must make it cheap to add a layout, cheap to tell whether it is good enough, and cheap to reject or retire weak fixtures, weak tests, and weak onboarding paths. Once the testing layer is disciplined, the rest of harness engineering can sit on top of it.
+
+## What Success Looks Like
+
+When this plan is complete, adding a new layout should feel like a guided production workflow instead of a custom debugging project:
+
+1. Capture reference XML and reference PNG once.
+2. Scaffold the layout with one canonical fixture family, not a one-off script pile.
+3. Run contracts, pagination, verbosity, and visual checks in one harness command.
+4. Get a machine-readable scorecard with exact reasons for failure.
+5. Let the harness drive bounded repair iterations until the layout clears the bar or is explicitly kicked to human review.
+6. Promote the layout into the baseline set only when its fixture pack, artifacts, and docs are complete.
+
+## Harness Principles
+
+These principles should govern every testing and harness decision in this repo:
+
+1. Evaluate the exact task we care about, not a proxy that is convenient to script.
+2. Prefer small, reliable, task-specific checks over one giant opaque suite.
+3. Log every run with artifacts so failures are explainable and reproducible.
+4. Separate blocking fast gates from slower confidence-building sweeps.
+5. Keep humans in calibration and approval loops, but automate the repetitive inspection work.
+6. Delete or demote tests that do not produce trusted signal.
+
+These principles align with OpenAI's public guidance on eval-driven development, practical agent workflows, and using structured evaluation loops instead of ad hoc manual judging. See [Evals design guide](https://platform.openai.com/docs/guides/evals-design), [Evaluating model performance](https://platform.openai.com/docs/guides/evals), and [A practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf).
+
+## Current Compliance Snapshot
+
+This section is the verified baseline as of 2026-03-06.
+
+### Strong Today
+
+- Fast contract coverage exists and passes:
+  - `npm run -s test:contracts`
+  - `npm run -s test:contracts:registry`
+- Smoke generation exists and passes:
+  - `npm run -s smoke`
+- The visual runtime preflight exists and passes:
+  - `npm run -s validate:visual`
+- QA golden coverage already checks:
+  - all current layout types
+  - all slots
+  - chart type coverage
+  - short and verbose narrative presence
+
+### Partial Today
+
+- Pagination regression coverage exists, but it is fragmented into narrow scripts rather than one canonical matrix.
+- Visual regression coverage exists, but it is mostly script-per-layout or script-per-feature instead of family-first orchestration.
+- Theme drift and builder grep guards exist and already contribute useful fast-gate signal.
+- Manual scenario coverage exists in `testing/manual-test-plan.md`, but it is not integrated with automated harness promotion rules.
+
+### Missing or Weak Today
+
+- No repo CI workflows are present, so the plan's PR/nightly/release lanes are not enforced.
+- No changed-family detection exists for layout-affecting pull requests.
+- No automated onboarding loop exists for "extract XML + render PNG + iterate until acceptable".
+- No deckSpec quality rubric exists for deciding which fixtures stay, graduate, or get removed.
+- No verbosity matrix exists even though narrative density is already important to layout success.
+- No unified artifact contract exists for every harness run.
+- No scorecard exists for flake rate, pass rate, coverage gaps, or test retirement decisions.
+
+### Verified Gaps and Quality Debt
+
+- Broken advertised entrypoints:
+  - `generate` points to a missing fixture in [package.json](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/package.json#L8)
+  - `generate:layouts` points to a missing fixture in [package.json](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/package.json#L9)
+- Broken advertised validation test:
+  - `test:validation:failure` depends on a missing deck in [package.json](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/package.json#L14) and [scripts/test-validation-failure.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/test-validation-failure.mjs#L9)
+- Layout scaffolding is still manual and non-portable:
+  - the scaffold emits only a console stub for visual validation in [scripts/new-layout.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/new-layout.mjs#L113)
+  - the scaffold references outdated schema/doc paths in [scripts/new-layout.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/new-layout.mjs#L136)
+  - the scaffold hardcodes a desktop output path in [scripts/new-layout.mjs](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/scripts/new-layout.mjs#L147)
+- README accuracy is mixed:
+  - it documents missing workflow/spec files in [README.md](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/README.md#L146)
+  - it acknowledges broken entrypoints instead of fixing them in [README.md](/Users/rishi/Code/ai-tools/kpmg-utils/kpmg-slidegen/README.md#L131)
+
+## Reorganized Harness Model
+
+The harness should be reorganized around evidence lanes, not around historical scripts.
+
+### Lane Model
+
+1. `L0` Schema and contract lane
+   - registry parity
+   - template parity
+   - geometry required keys
+   - pagination policy coverage
+   - no silent fallbacks
+
+2. `L1` DeckSpec quality lane
+   - fixture metadata validity
+   - slide-type intent coverage
+   - source completeness
+   - density and verbosity tagging
+   - fixture ownership and retention status
+
+3. `L2` Pagination and structural behavior lane
+   - continuation behavior
+   - nested bullets
+   - table splits
+   - contents pagination
+   - section semantics
+
+4. `L3` Visual and postprocess lane
+   - preview render
+   - montage render
+   - overflow visual inspection
+   - baseline comparison
+   - reference parity
+
+5. `L4` Layout onboarding lane
+   - reference extraction
+   - candidate render
+   - structural diff
+   - visual diff
+   - bounded retry loop
+   - human promotion step
+
+6. `L5` CI and scheduled confidence lane
+   - PR fast gate
+   - PR changed-family visual gate
+   - nightly full matrix
+   - weekly cleanup and retirement review
+
+## Required Artifact Contract
+
+Every blocking or promotable harness run must emit the same artifact set:
+
+1. input deckSpec or fixture id
+2. rendered `.pptx`
+3. `qa.json`
+4. reference XML snapshot when applicable
+5. per-slide PNGs
+6. montage PNG when applicable
+7. structured grading summary
+8. command manifest with tool versions
+9. baseline comparison report when a baseline exists
+10. failure classification with one primary owner lane
+
+If a test does not produce enough evidence for someone else to understand why it passed or failed, it should not remain in the blocking path.
+
+## DeckSpec Governance Model
+
+DeckSpecs are part of the harness, not just examples. Every fixture must be classified and curated.
+
+### Fixture Classes
+
+1. `golden`
+   - canonical all-layout or all-family coverage
+   - stable and reviewed
+
+2. `regression`
+   - reproduces a previously broken behavior
+   - must name the exact failure mode
+
+3. `stress`
+   - intentionally hard cases for density, overflow, or pagination
+
+4. `scenario`
+   - realistic multi-slide narrative deck used for end-to-end behavior
+
+5. `reference-parity`
+   - candidate vs extracted reference comparison input
+
+6. `invalid`
+   - expected-failure fixture for validation behavior
+
+### Required Metadata for Every Fixture
+
+Each retained fixture pack must eventually declare:
+
+- fixture class
+- owner
+- covered layout family or families
+- verbosity band
+- density band
+- expected pass/fail state
+- whether it is baseline-bearing
+- whether it is safe for PR blocking
+- origin of the content and whether it is synthetic or reference-derived
+
+### Remove or Rewrite a DeckSpec When
+
+- it is not tied to a named risk
+- it duplicates another fixture without adding coverage
+- it only exists because a historical script wanted a one-off input
+- it cannot be explained by a clear layout family or failure mode
+- it depends on local machine paths or hidden external data
+- it does not have enough content quality to tell us whether the layout is actually good
+
+## Verbosity and Density Matrix
+
+The future layout count will only stay manageable if content shape is tested systematically.
+
+Every narrative-capable layout family must eventually be exercised across:
+
+1. terse
+2. target
+3. verbose
+4. extreme-but-valid
+
+And each relevant fixture should declare:
+
+1. density band
+2. expected pagination outcome
+3. expected QA outcome
+4. whether the result should remain one slide or split
+
+This is how we stop discovering fit problems only after a human eyeballs a PNG late in the loop.
+
+## Automated Layout Onboarding Loop
+
+This is the core workflow this plan must enable.
+
+### Outcome
+
+A new layout should be onboarded through one scripted harness path that can reach "good enough for human review" without hand-assembling ad hoc tests.
+
+### Loop
+
+1. ingest source material
+   - extracted XML
+   - reference slide PNG
+   - reference layout metadata
+
+2. scaffold candidate package
+   - builder stub
+   - registry entry stub
+   - template contract stub
+   - canonical fixture set
+   - quality checklist
+
+3. run deterministic gates
+   - contracts
+   - deckSpec quality checks
+   - pagination expectations
+
+4. run reference comparison gates
+   - candidate PNG vs reference PNG
+   - structural checks against extracted geometry
+   - allowed variance thresholds
+
+5. issue structured repair guidance
+   - missing boxes
+   - wrong pagination behavior
+   - density mismatch
+   - visual mismatch
+   - unsupported slot usage
+
+6. retry automatically up to a bounded limit
+   - default max three automated repair attempts
+   - every retry must store artifacts and diffs
+
+7. gate promotion
+   - promote only if all required lanes pass
+   - otherwise mark as manual-review-required with preserved evidence
+
+## Test Retirement Policy
+
+Low-quality tests must be removed or downgraded. Keeping them is expensive because they make the harness look stronger than it is.
+
+### A Test Is Low Quality If It Is Any Of
+
+1. broken by default
+2. non-portable
+3. redundant with a better test
+4. dependent on missing fixtures
+5. impossible to interpret when it fails
+6. coupled to personal machine paths
+7. too narrow to justify a top-level npm entry
+8. not tied to a stated risk or acceptance bar
+
+### Allowed Actions
+
+1. fix and keep
+2. merge into a family runner
+3. demote to non-blocking/manual
+4. archive
+5. delete
 
 ## Phase Outcomes (Non-Technical)
 
-### Phase 0: First impressions are trustworthy
-Core entrypoints, docs, and repo hygiene are accurate and runnable so external reviewers immediately see a disciplined, production-minded project.
+### Phase 0: The current harness can be trusted at face value
 
-### Phase 1: Every layout has a provable contract
-Any new or modified layout is automatically checked for registry coverage, geometry contract correctness, and pagination policy integrity before merge.
+Commands, docs, and fixtures stop lying about what works.
 
-### Phase 2: Pagination behavior is reliable under stress
-Overflow and continuation behavior is validated at the deckSpec input/output boundary so regressions are detected without relying on manual slide inspection.
+### Phase 1: Tests are organized by signal, not history
 
-### Phase 3: Visual quality is reviewed systematically, not by spot check
-Layout families are rendered in a repeatable way with consistent artifacts and baselines so review quality scales as layout count grows.
+The repo has one clear view of fast checks, structural checks, visual checks, and end-to-end checks.
 
-### Phase 4: E2E validation is predictable and automatable
-PR, nightly, and release procedures are explicit, reproducible, and produce the same artifacts every run.
+### Phase 2: Fixtures become curated assets
 
-### Phase 5: CI enforces the right checks at the right speed
-Fast checks block regressions early while deeper suites run on schedule, balancing throughput with confidence.
+DeckSpecs are classified, tagged, and pruned so they help rather than confuse.
 
-### Phase 6: Repo knowledge becomes a usable map for agents and humans
-Harness intent, ownership, and coverage are documented in concise maps that are easy to navigate and keep fresh.
+### Phase 3: Content-shape coverage becomes intentional
 
-### Phase 7: Drift is cleaned continuously
-Recurring cleanup and scoring loops keep style, reliability, and architecture from decaying as agent throughput increases.
+Verbosity and density are tested on purpose instead of being discovered accidentally.
 
-### Phase 8: Legacy noise is retired
-Outdated, duplicate, or manual-only test paths are removed or archived so the harness stays fast, legible, and credible.
+### Phase 4: Visual quality scales by family
 
-### Phase 9: Executive/leadership review package is presentation-ready
-The repo includes a crisp “what this is, how quality is enforced, and how to reproduce” narrative with auditable evidence artifacts.
+Adding more layouts does not require adding more fragile one-off scripts at the same rate.
 
-## Testing Strategy That Scales With Layouts
+### Phase 5: New layouts follow one automated path
 
-Use layered gates where runtime cost grows by risk level, not by raw layout count:
+Reference extraction, candidate generation, scoring, and bounded retries become one onboarding loop.
 
-1. `L0` static/contract checks: O(number of types), runs on every PR, no rendering required.
-2. `L1` pagination behavior checks: O(number of pagination policies + stress fixtures), deckSpec-in/deckSpec-out.
-3. `L2` visual family baselines: O(number of layout families), not one script per layout.
-4. `L3` nightly full visual matrix: O(layout x density band x policy), non-blocking for daytime velocity.
-5. `L4` weekly garbage collection: drift scans + auto-fix PRs for small, mechanical issues.
+### Phase 6: CI reflects real confidence levels
+
+Fast lanes block regressions early, and deeper lanes run on the right cadence with artifacts.
+
+### Phase 7: Weak signal is continuously retired
+
+Old scripts, bad fixtures, and flaky checks do not accumulate quietly.
+
+### Phase 8: Harness docs become operational
+
+Anyone can see how quality is enforced, what evidence is produced, and how a layout graduates.
 
 ## Implementation Checklist
 
-- [ ] 0.0 Repo polish baseline (pre-harness cleanup)
-- [ ] 0.1 Fix broken primary entrypoints (`npm run generate`, `npm run generate:layouts`) to use existing fixtures.
-- [ ] 0.2 Replace stale README file map and command references with current repo reality.
-- [ ] 0.3 Add minimal CI skeleton (PR + nightly workflow files) so quality gates are visible and enforceable.
-- [ ] 0.4 Apply artifact hygiene rules (`outputs`, temp folders, lock files) and tighten `.gitignore`.
-- [ ] 0.5 Reduce `TODOS.md` to active, non-duplicative items only.
-- [ ] 0.6 Validation for 0.0: clean-clone quick start succeeds and docs commands are copy/paste runnable.
+- [ ] 0.0 Establish the truthful baseline
+  - [ ] 0.1 Replace or remove broken `generate` and `generate:layouts` entrypoints.
+  - [ ] 0.2 Replace or repair `test:validation:failure` with a real invalid fixture.
+  - [ ] 0.3 Audit every npm test command as `keep | merge | demote | delete`.
+  - [ ] 0.4 Add one canonical test inventory doc with lane, owner, fixture set, and blocking status.
+  - [ ] 0.5 Validation for 0.0: every documented test command is runnable or explicitly marked non-blocking/manual.
 
-- [ ] 1.0 Contract tests (fast, deterministic)
-- [ ] 1.1 Extend registry coverage test to enforce: every `layouts.json` type must have a registry entry or explicit `templateOnly` marker.
-- [ ] 1.2 Extend geometry contract checks to enforce required box keys per type and fail on missing required keys.
-- [ ] 1.3 Enforce pagination policy coverage: every `paginationPolicyKey` in registry exists and validates against policy schema.
-- [ ] 1.4 Add a no-silent-fallback guard that fails when builders define geometry defaults for required boxes.
-- [ ] 1.5 Add `npm run test:contracts:all` to aggregate registry/geometry/policy/no-fallback checks.
-- [ ] 1.6 Validation for 1.0: run `test:contracts:all` and ensure it is included in PR fast gate.
+- [ ] 1.0 Reorganize the test surface around lanes
+  - [ ] 1.1 Add aggregate commands for `contracts:all`, `deckspec:all`, `pagination:all`, `visual:families`, and `harness:pr`.
+  - [ ] 1.2 Reclassify current scripts into lane folders or a documented lane map.
+  - [ ] 1.3 Remove top-level prominence from one-off scripts that should not be the public interface.
+  - [ ] 1.4 Ensure every lane writes artifacts to a predictable location and schema.
+  - [ ] 1.5 Validation for 1.0: a new contributor can explain the harness from the lane map without reading individual scripts.
 
-- [ ] 2.0 Pagination correctness tests (deckSpec in/out)
-- [ ] 2.1 Add fixture: heading + long body merge (assert no duplicates, no skips).
-- [ ] 2.2 Add fixture: nested children preserved across continuation slides.
-- [ ] 2.3 Add fixture: table split preserves metadata across continuation.
-- [ ] 2.4 Add fixture: contents with >10 sections paginates and preserves section/page semantics.
-- [ ] 2.5 Add a single pagination test runner that compares input deckSpec to paginated output structure + QA evidence.
-- [ ] 2.6 Add `npm run test:pagination:all`.
-- [ ] 2.7 Validation for 2.0: `test:pagination:all` passes and runs in CI PR gate.
+- [ ] 2.0 Build deckSpec quality governance
+  - [ ] 2.1 Create a fixture registry covering every retained deckSpec in `decks/`.
+  - [ ] 2.2 Tag fixtures by class, family, verbosity, density, owner, and retention status.
+  - [ ] 2.3 Add checks for missing metadata, duplicate purpose, and uncategorized fixtures.
+  - [ ] 2.4 Define promotion criteria for a fixture becoming baseline-bearing.
+  - [ ] 2.5 Remove or archive low-quality deckSpecs that fail the rubric.
+  - [ ] 2.6 Validation for 2.0: every retained fixture is explainable through the registry alone.
 
-- [ ] 3.0 Visual regression baseline for layout families
-- [ ] 3.1 Add `fixtures/decks/<layout-family>.deckSpec.json` for all registered layout families (currently 14 types) with scaling path to 40+ layouts.
-- [ ] 3.2 Add `scripts/render_fixture.sh` to render fixture decks to `artifacts/visual/<run-id>/<family>/`.
-- [ ] 3.3 Emit per-family montage + per-slide PNGs and preserve QA JSON alongside images.
-- [ ] 3.4 Add baseline management policy: controlled update flow and review note requirement.
-- [ ] 3.5 Add `npm run test:visual:families`.
-- [ ] 3.6 Validation for 3.0: family visual run is deterministic and reviewable from artifacts only.
+- [ ] 3.0 Add content-shape coverage
+  - [ ] 3.1 Define canonical verbosity bands and density bands for narrative layouts.
+  - [ ] 3.2 Build family fixture packs that cover terse, target, verbose, and extreme-but-valid cases.
+  - [ ] 3.3 Add expectations for split/no-split behavior per band.
+  - [ ] 3.4 Add a single report showing which families lack verbosity coverage.
+  - [ ] 3.5 Validation for 3.0: layout fit failures become reproducible by fixture band, not anecdote.
 
-- [ ] 4.0 E2E procedures
-- [ ] 4.1 Define PR E2E procedure: contracts + pagination + changed-family visual render + artifact upload.
-- [ ] 4.2 Define nightly E2E procedure: full family render + all visual suites + QA golden contract.
-- [ ] 4.3 Define release E2E procedure: full run from clean environment with baseline verification.
-- [ ] 4.4 Define failure triage runbook with owner, severity, and rerun policy.
-- [ ] 4.5 Validation for 4.0: one dry-run PR flow and one nightly simulation completed.
+- [ ] 4.0 Consolidate structural behavior tests
+  - [ ] 4.1 Merge narrow pagination scripts into one pagination matrix runner.
+  - [ ] 4.2 Add expected-failure fixtures for invalid deckSpec behavior.
+  - [ ] 4.3 Add assertions for continuation semantics, nested content preservation, and table metadata carry-forward.
+  - [ ] 4.4 Include QA evidence checks in the structural lane so pagination is not judged by slide count alone.
+  - [ ] 4.5 Validation for 4.0: one command shows the full structural health of the generator.
 
-- [ ] 5.0 CI rollout
-- [ ] 5.1 Add CI config for PR fast gate (`contracts:all`, `pagination:all`, smoke, strict drift guards).
-- [ ] 5.2 Add CI config for visual gate on changed families (or label-driven full visual run).
-- [ ] 5.3 Add nightly scheduled CI for full visual matrix and QA golden checks.
-- [ ] 5.4 Provision CI runner dependencies for visual runtime (Python deps + Poppler/tooling).
-- [ ] 5.5 Add artifact retention policy and naming conventions for reproducibility.
-- [ ] 5.6 Validation for 5.0: CI jobs produce deterministic pass/fail and accessible artifacts.
+- [ ] 5.0 Consolidate visual regression testing by family
+  - [ ] 5.1 Define layout families as the visual unit of scale.
+  - [ ] 5.2 Merge duplicate or overlapping per-layout scripts into family runners where possible.
+  - [ ] 5.3 Standardize visual artifacts: preview PNGs, montage, hash report, and overflow report.
+  - [ ] 5.4 Separate deterministic blocking visual checks from exploratory manual suites.
+  - [ ] 5.5 Keep exact reference-parity tooling, but wire it into onboarding instead of leaving it as a standalone niche command.
+  - [ ] 5.6 Validation for 5.0: visual coverage grows sublinearly as layout count grows.
 
-- [ ] 6.0 Documentation and maps
-- [ ] 6.1 Add `docs/harness/README.md` as the harness table-of-contents.
-- [ ] 6.2 Add `docs/harness/layout-family-map.md` mapping slide types -> family -> fixture -> policy.
-- [ ] 6.3 Add `docs/harness/test-map.md` mapping risks -> tests -> owning scripts -> CI jobs.
-- [ ] 6.4 Add `docs/harness/e2e-procedures.md` for PR/nightly/release workflows.
-- [ ] 6.5 Cross-link harness docs from `AGENTS.md`, `README.md`, and workflow docs.
-- [ ] 6.6 Validation for 6.0: docs are link-complete, current, and used by agents as first lookup path.
+- [ ] 6.0 Automate layout onboarding
+  - [ ] 6.1 Replace the current `new:layout` scaffold with a real onboarding harness.
+  - [ ] 6.2 Accept reference assets as first-class inputs: XML extraction, slide PNG, and metadata.
+  - [ ] 6.3 Emit a candidate package with required tests, fixtures, and docs.
+  - [ ] 6.4 Run bounded repair iterations with structured failure categories.
+  - [ ] 6.5 Gate final promotion on contracts, structure, verbosity coverage, and visual comparison.
+  - [ ] 6.6 Validation for 6.0: one command can take a new reference layout from raw assets to review-ready candidate.
 
-- [ ] 7.0 Drift guards and recurring garbage collection
-- [ ] 7.1 Add scheduled drift scans for style/contract/pagination anti-patterns with machine-fixable suggestions.
-- [ ] 7.2 Add small auto-remediation PR workflow for low-risk mechanical cleanup.
-- [ ] 7.3 Add quality scorecard (`docs/harness/quality-score.md`) tracking pass rates, flakes, and drift debt.
-- [ ] 7.4 Add tech debt queue entries for non-mechanical cleanup discovered by scheduled scans.
-- [ ] 7.5 Validation for 7.0: first weekly cleanup cycle creates actionable, review-light PRs.
+- [ ] 7.0 Introduce CI and scheduled procedures
+  - [ ] 7.1 Add PR fast gate for contracts, deckSpec quality, pagination, smoke, and strict drift.
+  - [ ] 7.2 Add PR visual gate for changed families and theme end-to-end coverage.
+  - [ ] 7.3 Add nightly full matrix for all family visuals, QA golden, and coverage reports.
+  - [ ] 7.4 Add weekly cleanup job for retirement candidates, flake review, and scorecard updates.
+  - [ ] 7.5 Validation for 7.0: the same harness story exists locally and in CI.
 
-- [ ] 8.0 Legacy test and script garbage collection
-- [ ] 8.1 Remove duplicate npm aliases (for example duplicate `skill:smoke`-equivalent entries).
-- [ ] 8.2 Decide and execute `remove | wire-in | archive` for orphan scripts (for example hardcoded-layout guard script).
-- [ ] 8.3 Deprecate superseded drift scripts once `theme` drift guard fully replaces legacy AST drift checks.
-- [ ] 8.4 Reclassify manual-signoff visual suites out of automated blocking aggregate runs unless made deterministic.
-- [ ] 8.5 Consolidate near-duplicate visual scripts and tiny per-feature baselines into family-level harness where possible.
-- [ ] 8.6 Archive or rewrite non-portable/manual-only testing scripts that depend on local machine paths or external hidden dirs.
-- [ ] 8.7 Validation for 8.0: reduced script surface, no dead npm entries, and no manual-only checks in blocking CI gates.
+- [ ] 8.0 Add scorecards and retirement loops
+  - [ ] 8.1 Track pass rate, flake rate, missing coverage, and time-to-debug per lane.
+  - [ ] 8.2 Track which fixtures and tests are pending retirement review.
+  - [ ] 8.3 Add thresholds for when a test is demoted from blocking.
+  - [ ] 8.4 Add a recurring review pass for deleting dead harness surface area.
+  - [ ] 8.5 Validation for 8.0: harness complexity can shrink as well as grow.
 
-- [ ] 9.0 Executive readiness package
-- [ ] 9.1 Add `docs/harness/executive-quality-brief.md` (quality model, test lanes, governance, risk controls).
-- [ ] 9.2 Add reproducibility appendix with exact commands and expected artifact structure.
-- [ ] 9.3 Add one “evidence bundle” sample from a full nightly run (artifacts index + pass/fail summary).
-- [ ] 9.4 Add concise architecture and quality maps for leadership readers (1-page each).
-- [ ] 9.5 Validation for 9.0: reviewer can understand system quality posture in <15 minutes from docs alone.
+- [ ] 9.0 Publish the operator docs
+  - [ ] 9.1 Add `docs/harness/README.md` as the table of contents.
+  - [ ] 9.2 Add `docs/harness/lane-map.md` mapping risks to checks and commands.
+  - [ ] 9.3 Add `docs/harness/fixture-governance.md` for deckSpec quality rules.
+  - [ ] 9.4 Add `docs/harness/layout-onboarding.md` for the automated onboarding loop.
+  - [ ] 9.5 Add `docs/harness/e2e-procedures.md` for PR, nightly, and weekly procedures.
+  - [ ] 9.6 Validation for 9.0: a human or agent can follow the docs to add a layout without inventing process.
 
-## CI Gate Design
+## Recommended Sequence
 
-1. PR fast gate (blocking): contracts, pagination, smoke, strict drift.
-2. PR visual gate (blocking for layout-affecting changes): changed families render + baseline check.
-3. Nightly full gate (non-blocking, paging on regressions): full visual suite + QA golden + coverage report.
-4. Weekly maintenance gate (non-blocking): drift cleanup scans + quality score update.
+1. first repair truthfulness problems
+   - broken commands
+   - broken fixtures
+   - broken docs
 
-## E2E Procedures (Detailed)
+2. then create the fixture registry and retirement rubric
+   - this prevents more harness sprawl while we refactor
 
-### PR E2E (blocking, fast lane)
+3. then merge structural and visual tests into lane-based runners
+   - this creates the platform for scale
 
-Purpose: catch regressions early with predictable runtime.
+4. then automate layout onboarding
+   - this is where XML extraction and PNG inspection become part of one loop
 
-1. Run fast contracts/policy/geometry gate.
-2. Run pagination deckSpec in/out gate.
-3. Run smoke + strict drift guards.
-4. Detect changed layout families from diff and run family visuals only for impacted families.
-5. Always run theme E2E visual baseline gate.
-6. Upload artifacts (`.pptx`, `qa.json`, PNGs, montage, hash report, command manifest).
+5. then wire CI and scorecards
+   - only after the local harness model is coherent
 
-Target command shape:
+## Acceptance Criteria For This Plan
 
-1. `npm run -s test:contracts:all`
-2. `npm run -s test:pagination:all`
-3. `npm run -s qa`
-4. `npm run -s test:visual:theme-e2e`
-5. `npm run -s test:visual:families -- --changed-only`
+This plan should be considered fulfilled only when all of the following are true:
 
-### Nightly E2E (full confidence sweep)
+1. a new layout can be added through one documented onboarding path
+2. the onboarding path produces artifacts and a structured grading summary
+3. deckSpecs are curated, tagged, and pruned under a published rubric
+4. verbosity and density are tested intentionally across layout families
+5. low-quality tests have been removed, merged, or demoted
+6. CI reflects the same lanes used locally
+7. the repo can explain its harness quality posture without tribal knowledge
 
-Purpose: comprehensive quality signal without blocking daytime PR throughput.
+## Explicit Non-Goals For The First Pass
 
-1. Run full contract + pagination suites.
-2. Run QA golden fixture contract.
-3. Run full visual family matrix and existing visual aggregate suites.
-4. Publish coverage summary (types, families, pagination policies, baseline checks).
-5. Open/append quality scorecard with pass rate and flake trends.
+These are intentionally deferred until the testing-first reorganization is stable:
 
-Target command shape:
-
-1. `npm run -s test:contracts:all`
-2. `npm run -s test:pagination:all`
-3. `npm run -s test:qa:golden`
-4. `npm run -s test:visual:families`
-5. `npm run -s test:visual:all`
-
-### Release E2E (clean-room gate)
-
-Purpose: prove release candidate from a clean environment is reproducible and stable.
-
-1. Run in a fresh clone/container with pinned Node/Python/tool versions.
-2. Execute nightly scope end-to-end.
-3. Re-run baseline verification without update flags.
-4. Produce signed artifact manifest and release quality summary.
-5. Block release on any contract/pagination/visual mismatch.
-
-## E2E Artifact Contract
-
-Each harness run must publish:
-
-1. Rendered `.pptx`.
-2. `qa.json`.
-3. Per-slide PNGs.
-4. Family montage PNG.
-5. Baseline/hash comparison report.
-6. Command manifest (exact commands + versions) for reproducibility.
-
-## Recommended Rollout Sequence
-
-1. Week 0: 0.0 polish baseline (fix broken entrypoints/docs, add minimal CI skeleton).
-2. Week 1: 1.0 + 2.0 + PR fast CI.
-3. Week 2: 3.0 + changed-family visual CI + baseline policy.
-4. Week 3: 4.0 + 6.0 + nightly and weekly maintenance loops.
-5. Week 4: 8.0 + 9.0 legacy cleanup and executive package.
-
-## Open Questions Before Implementation
-
-1. Which CI platform should host the new gates if repo-native CI is introduced?
-2. Should PR visual gate be changed-families-only or always run full families for the first month?
-3. What is the initial timeout budget for PR fast gate vs visual gate?
+1. broad product feature expansion unrelated to harness quality
+2. support for fallback compatibility paths that hide broken layouts
+3. bespoke one-off visual scripts for every future layout
+4. adding more fixture volume without adding fixture governance
