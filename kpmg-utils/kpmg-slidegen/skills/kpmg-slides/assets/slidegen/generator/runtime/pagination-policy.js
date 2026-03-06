@@ -9,6 +9,11 @@ const ALLOWED_STRATEGIES = new Set([
   'bridgeAnalysisColumns',
   'businessOverview',
 ]);
+const ONE_COLUMN_LAYOUT_VARIANTS = new Set([
+  'oneColumn',
+  'analysisWideChart2ColsText',
+  'analysisWideChartTableText',
+]);
 
 function isStringArray(value) {
   return Array.isArray(value) && value.every((item) => typeof item === 'string' && item.trim().length > 0);
@@ -36,7 +41,22 @@ function normalizePolicy(key, rawPolicy = {}) {
     );
   }
 
-  const mode = String(rawPolicy?.mode || strategy).trim();
+  const mode = String(rawPolicy?.mode || '').trim();
+  if (!mode) throw new Error(`Pagination policy "${key}" must define a non-empty mode`);
+  const options = rawPolicy?.options && typeof rawPolicy.options === 'object' ? { ...rawPolicy.options } : {};
+  if (strategy === 'oneColumnBullets') {
+    const variant = String(options.layoutVariant || '').trim();
+    if (!variant) {
+      throw new Error(
+        `Pagination policy "${key}" strategy "${strategy}" requires options.layoutVariant`,
+      );
+    }
+    if (!ONE_COLUMN_LAYOUT_VARIANTS.has(variant)) {
+      throw new Error(
+        `Pagination policy "${key}" has unsupported one-column layoutVariant "${variant}"`,
+      );
+    }
+  }
   const dropFields = normalizeList(rawPolicy?.dropFields);
   const recomputeFields = normalizeList(rawPolicy?.recomputeFields);
 
@@ -46,7 +66,7 @@ function normalizePolicy(key, rawPolicy = {}) {
     mode,
     dropFields,
     recomputeFields,
-    options: rawPolicy?.options && typeof rawPolicy.options === 'object' ? { ...rawPolicy.options } : {},
+    options,
   });
 }
 

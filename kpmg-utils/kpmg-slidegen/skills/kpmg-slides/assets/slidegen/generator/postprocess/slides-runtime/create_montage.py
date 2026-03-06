@@ -2,7 +2,6 @@
 # Copyright (c) OpenAI. All rights reserved.
 import argparse
 import re
-import tempfile
 from math import ceil
 from os import listdir
 from os.path import basename, expanduser, isfile, join, splitext
@@ -12,40 +11,30 @@ from ensure_raster_image import SUPPORTED_EXTS, ensure_raster_image  # type: ign
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
-def _make_placeholder(w: int, h: int) -> Image.Image:
-    """Create a visible placeholder tile with a light gray fill and a red X cross."""
-    ph = Image.new("RGBA", (w, h), (220, 220, 220, 255))
-    ph_draw = ImageDraw.Draw(ph)
-    line_color = (180, 0, 0, 255)
-    ph_draw.line([(0, 0), (ph.width - 1, ph.height - 1)], fill=line_color, width=3)
-    ph_draw.line([(ph.width - 1, 0), (0, ph.height - 1)], fill=line_color, width=3)
-    return ph
+def _load_images(
+    input_files: list[str],
+    retain_converted_files: bool,
+    fail_on_image_error: bool = True,
+) -> tuple[list[str], list[Image.Image]]:
+    # Montage currently accepts raster inputs only, so the retain/delete distinction
+    # does not change behavior inside this bundled runtime.
+    del retain_converted_files
 
+    labels: list[str] = []
+    images: list[Image.Image] = []
 
-def _load_images_with_placeholders(
-    input_files: list[str], retain_converted_files: bool, fail_on_image_error: bool = False
-) -> tuple[list[str], list[Image.Image | None]]:
-    labels = [basename(p) for p in input_files]
-    images: list[Image.Image | None] = []
-    if retain_converted_files:
-        for p in input_files:
-            try:
-                images.append(Image.open(ensure_raster_image(p)))
-            except Exception as e:
-                if fail_on_image_error:
-                    raise
-                print(f'Warning: Failed to convert or load image "{p}": {e}')
-                images.append(None)
-    else:
-        with tempfile.TemporaryDirectory(prefix="montage_convert_") as tmp_conv:
-            for p in input_files:
-                try:
-                    images.append(Image.open(ensure_raster_image(p, tmp_conv)))
-                except Exception as e:
-                    if fail_on_image_error:
-                        raise
-                    print(f'Warning: Failed to convert or load image "{p}": {e}')
-                    images.append(None)
+    for path in input_files:
+        try:
+            images.append(Image.open(ensure_raster_image(path)))
+            labels.append(basename(path))
+        except Exception as exc:
+            if fail_on_image_error:
+                raise
+            print(f'Warning: Failed to convert or load image "{path}": {exc}')
+
+    if not images:
+        raise ValueError("No valid images to render.")
+
     return labels, images
 
 
@@ -63,7 +52,7 @@ def create_montage(
     gap: int,
     label_mode: Literal["number", "filename", "none"],
     retain_converted_files: bool = False,
-    fail_on_image_error: bool = False,
+    fail_on_image_error: bool = True,
 ) -> None:
     """Build a montage with a fixed number of columns.
 
@@ -80,21 +69,13 @@ def create_montage(
     if cell_w <= 0 or cell_h <= 0:
         raise ValueError("cell_w and cell_h must be positive")
 
-    labels, images = _load_images_with_placeholders(
+    labels, images = _load_images(
         input_files=input_files,
         retain_converted_files=retain_converted_files,
         fail_on_image_error=fail_on_image_error,
     )
 
     num_images = len(images)
-    num_valid = sum(1 for im in images if im is not None)
-    if num_valid == 0:
-        raise ValueError("No valid images to render.")
-    if num_valid < num_images:
-        cell_size = round(min(cell_w, cell_h) * 0.6)
-        placeholder = _make_placeholder(cell_size, cell_size)
-    else:
-        placeholder = None
     cols = num_col
     rows = ceil(num_images / cols)
 
@@ -151,16 +132,11 @@ def create_montage(
         else:
             text_w = 0
 
-        if img:
-            resized = ImageOps.contain(
-                img.convert("RGBA"),
-                (cell_w, cell_h),
-                method=Image.Resampling.LANCZOS,
-            )
-        else:
-            print(f"Warning: Using placeholder for invalid image at row={row + 1}, col={col + 1}")
-            assert placeholder is not None
-            resized = placeholder
+        resized = ImageOps.contain(
+            img.convert("RGBA"),
+            (cell_w, cell_h),
+            method=Image.Resampling.LANCZOS,
+        )
 
         paste_x = x0 + (cell_w - resized.width) // 2
         paste_y = y0 + (cell_h - resized.height) // 2
@@ -196,7 +172,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Create a montage with a fixed number of columns. "
-            "Each image is resized isotropically to fit inside a cell of size (cell_width x cell_height)."
+            "Each image is resized isotropically to fit inside a cell "
+            "of size (cell_width x cell_height)."
         )
     )
     group = parser.add_mutually_exclusive_group(required=True)
@@ -252,13 +229,11 @@ def main() -> None:
         ),
     )
     parser.add_argument(
-        "--fail_on_image_error",
-        action="store_true",
-        default=False,
-        help=(
-            "If set, fail immediately when any image conversion/loading fails (no placeholders). "
-            "By default, failures are tolerated and placeholders are used."
-        ),
+        "--fail-on-image-error",
+        dest="fail_on_image_error",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Fail immediately when any image conversion/loading fails.",
     )
     args = parser.parse_args()
 

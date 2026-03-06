@@ -1,13 +1,21 @@
 ---
 owner: kpmg-slidegen maintainers
 status: active
-last-reviewed: 2026-02-23
+last-reviewed: 2026-03-06
 review-cycle-days: 14
 source-of-truth: TODOS.md
-verification-state: partially-verified
+verification-state: verified-with-open-gaps
 ---
 
 # TODOs
+
+## Status Snapshot (2026-03-06)
+
+- Verified directly this review: the public repo surface is centered on `npm run qa`, the `test:*` harness lanes that still exist in `package.json`, `skill:*` bundle maintenance commands, and targeted local audit scripts such as `node scripts/test-hardcoded-layout-values.mjs`.
+- Canonical geometry/fail-fast contract work is landed, but fallback-style geometry access still exists and the hardcoded-layout guard is not yet wired into `npm run qa`.
+- Expected-failure validation coverage is still incomplete because there is no maintained invalid-fixture regression lane on the current public script surface.
+- Skill mode policy and prompt templates are still incomplete, and any future new-builder workflow remains intentionally deferred until layout onboarding is supported again.
+- `Next`, `Parked By Decision`, and `CI And Release` remain mostly open; several items have partial groundwork, but no additional items in those sections are fully complete yet.
 
 ## Completed Baseline
 
@@ -22,8 +30,17 @@ verification-state: partially-verified
 
 ## Priority Now
 
+- [ ] Refactor audit follow-up (2026-03-04): finish removing hardcoded/fallback geometry paths so builders/pagination consume canonical `ctx.geometry` only. Status 2026-03-06: the canonical contract landed, but `node scripts/test-hardcoded-layout-values.mjs` still reports 16 `geometry || {}` violations.
+- [ ] Add `scripts/test-hardcoded-layout-values.mjs` to `package.json` and include it in `npm run qa` as a blocking check. Status 2026-03-06: the script exists and fails usefully, but `npm run qa` still skips it.
+- [ ] Remove fallback geometry constants and paths in hot spots: `generator/helpers/one-column-layout.js`, `generator/helpers/two-column-layout.js`, `generator/runtime/paginate.js`, `generator/builders/cover-slide.js`, `generator/builders/contents-slide.js`, `generator/builders/divider-slide.js`, `generator/builders/title-strapline-4-boxes.js`, `generator/builders/analysis-bridge.js`, `generator/builders/business-overview.js`, `generator/builders/analysis-narrow-table.js`. Status 2026-03-06: some files now use strict geometry resolvers, but the listed hotspots still include fallback-style entry points.
+- [ ] Add a maintained invalid-fixture regression path so expected-failure validation behavior is covered again. Status 2026-03-06: the repo no longer exposes a public `test:validation:failure` lane, so the replacement needs both a fixture and a supported command path.
+- [ ] Make `npm run qa` enforce full gating (at minimum: contracts, registry contracts, smoke, hardcoded geometry drift, strict AST drift, golden QA). Status 2026-03-06: `qa` currently runs contracts, registry contracts, smoke, theme strict drift, and grep drift only.
+- [ ] Decide and document strict drift policy: either keep `test:drift:ast:strict` as blocking and pay down findings, or scope/tune the rule set to intentional exclusions. Status 2026-03-06: `npm run test:drift:ast:strict` still fails on numeric literals in `generator/runtime/theme.js`.
+- [ ] Preserve and enforce fail-fast posture for geometry/policy/slot contracts while removing silent fallback paths. Status 2026-03-06: fail-fast contract checks are in place, but the silent/fallback geometry paths are not fully gone yet.
+- [x] Keep targeted regression coverage green for pagination behaviors (one-column merge, nested bullets, contents continuation, table metadata persistence, split QA reporting). Status 2026-03-06: the targeted scripts pass individually, though there is still no aggregate `test:pagination:all` gate.
+
 - [x] Add one golden QA fixture for regression checks on report shape.
-- [x] Add one failing example deck for validation behavior testing.
+- [ ] Reintroduce invalid-fixture coverage only as part of a supported public harness lane. Status 2026-03-06: legacy failing deckSpecs still exist, but there is no maintained public command for this coverage area.
 - [x] Create `scripts/sync-skill-bundle.mjs` to sync generator/runtime/templates/docs into `skills/kpmg-slides/assets` and `skills/kpmg-slides/references`.
 - [x] Add `npm` commands for skill sync and drift checks (`skill:sync`, `skill:verify`).
 - [x] Add a skill-only smoke test that runs from `skills/kpmg-slides` using only synced skill files and writes deterministic artifacts.
@@ -33,9 +50,11 @@ verification-state: partially-verified
 - [x] Vendor local slides postprocess runtime into repo and bundle it into skill sync output.
 - [ ] Expand `skills/kpmg-slides/SKILL.md` with explicit mode policy: compile-from-context, guided-planning, and surgical-revision.
 - [ ] Add copy-paste prompt templates for each skill mode in `skills/kpmg-slides/references/`.
-- [ ] Add a documented “new builder from scratch” workflow: define layout type in both template contracts, implement/register builder, add pagination hooks, update schema/skill references, add regression deck example, and validate with QA + visual checks.
+- [ ] Add a documented “new builder from scratch” workflow only after layout authoring is intentionally reintroduced as a supported repo capability.
 
 ## Next
+
+Status 2026-03-06: no items in this section are fully complete. Existing scenario decks, QA guidance, charting docs, repair suggestions, and input-prep helpers provide partial groundwork for several items, but none of the requested deliverables are finished yet.
 
 - [ ] Add a benchmark scenario fixture for `mid-thread compile` with dense prior context.
 - [ ] Add a benchmark scenario fixture for `zero-context planning` that starts from user Q&A.
@@ -45,18 +64,29 @@ verification-state: partially-verified
 - [ ] Add a golden deckspec example library (one polished reference per supported slide type with rationale).
 - [ ] Add a QA interpretation guide mapping common errors/warnings to concrete fix actions.
 - [ ] Add a brief release checklist for template package changes.
+- [ ] Add direct source-to-deck compilation flows that turn SEC/data-room/markdown inputs into canonical `deckSpec` before render.
+- [ ] Add first-class skill authoring modes for `zero-context planning`, `mid-thread compile`, and `surgical revision` with explicit prompts and acceptance criteria.
+- [ ] Add a QA auto-repair loop that converts `qa.json` findings into targeted `deckSpec` edits and slide rewrite suggestions.
+- [ ] Expand the slide vocabulary with higher-value consulting layouts and safer chart grammars (timelines, KPI dashboards, appendix/reference slides, org/perimeter variants, heatmaps, approved chart presets).
+- [ ] Add source traceability features such as per-slide evidence manifests and optional evidence appendix generation from authored sources.
 
 ## Parked By Decision
+
+Status 2026-03-06: realistic long-form scenario decks and outputs exist, but the curated real-world golden library described below has not been assembled.
 
 - [ ] Add a real-world golden deck library (20-25 page polished examples) and run on-demand visual QA against those fixtures once the local slides runtime is embedded.
 
 ## CI And Release
+
+Status 2026-03-06: the relevant commands exist locally, but there is still no repo CI wiring or release gate enforcing them.
 
 - [ ] Add CI wiring for `npm run smoke` and `npm run test:postprocess`.
 - [ ] Add optional CI profile for visual validation in environments where slides Python deps are installed.
 - [ ] Add a release gate that requires `skill:verify` success before publishing/updating the skill bundle.
 
 ## Deep Review Notes
+
+Historical audit context only. Several findings below have since been partially or fully addressed; use `Status Snapshot` and `Priority Now` above for the current live status.
 
 1. Executive Summary (5-8 bullets).
 

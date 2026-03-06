@@ -46,6 +46,7 @@ class SectionConfig:
     canonical_name: str
     aliases: Sequence[str]
     preferred_levels: Sequence[int] = (1,)
+    collect_all_matches: bool = False
 
 
 @dataclass(frozen=True)
@@ -81,7 +82,9 @@ SECTION_CONFIGS: Sequence[SectionConfig] = (
             "Profit and loss overview",
             "P&L overview",
             "Financial performance",
+            "Income Statement",
         ),
+        collect_all_matches=True,
     ),
     SectionConfig(
         slug="qoe-and-earnings-adjustments",
@@ -152,11 +155,6 @@ SECTION_CONFIGS: Sequence[SectionConfig] = (
         slug="summary-financials",
         canonical_name="Summary financials",
         aliases=("Summary financials", "Summary Financials"),
-    ),
-    SectionConfig(
-        slug="income-statement",
-        canonical_name="Income Statement",
-        aliases=("Income Statement",),
     ),
     SectionConfig(
         slug="balance-sheet",
@@ -346,6 +344,46 @@ def find_best_section_block(report: ReportDoc, config: SectionConfig) -> Optiona
     return None if best is None else best[3]
 
 
+def find_matching_section_blocks(report: ReportDoc, config: SectionConfig) -> List[HeadingBlock]:
+    """Find all matching heading blocks in deterministic source order."""
+    matches: List[Tuple[int, int, int, HeadingBlock]] = []
+    seen_indexes = set()
+    for block in report.headings:
+        for alias_idx, alias in enumerate(config.aliases):
+            if not heading_matches_alias(block.text, alias):
+                continue
+            if block.index in seen_indexes:
+                break
+            matches.append(
+                (level_rank(block.level, config.preferred_levels), alias_idx, block.index, block)
+            )
+            seen_indexes.add(block.index)
+            break
+    matches.sort()
+    return [match[3] for match in matches]
+
+
+def combined_matched_heading(blocks: Sequence[HeadingBlock]) -> Optional[str]:
+    """Render stable matched-heading metadata for one or more source sections."""
+    if not blocks:
+        return None
+    return " + ".join(block.text for block in blocks)
+
+
+def combined_verbatim_extract(blocks: Sequence[HeadingBlock]) -> Optional[str]:
+    """Render one verbatim extract from one or more source section bodies."""
+    if not blocks:
+        return None
+    combined_parts: List[str] = []
+    for idx, block in enumerate(blocks):
+        if idx > 0:
+            combined_parts.append("\n")
+        combined_parts.append(block.body)
+        if not block.body.endswith("\n"):
+            combined_parts.append("\n")
+    return "".join(combined_parts)
+
+
 def find_subheading_within_parent(
     report: ReportDoc,
     parent: HeadingBlock,
@@ -410,10 +448,15 @@ def build_section_file(
     missing_reports: List[str] = []
 
     for report_idx, report in enumerate(reports):
-        block = find_best_section_block(report, config)
-        matched_heading = block.text if block else None
-        extract = block.body if block else None
-        if block is None:
+        if config.collect_all_matches:
+            blocks = find_matching_section_blocks(report, config)
+        else:
+            block = find_best_section_block(report, config)
+            blocks = [] if block is None else [block]
+
+        matched_heading = combined_matched_heading(blocks)
+        extract = combined_verbatim_extract(blocks)
+        if not blocks:
             missing_reports.append(report.report_id)
         entries.append(
             render_entry(

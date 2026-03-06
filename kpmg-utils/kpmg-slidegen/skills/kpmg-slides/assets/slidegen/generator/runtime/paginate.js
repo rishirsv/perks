@@ -10,17 +10,23 @@ import { BRIDGE_DEFAULT_ANALYSIS_BOXES, clampBridgePhaseCount, resolveBridgeAnal
 import { computeOneColumnLayoutGeometry } from '../helpers/one-column-layout.js';
 import { computeTwoColumnLayoutGeometry } from '../helpers/two-column-layout.js';
 import { isHeaderLine } from '../helpers/bullets.js';
+import {
+  CONTENTS_SECTIONS_PER_SLIDE,
+  RECOMPUTE_FIELD_CONTENTS_PAGE_RANGES,
+} from '../helpers/pagination-constants.js';
 import { resolveSlideGeometry } from './template-contracts.js';
 import { resolveTheme } from '../helpers/theme.js';
 import {
   computeAnalysisWideChart2ColsTextGeometry,
   computeAnalysisWideChartTableTextGeometry,
 } from '../helpers/analysis-wide-layout.js';
-import { resolveRegistryTypeForSlide } from './slide-registry.js';
+import { isExcludedFromLogicalPaging, resolveRegistryTypeForSlide } from './slide-registry.js';
 import { requireGeometryBox } from './geometry-contract.js';
-const CONTENTS_SECTIONS_PER_SLIDE = 10;
+
 const TABLE_ROW_DENSITY_LINE_THRESHOLD = 7;
 const TABLE_ROW_DENSITY_HEIGHT_THRESHOLD = 0.82;
+const includeFooterByMasterCache = new WeakMap();
+const validatedPolicyDispatchCache = new WeakSet();
 
 function requireFiniteMetric(name, value) {
   const numeric = Number(value);
@@ -537,16 +543,383 @@ function paginateTableRows(
   return out;
 }
 
-export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
+function normalizeSectionKey(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function setRange(map, key, page) {
+  if (!key || !Number.isFinite(page) || page <= 0) return;
+  const prev = map.get(key);
+  if (!prev) {
+    map.set(key, { start: page, end: page });
+    return;
+  }
+  map.set(key, { start: Math.min(prev.start, page), end: Math.max(prev.end, page) });
+}
+
+function formatPageRange(start, end) {
+  if (!Number.isFinite(start) || start <= 0) return '';
+  if (!Number.isFinite(end) || end <= 0 || end === start) return `(p. ${start})`;
+  return `(p. ${start}-${end})`;
+}
+
+function getIncludeFooterByMaster(templatePackage = {}) {
+  if (includeFooterByMasterCache.has(templatePackage)) {
+    return includeFooterByMasterCache.get(templatePackage);
+  }
+  const map = new Map();
+  const variants = templatePackage?.layouts?.masters?.variants || {};
+  for (const variant of Object.values(variants)) {
+    if (!variant?.masterName) continue;
+    map.set(variant.masterName, Boolean(variant.includeFooter));
+  }
+  includeFooterByMasterCache.set(templatePackage, map);
+  return map;
+}
+
+function isDividerSlide(slideSpec = {}, runtimeContext = {}) {
+  const type = resolveRegistryTypeForSlide(slideSpec);
+  if (!type) return false;
+  const entry = runtimeContext?.slideRegistry?.get?.(type);
+  return entry?.builderId === 'divider';
+}
+
+export function resolveMasterNameForSlide(slideSpec = {}, runtimeContext = {}) {
+  const type = resolveRegistryTypeForSlide(slideSpec);
+  if (!type) {
+    throw new Error('Unable to resolve slide type for master resolution');
+  }
+  const templateContracts = runtimeContext?.templateContracts;
+  if (!templateContracts?.get) {
+    throw new Error('Missing required template contracts for master resolution');
+  }
+  const resolved = templateContracts.resolveForSlide(slideSpec, type);
+  if (!resolved?.masterName) throw new Error(`Missing template contract masterName for slide type "${type}"`);
+  return resolved.masterName;
+}
+
+export function shouldRenderLogicalPageNumber(slideSpec = {}, runtimeContext = {}, resolvedMasterName = null) {
+  const type = resolveRegistryTypeForSlide(slideSpec);
+  if (!type) return false;
+  if (isExcludedFromLogicalPaging(type)) return false;
+  const templatePackage = runtimeContext?.template;
+  if (!templatePackage) {
+    throw new Error('Missing template package in runtime context for logical page calculation');
+  }
+  const masterName = resolvedMasterName || resolveMasterNameForSlide(slideSpec, runtimeContext);
+  return Boolean(getIncludeFooterByMaster(templatePackage).get(masterName));
+}
+
+function applyAutoContentsPageRanges(slides = [], runtimeContext = {}) {
+  const sectionRangesByNumber = new Map();
+  const sectionRangesByTitle = new Map();
+  let logicalPage = 0;
+  let activeSectionNumber = '';
+  let activeSectionTitle = '';
+
+  for (const slide of slides) {
+    const isDivider = isDividerSlide(slide, runtimeContext);
+    if (isDivider) {
+      activeSectionNumber = String(slide?.sectionNumber || '').trim();
+      activeSectionTitle = normalizeSectionKey(slide?.sectionTitle);
+      continue;
+    }
+    if (!shouldRenderLogicalPageNumber(slide, runtimeContext)) continue;
+    logicalPage += 1;
+    if (slide?.type === 'contents') continue;
+    if (activeSectionNumber) setRange(sectionRangesByNumber, activeSectionNumber, logicalPage);
+    if (activeSectionTitle) setRange(sectionRangesByTitle, activeSectionTitle, logicalPage);
+  }
+
+  return slides.map((slide) => {
+    if (slide?.type !== 'contents' || !Array.isArray(slide.sections)) return slide;
+    const sections = slide.sections.map((section) => {
+      const byNumber = sectionRangesByNumber.get(String(section?.number || '').trim());
+      const byTitle = sectionRangesByTitle.get(normalizeSectionKey(section?.title));
+      const range = byNumber || byTitle;
+      if (!range) return section;
+      return {
+        ...section,
+        pageRange: formatPageRange(range.start, range.end),
+      };
+    });
+    return { ...slide, sections };
+  });
+}
+
+function paginateNoneStrategy({ slideSpec }) {
+  return { slides: [slideSpec], originalCount: 0 };
+}
+
+function paginateTwoColumnBulletsStrategy({
+  slideSpec,
+  geometry,
+  masterName,
+  titleMaxChars,
+  runtimeContext,
+  footerSafeTopByMaster,
+  paginationMetrics,
+  resolveMasterFooterSafeTop,
+}) {
+  const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
+  const twoColLayout = computeTwoColumnLayoutGeometry({
+    geometry,
+    masterName,
+    footerSafeTopByMaster,
+    theme: runtimeContext?.theme || null,
+    strapline: slideSpec?.strapline,
+    straplineFontSize: paginationMetrics.straplineFontSize,
+  });
+  const slides = paginateTwoColumn(slideSpec, geometry, {
+    bodyFontSize: paginationMetrics.bodyFontSize,
+    footerSafe: false,
+    footerSafeTop,
+    titleMaxChars,
+    leftBox: twoColLayout?.safeLeftGeo || null,
+    rightBox: twoColLayout?.safeRightGeo || null,
+  });
+  const originalCount =
+    (Array.isArray(slideSpec.leftBody) ? slideSpec.leftBody.length : 0) +
+    (Array.isArray(slideSpec.rightBody) ? slideSpec.rightBody.length : 0);
+  return { slides, originalCount };
+}
+
+function resolveOneColumnLayoutBoxes({
+  variant,
+  slideSpec,
+  geometry,
+  masterName,
+  runtimeContext,
+  footerSafeTopByMaster,
+  paginationMetrics,
+}) {
+  if (variant === 'oneColumn') {
+    const firstLayout = computeOneColumnLayoutGeometry({
+      geometry,
+      masterName,
+      footerSafeTopByMaster,
+      theme: runtimeContext?.theme || null,
+      strapline: slideSpec?.strapline,
+      source: slideSpec?.source,
+      callouts: slideSpec?.callouts,
+      straplineFontSize: paginationMetrics.straplineFontSize,
+      sourceFontSize: paginationMetrics.sourceFontSize,
+    });
+    const continuationLayout =
+      Array.isArray(slideSpec?.callouts) && slideSpec.callouts.length > 0
+        ? computeOneColumnLayoutGeometry({
+            geometry,
+            masterName,
+            footerSafeTopByMaster,
+            theme: runtimeContext?.theme || null,
+            strapline: slideSpec?.strapline,
+            source: slideSpec?.source,
+            callouts: [],
+            straplineFontSize: paginationMetrics.straplineFontSize,
+            sourceFontSize: paginationMetrics.sourceFontSize,
+          })
+        : null;
+    return {
+      bodyBox: firstLayout?.safeBodyGeo || null,
+      continuationBodyBox: continuationLayout?.safeBodyGeo || firstLayout?.safeBodyGeo || null,
+    };
+  }
+
+  if (variant === 'analysisWideChart2ColsText' || variant === 'analysisWideChartTableText') {
+    const isTableVariant = variant === 'analysisWideChartTableText';
+    const firstLayout = isTableVariant
+      ? computeAnalysisWideChartTableTextGeometry({
+          geometry,
+          masterName,
+          footerSafeTopByMaster,
+          theme: runtimeContext?.theme || null,
+          strapline: slideSpec?.strapline,
+          chart: slideSpec?.chart,
+          table: slideSpec?.table,
+          noteSource: slideSpec?.noteSource,
+          showSummaryChart: slideSpec?.showSummaryChart,
+          callouts: slideSpec?.callouts,
+        })
+      : computeAnalysisWideChart2ColsTextGeometry({
+          geometry,
+          masterName,
+          footerSafeTopByMaster,
+          theme: runtimeContext?.theme || null,
+          strapline: slideSpec?.strapline,
+          chart: slideSpec?.chart,
+          callouts: slideSpec?.callouts,
+        });
+    const continuationLayout =
+      Array.isArray(slideSpec?.callouts) && slideSpec.callouts.length > 0
+        ? isTableVariant
+          ? computeAnalysisWideChartTableTextGeometry({
+              geometry,
+              masterName,
+              footerSafeTopByMaster,
+              theme: runtimeContext?.theme || null,
+              strapline: slideSpec?.strapline,
+              chart: slideSpec?.chart,
+              table: slideSpec?.table,
+              noteSource: slideSpec?.noteSource,
+              showSummaryChart: slideSpec?.showSummaryChart,
+              callouts: [],
+            })
+          : computeAnalysisWideChart2ColsTextGeometry({
+              geometry,
+              masterName,
+              footerSafeTopByMaster,
+              theme: runtimeContext?.theme || null,
+              strapline: slideSpec?.strapline,
+              chart: slideSpec?.chart,
+              callouts: [],
+            })
+        : null;
+    return {
+      bodyBox: firstLayout?.safeTextBox || null,
+      continuationBodyBox: continuationLayout?.safeTextBox || firstLayout?.safeTextBox || null,
+    };
+  }
+
+  throw new Error(`Unsupported one-column pagination layoutVariant "${variant}"`);
+}
+
+function paginateOneColumnBulletsStrategy({
+  slideSpec,
+  geometry,
+  masterName,
+  titleMaxChars,
+  runtimeContext,
+  footerSafeTopByMaster,
+  paginationMetrics,
+  policy,
+  resolveMasterFooterSafeTop,
+}) {
+  const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
+  const variant = String(policy?.options?.layoutVariant || '').trim();
+  if (!variant) {
+    throw new Error(`Missing required options.layoutVariant for one-column pagination policy "${policy?.key || ''}"`);
+  }
+  const boxes = resolveOneColumnLayoutBoxes({
+    variant,
+    slideSpec,
+    geometry,
+    masterName,
+    runtimeContext,
+    footerSafeTopByMaster,
+    paginationMetrics,
+  });
+  const slides = paginateOneColumnBullets(slideSpec, geometry, 'body', {
+    bodyFontSize: paginationMetrics.bodyFontSize,
+    footerSafe: false,
+    footerSafeTop,
+    titleMaxChars,
+    bodyBox: boxes.bodyBox,
+    continuationBodyBox: boxes.continuationBodyBox,
+  });
+  const originalCount = Array.isArray(slideSpec.body) ? slideSpec.body.length : 0;
+  return { slides, originalCount };
+}
+
+function paginateTableRowsStrategy({
+  slideSpec,
+  geometry,
+  masterName,
+  titleMaxChars,
+  paginationMetrics,
+  resolveMasterFooterSafeTop,
+  emitTableWarning,
+}) {
+  const footerSafeTop = resolveMasterFooterSafeTop(masterName, true);
+  const slides = paginateTableRows(slideSpec, geometry, {
+    tableRowHeightCap: paginationMetrics.tableRowHeightCap,
+    footerSafe: true,
+    footerSafeTop,
+    titleMaxChars,
+    emitWarning: emitTableWarning,
+  });
+  const originalCount = Array.isArray(slideSpec?.table?.rows) ? slideSpec.table.rows.length : 0;
+  return { slides, originalCount };
+}
+
+function paginateContentsSectionsStrategy({ slideSpec, titleMaxChars }) {
+  return {
+    slides: paginateContentsSections(slideSpec, { titleMaxChars }),
+    originalCount: Array.isArray(slideSpec.sections) ? slideSpec.sections.length : 0,
+  };
+}
+
+function paginateBridgeAnalysisColumnsStrategy({ slideSpec, geometry, titleMaxChars, paginationMetrics }) {
+  const slides = paginateBridgeAnalysisColumns(slideSpec, geometry, {
+    titleMaxChars,
+    bodyFontSize: paginationMetrics.bridgeAnalysisBodyFontSize,
+  });
+  const originalCount = Array.isArray(slideSpec.analysisColumns)
+    ? slideSpec.analysisColumns.reduce(
+        (sum, col) => sum + (Array.isArray(col?.body) ? col.body.length : String(col?.body || '').trim() ? 1 : 0),
+        0,
+      )
+    : 0;
+  return { slides, originalCount };
+}
+
+function paginateBusinessOverviewStrategy({ slideSpec, geometry, titleMaxChars, paginationMetrics }) {
+  const slides = paginateBusinessOverview(slideSpec, geometry, {
+    titleMaxChars,
+    bodyFontSize: paginationMetrics.bodyFontSize,
+  });
+  const originalCount = Array.isArray(slideSpec.overviewBody) ? slideSpec.overviewBody.length : 0;
+  return { slides, originalCount };
+}
+
+const PAGINATION_STRATEGY_HANDLERS = Object.freeze({
+  none: paginateNoneStrategy,
+  twoColumnBullets: paginateTwoColumnBulletsStrategy,
+  oneColumnBullets: paginateOneColumnBulletsStrategy,
+  tableRows: paginateTableRowsStrategy,
+  contentsSections: paginateContentsSectionsStrategy,
+  bridgeAnalysisColumns: paginateBridgeAnalysisColumnsStrategy,
+  businessOverview: paginateBusinessOverviewStrategy,
+});
+
+function assertPolicyDispatchCoverage(paginationPolicy) {
+  if (validatedPolicyDispatchCache.has(paginationPolicy)) return;
+  if (typeof paginationPolicy?.keys !== 'function') {
+    throw new Error('Missing pagination policy keys() for dispatch coverage validation');
+  }
+  for (const key of paginationPolicy.keys()) {
+    const policy = paginationPolicy.get(key);
+    const strategy = String(policy?.strategy || '').trim();
+    if (!strategy) {
+      throw new Error(`Pagination policy "${key}" missing strategy`);
+    }
+    if (typeof PAGINATION_STRATEGY_HANDLERS[strategy] !== 'function') {
+      throw new Error(`No pagination handler registered for policy "${key}" strategy "${strategy}"`);
+    }
+  }
+  validatedPolicyDispatchCache.add(paginationPolicy);
+}
+
+function paginateWithStrategy(strategy, params) {
+  const handler = PAGINATION_STRATEGY_HANDLERS[strategy];
+  if (typeof handler !== 'function') {
+    throw new Error(`Unsupported pagination strategy "${strategy}"`);
+  }
+  return handler(params);
+}
+
+export function paginateDeckSpec(deckSpec, runtimeContext = {}) {
   const spec = deckSpec && typeof deckSpec === 'object' ? deckSpec : { slides: [] };
   const slides = Array.isArray(spec.slides) ? spec.slides : [];
   const out = {
     ...spec,
     slides: [],
+    slideTrace: [],
     paginationDecisions: [],
     overflowEvents: [],
     tableWarnings: [],
+    recomputeFields: [],
   };
+  const recomputeFields = new Set();
 
   const templateContracts = runtimeContext?.templateContracts;
   const slideRegistry = runtimeContext?.slideRegistry;
@@ -555,6 +928,7 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
   if (!templateContracts?.get) throw new Error('Missing required template contracts in pagination runtime context');
   if (!slideRegistry?.get) throw new Error('Missing required slide registry in pagination runtime context');
   if (!paginationPolicy?.get) throw new Error('Missing required pagination policy in pagination runtime context');
+  assertPolicyDispatchCoverage(paginationPolicy);
 
   const paginationMetrics = resolvePaginationMetrics(runtimeContext?.theme || null);
 
@@ -619,10 +993,8 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
     const slideSpec = slides[slideIndex];
     const rawType = slideSpec?.type;
     const type = resolveRegistryTypeForSlide(slideSpec);
-    const layout = (layouts && rawType && layouts[rawType]) || (layouts && type && layouts[type]) || null;
-    if (!rawType || !layout) {
-      out.slides.push(slideSpec);
-      continue;
+    if (!rawType || !type) {
+      throw new Error(`slides[${slideIndex}] missing valid slide type for pagination`);
     }
 
     const registryEntry = slideRegistry.get(type);
@@ -634,181 +1006,64 @@ export function paginateDeckSpec(deckSpec, layouts, runtimeContext = {}) {
     if (!policy) {
       throw new Error(`Missing pagination policy "${policyKey}" for slide type "${type}"`);
     }
+    for (const field of policy.recomputeFields || []) recomputeFields.add(field);
     const geom = resolveSlideGeometry(templateContracts, type);
-    const titleMaxChars = Number(layout?.slots?.title?.maxChars || 0) || null;
-    const mode = policy.mode || policy.strategy;
     const contract = templateContracts.get(type);
-    if (!contract?.masterName) {
-      throw new Error(`Missing template contract masterName for slide type "${type}"`);
+    if (!contract) {
+      throw new Error(`Unknown layout type "${type}" in template layouts.json`);
     }
-    const masterName = contract.masterName;
+    const titleMaxChars = Number(contract?.slots?.title?.maxChars || 0) || null;
+    const mode = policy.mode;
+    const masterName = resolveMasterNameForSlide(slideSpec, runtimeContext);
 
-    if (policy.strategy === 'none') {
-      out.slides.push(slideSpec);
-      continue;
+    const pagedResult = paginateWithStrategy(policy.strategy, {
+      slideSpec,
+      geometry: geom,
+      titleMaxChars,
+      masterName,
+      policy,
+      runtimeContext,
+      paginationMetrics,
+      footerSafeTopByMaster,
+      resolveMasterFooterSafeTop,
+      emitTableWarning: (warning) => recordTableWarning(slideIndex, rawType, warning),
+    });
+    if (!Array.isArray(pagedResult?.slides)) {
+      throw new Error(
+        `Pagination strategy "${policy.strategy}" returned invalid slides array for type "${rawType}"`,
+      );
     }
-
-    let paged = [slideSpec];
-    let originalCount = 0;
-
-    if (policy.strategy === 'twoColumnBullets') {
-      const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
-      const twoColLayout = computeTwoColumnLayoutGeometry({
-        geometry: geom,
-        masterName,
-        footerSafeTopByMaster,
-        theme: runtimeContext?.theme || null,
-        strapline: slideSpec?.strapline,
-        straplineFontSize: paginationMetrics.straplineFontSize,
-      });
-      paged = paginateTwoColumn(slideSpec, geom, {
-        bodyFontSize: paginationMetrics.bodyFontSize,
-        footerSafe: false,
-        footerSafeTop,
-        titleMaxChars,
-        leftBox: twoColLayout?.safeLeftGeo || null,
-        rightBox: twoColLayout?.safeRightGeo || null,
-      });
-      originalCount =
-        (Array.isArray(slideSpec.leftBody) ? slideSpec.leftBody.length : 0) +
-        (Array.isArray(slideSpec.rightBody) ? slideSpec.rightBody.length : 0);
-    } else if (policy.strategy === 'oneColumnBullets') {
-      const footerSafeTop = resolveMasterFooterSafeTop(masterName, false);
-      const variant = String(policy?.options?.layoutVariant || 'oneColumn');
-
-      if (variant === 'oneColumn') {
-        const oneColLayout = computeOneColumnLayoutGeometry({
-          geometry: geom,
-          masterName,
-          footerSafeTopByMaster,
-          theme: runtimeContext?.theme || null,
-          strapline: slideSpec?.strapline,
-          source: slideSpec?.source,
-          callouts: slideSpec?.callouts,
-          straplineFontSize: paginationMetrics.straplineFontSize,
-          sourceFontSize: paginationMetrics.sourceFontSize,
-        });
-        const oneColContinuationLayout =
-          Array.isArray(slideSpec?.callouts) && slideSpec.callouts.length > 0
-            ? computeOneColumnLayoutGeometry({
-                geometry: geom,
-                masterName,
-                footerSafeTopByMaster,
-                theme: runtimeContext?.theme || null,
-                strapline: slideSpec?.strapline,
-                source: slideSpec?.source,
-                callouts: [],
-                straplineFontSize: paginationMetrics.straplineFontSize,
-                sourceFontSize: paginationMetrics.sourceFontSize,
-              })
-            : null;
-        paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
-          bodyFontSize: paginationMetrics.bodyFontSize,
-          footerSafe: false,
-          footerSafeTop,
-          titleMaxChars,
-          bodyBox: oneColLayout?.safeBodyGeo || null,
-          continuationBodyBox: oneColContinuationLayout?.safeBodyGeo || oneColLayout?.safeBodyGeo || null,
-        });
-      } else if (variant === 'analysisWideChart2ColsText' || variant === 'analysisWideChartTableText') {
-        const isTableVariant = variant === 'analysisWideChartTableText';
-        const wideLayout = isTableVariant
-          ? computeAnalysisWideChartTableTextGeometry({
-              geometry: geom,
-              masterName,
-              footerSafeTopByMaster,
-              theme: runtimeContext?.theme || null,
-              strapline: slideSpec?.strapline,
-              chart: slideSpec?.chart,
-              table: slideSpec?.table,
-              noteSource: slideSpec?.noteSource,
-              showSummaryChart: slideSpec?.showSummaryChart,
-              callouts: slideSpec?.callouts,
-            })
-          : computeAnalysisWideChart2ColsTextGeometry({
-              geometry: geom,
-              masterName,
-              footerSafeTopByMaster,
-              theme: runtimeContext?.theme || null,
-              strapline: slideSpec?.strapline,
-              chart: slideSpec?.chart,
-              callouts: slideSpec?.callouts,
-            });
-        const wideLayoutContinuation =
-          Array.isArray(slideSpec?.callouts) && slideSpec.callouts.length > 0
-            ? isTableVariant
-              ? computeAnalysisWideChartTableTextGeometry({
-                  geometry: geom,
-                  masterName,
-                  footerSafeTopByMaster,
-                  theme: runtimeContext?.theme || null,
-                  strapline: slideSpec?.strapline,
-                  chart: slideSpec?.chart,
-                  table: slideSpec?.table,
-                  noteSource: slideSpec?.noteSource,
-                  showSummaryChart: slideSpec?.showSummaryChart,
-                  callouts: [],
-                })
-              : computeAnalysisWideChart2ColsTextGeometry({
-                  geometry: geom,
-                  masterName,
-                  footerSafeTopByMaster,
-                  theme: runtimeContext?.theme || null,
-                  strapline: slideSpec?.strapline,
-                  chart: slideSpec?.chart,
-                  callouts: [],
-                })
-            : null;
-        paged = paginateOneColumnBullets(slideSpec, geom, 'body', {
-          bodyFontSize: paginationMetrics.bodyFontSize,
-          footerSafe: false,
-          footerSafeTop,
-          titleMaxChars,
-          bodyBox: wideLayout?.safeTextBox || null,
-          continuationBodyBox: wideLayoutContinuation?.safeTextBox || wideLayout?.safeTextBox || null,
-        });
-      } else {
-        throw new Error(`Unsupported one-column pagination layoutVariant "${variant}" for policy "${policy.key}"`);
-      }
-      originalCount = Array.isArray(slideSpec.body) ? slideSpec.body.length : 0;
-    } else if (policy.strategy === 'tableRows') {
-      const footerSafeTop = resolveMasterFooterSafeTop(masterName, true);
-      paged = paginateTableRows(slideSpec, geom, {
-        tableRowHeightCap: paginationMetrics.tableRowHeightCap,
-        footerSafe: true,
-        footerSafeTop,
-        titleMaxChars,
-        emitWarning: (warning) => recordTableWarning(slideIndex, rawType, warning),
-      });
-      originalCount = Array.isArray(slideSpec?.table?.rows) ? slideSpec.table.rows.length : 0;
-    } else if (policy.strategy === 'contentsSections') {
-      paged = paginateContentsSections(slideSpec, { titleMaxChars });
-      originalCount = Array.isArray(slideSpec.sections) ? slideSpec.sections.length : 0;
-    } else if (policy.strategy === 'bridgeAnalysisColumns') {
-      paged = paginateBridgeAnalysisColumns(slideSpec, geom, {
-        titleMaxChars,
-        bodyFontSize: paginationMetrics.bridgeAnalysisBodyFontSize,
-      });
-      originalCount = Array.isArray(slideSpec.analysisColumns)
-        ? slideSpec.analysisColumns.reduce(
-            (sum, col) => sum + (Array.isArray(col?.body) ? col.body.length : String(col?.body || '').trim() ? 1 : 0),
-            0,
-          )
-        : 0;
-    } else if (policy.strategy === 'businessOverview') {
-      paged = paginateBusinessOverview(slideSpec, geom, {
-        titleMaxChars,
-        bodyFontSize: paginationMetrics.bodyFontSize,
-      });
-      originalCount = Array.isArray(slideSpec.overviewBody) ? slideSpec.overviewBody.length : 0;
-    } else {
-      throw new Error(`Unsupported pagination strategy "${policy.strategy}" for slide type "${rawType}"`);
-    }
+    const paged = pagedResult.slides;
+    const originalCount = Number.isFinite(Number(pagedResult?.originalCount))
+      ? Number(pagedResult.originalCount)
+      : 0;
 
     applyContinuationDropFields(paged, policy);
     recordSplit(slideIndex, rawType, mode, originalCount, paged.length, { policyKey: policy.key });
+    const outputOffset = out.slides.length;
+    paged.forEach((pagedSlide, pageIndex) => {
+      out.slideTrace.push({
+        inputSlideIndex: slideIndex,
+        outputSlideIndex: outputOffset + pageIndex,
+        slideType: pagedSlide?.type || rawType,
+        sourceSlideType: rawType,
+        pagination: {
+          mode,
+          policyKey: policy.key,
+          pageIndex,
+          pageCount: paged.length,
+          split: paged.length > 1,
+          originalCount,
+        },
+      });
+    });
     out.slides.push(...paged);
   }
+
+  if (recomputeFields.has(RECOMPUTE_FIELD_CONTENTS_PAGE_RANGES)) {
+    out.slides = applyAutoContentsPageRanges(out.slides, runtimeContext);
+  }
+  out.recomputeFields = [...recomputeFields].sort();
 
   return out;
 }

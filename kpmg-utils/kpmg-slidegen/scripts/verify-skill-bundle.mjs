@@ -1,29 +1,18 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-const REPO_ROOT = process.cwd();
-const SKILL_ROOT = path.join(REPO_ROOT, 'skills', 'kpmg-slides');
+import { REPO_ROOT, resolveRepoPath } from './support.mjs';
+
+const SKILL_ROOT = resolveRepoPath('skills', 'kpmg-slides');
 const MANIFEST_PATH = path.join(SKILL_ROOT, 'assets', 'bundle-manifest.json');
 const SKILL_MD_PATH = path.join(SKILL_ROOT, 'SKILL.md');
 const OPENAI_YAML_PATH = path.join(SKILL_ROOT, 'agents', 'openai.yaml');
 const SKILL_RUNNER_PATH = path.join(SKILL_ROOT, 'scripts', 'run_kpmg_slides.sh');
-const SMOKE_FIXTURE_CANDIDATES = [
-  path.join(REPO_ROOT, 'decks', 'scenario02-saas-mid-diligence.deckSpec.json'),
-  path.join(REPO_ROOT, 'decks', 'regression-callouts-dense-one-column-no-callouts.deckSpec.json'),
-  path.join(REPO_ROOT, 'decks', 'skill-bundle-smoke.deckSpec.json'),
-  path.join(SKILL_ROOT, 'assets', 'templates', 'deckspec-starter.json'),
-];
-const SMOKE_OUT_DIR = path.join(REPO_ROOT, 'outputs', 'qa-golden-fixture', 'skill-smoke');
-const BUNDLED_POSTPROCESS_RUNTIME = path.join(
-  SKILL_ROOT,
-  'assets',
-  'slidegen',
-  'generator',
-  'postprocess',
-  'slides-runtime',
-);
+const SMOKE_FIXTURE_PATH = path.join(SKILL_ROOT, 'assets', 'templates', 'presets', 'detailed.deckSpec.json');
+const BUNDLED_POSTPROCESS_RUNTIME = path.join(SKILL_ROOT, 'assets', 'slidegen', 'generator', 'postprocess', 'slides-runtime');
 const REQUIRED_POSTPROCESS_FILES = [
   'render_slides.py',
   'create_montage.py',
@@ -31,6 +20,9 @@ const REQUIRED_POSTPROCESS_FILES = [
   'ensure_raster_image.py',
 ];
 const SKIP_SMOKE = process.argv.includes('--skip-smoke');
+const MANIFEST_COVERAGE_EXEMPTIONS = new Set([
+  path.resolve(MANIFEST_PATH),
+]);
 
 function sha256(filePath) {
   const hash = crypto.createHash('sha256');
@@ -114,6 +106,31 @@ function verifyManifest() {
   }
 }
 
+function verifyManifestCoverage() {
+  const manifest = readJson(MANIFEST_PATH);
+  const coveredTargets = new Set(
+    (Array.isArray(manifest?.entries) ? manifest.entries : []).map((entry) =>
+      path.resolve(path.join(REPO_ROOT, entry.target)),
+    ),
+  );
+  const uncovered = listFilesRecursively(SKILL_ROOT).filter((filePath) => {
+    const resolved = path.resolve(filePath);
+    if (MANIFEST_COVERAGE_EXEMPTIONS.has(resolved)) return false;
+    if (resolved.includes(`${path.sep}node_modules${path.sep}`)) return false;
+    if (resolved.includes(`${path.sep}__pycache__${path.sep}`)) return false;
+    return !coveredTargets.has(resolved);
+  });
+
+  if (uncovered.length) {
+    throw new Error(
+      `Skill bundle manifest coverage is incomplete (${uncovered.length} file(s)).\n${uncovered
+        .slice(0, 30)
+        .map((filePath) => path.relative(REPO_ROOT, filePath))
+        .join('\n')}`,
+    );
+  }
+}
+
 function verifyNoAbsolutePaths() {
   const textExtensions = new Set([
     '.md',
@@ -179,44 +196,42 @@ function verifyBundledPostprocessRuntime() {
   }
 }
 
-function resolveSmokeFixturePath() {
-  for (const candidate of SMOKE_FIXTURE_CANDIDATES) {
-    if (fs.existsSync(candidate)) return candidate;
-  }
-  return null;
-}
-
 function runSmoke() {
   if (!fs.existsSync(SKILL_RUNNER_PATH)) {
     throw new Error(`Missing skill runner script: ${SKILL_RUNNER_PATH}`);
   }
-  const smokeFixturePath = resolveSmokeFixturePath();
-  if (!smokeFixturePath) {
+  if (!fs.existsSync(SMOKE_FIXTURE_PATH)) {
     throw new Error(
-      `Missing smoke fixture. Checked: ${SMOKE_FIXTURE_CANDIDATES.map((p) => path.relative(REPO_ROOT, p)).join(', ')}`,
+      `Missing canonical smoke fixture: ${path.relative(REPO_ROOT, SMOKE_FIXTURE_PATH)}`,
     );
   }
-  const smoke = spawnSync(
-    'bash',
-    [SKILL_RUNNER_PATH, '--in', smokeFixturePath, '--out-dir', SMOKE_OUT_DIR],
-    {
+  const smokeOutDir = fs.mkdtempSync(path.join(os.tmpdir(), 'kpmg-slidegen-skill-smoke-'));
+  try {
+    const smoke = spawnSync(
+      'bash',
+      [SKILL_RUNNER_PATH, '--in', SMOKE_FIXTURE_PATH, '--out-dir', smokeOutDir],
+      {
     cwd: REPO_ROOT,
     encoding: 'utf8',
     env: {
       ...process.env,
       PYTHONDONTWRITEBYTECODE: '1',
     },
-    },
-  );
-  if (smoke.status !== 0) {
-    throw new Error(`Skill smoke failed.\n${smoke.stdout || ''}\n${smoke.stderr || ''}`.trim());
+      },
+    );
+    if (smoke.status !== 0) {
+      throw new Error(`Skill smoke failed.\n${smoke.stdout || ''}\n${smoke.stderr || ''}`.trim());
+    }
+    const output = (smoke.stdout || '').trim();
+    if (output) console.log(output);
+  } finally {
+    fs.rmSync(smokeOutDir, { recursive: true, force: true });
   }
-  const output = (smoke.stdout || '').trim();
-  if (output) console.log(output);
 }
 
 function main() {
   verifyManifest();
+  verifyManifestCoverage();
   verifyNoAbsolutePaths();
   verifyOpenAiMetadata();
   verifyBundledPostprocessRuntime();

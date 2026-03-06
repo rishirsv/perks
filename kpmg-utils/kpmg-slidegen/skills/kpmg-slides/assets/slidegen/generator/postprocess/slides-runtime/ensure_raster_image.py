@@ -25,37 +25,23 @@ RASTER_EXTS = {
 SUPPORTED_EXTS = RASTER_EXTS
 
 
-def ensure_raster_image(path: str, out_dir: str | None = None) -> str:
-    """Return the input path when it is a supported raster file.
-
-    `out_dir` is accepted for API compatibility with create_montage.
-    """
-    _ = out_dir
+def ensure_raster_image(path: str) -> str:
+    """Return the input path when it is a supported raster file."""
     ext_lower = splitext(path)[1].lower()
     if ext_lower in RASTER_EXTS:
         return path
     raise ValueError(
-        "Unsupported image format for montage (raster formats only): "
-        f"{path}"
+        f"Unsupported image format for montage (raster formats only): {path}"
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description=(
-            "Validate montage inputs are supported raster image formats."
-        )
+        description="Validate montage inputs are supported raster image formats."
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--input_files", nargs="+", help="List of input image file paths")
     group.add_argument("--input_dir", help="Directory containing input images")
-    parser.add_argument(
-        "--output_dir",
-        default=None,
-        help=(
-            "Accepted for compatibility; no files are converted or written."
-        ),
-    )
     args = parser.parse_args()
 
     if args.input_files:
@@ -72,7 +58,7 @@ def main() -> None:
             raise SystemExit("No files with supported raster extensions in input_dir")
 
     for p in paths:
-        ensure_raster_image(p, args.output_dir)
+        ensure_raster_image(p)
 
 
 if __name__ == "__main__":

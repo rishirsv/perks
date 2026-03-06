@@ -5,7 +5,7 @@ This plan covers five realistic KPMG-style tasks across small, medium, and large
 ## Prerequisites
 
 - `npm install`
-- `python3 testing/scripts/prepare_test_data.sh` (builds SEC and simulated data room samples)
+- `bash testing/scripts/prepare_test_data.sh` (builds SEC and simulated data room samples)
 
 Sample data output locations:
 - SEC-based inputs: `testing/data/sec/`

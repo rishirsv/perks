@@ -6,33 +6,37 @@ import {
   resolveTextBoxOptions,
   resolveTheme,
 } from '../helpers/theme.js';
+import { CONTENTS_SECTIONS_PER_ROW } from '../helpers/pagination-constants.js';
 
 function resolveTextStyles(theme = null) {
   const resolvedTheme = resolveTheme(theme);
   const componentTokens = resolvedTheme.components?.[THEME_COMPONENT_KEYS.contents] || {};
   const fontSizes = componentTokens.fontSizes || {};
+  const textTokens = resolvedTheme.components?.text || {};
+  const marginNone = Number(textTokens?.margin?.none);
+  const itemParaSpaceAfter = Number(textTokens?.paraSpaceAfter?.source);
   return {
     sectionNo: {
       ...resolveHeadingTextStyle(resolvedTheme, { colorKey: 'kpmgBlue' }),
       fontSize: Number(fontSizes.sectionNo || resolvedTheme.typeSizes.title),
-      margin: 0,
+      margin: marginNone,
       valign: 'top',
     },
     sectionTitle: {
       ...resolveHeadingTextStyle(resolvedTheme, { colorKey: 'kpmgBlue' }),
       fontSize: Number(fontSizes.sectionTitle || resolvedTheme.typeSizes.body),
-      margin: 0,
+      margin: marginNone,
       valign: 'top',
     },
     pageRange: {
       ...resolveHeadingTextStyle(resolvedTheme, { colorKey: 'kpmgBlue' }),
       fontSize: Number(fontSizes.pageRange || resolvedTheme.typeSizes.source),
-      margin: 0,
+      margin: marginNone,
       valign: 'top',
     },
     item: {
-      ...resolveBodyTextStyle(resolvedTheme, { paraSpaceAfter: 0 }),
-      margin: 0,
+      ...resolveBodyTextStyle(resolvedTheme, { paraSpaceAfter: itemParaSpaceAfter }),
+      margin: marginNone,
       valign: 'top',
     },
   };
@@ -109,14 +113,18 @@ function addSectionBlock(pptx, slide, section, geo, { metrics, textStyles, secti
 
 function chunkFive(arr) {
   const a = Array.isArray(arr) ? arr : [];
-  return [a.slice(0, 5), a.slice(5, 10)];
+  return [
+    a.slice(0, CONTENTS_SECTIONS_PER_ROW),
+    a.slice(CONTENTS_SECTIONS_PER_ROW, CONTENTS_SECTIONS_PER_ROW * 2),
+  ];
 }
 
 function sectionBox(col, rowGeo, { theme } = {}) {
   const components = theme?.components || {};
   const contentsSlideTokens = components[THEME_COMPONENT_KEYS.contentsSlide] || {};
   const gap = Number(contentsSlideTokens.sectionGap || theme?.spacing?.sectionGap || 0.18);
-  const colW = (rowGeo.w - gap * 4) / 5;
+  const columns = CONTENTS_SECTIONS_PER_ROW;
+  const colW = (rowGeo.w - gap * (columns - 1)) / columns;
   return { x: rowGeo.x + (colW + gap) * col, y: rowGeo.y, w: colW, h: rowGeo.h };
 }
 
