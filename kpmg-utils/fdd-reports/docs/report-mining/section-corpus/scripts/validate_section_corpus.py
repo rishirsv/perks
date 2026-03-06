@@ -54,6 +54,7 @@ class SectionConfig:
     canonical_name: str
     aliases: Sequence[str]
     preferred_levels: Sequence[int] = (1,)
+    collect_all_matches: bool = False
 
 
 @dataclass(frozen=True)
@@ -99,7 +100,9 @@ SECTION_CONFIGS: Sequence[SectionConfig] = (
             "Profit and loss overview",
             "P&L overview",
             "Financial performance",
+            "Income Statement",
         ),
+        collect_all_matches=True,
     ),
     SectionConfig(
         output_file="sections/qoe-and-earnings-adjustments.md",
@@ -170,11 +173,6 @@ SECTION_CONFIGS: Sequence[SectionConfig] = (
         output_file="sections/summary-financials.md",
         canonical_name="Summary financials",
         aliases=("Summary financials", "Summary Financials"),
-    ),
-    SectionConfig(
-        output_file="sections/income-statement.md",
-        canonical_name="Income Statement",
-        aliases=("Income Statement",),
     ),
     SectionConfig(
         output_file="sections/balance-sheet.md",
@@ -360,6 +358,24 @@ def find_best_section_block(report: ReportDoc, config: SectionConfig) -> Optiona
     return None if best is None else best[3]
 
 
+def find_matching_section_blocks(report: ReportDoc, config: SectionConfig) -> List[HeadingBlock]:
+    matches: List[Tuple[int, int, int, HeadingBlock]] = []
+    seen_indexes = set()
+    for block in report.headings:
+        for alias_idx, alias in enumerate(config.aliases):
+            if not heading_matches_alias(block.text, alias):
+                continue
+            if block.index in seen_indexes:
+                break
+            matches.append(
+                (level_rank(block.level, config.preferred_levels), alias_idx, block.index, block)
+            )
+            seen_indexes.add(block.index)
+            break
+    matches.sort()
+    return [match[3] for match in matches]
+
+
 def find_subheading_within_parent(
     report: ReportDoc,
     parent: HeadingBlock,
@@ -381,13 +397,32 @@ def find_subheading_within_parent(
     return None if best is None else best[3]
 
 
-def expected_extract_for_block(block: Optional[HeadingBlock]) -> str:
-    if block is None:
+def combined_matched_heading(blocks: Sequence[HeadingBlock]) -> str:
+    if not blocks:
+        return NOT_PRESENT
+    return " + ".join(block.text for block in blocks)
+
+
+def expected_extract_for_blocks(blocks: Sequence[HeadingBlock]) -> str:
+    if not blocks:
         return f"{NOT_PRESENT}\n"
-    text = block.body
+    parts: List[str] = []
+    for idx, block in enumerate(blocks):
+        if idx > 0:
+            parts.append("\n")
+        parts.append(block.body)
+        if not block.body.endswith("\n"):
+            parts.append("\n")
+    text = "".join(parts)
     if not text.endswith("\n"):
         text += "\n"
     return text
+
+
+def expected_extract_for_block(block: Optional[HeadingBlock]) -> str:
+    if block is None:
+        return f"{NOT_PRESENT}\n"
+    return expected_extract_for_blocks([block])
 
 
 def parse_output_entries(text: str) -> List[ParsedEntry]:
@@ -491,10 +526,13 @@ def add_check(
 
 def expected_section_target(
     report: ReportDoc, config: SectionConfig
-) -> Tuple[Optional[HeadingBlock], str]:
-    block = find_best_section_block(report, config)
-    heading = block.text if block else NOT_PRESENT
-    return block, heading
+) -> Tuple[List[HeadingBlock], str]:
+    if config.collect_all_matches:
+        blocks = find_matching_section_blocks(report, config)
+    else:
+        block = find_best_section_block(report, config)
+        blocks = [] if block is None else [block]
+    return blocks, combined_matched_heading(blocks)
 
 
 def expected_adjustment_target(
@@ -585,8 +623,9 @@ def validate_section_file(
         if not matches:
             continue
         entry = matches[0]
-        block, expected_heading = expected_section_target(report, config)
-        expected_extract = expected_extract_for_block(block)
+        blocks, expected_heading = expected_section_target(report, config)
+        primary_block = blocks[0] if blocks else None
+        expected_extract = expected_extract_for_blocks(blocks)
 
         add_check(
             result,
@@ -647,7 +686,7 @@ def validate_section_file(
             message="Metadata matched_heading must equal deterministically selected source heading.",
             expected=expected_heading,
             actual=entry.matched_heading,
-            source_location=line_location(report.source_file, block),
+            source_location=line_location(report.source_file, primary_block),
         )
 
         actual_extract = entry.extract
@@ -661,7 +700,7 @@ def validate_section_file(
             message="Verbatim Extract must byte-match source heading body (newline-normalized only).",
             expected=expected_extract,
             actual=actual_extract,
-            source_location=line_location(report.source_file, block),
+            source_location=line_location(report.source_file, primary_block),
         )
 
         add_check(
@@ -673,7 +712,7 @@ def validate_section_file(
             message="Verbatim Extract must not include extra inserted tokens beyond source text.",
             expected="exact",
             actual=classify_token_issue(expected_extract, actual_extract),
-            source_location=line_location(report.source_file, block),
+            source_location=line_location(report.source_file, primary_block),
         )
 
         if entry.matched_heading == NOT_PRESENT:
@@ -688,9 +727,16 @@ def validate_section_file(
                 actual=actual_extract.replace("\n", "\\n"),
             )
         else:
-            candidates = find_blocks_by_exact_heading(report, entry.matched_heading)
-            candidate_extracts = {expected_extract_for_block(candidate) for candidate in candidates}
-            candidate_ok = actual_extract in candidate_extracts
+            heading_parts = [part.strip() for part in entry.matched_heading.split(" + ")]
+            candidate_blocks: List[HeadingBlock] = []
+            for heading_part in heading_parts:
+                candidates = find_blocks_by_exact_heading(report, heading_part)
+                if not candidates:
+                    candidate_blocks = []
+                    break
+                candidate_blocks.append(candidates[0])
+            candidate_extract = expected_extract_for_blocks(candidate_blocks)
+            candidate_ok = bool(candidate_blocks) and actual_extract == candidate_extract
             add_check(
                 result,
                 report_result,
@@ -698,7 +744,7 @@ def validate_section_file(
                 check_id="extract_matches_metadata_heading",
                 passed=candidate_ok,
                 message="Extract must match the source body for the metadata matched_heading.",
-                expected=f"{len(candidates)} source heading candidate(s)",
+                expected=candidate_extract,
                 actual="matched" if candidate_ok else "not_matched",
             )
             if not candidate_ok:
@@ -713,7 +759,7 @@ def validate_section_file(
                         message="First mismatch between expected and actual extract content.",
                         expected=diff["expected_snippet"],  # type: ignore[arg-type]
                         actual=diff["actual_snippet"],  # type: ignore[arg-type]
-                        source_location=line_location(report.source_file, block),
+                        source_location=line_location(report.source_file, primary_block),
                     )
 
         top_level_alias_hits = [
@@ -723,13 +769,17 @@ def validate_section_file(
             and any(heading_matches_alias(candidate.text, alias) for alias in config.aliases)
         ]
         if top_level_alias_hits:
+            matched_heading_parts = [part.strip() for part in entry.matched_heading.split(" + ")]
             add_check(
                 result,
                 report_result,
                 requirement="1",
                 check_id="prefer_top_level_when_available",
                 passed=entry.matched_heading == NOT_PRESENT
-                or any(candidate.text == entry.matched_heading for candidate in top_level_alias_hits),
+                or all(
+                    any(candidate.text == heading_part for candidate in top_level_alias_hits)
+                    for heading_part in matched_heading_parts
+                ),
                 message="When top-level heading alias exists, matched heading must come from top-level section.",
                 expected=", ".join(candidate.text for candidate in top_level_alias_hits),
                 actual=entry.matched_heading,

@@ -5,6 +5,7 @@ import path from 'node:path';
 import { parseCliOptions } from '../generator/app/cli.js';
 import { resolveStrictOverflowStatus } from '../generator/app/strict-overflow.js';
 import { generateFixture } from './harness/lib.mjs';
+import { REPO_ROOT } from './support.mjs';
 
 const renderRun = await generateFixture('scenario-saas-mid-diligence', {
   enforceOverlap: true,
@@ -75,6 +76,25 @@ assert.equal(
   path.basename(starterCli.outPath),
   'detailed.pptx',
   'Starter presets should fall back to the input filename when titles are generic placeholders.',
+);
+
+const montageRuntimePath = path.join(
+  REPO_ROOT,
+  'generator',
+  'postprocess',
+  'slides-runtime',
+  'create_montage.py',
+);
+const montageRuntimeSource = fs.readFileSync(montageRuntimePath, 'utf8');
+assert.match(
+  montageRuntimeSource,
+  /--fail-on-image-error/,
+  'Montage runtime should expose the fail-on-image-error CLI flag.',
+);
+assert.match(
+  montageRuntimeSource,
+  /BooleanOptionalAction/,
+  'Montage runtime should model the image-error toggle as a real boolean optional flag, including the generated no-fail variant.',
 );
 
 const strictOptions = {

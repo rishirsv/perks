@@ -2,7 +2,6 @@
 # Copyright (c) OpenAI. All rights reserved.
 import argparse
 import re
-import tempfile
 from math import ceil
 from os import listdir
 from os.path import basename, expanduser, isfile, join, splitext
@@ -11,32 +10,31 @@ from typing import Literal
 from ensure_raster_image import SUPPORTED_EXTS, ensure_raster_image  # type: ignore
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
+
 def _load_images(
-    input_files: list[str], retain_converted_files: bool, fail_on_image_error: bool = True
+    input_files: list[str],
+    retain_converted_files: bool,
+    fail_on_image_error: bool = True,
 ) -> tuple[list[str], list[Image.Image]]:
+    # Montage currently accepts raster inputs only, so the retain/delete distinction
+    # does not change behavior inside this bundled runtime.
+    del retain_converted_files
+
     labels: list[str] = []
     images: list[Image.Image] = []
-    if retain_converted_files:
-        for p in input_files:
-            try:
-                images.append(Image.open(ensure_raster_image(p)))
-                labels.append(basename(p))
-            except Exception as e:
-                if fail_on_image_error:
-                    raise
-                print(f'Warning: Failed to convert or load image "{p}": {e}')
-    else:
-        with tempfile.TemporaryDirectory(prefix="montage_convert_"):
-            for p in input_files:
-                try:
-                    images.append(Image.open(ensure_raster_image(p)))
-                    labels.append(basename(p))
-                except Exception as e:
-                    if fail_on_image_error:
-                        raise
-                    print(f'Warning: Failed to convert or load image "{p}": {e}')
+
+    for path in input_files:
+        try:
+            images.append(Image.open(ensure_raster_image(path)))
+            labels.append(basename(path))
+        except Exception as exc:
+            if fail_on_image_error:
+                raise
+            print(f'Warning: Failed to convert or load image "{path}": {exc}')
+
     if not images:
         raise ValueError("No valid images to render.")
+
     return labels, images
 
 
@@ -174,7 +172,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Create a montage with a fixed number of columns. "
-            "Each image is resized isotropically to fit inside a cell of size (cell_width x cell_height)."
+            "Each image is resized isotropically to fit inside a cell "
+            "of size (cell_width x cell_height)."
         )
     )
     group = parser.add_mutually_exclusive_group(required=True)
@@ -230,12 +229,11 @@ def main() -> None:
         ),
     )
     parser.add_argument(
-        "--fail_on_image_error",
-        action="store_true",
+        "--fail-on-image-error",
+        dest="fail_on_image_error",
+        action=argparse.BooleanOptionalAction,
         default=True,
-        help=(
-            "Fail immediately when any image conversion/loading fails."
-        ),
+        help="Fail immediately when any image conversion/loading fails.",
     )
     args = parser.parse_args()
 

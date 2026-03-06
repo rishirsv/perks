@@ -189,7 +189,7 @@ export function createSlidesAdapter() {
         String(numCol),
         '--label_mode',
         labelMode,
-        '--fail_on_image_error',
+        '--fail-on-image-error',
       ]);
       if (!run.ok) {
         return {

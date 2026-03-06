@@ -11,6 +11,7 @@ const STATUS_ALIASES = Object.freeze({
   warn: 'warn',
   fail: 'fail',
   invalid: 'fail',
+  not_requested: 'skipped',
   skipped: 'skipped',
   error: 'error',
 });

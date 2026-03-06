@@ -26,6 +26,6 @@ bash testing/scripts/generate_data_room_samples.sh
 ## Files
 
 - Manual scenarios: `testing/manual-test-plan.md`
-- Scenario input map: `testing/data/SCENARIO_INPUTS.md`
+- Scenario inputs are described inline in `testing/manual-test-plan.md` and generated under `testing/data/`
 - SEC input packs: `testing/data/sec/`
 - Simulated data rooms: `testing/data/data_rooms/`

@@ -101,6 +101,7 @@ If `--out` is omitted, generation writes to `./outputs/kpmg-slidegen/<timestamp>
 - `npm run test:visual`: preview, montage, and visual-overflow lane.
 - `npm run test:dist`: skill bundle sync, portability, and smoke verification.
 - `npm run test:nightly`: full parent harness sweep.
+- Repo CI note: GitHub Actions runs `npm run test:pr` on every push and pull request, and runs `npm run test:nightly` on the scheduled nightly job.
 
 ## Output Artifacts
 
@@ -138,10 +139,9 @@ Optional postprocess artifacts:
 ## Documentation Map
 
 - `ARCHITECTURE.md`: runtime architecture and module boundaries.
-- `docs/exec-plans/active/agent-harness-engineering-plan.md`: active harness reset plan and implementation checklist.
+- `docs/exec-plans/active/agent-harness-engineering-plan.md`: active harness maintenance plan and implementation checklist.
 - `AGENTS.md`: working rules and repo scope.
 - `skills/kpmg-slides/SKILL.md`: portable skill instructions and preset vocabulary.
 - `skills/kpmg-slides/references/quality_assurance.md`: QA triage guide for the normalized `qa.json`.
 - `testing/README.md`: data preparation helpers.
 - `testing/manual-test-plan.md`: manual verification plan.
-- `testing/data/SCENARIO_INPUTS.md`: scenario fixture map.

@@ -25,7 +25,6 @@ python3 docs/report-mining/section-corpus/scripts/build_section_corpus.py
   - `sections/risks-and-red-flags.md` (23 report entries)
   - `sections/open-items-and-data-requests.md` (23 report entries)
   - `sections/summary-financials.md` (23 report entries)
-  - `sections/income-statement.md` (23 report entries)
   - `sections/balance-sheet.md` (23 report entries)
   - `sections/cash-flows.md` (23 report entries)
   - `sections/reporting-environment.md` (23 report entries)

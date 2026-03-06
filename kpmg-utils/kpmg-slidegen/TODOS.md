@@ -11,10 +11,10 @@ verification-state: verified-with-open-gaps
 
 ## Status Snapshot (2026-03-06)
 
-- Verified directly this review: `npm run qa`, `npm run test:qa:golden`, `npm run test:validation:failure`, `npm run test:drift:ast:strict`, `node scripts/test-hardcoded-layout-values.mjs`, and targeted pagination regressions.
+- Verified directly this review: the public repo surface is centered on `npm run qa`, the `test:*` harness lanes that still exist in `package.json`, `skill:*` bundle maintenance commands, and targeted local audit scripts such as `node scripts/test-hardcoded-layout-values.mjs`.
 - Canonical geometry/fail-fast contract work is landed, but fallback-style geometry access still exists and the hardcoded-layout guard is not yet wired into `npm run qa`.
-- `decks/qa-golden-all-layouts.deckSpec.json` is restored and `npm run test:qa:golden` passes; `decks/validation-failing-example.deckSpec.json` is still missing, so `npm run test:validation:failure` fails with `ENOENT`.
-- Skill mode policy, prompt templates, and the new-builder workflow are still incomplete.
+- Expected-failure validation coverage is still incomplete because there is no maintained invalid-fixture regression lane on the current public script surface.
+- Skill mode policy and prompt templates are still incomplete, and any future new-builder workflow remains intentionally deferred until layout onboarding is supported again.
 - `Next`, `Parked By Decision`, and `CI And Release` remain mostly open; several items have partial groundwork, but no additional items in those sections are fully complete yet.
 
 ## Completed Baseline
@@ -33,14 +33,14 @@ verification-state: verified-with-open-gaps
 - [ ] Refactor audit follow-up (2026-03-04): finish removing hardcoded/fallback geometry paths so builders/pagination consume canonical `ctx.geometry` only. Status 2026-03-06: the canonical contract landed, but `node scripts/test-hardcoded-layout-values.mjs` still reports 16 `geometry || {}` violations.
 - [ ] Add `scripts/test-hardcoded-layout-values.mjs` to `package.json` and include it in `npm run qa` as a blocking check. Status 2026-03-06: the script exists and fails usefully, but `npm run qa` still skips it.
 - [ ] Remove fallback geometry constants and paths in hot spots: `generator/helpers/one-column-layout.js`, `generator/helpers/two-column-layout.js`, `generator/runtime/paginate.js`, `generator/builders/cover-slide.js`, `generator/builders/contents-slide.js`, `generator/builders/divider-slide.js`, `generator/builders/title-strapline-4-boxes.js`, `generator/builders/analysis-bridge.js`, `generator/builders/business-overview.js`, `generator/builders/analysis-narrow-table.js`. Status 2026-03-06: some files now use strict geometry resolvers, but the listed hotspots still include fallback-style entry points.
-- [ ] Restore the remaining missing validation fixture so regression tests run end-to-end: `decks/validation-failing-example.deckSpec.json`. Status 2026-03-06: `decks/qa-golden-all-layouts.deckSpec.json` is restored and `npm run test:qa:golden` passes.
+- [ ] Add a maintained invalid-fixture regression path so expected-failure validation behavior is covered again. Status 2026-03-06: the repo no longer exposes a public `test:validation:failure` lane, so the replacement needs both a fixture and a supported command path.
 - [ ] Make `npm run qa` enforce full gating (at minimum: contracts, registry contracts, smoke, hardcoded geometry drift, strict AST drift, golden QA). Status 2026-03-06: `qa` currently runs contracts, registry contracts, smoke, theme strict drift, and grep drift only.
 - [ ] Decide and document strict drift policy: either keep `test:drift:ast:strict` as blocking and pay down findings, or scope/tune the rule set to intentional exclusions. Status 2026-03-06: `npm run test:drift:ast:strict` still fails on numeric literals in `generator/runtime/theme.js`.
 - [ ] Preserve and enforce fail-fast posture for geometry/policy/slot contracts while removing silent fallback paths. Status 2026-03-06: fail-fast contract checks are in place, but the silent/fallback geometry paths are not fully gone yet.
 - [x] Keep targeted regression coverage green for pagination behaviors (one-column merge, nested bullets, contents continuation, table metadata persistence, split QA reporting). Status 2026-03-06: the targeted scripts pass individually, though there is still no aggregate `test:pagination:all` gate.
 
 - [x] Add one golden QA fixture for regression checks on report shape.
-- [ ] Restore the canonical failing validation fixture used by `npm run test:validation:failure`. Status 2026-03-06: `decks/validation-failing-legacy-nested-bullets.deckSpec.json` exists, but `decks/validation-failing-example.deckSpec.json` is still missing.
+- [ ] Reintroduce invalid-fixture coverage only as part of a supported public harness lane. Status 2026-03-06: legacy failing deckSpecs still exist, but there is no maintained public command for this coverage area.
 - [x] Create `scripts/sync-skill-bundle.mjs` to sync generator/runtime/templates/docs into `skills/kpmg-slides/assets` and `skills/kpmg-slides/references`.
 - [x] Add `npm` commands for skill sync and drift checks (`skill:sync`, `skill:verify`).
 - [x] Add a skill-only smoke test that runs from `skills/kpmg-slides` using only synced skill files and writes deterministic artifacts.
@@ -50,7 +50,7 @@ verification-state: verified-with-open-gaps
 - [x] Vendor local slides postprocess runtime into repo and bundle it into skill sync output.
 - [ ] Expand `skills/kpmg-slides/SKILL.md` with explicit mode policy: compile-from-context, guided-planning, and surgical-revision.
 - [ ] Add copy-paste prompt templates for each skill mode in `skills/kpmg-slides/references/`.
-- [ ] Add a documented “new builder from scratch” workflow: define layout type in both template contracts, implement/register builder, add pagination hooks, update schema/skill references, add regression deck example, and validate with QA + visual checks.
+- [ ] Add a documented “new builder from scratch” workflow only after layout authoring is intentionally reintroduced as a supported repo capability.
 
 ## Next
 

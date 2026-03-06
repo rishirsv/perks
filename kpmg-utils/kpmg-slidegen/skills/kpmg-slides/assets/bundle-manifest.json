@@ -1,7 +1,25 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-03-06T16:02:24.796Z",
+  "generatedAt": "2026-03-06T19:57:33.338Z",
   "entries": [
+    {
+      "source": "skills/kpmg-slides/agents/openai.yaml",
+      "target": "skills/kpmg-slides/agents/openai.yaml",
+      "size": 331,
+      "sha256": "eaabea833ee552b39ac3f630b9aa6822be70348b61239109a04cf0d074298130"
+    },
+    {
+      "source": "skills/kpmg-slides/assets/kpmg-slides-small.png",
+      "target": "skills/kpmg-slides/assets/kpmg-slides-small.png",
+      "size": 694,
+      "sha256": "899c678d3b945bfb99a5d1b6bec214d24ee35e129758a8fbe92f76ae3f843f28"
+    },
+    {
+      "source": "skills/kpmg-slides/assets/kpmg-slides.png",
+      "target": "skills/kpmg-slides/assets/kpmg-slides.png",
+      "size": 11938,
+      "sha256": "a0d7292edebccc0c273faa3ad2b6047a342239833cd52315217d3f53d5629b79"
+    },
     {
       "source": "generator/app/artifacts.js",
       "target": "skills/kpmg-slides/assets/slidegen/generator/app/artifacts.js",
@@ -29,8 +47,8 @@
     {
       "source": "generator/app/qa-report.js",
       "target": "skills/kpmg-slides/assets/slidegen/generator/app/qa-report.js",
-      "size": 27024,
-      "sha256": "0c133091a7c7b643768d0f5e70e547e50620ef17a049a5f7b5f697c90bbc5413"
+      "size": 27052,
+      "sha256": "20143f92b8c47bfb5045ec9d6918df534096501883b195ef8f449bd197e0f03d"
     },
     {
       "source": "generator/app/strict-overflow.js",
@@ -222,19 +240,19 @@
       "source": "generator/postprocess/slides-adapter.js",
       "target": "skills/kpmg-slides/assets/slidegen/generator/postprocess/slides-adapter.js",
       "size": 7327,
-      "sha256": "fe576869372c14125dcd9b7acef1ea8e5ab72676505eb73c36c60925b898e1dd"
+      "sha256": "ad0c46f8b91c18af24ac95579167fefb40d13c25a14f80e09f285c81ce13c17c"
     },
     {
       "source": "generator/postprocess/slides-runtime/create_montage.py",
       "target": "skills/kpmg-slides/assets/slidegen/generator/postprocess/slides-runtime/create_montage.py",
-      "size": 9060,
-      "sha256": "5c55879016212d79dbbd7f6090b6ac90987ccb1fc66a99a8125626b9ca61ba04"
+      "size": 8786,
+      "sha256": "20b7eacd5eee3c7f4c9c7d6139e6c108b7e0274b2438320b1a3eeb0cc9d6ae5f"
     },
     {
       "source": "generator/postprocess/slides-runtime/ensure_raster_image.py",
       "target": "skills/kpmg-slides/assets/slidegen/generator/postprocess/slides-runtime/ensure_raster_image.py",
-      "size": 1795,
-      "sha256": "caab3798b8f1a9b507cb69292e993539cd19a33b24c1793f17d904f6498a2bd6"
+      "size": 1755,
+      "sha256": "f45eef15aa0169e1a14079ba5c62eba335871d16e439b10c38202c0112d10fe8"
     },
     {
       "source": "generator/postprocess/slides-runtime/render_slides.py",
@@ -475,6 +493,78 @@
       "target": "skills/kpmg-slides/assets/templates/presets/presets.manifest.json",
       "size": 959,
       "sha256": "dd81d10ce3200b3de6ac2af426aa883b363f03dc2080b4de04071a1102f45349"
+    },
+    {
+      "source": "skills/kpmg-slides/package-lock.json",
+      "target": "skills/kpmg-slides/package-lock.json",
+      "size": 7203,
+      "sha256": "0d8491d4fb14fa6fce905bb20c2c9d218bd8570b68c00ad907336932c73e18ad"
+    },
+    {
+      "source": "skills/kpmg-slides/package.json",
+      "target": "skills/kpmg-slides/package.json",
+      "size": 237,
+      "sha256": "edb6b369f60c2ad193d55c0de0cd86ddc43f54146a4a6368219577bf5cb57efc"
+    },
+    {
+      "source": "skills/kpmg-slides/references/charting-playbook.md",
+      "target": "skills/kpmg-slides/references/charting-playbook.md",
+      "size": 7229,
+      "sha256": "a3963fbbb17d845bb782fb4809c5df7ada73c559ac31d78c96b4cadc7cfb5283"
+    },
+    {
+      "source": "skills/kpmg-slides/references/deckspec.schema.json",
+      "target": "skills/kpmg-slides/references/deckspec.schema.json",
+      "size": 26108,
+      "sha256": "538614d141d8e67bd58d63d8acbe6aadebf50e1a0c3d4126bdc3e0d700005dfa"
+    },
+    {
+      "source": "skills/kpmg-slides/references/INDEX.md",
+      "target": "skills/kpmg-slides/references/INDEX.md",
+      "size": 1228,
+      "sha256": "baef0d1a7afe8e5d4f4fed0a3c5a0d1ea3553b46b657ad68d3be6a0d9dbe4469"
+    },
+    {
+      "source": "skills/kpmg-slides/references/layout-policy.md",
+      "target": "skills/kpmg-slides/references/layout-policy.md",
+      "size": 3692,
+      "sha256": "46bf7f99385a37e01393fae67f20d354a85ca642971f9b5e0d0d625326702e1e"
+    },
+    {
+      "source": "skills/kpmg-slides/references/quality_assurance.md",
+      "target": "skills/kpmg-slides/references/quality_assurance.md",
+      "size": 8717,
+      "sha256": "901426798644036fbea759fc82213d91a3457b498873492f653f76ef0a9d70ba"
+    },
+    {
+      "source": "skills/kpmg-slides/references/slide-contract.md",
+      "target": "skills/kpmg-slides/references/slide-contract.md",
+      "size": 10992,
+      "sha256": "4ebb595013e7da07518e7f9a798991068f8a29e595e8aea3e02a12a8d6ed4ac4"
+    },
+    {
+      "source": "skills/kpmg-slides/references/writing-standards.md",
+      "target": "skills/kpmg-slides/references/writing-standards.md",
+      "size": 5154,
+      "sha256": "4d807d714afe8459fafcd4c05ea0dd2e1282ae66a324e440933b61a87fa2afb2"
+    },
+    {
+      "source": "skills/kpmg-slides/requirements.txt",
+      "target": "skills/kpmg-slides/requirements.txt",
+      "size": 331,
+      "sha256": "00c7264b60f1c5e8e73e2e360b84988ab12c67708fb88c33b7d628393692a180"
+    },
+    {
+      "source": "skills/kpmg-slides/scripts/run_kpmg_slides.sh",
+      "target": "skills/kpmg-slides/scripts/run_kpmg_slides.sh",
+      "size": 3638,
+      "sha256": "04c0e339fd2e24c66ac9f568bb58b294cca9eb949aeaaaa5f7cfd18e5272e570"
+    },
+    {
+      "source": "skills/kpmg-slides/SKILL.md",
+      "target": "skills/kpmg-slides/SKILL.md",
+      "size": 19043,
+      "sha256": "bcaa427d985d898228a3308f462a498c1d5707172e92bb22ee7ae2730b0b95be"
     }
   ]
 }

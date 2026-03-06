@@ -30,8 +30,24 @@ const FILE_SYNC_MAP = [
   },
 ];
 
+const NATIVE_FILE_MANIFEST_PATHS = [
+  path.join(SKILL_ROOT, 'SKILL.md'),
+  path.join(SKILL_ROOT, 'agents', 'openai.yaml'),
+  path.join(SKILL_ROOT, 'assets', 'kpmg-slides-small.png'),
+  path.join(SKILL_ROOT, 'assets', 'kpmg-slides.png'),
+  path.join(SKILL_ROOT, 'package-lock.json'),
+  path.join(SKILL_ROOT, 'package.json'),
+  path.join(SKILL_ROOT, 'requirements.txt'),
+  path.join(SKILL_ROOT, 'scripts', 'run_kpmg_slides.sh'),
+];
+
+const NATIVE_DIRECTORY_MANIFEST_PATHS = [
+  path.join(SKILL_ROOT, 'references'),
+];
+
 const STALE_PATHS = [
   path.join(SKILL_ROOT, 'assets', 'fixtures'),
+  path.join(SKILL_ROOT, 'assets', 'slidegen', 'generator', 'postprocess', 'slides-runtime', '__pycache__'),
 ];
 
 function relativeToRepo(absPath) {
@@ -102,6 +118,29 @@ function syncFiles(fileMap) {
     copyFile(source, target);
     return { source, target };
   });
+}
+
+function collectManifestOnlyPairs(paths) {
+  const pairs = [];
+  for (const manifestPath of paths) {
+    if (!fs.existsSync(manifestPath)) {
+      throw new Error(`Missing required bundle-native path: ${relativeToRepo(manifestPath)}`);
+    }
+    const stat = fs.statSync(manifestPath);
+    if (stat.isDirectory()) {
+      const files = listFilesRecursively(manifestPath, { includeDotfiles: true });
+      for (const filePath of files) {
+        pairs.push({ source: filePath, target: filePath });
+      }
+      continue;
+    }
+    if (stat.isFile()) {
+      pairs.push({ source: manifestPath, target: manifestPath });
+      continue;
+    }
+    throw new Error(`Unsupported bundle-native manifest path: ${relativeToRepo(manifestPath)}`);
+  }
+  return pairs;
 }
 
 function resolveFileSyncMap(fileMap) {
@@ -181,10 +220,14 @@ function main() {
   const resolvedFileSyncMap = resolveFileSyncMap(FILE_SYNC_MAP);
   const dirPairs = DIRECTORY_SYNC_MAP.flatMap(({ source, target }) => syncDirectory(source, target));
   const filePairs = syncFiles(resolvedFileSyncMap);
+  const nativePairs = collectManifestOnlyPairs([
+    ...NATIVE_FILE_MANIFEST_PATHS,
+    ...NATIVE_DIRECTORY_MANIFEST_PATHS,
+  ]);
   pruneManagedFileTargets(resolvedFileSyncMap);
   removeStalePaths(STALE_PATHS);
   removeMacMetadata(SKILL_ROOT);
-  const entries = buildManifestEntries([...dirPairs, ...filePairs]);
+  const entries = buildManifestEntries([...dirPairs, ...filePairs, ...nativePairs]);
   writeManifest(entries);
   console.log(`Skill bundle sync complete: ${relativeToRepo(SKILL_ROOT)}`);
   console.log(`Manifest: ${relativeToRepo(MANIFEST_PATH)} (${entries.length} entries)`);

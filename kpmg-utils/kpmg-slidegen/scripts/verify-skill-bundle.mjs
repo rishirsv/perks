@@ -20,6 +20,9 @@ const REQUIRED_POSTPROCESS_FILES = [
   'ensure_raster_image.py',
 ];
 const SKIP_SMOKE = process.argv.includes('--skip-smoke');
+const MANIFEST_COVERAGE_EXEMPTIONS = new Set([
+  path.resolve(MANIFEST_PATH),
+]);
 
 function sha256(filePath) {
   const hash = crypto.createHash('sha256');
@@ -98,6 +101,31 @@ function verifyManifest() {
     throw new Error(
       `Skill bundle drift detected (${mismatches.length} issue(s)). Run: npm run skill:sync\n${mismatches
         .slice(0, 20)
+        .join('\n')}`,
+    );
+  }
+}
+
+function verifyManifestCoverage() {
+  const manifest = readJson(MANIFEST_PATH);
+  const coveredTargets = new Set(
+    (Array.isArray(manifest?.entries) ? manifest.entries : []).map((entry) =>
+      path.resolve(path.join(REPO_ROOT, entry.target)),
+    ),
+  );
+  const uncovered = listFilesRecursively(SKILL_ROOT).filter((filePath) => {
+    const resolved = path.resolve(filePath);
+    if (MANIFEST_COVERAGE_EXEMPTIONS.has(resolved)) return false;
+    if (resolved.includes(`${path.sep}node_modules${path.sep}`)) return false;
+    if (resolved.includes(`${path.sep}__pycache__${path.sep}`)) return false;
+    return !coveredTargets.has(resolved);
+  });
+
+  if (uncovered.length) {
+    throw new Error(
+      `Skill bundle manifest coverage is incomplete (${uncovered.length} file(s)).\n${uncovered
+        .slice(0, 30)
+        .map((filePath) => path.relative(REPO_ROOT, filePath))
         .join('\n')}`,
     );
   }
@@ -203,6 +231,7 @@ function runSmoke() {
 
 function main() {
   verifyManifest();
+  verifyManifestCoverage();
   verifyNoAbsolutePaths();
   verifyOpenAiMetadata();
   verifyBundledPostprocessRuntime();
