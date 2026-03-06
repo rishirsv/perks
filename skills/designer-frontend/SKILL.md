@@ -14,6 +14,16 @@ Before following any other workflow in this skill:
 
 If `docs/DESIGN.md` does not exist, do not create or refresh it silently. Use `design-init` only when the user explicitly asks for design-context setup or refresh.
 
+## Hard Constraints
+
+Read [anti-defaults](references/anti-defaults.md) before choosing a layout, type system, visual language, or dashboard structure.
+
+Treat that reference as binding guidance for this skill:
+- ban default AI UI moves instead of refining them
+- prefer the harder, cleaner option when a choice feels templated
+- use the "normal" defaults there for structural UI decisions unless the product context justifies something more opinionated
+- never add decorative patterns from habit; every visual decision must earn its place in the product
+
 ## Use This Skill For
 
 - Creating a new frontend surface from scratch
@@ -148,6 +158,7 @@ If you showed this interface to someone and said "AI made this," would they beli
 A distinctive interface should make someone ask "how was this made?" not "which AI made this?"
 
 Review the DON'T guidelines above. They are the fingerprints of generic AI-generated work.
+Also review [anti-defaults](references/anti-defaults.md) as the explicit ban list for common dashboard and app-shell failure modes.
 
 ## Workflow
 
@@ -162,7 +173,7 @@ Follow this order:
    - the transition layer
 5. Use the references only where they sharpen the work.
 6. Implement the interface in production-ready code.
-7. Review the result against the anti-patterns list before stopping.
+7. Review the result against the anti-patterns list and [anti-defaults](references/anti-defaults.md) before stopping.
 
 Match implementation complexity to the aesthetic vision. Maximalist designs can justify richer motion and more elaborate visual systems. Minimalist or refined designs require restraint, spacing precision, and subtle details.
 
