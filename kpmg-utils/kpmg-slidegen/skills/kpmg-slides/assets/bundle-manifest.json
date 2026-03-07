@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-03-07T21:35:17.377Z",
+  "generatedAt": "2026-03-07T22:39:57.238Z",
   "entries": [
     {
       "source": "skills/kpmg-slides/agents/openai.yaml",
@@ -311,8 +311,8 @@
     {
       "source": "generator/runtime/render-context.js",
       "target": "skills/kpmg-slides/assets/slidegen/generator/runtime/render-context.js",
-      "size": 5789,
-      "sha256": "ae3b8c0e8f45e0138fdb5e9ac89a524c071624dbe520c36aa78175c83a68f6a8"
+      "size": 6197,
+      "sha256": "b914c906439a3fe5149f492c50d854b8389f6e29ea54397fd7bd28714808b78e"
     },
     {
       "source": "generator/runtime/render-deck.js",

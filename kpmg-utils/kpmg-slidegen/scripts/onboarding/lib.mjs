@@ -13,6 +13,8 @@ import {
 } from '../../generator/runtime/template-package.js';
 import { REPO_ROOT } from '../support.mjs';
 
+export { REPO_ROOT };
+
 export const ONBOARDING_LAYOUT_ROOT =
   process.env.ONBOARDING_LAYOUT_ROOT || path.join(REPO_ROOT, 'onboarding', 'layouts');
 export const ONBOARDING_OUTPUT_ROOT =
@@ -112,6 +114,46 @@ export function writeText(filePath, value) {
  */
 export function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
+}
+
+/**
+ * Normalize a PNG to the fixed comparison canvas used by onboarding.
+ *
+ * @param {object} params
+ * @returns {string}
+ */
+export function normalizePng({
+  inputPath,
+  outputPath,
+  width = DEFAULT_PREVIEW_WIDTH,
+  height = DEFAULT_PREVIEW_HEIGHT,
+}) {
+  const normalizeScript = path.join(REPO_ROOT, 'scripts', 'onboarding', 'normalize_png.py');
+  ensureDir(path.dirname(outputPath));
+  const normalize = spawnSync(
+    'python3',
+    [
+      normalizeScript,
+      '--input',
+      inputPath,
+      '--output',
+      outputPath,
+      '--width',
+      String(width),
+      '--height',
+      String(height),
+    ],
+    {
+      cwd: REPO_ROOT,
+      encoding: 'utf8',
+    },
+  );
+  if (normalize.status !== 0) {
+    throw new Error(
+      `Failed to normalize PNG.\n${normalize.stdout || ''}\n${normalize.stderr || ''}`.trim(),
+    );
+  }
+  return outputPath;
 }
 
 /**
@@ -446,31 +488,12 @@ export function captureReferenceSlide({
     if (!fs.existsSync(sourcePng)) {
       throw new Error(`Reference slide ${slideNumber} was not found in rendered preview output.`);
     }
-    ensureDir(path.dirname(referencePngPath));
-    const normalizeScript = path.join(REPO_ROOT, 'scripts', 'onboarding', 'normalize_png.py');
-    const normalize = spawnSync(
-      'python3',
-      [
-        normalizeScript,
-        '--input',
-        sourcePng,
-        '--output',
-        referencePngPath,
-        '--width',
-        String(width),
-        '--height',
-        String(height),
-      ],
-      {
-        cwd: REPO_ROOT,
-        encoding: 'utf8',
-      },
-    );
-    if (normalize.status !== 0) {
-      throw new Error(
-        `Failed to normalize reference PNG.\n${normalize.stdout || ''}\n${normalize.stderr || ''}`.trim(),
-      );
-    }
+    normalizePng({
+      inputPath: sourcePng,
+      outputPath: referencePngPath,
+      width,
+      height,
+    });
     return referencePngPath;
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });

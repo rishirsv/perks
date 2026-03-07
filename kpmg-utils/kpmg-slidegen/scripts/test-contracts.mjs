@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { buildRenderContext } from '../generator/runtime/render-context.js';
-import { loadTemplatePackage } from '../generator/runtime/template-package.js';
+import { getSlideRegistry } from '../generator/runtime/slide-registry.js';
+import { cloneTemplatePackage, loadTemplatePackage } from '../generator/runtime/template-package.js';
 import { REPO_ROOT } from './support.mjs';
 
 const templatePackage = loadTemplatePackage('kpmg-diligence');
@@ -153,5 +154,41 @@ for (const type of registryTypes) {
     `Builder context keys mismatch for ${type}`,
   );
 }
+
+const customBackCoverType = 'customBackCoverContractSmoke';
+const builtinBackCoverEntry = getSlideRegistry().get('backCover');
+const customTemplatePackage = cloneTemplatePackage(templatePackage, {
+  layouts: {
+    types: {
+      [customBackCoverType]: JSON.parse(
+        JSON.stringify(templatePackage.layouts.types.backCover),
+      ),
+    },
+  },
+});
+const customCtx = buildRenderContext({
+  templatePackage: customTemplatePackage,
+  options: {
+    slideRegistryOverrides: {
+      [customBackCoverType]: {
+        ...builtinBackCoverEntry,
+        builderId: customBackCoverType,
+      },
+    },
+  },
+});
+const customBackCoverBuilderCtx = customCtx.buildBuilderCtx({
+  slideSpec: { type: customBackCoverType },
+  registryType: customBackCoverType,
+  options: { ...customCtx.options, footerValues: {} },
+});
+assert.ok(
+  customBackCoverBuilderCtx.assets?.closingLogoWhite,
+  'Custom backCover override types should inherit required back-cover assets.',
+);
+assert.ok(
+  customBackCoverBuilderCtx.assets?.closingSocialLinkedin,
+  'Custom backCover override types should inherit social icon assets.',
+);
 
 console.log('Contract lane passed.');

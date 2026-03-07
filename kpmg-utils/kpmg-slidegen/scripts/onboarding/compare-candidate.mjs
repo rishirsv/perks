@@ -4,6 +4,7 @@ import {
   compareCandidateImages,
   getLayoutPaths,
   loadSourceRecord,
+  normalizePng,
   parseArgMap,
   writeSourceRecord,
 } from './lib.mjs';
@@ -26,7 +27,10 @@ if (!fs.existsSync(paths.candidatePreviewPngPath)) {
   throw new Error(`Missing candidate preview PNG: ${paths.candidatePreviewPngPath}`);
 }
 
-fs.copyFileSync(paths.candidatePreviewPngPath, paths.candidatePngPath);
+normalizePng({
+  inputPath: paths.candidatePreviewPngPath,
+  outputPath: paths.candidatePngPath,
+});
 const { scorecard } = compareCandidateImages({
   referencePngPath: paths.referencePngPath,
   candidatePngPath: paths.candidatePngPath,
