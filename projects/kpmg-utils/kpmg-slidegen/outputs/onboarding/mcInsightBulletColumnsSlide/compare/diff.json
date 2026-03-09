@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "metrics": {
+    "width": 1600,
+    "height": 900,
+    "changedPixels": 296080,
+    "totalPixels": 1440000,
+    "changedPixelRatio": 0.205611,
+    "meanAbs": 14.370321,
+    "rms": 51.941181,
+    "maxAbs": 255
+  }
+}

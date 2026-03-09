@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "title": "Draft mcThreeBulletSlide",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcThreeBulletSlide",
+      "title": "Title",
+      "strapline": "Subtitle",
+      "columns": [
+        {
+          "heading": "Bullet #1",
+          "body": [
+            "Bullet 1 Description"
+          ],
+          "iconAsset": "mc-three-bullet-icon-1.png"
+        },
+        {
+          "heading": "Bullet #2",
+          "body": [
+            "Bullet 2 Description"
+          ],
+          "iconAsset": "mc-three-bullet-icon-2.png"
+        },
+        {
+          "heading": "Bullet #3",
+          "body": [
+            "Bullet 3 Description"
+          ],
+          "iconAsset": "mc-three-bullet-icon-3.png"
+        }
+      ]
+    }
+  ]
+}

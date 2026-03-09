@@ -45,3 +45,35 @@ Use these rules when layout choice is close and continuation behavior matters:
 1. `oneColumnText`, `analysisWideChart2ColsText`, and `analysisWideChartTableText` drop `callouts` on continuation slides. Keep must-retain points in body text, not callouts.
 2. `businessOverview` drops `chart` on continuation slides. If chart context is essential on every page, prefer splitting manually into separate slides instead of relying on auto-pagination.
 3. `contents` page ranges are recomputed at runtime; choose this layout only when section ordering is stable enough for automatic page-range regeneration.
+
+## Onboarded Canonical Types
+
+- `mcProjectOverviewMetrics`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcVisionStrategyFramework`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcGuidingPrinciples`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcThreeQuestions`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcScopeStatement`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcExecutiveSummaryKeyValue`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcExecutiveSummaryValueProps`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcNumberedBulletColumnsSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcInsightBulletColumnsSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcStageBulletGridSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcFiveBulletSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcFourBulletSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcThreeBulletSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcTwoBulletSlide`: canonical onboarded layout based on `titleStrapline4TextBoxes`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.
+
+- `mcContentsAlt`: canonical onboarded layout based on `contents`. Use the same selection heuristics as the base family unless repo docs for this layout say otherwise.

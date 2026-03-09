@@ -1,0 +1,88 @@
+{
+  "description": "Draft layout mcStageBulletGridSlide based on titleStrapline4TextBoxes",
+  "geometry": {
+    "titleBox": {
+      "x": 0.42,
+      "y": 0.3,
+      "w": 2.4,
+      "h": 0.58
+    },
+    "straplineBox": {
+      "x": 0.42,
+      "y": 1.1,
+      "w": 2.6,
+      "h": 0.34
+    },
+    "columnBoxes": [
+      {
+        "x": 0.6067,
+        "y": 1.6364,
+        "w": 3.03,
+        "h": 5.06
+      },
+      {
+        "x": 3.6367,
+        "y": 1.6364,
+        "w": 3.03,
+        "h": 5.06
+      },
+      {
+        "x": 6.6667,
+        "y": 1.6364,
+        "w": 3.03,
+        "h": 5.06
+      },
+      {
+        "x": 9.6967,
+        "y": 1.6364,
+        "w": 3.03,
+        "h": 5.06
+      }
+    ]
+  },
+  "slots": {
+    "columns": {
+      "kind": "columns",
+      "required": true,
+      "minItems": 4,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "cards",
+        "keepTogether": true,
+        "priority": "high"
+      }
+    },
+    "strapline": {
+      "kind": "text",
+      "required": true,
+      "minChars": 3,
+      "maxChars": 120,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "medium"
+      }
+    },
+    "title": {
+      "kind": "text",
+      "required": true,
+      "minChars": 3,
+      "maxChars": 60,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "medium"
+      }
+    }
+  },
+  "templateLayout": "Draft mcStageBulletGridSlide",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcStageBulletGridSlide",
+  "family": "titleStrapline4TextBoxes"
+}

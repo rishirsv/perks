@@ -1204,8 +1204,495 @@
         },
         {
           "$ref": "#/$defs/slideBackCover"
+        },
+        {
+          "$ref": "#/$defs/slideMcContentsAlt"
+        },
+        {
+          "$ref": "#/$defs/slideMcTwoBulletSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcThreeBulletSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcFourBulletSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcFiveBulletSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcStageBulletGridSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcInsightBulletColumnsSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcNumberedBulletColumnsSlide"
+        },
+        {
+          "$ref": "#/$defs/slideMcExecutiveSummaryValueProps"
+        },
+        {
+          "$ref": "#/$defs/slideMcExecutiveSummaryKeyValue"
+        },
+        {
+          "$ref": "#/$defs/slideMcScopeStatement"
+        },
+        {
+          "$ref": "#/$defs/slideMcThreeQuestions"
+        },
+        {
+          "$ref": "#/$defs/slideMcGuidingPrinciples"
+        },
+        {
+          "$ref": "#/$defs/slideMcVisionStrategyFramework"
+        },
+        {
+          "$ref": "#/$defs/slideMcProjectOverviewMetrics"
         }
       ]
+    },
+    "slideMcContentsAlt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "sections"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcContentsAlt"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 40
+        },
+        "sections": {
+          "$ref": "#/$defs/contentsSectionsMin3"
+        }
+      }
+    },
+    "slideMcTwoBulletSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcTwoBulletSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcThreeBulletSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcThreeBulletSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcFourBulletSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcFourBulletSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcFiveBulletSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcFiveBulletSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcStageBulletGridSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcStageBulletGridSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcInsightBulletColumnsSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcInsightBulletColumnsSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcNumberedBulletColumnsSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcNumberedBulletColumnsSlide"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcExecutiveSummaryValueProps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcExecutiveSummaryValueProps"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcExecutiveSummaryKeyValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcExecutiveSummaryKeyValue"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcScopeStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcScopeStatement"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcThreeQuestions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcThreeQuestions"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcGuidingPrinciples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcGuidingPrinciples"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcVisionStrategyFramework": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcVisionStrategyFramework"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
+    },
+    "slideMcProjectOverviewMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "columns"
+      ],
+      "properties": {
+        "type": {
+          "const": "mcProjectOverviewMetrics"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "bodyStyle": {
+          "$ref": "#/$defs/bodyStyle"
+        },
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
+        }
+      }
     }
   }
 }

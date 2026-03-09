@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "title": "Draft mcContentsAlt",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcContentsAlt",
+      "title": "Table of\ncontents",
+      "sections": [
+        {
+          "number": "01",
+          "title": "Agenda",
+          "pageRange": "3"
+        },
+        {
+          "number": "02",
+          "title": "Executive summary",
+          "pageRange": "9"
+        },
+        {
+          "number": "03",
+          "title": "Vision & objectives",
+          "pageRange": "16"
+        },
+        {
+          "number": "04",
+          "title": "Bullet points",
+          "pageRange": "36"
+        },
+        {
+          "number": "05",
+          "title": "Timelines & project plan",
+          "pageRange": "82"
+        },
+        {
+          "number": "06",
+          "title": "Dashboards & tables",
+          "pageRange": "134"
+        },
+        {
+          "number": "07",
+          "title": "Line graphs",
+          "pageRange": "184"
+        },
+        {
+          "number": "08",
+          "title": "Pie charts",
+          "pageRange": "193"
+        },
+        {
+          "number": "09",
+          "title": "Bar charts",
+          "pageRange": "202"
+        },
+        {
+          "number": "10",
+          "title": "Scatter & other charts",
+          "pageRange": "262"
+        },
+        {
+          "number": "11",
+          "title": "Fees & KPIs",
+          "pageRange": "275"
+        },
+        {
+          "number": "12",
+          "title": "Map",
+          "pageRange": "286"
+        },
+        {
+          "number": "13",
+          "title": "Other infographics",
+          "pageRange": "297"
+        }
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { parseArgMap } from './lib.mjs';
 
 function usage() {
   throw new Error(
-    'Usage: node scripts/onboarding/run-layout-onboarding.mjs --source-pptx <file.pptx> --slide <n> --layout-id <camelCaseId> [--family <existingType>] [--extract-seed] [--with-montage] [--stop-after init|render|compare] [--force]',
+    'Usage: node scripts/onboarding/run-layout-onboarding.mjs --source-pptx <file.pptx> --slide <n> --layout-id <camelCaseId> [--template <name>] [--family <existingType>] [--extract-seed] [--with-montage] [--stop-after init|render|compare] [--force]',
   );
 }
 
@@ -43,6 +43,7 @@ const initArgs = [
   '--layout-id',
   String(layoutId),
 ];
+if (args.get('template')) initArgs.push('--template', String(args.get('template')));
 if (args.get('family')) initArgs.push('--family', String(args.get('family')));
 if (args.get('extract-seed')) initArgs.push('--extract-seed');
 if (args.get('force')) initArgs.push('--force');

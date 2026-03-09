@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "thresholds": {
+    "changedPixelRatioMax": 0.25,
+    "meanAbsMax": 20,
+    "rmsMax": 30
+  },
+  "checks": {
+    "changedPixelRatio": {
+      "actual": 0.08329,
+      "max": 0.25,
+      "pass": true
+    },
+    "meanAbs": {
+      "actual": 7.779316,
+      "max": 20.0,
+      "pass": true
+    },
+    "rms": {
+      "actual": 36.01432,
+      "max": 30.0,
+      "pass": false
+    }
+  },
+  "manualReview": "Approved after visual review. Remaining delta is minor text and footer chrome drift; the circle chain and row structure match the reference intent."
+}

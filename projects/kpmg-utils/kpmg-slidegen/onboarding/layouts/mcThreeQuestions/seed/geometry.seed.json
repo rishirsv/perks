@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 29,
+  "slideTarget": "slides/slide29.xml",
+  "summary": {
+    "shapeCount": 10,
+    "text": 8,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 1
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.111111,
+        "y": 1.847827,
+        "w": 5.625,
+        "h": 4.593205
+      },
+      "name": "Arrow: Pentagon 57",
+      "id": "58",
+      "textPreview": "Key questions",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.597222,
+        "y": 1.847827,
+        "w": 5.634444,
+        "h": 4.593205
+      },
+      "name": "Arrow: Pentagon 5",
+      "id": "6",
+      "textPreview": "Situation and complication [Insert description e.g., [Client] is driving a focus strategy process within the solutions division and is currently clarifying stra",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.567232,
+        "y": 2.55106,
+        "w": 5.002212,
+        "h": 0.706836
+      },
+      "name": "TextBox 59",
+      "id": "60",
+      "textPreview": "[Insert key question e.g., How do we design an implementation model that fits [Client] and realizes the full impact of the new strategy?]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.567232,
+        "y": 4.152334,
+        "w": 5.002212,
+        "h": 0.235612
+      },
+      "name": "TextBox 60",
+      "id": "61",
+      "textPreview": "[Insert key question]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.567232,
+        "y": 5.517997,
+        "w": 5.002212,
+        "h": 0.235612
+      },
+      "name": "TextBox 255",
+      "id": "256",
+      "textPreview": "[Insert key question]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 6.883611,
+        "y": 2.676417,
+        "w": 0.456121,
+        "h": 0.456121
+      },
+      "name": "Freeform: Shape 9",
+      "id": "4",
+      "textPreview": "1",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 6.883611,
+        "y": 4.04208,
+        "w": 0.456121,
+        "h": 0.456121
+      },
+      "name": "Freeform: Shape 14",
+      "id": "32",
+      "textPreview": "2",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 6.883611,
+        "y": 5.407743,
+        "w": 0.456121,
+        "h": 0.456121
+      },
+      "name": "Freeform: Shape 19",
+      "id": "37",
+      "textPreview": "3",
+      "relationship": null
+    }
+  ]
+}

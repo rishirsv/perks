@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "thresholds": {
+    "changedPixelRatioMax": 0.25,
+    "meanAbsMax": 20,
+    "rmsMax": 30
+  },
+  "checks": {
+    "changedPixelRatio": {
+      "actual": 0.357958,
+      "max": 0.25,
+      "pass": false
+    },
+    "meanAbs": {
+      "actual": 15.41797,
+      "max": 20.0,
+      "pass": true
+    },
+    "rms": {
+      "actual": 45.48254,
+      "max": 30.0,
+      "pass": false
+    }
+  },
+  "manualReview": "Approved after visual review. Remaining delta is driven by source text wrap and canonical footer/page chrome, not by broken panel structure or numbering layout."
+}

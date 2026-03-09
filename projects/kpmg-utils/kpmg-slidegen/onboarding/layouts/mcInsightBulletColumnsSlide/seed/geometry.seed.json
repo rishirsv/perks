@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 18,
+  "slideTarget": "slides/slide18.xml",
+  "summary": {
+    "shapeCount": 10,
+    "text": 2,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 7
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.0,
+        "y": 5.729199,
+        "w": 13.333333,
+        "h": 0.954624
+      },
+      "name": "Rectangle 7",
+      "id": "8",
+      "textPreview": "High value insight",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 6.496697,
+        "y": -4.151438,
+        "w": 0.339937,
+        "h": 12.119999
+      },
+      "name": "Left Brace 3",
+      "id": "4",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 5.100758,
+        "y": 1.738594,
+        "w": 3.131816,
+        "h": 0.308663
+      },
+      "name": "Rectangle 11",
+      "id": "12",
+      "textPreview": "Key Bullets",
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 0.608553,
+        "y": 2.296113,
+        "w": 2.109894,
+        "h": 2.465287
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 3.031189,
+        "y": 2.296113,
+        "w": 2.182404,
+        "h": 2.465287
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 5.453824,
+        "y": 2.296113,
+        "w": 2.182403,
+        "h": 2.465287
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 7.876459,
+        "y": 2.296113,
+        "w": 2.182403,
+        "h": 2.465287
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 10.299093,
+        "y": 2.296113,
+        "w": 2.425688,
+        "h": 2.465287
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    }
+  ]
+}

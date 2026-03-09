@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "title": "McGuidingPrinciples Reference Parity",
+    "textAmount": "md",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcGuidingPrinciples",
+      "title": "We believe in four guiding principles for a strong operating model",
+      "principleLabels": [
+        "[Principle 1]",
+        "[Principle 2]",
+        "[Principle 3]",
+        "[Principle 4]"
+      ],
+      "principleBodies": [
+        "Start with the commercial priorities that matter most and align the work around where the program can create visible value first.",
+        "Keep choices practical by linking strategic direction to the day-to-day decisions teams will actually need to make.",
+        "Focus governance on decisions, sequencing, and accountability rather than adding process for its own sake.",
+        "Build momentum through a delivery approach that balances quick wins with the structural changes required for scale."
+      ]
+    }
+  ]
+}

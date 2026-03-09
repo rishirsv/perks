@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "layoutId": "mcTwoBulletSlide",
+  "templateName": "kpmg-diligence",
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "sourceSlideNumber": 6,
+  "family": "titleStrapline4TextBoxes",
+  "suggestedFamily": null,
+  "status": "promoted",
+  "extractSeed": true,
+  "approval": {
+    "approved": true,
+    "approvedBy": "Codex with user approval",
+    "approvedAt": "2026-03-09T18:09:58.276Z",
+    "notes": "User approved promotion after manual visual review; promoted with small residual RMS delta."
+  },
+  "artifacts": {
+    "referencePngPath": "compare/reference.png",
+    "candidateQaPath": "candidate/qa.json",
+    "scorecardPath": "compare/scorecard.json"
+  }
+}

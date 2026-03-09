@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 32,
+  "slideTarget": "slides/slide32.xml",
+  "summary": {
+    "shapeCount": 12,
+    "text": 6,
+    "image": 3,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 2
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 3",
+      "id": "4",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 1.469027,
+        "y": 7.168142,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": "TextBox 19",
+      "id": "20",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 3.248725,
+        "y": 1.55553,
+        "w": 9.475234,
+        "h": 0.770792
+      },
+      "name": "Rectangle 89",
+      "id": "22",
+      "textPreview": "[Insert the specific, measurable project objective / goal e.g., Identify 5-10 cost saving initiatives]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 1.555531,
+        "w": 2.642058,
+        "h": 0.77079
+      },
+      "name": "Text Placeholder 6",
+      "id": "23",
+      "textPreview": "Objective",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.598959,
+        "y": 2.623699,
+        "w": 5.855907,
+        "h": 0.771654
+      },
+      "name": "Text Placeholder 6",
+      "id": "24",
+      "textPreview": "Context and criteria",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.598959,
+        "y": 3.383588,
+        "w": 5.855907,
+        "h": 3.041667
+      },
+      "name": "Rectangle 89",
+      "id": "25",
+      "textPreview": "[Insert any specific contex t that is relevant for the project, or standards / benchmarks that you will use to steer the project] [Insert any specific contex t ",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 6.868052,
+        "y": 3.383588,
+        "w": 5.855907,
+        "h": 3.041667
+      },
+      "name": "Rectangle 89",
+      "id": "26",
+      "textPreview": "[Insert specific KPIs that will be used to measure progress and success in the project ] [Insert specific KPIs that will be used to measure progress and success",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 6.868052,
+        "y": 2.623699,
+        "w": 5.855907,
+        "h": 0.771654
+      },
+      "name": "Text Placeholder 6",
+      "id": "27",
+      "textPreview": "Metrics",
+      "relationship": null
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 2.543872,
+        "y": 1.645651,
+        "w": 0.590551,
+        "h": 0.590551
+      },
+      "name": "Graphic 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image30.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 12.030182,
+        "y": 2.715595,
+        "w": 0.590551,
+        "h": 0.590551
+      },
+      "name": "Graphic 6",
+      "id": "7",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image32.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 5.754432,
+        "y": 2.71425,
+        "w": 0.590551,
+        "h": 0.590551
+      },
+      "name": "Graphic 8",
+      "id": "9",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image34.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    }
+  ]
+}

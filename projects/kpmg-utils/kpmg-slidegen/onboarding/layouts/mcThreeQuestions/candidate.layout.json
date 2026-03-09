@@ -1,0 +1,49 @@
+{
+  "description": "MC three-questions executive framing slide",
+  "geometry": {
+    "titleBox": { "x": 0.61, "y": 0.45, "w": 6.9, "h": 0.52 },
+    "leftHeadingBox": { "x": 0.74, "y": 1.88, "w": 4.8, "h": 0.26 },
+    "typography": {
+      "leftBodyBox": { "x": 0.7, "y": 2.37, "w": 5.45, "h": 3.55 },
+      "panelBox": { "x": 7.11, "y": 1.85, "w": 5.62, "h": 4.79 },
+      "panelHeadingBox": { "x": 7.23, "y": 1.89, "w": 2.3, "h": 0.28 },
+      "questionRows": [
+        {
+          "circleBox": { "x": 6.89, "y": 2.67, "w": 0.45, "h": 0.45 },
+          "textBox": { "x": 7.58, "y": 2.57, "w": 4.74, "h": 0.7 }
+        },
+        {
+          "circleBox": { "x": 6.89, "y": 4.05, "w": 0.45, "h": 0.45 },
+          "textBox": { "x": 7.58, "y": 3.96, "w": 4.5, "h": 0.56 }
+        },
+        {
+          "circleBox": { "x": 6.89, "y": 5.43, "w": 0.45, "h": 0.45 },
+          "textBox": { "x": 7.58, "y": 5.33, "w": 4.5, "h": 0.56 }
+        }
+      ]
+    }
+  },
+  "slots": {
+    "title": { "kind": "text", "required": true, "minChars": 10, "maxChars": 90, "allowEmpty": false },
+    "situationTitle": { "kind": "text", "required": true, "minChars": 8, "maxChars": 50, "allowEmpty": false },
+    "situationPoints": { "kind": "textArray", "required": true, "minItems": 3, "allowEmpty": false },
+    "questionsTitle": { "kind": "text", "required": true, "minChars": 4, "maxChars": 40, "allowEmpty": false },
+    "questions": { "kind": "textArray", "required": true, "minItems": 3, "maxItems": 3, "allowEmpty": false }
+  },
+  "registry": {
+    "master": "KPMG_WHITE",
+    "paginationPolicyKey": "none.v1",
+    "requiredGeometry": ["titleBox", "leftHeadingBox", "typography"],
+    "optionalGeometry": [],
+    "optionalDefaults": {},
+    "excludeFromLogicalPaging": true
+  },
+  "templateLayout": "Draft mcThreeQuestions",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcThreeQuestions",
+  "family": "custom"
+}

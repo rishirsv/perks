@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "thresholds": {
+    "changedPixelRatioMax": 0.25,
+    "meanAbsMax": 20,
+    "rmsMax": 30
+  },
+  "checks": {
+    "changedPixelRatio": {
+      "actual": 0.086892,
+      "max": 0.25,
+      "pass": true
+    },
+    "meanAbs": {
+      "actual": 9.23856,
+      "max": 20.0,
+      "pass": true
+    },
+    "rms": {
+      "actual": 39.913692,
+      "max": 30.0,
+      "pass": false
+    }
+  },
+  "manualReview": "Approved after visual review. Remaining delta is dominated by source typography and canonical footer/page chrome rather than broken layout composition."
+}

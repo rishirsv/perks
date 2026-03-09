@@ -19,13 +19,6 @@ import {
 } from './lib.mjs';
 
 const BUILDER_ROOT = path.join(REPO_ROOT, 'generator', 'builders', 'onboarded');
-const TEMPLATE_LAYOUTS_PATH = path.join(
-  REPO_ROOT,
-  'templates',
-  'kpmg-diligence',
-  'package',
-  'layouts.json',
-);
 const GOLDEN_ALL_LAYOUTS_PATH = path.join(
   REPO_ROOT,
   'fixtures',
@@ -50,6 +43,10 @@ function usage() {
   );
 }
 
+function getTemplateLayoutsPath(templateName) {
+  return path.join(REPO_ROOT, 'templates', templateName, 'package', 'layouts.json');
+}
+
 function rewriteCandidateBuilderForCanonicalModule(source) {
   const repoFileUrlPrefix = `file://${REPO_ROOT.split(path.sep).join('/')}/generator/`;
   return source
@@ -57,12 +54,36 @@ function rewriteCandidateBuilderForCanonicalModule(source) {
     .replace(/\.\.\/\.\.\/\.\.\/generator\//g, '../../');
 }
 
-function upsertOnboardedRegistryEntry({ layoutId, family }) {
+function upsertOnboardedRegistryEntry({ layoutId, family, candidateLayout }) {
   const registry = getSlideRegistry();
   const baseEntry = registry.get(family);
   if (!baseEntry) {
     throw new Error(`Unknown base family in registry: ${family}`);
   }
+  const registryOverrides = candidateLayout?.registry || {};
+  const overrideMaster =
+    typeof registryOverrides.master === 'string' && registryOverrides.master.trim()
+      ? registryOverrides.master.trim()
+      : null;
+  const overridePaginationPolicyKey =
+    typeof registryOverrides.paginationPolicyKey === 'string' &&
+    registryOverrides.paginationPolicyKey.trim()
+      ? registryOverrides.paginationPolicyKey.trim()
+      : null;
+  const overrideExcludeFromLogicalPaging =
+    typeof registryOverrides.excludeFromLogicalPaging === 'boolean'
+      ? registryOverrides.excludeFromLogicalPaging
+      : null;
+  const overrideRequiredGeometry = Array.isArray(registryOverrides.requiredGeometry)
+    ? registryOverrides.requiredGeometry.filter((key) => typeof key === 'string' && key.trim())
+    : null;
+  const overrideOptionalGeometry = Array.isArray(registryOverrides.optionalGeometry)
+    ? registryOverrides.optionalGeometry.filter((key) => typeof key === 'string' && key.trim())
+    : null;
+  const overrideOptionalDefaults =
+    registryOverrides.optionalDefaults && typeof registryOverrides.optionalDefaults === 'object'
+      ? { ...registryOverrides.optionalDefaults }
+      : null;
 
   const index = loadOnboardedRegistryIndex();
   const pascal = toPascalCase(layoutId);
@@ -73,13 +94,14 @@ function upsertOnboardedRegistryEntry({ layoutId, family }) {
     registryEntry: {
       builderId: layoutId,
       builder: '__BUILDER_REF__',
-      master: baseEntry.master,
-      requiredGeometry: [...(baseEntry.requiredGeometry || [])],
-      optionalGeometry: [...(baseEntry.optionalGeometry || [])],
-      optionalDefaults: { ...(baseEntry.optionalDefaults || {}) },
-      paginationPolicyKey: baseEntry.paginationPolicyKey,
+      master: overrideMaster || baseEntry.master,
+      requiredGeometry: overrideRequiredGeometry || [...(baseEntry.requiredGeometry || [])],
+      optionalGeometry: overrideOptionalGeometry || [...(baseEntry.optionalGeometry || [])],
+      optionalDefaults: overrideOptionalDefaults || { ...(baseEntry.optionalDefaults || {}) },
+      paginationPolicyKey: overridePaginationPolicyKey || baseEntry.paginationPolicyKey,
       validationHooks: [...(baseEntry.validationHooks || [])],
-      excludeFromLogicalPaging: Boolean(baseEntry.excludeFromLogicalPaging),
+      excludeFromLogicalPaging:
+        overrideExcludeFromLogicalPaging ?? Boolean(baseEntry.excludeFromLogicalPaging),
     },
   };
 
@@ -89,11 +111,11 @@ function upsertOnboardedRegistryEntry({ layoutId, family }) {
   writeOnboardedRegistry(merged);
 }
 
-function upsertTemplateLayout({ layoutId, candidateLayout }) {
-  const layouts = readJson(TEMPLATE_LAYOUTS_PATH);
+function upsertTemplateLayout({ templateName, layoutId, candidateLayout }) {
+  const layouts = readJson(getTemplateLayoutsPath(templateName));
   layouts.types = layouts.types || {};
   layouts.types[layoutId] = sanitizeCandidateLayout(candidateLayout);
-  writeJson(TEMPLATE_LAYOUTS_PATH, layouts);
+  writeJson(getTemplateLayoutsPath(templateName), layouts);
 }
 
 function upsertGoldenFixture({ layoutId, candidateDeckSpec }) {
@@ -278,8 +300,10 @@ writeText(
 upsertOnboardedRegistryEntry({
   layoutId: String(layoutId),
   family: source.family,
+  candidateLayout,
 });
 upsertTemplateLayout({
+  templateName: source.templateName,
   layoutId: String(layoutId),
   candidateLayout,
 });

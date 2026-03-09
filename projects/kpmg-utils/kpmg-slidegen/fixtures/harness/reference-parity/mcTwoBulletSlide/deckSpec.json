@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "title": "McTwoBulletSlide Reference Parity",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcTwoBulletSlide",
+      "title": "Title",
+      "strapline": "Subtitle",
+      "columns": [
+        {
+          "heading": "Bullet #1",
+          "body": [
+            "Bullet 1 Description"
+          ],
+          "iconAsset": "mc-two-bullet-icon-1.png"
+        },
+        {
+          "heading": "Bullet #2",
+          "body": [
+            "Bullet 2 Description"
+          ],
+          "iconAsset": "mc-two-bullet-icon-2.png"
+        }
+      ]
+    }
+  ]
+}

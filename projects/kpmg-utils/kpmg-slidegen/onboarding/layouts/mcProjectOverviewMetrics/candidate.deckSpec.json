@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "title": "Draft mcProjectOverviewMetrics",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcProjectOverviewMetrics",
+      "title": "Customer experience program overview",
+      "objectiveTitle": "Objective",
+      "objectiveText": "Identify the highest-value experience interventions, define delivery owners, and track the outcomes that will matter most over the next two quarters.",
+      "contextTitle": "Context and criteria",
+      "contextItems": [
+        "Anchor the work on the customer journeys where leadership expects the fastest commercial impact.",
+        "Use a consistent lens for feasibility, cross-functional readiness, and strategic fit before prioritizing initiatives.",
+        "Align the steering cadence and decision forums so teams can resolve blockers quickly without losing control.",
+        "Keep a light evidence trail that supports decisions and makes trade-offs visible."
+      ],
+      "metricsTitle": "Metrics",
+      "metricsItems": [
+        "Track initiative delivery against the milestones needed to unlock the first wave of benefits.",
+        "Measure commercial, operational, and customer signals so the team can judge whether the changes are working.",
+        "Monitor cross-functional dependency resolution and time-to-decision to keep execution moving.",
+        "Use a short executive scorecard that highlights outcomes, blockers, and decisions required."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 20,
+  "slideTarget": "slides/slide20.xml",
+  "summary": {
+    "shapeCount": 3,
+    "text": 0,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 2
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 0.606667,
+        "y": 1.687714,
+        "w": 12.12,
+        "h": 5.244324
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    }
+  ]
+}

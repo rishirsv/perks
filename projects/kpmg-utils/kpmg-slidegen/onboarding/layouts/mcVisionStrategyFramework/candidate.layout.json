@@ -1,0 +1,68 @@
+{
+  "description": "MC vision and strategy house with four prompts and three strategy bands",
+  "geometry": {
+    "titleBox": { "x": 0.61, "y": 0.45, "w": 8.05, "h": 0.52 },
+    "typography": {
+      "roofBox": { "x": 2.56, "y": 1.11, "w": 10.14, "h": 1.78 },
+      "roofTextBox": { "x": 5.37, "y": 1.87, "w": 4.2, "h": 0.28 },
+      "promptRows": [
+        {
+          "promptBox": { "x": 0.61, "y": 1.93, "w": 1.25, "h": 0.62 },
+          "iconBox": { "x": 1.98, "y": 2.12, "w": 0.33, "h": 0.33 }
+        },
+        {
+          "promptBox": { "x": 0.61, "y": 3.14, "w": 1.25, "h": 0.5 },
+          "iconBox": { "x": 1.98, "y": 3.25, "w": 0.33, "h": 0.33 }
+        },
+        {
+          "promptBox": { "x": 0.61, "y": 4.31, "w": 1.25, "h": 0.62 },
+          "iconBox": { "x": 1.98, "y": 4.52, "w": 0.33, "h": 0.33 }
+        },
+        {
+          "promptBox": { "x": 0.61, "y": 5.79, "w": 1.25, "h": 0.46 },
+          "iconBox": { "x": 1.98, "y": 5.91, "w": 0.33, "h": 0.33 }
+        }
+      ],
+      "bandRows": [
+        {
+          "panelBox": { "x": 2.56, "y": 2.98, "w": 10.17, "h": 1.22 },
+          "headingBox": { "x": 2.79, "y": 3.19, "w": 1.75, "h": 0.46 },
+          "bodyBox": { "x": 4.66, "y": 3.19, "w": 7.7, "h": 0.26 }
+        },
+        {
+          "panelBox": { "x": 2.56, "y": 4.14, "w": 10.17, "h": 1.22 },
+          "headingBox": { "x": 2.79, "y": 4.57, "w": 1.35, "h": 0.3 },
+          "bodyBox": { "x": 4.66, "y": 4.57, "w": 7.35, "h": 0.26 }
+        },
+        {
+          "panelBox": { "x": 2.56, "y": 5.52, "w": 10.17, "h": 1.22 },
+          "headingBox": { "x": 2.79, "y": 5.95, "w": 1.5, "h": 0.3 },
+          "bodyBox": { "x": 4.66, "y": 5.95, "w": 6.55, "h": 0.26 }
+        }
+      ]
+    }
+  },
+  "slots": {
+    "title": { "kind": "text", "required": true, "minChars": 10, "maxChars": 90, "allowEmpty": false },
+    "prompts": { "kind": "textArray", "required": true, "minItems": 4, "maxItems": 4, "allowEmpty": false },
+    "visionText": { "kind": "text", "required": true, "minChars": 10, "maxChars": 140, "allowEmpty": false },
+    "bandHeadings": { "kind": "textArray", "required": true, "minItems": 3, "maxItems": 3, "allowEmpty": false },
+    "bandBodies": { "kind": "textArray", "required": true, "minItems": 3, "maxItems": 3, "allowEmpty": false }
+  },
+  "registry": {
+    "master": "KPMG_WHITE",
+    "paginationPolicyKey": "none.v1",
+    "requiredGeometry": ["titleBox", "typography"],
+    "optionalGeometry": [],
+    "optionalDefaults": {},
+    "excludeFromLogicalPaging": true
+  },
+  "templateLayout": "Draft mcVisionStrategyFramework",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcVisionStrategyFramework",
+  "family": "custom"
+}

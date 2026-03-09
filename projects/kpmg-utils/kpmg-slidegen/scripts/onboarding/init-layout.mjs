@@ -18,7 +18,7 @@ import {
 
 function usage() {
   throw new Error(
-    'Usage: node scripts/onboarding/init-layout.mjs --source-pptx <file.pptx> --slide <n> --layout-id <camelCaseId> [--family <existingType>] [--extract-seed] [--force]',
+    'Usage: node scripts/onboarding/init-layout.mjs --source-pptx <file.pptx> --slide <n> --layout-id <camelCaseId> [--template <name>] [--family <existingType>] [--extract-seed] [--force]',
   );
 }
 
@@ -26,6 +26,9 @@ const args = parseArgMap(process.argv.slice(2));
 const sourcePptxPath = args.get('source-pptx');
 const slideNumber = Number(args.get('slide'));
 const layoutId = normalizeLayoutId(args.get('layout-id'));
+const templateName = args.get('template')
+  ? String(args.get('template'))
+  : 'kpmg-diligence';
 const family = args.get('family') ? String(args.get('family')) : null;
 const extractSeed = Boolean(args.get('extract-seed'));
 const force = Boolean(args.get('force'));
@@ -51,7 +54,7 @@ if (!force) {
   }
 }
 
-const templatePackage = loadTemplatePackage('kpmg-diligence');
+const templatePackage = family ? loadTemplatePackage(templateName) : null;
 const candidateLayout = buildCandidateLayoutScaffold({
   templatePackage,
   family,
@@ -84,6 +87,7 @@ writeJson(
   paths.sourcePath,
   buildSourceRecord({
     layoutId,
+    templateName,
     sourcePptxPath,
     sourceSlideNumber: slideNumber,
     family,

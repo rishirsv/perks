@@ -2,6 +2,9 @@
 
 Use this workflow when you want to turn a slide from a source PowerPoint into a new canonical layout in the parent repo.
 
+For the full end-to-end operating guide, see
+`docs/onboarding/layout-onboarding-workflow.md`.
+
 This workflow is repo-only by design:
 - Keep source PPTX files, seeds, prompts, and diff artifacts in this repo only.
 - Do not sync draft onboarding assets into `skills/kpmg-slides/`.
@@ -47,6 +50,7 @@ node scripts/onboarding/init-layout.mjs \
   --source-pptx references/coffee_fdd.pptx \
   --slide 1 \
   --layout-id coffeeBusinessOverview \
+  --template kpmg-diligence \
   --family businessOverview \
   --extract-seed
 ```
@@ -72,6 +76,7 @@ node scripts/onboarding/run-layout-onboarding.mjs \
   --source-pptx references/coffee_fdd.pptx \
   --slide 1 \
   --layout-id coffeeBusinessOverview \
+  --template kpmg-diligence \
   --family businessOverview \
   --extract-seed
 ```
@@ -83,6 +88,7 @@ node scripts/onboarding/run-layout-onboarding.mjs \
   --source-pptx references/coffee_fdd.pptx \
   --slide 1 \
   --layout-id coffeeBusinessOverview \
+  --template kpmg-diligence \
   --family businessOverview \
   --extract-seed \
   --stop-after init
@@ -126,7 +132,7 @@ Promotion updates the parent repo only:
 
 1. Copies the candidate builder into `generator/builders/onboarded/`.
 2. Adds the canonical type to the generated onboarded registry.
-3. Adds the layout contract to `templates/kpmg-diligence/package/layouts.json`.
+3. Adds the layout contract to `templates/<template-name>/package/layouts.json`.
 4. Adds reference-parity fixture coverage and updates the fixture manifest.
 5. Adds the type to the canonical all-layouts fixture.
 6. Updates parent-repo reference docs and schema.

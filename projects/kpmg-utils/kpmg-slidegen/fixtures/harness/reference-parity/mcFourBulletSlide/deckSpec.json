@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "title": "McFourBulletSlide Reference Parity",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcFourBulletSlide",
+      "title": "Title",
+      "strapline": "Subtitle",
+      "columns": [
+        {
+          "heading": "Bullet #1",
+          "body": [
+            "Bullet 1 Description"
+          ],
+          "iconAsset": "mc-four-bullet-icon-1.png"
+        },
+        {
+          "heading": "Bullet #2",
+          "body": [
+            "Bullet 2 Description"
+          ],
+          "iconAsset": "mc-four-bullet-icon-2.png"
+        },
+        {
+          "heading": "Bullet #3",
+          "body": [
+            "Bullet 3 Description"
+          ],
+          "iconAsset": "mc-four-bullet-icon-3.png"
+        },
+        {
+          "heading": "Bullet #4",
+          "body": [
+            "Bullet 4 Description"
+          ],
+          "iconAsset": "mc-four-bullet-icon-4.png"
+        }
+      ]
+    }
+  ]
+}

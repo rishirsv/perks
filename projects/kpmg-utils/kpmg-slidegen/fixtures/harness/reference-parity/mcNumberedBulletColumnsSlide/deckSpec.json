@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "title": "McNumberedBulletColumnsSlide Reference Parity",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcNumberedBulletColumnsSlide",
+      "title": "Title",
+      "strapline": "Subtitle",
+      "columns": [
+        {
+          "number": "1",
+          "heading": "Bullet #1",
+          "subheading": "Sub Bullet #1",
+          "sectionTitle": "Title #1",
+          "items": [
+            "Bullet Bullet #1",
+            "Bullet Bullet #1",
+            "Bullet Bullet #1"
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Bullet #2",
+          "subheading": "Sub Bullet #2",
+          "sectionTitle": "Title #2",
+          "items": [
+            "Bullet Bullet #2",
+            "Bullet Bullet #2",
+            "Bullet Bullet #2"
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Bullet #3",
+          "subheading": "Sub Bullet #3",
+          "sectionTitle": "Title #3",
+          "items": [
+            "Bullet Bullet #3",
+            "Bullet Bullet #3",
+            "Bullet Bullet #3"
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Bullet #4",
+          "subheading": "Sub Bullet #4",
+          "sectionTitle": "Title #4",
+          "items": [
+            "Bullet Bullet #4",
+            "Bullet Bullet #4",
+            "Bullet Bullet #4"
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Bullet #5",
+          "subheading": "Sub Bullet #5",
+          "sectionTitle": "Title #5",
+          "items": [
+            "Bullet Bullet #5",
+            "Bullet Bullet #5",
+            "Bullet Bullet #5"
+          ]
+        }
+      ]
+    }
+  ]
+}

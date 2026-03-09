@@ -1,0 +1,49 @@
+{
+  "description": "MC project overview with objective band and two KPI context cards",
+  "geometry": {
+    "titleBox": { "x": 0.61, "y": 0.45, "w": 7.2, "h": 0.52 },
+    "typography": {
+      "objectiveHeaderBox": { "x": 0.61, "y": 1.54, "w": 2.77, "h": 0.82 },
+      "objectiveIconBox": { "x": 2.45, "y": 1.67, "w": 0.58, "h": 0.58 },
+      "objectiveBodyBox": { "x": 3.38, "y": 1.54, "w": 9.35, "h": 0.82 },
+      "objectiveTextBox": { "x": 3.48, "y": 1.87, "w": 8.95, "h": 0.28 },
+      "contextCard": {
+        "headerBox": { "x": 0.61, "y": 2.66, "w": 5.84, "h": 0.8 },
+        "iconBox": { "x": 5.7, "y": 2.81, "w": 0.47, "h": 0.47 },
+        "bodyBox": { "x": 0.61, "y": 3.46, "w": 5.84, "h": 3.19 },
+        "itemsBox": { "x": 0.74, "y": 3.56, "w": 5.15, "h": 2.25 }
+      },
+      "metricsCard": {
+        "headerBox": { "x": 6.86, "y": 2.66, "w": 5.87, "h": 0.8 },
+        "iconBox": { "x": 11.98, "y": 2.82, "w": 0.53, "h": 0.53 },
+        "bodyBox": { "x": 6.86, "y": 3.46, "w": 5.87, "h": 3.19 },
+        "itemsBox": { "x": 7.02, "y": 3.56, "w": 5.12, "h": 2.25 }
+      }
+    }
+  },
+  "slots": {
+    "title": { "kind": "text", "required": true, "minChars": 8, "maxChars": 90, "allowEmpty": false },
+    "objectiveTitle": { "kind": "text", "required": true, "minChars": 4, "maxChars": 30, "allowEmpty": false },
+    "objectiveText": { "kind": "text", "required": true, "minChars": 10, "maxChars": 180, "allowEmpty": false },
+    "contextTitle": { "kind": "text", "required": true, "minChars": 5, "maxChars": 40, "allowEmpty": false },
+    "contextItems": { "kind": "textArray", "required": true, "minItems": 3, "allowEmpty": false },
+    "metricsTitle": { "kind": "text", "required": true, "minChars": 5, "maxChars": 30, "allowEmpty": false },
+    "metricsItems": { "kind": "textArray", "required": true, "minItems": 3, "allowEmpty": false }
+  },
+  "registry": {
+    "master": "KPMG_WHITE",
+    "paginationPolicyKey": "none.v1",
+    "requiredGeometry": ["titleBox", "typography"],
+    "optionalGeometry": [],
+    "optionalDefaults": {},
+    "excludeFromLogicalPaging": true
+  },
+  "templateLayout": "Draft mcProjectOverviewMetrics",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcProjectOverviewMetrics",
+  "family": "custom"
+}

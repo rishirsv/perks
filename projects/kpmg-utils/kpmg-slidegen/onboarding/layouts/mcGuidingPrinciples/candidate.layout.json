@@ -1,0 +1,53 @@
+{
+  "description": "MC four guiding principles slide with linked principle markers",
+  "geometry": {
+    "titleBox": { "x": 0.61, "y": 0.45, "w": 8.3, "h": 0.52 },
+    "typography": {
+      "rows": [
+        {
+          "circleBox": { "x": 0.98, "y": 1.34, "w": 1.03, "h": 1.03 },
+          "textBox": { "x": 2.39, "y": 1.76, "w": 5.1, "h": 0.3 },
+          "dividerBox": { "x": 2.39, "y": 2.57, "w": 10.02, "h": 0.01 },
+          "connectorBox": { "x": 1.49, "y": 2.36, "w": 0.01, "h": 0.42 }
+        },
+        {
+          "circleBox": { "x": 0.98, "y": 2.78, "w": 1.03, "h": 1.03 },
+          "textBox": { "x": 2.39, "y": 3.2, "w": 5.1, "h": 0.3 },
+          "dividerBox": { "x": 2.39, "y": 4.01, "w": 10.02, "h": 0.01 },
+          "connectorBox": { "x": 1.49, "y": 3.8, "w": 0.01, "h": 0.42 }
+        },
+        {
+          "circleBox": { "x": 0.98, "y": 4.22, "w": 1.03, "h": 1.03 },
+          "textBox": { "x": 2.39, "y": 4.64, "w": 5.1, "h": 0.3 },
+          "dividerBox": { "x": 2.39, "y": 5.45, "w": 10.02, "h": 0.01 },
+          "connectorBox": { "x": 1.49, "y": 5.24, "w": 0.01, "h": 0.42 }
+        },
+        {
+          "circleBox": { "x": 0.98, "y": 5.66, "w": 1.03, "h": 1.03 },
+          "textBox": { "x": 2.39, "y": 6.08, "w": 5.1, "h": 0.3 }
+        }
+      ]
+    }
+  },
+  "slots": {
+    "title": { "kind": "text", "required": true, "minChars": 10, "maxChars": 100, "allowEmpty": false },
+    "principleLabels": { "kind": "textArray", "required": true, "minItems": 4, "maxItems": 4, "allowEmpty": false },
+    "principleBodies": { "kind": "textArray", "required": true, "minItems": 4, "maxItems": 4, "allowEmpty": false }
+  },
+  "registry": {
+    "master": "KPMG_WHITE",
+    "paginationPolicyKey": "none.v1",
+    "requiredGeometry": ["titleBox", "typography"],
+    "optionalGeometry": [],
+    "optionalDefaults": {},
+    "excludeFromLogicalPaging": true
+  },
+  "templateLayout": "Draft mcGuidingPrinciples",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcGuidingPrinciples",
+  "family": "custom"
+}

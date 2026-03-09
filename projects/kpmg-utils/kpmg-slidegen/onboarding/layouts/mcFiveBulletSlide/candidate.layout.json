@@ -1,0 +1,124 @@
+{
+  "description": "Draft layout mcFiveBulletSlide based on titleStrapline4TextBoxes",
+  "geometry": {
+    "titleBox": {
+      "x": 0.42,
+      "y": 0.3,
+      "w": 2.4,
+      "h": 0.58
+    },
+    "straplineBox": {
+      "x": 0.42,
+      "y": 1.1,
+      "w": 2.6,
+      "h": 0.34
+    },
+    "columnBoxes": [
+      {
+        "x": 0.6067,
+        "y": 1.6805,
+        "w": 3.6938,
+        "h": 0.95
+      },
+      {
+        "x": 4.3005,
+        "y": 1.6805,
+        "w": 8.4262,
+        "h": 0.95
+      },
+      {
+        "x": 0.6067,
+        "y": 2.7105,
+        "w": 3.6938,
+        "h": 0.95
+      },
+      {
+        "x": 4.3005,
+        "y": 2.7105,
+        "w": 8.4262,
+        "h": 0.95
+      },
+      {
+        "x": 0.6067,
+        "y": 3.7405,
+        "w": 3.6938,
+        "h": 0.95
+      },
+      {
+        "x": 4.3005,
+        "y": 3.7405,
+        "w": 8.4262,
+        "h": 0.95
+      },
+      {
+        "x": 0.6067,
+        "y": 4.7705,
+        "w": 3.6938,
+        "h": 0.95
+      },
+      {
+        "x": 4.3005,
+        "y": 4.7705,
+        "w": 8.4262,
+        "h": 0.95
+      },
+      {
+        "x": 0.6067,
+        "y": 5.8005,
+        "w": 3.6938,
+        "h": 0.95
+      },
+      {
+        "x": 4.3005,
+        "y": 5.8005,
+        "w": 8.4262,
+        "h": 0.95
+      }
+    ]
+  },
+  "slots": {
+    "columns": {
+      "kind": "columns",
+      "required": true,
+      "minItems": 5,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "cards",
+        "keepTogether": true,
+        "priority": "high"
+      }
+    },
+    "strapline": {
+      "kind": "text",
+      "required": true,
+      "minChars": 3,
+      "maxChars": 120,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "medium"
+      }
+    },
+    "title": {
+      "kind": "text",
+      "required": true,
+      "minChars": 3,
+      "maxChars": 60,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "medium"
+      }
+    }
+  },
+  "templateLayout": "Draft mcFiveBulletSlide",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcFiveBulletSlide",
+  "family": "titleStrapline4TextBoxes"
+}

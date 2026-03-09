@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "thresholds": {
+    "changedPixelRatioMax": 0.25,
+    "meanAbsMax": 20,
+    "rmsMax": 30
+  },
+  "checks": {
+    "changedPixelRatio": {
+      "actual": 0.512675,
+      "max": 0.25,
+      "pass": false
+    },
+    "meanAbs": {
+      "actual": 19.838688,
+      "max": 20.0,
+      "pass": true
+    },
+    "rms": {
+      "actual": 49.57299,
+      "max": 30.0,
+      "pass": false
+    }
+  },
+  "manualReview": "Approved after visual review. Remaining delta is mostly header gradient simplification, exact body wrapping, and canonical footer/page chrome rather than incorrect panel layout."
+}

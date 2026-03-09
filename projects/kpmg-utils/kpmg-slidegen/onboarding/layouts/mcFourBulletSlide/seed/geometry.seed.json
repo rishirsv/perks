@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 14,
+  "slideTarget": "slides/slide14.xml",
+  "summary": {
+    "shapeCount": 22,
+    "text": 8,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 13
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606667,
+        "y": 1.680491,
+        "w": 12.119998,
+        "h": 1.212735
+      },
+      "name": "Rectangle 3",
+      "id": "4",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 1.680491,
+        "w": 3.693775,
+        "h": 1.212735
+      },
+      "name": "Rectangle 7",
+      "id": "8",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974506,
+        "y": 2.022356,
+        "w": 2.166996,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "12",
+      "textPreview": "Bullet #1",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606667,
+        "y": 3.010173,
+        "w": 12.119998,
+        "h": 1.212735
+      },
+      "name": "Rectangle 12",
+      "id": "13",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 3.010173,
+        "w": 3.693775,
+        "h": 1.212735
+      },
+      "name": "Rectangle 16",
+      "id": "17",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974506,
+        "y": 3.352037,
+        "w": 2.166996,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "19",
+      "textPreview": "Bullet #2",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 4.338286,
+        "w": 12.119998,
+        "h": 1.212735
+      },
+      "name": "Rectangle 24",
+      "id": "25",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 4.338286,
+        "w": 3.693775,
+        "h": 1.212735
+      },
+      "name": "Rectangle 25",
+      "id": "26",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974507,
+        "y": 4.680151,
+        "w": 1.866041,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "27",
+      "textPreview": "Bullet #3",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 2.022356,
+        "w": 7.573362,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "28",
+      "textPreview": "Bullet 1 Description",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 3.352037,
+        "w": 7.862229,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "29",
+      "textPreview": "Bullet 2 Description",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 4.680151,
+        "w": 7.573362,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "30",
+      "textPreview": "Bullet 3 Description",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 5.644938,
+        "w": 12.119998,
+        "h": 1.212735
+      },
+      "name": "Rectangle 259",
+      "id": "260",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 5.644938,
+        "w": 3.693775,
+        "h": 1.212735
+      },
+      "name": "Rectangle 260",
+      "id": "261",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974507,
+        "y": 5.986802,
+        "w": 1.607112,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "262",
+      "textPreview": "Bullet #4",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 5.986802,
+        "w": 7.573362,
+        "h": 0.529005
+      },
+      "name": "Title 18",
+      "id": "263",
+      "textPreview": "Bullet 4 Description",
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 1.038293,
+        "y": 4.73142,
+        "w": 0.45,
+        "h": 0.426469
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 1.060084,
+        "y": 3.441542,
+        "w": 0.406417,
+        "h": 0.349997
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 1.053793,
+        "y": 2.061859,
+        "w": 0.419002,
+        "h": 0.449999
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 1.071899,
+        "y": 6.076306,
+        "w": 0.382789,
+        "h": 0.349998
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    }
+  ]
+}

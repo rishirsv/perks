@@ -86,6 +86,16 @@ function resolveThemeColor(theme, colorKey, fallback) {
 }
 
 /**
+ * Resolve the major heading font extracted from the source theme when present.
+ * @param {object|null} theme
+ * @returns {string}
+ */
+export function resolveMajorHeadingFont(theme = null) {
+  const resolvedTheme = resolveTheme(theme);
+  return resolvedTheme?.extracted?.fonts?.['+mj-lt'] || resolvedTheme?.fonts?.heading || 'Arial';
+}
+
+/**
  * Resolve standard text box options from theme defaults plus overrides.
  * @param {object|null} theme
  * @param {object} [overrides]

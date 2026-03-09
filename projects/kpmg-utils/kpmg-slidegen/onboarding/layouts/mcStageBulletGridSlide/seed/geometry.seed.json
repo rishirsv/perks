@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 15,
+  "slideTarget": "slides/slide15.xml",
+  "summary": {
+    "shapeCount": 26,
+    "text": 13,
+    "image": 4,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 8
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 9.576376,
+        "y": 1.636428,
+        "w": 3.150291,
+        "h": 5.278341
+      },
+      "name": "Rectangle 30",
+      "id": "31",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 10.237133,
+        "y": 2.506803,
+        "w": 1.923052,
+        "h": 0.611225
+      },
+      "name": "TextBox 31",
+      "id": "32",
+      "textPreview": "Stage 4 Bullet Title #4",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 10.23199,
+        "y": 4.220841,
+        "w": 2.132934,
+        "h": 0.611225
+      },
+      "name": "TextBox 32",
+      "id": "33",
+      "textPreview": "Bullet Subtitle #4",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 9.46416,
+        "y": 5.940098,
+        "w": 0.860325,
+        "h": 0.224528
+      },
+      "name": "Isosceles Triangle 65",
+      "id": "34",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 6.666667,
+        "y": 1.636428,
+        "w": 3.150291,
+        "h": 5.278341
+      },
+      "name": "Rectangle 34",
+      "id": "35",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.272405,
+        "y": 2.506803,
+        "w": 1.871052,
+        "h": 0.611225
+      },
+      "name": "TextBox 35",
+      "id": "36",
+      "textPreview": "Stage 3 Bullet Title #3",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.267263,
+        "y": 4.220841,
+        "w": 2.297652,
+        "h": 0.611225
+      },
+      "name": "TextBox 36",
+      "id": "37",
+      "textPreview": "Bullet Subtitle #3",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 3.696797,
+        "y": 1.636428,
+        "w": 3.150291,
+        "h": 5.278341
+      },
+      "name": "Rectangle 37",
+      "id": "38",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.899929,
+        "y": 3.363822,
+        "w": 1.603221,
+        "h": 0.611225
+      },
+      "name": "TextBox 38",
+      "id": "39",
+      "textPreview": "Build a clean, real-time data pipeline that feeds every decision without latency or gaps",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606667,
+        "y": 1.636428,
+        "w": 3.150291,
+        "h": 5.278341
+      },
+      "name": "Rectangle 39",
+      "id": "40",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 3.378899,
+        "y": 5.940097,
+        "w": 0.860325,
+        "h": 0.224528
+      },
+      "name": "Isosceles Triangle 33",
+      "id": "41",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 6.486203,
+        "y": 5.940098,
+        "w": 0.860325,
+        "h": 0.224528
+      },
+      "name": "Isosceles Triangle 34",
+      "id": "42",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.035521,
+        "y": 2.506802,
+        "w": 2.096611,
+        "h": 0.949507
+      },
+      "name": "TextBox 42",
+      "id": "43",
+      "textPreview": "Stage 1 Bullet Title #1",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.204972,
+        "y": 2.506803,
+        "w": 2.065433,
+        "h": 0.611225
+      },
+      "name": "TextBox 43",
+      "id": "44",
+      "textPreview": "Stage 2 Bullet Title #2",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.030379,
+        "y": 4.220841,
+        "w": 2.218406,
+        "h": 0.611225
+      },
+      "name": "TextBox 44",
+      "id": "45",
+      "textPreview": "Bullet Subtitle #1",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.199828,
+        "y": 4.220841,
+        "w": 2.104194,
+        "h": 0.611225
+      },
+      "name": "TextBox 45",
+      "id": "46",
+      "textPreview": "Bullet Subtitle #2",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.030379,
+        "y": 5.159234,
+        "w": 2.218406,
+        "h": 0.611225
+      },
+      "name": "TextBox 46",
+      "id": "47",
+      "textPreview": "Bullet Bullet #1 Bullet Bullet #1 Bullet Bullet #1 Bullet Bullet #1",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.200951,
+        "y": 5.159234,
+        "w": 2.225165,
+        "h": 0.611225
+      },
+      "name": "TextBox 47",
+      "id": "48",
+      "textPreview": "Bullet Bullet #2 Bullet Bullet #2 Bullet Bullet #2 Bullet Bullet #2",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 7.277267,
+        "y": 5.159234,
+        "w": 2.252997,
+        "h": 0.611225
+      },
+      "name": "TextBox 48",
+      "id": "49",
+      "textPreview": "Bullet Bullet #3 Bullet Bullet #3 Bullet Bullet #3 Bullet Bullet #3",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 10.247137,
+        "y": 5.159234,
+        "w": 2.055817,
+        "h": 0.611225
+      },
+      "name": "TextBox 49",
+      "id": "50",
+      "textPreview": "Bullet Bullet #4 Bullet Bullet #4 Bullet Bullet #4 Bullet Bullet #4",
+      "relationship": null
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 4.102724,
+        "y": 1.990206,
+        "w": 0.393701,
+        "h": 0.393701
+      },
+      "name": "Graphic 50",
+      "id": "51",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image2.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 1.035521,
+        "y": 1.990206,
+        "w": 0.393701,
+        "h": 0.393701
+      },
+      "name": "Graphic 51",
+      "id": "52",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image4.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 7.286437,
+        "y": 1.990206,
+        "w": 0.393701,
+        "h": 0.393701
+      },
+      "name": "Graphic 52",
+      "id": "53",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image6.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 10.237133,
+        "y": 1.990206,
+        "w": 0.393701,
+        "h": 0.393701
+      },
+      "name": "Graphic 53",
+      "id": "54",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image8.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    }
+  ]
+}

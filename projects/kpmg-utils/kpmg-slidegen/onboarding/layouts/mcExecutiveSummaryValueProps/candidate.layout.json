@@ -1,0 +1,82 @@
+{
+  "description": "Draft layout mcExecutiveSummaryValueProps based on titleStrapline4TextBoxes",
+  "geometry": {
+    "titleBox": {
+      "x": 0.42,
+      "y": 0.3,
+      "w": 3.1,
+      "h": 0.62
+    },
+    "straplineBox": {
+      "x": 0.61,
+      "y": 1.86,
+      "w": 4.1,
+      "h": 0.22
+    },
+    "columnBoxes": [
+      {
+        "x": 0.8106,
+        "y": 2.5193,
+        "w": 3.5565,
+        "h": 3.44
+      },
+      {
+        "x": 4.9088,
+        "y": 2.5193,
+        "w": 3.5565,
+        "h": 3.44
+      },
+      {
+        "x": 9.007,
+        "y": 2.5193,
+        "w": 3.5565,
+        "h": 3.44
+      }
+    ]
+  },
+  "slots": {
+    "columns": {
+      "kind": "columns",
+      "required": true,
+      "minItems": 3,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "cards",
+        "keepTogether": true,
+        "priority": "high"
+      }
+    },
+    "strapline": {
+      "kind": "text",
+      "required": true,
+      "minChars": 3,
+      "maxChars": 120,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "medium"
+      }
+    },
+    "title": {
+      "kind": "text",
+      "required": true,
+      "minChars": 3,
+      "maxChars": 60,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "medium"
+      }
+    }
+  },
+  "templateLayout": "Draft mcExecutiveSummaryValueProps",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcExecutiveSummaryValueProps",
+  "family": "titleStrapline4TextBoxes"
+}

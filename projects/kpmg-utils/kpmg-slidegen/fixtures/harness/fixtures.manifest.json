@@ -16,146 +16,6 @@
       "deckSpec": "golden/all-layouts/deckSpec.json"
     },
     {
-      "id": "scenario-saas-mid-diligence",
-      "class": "scenario",
-      "owner": "slidegen",
-      "families": [
-        "diligence"
-      ],
-      "textAmount": "md",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "scenario/saas-mid-diligence/deckSpec.json"
-    },
-    {
-      "id": "scenario-manufacturing-qoe-extensive",
-      "class": "scenario",
-      "owner": "slidegen",
-      "families": [
-        "qoe"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": false,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "scenario/manufacturing-qoe-extensive/deckSpec.json"
-    },
-    {
-      "id": "scenario-retail-ic-extensive",
-      "class": "scenario",
-      "owner": "slidegen",
-      "families": [
-        "ic"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": false,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "scenario/retail-ic-extensive/deckSpec.json"
-    },
-    {
-      "id": "regression-one-column-overflow",
-      "class": "regression",
-      "owner": "slidegen",
-      "families": [
-        "oneColumnText"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "regression/one-column-overflow/deckSpec.json"
-    },
-    {
-      "id": "regression-two-column-overflow",
-      "class": "regression",
-      "owner": "slidegen",
-      "families": [
-        "twoColumnText"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "regression/two-column-overflow/deckSpec.json"
-    },
-    {
-      "id": "regression-analysis-wide-chart-table-overflow",
-      "class": "regression",
-      "owner": "slidegen",
-      "families": [
-        "analysisWideChartTableText"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "regression/analysis-wide-chart-table-overflow/deckSpec.json"
-    },
-    {
-      "id": "regression-business-overview-overflow",
-      "class": "regression",
-      "owner": "slidegen",
-      "families": [
-        "businessOverview"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "regression/business-overview-overflow/deckSpec.json"
-    },
-    {
-      "id": "regression-nested-bullets-children",
-      "class": "regression",
-      "owner": "slidegen",
-      "families": [
-        "oneColumnText"
-      ],
-      "textAmount": "lg",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "regression/nested-bullets-children/deckSpec.json"
-    },
-    {
-      "id": "regression-theme-e2e-all-types",
-      "class": "regression",
-      "owner": "slidegen",
-      "families": [
-        "theme"
-      ],
-      "textAmount": "lg",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": true,
-      "origin": "synthetic",
-      "deckSpec": "regression/theme-e2e-all-types/deckSpec.json"
-    },
-    {
-      "id": "stress-analysis-bridge-overflow",
-      "class": "stress",
-      "owner": "slidegen",
-      "families": [
-        "analysisBridge"
-      ],
-      "textAmount": "xl",
-      "expectedOutcome": "pass",
-      "blockingSafe": true,
-      "baselineBearing": false,
-      "origin": "synthetic",
-      "deckSpec": "stress/analysis-bridge-overflow/deckSpec.json"
-    },
-    {
       "id": "invalid-legacy-nested-bullets",
       "class": "invalid",
       "owner": "slidegen",
@@ -206,6 +66,431 @@
         "slideNumber": 1,
         "candidateSlideNumber": 1
       }
+    },
+    {
+      "id": "reference-parity-mcContentsAlt",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcContentsAlt"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcContentsAlt/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 2,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcExecutiveSummaryKeyValue",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcExecutiveSummaryKeyValue"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcExecutiveSummaryKeyValue/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 26,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcExecutiveSummaryValueProps",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcExecutiveSummaryValueProps"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcExecutiveSummaryValueProps/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 23,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcFiveBulletSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcFiveBulletSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcFiveBulletSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 19,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcFourBulletSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcFourBulletSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcFourBulletSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 14,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcGuidingPrinciples",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcGuidingPrinciples"
+      ],
+      "textAmount": "md",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcGuidingPrinciples/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 30,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcInsightBulletColumnsSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcInsightBulletColumnsSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcInsightBulletColumnsSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 18,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcNumberedBulletColumnsSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcNumberedBulletColumnsSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcNumberedBulletColumnsSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 20,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcProjectOverviewMetrics",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcProjectOverviewMetrics"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcProjectOverviewMetrics/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 32,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcScopeStatement",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcScopeStatement"
+      ],
+      "textAmount": "md",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcScopeStatement/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 28,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcStageBulletGridSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcStageBulletGridSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcStageBulletGridSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 15,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcThreeBulletSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcThreeBulletSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcThreeBulletSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 10,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcThreeQuestions",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcThreeQuestions"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcThreeQuestions/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 29,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcTwoBulletSlide",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcTwoBulletSlide"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcTwoBulletSlide/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 6,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "reference-parity-mcVisionStrategyFramework",
+      "class": "reference-parity",
+      "owner": "slidegen",
+      "families": [
+        "mcVisionStrategyFramework"
+      ],
+      "textAmount": "md",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "reference-derived",
+      "deckSpec": "reference-parity/mcVisionStrategyFramework/deckSpec.json",
+      "reference": {
+        "pptx": "../../../../templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+        "slideNumber": 31,
+        "candidateSlideNumber": 1
+      }
+    },
+    {
+      "id": "regression-analysis-wide-chart-table-overflow",
+      "class": "regression",
+      "owner": "slidegen",
+      "families": [
+        "analysisWideChartTableText"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "regression/analysis-wide-chart-table-overflow/deckSpec.json"
+    },
+    {
+      "id": "regression-business-overview-overflow",
+      "class": "regression",
+      "owner": "slidegen",
+      "families": [
+        "businessOverview"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "regression/business-overview-overflow/deckSpec.json"
+    },
+    {
+      "id": "regression-nested-bullets-children",
+      "class": "regression",
+      "owner": "slidegen",
+      "families": [
+        "oneColumnText"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "regression/nested-bullets-children/deckSpec.json"
+    },
+    {
+      "id": "regression-one-column-overflow",
+      "class": "regression",
+      "owner": "slidegen",
+      "families": [
+        "oneColumnText"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "regression/one-column-overflow/deckSpec.json"
+    },
+    {
+      "id": "regression-theme-e2e-all-types",
+      "class": "regression",
+      "owner": "slidegen",
+      "families": [
+        "theme"
+      ],
+      "textAmount": "lg",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": true,
+      "origin": "synthetic",
+      "deckSpec": "regression/theme-e2e-all-types/deckSpec.json"
+    },
+    {
+      "id": "regression-two-column-overflow",
+      "class": "regression",
+      "owner": "slidegen",
+      "families": [
+        "twoColumnText"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "regression/two-column-overflow/deckSpec.json"
+    },
+    {
+      "id": "scenario-manufacturing-qoe-extensive",
+      "class": "scenario",
+      "owner": "slidegen",
+      "families": [
+        "qoe"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "scenario/manufacturing-qoe-extensive/deckSpec.json"
+    },
+    {
+      "id": "scenario-retail-ic-extensive",
+      "class": "scenario",
+      "owner": "slidegen",
+      "families": [
+        "ic"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": false,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "scenario/retail-ic-extensive/deckSpec.json"
+    },
+    {
+      "id": "scenario-saas-mid-diligence",
+      "class": "scenario",
+      "owner": "slidegen",
+      "families": [
+        "diligence"
+      ],
+      "textAmount": "md",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "scenario/saas-mid-diligence/deckSpec.json"
+    },
+    {
+      "id": "stress-analysis-bridge-overflow",
+      "class": "stress",
+      "owner": "slidegen",
+      "families": [
+        "analysisBridge"
+      ],
+      "textAmount": "xl",
+      "expectedOutcome": "pass",
+      "blockingSafe": true,
+      "baselineBearing": false,
+      "origin": "synthetic",
+      "deckSpec": "stress/analysis-bridge-overflow/deckSpec.json"
     }
   ]
 }

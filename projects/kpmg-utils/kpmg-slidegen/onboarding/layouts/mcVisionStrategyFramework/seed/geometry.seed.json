@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 31,
+  "slideTarget": "slides/slide31.xml",
+  "summary": {
+    "shapeCount": 20,
+    "text": 11,
+    "image": 4,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 0,
+    "other": 5
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 2.715839,
+        "y": 1.377666,
+        "w": 9.979633,
+        "h": 1.416677
+      },
+      "name": "Triangle 3",
+      "id": "4",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 2.680409,
+        "y": 2.868608,
+        "w": 10.050491,
+        "h": 1.214294
+      },
+      "name": "Rectangle 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 2.680408,
+        "y": 4.157166,
+        "w": 10.050491,
+        "h": 1.214294
+      },
+      "name": "Rectangle 5",
+      "id": "6",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 2.680412,
+        "y": 5.461267,
+        "w": 10.050491,
+        "h": 1.214294
+      },
+      "name": "Rectangle 6",
+      "id": "7",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.511599,
+        "y": 1.949326,
+        "w": 1.55738,
+        "h": 0.807813
+      },
+      "name": "TextBox 7",
+      "id": "8",
+      "textPreview": "What are we trying to accomplish?",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.520598,
+        "y": 3.189654,
+        "w": 1.55738,
+        "h": 0.5722
+      },
+      "name": "TextBox 8",
+      "id": "9",
+      "textPreview": "Who should we target?",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.520598,
+        "y": 4.360407,
+        "w": 1.55738,
+        "h": 0.807813
+      },
+      "name": "TextBox 9",
+      "id": "10",
+      "textPreview": "What is our distinctive proposition?",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.520598,
+        "y": 5.766773,
+        "w": 1.55738,
+        "h": 0.5722
+      },
+      "name": "TextBox 10",
+      "id": "11",
+      "textPreview": "How will we deliver it?",
+      "relationship": null
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 2.032729,
+        "y": 3.295915,
+        "w": 0.35968,
+        "h": 0.35968
+      },
+      "name": "Picture 12",
+      "id": "13",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image25.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 2.011149,
+        "y": 5.873739,
+        "w": 0.358268,
+        "h": 0.358268
+      },
+      "name": "Picture 14",
+      "id": "15",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image26.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 1.990265,
+        "y": 4.574738,
+        "w": 0.379152,
+        "h": 0.379152
+      },
+      "name": "Picture 16",
+      "id": "17",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image27.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 2.044184,
+        "y": 2.179121,
+        "w": 0.348224,
+        "h": 0.348224
+      },
+      "name": "Picture 18",
+      "id": "19",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image28.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 5.010313,
+        "y": 1.999815,
+        "w": 5.288659,
+        "h": 0.30293
+      },
+      "name": "TextBox 19",
+      "id": "20",
+      "textPreview": "[Insert description of vision and ambition]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.661516,
+        "y": 3.02136,
+        "w": 8.033955,
+        "h": 0.504883
+      },
+      "name": "TextBox 20",
+      "id": "21",
+      "textPreview": "[Insert description of which client segments you are going after and, if relevant, which part of the value chain]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.807292,
+        "y": 3.02136,
+        "w": 2.081686,
+        "h": 0.908789
+      },
+      "name": "TextBox 21",
+      "id": "22",
+      "textPreview": "Customer segmentation and value chain prioritization",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.80855,
+        "y": 4.511872,
+        "w": 2.081686,
+        "h": 0.504883
+      },
+      "name": "TextBox 22",
+      "id": "23",
+      "textPreview": "Value proposition",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.818855,
+        "y": 5.800432,
+        "w": 2.081686,
+        "h": 0.504883
+      },
+      "name": "TextBox 23",
+      "id": "24",
+      "textPreview": "Go-to-market model",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.661515,
+        "y": 4.242602,
+        "w": 8.033956,
+        "h": 0.30293
+      },
+      "name": "TextBox 24",
+      "id": "25",
+      "textPreview": "[Insert description of value propositions and key solution features, if relevant]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.661515,
+        "y": 5.529873,
+        "w": 7.901703,
+        "h": 0.30293
+      },
+      "name": "TextBox 26",
+      "id": "27",
+      "textPreview": "[Insert description of channels, distribution strategy, team etc.]",
+      "relationship": null
+    }
+  ]
+}

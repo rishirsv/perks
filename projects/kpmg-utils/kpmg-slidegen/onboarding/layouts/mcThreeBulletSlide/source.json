@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "layoutId": "mcThreeBulletSlide",
+  "templateName": "kpmg-diligence",
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "sourceSlideNumber": 10,
+  "family": "titleStrapline4TextBoxes",
+  "suggestedFamily": null,
+  "status": "promoted",
+  "extractSeed": true,
+  "approval": {
+    "approved": true,
+    "approvedBy": "Codex visual review",
+    "approvedAt": "2026-03-09T18:18:02.196Z",
+    "notes": "Re-promoted after parallel promotion race; residual RMS delta is primarily footer and slide-number chrome drift versus the source reference."
+  },
+  "artifacts": {
+    "referencePngPath": "compare/reference.png",
+    "candidateQaPath": "candidate/qa.json",
+    "scorecardPath": "compare/scorecard.json"
+  }
+}

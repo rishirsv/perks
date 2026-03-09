@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "title": "Draft mcExecutiveSummaryValueProps",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcExecutiveSummaryValueProps",
+      "title": "Executive summary",
+      "strapline": "What [Client] is looking for:",
+      "columns": [
+        {
+          "heading": "[Insert description of main driver of issue e.g. Client has severe issues with profitability levels]...",
+          "items": [
+            "[Insert main value propositions that you bring to the table, e.g. experience with similar issues]",
+            "[Insert main value propositions]",
+            "..."
+          ],
+          "iconAsset": "mc-exec-summary-icon-1.png"
+        },
+        {
+          "heading": "...[Insert description of main need e.g. resulting in need to streamline costs]...",
+          "items": [
+            "[Insert main value propositions that you bring to the table, e.g. experience with similar issues]",
+            "[Insert main value propositions]",
+            "..."
+          ],
+          "iconAsset": "mc-exec-summary-icon-2.png"
+        },
+        {
+          "heading": "...[Insert description of added need or benefit e.g. with a focus on fast impact and cross-organizational implementation]",
+          "items": [
+            "[Insert main value propositions that you bring to the table, e.g. experience with similar issues]",
+            "[Insert main value propositions]",
+            "..."
+          ],
+          "iconAsset": "mc-exec-summary-icon-3.png"
+        }
+      ]
+    }
+  ]
+}

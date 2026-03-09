@@ -1380,6 +1380,1629 @@
         "mode": "balanced",
         "minScore": 0.8
       }
+    },
+    "mcContentsAlt": {
+      "description": "Draft layout mcContentsAlt based on contents",
+      "templateLayout": "Draft mcContentsAlt",
+      "geometry": {
+        "titleBox": {
+          "x": 1.03,
+          "y": 0.86,
+          "w": 2.38,
+          "h": 1.58
+        },
+        "topRowBox": {
+          "x": 4.72,
+          "y": 1.58,
+          "w": 4.05,
+          "h": 2.72
+        },
+        "bottomRowBox": {
+          "x": 4.72,
+          "y": 4.28,
+          "w": 4.05,
+          "h": 2.44
+        }
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 6,
+          "maxChars": 40,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "sections": {
+          "kind": "contentsSections",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "contents",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.8
+      }
+    },
+    "mcTwoBulletSlide": {
+      "description": "Draft layout mcTwoBulletSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.6805,
+            "w": 3.6938,
+            "h": 2.4658
+          },
+          {
+            "x": 4.3005,
+            "y": 1.6805,
+            "w": 8.4262,
+            "h": 2.4658
+          },
+          {
+            "x": 0.6067,
+            "y": 4.3886,
+            "w": 3.6938,
+            "h": 2.33
+          },
+          {
+            "x": 4.3005,
+            "y": 4.3886,
+            "w": 8.4262,
+            "h": 2.33
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 2,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcTwoBulletSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcThreeBulletSlide": {
+      "description": "Draft layout mcThreeBulletSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.6805,
+            "w": 3.6938,
+            "h": 1.6029
+          },
+          {
+            "x": 4.3005,
+            "y": 1.6805,
+            "w": 8.4262,
+            "h": 1.6029
+          },
+          {
+            "x": 0.6067,
+            "y": 3.4154,
+            "w": 3.6938,
+            "h": 1.6029
+          },
+          {
+            "x": 4.3005,
+            "y": 3.4154,
+            "w": 8.4262,
+            "h": 1.6029
+          },
+          {
+            "x": 0.6067,
+            "y": 5.1503,
+            "w": 3.6938,
+            "h": 1.603
+          },
+          {
+            "x": 4.3005,
+            "y": 5.1503,
+            "w": 8.4262,
+            "h": 1.603
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcThreeBulletSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcFourBulletSlide": {
+      "description": "Draft layout mcFourBulletSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.6805,
+            "w": 3.6938,
+            "h": 1.2127
+          },
+          {
+            "x": 4.3005,
+            "y": 1.6805,
+            "w": 8.4262,
+            "h": 1.2127
+          },
+          {
+            "x": 0.6067,
+            "y": 2.9672,
+            "w": 3.6938,
+            "h": 1.2127
+          },
+          {
+            "x": 4.3005,
+            "y": 2.9672,
+            "w": 8.4262,
+            "h": 1.2127
+          },
+          {
+            "x": 0.6067,
+            "y": 4.254,
+            "w": 3.6938,
+            "h": 1.2127
+          },
+          {
+            "x": 4.3005,
+            "y": 4.254,
+            "w": 8.4262,
+            "h": 1.2127
+          },
+          {
+            "x": 0.6067,
+            "y": 5.5407,
+            "w": 3.6938,
+            "h": 1.2126
+          },
+          {
+            "x": 4.3005,
+            "y": 5.5407,
+            "w": 8.4262,
+            "h": 1.2126
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 4,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcFourBulletSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcFiveBulletSlide": {
+      "description": "Draft layout mcFiveBulletSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.6805,
+            "w": 3.6938,
+            "h": 0.95
+          },
+          {
+            "x": 4.3005,
+            "y": 1.6805,
+            "w": 8.4262,
+            "h": 0.95
+          },
+          {
+            "x": 0.6067,
+            "y": 2.7105,
+            "w": 3.6938,
+            "h": 0.95
+          },
+          {
+            "x": 4.3005,
+            "y": 2.7105,
+            "w": 8.4262,
+            "h": 0.95
+          },
+          {
+            "x": 0.6067,
+            "y": 3.7405,
+            "w": 3.6938,
+            "h": 0.95
+          },
+          {
+            "x": 4.3005,
+            "y": 3.7405,
+            "w": 8.4262,
+            "h": 0.95
+          },
+          {
+            "x": 0.6067,
+            "y": 4.7705,
+            "w": 3.6938,
+            "h": 0.95
+          },
+          {
+            "x": 4.3005,
+            "y": 4.7705,
+            "w": 8.4262,
+            "h": 0.95
+          },
+          {
+            "x": 0.6067,
+            "y": 5.8005,
+            "w": 3.6938,
+            "h": 0.95
+          },
+          {
+            "x": 4.3005,
+            "y": 5.8005,
+            "w": 8.4262,
+            "h": 0.95
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 5,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcFiveBulletSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcStageBulletGridSlide": {
+      "description": "Draft layout mcStageBulletGridSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.6364,
+            "w": 3.03,
+            "h": 5.06
+          },
+          {
+            "x": 3.6367,
+            "y": 1.6364,
+            "w": 3.03,
+            "h": 5.06
+          },
+          {
+            "x": 6.6667,
+            "y": 1.6364,
+            "w": 3.03,
+            "h": 5.06
+          },
+          {
+            "x": 9.6967,
+            "y": 1.6364,
+            "w": 3.03,
+            "h": 5.06
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 4,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcStageBulletGridSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcInsightBulletColumnsSlide": {
+      "description": "Draft layout mcInsightBulletColumnsSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6086,
+            "y": 2.2961,
+            "w": 2.1099,
+            "h": 2.1
+          },
+          {
+            "x": 3.0312,
+            "y": 2.2961,
+            "w": 2.1824,
+            "h": 2.1
+          },
+          {
+            "x": 5.4538,
+            "y": 2.2961,
+            "w": 2.1824,
+            "h": 2.1
+          },
+          {
+            "x": 7.8765,
+            "y": 2.2961,
+            "w": 2.1824,
+            "h": 2.1
+          },
+          {
+            "x": 10.2991,
+            "y": 2.2961,
+            "w": 2.4257,
+            "h": 2.1
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 5,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "sectionLabel": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 40,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "label",
+            "keepTogether": true,
+            "priority": "low"
+          }
+        },
+        "insightText": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "label",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        }
+      },
+      "templateLayout": "Draft mcInsightBulletColumnsSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcNumberedBulletColumnsSlide": {
+      "description": "Draft layout mcNumberedBulletColumnsSlide based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 2.4,
+          "h": 0.58
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1.1,
+          "w": 2.6,
+          "h": 0.34
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.6877,
+            "w": 2.22,
+            "h": 5
+          },
+          {
+            "x": 3.1467,
+            "y": 1.6877,
+            "w": 2.22,
+            "h": 5
+          },
+          {
+            "x": 5.6867,
+            "y": 1.6877,
+            "w": 2.22,
+            "h": 5
+          },
+          {
+            "x": 8.2267,
+            "y": 1.6877,
+            "w": 2.22,
+            "h": 5
+          },
+          {
+            "x": 10.7667,
+            "y": 1.6877,
+            "w": 2,
+            "h": 5
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 5,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcNumberedBulletColumnsSlide",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcExecutiveSummaryKeyValue": {
+      "description": "Draft layout mcExecutiveSummaryKeyValue based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 3.1,
+          "h": 0.62
+        },
+        "straplineBox": {
+          "x": 0.42,
+          "y": 1,
+          "w": 0.2,
+          "h": 0.12
+        },
+        "columnBoxes": [
+          {
+            "x": 0.6067,
+            "y": 1.4274,
+            "w": 12.12,
+            "h": 1.1625
+          },
+          {
+            "x": 0.6067,
+            "y": 2.7274,
+            "w": 12.12,
+            "h": 1.1625
+          },
+          {
+            "x": 0.6067,
+            "y": 4.0274,
+            "w": 12.12,
+            "h": 1.1625
+          },
+          {
+            "x": 0.6067,
+            "y": 5.3274,
+            "w": 12.12,
+            "h": 1.1625
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 4,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "columns",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": false,
+          "minChars": 0,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcExecutiveSummaryKeyValue",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcExecutiveSummaryValueProps": {
+      "description": "Draft layout mcExecutiveSummaryValueProps based on titleStrapline4TextBoxes",
+      "geometry": {
+        "titleBox": {
+          "x": 0.42,
+          "y": 0.3,
+          "w": 3.1,
+          "h": 0.62
+        },
+        "straplineBox": {
+          "x": 0.61,
+          "y": 1.86,
+          "w": 4.1,
+          "h": 0.22
+        },
+        "columnBoxes": [
+          {
+            "x": 0.8106,
+            "y": 2.5193,
+            "w": 3.5565,
+            "h": 3.44
+          },
+          {
+            "x": 4.9088,
+            "y": 2.5193,
+            "w": 3.5565,
+            "h": 3.44
+          },
+          {
+            "x": 9.007,
+            "y": 2.5193,
+            "w": 3.5565,
+            "h": 3.44
+          }
+        ]
+      },
+      "slots": {
+        "columns": {
+          "kind": "columns",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "cards",
+            "keepTogether": true,
+            "priority": "high"
+          }
+        },
+        "strapline": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 120,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        },
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 3,
+          "maxChars": 60,
+          "allowEmpty": false,
+          "renderingHints": {
+            "mode": "heading",
+            "keepTogether": true,
+            "priority": "medium"
+          }
+        }
+      },
+      "templateLayout": "Draft mcExecutiveSummaryValueProps",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcScopeStatement": {
+      "description": "MC scope statement with four icon-led project objectives",
+      "geometry": {
+        "titleBox": {
+          "x": 0.61,
+          "y": 0.46,
+          "w": 6.3,
+          "h": 0.5
+        },
+        "typography": {
+          "rows": [
+            {
+              "circleBox": {
+                "x": 0.69,
+                "y": 1.99,
+                "w": 0.82,
+                "h": 0.82
+              },
+              "iconBox": {
+                "x": 0.89,
+                "y": 2.18,
+                "w": 0.42,
+                "h": 0.42
+              },
+              "textBox": {
+                "x": 1.93,
+                "y": 2.15,
+                "w": 10.25,
+                "h": 0.42
+              }
+            },
+            {
+              "circleBox": {
+                "x": 0.69,
+                "y": 3.28,
+                "w": 0.82,
+                "h": 0.82
+              },
+              "iconBox": {
+                "x": 0.89,
+                "y": 3.47,
+                "w": 0.42,
+                "h": 0.42
+              },
+              "textBox": {
+                "x": 1.93,
+                "y": 3.44,
+                "w": 9.95,
+                "h": 0.48
+              }
+            },
+            {
+              "circleBox": {
+                "x": 0.69,
+                "y": 4.57,
+                "w": 0.82,
+                "h": 0.82
+              },
+              "iconBox": {
+                "x": 0.89,
+                "y": 4.76,
+                "w": 0.42,
+                "h": 0.42
+              },
+              "textBox": {
+                "x": 1.93,
+                "y": 4.7,
+                "w": 10.3,
+                "h": 0.62
+              }
+            },
+            {
+              "circleBox": {
+                "x": 0.69,
+                "y": 5.86,
+                "w": 0.82,
+                "h": 0.82
+              },
+              "iconBox": {
+                "x": 0.89,
+                "y": 6.05,
+                "w": 0.42,
+                "h": 0.42
+              },
+              "textBox": {
+                "x": 1.93,
+                "y": 6.05,
+                "w": 4.3,
+                "h": 0.34
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 80,
+          "allowEmpty": false
+        },
+        "objectives": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 4,
+          "maxItems": 4,
+          "allowEmpty": false
+        }
+      },
+      "templateLayout": "Draft mcScopeStatement",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcThreeQuestions": {
+      "description": "MC three-questions executive framing slide",
+      "geometry": {
+        "titleBox": {
+          "x": 0.61,
+          "y": 0.45,
+          "w": 6.9,
+          "h": 0.52
+        },
+        "leftHeadingBox": {
+          "x": 0.74,
+          "y": 1.88,
+          "w": 4.8,
+          "h": 0.26
+        },
+        "typography": {
+          "leftBodyBox": {
+            "x": 0.7,
+            "y": 2.37,
+            "w": 5.45,
+            "h": 3.55
+          },
+          "panelBox": {
+            "x": 7.11,
+            "y": 1.85,
+            "w": 5.62,
+            "h": 4.79
+          },
+          "panelHeadingBox": {
+            "x": 7.23,
+            "y": 1.89,
+            "w": 2.3,
+            "h": 0.28
+          },
+          "questionRows": [
+            {
+              "circleBox": {
+                "x": 6.89,
+                "y": 2.67,
+                "w": 0.45,
+                "h": 0.45
+              },
+              "textBox": {
+                "x": 7.58,
+                "y": 2.57,
+                "w": 4.74,
+                "h": 0.7
+              }
+            },
+            {
+              "circleBox": {
+                "x": 6.89,
+                "y": 4.05,
+                "w": 0.45,
+                "h": 0.45
+              },
+              "textBox": {
+                "x": 7.58,
+                "y": 3.96,
+                "w": 4.5,
+                "h": 0.56
+              }
+            },
+            {
+              "circleBox": {
+                "x": 6.89,
+                "y": 5.43,
+                "w": 0.45,
+                "h": 0.45
+              },
+              "textBox": {
+                "x": 7.58,
+                "y": 5.33,
+                "w": 4.5,
+                "h": 0.56
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 10,
+          "maxChars": 90,
+          "allowEmpty": false
+        },
+        "situationTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 50,
+          "allowEmpty": false
+        },
+        "situationPoints": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false
+        },
+        "questionsTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 4,
+          "maxChars": 40,
+          "allowEmpty": false
+        },
+        "questions": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "maxItems": 3,
+          "allowEmpty": false
+        }
+      },
+      "templateLayout": "Draft mcThreeQuestions",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcGuidingPrinciples": {
+      "description": "MC four guiding principles slide with linked principle markers",
+      "geometry": {
+        "titleBox": {
+          "x": 0.61,
+          "y": 0.45,
+          "w": 8.3,
+          "h": 0.52
+        },
+        "typography": {
+          "rows": [
+            {
+              "circleBox": {
+                "x": 0.98,
+                "y": 1.34,
+                "w": 1.03,
+                "h": 1.03
+              },
+              "textBox": {
+                "x": 2.39,
+                "y": 1.76,
+                "w": 5.1,
+                "h": 0.3
+              },
+              "dividerBox": {
+                "x": 2.39,
+                "y": 2.57,
+                "w": 10.02,
+                "h": 0.01
+              },
+              "connectorBox": {
+                "x": 1.49,
+                "y": 2.36,
+                "w": 0.01,
+                "h": 0.42
+              }
+            },
+            {
+              "circleBox": {
+                "x": 0.98,
+                "y": 2.78,
+                "w": 1.03,
+                "h": 1.03
+              },
+              "textBox": {
+                "x": 2.39,
+                "y": 3.2,
+                "w": 5.1,
+                "h": 0.3
+              },
+              "dividerBox": {
+                "x": 2.39,
+                "y": 4.01,
+                "w": 10.02,
+                "h": 0.01
+              },
+              "connectorBox": {
+                "x": 1.49,
+                "y": 3.8,
+                "w": 0.01,
+                "h": 0.42
+              }
+            },
+            {
+              "circleBox": {
+                "x": 0.98,
+                "y": 4.22,
+                "w": 1.03,
+                "h": 1.03
+              },
+              "textBox": {
+                "x": 2.39,
+                "y": 4.64,
+                "w": 5.1,
+                "h": 0.3
+              },
+              "dividerBox": {
+                "x": 2.39,
+                "y": 5.45,
+                "w": 10.02,
+                "h": 0.01
+              },
+              "connectorBox": {
+                "x": 1.49,
+                "y": 5.24,
+                "w": 0.01,
+                "h": 0.42
+              }
+            },
+            {
+              "circleBox": {
+                "x": 0.98,
+                "y": 5.66,
+                "w": 1.03,
+                "h": 1.03
+              },
+              "textBox": {
+                "x": 2.39,
+                "y": 6.08,
+                "w": 5.1,
+                "h": 0.3
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 10,
+          "maxChars": 100,
+          "allowEmpty": false
+        },
+        "principleLabels": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 4,
+          "maxItems": 4,
+          "allowEmpty": false
+        },
+        "principleBodies": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 4,
+          "maxItems": 4,
+          "allowEmpty": false
+        }
+      },
+      "templateLayout": "Draft mcGuidingPrinciples",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcVisionStrategyFramework": {
+      "description": "MC vision and strategy house with four prompts and three strategy bands",
+      "geometry": {
+        "titleBox": {
+          "x": 0.61,
+          "y": 0.45,
+          "w": 8.05,
+          "h": 0.52
+        },
+        "typography": {
+          "roofBox": {
+            "x": 2.56,
+            "y": 1.11,
+            "w": 10.14,
+            "h": 1.78
+          },
+          "roofTextBox": {
+            "x": 5.37,
+            "y": 1.87,
+            "w": 4.2,
+            "h": 0.28
+          },
+          "promptRows": [
+            {
+              "promptBox": {
+                "x": 0.61,
+                "y": 1.93,
+                "w": 1.25,
+                "h": 0.62
+              },
+              "iconBox": {
+                "x": 1.98,
+                "y": 2.12,
+                "w": 0.33,
+                "h": 0.33
+              }
+            },
+            {
+              "promptBox": {
+                "x": 0.61,
+                "y": 3.14,
+                "w": 1.25,
+                "h": 0.5
+              },
+              "iconBox": {
+                "x": 1.98,
+                "y": 3.25,
+                "w": 0.33,
+                "h": 0.33
+              }
+            },
+            {
+              "promptBox": {
+                "x": 0.61,
+                "y": 4.31,
+                "w": 1.25,
+                "h": 0.62
+              },
+              "iconBox": {
+                "x": 1.98,
+                "y": 4.52,
+                "w": 0.33,
+                "h": 0.33
+              }
+            },
+            {
+              "promptBox": {
+                "x": 0.61,
+                "y": 5.79,
+                "w": 1.25,
+                "h": 0.46
+              },
+              "iconBox": {
+                "x": 1.98,
+                "y": 5.91,
+                "w": 0.33,
+                "h": 0.33
+              }
+            }
+          ],
+          "bandRows": [
+            {
+              "panelBox": {
+                "x": 2.56,
+                "y": 2.98,
+                "w": 10.17,
+                "h": 1.22
+              },
+              "headingBox": {
+                "x": 2.79,
+                "y": 3.19,
+                "w": 1.75,
+                "h": 0.46
+              },
+              "bodyBox": {
+                "x": 4.66,
+                "y": 3.19,
+                "w": 7.7,
+                "h": 0.26
+              }
+            },
+            {
+              "panelBox": {
+                "x": 2.56,
+                "y": 4.14,
+                "w": 10.17,
+                "h": 1.22
+              },
+              "headingBox": {
+                "x": 2.79,
+                "y": 4.57,
+                "w": 1.35,
+                "h": 0.3
+              },
+              "bodyBox": {
+                "x": 4.66,
+                "y": 4.57,
+                "w": 7.35,
+                "h": 0.26
+              }
+            },
+            {
+              "panelBox": {
+                "x": 2.56,
+                "y": 5.52,
+                "w": 10.17,
+                "h": 1.22
+              },
+              "headingBox": {
+                "x": 2.79,
+                "y": 5.95,
+                "w": 1.5,
+                "h": 0.3
+              },
+              "bodyBox": {
+                "x": 4.66,
+                "y": 5.95,
+                "w": 6.55,
+                "h": 0.26
+              }
+            }
+          ]
+        }
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 10,
+          "maxChars": 90,
+          "allowEmpty": false
+        },
+        "prompts": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 4,
+          "maxItems": 4,
+          "allowEmpty": false
+        },
+        "visionText": {
+          "kind": "text",
+          "required": true,
+          "minChars": 10,
+          "maxChars": 140,
+          "allowEmpty": false
+        },
+        "bandHeadings": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "maxItems": 3,
+          "allowEmpty": false
+        },
+        "bandBodies": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "maxItems": 3,
+          "allowEmpty": false
+        }
+      },
+      "templateLayout": "Draft mcVisionStrategyFramework",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
+    },
+    "mcProjectOverviewMetrics": {
+      "description": "MC project overview with objective band and two KPI context cards",
+      "geometry": {
+        "titleBox": {
+          "x": 0.61,
+          "y": 0.45,
+          "w": 7.2,
+          "h": 0.52
+        },
+        "typography": {
+          "objectiveHeaderBox": {
+            "x": 0.61,
+            "y": 1.54,
+            "w": 2.77,
+            "h": 0.82
+          },
+          "objectiveIconBox": {
+            "x": 2.45,
+            "y": 1.67,
+            "w": 0.58,
+            "h": 0.58
+          },
+          "objectiveBodyBox": {
+            "x": 3.38,
+            "y": 1.54,
+            "w": 9.35,
+            "h": 0.82
+          },
+          "objectiveTextBox": {
+            "x": 3.48,
+            "y": 1.87,
+            "w": 8.95,
+            "h": 0.28
+          },
+          "contextCard": {
+            "headerBox": {
+              "x": 0.61,
+              "y": 2.66,
+              "w": 5.84,
+              "h": 0.8
+            },
+            "iconBox": {
+              "x": 5.7,
+              "y": 2.81,
+              "w": 0.47,
+              "h": 0.47
+            },
+            "bodyBox": {
+              "x": 0.61,
+              "y": 3.46,
+              "w": 5.84,
+              "h": 3.19
+            },
+            "itemsBox": {
+              "x": 0.74,
+              "y": 3.56,
+              "w": 5.15,
+              "h": 2.25
+            }
+          },
+          "metricsCard": {
+            "headerBox": {
+              "x": 6.86,
+              "y": 2.66,
+              "w": 5.87,
+              "h": 0.8
+            },
+            "iconBox": {
+              "x": 11.98,
+              "y": 2.82,
+              "w": 0.53,
+              "h": 0.53
+            },
+            "bodyBox": {
+              "x": 6.86,
+              "y": 3.46,
+              "w": 5.87,
+              "h": 3.19
+            },
+            "itemsBox": {
+              "x": 7.02,
+              "y": 3.56,
+              "w": 5.12,
+              "h": 2.25
+            }
+          }
+        }
+      },
+      "slots": {
+        "title": {
+          "kind": "text",
+          "required": true,
+          "minChars": 8,
+          "maxChars": 90,
+          "allowEmpty": false
+        },
+        "objectiveTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 4,
+          "maxChars": 30,
+          "allowEmpty": false
+        },
+        "objectiveText": {
+          "kind": "text",
+          "required": true,
+          "minChars": 10,
+          "maxChars": 180,
+          "allowEmpty": false
+        },
+        "contextTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 5,
+          "maxChars": 40,
+          "allowEmpty": false
+        },
+        "contextItems": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false
+        },
+        "metricsTitle": {
+          "kind": "text",
+          "required": true,
+          "minChars": 5,
+          "maxChars": 30,
+          "allowEmpty": false
+        },
+        "metricsItems": {
+          "kind": "textArray",
+          "required": true,
+          "minItems": 3,
+          "allowEmpty": false
+        }
+      },
+      "templateLayout": "Draft mcProjectOverviewMetrics",
+      "densityTarget": {
+        "mode": "balanced",
+        "minScore": 0.75
+      }
     }
   },
   "detectedLayoutSlots": {

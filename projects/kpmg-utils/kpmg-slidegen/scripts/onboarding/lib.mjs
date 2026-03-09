@@ -374,7 +374,39 @@ export function buildCandidateBuilderSource({ family, layoutId }) {
   const policy = getFamilyPolicy(family);
   const importPath = pathToFileURL(path.join(REPO_ROOT, policy.builderModule)).href;
 
-  return `import { ${policy.builderExport} } from '${importPath}';\n\nexport function build${pascal}(pptx, slideSpec, ctx) {\n  return ${policy.builderExport}(pptx, slideSpec, ctx);\n}\n\nexport default build${pascal};\n`;
+  return `import { ${policy.builderExport} } from '${importPath}';\n\n// Candidate builder rules:\n// - Prefer canonical theme/token helpers over ad hoc font/color literals.\n// - Prefer theme helper font resolution over literal fontFace values in the builder.\n// - Prefer master/footer chrome and footer-safe geometry over stamping footer screenshots.\n// - Prefer template asset resolution helpers over repo-root path stitching.\nexport function build${pascal}(pptx, slideSpec, ctx) {\n  return ${policy.builderExport}(pptx, slideSpec, ctx);\n}\n\nexport default build${pascal};\n`;
+}
+
+/**
+ * Guard common candidate-builder anti-patterns before render/promotion.
+ *
+ * @param {string} filePath
+ */
+export function auditCandidateBuilderSource(filePath) {
+  const source = fs.readFileSync(filePath, 'utf8');
+  const violations = [];
+
+  if (/FOOTER_IMAGE_PATH|footer\.png|footer\.jpg|footer\.jpeg|footer\.svg/i.test(source)) {
+    violations.push('Use canonical master/footer chrome instead of stamping footer images.');
+  }
+
+  if (/REPO_ROOT[\s\S]*templates|path\.resolve\(__dirname[\s\S]*templates/i.test(source)) {
+    violations.push('Use template asset resolution helpers instead of repo-root template path stitching.');
+  }
+
+  if (/['"][0-9A-Fa-f]{6}['"]/.test(source)) {
+    violations.push('Use canonical theme palette values instead of raw hex color literals in candidate builders.');
+  }
+
+  if (/fontFace\s*:\s*['"][^'"]+['"]/.test(source)) {
+    violations.push('Use existing theme/helper font resolution instead of literal fontFace values in candidate builders.');
+  }
+
+  if (violations.length > 0) {
+    throw new Error(
+      `Candidate builder audit failed for ${filePath}:\n- ${violations.join('\n- ')}`,
+    );
+  }
 }
 
 /**
@@ -388,6 +420,7 @@ export function sanitizeCandidateLayout(candidateLayout) {
   delete sanitizedLayout.type;
   delete sanitizedLayout.family;
   delete sanitizedLayout.schemaVersion;
+  delete sanitizedLayout.registry;
   return sanitizedLayout;
 }
 
@@ -434,23 +467,51 @@ export function buildDraftTemplatePackage({ templatePackage, layoutId, candidate
  * @param {object} params
  * @returns {object}
  */
-export function buildDraftRegistryEntry({ family, layoutId, builder }) {
+export function buildDraftRegistryEntry({ family, layoutId, builder, candidateLayout = null }) {
   const baseRegistry = getSlideRegistry();
   const baseEntry = baseRegistry.get(family);
   if (!baseEntry) {
     throw new Error(`Unknown base family in slide registry: ${family}`);
   }
+  const registryOverrides = candidateLayout?.registry || {};
+  const overrideMaster =
+    typeof registryOverrides.master === 'string' && registryOverrides.master.trim()
+      ? registryOverrides.master.trim()
+      : null;
+  const overridePaginationPolicyKey =
+    typeof registryOverrides.paginationPolicyKey === 'string' &&
+    registryOverrides.paginationPolicyKey.trim()
+      ? registryOverrides.paginationPolicyKey.trim()
+      : null;
+  const overrideExcludeFromLogicalPaging =
+    typeof registryOverrides.excludeFromLogicalPaging === 'boolean'
+      ? registryOverrides.excludeFromLogicalPaging
+      : null;
+  const overrideRequiredGeometry = Array.isArray(registryOverrides.requiredGeometry)
+    ? registryOverrides.requiredGeometry.filter((key) => typeof key === 'string' && key.trim())
+    : null;
+  const overrideOptionalGeometry = Array.isArray(registryOverrides.optionalGeometry)
+    ? registryOverrides.optionalGeometry.filter((key) => typeof key === 'string' && key.trim())
+    : null;
+  const overrideOptionalDefaults =
+    registryOverrides.optionalDefaults && typeof registryOverrides.optionalDefaults === 'object'
+      ? { ...registryOverrides.optionalDefaults }
+      : null;
   return {
     ...baseEntry,
     builderId: layoutId,
     builder,
-    requiredGeometry: [...(baseEntry.requiredGeometry || [])],
-    optionalGeometry: [...(baseEntry.optionalGeometry || [])],
-    optionalDefaults: { ...(baseEntry.optionalDefaults || {}) },
+    master: overrideMaster || baseEntry.master,
+    requiredGeometry: overrideRequiredGeometry || [...(baseEntry.requiredGeometry || [])],
+    optionalGeometry: overrideOptionalGeometry || [...(baseEntry.optionalGeometry || [])],
+    optionalDefaults: overrideOptionalDefaults || { ...(baseEntry.optionalDefaults || {}) },
+    paginationPolicyKey: overridePaginationPolicyKey || baseEntry.paginationPolicyKey,
+    excludeFromLogicalPaging:
+      overrideExcludeFromLogicalPaging ?? Boolean(baseEntry.excludeFromLogicalPaging),
     geometryContract: {
-      requiredKeys: [...(baseEntry.geometryContract?.requiredKeys || [])],
-      optionalKeys: [...(baseEntry.geometryContract?.optionalKeys || [])],
-      optionalDefaults: { ...(baseEntry.geometryContract?.optionalDefaults || {}) },
+      requiredKeys: overrideRequiredGeometry || [...(baseEntry.geometryContract?.requiredKeys || [])],
+      optionalKeys: overrideOptionalGeometry || [...(baseEntry.geometryContract?.optionalKeys || [])],
+      optionalDefaults: overrideOptionalDefaults || { ...(baseEntry.geometryContract?.optionalDefaults || {}) },
     },
   };
 }
@@ -535,6 +596,7 @@ export function buildSourceRecord(input) {
   return {
     schemaVersion: 1,
     layoutId: input.layoutId,
+    templateName: input.templateName || 'kpmg-diligence',
     sourcePptxPath: input.sourcePptxPath,
     sourceSlideNumber: Number(input.sourceSlideNumber),
     family: input.family || null,
@@ -566,7 +628,11 @@ export function loadSourceRecord(layoutId) {
   if (!fs.existsSync(sourcePath)) {
     throw new Error(`Missing onboarding source record: ${sourcePath}`);
   }
-  return readJson(sourcePath);
+  const sourceRecord = readJson(sourcePath);
+  if (!sourceRecord.templateName) {
+    sourceRecord.templateName = 'kpmg-diligence';
+  }
+  return sourceRecord;
 }
 
 /**
@@ -631,9 +697,10 @@ export async function renderCandidate({
     throw new Error('Draft layout has no base family. Set `family` in source.json before rendering.');
   }
 
-  const templatePackage = loadTemplatePackage('kpmg-diligence');
+  const templatePackage = loadTemplatePackage(source.templateName);
   const candidateLayout = readJson(paths.candidateLayoutPath);
   const candidateDeckSpec = readJson(paths.candidateDeckSpecPath);
+  auditCandidateBuilderSource(paths.candidateBuilderPath);
   const builder = await loadDraftBuilder(paths.candidateBuilderPath, layoutId);
   const draftTemplatePackage = buildDraftTemplatePackage({
     templatePackage,
@@ -644,6 +711,7 @@ export async function renderCandidate({
     family: source.family,
     layoutId,
     builder,
+    candidateLayout,
   });
 
   const result = await generateToFile(candidateDeckSpec, paths.candidateDeckPath, {

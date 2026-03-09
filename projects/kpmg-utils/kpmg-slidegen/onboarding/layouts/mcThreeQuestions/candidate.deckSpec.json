@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "title": "Draft mcThreeQuestions",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcThreeQuestions",
+      "title": "This project will answer three key questions",
+      "situationTitle": "Situation and complication",
+      "situationPoints": [
+        "Leadership has aligned on the ambition, but the path from strategy to execution remains uneven across business units.",
+        "Commercial, delivery, and enabling functions are making decisions with different assumptions about sequencing and ownership.",
+        "The program now needs a tighter view of where to focus, what to prioritize, and how to mobilize at pace.",
+        "Management is asking for a practical implementation model that turns strategic intent into measurable impact."
+      ],
+      "questionsTitle": "Key questions",
+      "questions": [
+        "How do we design an implementation model that fits the organization and realizes the full impact of the new strategy?",
+        "Which decisions and workstreams will create the greatest near-term value while preserving long-term strategic flexibility?",
+        "What governance, sequencing, and delivery model will keep the transformation moving once priorities are set?"
+      ]
+    }
+  ]
+}

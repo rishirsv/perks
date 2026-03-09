@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Draft mcFiveBulletSlide",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcFiveBulletSlide",
+      "title": "Title",
+      "strapline": "Subtitle",
+      "columns": [
+        {
+          "heading": "Bullet #1",
+          "body": [
+            "Bullet 1 Description"
+          ],
+          "iconAsset": "mc-five-bullet-icon-1.png"
+        },
+        {
+          "heading": "Bullet #2",
+          "body": [
+            "Bullet 2 Description"
+          ],
+          "iconAsset": "mc-five-bullet-icon-2.png"
+        },
+        {
+          "heading": "Bullet #3",
+          "body": [
+            "Bullet 3 Description"
+          ],
+          "iconAsset": "mc-five-bullet-icon-3.png"
+        },
+        {
+          "heading": "Bullet #4",
+          "body": [
+            "Bullet 4 Description"
+          ],
+          "iconAsset": "mc-five-bullet-icon-4.png"
+        },
+        {
+          "heading": "Bullet #5",
+          "body": [
+            "Bullet 5 Description"
+          ],
+          "iconAsset": "mc-five-bullet-icon-5.png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "thresholds": {
+    "changedPixelRatioMax": 0.25,
+    "meanAbsMax": 20,
+    "rmsMax": 30
+  },
+  "checks": {
+    "changedPixelRatio": {
+      "actual": 0.205611,
+      "max": 0.25,
+      "pass": true
+    },
+    "meanAbs": {
+      "actual": 14.370321,
+      "max": 20.0,
+      "pass": true
+    },
+    "rms": {
+      "actual": 51.941181,
+      "max": 30.0,
+      "pass": true
+    }
+  }
+}

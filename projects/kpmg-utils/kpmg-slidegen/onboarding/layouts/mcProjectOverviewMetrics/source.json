@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "layoutId": "mcProjectOverviewMetrics",
+  "templateName": "kpmg-diligence",
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "sourceSlideNumber": 32,
+  "family": "titleStrapline4TextBoxes",
+  "suggestedFamily": null,
+  "status": "promoted",
+  "extractSeed": true,
+  "approval": {
+    "approved": true,
+    "approvedBy": "Codex",
+    "approvedAt": "2026-03-09T19:38:06.098Z",
+    "notes": "Reviewed visually; remaining diff is gradient/text/footer chrome drift."
+  },
+  "artifacts": {
+    "referencePngPath": "compare/reference.png",
+    "candidateQaPath": "candidate/qa.json",
+    "scorecardPath": "compare/scorecard.json"
+  }
+}

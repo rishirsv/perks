@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 28,
+  "slideTarget": "slides/slide28.xml",
+  "summary": {
+    "shapeCount": 9,
+    "text": 0,
+    "image": 4,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 0,
+    "other": 5
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.678879,
+        "y": 1.93422,
+        "w": 0.800087,
+        "h": 0.800087
+      },
+      "name": "Google Shape;49;p15",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.678879,
+        "y": 3.193364,
+        "w": 0.800087,
+        "h": 0.800087
+      },
+      "name": "Google Shape;50;p15",
+      "id": "6",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.678879,
+        "y": 4.452508,
+        "w": 0.800087,
+        "h": 0.800087
+      },
+      "name": "Google Shape;51;p15",
+      "id": "7",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.678879,
+        "y": 5.71165,
+        "w": 0.800087,
+        "h": 0.800087
+      },
+      "name": "Google Shape;52;p15",
+      "id": "8",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 0.823017,
+        "y": 5.855788,
+        "w": 0.511811,
+        "h": 0.511811
+      },
+      "name": "Graphic 19",
+      "id": "20",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image17.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 0.823017,
+        "y": 4.596646,
+        "w": 0.511811,
+        "h": 0.511811
+      },
+      "name": "Graphic 21",
+      "id": "22",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image19.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 0.823017,
+        "y": 2.078358,
+        "w": 0.511811,
+        "h": 0.511811
+      },
+      "name": "Graphic 23",
+      "id": "24",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image21.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 0.823017,
+        "y": 3.337502,
+        "w": 0.511811,
+        "h": 0.511811
+      },
+      "name": "Graphic 25",
+      "id": "26",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image23.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    }
+  ]
+}

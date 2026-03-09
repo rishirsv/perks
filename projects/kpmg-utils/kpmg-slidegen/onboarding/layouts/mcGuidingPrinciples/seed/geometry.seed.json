@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 30,
+  "slideTarget": "slides/slide30.xml",
+  "summary": {
+    "shapeCount": 16,
+    "text": 8,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 7
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.954417,
+        "y": 1.265456,
+        "w": 1.061907,
+        "h": 1.061908
+      },
+      "name": "Freeform: Shape 6",
+      "id": "7",
+      "textPreview": "[Principle 1]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.956379,
+        "y": 2.713565,
+        "w": 1.061907,
+        "h": 1.061908
+      },
+      "name": "Freeform: Shape 27",
+      "id": "28",
+      "textPreview": "[Principle 2]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.956379,
+        "y": 4.161674,
+        "w": 1.061907,
+        "h": 1.061908
+      },
+      "name": "Freeform: Shape 28",
+      "id": "29",
+      "textPreview": "[Principle 3]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.954417,
+        "y": 5.60978,
+        "w": 1.061907,
+        "h": 1.061908
+      },
+      "name": "Freeform: Shape 29",
+      "id": "30",
+      "textPreview": "[Principle 4]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.43753,
+        "y": 1.678605,
+        "w": 9.921132,
+        "h": 0.235612
+      },
+      "name": "Rectangle 53",
+      "id": "54",
+      "textPreview": "[Insert description of guiding principle, 2-3 lines]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.43753,
+        "y": 3.105673,
+        "w": 9.921132,
+        "h": 0.235612
+      },
+      "name": "Rectangle 54",
+      "id": "55",
+      "textPreview": "[Insert description of guiding principle, 2-3 lines]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.43753,
+        "y": 4.564939,
+        "w": 9.921132,
+        "h": 0.235612
+      },
+      "name": "Rectangle 211",
+      "id": "212",
+      "textPreview": "[Insert description of guiding principle, 2-3 lines]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.43753,
+        "y": 6.022929,
+        "w": 9.921132,
+        "h": 0.235612
+      },
+      "name": "Rectangle 219",
+      "id": "220",
+      "textPreview": "[Insert description of guiding principle, 2-3 lines]",
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 2.43753,
+        "y": 2.509945,
+        "w": 9.92,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 2.43753,
+        "y": 3.953112,
+        "w": 9.92,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 2.43753,
+        "y": 5.411741,
+        "w": 9.92,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 1.490373,
+        "y": 5.263905,
+        "w": 0.0,
+        "h": 0.305556
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 1.490373,
+        "y": 3.815796,
+        "w": 0.0,
+        "h": 0.305556
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 1.490373,
+        "y": 2.367687,
+        "w": 0.0,
+        "h": 0.305556
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    }
+  ]
+}

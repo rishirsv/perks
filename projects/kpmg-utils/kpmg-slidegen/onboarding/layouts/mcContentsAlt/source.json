@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "layoutId": "mcContentsAlt",
+  "templateName": "kpmg-diligence",
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "sourceSlideNumber": 2,
+  "family": "contents",
+  "suggestedFamily": null,
+  "status": "promoted",
+  "extractSeed": true,
+  "approval": {
+    "approved": true,
+    "approvedBy": "Codex with user approval",
+    "approvedAt": "2026-03-09T17:44:07.214Z",
+    "notes": "User approved promotion after visual review despite residual RMS diff gap."
+  },
+  "artifacts": {
+    "referencePngPath": "compare/reference.png",
+    "candidateQaPath": "candidate/qa.json",
+    "scorecardPath": "compare/scorecard.json"
+  }
+}

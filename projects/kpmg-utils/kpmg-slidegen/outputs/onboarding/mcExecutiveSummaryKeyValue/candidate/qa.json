@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "run": {
+    "generatedAt": "2026-03-09T19:02:14.680Z",
+    "template": "kpmg-diligence",
+    "strictRequested": true,
+    "allowSparse": true,
+    "inputSlideCount": 1,
+    "outputSlideCount": 1,
+    "textAmount": "lg",
+    "slideCountPolicy": null,
+    "styleIntent": null
+  },
+  "outcome": {
+    "status": "pass",
+    "blockingIssueCount": 0,
+    "advisoryIssueCount": 0,
+    "failedChecks": [],
+    "warningChecks": []
+  },
+  "checks": [
+    {
+      "id": "contracts",
+      "status": "pass",
+      "blocking": true,
+      "summary": "Template contracts and master wiring completed without runtime fallback usage.",
+      "metrics": {
+        "fallbackCount": 0,
+        "masterMismatchCount": 0
+      },
+      "details": {
+        "fallbacks": []
+      },
+      "artifacts": {}
+    },
+    {
+      "id": "validation",
+      "status": "pass",
+      "blocking": true,
+      "summary": "Deck validation passed.",
+      "metrics": {
+        "errorCount": 0,
+        "warningCount": 0,
+        "missingSlotCount": 0,
+        "slotIssueCount": 0
+      },
+      "details": {},
+      "artifacts": {}
+    },
+    {
+      "id": "verbosity",
+      "status": "pass",
+      "blocking": false,
+      "summary": "Requested verbosity tier is aligned with the authored slides.",
+      "metrics": {
+        "failCount": 0,
+        "warningCount": 0,
+        "checkedSlideCount": 1,
+        "textAmount": "lg"
+      },
+      "details": {},
+      "artifacts": {}
+    },
+    {
+      "id": "pagination",
+      "status": "pass",
+      "blocking": true,
+      "summary": "Pagination completed without blocking issues.",
+      "metrics": {
+        "decisionCount": 0,
+        "splitCount": 0,
+        "recomputeFieldCount": 0,
+        "tableWarningCount": 0
+      },
+      "details": {
+        "recomputeFields": [],
+        "decisions": []
+      },
+      "artifacts": {}
+    },
+    {
+      "id": "overlap",
+      "status": "pass",
+      "blocking": true,
+      "summary": "No overlaps were detected in the rendered deck.",
+      "metrics": {
+        "severeCount": 0,
+        "warningCount": 0,
+        "slideCount": 1
+      },
+      "details": {},
+      "artifacts": {}
+    },
+    {
+      "id": "visual_preview",
+      "status": "pass",
+      "blocking": false,
+      "summary": "Preview images were generated successfully.",
+      "metrics": {
+        "attempted": true,
+        "slideImageCount": 1
+      },
+      "details": {},
+      "artifacts": {}
+    },
+    {
+      "id": "montage",
+      "status": "skipped",
+      "blocking": false,
+      "summary": "Montage generation was skipped.",
+      "metrics": {
+        "attempted": false
+      },
+      "details": {},
+      "artifacts": {}
+    },
+    {
+      "id": "visual_overflow",
+      "status": "pass",
+      "blocking": true,
+      "summary": "Visual overflow inspection passed.",
+      "metrics": {
+        "attempted": true,
+        "failingSlideCount": 0
+      },
+      "details": {},
+      "artifacts": {}
+    }
+  ],
+  "findings": [],
+  "slides": [
+    {
+      "inputSlideIndex": 0,
+      "outputSlideIndex": 0,
+      "slideType": "mcExecutiveSummaryKeyValue",
+      "sourceSlideType": "mcExecutiveSummaryKeyValue",
+      "status": "pass",
+      "pagination": {
+        "mode": "none",
+        "policyKey": "none.v1",
+        "pageIndex": 0,
+        "pageCount": 1,
+        "split": false,
+        "originalCount": 0
+      },
+      "master": {
+        "slideIndex": 0,
+        "slideType": "mcExecutiveSummaryKeyValue",
+        "expectedMaster": "KPMG_WHITE",
+        "appliedMaster": "KPMG_WHITE",
+        "matched": true
+      },
+      "density": {
+        "slideIndex": 0,
+        "slideType": "mcExecutiveSummaryKeyValue",
+        "status": "OK",
+        "score": 1,
+        "minScore": 0.75,
+        "acceptableFloor": 0.637,
+        "shouldRepair": false
+      },
+      "verbosity": {
+        "findings": []
+      },
+      "findingCodes": []
+    }
+  ],
+  "artifacts": {
+    "runRoot": "/Users/rishi/Code/ai-tools/projects/kpmg-utils/kpmg-slidegen/outputs/onboarding/mcExecutiveSummaryKeyValue/candidate",
+    "deck": {
+      "path": "deck.pptx",
+      "exists": true
+    },
+    "qa": {
+      "path": "qa.json",
+      "exists": true
+    },
+    "preview": {
+      "status": "pass",
+      "outputDir": "preview",
+      "slideCount": 1,
+      "imagePaths": [
+        "preview/slide-1.png"
+      ],
+      "width": 1600,
+      "height": 900,
+      "reason": null
+    },
+    "montage": {
+      "status": "skipped",
+      "path": null,
+      "reason": null
+    },
+    "overflowVisual": {
+      "status": "pass",
+      "failingSlides": [],
+      "imagePaths": [],
+      "reason": null
+    }
+  }
+}

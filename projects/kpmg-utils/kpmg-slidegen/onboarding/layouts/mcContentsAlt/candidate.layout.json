@@ -1,0 +1,61 @@
+{
+  "description": "Draft layout mcContentsAlt based on contents",
+  "templateLayout": "Draft mcContentsAlt",
+  "geometry": {
+    "titleBox": {
+      "x": 1.03,
+      "y": 0.86,
+      "w": 2.38,
+      "h": 1.58
+    },
+    "topRowBox": {
+      "x": 4.72,
+      "y": 1.58,
+      "w": 4.05,
+      "h": 2.72
+    },
+    "bottomRowBox": {
+      "x": 4.72,
+      "y": 4.28,
+      "w": 4.05,
+      "h": 2.44
+    }
+  },
+  "slots": {
+    "title": {
+      "kind": "text",
+      "required": true,
+      "minChars": 6,
+      "maxChars": 40,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "heading",
+        "keepTogether": true,
+        "priority": "high"
+      }
+    },
+    "sections": {
+      "kind": "contentsSections",
+      "required": true,
+      "minItems": 3,
+      "allowEmpty": false,
+      "renderingHints": {
+        "mode": "contents",
+        "keepTogether": true,
+        "priority": "high"
+      }
+    }
+  },
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.8
+  },
+  "registry": {
+    "master": "KPMG_SECTION_DARK",
+    "paginationPolicyKey": "none.v1",
+    "excludeFromLogicalPaging": true
+  },
+  "schemaVersion": 1,
+  "type": "mcContentsAlt",
+  "family": "contents"
+}

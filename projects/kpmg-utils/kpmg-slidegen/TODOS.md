@@ -259,6 +259,7 @@ Historical audit context only. Several findings below have since been partially 
 - Improve overlap bounds for `sizing` (`cover/contain/crop`) and add a small set of regression fixtures.
 - Update SKILL.md with a complete dependency list and improve postprocess availability diagnostics.
 - Refactor `render-deck.js` into cohesive modules; add unit tests for validators and pagination.
+- Review the growing MC onboarding set and decide which layouts should remain per-layout variants versus being promoted into a few reusable structural families. Guiding rule: broaden an existing family only when multiple layouts share the same semantic regions and slot shapes; otherwise create a small new family rather than bloating `titleStrapline4TextBoxes` or relying indefinitely on one-off draft geometry overrides. Candidate future families include patterns like `iconStatementList`, `questionPanel`, `principleChain`, `strategyHouse`, and `overviewBandTwoCards`.
 
 **Longer-Term**
 

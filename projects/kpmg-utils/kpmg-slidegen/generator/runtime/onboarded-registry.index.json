@@ -1,4 +1,301 @@
 {
   "schemaVersion": 1,
-  "entries": []
+  "entries": [
+    {
+      "type": "mcContentsAlt",
+      "builderFile": "mcContentsAlt",
+      "exportName": "buildMcContentsAlt",
+      "registryEntry": {
+        "builderId": "mcContentsAlt",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_SECTION_DARK",
+        "requiredGeometry": [
+          "titleBox",
+          "topRowBox",
+          "bottomRowBox"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": true
+      }
+    },
+    {
+      "type": "mcExecutiveSummaryKeyValue",
+      "builderFile": "mcExecutiveSummaryKeyValue",
+      "exportName": "buildMcExecutiveSummaryKeyValue",
+      "registryEntry": {
+        "builderId": "mcExecutiveSummaryKeyValue",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcExecutiveSummaryValueProps",
+      "builderFile": "mcExecutiveSummaryValueProps",
+      "exportName": "buildMcExecutiveSummaryValueProps",
+      "registryEntry": {
+        "builderId": "mcExecutiveSummaryValueProps",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcFiveBulletSlide",
+      "builderFile": "mcFiveBulletSlide",
+      "exportName": "buildMcFiveBulletSlide",
+      "registryEntry": {
+        "builderId": "mcFiveBulletSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcFourBulletSlide",
+      "builderFile": "mcFourBulletSlide",
+      "exportName": "buildMcFourBulletSlide",
+      "registryEntry": {
+        "builderId": "mcFourBulletSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcGuidingPrinciples",
+      "builderFile": "mcGuidingPrinciples",
+      "exportName": "buildMcGuidingPrinciples",
+      "registryEntry": {
+        "builderId": "mcGuidingPrinciples",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "typography"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": true
+      }
+    },
+    {
+      "type": "mcInsightBulletColumnsSlide",
+      "builderFile": "mcInsightBulletColumnsSlide",
+      "exportName": "buildMcInsightBulletColumnsSlide",
+      "registryEntry": {
+        "builderId": "mcInsightBulletColumnsSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcNumberedBulletColumnsSlide",
+      "builderFile": "mcNumberedBulletColumnsSlide",
+      "exportName": "buildMcNumberedBulletColumnsSlide",
+      "registryEntry": {
+        "builderId": "mcNumberedBulletColumnsSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcProjectOverviewMetrics",
+      "builderFile": "mcProjectOverviewMetrics",
+      "exportName": "buildMcProjectOverviewMetrics",
+      "registryEntry": {
+        "builderId": "mcProjectOverviewMetrics",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "typography"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": true
+      }
+    },
+    {
+      "type": "mcScopeStatement",
+      "builderFile": "mcScopeStatement",
+      "exportName": "buildMcScopeStatement",
+      "registryEntry": {
+        "builderId": "mcScopeStatement",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "typography"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": true
+      }
+    },
+    {
+      "type": "mcStageBulletGridSlide",
+      "builderFile": "mcStageBulletGridSlide",
+      "exportName": "buildMcStageBulletGridSlide",
+      "registryEntry": {
+        "builderId": "mcStageBulletGridSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcThreeBulletSlide",
+      "builderFile": "mcThreeBulletSlide",
+      "exportName": "buildMcThreeBulletSlide",
+      "registryEntry": {
+        "builderId": "mcThreeBulletSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcThreeQuestions",
+      "builderFile": "mcThreeQuestions",
+      "exportName": "buildMcThreeQuestions",
+      "registryEntry": {
+        "builderId": "mcThreeQuestions",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "leftHeadingBox",
+          "typography"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": true
+      }
+    },
+    {
+      "type": "mcTwoBulletSlide",
+      "builderFile": "mcTwoBulletSlide",
+      "exportName": "buildMcTwoBulletSlide",
+      "registryEntry": {
+        "builderId": "mcTwoBulletSlide",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "straplineBox",
+          "columnBoxes"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": false
+      }
+    },
+    {
+      "type": "mcVisionStrategyFramework",
+      "builderFile": "mcVisionStrategyFramework",
+      "exportName": "buildMcVisionStrategyFramework",
+      "registryEntry": {
+        "builderId": "mcVisionStrategyFramework",
+        "builder": "__BUILDER_REF__",
+        "master": "KPMG_WHITE",
+        "requiredGeometry": [
+          "titleBox",
+          "typography"
+        ],
+        "optionalGeometry": [],
+        "optionalDefaults": {},
+        "paginationPolicyKey": "none.v1",
+        "validationHooks": [],
+        "excludeFromLogicalPaging": true
+      }
+    }
+  ]
 }

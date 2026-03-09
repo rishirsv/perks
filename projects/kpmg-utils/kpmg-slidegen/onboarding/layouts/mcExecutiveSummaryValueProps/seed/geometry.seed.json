@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 23,
+  "slideTarget": "slides/slide23.xml",
+  "summary": {
+    "shapeCount": 19,
+    "text": 8,
+    "image": 3,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 7
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606667,
+        "y": 2.190486,
+        "w": 12.117292,
+        "h": 2.098537
+      },
+      "name": "TextBox 10",
+      "id": "11",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 1.857644,
+        "w": 3.556493,
+        "h": 0.219134
+      },
+      "name": "TextBox 17",
+      "id": "18",
+      "textPreview": "What [Client] is looking for:",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.810576,
+        "y": 4.858705,
+        "w": 3.556493,
+        "h": 1.093913
+      },
+      "name": "TextBox 9",
+      "id": "10",
+      "textPreview": "[Insert main value propositions that you bring to the table, e.g. experience with similar issues] [Insert main value propositions] \u2026",
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 4.637922,
+        "y": 2.358885,
+        "w": 0.0,
+        "h": 1.761739
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 8.736121,
+        "y": 2.359754,
+        "w": 0.0,
+        "h": 1.76
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 4.505852,
+        "w": 3.556493,
+        "h": 0.219134
+      },
+      "name": "TextBox 21",
+      "id": "22",
+      "textPreview": "What we bring:",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.908775,
+        "y": 4.858705,
+        "w": 3.556493,
+        "h": 1.093913
+      },
+      "name": "TextBox 22",
+      "id": "23",
+      "textPreview": "[Insert main value propositions that you bring to the table, e.g. experience with similar issues] [Insert main value propositions] \u2026",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.810576,
+        "y": 3.31993,
+        "w": 3.556493,
+        "h": 0.662969
+      },
+      "name": "TextBox 13",
+      "id": "14",
+      "textPreview": "[Insert description of main driver of issue e.g. Client has severe issues with profitability levels]\u2026",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.908775,
+        "y": 3.31993,
+        "w": 3.556493,
+        "h": 0.662969
+      },
+      "name": "TextBox 15",
+      "id": "16",
+      "textPreview": "\u2026[Insert description of main need e.g. resulting in need to streamline costs]\u2026",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 9.006974,
+        "y": 3.31993,
+        "w": 3.556493,
+        "h": 0.662969
+      },
+      "name": "TextBox 14",
+      "id": "15",
+      "textPreview": "\u2026[Insert description of added need or benefit e.g. with a focus on fast impact and cross-organizational implementation]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 9.006974,
+        "y": 4.858705,
+        "w": 3.556493,
+        "h": 1.093913
+      },
+      "name": "TextBox 23",
+      "id": "24",
+      "textPreview": "[Insert main value propositions that you bring to the table, e.g. experience with similar issues] [Insert main value propositions] \u2026",
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 4.637922,
+        "y": 4.873223,
+        "w": 0.0,
+        "h": 1.928364
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 8.736121,
+        "y": 4.873223,
+        "w": 0.0,
+        "h": 1.928364
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 6.5,
+        "y": 3.94047,
+        "w": 0.333333,
+        "h": 0.333333
+      },
+      "name": "AutoShape 2",
+      "id": "9",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 4.908775,
+        "y": 2.519297,
+        "w": 0.508085,
+        "h": 0.508085
+      },
+      "name": "Picture 273",
+      "id": "274",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image14.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 9.006974,
+        "y": 2.519297,
+        "w": 0.51,
+        "h": 0.51
+      },
+      "name": "Picture 274",
+      "id": "275",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image15.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    },
+    {
+      "kind": "image",
+      "box": {
+        "x": 0.810576,
+        "y": 2.519297,
+        "w": 0.51,
+        "h": 0.51
+      },
+      "name": "Picture 275",
+      "id": "276",
+      "textPreview": null,
+      "relationship": {
+        "target": "../media/image16.png",
+        "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+      }
+    }
+  ]
+}

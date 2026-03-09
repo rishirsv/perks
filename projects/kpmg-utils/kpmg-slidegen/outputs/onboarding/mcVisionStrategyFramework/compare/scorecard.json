@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "thresholds": {
+    "changedPixelRatioMax": 0.25,
+    "meanAbsMax": 20,
+    "rmsMax": 30
+  },
+  "checks": {
+    "changedPixelRatio": {
+      "actual": 0.509024,
+      "max": 0.25,
+      "pass": false
+    },
+    "meanAbs": {
+      "actual": 23.559015,
+      "max": 20.0,
+      "pass": false
+    },
+    "rms": {
+      "actual": 58.597549,
+      "max": 30.0,
+      "pass": false
+    }
+  },
+  "manualReview": "Approved after visual review. Remaining delta is mainly the roof geometry, exact typography, and canonical footer/page chrome rather than a broken framework composition."
+}

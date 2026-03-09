@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 26,
+  "slideTarget": "slides/slide26.xml",
+  "summary": {
+    "shapeCount": 12,
+    "text": 8,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 0,
+    "other": 4
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 1.427407,
+        "w": 1.676667,
+        "h": 1.1625
+      },
+      "name": "Rectangle 3",
+      "id": "4",
+      "textPreview": "Vision",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 2.727407,
+        "w": 1.676667,
+        "h": 1.1625
+      },
+      "name": "Rectangle 5",
+      "id": "6",
+      "textPreview": "Strategic objective",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 4.027407,
+        "w": 1.676667,
+        "h": 1.1625
+      },
+      "name": "Rectangle 7",
+      "id": "8",
+      "textPreview": "Solution",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 0.606667,
+        "y": 5.327407,
+        "w": 1.676667,
+        "h": 1.1625
+      },
+      "name": "Rectangle 8",
+      "id": "9",
+      "textPreview": "Sponsor",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.456667,
+        "y": 1.427407,
+        "w": 10.27,
+        "h": 1.1625
+      },
+      "name": "Rectangle 9",
+      "id": "10",
+      "textPreview": "[Insert vision for proposed project including qualitative and quantitative benefits]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.456667,
+        "y": 2.727407,
+        "w": 10.27,
+        "h": 1.1625
+      },
+      "name": "Rectangle 10",
+      "id": "11",
+      "textPreview": "[Insert strategic objective of project and how it fits into overall company or BU/team strategy. This can also be business need]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.456667,
+        "y": 4.027407,
+        "w": 10.27,
+        "h": 1.1625
+      },
+      "name": "Rectangle 11",
+      "id": "12",
+      "textPreview": "[Insert brief description of suggested solution]",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 2.456667,
+        "y": 5.327407,
+        "w": 10.27,
+        "h": 1.1625
+      },
+      "name": "Rectangle 12",
+      "id": "13",
+      "textPreview": "[Insert person, team, department, BU or similar who will sponsor the business case]",
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 0.606667,
+        "y": 2.658657,
+        "w": 12.12,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 0.606667,
+        "y": 3.958657,
+        "w": 12.12,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "cxnSp",
+      "box": {
+        "x": 0.606667,
+        "y": 5.258657,
+        "w": 12.12,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    }
+  ]
+}

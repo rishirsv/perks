@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 2,
+  "slideTarget": "slides/slide2.xml",
+  "summary": {
+    "shapeCount": 3,
+    "text": 1,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 0,
+    "other": 2
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.632832,
+        "y": 0.53125,
+        "w": 9.087165,
+        "h": 6.196389
+      },
+      "name": "Rectangle 9",
+      "id": "10",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.054855,
+        "y": 0.921211,
+        "w": 2.295004,
+        "h": 1.272304
+      },
+      "name": "TextBox 7",
+      "id": "8",
+      "textPreview": "Table of contents",
+      "relationship": null
+    }
+  ]
+}

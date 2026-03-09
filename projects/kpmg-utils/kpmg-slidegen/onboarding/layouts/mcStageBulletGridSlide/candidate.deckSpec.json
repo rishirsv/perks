@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "title": "Draft mcStageBulletGridSlide",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcStageBulletGridSlide",
+      "title": "Title",
+      "strapline": "Subtitle",
+      "columns": [
+        {
+          "stage": "Stage 1",
+          "heading": "Bullet Title #1",
+          "subheading": "Bullet Subtitle #1",
+          "items": ["Bullet Bullet #1", "Bullet Bullet #1", "Bullet Bullet #1", "Bullet Bullet #1"],
+          "iconAsset": "mc-stage-bullet-grid-icon-1.png"
+        },
+        {
+          "stage": "Stage 2",
+          "heading": "Bullet Title #2",
+          "subheading": "Bullet Subtitle #2",
+          "items": ["Bullet Bullet #2", "Bullet Bullet #2", "Bullet Bullet #2", "Bullet Bullet #2"],
+          "iconAsset": "mc-stage-bullet-grid-icon-2.png"
+        },
+        {
+          "stage": "Stage 3",
+          "heading": "Bullet Title #3",
+          "subheading": "Bullet Subtitle #3",
+          "items": ["Bullet Bullet #3", "Bullet Bullet #3", "Bullet Bullet #3", "Bullet Bullet #3"],
+          "iconAsset": "mc-stage-bullet-grid-icon-3.png"
+        },
+        {
+          "stage": "Stage 4",
+          "heading": "Bullet Title #4",
+          "subheading": "Bullet Subtitle #4",
+          "items": ["Bullet Bullet #4", "Bullet Bullet #4", "Bullet Bullet #4", "Bullet Bullet #4"],
+          "iconAsset": "mc-stage-bullet-grid-icon-4.png"
+        }
+      ]
+    }
+  ]
+}

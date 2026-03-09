@@ -279,6 +279,51 @@ Each column is typically:
   - `disclaimer` (text, min 80, max 700)
   - `url` (text, min 5, max 60)
 
+### `mcContentsAlt`
+
+
+### `mcTwoBulletSlide`
+
+
+### `mcThreeBulletSlide`
+
+
+### `mcFourBulletSlide`
+
+
+### `mcFiveBulletSlide`
+
+
+### `mcStageBulletGridSlide`
+
+
+### `mcInsightBulletColumnsSlide`
+
+
+### `mcNumberedBulletColumnsSlide`
+
+
+### `mcExecutiveSummaryValueProps`
+
+
+### `mcExecutiveSummaryKeyValue`
+
+
+### `mcScopeStatement`
+
+
+### `mcThreeQuestions`
+
+
+### `mcGuidingPrinciples`
+
+
+### `mcVisionStrategyFramework`
+
+
+### `mcProjectOverviewMetrics`
+
+
 ## Behavioral Contract Notes
 
 1. Write only the supported slots for each slide type; pagination policy controls continuation behavior at runtime.

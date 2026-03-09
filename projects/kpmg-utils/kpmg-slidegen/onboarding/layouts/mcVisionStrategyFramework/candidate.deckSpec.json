@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "title": "Draft mcVisionStrategyFramework",
+    "textAmount": "md",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcVisionStrategyFramework",
+      "title": "The overall vision and strategy for the project",
+      "prompts": [
+        "What are we trying to accomplish?",
+        "Who should we target?",
+        "What is our distinctive proposition?",
+        "How will we deliver it?"
+      ],
+      "visionText": "Create a focused growth model that aligns customer choices, proposition design, and delivery investment behind one clear ambition.",
+      "bandHeadings": [
+        "Customer segmentation and value chain prioritization",
+        "Value proposition",
+        "Go-to-market model"
+      ],
+      "bandBodies": [
+        "Define where to play first by identifying the customer groups, needs, and value pools that matter most.",
+        "Clarify the offer, differentiators, and solution themes that will make the strategy tangible in market.",
+        "Translate the strategy into channels, coverage, capabilities, and governance that can deliver it consistently."
+      ]
+    }
+  ]
+}

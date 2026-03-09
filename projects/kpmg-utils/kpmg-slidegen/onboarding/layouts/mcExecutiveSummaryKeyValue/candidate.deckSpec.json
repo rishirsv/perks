@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "Draft mcExecutiveSummaryKeyValue",
+    "textAmount": "lg",
+    "allowSparse": true
+  },
+  "slides": [
+    {
+      "type": "mcExecutiveSummaryKeyValue",
+      "title": "Executive summary",
+      "columns": [
+        {
+          "heading": "Vision",
+          "body": "[Insert vision for proposed project including qualitative and quantitative benefits]"
+        },
+        {
+          "heading": "Strategic objective",
+          "body": "[Insert strategic objective of project and how it fits into overall company or BU/team strategy. This can also be business need]"
+        },
+        {
+          "heading": "Solution",
+          "body": "[Insert brief description of suggested solution]"
+        },
+        {
+          "heading": "Sponsor",
+          "body": "[Insert person, team, department, BU or similar who will sponsor the business case]"
+        }
+      ]
+    }
+  ]
+}

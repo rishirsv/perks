@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "sourcePptxPath": "templates/kpmg-mc/source/kpmg-mc-slide-template.pptx",
+  "slideNumber": 10,
+  "slideTarget": "slides/slide10.xml",
+  "summary": {
+    "shapeCount": 17,
+    "text": 6,
+    "image": 0,
+    "chart": 0,
+    "table": 0,
+    "graphicFrame": 1,
+    "other": 10
+  },
+  "elements": [
+    {
+      "kind": "grpSpPr",
+      "box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "graphicFrame",
+      "box": {
+        "x": 0.001737,
+        "y": 0.001737,
+        "w": 0.001342,
+        "h": 0.001737
+      },
+      "name": "Object 4",
+      "id": "5",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606667,
+        "y": 1.680491,
+        "w": 12.119998,
+        "h": 1.602855
+      },
+      "name": "Rectangle 3",
+      "id": "4",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 1.680491,
+        "w": 3.693775,
+        "h": 1.602855
+      },
+      "name": "Rectangle 7",
+      "id": "8",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974506,
+        "y": 2.132329,
+        "w": 2.166996,
+        "h": 0.699179
+      },
+      "name": "Title 18",
+      "id": "12",
+      "textPreview": "Bullet #1",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606667,
+        "y": 3.437913,
+        "w": 12.119998,
+        "h": 1.602855
+      },
+      "name": "Rectangle 12",
+      "id": "13",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 3.437913,
+        "w": 3.693775,
+        "h": 1.602855
+      },
+      "name": "Rectangle 16",
+      "id": "17",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974506,
+        "y": 3.889752,
+        "w": 2.166996,
+        "h": 0.699179
+      },
+      "name": "Title 18",
+      "id": "19",
+      "textPreview": "Bullet #2",
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 5.193261,
+        "w": 12.119998,
+        "h": 1.602855
+      },
+      "name": "Rectangle 24",
+      "id": "25",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "shape",
+      "box": {
+        "x": 0.606668,
+        "y": 5.193261,
+        "w": 3.693775,
+        "h": 1.602855
+      },
+      "name": "Rectangle 25",
+      "id": "26",
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 1.974507,
+        "y": 5.6451,
+        "w": 1.866041,
+        "h": 0.699179
+      },
+      "name": "Title 18",
+      "id": "27",
+      "textPreview": "Bullet #3",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 2.132329,
+        "w": 7.573362,
+        "h": 0.699179
+      },
+      "name": "Title 18",
+      "id": "28",
+      "textPreview": "Bullet 1 Description",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 3.889752,
+        "w": 7.862229,
+        "h": 0.699179
+      },
+      "name": "Title 18",
+      "id": "29",
+      "textPreview": "Bullet 2 Description",
+      "relationship": null
+    },
+    {
+      "kind": "text",
+      "box": {
+        "x": 4.532016,
+        "y": 5.6451,
+        "w": 7.573362,
+        "h": 0.699179
+      },
+      "name": "Title 18",
+      "id": "30",
+      "textPreview": "Bullet 3 Description",
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 0.972983,
+        "y": 5.6451,
+        "w": 0.737757,
+        "h": 0.699179
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 1.00871,
+        "y": 3.952438,
+        "w": 0.666305,
+        "h": 0.573806
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    },
+    {
+      "kind": "grpSp",
+      "box": {
+        "x": 0.998393,
+        "y": 2.11304,
+        "w": 0.686937,
+        "h": 0.737756
+      },
+      "name": null,
+      "id": null,
+      "textPreview": null,
+      "relationship": null
+    }
+  ]
+}

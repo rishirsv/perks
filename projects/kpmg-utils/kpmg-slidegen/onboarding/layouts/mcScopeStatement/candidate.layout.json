@@ -1,0 +1,67 @@
+{
+  "description": "MC scope statement with four icon-led project objectives",
+  "geometry": {
+    "titleBox": {
+      "x": 0.61,
+      "y": 0.46,
+      "w": 6.3,
+      "h": 0.5
+    },
+    "typography": {
+      "rows": [
+        {
+          "circleBox": { "x": 0.69, "y": 1.99, "w": 0.82, "h": 0.82 },
+          "iconBox": { "x": 0.89, "y": 2.18, "w": 0.42, "h": 0.42 },
+          "textBox": { "x": 1.93, "y": 2.15, "w": 10.25, "h": 0.42 }
+        },
+        {
+          "circleBox": { "x": 0.69, "y": 3.28, "w": 0.82, "h": 0.82 },
+          "iconBox": { "x": 0.89, "y": 3.47, "w": 0.42, "h": 0.42 },
+          "textBox": { "x": 1.93, "y": 3.44, "w": 9.95, "h": 0.48 }
+        },
+        {
+          "circleBox": { "x": 0.69, "y": 4.57, "w": 0.82, "h": 0.82 },
+          "iconBox": { "x": 0.89, "y": 4.76, "w": 0.42, "h": 0.42 },
+          "textBox": { "x": 1.93, "y": 4.7, "w": 10.3, "h": 0.62 }
+        },
+        {
+          "circleBox": { "x": 0.69, "y": 5.86, "w": 0.82, "h": 0.82 },
+          "iconBox": { "x": 0.89, "y": 6.05, "w": 0.42, "h": 0.42 },
+          "textBox": { "x": 1.93, "y": 6.05, "w": 4.3, "h": 0.34 }
+        }
+      ]
+    }
+  },
+  "slots": {
+    "title": {
+      "kind": "text",
+      "required": true,
+      "minChars": 8,
+      "maxChars": 80,
+      "allowEmpty": false
+    },
+    "objectives": {
+      "kind": "textArray",
+      "required": true,
+      "minItems": 4,
+      "maxItems": 4,
+      "allowEmpty": false
+    }
+  },
+  "registry": {
+    "master": "KPMG_WHITE",
+    "paginationPolicyKey": "none.v1",
+    "requiredGeometry": ["titleBox", "typography"],
+    "optionalGeometry": [],
+    "optionalDefaults": {},
+    "excludeFromLogicalPaging": true
+  },
+  "templateLayout": "Draft mcScopeStatement",
+  "densityTarget": {
+    "mode": "balanced",
+    "minScore": 0.75
+  },
+  "schemaVersion": 1,
+  "type": "mcScopeStatement",
+  "family": "custom"
+}
