@@ -6,28 +6,28 @@ Use these repo-only checklists when an agent is helping with layout onboarding.
 
 Ask the agent to inspect:
 
-1. `onboarding/layouts/<layout-id>/source.json`
-2. `onboarding/layouts/<layout-id>/extract.normalized.json`
-3. `onboarding/layouts/<layout-id>/fingerprint.json`
-4. `onboarding/layouts/<layout-id>/seed/geometry.seed.json`
-3. `onboarding/layouts/<layout-id>/candidate.layout.json`
-4. `outputs/onboarding/<layout-id>/compare/reference.png`
+1. `onboarding/cases/<case-id>/intake.json`
+2. `onboarding/cases/<case-id>/extract.normalized.json`
+3. `onboarding/cases/<case-id>/fingerprint.json`
+4. `onboarding/cases/<case-id>/classify.json`
+5. `onboarding/cases/<case-id>/candidate.layout.json`
+6. `outputs/onboarding/<case-id>/compare/reference.png`
 
 Ask for:
 
-1. The best-fit existing family, if not already chosen.
+1. Whether the chosen primitive still looks like the right base contract for the case.
 2. The minimum geometry edits needed to align the draft with the reference.
-3. Any boxes that should stay anchored to the family defaults instead of the seed.
+3. Any geometry that should be modeled as a primitive change instead of a one-off layout override.
 
 ## Diff Prioritization Prompt
 
 Ask the agent to inspect:
 
-1. `outputs/onboarding/<layout-id>/compare/reference.png`
-2. `outputs/onboarding/<layout-id>/compare/candidate.png`
-3. `outputs/onboarding/<layout-id>/compare/diff.png`
-4. `outputs/onboarding/<layout-id>/compare/diff.json`
-5. `outputs/onboarding/<layout-id>/compare/scorecard.json`
+1. `outputs/onboarding/<case-id>/compare/reference.png`
+2. `outputs/onboarding/<case-id>/compare/candidate.png`
+3. `outputs/onboarding/<case-id>/compare/diff.png`
+4. `outputs/onboarding/<case-id>/compare/diff.json`
+5. `outputs/onboarding/<case-id>/compare/scorecard.json`
 
 Ask for:
 
@@ -39,12 +39,12 @@ Ask for:
 
 Ask the agent to inspect:
 
-1. `outputs/onboarding/<layout-id>/candidate/qa.json`
-2. `outputs/onboarding/<layout-id>/compare/scorecard.json`
-3. `outputs/onboarding/<layout-id>/compare/reference.png`
-4. `outputs/onboarding/<layout-id>/compare/candidate.png`
-5. `onboarding/layouts/<layout-id>/candidate.layout.json`
-6. `onboarding/layouts/<layout-id>/candidate.builder.js`
+1. `outputs/onboarding/<case-id>/candidate/qa.json`
+2. `outputs/onboarding/<case-id>/compare/scorecard.json`
+3. `outputs/onboarding/<case-id>/compare/reference.png`
+4. `outputs/onboarding/<case-id>/compare/candidate.png`
+5. `onboarding/cases/<case-id>/candidate.layout.json`
+6. `onboarding/cases/<case-id>/candidate.builder.js`
 
 Ask for:
 

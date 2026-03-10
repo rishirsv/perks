@@ -48,7 +48,7 @@ const env = {
   ONBOARDING_OUTPUT_ROOT: outputRoot,
   PYTHONDONTWRITEBYTECODE: '1',
 };
-const { assertPromotionReady } = await import(`./onboarding/case-lib.mjs?t=${Date.now()}`);
+const { assertPromotionReady, loadBuilderFromPrimitiveOrCase } = await import(`./onboarding/case-lib.mjs?t=${Date.now()}`);
 
 function makePromotionQa() {
   return {
@@ -251,6 +251,77 @@ try {
     false,
     'Existing primitive scaffolds should not create candidate.builder.js.',
   );
+
+  const newPrimitiveCaseId = 'business-overview-new-primitive-smoke';
+  const newPrimitiveLayoutId = 'businessOverviewNewPrimitiveSmoke';
+  const newPrimitiveCaseDir = path.join(caseRoot, newPrimitiveCaseId);
+
+  runNodeScript(
+    path.join(REPO_ROOT, 'scripts', 'onboarding', 'extract-case.mjs'),
+    [
+      '--case-id',
+      newPrimitiveCaseId,
+      '--source-pptx',
+      sourceDeckPath,
+      '--slide',
+      '1',
+      '--layout-id',
+      newPrimitiveLayoutId,
+    ],
+    env,
+    'New primitive onboarding extract',
+  );
+
+  runNodeScript(
+    path.join(REPO_ROOT, 'scripts', 'onboarding', 'classify-case.mjs'),
+    ['--case-id', newPrimitiveCaseId],
+    env,
+    'New primitive onboarding classify',
+  );
+
+  runNodeScript(
+    path.join(REPO_ROOT, 'scripts', 'onboarding', 'scaffold-case.mjs'),
+    [
+      '--case-id',
+      newPrimitiveCaseId,
+      '--new-primitive-id',
+      'businessOverviewPortable',
+      '--base-primitive-ref',
+      'businessOverview@1',
+    ],
+    env,
+    'New primitive onboarding scaffold',
+  );
+
+  const candidateBuilderPath = path.join(newPrimitiveCaseDir, 'candidate.builder.js');
+  assert.equal(
+    fs.existsSync(candidateBuilderPath),
+    true,
+    'New primitive scaffolds should create candidate.builder.js.',
+  );
+  const candidateBuilderSource = fs.readFileSync(candidateBuilderPath, 'utf8');
+  assert.ok(
+    !candidateBuilderSource.includes('file://'),
+    'Portable candidate builders should not use file:// imports.',
+  );
+  assert.ok(
+    !candidateBuilderSource.includes(REPO_ROOT),
+    'Portable candidate builders should not embed the local repo path.',
+  );
+  assert.match(
+    candidateBuilderSource,
+    /pathToFileURL\(path\.join\(process\.cwd\(\), 'generator\/builders\//,
+    'Portable candidate builders should resolve the base builder from the repo root at runtime.',
+  );
+  const portableBuilder = await loadBuilderFromPrimitiveOrCase({
+    caseId: newPrimitiveCaseId,
+    layoutId: newPrimitiveLayoutId,
+    primitive: {
+      builderModule: 'generator/builders/primitives/businessOverviewPortable.js',
+      builderExport: 'buildBusinessOverviewPortable',
+    },
+  });
+  assert.equal(typeof portableBuilder, 'function', 'Portable candidate builder should still load as a function.');
 
   const record = readJson(path.join(caseDir, 'intake.json'));
   assert.equal(record.status, 'compared', 'The smoke case should complete the compare stage.');

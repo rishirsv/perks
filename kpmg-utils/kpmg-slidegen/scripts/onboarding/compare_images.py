@@ -75,7 +75,8 @@ def main():
 
     if reference.size != candidate.size:
         raise SystemExit(
-            f"Dimension mismatch: reference={reference.size} candidate={candidate.size}"
+            "Dimension mismatch: onboarding compare requires matching native image dimensions "
+            f"(reference={reference.size} candidate={candidate.size})"
         )
 
     ref_arr = np.asarray(reference, dtype=np.int16)

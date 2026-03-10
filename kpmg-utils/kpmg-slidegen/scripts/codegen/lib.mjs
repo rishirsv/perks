@@ -26,6 +26,31 @@ export const GENERATED_ONBOARDED_MODULE_PATH = path.join(
   'runtime',
   'onboarded-registry.generated.js',
 );
+export const GENERATED_DECKSPEC_SCHEMA_PATH = path.join(
+  REPO_ROOT,
+  'references',
+  'deckspec.schema.json',
+);
+export const GENERATED_GOLDEN_ALL_LAYOUTS_PATH = path.join(
+  REPO_ROOT,
+  'fixtures',
+  'harness',
+  'golden',
+  'all-layouts',
+  'deckSpec.json',
+);
+export const FIXTURE_MANIFEST_SOURCE_PATH = path.join(
+  REPO_ROOT,
+  'fixtures',
+  'harness',
+  'fixtures.manifest.src.json',
+);
+export const GENERATED_FIXTURE_MANIFEST_PATH = path.join(
+  REPO_ROOT,
+  'fixtures',
+  'harness',
+  'fixtures.manifest.json',
+);
 
 export const GENERATED_FILE_HEADER = 'GENERATED FILE - DO NOT EDIT DIRECTLY. Source: templates-src/kpmg-diligence/*';
 

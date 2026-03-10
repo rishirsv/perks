@@ -8,13 +8,15 @@ Template-driven generator that converts `deckSpec` JSON inputs into:
 ## What This Repo Owns
 
 - Runtime generation pipeline in `generator/`
-- Template contracts in `templates/kpmg-diligence/package/`
+- Authored layout and primitive source in `templates-src/kpmg-diligence/`
+- Generated template contract outputs in `templates/kpmg-diligence/package/`
 - Skill bundle packaging and portability checks in `skills/kpmg-slides/`
 
 ## Contributor Guardrails
 
 - Edit generation logic only in `generator/`.
-- Keep template contracts in `templates/kpmg-diligence/package/`.
+- Author layouts and primitives in `templates-src/kpmg-diligence/`.
+- Treat `templates/kpmg-diligence/package/` and runtime registries as generated outputs.
 - Treat `fixtures/harness/` as the curated test surface and `presets/authoring/` as user-facing starters.
 - Keep runtime minimal; avoid unnecessary frameworks.
 - Keep docs and code aligned when changing slide types, slot rules, or QA shape.
@@ -148,7 +150,8 @@ Repo-only onboarding artifacts:
 - `ARCHITECTURE.md`: runtime architecture and module boundaries.
 - `docs/exec-plans/active/agent-harness-engineering-plan.md`: active harness maintenance plan and implementation checklist.
 - `docs/exec-plans/completed/repo-only-layout-onboarding-plan.md`: completed repo-only layout onboarding implementation plan.
-- `docs/onboarding/README.md`: repo-only single-layout onboarding workflow.
+- `docs/onboarding/onboard-layout.md`: authoritative repo-only layout onboarding workflow.
+- `docs/onboarding/README.md`: onboarding doc index and supporting references.
 - `docs/onboarding/agent-batch-workflow.md`: repo-only batch workflow for agent-driven onboarding loops.
 - `AGENTS.md`: working rules and repo scope.
 - `references/INDEX.md`: canonical parent-repo references index.

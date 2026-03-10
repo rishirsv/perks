@@ -81,6 +81,8 @@ npm run onboard:compare -- \
   --case-id coffee-business-overview
 ```
 
+Compare preserves the native PNG dimensions produced during extract and render. It does not resize either image to a fixed comparison canvas, and it fails immediately when the reference and candidate dimensions differ.
+
 Promote:
 
 ```bash
@@ -153,6 +155,7 @@ When onboarding creates a new primitive:
 - create `candidate.deckSpec.json`
 - create `candidate.primitive.json`
 - create `candidate.builder.js`
+  `candidate.builder.js` should resolve the base builder from the repo root at runtime so the case remains portable across machines before promotion.
 
 ## Render Model
 
@@ -193,6 +196,7 @@ Promotion is allowed only when:
 - `candidate.layout.json` exists
 - `candidate/preview/slide-1.png` exists
 - `candidate/qa.json` exists and has zero blocking checks
+- `compare/reference.png` and `compare/candidate.png` have matching native dimensions
 - `compare/diff.json` exists
 - `compare/scorecard.json` exists and resolves to one of:
 - deterministic pass

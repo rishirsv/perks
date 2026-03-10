@@ -4,21 +4,23 @@ Use this workflow when you want an agent to onboard 20-40 candidate layouts in t
 
 ## Batch Shape
 
-Each layout should move through the same repo-only stages:
+Each case should move through the same supported stages:
 
-1. `init`: create the draft workspace, capture `reference.png`, and emit `intake.json`, `extract.raw.json`, `extract.normalized.json`, `fingerprint.json`, and the compatibility `seed/geometry.seed.json`.
-2. `render`: build a deterministic one-slide candidate and collect `qa.json` plus preview PNG.
-3. `compare`: produce `candidate.png`, `diff.png`, `diff.json`, and `scorecard.json`.
-4. `review`: inspect deterministic failures first, then use an agent for visual triage and prioritization.
-5. `promote`: only after explicit approval metadata is present and the compare scorecard is promotable.
+1. `extract`: create `onboarding/cases/<case-id>/`, capture `reference.png`, and emit `intake.json`, `extract.raw.json`, `extract.normalized.json`, and `fingerprint.json`.
+2. `classify`: rank existing primitives and decide whether scaffold can proceed automatically or needs an explicit primitive choice.
+3. `scaffold`: create `candidate.layout.json`, `candidate.deckSpec.json`, and optional `candidate.primitive.json` plus `candidate.builder.js` for a new primitive.
+4. `render`: build a deterministic one-slide candidate and collect `qa.json` plus preview PNG.
+5. `compare`: produce `candidate.png`, `diff.png`, `diff.json`, and `scorecard.json`.
+6. `review`: inspect deterministic failures first, then use an agent for visual triage and prioritization.
+7. `promote`: only after explicit approval metadata is present and the compare scorecard is promotable.
 
 ## Recommended Agent Loop
 
 For each source slide:
 
-1. Run `run-layout-onboarding.mjs --stop-after init` with a chosen `layout-id`.
-2. Ask the agent to inspect `source.json`, `intake.json`, `extract.raw.json`, `extract.normalized.json`, `fingerprint.json`, `candidate.layout.json`, `candidate.builder.js`, `candidate.deckSpec.json`, and `seed/geometry.seed.json`.
-3. Let the agent tighten geometry and candidate content until `render-candidate.mjs` succeeds with zero blocking QA.
+1. Run `run-layout-onboarding.mjs --stop-after extract` with a chosen `case-id` and `layout-id`.
+2. Ask the agent to inspect `intake.json`, `extract.raw.json`, `extract.normalized.json`, `fingerprint.json`, and then `classify.json` once classification has been run.
+3. Run scaffold with either `--primitive-ref` or `--new-primitive-id` and let the agent tighten `candidate.layout.json`, `candidate.deckSpec.json`, and optional primitive files until `render-candidate.mjs` succeeds with zero blocking QA.
 4. Run `compare-candidate.mjs`.
 5. Ask the agent to summarize the top visual mismatches using `diff.json`, `scorecard.json`, `reference.png`, `candidate.png`, and `diff.png`.
 6. Repeat until the scorecard either passes deterministically or a human is prepared to approve the remaining differences with recorded exceptions.
@@ -51,18 +53,19 @@ Keep these out of the portable skill entirely:
 
 ## Useful Execution Pattern
 
-Use one workspace row per layout:
+Use one workspace row per case:
 
 ```text
-layout-id | source-pptx | slide | family | init | render | compare | review | promote
+case-id | layout-id | source-pptx | slide | classify | scaffold | render | compare | review | promote
 ```
 
 Agents work best when each row has:
 
-1. A fixed `layout-id`.
-2. A chosen base family.
-3. One owner who can approve promotion.
-4. Clear evidence paths under `outputs/onboarding/<layout-id>/compare/`.
+1. A fixed `case-id`.
+2. A fixed `layout-id`.
+3. An explicit primitive decision before scaffold when classification is fail-closed.
+4. One owner who can approve promotion.
+5. Clear evidence paths under `outputs/onboarding/<case-id>/compare/`.
 
 ## Human Approval Gate
 

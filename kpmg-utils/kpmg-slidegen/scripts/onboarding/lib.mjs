@@ -5,17 +5,10 @@ import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 import { createSlidesAdapter } from '../../generator/postprocess/slides-adapter.js';
-import { getSlideRegistry } from '../../generator/runtime/slide-registry.js';
-import {
-  cloneTemplatePackage,
-  loadTemplatePackage,
-} from '../../generator/runtime/template-package.js';
 import { REPO_ROOT } from '../support.mjs';
 
 export { REPO_ROOT };
 
-export const ONBOARDING_LAYOUT_ROOT =
-  process.env.ONBOARDING_LAYOUT_ROOT || path.join(REPO_ROOT, 'onboarding', 'layouts');
 export const ONBOARDING_OUTPUT_ROOT =
   process.env.ONBOARDING_OUTPUT_ROOT || path.join(REPO_ROOT, 'outputs', 'onboarding');
 export const ONBOARDING_POLICY_ROOT = path.join(REPO_ROOT, 'onboarding', 'policies');
@@ -30,22 +23,6 @@ export const GOLDEN_ALL_LAYOUTS_PATH = path.join(
 export const DIFF_THRESHOLDS_PATH = path.join(
   ONBOARDING_POLICY_ROOT,
   'diff-thresholds.json',
-);
-export const LEGACY_FAMILY_POLICIES_PATH = path.join(
-  ONBOARDING_POLICY_ROOT,
-  'families.json',
-);
-export const ONBOARDED_REGISTRY_INDEX_PATH = path.join(
-  REPO_ROOT,
-  'generator',
-  'runtime',
-  'onboarded-registry.index.json',
-);
-export const ONBOARDED_REGISTRY_MODULE_PATH = path.join(
-  REPO_ROOT,
-  'generator',
-  'runtime',
-  'onboarded-registry.generated.js',
 );
 export const DEFAULT_PREVIEW_WIDTH = 1600;
 export const DEFAULT_PREVIEW_HEIGHT = 900;
@@ -116,7 +93,7 @@ export function ensureDir(dirPath) {
 }
 
 /**
- * Normalize a PNG to the fixed comparison canvas used by onboarding.
+ * Normalize a PNG for onboarding compare.
  *
  * @param {object} params
  * @returns {string}
@@ -124,24 +101,30 @@ export function ensureDir(dirPath) {
 export function normalizePng({
   inputPath,
   outputPath,
-  width = DEFAULT_PREVIEW_WIDTH,
-  height = DEFAULT_PREVIEW_HEIGHT,
+  mode = 'preserve',
+  width = null,
+  height = null,
 }) {
   const normalizeScript = path.join(REPO_ROOT, 'scripts', 'onboarding', 'normalize_png.py');
   ensureDir(path.dirname(outputPath));
+  const args = [
+    normalizeScript,
+    '--input',
+    inputPath,
+    '--output',
+    outputPath,
+  ];
+  if (mode === 'resize') {
+    if (!Number.isFinite(width) || !Number.isFinite(height)) {
+      throw new Error('normalizePng resize mode requires finite width and height.');
+    }
+    args.push('--resize', '--width', String(width), '--height', String(height));
+  } else if (mode !== 'preserve') {
+    throw new Error(`Unsupported normalizePng mode: ${mode}`);
+  }
   const normalize = spawnSync(
     'python3',
-    [
-      normalizeScript,
-      '--input',
-      inputPath,
-      '--output',
-      outputPath,
-      '--width',
-      String(width),
-      '--height',
-      String(height),
-    ],
+    args,
     {
       cwd: REPO_ROOT,
       encoding: 'utf8',
@@ -156,96 +139,19 @@ export function normalizePng({
 }
 
 /**
- * Validate and normalize a layout id.
- *
- * @param {string} raw
- * @returns {string}
- */
-export function normalizeLayoutId(raw) {
-  const value = String(raw || '').trim();
-  if (!/^[a-z][a-zA-Z0-9]+$/.test(value)) {
-    throw new Error(
-      'Expected --layout-id to be camelCase and start with a lowercase letter.',
-    );
-  }
-  return value;
-}
-
-/**
  * Convert a layout id to PascalCase for export names.
  *
  * @param {string} value
  * @returns {string}
  */
 export function toPascalCase(value) {
-  const normalized = normalizeLayoutId(value);
+  const normalized = String(value || '').trim();
+  if (!/^[a-z][a-zA-Z0-9]+$/.test(normalized)) {
+    throw new Error(
+      'Expected --layout-id to be camelCase and start with a lowercase letter.',
+    );
+  }
   return normalized.charAt(0).toUpperCase() + normalized.slice(1);
-}
-
-/**
- * Return all stable repo paths for a layout onboarding workspace.
- *
- * @param {string} layoutId
- * @returns {object}
- */
-export function getLayoutPaths(layoutId) {
-  const normalized = normalizeLayoutId(layoutId);
-  const layoutRoot = path.join(ONBOARDING_LAYOUT_ROOT, normalized);
-  const outputRoot = path.join(ONBOARDING_OUTPUT_ROOT, normalized);
-  return {
-    layoutId: normalized,
-    layoutRoot,
-    intakePath: path.join(layoutRoot, 'intake.json'),
-    sourcePath: path.join(layoutRoot, 'source.json'),
-    extractRawPath: path.join(layoutRoot, 'extract.raw.json'),
-    extractNormalizedPath: path.join(layoutRoot, 'extract.normalized.json'),
-    fingerprintPath: path.join(layoutRoot, 'fingerprint.json'),
-    seedDir: path.join(layoutRoot, 'seed'),
-    seedPath: path.join(layoutRoot, 'seed', 'geometry.seed.json'),
-    candidateLayoutPath: path.join(layoutRoot, 'candidate.layout.json'),
-    candidateBuilderPath: path.join(layoutRoot, 'candidate.builder.js'),
-    candidateDeckSpecPath: path.join(layoutRoot, 'candidate.deckSpec.json'),
-    outputRoot,
-    candidateDir: path.join(outputRoot, 'candidate'),
-    candidateDeckPath: path.join(outputRoot, 'candidate', 'deck.pptx'),
-    candidateQaPath: path.join(outputRoot, 'candidate', 'qa.json'),
-    candidatePreviewDir: path.join(outputRoot, 'candidate', 'preview'),
-    candidatePreviewPngPath: path.join(outputRoot, 'candidate', 'preview', 'slide-1.png'),
-    candidateMontagePath: path.join(outputRoot, 'candidate', 'montage.png'),
-    compareDir: path.join(outputRoot, 'compare'),
-    referencePngPath: path.join(outputRoot, 'compare', 'reference.png'),
-    candidatePngPath: path.join(outputRoot, 'compare', 'candidate.png'),
-    diffPngPath: path.join(outputRoot, 'compare', 'diff.png'),
-    diffJsonPath: path.join(outputRoot, 'compare', 'diff.json'),
-    scorecardPath: path.join(outputRoot, 'compare', 'scorecard.json'),
-  };
-}
-
-/**
- * Ensure the workspace and output directories exist for a layout id.
- *
- * @param {string} layoutId
- * @returns {object}
- */
-export function ensureLayoutPaths(layoutId) {
-  const paths = getLayoutPaths(layoutId);
-  [
-    paths.layoutRoot,
-    paths.seedDir,
-    paths.candidateDir,
-    paths.candidatePreviewDir,
-    paths.compareDir,
-  ].forEach(ensureDir);
-  return paths;
-}
-
-/**
- * Load legacy family policies for the deprecated layout-workspace onboarding flow.
- *
- * @returns {object}
- */
-export function loadLegacyFamilyPolicies() {
-  return readJson(LEGACY_FAMILY_POLICIES_PATH);
 }
 
 /**
@@ -255,129 +161,6 @@ export function loadLegacyFamilyPolicies() {
  */
 export function loadDiffThresholds() {
   return readJson(DIFF_THRESHOLDS_PATH);
-}
-
-/**
- * Return the legacy base family policy or throw.
- *
- * @param {string} family
- * @returns {object}
- */
-export function getLegacyFamilyPolicy(family) {
-  const policies = loadLegacyFamilyPolicies();
-  const entry = policies?.families?.[family];
-  if (!entry) {
-    throw new Error(`Unknown legacy onboarding family: ${family}`);
-  }
-  return entry;
-}
-
-/**
- * Load the golden all-layouts deck and return a starter slide for a legacy family.
- *
- * @param {string} family
- * @param {string} layoutId
- * @returns {object}
- */
-export function buildStarterSlideFromLegacyFamily(family, layoutId) {
-  const golden = readJson(GOLDEN_ALL_LAYOUTS_PATH);
-  const baseSlide = (golden?.slides || []).find((slide) => slide?.type === family);
-  if (!baseSlide) {
-    return {
-      type: layoutId,
-      title: `Draft ${layoutId}`,
-      body: ['Replace this placeholder with candidate content.'],
-      bodyStyle: 'bullets',
-    };
-  }
-  return {
-    ...JSON.parse(JSON.stringify(baseSlide)),
-    type: layoutId,
-  };
-}
-
-/**
- * Build a legacy candidate layout scaffold from a base family.
- *
- * @param {object} params
- * @returns {object}
- */
-export function buildLegacyCandidateLayoutScaffold({ templatePackage, family, layoutId }) {
-  if (!family) {
-    return {
-      schemaVersion: 1,
-      type: layoutId,
-      family: null,
-      description: `Draft layout ${layoutId}`,
-      templateLayout: `Draft ${layoutId}`,
-      geometry: {},
-      slots: {},
-      densityTarget: {
-        mode: 'balanced',
-        minScore: 0.72,
-      },
-    };
-  }
-
-  const baseLayout = templatePackage?.layouts?.types?.[family];
-  if (!baseLayout) {
-    throw new Error(`Unable to scaffold candidate layout from unknown family: ${family}`);
-  }
-
-  return {
-    ...JSON.parse(JSON.stringify(baseLayout)),
-    schemaVersion: 1,
-    type: layoutId,
-    family,
-    description: `Draft layout ${layoutId} based on ${family}`,
-    templateLayout: `Draft ${layoutId}`,
-  };
-}
-
-/**
- * Build a legacy candidate deckspec scaffold from a base family.
- *
- * @param {object} params
- * @returns {object}
- */
-export function buildLegacyCandidateDeckSpecScaffold({ family, layoutId }) {
-  if (!family) {
-    return {
-      metadata: {
-        title: `Draft ${layoutId}`,
-        textAmount: 'md',
-        allowSparse: true,
-      },
-      slides: [],
-    };
-  }
-
-  return {
-    metadata: {
-      title: `Draft ${layoutId}`,
-      textAmount: 'lg',
-      allowSparse: true,
-    },
-    slides: [buildStarterSlideFromLegacyFamily(family, layoutId)],
-  };
-}
-
-/**
- * Build a legacy family-based candidate builder scaffold source.
- *
- * @param {object} params
- * @returns {string}
- */
-export function buildLegacyCandidateBuilderSource({ family, layoutId }) {
-  const pascal = toPascalCase(layoutId);
-  if (!family) {
-    return `export function build${pascal}() {\n  throw new Error('Select a base family in source.json before rendering this candidate layout.');\n}\n\nexport default build${pascal};\n`;
-  }
-
-  const policy = getLegacyFamilyPolicy(family);
-  const importPath = pathToFileURL(path.join(REPO_ROOT, policy.builderModule)).href;
-
-  return `import { ${policy.builderExport} } from '${importPath}';\n\nexport function build${pascal}(pptx, slideSpec, ctx) {\n  return ${policy.builderExport}(pptx, slideSpec, ctx);\n}\n\nexport default build${pascal};\n`;
 }
 
 /**
@@ -416,51 +199,6 @@ export async function loadDraftBuilder(filePath, layoutId) {
 }
 
 /**
- * Create an overlaid template package that includes a draft type.
- *
- * @param {object} params
- * @returns {object}
- */
-export function buildDraftTemplatePackage({ templatePackage, layoutId, candidateLayout }) {
-  return cloneTemplatePackage(templatePackage, {
-    layouts: {
-      types: {
-        [layoutId]: sanitizeCandidateLayout(candidateLayout),
-      },
-    },
-  });
-}
-
-/**
- * Build a legacy draft slide registry entry from a base family plus builder.
- *
- * @param {object} params
- * @returns {object}
- */
-export function buildLegacyDraftRegistryEntry({ family, layoutId, builder }) {
-  const baseRegistry = getSlideRegistry();
-  const baseEntry = baseRegistry.get(family);
-  if (!baseEntry) {
-    throw new Error(`Unknown base family in slide registry: ${family}`);
-  }
-  return {
-    ...baseEntry,
-    builderId: layoutId,
-    builder,
-    requiredGeometry: [...(baseEntry.requiredGeometry || [])],
-    optionalGeometry: [...(baseEntry.optionalGeometry || [])],
-    optionalDefaults: { ...(baseEntry.optionalDefaults || {}) },
-    geometryKinds: { ...(baseEntry.geometryKinds || {}) },
-    geometryContract: {
-      requiredKeys: [...(baseEntry.geometryContract?.requiredKeys || [])],
-      optionalKeys: [...(baseEntry.geometryContract?.optionalKeys || [])],
-      optionalDefaults: { ...(baseEntry.geometryContract?.optionalDefaults || {}) },
-      geometryKinds: { ...(baseEntry.geometryContract?.geometryKinds || {}) },
-    },
-  };
-}
-
-/**
  * Capture a reference slide PNG using the same preview adapter as candidate rendering.
  *
  * @param {object} params
@@ -494,39 +232,10 @@ export function captureReferenceSlide({
     normalizePng({
       inputPath: sourcePng,
       outputPath: referencePngPath,
-      width,
-      height,
     });
     return referencePngPath;
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
-  }
-}
-
-/**
- * Run the optional XML seed extractor for a selected slide.
- *
- * @param {object} params
- */
-export function extractGeometrySeed({ pptxPath, slideNumber, seedPath }) {
-  const scriptPath = path.join(REPO_ROOT, 'scripts', 'onboarding', 'extract_slide_seed.py');
-  ensureDir(path.dirname(seedPath));
-  const result = spawnSync(
-    'python3',
-    [scriptPath, '--pptx', pptxPath, '--slide', String(slideNumber), '--out', seedPath],
-    {
-      cwd: REPO_ROOT,
-      encoding: 'utf8',
-      env: {
-        ...process.env,
-        PYTHONDONTWRITEBYTECODE: '1',
-      },
-    },
-  );
-  if (result.status !== 0) {
-    throw new Error(
-      `Seed extraction failed.\n${result.stdout || ''}\n${result.stderr || ''}`.trim(),
-    );
   }
 }
 
@@ -541,13 +250,11 @@ export function extractOnboardingEvidence({
   rawPath,
   normalizedPath,
   fingerprintPath,
-  seedPath = null,
 }) {
   const scriptPath = path.join(REPO_ROOT, 'scripts', 'onboarding', 'extract_slide_seed.py');
   ensureDir(path.dirname(rawPath));
   ensureDir(path.dirname(normalizedPath));
   ensureDir(path.dirname(fingerprintPath));
-  if (seedPath) ensureDir(path.dirname(seedPath));
   const args = [
     scriptPath,
     '--pptx',
@@ -561,9 +268,6 @@ export function extractOnboardingEvidence({
     '--fingerprint-out',
     fingerprintPath,
   ];
-  if (seedPath) {
-    args.push('--out', seedPath);
-  }
   const result = spawnSync('python3', args, {
     cwd: REPO_ROOT,
     encoding: 'utf8',
@@ -577,89 +281,6 @@ export function extractOnboardingEvidence({
       `Evidence extraction failed.\n${result.stdout || ''}\n${result.stderr || ''}`.trim(),
     );
   }
-}
-
-/**
- * Build a stable onboarding intake record.
- *
- * @param {object} input
- * @returns {object}
- */
-export function buildIntakeRecord(input) {
-  return {
-    schemaVersion: 1,
-    layoutId: input.layoutId,
-    sourcePptxPath: input.sourcePptxPath,
-    sourceSlideNumber: Number(input.sourceSlideNumber),
-    family: input.family || null,
-    requestedEvidence: {
-      referencePng: true,
-      extractRaw: true,
-      extractNormalized: true,
-      fingerprint: true,
-    },
-  };
-}
-
-/**
- * Build a stable onboarding source record.
- *
- * @param {object} input
- * @returns {object}
- */
-export function buildSourceRecord(input) {
-  return {
-    schemaVersion: 1,
-    layoutId: input.layoutId,
-    sourcePptxPath: input.sourcePptxPath,
-    sourceSlideNumber: Number(input.sourceSlideNumber),
-    family: input.family || null,
-    suggestedFamily: input.suggestedFamily || null,
-    status: input.status || 'draft',
-    extractSeed: Boolean(input.extractSeed),
-    approval: input.approval || {
-      approved: false,
-      approvedBy: null,
-      approvedAt: null,
-      notes: null,
-    },
-    artifacts: {
-      intakePath: input.intakePath || null,
-      referencePngPath: input.referencePngPath || null,
-      extractRawPath: input.extractRawPath || null,
-      extractNormalizedPath: input.extractNormalizedPath || null,
-      fingerprintPath: input.fingerprintPath || null,
-      candidateQaPath: input.candidateQaPath || null,
-      candidatePngPath: input.candidatePngPath || null,
-      diffJsonPath: input.diffJsonPath || null,
-      scorecardPath: input.scorecardPath || null,
-    },
-  };
-}
-
-/**
- * Load the persisted source record for a layout.
- *
- * @param {string} layoutId
- * @returns {object}
- */
-export function loadSourceRecord(layoutId) {
-  const { sourcePath } = getLayoutPaths(layoutId);
-  if (!fs.existsSync(sourcePath)) {
-    throw new Error(`Missing onboarding source record: ${sourcePath}`);
-  }
-  return readJson(sourcePath);
-}
-
-/**
- * Persist a source record for a layout.
- *
- * @param {string} layoutId
- * @param {object} sourceRecord
- */
-export function writeSourceRecord(layoutId, sourceRecord) {
-  const { sourcePath } = getLayoutPaths(layoutId);
-  writeJson(sourcePath, sourceRecord);
 }
 
 /**
@@ -695,78 +316,6 @@ export function getBlockingChecks(qa = {}) {
     const status = String(check?.status || '').trim();
     return Boolean(check?.blocking) && ['fail', 'error'].includes(status);
   });
-}
-
-/**
- * Render a candidate deck through the existing generator APIs plus a draft overlay.
- *
- * @param {object} params
- * @returns {Promise<object>}
- */
-export async function renderCandidate({
-  layoutId,
-  withMontage = false,
-}) {
-  const { generateToFile } = await import('../../generator/index.js');
-  const paths = ensureLayoutPaths(layoutId);
-  const source = loadSourceRecord(layoutId);
-  if (!source.family) {
-    throw new Error('Draft layout has no base family. Set `family` in source.json before rendering.');
-  }
-
-  const templatePackage = loadTemplatePackage('kpmg-diligence');
-  const candidateLayout = readJson(paths.candidateLayoutPath);
-  const candidateDeckSpec = readJson(paths.candidateDeckSpecPath);
-  const builder = await loadDraftBuilder(paths.candidateBuilderPath, layoutId);
-  const draftTemplatePackage = buildDraftTemplatePackage({
-    templatePackage,
-    layoutId,
-    candidateLayout,
-  });
-  const draftRegistryEntry = buildLegacyDraftRegistryEntry({
-    family: source.family,
-    layoutId,
-    builder,
-  });
-
-  const result = await generateToFile(candidateDeckSpec, paths.candidateDeckPath, {
-    templatePackage: draftTemplatePackage,
-    slideRegistryOverrides: {
-      [layoutId]: draftRegistryEntry,
-    },
-    qaPath: paths.candidateQaPath,
-    runRoot: paths.candidateDir,
-    allowSparse: Boolean(candidateDeckSpec?.metadata?.allowSparse),
-    enforceOverlap: true,
-    strict: true,
-    postprocess: buildCandidatePostprocessOptions(paths, withMontage),
-  });
-  const qa = readJson(paths.candidateQaPath);
-  const blockingChecks = getBlockingChecks(qa);
-  writeSourceRecord(layoutId, {
-    ...source,
-    artifacts: {
-      ...(source.artifacts || {}),
-      candidateQaPath: path
-        .relative(paths.outputRoot, paths.candidateQaPath)
-        .split(path.sep)
-        .join('/'),
-    },
-  });
-  if (blockingChecks.length > 0) {
-    throw new Error(
-      `Candidate render has blocking checks: ${blockingChecks
-        .map((check) => `${check.id}:${check.status}`)
-        .join(', ')}`,
-    );
-  }
-
-  return {
-    ...result,
-    qa,
-    paths,
-    source,
-  };
 }
 
 /**
@@ -818,51 +367,4 @@ export function compareCandidateImages({
     diff: readJson(diffJsonPath),
     scorecard: readJson(scorecardPath),
   };
-}
-
-/**
- * Rebuild the generated canonical authored runtime registry module from an index file.
- *
- * @param {object[]} entries
- * @returns {string}
- */
-export function buildOnboardedRegistryModule(entries = []) {
-  if (entries.length === 0) {
-    return 'export const AUTHORED_REGISTRY_ENTRIES = Object.freeze({});\n';
-  }
-
-  const importLines = entries.map(
-    (entry) =>
-      `import ${entry.exportName} from '../builders/onboarded/${entry.builderFile}.js';`,
-  );
-
-  return `${importLines.join('\n')}\n\nexport const AUTHORED_REGISTRY_ENTRIES = Object.freeze({\n${entries
-    .map((entry) => {
-      const entryLiteral = JSON.stringify(entry.registryEntry, null, 2)
-        .replace(/"__BUILDER_REF__"/g, entry.exportName);
-      return `  ${entry.type}: Object.freeze(${entryLiteral}),`;
-    })
-    .join('\n')}\n});\n`;
-}
-
-/**
- * Load the canonical authored runtime registry index.
- *
- * @returns {object}
- */
-export function loadOnboardedRegistryIndex() {
-  return readJson(ONBOARDED_REGISTRY_INDEX_PATH);
-}
-
-/**
- * Persist the canonical authored runtime registry index and generated module.
- *
- * @param {object[]} entries
- */
-export function writeOnboardedRegistry(entries = []) {
-  writeJson(ONBOARDED_REGISTRY_INDEX_PATH, {
-    schemaVersion: 4,
-    entries,
-  });
-  fs.writeFileSync(ONBOARDED_REGISTRY_MODULE_PATH, buildOnboardedRegistryModule(entries));
 }

@@ -1,6 +1,4 @@
 {
-  "generatedFileHeader": "GENERATED FILE - DO NOT EDIT DIRECTLY. Source: templates-src/kpmg-diligence/*",
-  "schemaVersion": 1,
   "fixtures": [
     {
       "id": "golden-all-layouts",
@@ -13,8 +11,7 @@
       "blockingSafe": true,
       "baselineBearing": true,
       "origin": "synthetic",
-      "deckSpec": "golden/all-layouts/deckSpec.json",
-      "textAmount": "lg"
+      "deckSpec": "golden/all-layouts/deckSpec.json"
     },
     {
       "id": "scenario-saas-mid-diligence",
@@ -27,8 +24,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "scenario/saas-mid-diligence/deckSpec.json",
-      "textAmount": "md"
+      "deckSpec": "scenario/saas-mid-diligence/deckSpec.json"
     },
     {
       "id": "scenario-manufacturing-qoe-extensive",
@@ -41,8 +37,7 @@
       "blockingSafe": false,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "scenario/manufacturing-qoe-extensive/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "scenario/manufacturing-qoe-extensive/deckSpec.json"
     },
     {
       "id": "scenario-retail-ic-extensive",
@@ -55,8 +50,7 @@
       "blockingSafe": false,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "scenario/retail-ic-extensive/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "scenario/retail-ic-extensive/deckSpec.json"
     },
     {
       "id": "regression-one-column-overflow",
@@ -69,8 +63,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "regression/one-column-overflow/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "regression/one-column-overflow/deckSpec.json"
     },
     {
       "id": "regression-two-column-overflow",
@@ -83,8 +76,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "regression/two-column-overflow/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "regression/two-column-overflow/deckSpec.json"
     },
     {
       "id": "regression-analysis-wide-chart-table-overflow",
@@ -97,8 +89,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "regression/analysis-wide-chart-table-overflow/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "regression/analysis-wide-chart-table-overflow/deckSpec.json"
     },
     {
       "id": "regression-business-overview-overflow",
@@ -111,8 +102,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "regression/business-overview-overflow/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "regression/business-overview-overflow/deckSpec.json"
     },
     {
       "id": "regression-nested-bullets-children",
@@ -125,8 +115,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "regression/nested-bullets-children/deckSpec.json",
-      "textAmount": "lg"
+      "deckSpec": "regression/nested-bullets-children/deckSpec.json"
     },
     {
       "id": "regression-theme-e2e-all-types",
@@ -139,8 +128,7 @@
       "blockingSafe": true,
       "baselineBearing": true,
       "origin": "synthetic",
-      "deckSpec": "regression/theme-e2e-all-types/deckSpec.json",
-      "textAmount": "lg"
+      "deckSpec": "regression/theme-e2e-all-types/deckSpec.json"
     },
     {
       "id": "stress-analysis-bridge-overflow",
@@ -153,8 +141,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "stress/analysis-bridge-overflow/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "stress/analysis-bridge-overflow/deckSpec.json"
     },
     {
       "id": "stress-primitive-render-matrix",
@@ -176,8 +163,7 @@
       "blockingSafe": true,
       "baselineBearing": false,
       "origin": "synthetic",
-      "deckSpec": "stress/primitive-render-matrix/deckSpec.json",
-      "textAmount": "xl"
+      "deckSpec": "stress/primitive-render-matrix/deckSpec.json"
     },
     {
       "id": "invalid-legacy-nested-bullets",
@@ -209,8 +195,7 @@
         "pptx": "../../references/coffee_fdd.pptx",
         "slideNumber": 1,
         "candidateSlideNumber": 1
-      },
-      "textAmount": "xl"
+      }
     },
     {
       "id": "reference-parity-business-overview-north",
@@ -228,8 +213,7 @@
         "pptx": "../../references/north_fdd.pptx",
         "slideNumber": 1,
         "candidateSlideNumber": 1
-      },
-      "textAmount": "lg"
+      }
     }
   ]
 }

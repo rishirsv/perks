@@ -313,8 +313,7 @@ function buildCandidateBuilderSourceFromPrimitive({
   }
 
   const pascal = toPascalCase(layoutId);
-  const importPath = pathToFileURL(path.join(REPO_ROOT, sourcePrimitive.builderModule)).href;
-  return `import { ${sourcePrimitive.builderExport} } from '${importPath}';\n\nexport function build${pascal}(pptx, slideSpec, ctx) {\n  return ${sourcePrimitive.builderExport}(pptx, slideSpec, ctx);\n}\n\nexport default build${pascal};\n`;
+  return `import path from 'node:path';\nimport { pathToFileURL } from 'node:url';\n\nconst { ${sourcePrimitive.builderExport} } = await import(pathToFileURL(path.join(process.cwd(), '${sourcePrimitive.builderModule}')).href);\n\nexport function build${pascal}(pptx, slideSpec, ctx) {\n  return ${sourcePrimitive.builderExport}(pptx, slideSpec, ctx);\n}\n\nexport default build${pascal};\n`;
 }
 
 export function buildCandidateLayoutFromPrimitive({
@@ -451,7 +450,6 @@ export async function extractCase({
     rawPath: paths.extractRawPath,
     normalizedPath: paths.extractNormalizedPath,
     fingerprintPath: paths.fingerprintPath,
-    seedPath: null,
   });
 
   const record = buildCaseRecord({
@@ -842,11 +840,8 @@ export function promoteCase({
     }
     const primitive = readJson(paths.candidatePrimitivePath);
     const builderTargetPath = path.join(REPO_ROOT, primitive.builderModule);
-    const builderSource = fs.readFileSync(paths.candidateBuilderPath, 'utf8')
-      .replaceAll(`file://${REPO_ROOT.split(path.sep).join('/')}/generator/`, '../../')
-      .replace(/\.\.\/\.\.\/\.\.\/generator\//g, '../../');
     writeJson(path.join(REPO_ROOT, 'templates-src', 'kpmg-diligence', 'primitives', `${primitive.id}.json`), primitive);
-    writeText(builderTargetPath, builderSource);
+    writeText(builderTargetPath, fs.readFileSync(paths.candidateBuilderPath, 'utf8'));
   }
 
   const regen = spawnSync(process.execPath, [path.join(REPO_ROOT, 'scripts', 'codegen', 'generate-runtime-aggregates.mjs')], {
@@ -858,7 +853,7 @@ export function promoteCase({
     },
   });
   if (regen.status !== 0) {
-    throw new Error('Failed to regenerate runtime aggregates during promotion.');
+    throw new Error('Failed to regenerate full repo aggregates during promotion.');
   }
 
   const verifyGenerated = spawnSync(process.execPath, [path.join(REPO_ROOT, 'scripts', 'codegen', 'generate-runtime-aggregates.mjs'), '--check'], {
@@ -870,7 +865,7 @@ export function promoteCase({
     },
   });
   if (verifyGenerated.status !== 0) {
-    throw new Error('Failed to verify generated runtime aggregates during promotion.');
+    throw new Error('Failed to verify full repo aggregates during promotion.');
   }
 
   writeCaseRecord(caseId, {

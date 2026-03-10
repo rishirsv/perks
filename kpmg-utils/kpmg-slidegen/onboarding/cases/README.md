@@ -1,5 +1,7 @@
 # Onboarding Cases
 
+`docs/onboarding/onboard-layout.md` is the authoritative workflow doc for everything in this directory.
+
 Each case folder will eventually follow this shape:
 
 ```text

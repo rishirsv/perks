@@ -24,7 +24,8 @@ This repo converts `deckSpec` JSON files into `.pptx` outputs with a consolidate
 ## Scope
 
 - Edit generation logic only in `generator/`.
-- Keep template contracts in `templates/kpmg-diligence/package/`.
+- Author layouts and primitives in `templates-src/kpmg-diligence/`.
+- Treat `templates/kpmg-diligence/package/` and runtime registries as generated outputs.
 - Treat `fixtures/harness/` as the curated fixture surface and `presets/authoring/` as the user-facing starter surface.
 
 ## Working Rules
@@ -53,7 +54,8 @@ node generator/index.js \
 - `generator/strict/overlap.js`: overlap checks.
 - `generator/postprocess/slides-adapter.js`: preview/montage/overflow adapter with runtime discovery.
 - `generator/postprocess/slides-runtime/`: bundled Python postprocess runtime (`render_slides.py`, `create_montage.py`, `slides_test.py`, `ensure_raster_image.py`).
-- `templates/kpmg-diligence/package/layouts.json`: slide-type layout contract.
+- `templates-src/kpmg-diligence/`: authored primitives and layouts source of truth.
+- `templates/kpmg-diligence/package/layouts.json`: generated slide-type layout contract.
 - `scripts/onboarding/`: repo-only layout extraction, render, compare, and promotion tooling.
 - `onboarding/cases/`: repo-only onboarding case workspaces.
 

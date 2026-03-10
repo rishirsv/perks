@@ -4,25 +4,71 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 import {
+  GENERATED_DECKSPEC_SCHEMA_PATH,
   GENERATED_FILE_HEADER,
+  GENERATED_FIXTURE_MANIFEST_PATH,
+  GENERATED_GOLDEN_ALL_LAYOUTS_PATH,
   GENERATED_LAYOUTS_PATH,
+  GENERATED_ONBOARDED_INDEX_PATH,
+  GENERATED_ONBOARDED_MODULE_PATH,
   makeJsonContent,
   readSourceLayoutPackageMeta,
   readSourceLayouts,
 } from './codegen/lib.mjs';
-import { buildLayoutsAggregate } from './codegen/generate-runtime-aggregates.mjs';
+import {
+  buildDeckspecSchema,
+  buildFixtureManifest,
+  buildGoldenAllLayoutsDeck,
+  buildLayoutsAggregate,
+  buildOnboardedIndex,
+  buildOnboardedModule,
+  buildRegistryEntries,
+  mapBy,
+} from './codegen/generate-runtime-aggregates.mjs';
 import { REPO_ROOT } from './support.mjs';
+import { primitiveVersionRef, readSourcePrimitives } from './codegen/lib.mjs';
 
-const originalLayoutsContent = fs.readFileSync(GENERATED_LAYOUTS_PATH, 'utf8');
-const expectedLayoutsContent = makeJsonContent(
-  buildLayoutsAggregate(readSourceLayouts(), readSourceLayoutPackageMeta()),
+const layouts = readSourceLayouts();
+const primitives = readSourcePrimitives();
+const primitivesByRef = mapBy(primitives, primitiveVersionRef);
+const registryEntries = buildRegistryEntries(layouts, primitivesByRef);
+const expectedFiles = new Map([
+  [
+    GENERATED_LAYOUTS_PATH,
+    makeJsonContent(buildLayoutsAggregate(layouts, readSourceLayoutPackageMeta())),
+  ],
+  [
+    GENERATED_ONBOARDED_INDEX_PATH,
+    makeJsonContent(buildOnboardedIndex(registryEntries)),
+  ],
+  [
+    GENERATED_ONBOARDED_MODULE_PATH,
+    buildOnboardedModule(registryEntries),
+  ],
+  [
+    GENERATED_DECKSPEC_SCHEMA_PATH,
+    makeJsonContent(buildDeckspecSchema(layouts)),
+  ],
+  [
+    GENERATED_GOLDEN_ALL_LAYOUTS_PATH,
+    makeJsonContent(buildGoldenAllLayoutsDeck(layouts)),
+  ],
+  [
+    GENERATED_FIXTURE_MANIFEST_PATH,
+    makeJsonContent(buildFixtureManifest()),
+  ],
+]);
+const originalContents = new Map(
+  [...expectedFiles.keys()].map((filePath) => [filePath, fs.readFileSync(filePath, 'utf8')]),
 );
 
 try {
-  fs.writeFileSync(
-    GENERATED_LAYOUTS_PATH,
-    '{\n  "corrupted": true,\n  "note": "source reproducibility smoke"\n',
-  );
+  for (const filePath of expectedFiles.keys()) {
+    fs.writeFileSync(
+      filePath,
+      `{\n  "corrupted": true,\n  "note": "source reproducibility smoke for ${path.basename(filePath)}"\n`,
+    );
+  }
 
   const regen = spawnSync(process.execPath, [path.join(REPO_ROOT, 'scripts', 'codegen', 'generate-runtime-aggregates.mjs')], {
     cwd: REPO_ROOT,
@@ -38,14 +84,16 @@ try {
     `Runtime aggregate regeneration should succeed from source fragments alone.\n${regen.stdout || ''}\n${regen.stderr || ''}`.trim(),
   );
 
-  const regeneratedLayoutsContent = fs.readFileSync(GENERATED_LAYOUTS_PATH, 'utf8');
-  assert.equal(
-    regeneratedLayoutsContent,
-    expectedLayoutsContent,
-    'Regenerated layouts.json should be reproducible from source layouts plus authored package metadata only.',
-  );
+  for (const [filePath, expectedContent] of expectedFiles.entries()) {
+    const regeneratedContent = fs.readFileSync(filePath, 'utf8');
+    assert.equal(
+      regeneratedContent,
+      expectedContent,
+      `Regenerated output should be reproducible from authored sources only: ${path.relative(REPO_ROOT, filePath)}`,
+    );
+  }
   assert.match(
-    regeneratedLayoutsContent,
+    fs.readFileSync(GENERATED_LAYOUTS_PATH, 'utf8'),
     new RegExp(`"generatedFileHeader": "${GENERATED_FILE_HEADER.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`),
     'The regenerated layout package should restore the generated file header.',
   );
@@ -64,7 +112,9 @@ try {
     `Generated output verification should pass after regeneration from source-only inputs.\n${verify.stdout || ''}\n${verify.stderr || ''}`.trim(),
   );
 } finally {
-  fs.writeFileSync(GENERATED_LAYOUTS_PATH, originalLayoutsContent);
+  for (const [filePath, content] of originalContents.entries()) {
+    fs.writeFileSync(filePath, content);
+  }
 }
 
 console.log('Source-only codegen reproducibility passed.');
