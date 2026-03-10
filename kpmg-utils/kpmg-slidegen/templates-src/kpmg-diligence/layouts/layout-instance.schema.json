@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpmg-slidegen/templates-src/kpmg-diligence/layouts/layout-instance.schema.json",
+  "title": "KPMG SlideGen Layout Instance",
+  "description": "Repo-only authoring contract for a user-facing layout instance backed by a primitive definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "primitive",
+    "description",
+    "geometry"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+    },
+    "primitive": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9-]*@[1-9][0-9]*$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geometry": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/geometryValue"
+      }
+    },
+    "slotOverrides": {
+      "type": "object",
+      "default": {}
+    },
+    "comparePolicyOverrides": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "masterOverride": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "geometryValue": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/box"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/box"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/geometryNode"
+          }
+        }
+      ]
+    },
+    "geometryNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "box"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "box": {
+          "$ref": "#/$defs/box"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/geometryNode"
+          }
+        }
+      }
+    },
+    "box": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "w": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "h": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    }
+  }
+}

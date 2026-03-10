@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpmg-slidegen/docs/onboarding/compare-scorecard.schema.json",
+  "title": "KPMG SlideGen Compare Scorecard",
+  "description": "Schema for deterministic compare scorecards produced by onboarding image comparison.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "pass",
+    "thresholds",
+    "checks"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "pass": {
+      "type": "boolean"
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "required": [
+        "changedPixelRatioMax",
+        "meanAbsMax",
+        "rmsMax"
+      ],
+      "properties": {
+        "changedPixelRatioMax": {
+          "type": "number",
+          "minimum": 0
+        },
+        "meanAbsMax": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rmsMax": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changedPixelRatio",
+        "meanAbs",
+        "rms"
+      ],
+      "properties": {
+        "changedPixelRatio": {
+          "$ref": "#/$defs/checkResult"
+        },
+        "meanAbs": {
+          "$ref": "#/$defs/checkResult"
+        },
+        "rms": {
+          "$ref": "#/$defs/checkResult"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actual",
+        "max",
+        "pass"
+      ],
+      "properties": {
+        "actual": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pass": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
