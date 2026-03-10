@@ -1,6 +1,6 @@
 ---
 name: code-docs
-description: "Create or update code related documentation and product specs."
+description: "Create or update code related documentation and product specs. Use only when the user explicitly invokes `code-docs`/`$code-docs` or directly asks to use this skill; do not auto-activate it for general documentation requests."
 ---
 
 # Code Docs
@@ -8,6 +8,7 @@ description: "Create or update code related documentation and product specs."
 ## Objective
 
 Create or update repository documentation using canonical structure and naming. Keep docs agent-legible, layered, and mechanically verifiable.
+Activate this skill only on explicit user request.
 
 ## Scope
 
