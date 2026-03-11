@@ -8,13 +8,15 @@ Template-driven generator that converts `deckSpec` JSON inputs into:
 ## What This Repo Owns
 
 - Runtime generation pipeline in `generator/`
-- Template contracts in `templates/kpmg-diligence/package/`
+- Authored layout and primitive source in `templates-src/kpmg-diligence/`
+- Generated template contract outputs in `templates/kpmg-diligence/package/`
 - Skill bundle packaging and portability checks in `skills/kpmg-slides/`
 
 ## Contributor Guardrails
 
 - Edit generation logic only in `generator/`.
-- Keep template contracts in `templates/kpmg-diligence/package/`.
+- Author layouts and primitives in `templates-src/kpmg-diligence/`.
+- Treat `templates/kpmg-diligence/package/` and runtime registries as generated outputs.
 - Treat `fixtures/harness/` as the curated test surface and `presets/authoring/` as user-facing starters.
 - Keep runtime minimal; avoid unnecessary frameworks.
 - Keep docs and code aligned when changing slide types, slot rules, or QA shape.
@@ -101,7 +103,7 @@ If `--out` is omitted, generation writes to `./outputs/kpmg-slidegen/<timestamp>
 - `npm run test:visual`: preview, montage, and visual-overflow lane.
 - `npm run test:dist`: skill bundle sync, portability, and smoke verification.
 - `npm run test:onboarding`: repo-only onboarding smoke lane.
-- `npm run onboard:run`: initialize, render, and compare one draft layout.
+- `npm run onboard:run`: run the extract, classify, scaffold, render, and compare lifecycle for one onboarding case.
 - `npm run test:nightly`: full parent harness sweep.
 - Repo CI note: GitHub Actions runs `npm run test:pr` on every push and pull request, and runs `npm run test:nightly` on the scheduled nightly job.
 
@@ -126,9 +128,9 @@ Optional postprocess artifacts:
 - overflow diagnostic image paths in `qa.artifacts.overflowVisual.imagePaths`
 
 Repo-only onboarding artifacts:
-- `onboarding/layouts/<layout-id>/`: stable draft workspace (`source.json`, candidate scaffold files, optional seed data)
-- `outputs/onboarding/<layout-id>/candidate/`: draft deck, QA, preview, optional montage
-- `outputs/onboarding/<layout-id>/compare/`: reference, candidate, diff, metrics, scorecard
+- `onboarding/cases/<case-id>/`: stable case workspace (`intake.json`, extraction evidence, classification, candidate scaffold files, and review notes)
+- `outputs/onboarding/<case-id>/candidate/`: draft deck, QA, preview, optional montage
+- `outputs/onboarding/<case-id>/compare/`: reference, candidate, diff, metrics, scorecard
 
 ## Troubleshooting
 
@@ -148,7 +150,8 @@ Repo-only onboarding artifacts:
 - `ARCHITECTURE.md`: runtime architecture and module boundaries.
 - `docs/exec-plans/active/agent-harness-engineering-plan.md`: active harness maintenance plan and implementation checklist.
 - `docs/exec-plans/completed/repo-only-layout-onboarding-plan.md`: completed repo-only layout onboarding implementation plan.
-- `docs/onboarding/README.md`: repo-only single-layout onboarding workflow.
+- `docs/onboarding/onboard-layout.md`: authoritative repo-only layout onboarding workflow.
+- `docs/onboarding/README.md`: onboarding doc index and supporting references.
 - `docs/onboarding/agent-batch-workflow.md`: repo-only batch workflow for agent-driven onboarding loops.
 - `AGENTS.md`: working rules and repo scope.
 - `references/INDEX.md`: canonical parent-repo references index.

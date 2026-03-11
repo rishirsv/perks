@@ -124,13 +124,6 @@
         }
       }
     },
-    "bodyStyle": {
-      "type": "string",
-      "enum": [
-        "bullets",
-        "paragraphs"
-      ]
-    },
     "textRun": {
       "description": "Allowed item in textArray slots.",
       "oneOf": [
@@ -168,27 +161,6 @@
     "textArrayMin1": {
       "type": "array",
       "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/textRun"
-      }
-    },
-    "textArrayMin2": {
-      "type": "array",
-      "minItems": 2,
-      "items": {
-        "$ref": "#/$defs/textRun"
-      }
-    },
-    "textArrayMin3": {
-      "type": "array",
-      "minItems": 3,
-      "items": {
-        "$ref": "#/$defs/textRun"
-      }
-    },
-    "textArrayMin4": {
-      "type": "array",
-      "minItems": 4,
       "items": {
         "$ref": "#/$defs/textRun"
       }
@@ -488,28 +460,6 @@
         }
       ]
     },
-    "columnsMin4": {
-      "type": "array",
-      "minItems": 4,
-      "items": {
-        "$ref": "#/$defs/column"
-      }
-    },
-    "columnsMin1": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/column"
-      }
-    },
-    "columnsMin1Max4": {
-      "type": "array",
-      "minItems": 1,
-      "maxItems": 4,
-      "items": {
-        "$ref": "#/$defs/column"
-      }
-    },
     "businessStructureNode": {
       "type": "object",
       "additionalProperties": false,
@@ -678,207 +628,66 @@
         }
       }
     },
-    "contentsSectionsMin3": {
+    "columnsMin1Max4": {
       "type": "array",
-      "minItems": 3,
+      "minItems": 1,
+      "maxItems": 4,
       "items": {
-        "$ref": "#/$defs/contentsSection"
+        "$ref": "#/$defs/column"
       }
     },
-    "slideCover": {
+    "slideAnalysisBridge": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "type",
         "title",
-        "subtitle"
+        "bridge",
+        "analysisColumns"
       ],
       "properties": {
         "type": {
-          "const": "cover"
-        },
-        "title": {
-          "type": "string",
-          "minLength": 8,
-          "maxLength": 100
-        },
-        "subtitle": {
-          "type": "string",
-          "minLength": 12,
-          "maxLength": 200
-        }
-      }
-    },
-    "slideDivider": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "sectionNumber",
-        "sectionTitle"
-      ],
-      "properties": {
-        "type": {
-          "const": "divider"
-        },
-        "sectionNumber": {
-          "type": "string",
-          "pattern": "^\\d{2}$",
-          "minLength": 2,
-          "maxLength": 2
-        },
-        "sectionTitle": {
-          "type": "string",
-          "minLength": 6,
-          "maxLength": 80
-        }
-      }
-    },
-    "slideDividerDark": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "sectionNumber",
-        "sectionTitle"
-      ],
-      "properties": {
-        "type": {
-          "const": "dividerDark"
-        },
-        "sectionNumber": {
-          "type": "string",
-          "pattern": "^\\d{2}$",
-          "minLength": 2,
-          "maxLength": 2
-        },
-        "sectionTitle": {
-          "type": "string",
-          "minLength": 6,
-          "maxLength": 80
-        }
-      }
-    },
-    "slideDividerLight": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "sectionNumber",
-        "sectionTitle"
-      ],
-      "properties": {
-        "type": {
-          "const": "dividerLight"
-        },
-        "sectionNumber": {
-          "type": "string",
-          "pattern": "^\\d{2}$",
-          "minLength": 2,
-          "maxLength": 2
-        },
-        "sectionTitle": {
-          "type": "string",
-          "minLength": 6,
-          "maxLength": 80
-        }
-      }
-    },
-    "slideContents": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "title",
-        "sections"
-      ],
-      "properties": {
-        "type": {
-          "const": "contents"
-        },
-        "title": {
-          "type": "string",
-          "minLength": 6,
-          "maxLength": 40
-        },
-        "sections": {
-          "$ref": "#/$defs/contentsSectionsMin3"
-        }
-      }
-    },
-    "slideOneColumnText": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "title",
-        "body"
-      ],
-      "properties": {
-        "type": {
-          "const": "oneColumnText"
+          "const": "analysisBridge"
         },
         "title": {
           "type": "string",
           "minLength": 12,
-          "maxLength": 50
+          "maxLength": 80
+        },
+        "bridge": {
+          "$ref": "#/$defs/bridge"
+        },
+        "analysisColumns": {
+          "$ref": "#/$defs/columnsMin1Max4"
         },
         "strapline": {
           "type": "string",
           "minLength": 12,
           "maxLength": 700
+        },
+        "bodyStyle": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
         },
         "source": {
           "type": "string",
-          "minLength": 12,
-          "maxLength": 700
+          "minLength": 10,
+          "maxLength": 500
         },
-        "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
-        },
-        "body": {
-          "$ref": "#/$defs/textArrayMin3",
-          "x-kpmg-minChars": 180
-        },
-        "callouts": {
-          "$ref": "#/$defs/columnsMin1"
+        "note": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 500
         }
       }
     },
-    "slideTwoColumnText": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "title",
-        "leftBody",
-        "rightBody"
-      ],
-      "properties": {
-        "type": {
-          "const": "twoColumnText"
-        },
-        "title": {
-          "type": "string",
-          "minLength": 12,
-          "maxLength": 50
-        },
-        "strapline": {
-          "type": "string",
-          "minLength": 12,
-          "maxLength": 700
-        },
-        "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
-        },
-        "leftBody": {
-          "$ref": "#/$defs/textArrayMin2",
-          "x-kpmg-minChars": 80
-        },
-        "rightBody": {
-          "$ref": "#/$defs/textArrayMin2",
-          "x-kpmg-minChars": 80
-        }
+    "textArrayMin2": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/textRun"
       }
     },
     "slideAnalysisNarrowTable": {
@@ -886,41 +695,54 @@
       "additionalProperties": false,
       "required": [
         "type",
-        "title",
         "table",
+        "title",
         "insights"
       ],
       "properties": {
         "type": {
           "const": "analysisNarrowTable"
         },
-        "title": {
+        "notes": {
           "type": "string",
           "minLength": 12,
-          "maxLength": 50
+          "maxLength": 700
         },
         "strapline": {
           "type": "string",
           "minLength": 12,
           "maxLength": 700
         },
-        "notes": {
+        "table": {
+          "$ref": "#/$defs/table"
+        },
+        "title": {
           "type": "string",
           "minLength": 12,
-          "maxLength": 700
+          "maxLength": 50
+        },
+        "insights": {
+          "$ref": "#/$defs/textArrayMin2"
         },
         "insightTitle": {
           "type": "string",
           "minLength": 6,
           "maxLength": 80
-        },
-        "table": {
-          "$ref": "#/$defs/table"
-        },
-        "insights": {
-          "$ref": "#/$defs/textArrayMin2",
-          "x-kpmg-minChars": 80
         }
+      }
+    },
+    "textArrayMin4": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/textRun"
+      }
+    },
+    "columnsMin1": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/column"
       }
     },
     "slideAnalysisWideChart2ColsText": {
@@ -928,33 +750,35 @@
       "additionalProperties": false,
       "required": [
         "type",
-        "title",
         "body",
-        "chart"
+        "chart",
+        "title"
       ],
       "properties": {
         "type": {
           "const": "analysisWideChart2ColsText"
         },
-        "title": {
-          "type": "string",
-          "minLength": 12,
-          "maxLength": 50
+        "body": {
+          "$ref": "#/$defs/textArrayMin4"
+        },
+        "chart": {
+          "$ref": "#/$defs/chart"
         },
         "strapline": {
           "type": "string",
           "minLength": 12,
           "maxLength": 700
         },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
         "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
-        },
-        "body": {
-          "$ref": "#/$defs/textArrayMin4",
-          "x-kpmg-minChars": 180
-        },
-        "chart": {
-          "$ref": "#/$defs/chart"
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
         },
         "callouts": {
           "$ref": "#/$defs/columnsMin1"
@@ -989,12 +813,8 @@
           "minLength": 6,
           "maxLength": 120
         },
-        "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
-        },
         "body": {
-          "$ref": "#/$defs/textArrayMin4",
-          "x-kpmg-minChars": 180
+          "$ref": "#/$defs/textArrayMin4"
         },
         "chart": {
           "$ref": "#/$defs/chart"
@@ -1007,52 +827,36 @@
           "minLength": 12,
           "maxLength": 700
         },
+        "bodyStyle": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
+        },
         "callouts": {
           "$ref": "#/$defs/columnsMin1"
         }
       }
     },
-    "slideAnalysisBridge": {
+    "slideBackCover": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "type",
-        "title",
-        "bridge",
-        "analysisColumns"
+        "type"
       ],
       "properties": {
         "type": {
-          "const": "analysisBridge"
+          "const": "backCover"
         },
-        "title": {
+        "disclaimer": {
           "type": "string",
-          "minLength": 12,
-          "maxLength": 80
-        },
-        "strapline": {
-          "type": "string",
-          "minLength": 12,
+          "minLength": 80,
           "maxLength": 700
         },
-        "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
-        },
-        "bridge": {
-          "$ref": "#/$defs/bridge"
-        },
-        "analysisColumns": {
-          "$ref": "#/$defs/columnsMin1Max4"
-        },
-        "source": {
+        "url": {
           "type": "string",
-          "minLength": 10,
-          "maxLength": 500
-        },
-        "note": {
-          "type": "string",
-          "minLength": 10,
-          "maxLength": 500
+          "minLength": 5,
+          "maxLength": 60
         }
       }
     },
@@ -1088,8 +892,7 @@
           "$ref": "#/$defs/businessStructure"
         },
         "overviewBody": {
-          "$ref": "#/$defs/textArrayMin2",
-          "x-kpmg-minChars": 80
+          "$ref": "#/$defs/textArrayMin2"
         },
         "chart": {
           "$ref": "#/$defs/chart"
@@ -1105,8 +908,194 @@
           "maxLength": 500
         },
         "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
         }
+      }
+    },
+    "contentsSectionsMin3": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/contentsSection"
+      }
+    },
+    "slideContents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "sections"
+      ],
+      "properties": {
+        "type": {
+          "const": "contents"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 40
+        },
+        "sections": {
+          "$ref": "#/$defs/contentsSectionsMin3"
+        }
+      }
+    },
+    "slideCover": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "subtitle",
+        "title"
+      ],
+      "properties": {
+        "type": {
+          "const": "cover"
+        },
+        "subtitle": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 200
+        },
+        "title": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 100
+        }
+      }
+    },
+    "slideDivider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sectionNumber",
+        "sectionTitle"
+      ],
+      "properties": {
+        "type": {
+          "const": "divider"
+        },
+        "sectionNumber": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "pattern": "^\\d{2}$"
+        },
+        "sectionTitle": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 80
+        }
+      }
+    },
+    "slideDividerDark": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sectionNumber",
+        "sectionTitle"
+      ],
+      "properties": {
+        "type": {
+          "const": "dividerDark"
+        },
+        "sectionNumber": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "pattern": "^\\d{2}$"
+        },
+        "sectionTitle": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 80
+        }
+      }
+    },
+    "slideDividerLight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sectionNumber",
+        "sectionTitle"
+      ],
+      "properties": {
+        "type": {
+          "const": "dividerLight"
+        },
+        "sectionNumber": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "pattern": "^\\d{2}$"
+        },
+        "sectionTitle": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 80
+        }
+      }
+    },
+    "textArrayMin3": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/textRun"
+      }
+    },
+    "slideOneColumnText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "body",
+        "title"
+      ],
+      "properties": {
+        "type": {
+          "const": "oneColumnText"
+        },
+        "body": {
+          "$ref": "#/$defs/textArrayMin3"
+        },
+        "strapline": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "source": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 700
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "bodyStyle": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
+        },
+        "callouts": {
+          "$ref": "#/$defs/columnsMin1"
+        }
+      }
+    },
+    "columnsMin4": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/column"
       }
     },
     "slideTitleStrapline4TextBoxes": {
@@ -1114,55 +1103,94 @@
       "additionalProperties": false,
       "required": [
         "type",
-        "title",
-        "columns"
+        "columns",
+        "title"
       ],
       "properties": {
         "type": {
           "const": "titleStrapline4TextBoxes"
         },
-        "title": {
-          "type": "string",
-          "minLength": 12,
-          "maxLength": 50
+        "columns": {
+          "$ref": "#/$defs/columnsMin4"
         },
         "strapline": {
           "type": "string",
           "minLength": 12,
           "maxLength": 700
         },
-        "bodyStyle": {
-          "$ref": "#/$defs/bodyStyle"
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 50
         },
-        "columns": {
-          "$ref": "#/$defs/columnsMin4"
+        "bodyStyle": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
         }
       }
     },
-    "slideBackCover": {
+    "slideTwoColumnText": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "type"
+        "type",
+        "leftBody",
+        "rightBody",
+        "title"
       ],
       "properties": {
         "type": {
-          "const": "backCover"
+          "const": "twoColumnText"
         },
-        "disclaimer": {
+        "leftBody": {
+          "$ref": "#/$defs/textArrayMin2"
+        },
+        "rightBody": {
+          "$ref": "#/$defs/textArrayMin2"
+        },
+        "strapline": {
           "type": "string",
-          "minLength": 80,
+          "minLength": 12,
           "maxLength": 700
         },
-        "url": {
+        "title": {
           "type": "string",
-          "minLength": 5,
-          "maxLength": 60
+          "minLength": 12,
+          "maxLength": 50
+        },
+        "bodyStyle": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 10,
+          "pattern": "^(bullets|paragraphs)$"
         }
       }
     },
     "slide": {
       "oneOf": [
+        {
+          "$ref": "#/$defs/slideAnalysisBridge"
+        },
+        {
+          "$ref": "#/$defs/slideAnalysisNarrowTable"
+        },
+        {
+          "$ref": "#/$defs/slideAnalysisWideChart2ColsText"
+        },
+        {
+          "$ref": "#/$defs/slideAnalysisWideChartTableText"
+        },
+        {
+          "$ref": "#/$defs/slideBackCover"
+        },
+        {
+          "$ref": "#/$defs/slideBusinessOverview"
+        },
+        {
+          "$ref": "#/$defs/slideContents"
+        },
         {
           "$ref": "#/$defs/slideCover"
         },
@@ -1176,36 +1204,16 @@
           "$ref": "#/$defs/slideDividerLight"
         },
         {
-          "$ref": "#/$defs/slideContents"
-        },
-        {
           "$ref": "#/$defs/slideOneColumnText"
-        },
-        {
-          "$ref": "#/$defs/slideTwoColumnText"
-        },
-        {
-          "$ref": "#/$defs/slideAnalysisNarrowTable"
-        },
-        {
-          "$ref": "#/$defs/slideAnalysisWideChart2ColsText"
-        },
-        {
-          "$ref": "#/$defs/slideAnalysisWideChartTableText"
-        },
-        {
-          "$ref": "#/$defs/slideAnalysisBridge"
-        },
-        {
-          "$ref": "#/$defs/slideBusinessOverview"
         },
         {
           "$ref": "#/$defs/slideTitleStrapline4TextBoxes"
         },
         {
-          "$ref": "#/$defs/slideBackCover"
+          "$ref": "#/$defs/slideTwoColumnText"
         }
       ]
     }
-  }
+  },
+  "generatedFileHeader": "GENERATED FILE - DO NOT EDIT DIRECTLY. Source: templates-src/kpmg-diligence/*"
 }
