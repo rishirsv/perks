@@ -14,9 +14,9 @@
 
 ## Section objective
 
-The Net working capital section explains the operating working-capital position in terms that matter for purchase price and closing mechanics. In most cases, it starts with a reported and adjusted working-capital schedule, explains the basis of presentation and the nature of the adjustments, and then walks the key normalization items that move reported working capital to the adjusted or target view.
+The Net working capital section explains the operating working-capital position in terms that matter for purchase price and closing mechanics. In most cases, this reference supports an NWC overview, due diligence adjustment commentary, pro forma adjustment commentary, or a narrower schedule-backed note.
 
-This section operates similarly to the net debt section, but it focuses on operating working-capital balances and working-capital adjustments rather than indebtedness. It should explain what is included in working capital, what is excluded, how the major adjustments are categorized, and what the resulting analysis means for normalized working capital, target working capital, or closing true-up mechanics.
+This section operates similarly to the net debt section, but it focuses on operating working-capital balances and working-capital adjustments rather than indebtedness. It should explain what is included in working capital, what is excluded, how the major adjustments are categorized, and what the resulting analysis means for adjusted or normalized working capital, target working capital, or closing true-up mechanics.
 
 Global writing, placeholder, and language rules are defined in `references/global-writing-conventions.md` and apply here.
 
@@ -26,8 +26,8 @@ Global writing, placeholder, and language rules are defined in `references/globa
 2. **Use the schedule as the anchor exhibit:** Strong working-capital sections are built around a schedule or bridge, with commentary drafted beside it rather than as free-form prose.
 3. **State the basis of presentation clearly:** Explain the periods shown, the basis of the schedule, and the adjustment categories used in the analysis.
 4. **Separate the categories of adjustment:** Keep definitional adjustments, due diligence adjustments, pro forma adjustments, sell-side adjustments, and other considerations distinct when those categories are used in the source analysis.
-5. **Explain the adjustment through the balance and the operating logic:** Describe what the balance relates to, why it is included or excluded from working capital, and how it affects normalized working capital or closing mechanics.
-6. **Use drivers and days analysis selectively:** Include receivables, inventory, payables, deferred revenue, DSO, DPO, DIO, billing patterns, or seasonality only when they materially improve interpretation of the working-capital level or target.
+5. **Explain the adjustment through the balance and the perimeter logic:** Describe what the balance relates to, why it is included or excluded from working capital, and stop once the treatment is clear unless a target, peg, or closing implication is specifically supported.
+6. **Use drivers and days analysis selectively:** Include receivables, inventory, payables, deferred revenue, DSO, DPO, DIO, billing patterns, or seasonality only when they materially improve interpretation of the working-capital level or target. Stable metrics can be referenced briefly rather than expanded.
 7. **State target or peg conclusions only when supported:** If the source supports a target, peg, surplus, or deficit conclusion, state it clearly. Otherwise, stop at the adjusted or normalized working-capital analysis.
 8. **Keep the section focused on purchase-price mechanics:** Do not let the section drift into a generic balance sheet discussion or a long list of unsupported possible adjustments.
 
@@ -36,21 +36,21 @@ Global writing, placeholder, and language rules are defined in `references/globa
 1. **Confirm the working-capital basis and default scope:** Identify whether the analysis is period-end, average, trailing, target-based, or otherwise deal-defined, and carry that basis consistently through the section. If the user has not narrowed the request, treat the section as a full working-capital adjustment walkthrough.
 2. **Review the full schedule first:** Start from the reported and adjusted working-capital schedule, or the trial-balance-based working-capital support, and identify the main reported balances and adjustment categories.
 3. **Define the operating boundary:** Determine which balances are included in net working capital and which balances are excluded because they are cash, debt-like, tax, capex-related, non-operating, or otherwise outside the agreed working-capital perimeter.
-4. **Choose the section shape and identify what needs emphasis:** Decide whether the section should read as a straightforward adjusted working-capital section or whether seasonality, sell-side layers, driver analysis, or target-setting need more emphasis.
+4. **Choose the section shape and identify what needs emphasis:** Decide whether the section should read as an NWC overview, a due diligence adjustment section, a pro forma adjustment section, or a narrower schedule-backed note, and whether seasonality, sell-side layers, driver analysis, or target-setting need more emphasis.
 5. **Set out the basis of presentation:** Explain the periods presented and the categories of adjustments used in the analysis, such as definitional, due diligence, sell-side, buy-side, or pro forma.
 6. **Identify the key adjustments:** Pull out the adjustments that most affect adjusted or normalized working capital and explain them one by one.
 7. **Find the closest adjustment pattern:** For each material adjustment, identify the closest example type in the adjustment narrative library and model the sentence pattern on that example before adapting it to the company-specific facts.
-8. **Draft the section in final reading order:** Start with the position and basis of presentation, present the schedule, then walk the material adjustments in schedule order, and add supporting notes only where they improve interpretation.
-9. **Add driver, days, target, or sell-side commentary selectively:** Use line-item commentary and days metrics only when they help the reader understand whether the reported or adjusted working-capital level is representative.
+8. **Draft the section in final reading order:** For overview outputs, start with the position and basis of presentation, then present the schedule and any grouped adjustment categories. For due diligence or pro forma adjustment outputs, keep the commentary aligned to the schedule and the relevant adjustment order. Add supporting notes only where they improve interpretation.
+9. **Add driver, days, target, or sell-side commentary selectively:** Use line-item commentary and days metrics only when they help the reader understand whether the reported or adjusted working-capital level is representative. If DSO, DPO, DIO, or seasonality are stable, reference them briefly or omit them.
 10. **Stop when the working-capital analysis is interpretable:** Include enough detail for the reader to understand the reported schedule, the major adjustments, and the target or closing implications without turning the section into a complete operating balance-sheet appendix.
 
 ## Section architecture
 
-Scale the section based on the complexity of the working-capital definition, the number of adjustment categories, the importance of seasonality, and whether the analysis supports a target or peg conclusion.
+Scale the section based on the complexity of the working-capital definition, the number of adjustment categories, the importance of seasonality, and whether the analysis supports a target or peg conclusion. Broad NWC outputs may span an overview and one or more adjustment-led sections when that better matches the requested artifact or source analysis.
 
 **Verbosity:**
 
-- Stop adding detail when the reader can understand the working-capital basis, the major balances within the schedule, the material adjustments, and any target or closing implications. In most cases, aim for one anchor schedule plus 5-10 commentary bullets or numbered items and roughly 300-850 words. Move above that range only when the section includes multiple adjustment categories, extensive seasonality analysis, or a more involved target-setting discussion.
+- Stop adding detail when the reader can understand the working-capital basis, the major balances within the schedule, the material adjustments, and any target or closing implications. In most cases, aim for one anchor schedule plus 5-10 commentary blocks or numbered items and roughly 300-850 words. Move above that range only when the section includes multiple adjustment categories, extensive seasonality analysis, or a more involved target-setting discussion.
 
 **Required content areas:**
 
@@ -102,7 +102,8 @@ Scale the section based on the complexity of the working-capital definition, the
 
 **Formatting principle:**
 
-- Use a short overview followed by a basis-of-presentation note, the schedule, and then adjustment commentary aligned to the schedule.
+- For overview outputs, use a short opening position line, a basis-of-presentation note, the schedule, and then grouped adjustment commentary or supporting notes where helpful.
+- For due diligence or pro forma adjustment outputs, keep the writing aligned to the schedule and the adjustment order rather than forcing a broader overview shape.
 - When the source analysis uses adjustment categories, state them explicitly in the same plain-language style as the source, such as `Definitional adjustments`, `Due diligence adjustments`, `Pro forma adjustments`, or `Sell-side adjustments`.
 - When discussing a balance or adjustment that maps directly to the schedule, use the schedule label followed by a colon in bold, then explain what it relates to and how it affects working capital.
 
@@ -110,7 +111,22 @@ Scale the section based on the complexity of the working-capital definition, the
 
 Use these as the main building blocks for the section. Choose only the content areas the draft actually needs.
 
-The standard pattern is an overview of the reported and adjusted position, followed by basis-of-presentation commentary, the working-capital schedule, and then the working-capital adjustments, with supporting notes added only where they improve interpretation.
+The standard pattern is an NWC overview followed by due diligence or pro forma adjustment commentary where relevant, with supporting notes added only where they improve interpretation.
+
+### Overview
+
+- Use when the user asks for the main NWC section or when the source analysis starts with a reported and adjusted working-capital summary.
+- Keep the focus on the reported and adjusted position, basis of presentation, and the adjustment categories the reader should use to frame the analysis.
+
+### Due diligence adjustments
+
+- Use when the source analysis or requested artifact focuses on the diligence adjustments that move reported working capital to the adjusted view.
+- Keep the commentary aligned to the schedule and the due diligence adjustment order.
+
+### Pro forma adjustments
+
+- Use when the source analysis includes run-rate or business-change adjustments beyond the reported and diligence-adjusted working-capital view.
+- Keep the commentary aligned to the pro forma adjustment order and explain the operating change that drives the run-rate impact.
 
 ### Opening position line
 
@@ -175,7 +191,7 @@ Choose the closest narrative and adapt the structure and level of detail to the 
 
 - Add these only when they materially improve the reader's interpretation of the schedule.
 - `Drivers or seasonality:` Use a short note when receivable, payable, inventory, or deferred revenue levels need operating context to be read properly. Sample wording: `**Seasonality:** Billings are typically strongest in the second half of the year, which results in higher receivable balances and elevated DSO at the peak trading dates.`
-- `Days analysis:` Use DSO, DPO, DIO, or similar metrics only when they explain why a reported or adjusted balance is high, low, or non-representative. Sample wording: `**Average adjusted DSO:** Adjusted DSO remained between [x] and [x] days over the historical period, with the increase in [period] driven by delayed customer payment timing.`
+- `Days analysis:` Use DSO, DPO, DIO, or similar metrics only when they explain why a reported or adjusted balance is high, low, or non-representative. If the metrics are stable, reference them briefly or omit them. Sample wording: `**Average adjusted DSO:** Adjusted DSO remained between [x] and [x] days over the historical period, with the increase in [period] driven by delayed customer payment timing.`
 - `Target or peg conclusion:` State the target, peg, surplus, or deficit only when the basis is supported. Sample wording: `**Target working capital:** Based on the draft SPA definition, adjusted average working capital indicates a [$x.x million] surplus against the agreed target basis.`
 - `Sell-side or prior-analysis note:` Use a short note when the analysis starts from seller-prepared work and the reader needs to know what was retained, changed, or challenged. Sample wording: `**Sell-side adjustments:** The seller-prepared adjustments were used as the starting point for the analysis, with changes made where recurring items, phasing assumptions, or classification were not considered supportable.`
 - `Other considerations:` Keep this brief and use it only for unresolved items that still matter to the closing or target view. Sample wording: `**Quarter-end timing:** Collection and payment timing around the closing date may move the final receivable and payable balances, so the true-up should be assessed using the agreed cut-off conventions.`
@@ -183,19 +199,23 @@ Choose the closest narrative and adapt the structure and level of detail to the 
 ## Section-specific writing guidance
 
 1. Use the working-capital schedule as the structural anchor and keep the commentary aligned to the way the schedule is presented.
-2. State the basis of presentation and the categories of adjustment clearly before walking the adjustments.
-3. Explain each adjustment through the balance, the operating or definitional logic, and the effect on adjusted working capital.
-4. Where an adjustment type has a close analogue in the adjustment narrative library, follow that sentence pattern and adapt it to the company-specific facts rather than inventing a new structure.
-5. Use supporting notes for drivers, days, sell-side differences, or other considerations only when they materially improve the section.
+2. For overview outputs, state the basis of presentation and the categories of adjustment clearly before walking the adjustments.
+3. For due diligence or pro forma adjustment outputs, keep the commentary aligned to the relevant adjustment order rather than forcing a broader overview format.
+4. Explain each adjustment through the balance and the operating or definitional logic, and add further impact commentary only when it adds decision-useful information.
+5. Where an adjustment type has a close analogue in the adjustment narrative library, follow that sentence pattern and adapt it to the company-specific facts rather than inventing a new structure.
+6. Use supporting notes for drivers, days, sell-side differences, or other considerations only when they materially improve the section.
 
 ## Verification and review checks
 
 **Verification questions:**
 
 - Is the section clear on whether it is discussing reported, adjusted, normalized, average, or target working capital?
+- Does the output match the requested or implied page shape, such as overview, due diligence adjustments, pro forma adjustments, or a narrow note?
 - Does the section explain the basis of presentation and the categories of adjustments before walking the adjustments themselves?
 - For each material adjustment, does the commentary explain what it relates to and how it affects working capital?
+- Do the adjustment narratives stop once the balance and perimeter logic are clear, without adding generic restatement such as why the exclusion avoids distorting the analysis?
 - Where relevant, does the section explain the key working-capital drivers or days metrics without overloading the section with unnecessary operating detail?
+- If days or seasonality metrics are included, do they materially improve interpretation, and if not, has the section stayed concise?
 - If a target or peg conclusion is stated, is it clearly supported by the source basis?
 - Does the section provide enough detail for the reader to understand the working-capital bridge and its purchase-price implications without turning into a complete balance-sheet appendix?
 

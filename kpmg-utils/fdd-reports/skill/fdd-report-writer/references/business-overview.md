@@ -14,9 +14,9 @@
 
 ## Section objective
 
-The Business overview section defines the transaction perimeter and explains the current business model in terms that matter for diligence. In most cases, it starts by establishing what is being acquired and what the business does, then explains how revenue is generated and adds only the structural facts needed to understand the current model.
+The Business overview section defines the transaction perimeter and explains the current business model in a concise company-overview format. In most cases, it starts by establishing what is being acquired and what the business does, then explains how revenue is generated and adds only the structural facts needed to understand the current model.
 
-It should tell the reader what is in scope, what the business provides, how it gets paid, and any structural facts needed to interpret the business as it exists today, such as material entities, brands, channels, footprint, shared-service dependencies, recent acquisitions, reorganizations, or standalone considerations.
+It should tell the reader what is in scope, what the business provides, how it gets paid, and only the structural facts needed to interpret the business as it exists today, such as material entities, brands, channels, footprint, shared-service dependencies, recent acquisitions, reorganizations, or standalone considerations.
 
 Global writing, placeholder, and language rules are defined in `references/global-writing-conventions.md` and apply here.
 
@@ -24,7 +24,7 @@ Global writing, placeholder, and language rules are defined in `references/globa
 
 1. **Perimeter clarity comes first:** Define what is in scope and what is excluded before expanding into products, services, geographies, or structure.
 2. **Explain the economics of the model:** Describe what the business sells and how it gets paid. Avoid generic market-positioning, strategy, or management-presentation language.
-3. **Use structural detail selectively:** Include entities, brands, service lines, channels, footprint, or scale only when they help the reader understand how the business works.
+3. **Use structural detail selectively and group related facts together:** Include entities, brands, service lines, channels, footprint, or scale only when they help the reader understand how the business works, and group related points into the clearest overview shape for the reader.
 4. **Add dependencies and change context only when they matter:** Shared services, supplier or platform relationships, workforce model, regulation, recent acquisitions, closures, or reorganizations belong here only when they materially affect how the business should be read.
 5. **Keep the section focused on the current business:** This section is not a mini historical performance section or risk register. Include historical or standalone context only when it affects interpretation of the current model.
 
@@ -32,10 +32,10 @@ Global writing, placeholder, and language rules are defined in `references/globa
 
 1. **Define the perimeter and default scope:** Identify the legal entities, brands, business lines, geographies, and explicit exclusions in scope. If the user has not narrowed the request, treat the section as a full current-state business overview rather than a narrow topic note.
 2. **Explain what the business does and how it makes money:** Determine the products or services that define the business and the revenue mechanics that matter, including the core pricing logic, contract structure, or volume drivers.
-3. **Choose the section shape and preserve useful grouping:** Decide whether the section should read as a straightforward perimeter-and-model overview or whether multi-entity structure, dependencies, recent changes, or standalone issues need additional emphasis.
+3. **Choose the section shape and preserve useful grouping:** Decide whether the section should read as a straightforward company overview or whether perimeter, offering mix, dependencies, recent changes, or standalone issues need grouped emphasis.
 4. **Select only the structural facts that matter:** Add entities, business lines, channels, footprint, or scale anchors such as sites, members, customers, branches, technicians, or assets only when they make the business model easier to understand.
 5. **Add dependency, recent-change, and comparability context selectively:** Include shared services, centralized functions, supplier or platform relationships, workforce model, regulatory structure, acquisitions, restructurings, carve-outs, or standalone issues only when they materially change interpretation.
-6. **Draft the section in final reading order:** Start with the business identity and perimeter, then explain what the business does and how revenue is generated, and then add any mix, scale, dependency, recent-change, or comparability detail in the clearest order for the reader.
+6. **Draft the section in final reading order:** Start with the business identity and perimeter, then explain what the business does and how revenue is generated, and then add any mix, scale, dependency, recent-change, or comparability detail in grouped bullets or sentence clusters that are easiest for the reader to scan.
 7. **Stop when the current business model is clear:** Include enough detail for the reader to understand what is being acquired, how the business operates, and any structural facts that change interpretation without turning the section into a strategy deck or operating appendix.
 
 ## Section architecture
@@ -44,7 +44,7 @@ Scale the section based on how much perimeter, business-model, composition, and 
 
 **Verbosity:**
 
-- Stop adding detail when the reader understands what is being acquired, what the business does, how it makes money, and only the structural facts needed to interpret the current model. In most cases, aim for 4-8 bullets and roughly 180-450 words. Move above that range only when multiple entities, material dependencies, or recent changes genuinely need explanation.
+- Stop adding detail when the reader understands what is being acquired, what the business does, how it makes money, and only the structural facts needed to interpret the current model. In most cases, aim for 4-8 concise bullets and roughly 180-450 words, preferring fewer, denser bullets where related facts can be grouped cleanly. Move above that range only when multiple entities, material dependencies, or recent changes genuinely need explanation.
 
 **Required content areas:**
 
@@ -55,6 +55,8 @@ Scale the section based on how much perimeter, business-model, composition, and 
 
 **Optional content areas:**
 
+- Legal structure or perimeter context
+  - Add when ownership, holding structure, carve-outs, or transaction perimeter complexity materially affects how the Company should be understood.
 - Composition and scale
   - Add when mix, structure, or scale helps the reader understand the business model.
 - Operating structure and dependencies
@@ -70,6 +72,7 @@ Scale the section based on how much perimeter, business-model, composition, and 
 
 - Company description covering what the business does
 - Transaction perimeter details, including included entities, excluded items, and any carve-outs
+- Ownership, legal structure, or perimeter-support context when that helps explain what is being acquired
 - Revenue model details, including how the business gets paid and any key pricing or contract mechanics
 - Basic operating footprint, such as geographies, sites, branches, clinics, customers, members, or other scale anchors when relevant
 - Business composition details, such as entities, brands, service lines, channels, or customer groups, when they matter to understanding the model
@@ -81,6 +84,7 @@ Scale the section based on how much perimeter, business-model, composition, and 
 
 - Treat perimeter, business model, and revenue mechanics as the core inputs. These should usually appear even in a short section.
 - Add entities, service lines, channels, locations, and scale metrics only when they help explain how the business works.
+- If ownership, legal structure, or perimeter complexity materially affects how the Company should be understood, surface that context early or group it into a clearly signposted supporting block.
 - Dependencies, recent changes, and comparability points should be added selectively, not by default.
 - Keep the commentary aligned to the evidence the user provided; do not invent commercial positioning, market claims, or unsupported operating detail.
 - If source information is thin, keep the section concise rather than padding it with generic commentary.
@@ -88,14 +92,15 @@ Scale the section based on how much perimeter, business-model, composition, and 
 
 **Formatting principle:**
 
-- Default to standard bullets. Add a short lead-in line or in-section subheader only when it helps the reader scan grouped content, such as service lines, entities, brands, or product categories.
-- Keep bullets in a natural report-writing voice rather than a training or instructional voice.
+- Default to concise company-overview bullets. Group related facts together where that improves readability, and keep each bullet focused on one business idea or one closely related set of facts.
+- Add a short lead-in line or in-section subheader only when it helps the reader scan grouped content, such as service lines, entities, brands, product categories, or perimeter context.
+- Keep bullets in a natural report-writing voice rather than sounding like training notes or a fact dump.
 
 ## Typical content areas
 
 Use these as the main building blocks for the section. Choose only the content areas the draft actually needs.
 
-The standard pattern is a short opening on the company and perimeter, followed by how the business works and how it generates revenue, with mix, scale, dependency, recent-change, or comparability points added only where needed.
+The standard pattern is a short opening on the company and perimeter, followed by a company overview of what the business provides and how it generates revenue, with mix, scale, dependency, recent-change, or comparability points added only where needed.
 
 ### Company identity and perimeter
 
@@ -103,9 +108,16 @@ The standard pattern is a short opening on the company and perimeter, followed b
 - Keep this tight and factual.
 - Sample wording: `Northfield Care Group provides outpatient primary care and diagnostic services across Ontario and Quebec through a regional clinic network. The transaction perimeter includes clinic and laboratory operations and excludes a separately owned real estate holdco and one non-core pharmacy JV.`
 
-### What the business does
+### Legal structure or perimeter context
 
-- Explain the products or services the business provides in plain language.
+- Use when ownership, holding structure, carve-outs, or transaction perimeter complexity materially affects how the Company should be understood.
+- Keep the point factual and scoped to what helps the reader understand the perimeter.
+- Sample wording: `The transaction perimeter includes the operating payments entity and excludes seller-owned service affiliates and non-core holdco interests outside the proposed acquisition boundary.`
+
+### Company overview / offerings
+
+- Explain the main products, services, or offerings in plain language.
+- Group related offerings together where that helps the reader understand the business model.
 - Focus on the operating model rather than broad strategy or market positioning.
 - Sample wording: `The Company delivers physician-led consultations, diagnostic testing, and ancillary care through community clinic sites and affiliated labs.`
 
@@ -129,7 +141,7 @@ The standard pattern is a short opening on the company and perimeter, followed b
 ### Dependencies and operating structure
 
 - Use when: shared services, supplier reliance, platform dependence, workforce model, or regulation materially shapes how the business operates.
-- Skip when: the point is only a generic risk statement rather than an explanation of how the business works.
+- Skip when: the point is only a generic risk statement rather than a factual explanation of how the business currently operates.
 - Sample wording: `Centralized scheduling, billing, and physician recruitment support all regions, which improves operating consistency but concentrates execution dependence in the corporate platform.`
 
 ### Recent changes
@@ -150,8 +162,8 @@ The standard pattern is a short opening on the company and perimeter, followed b
 2. Explain what the business does in terms of offerings and revenue mechanics, not abstract strategy.
 3. Use customer, channel, and geography detail only when it helps explain how the business gets paid or how the model is structured.
 4. Use scale anchors only when they make the business model more concrete.
-5. Keep one business idea per bullet or sentence cluster.
-6. Default to standard bullets. Use in-section subheaders or labeled bullets only when they make grouped content easier to scan.
+5. Keep one business idea per bullet or one closely related cluster of facts where grouping improves readability.
+6. Default to concise grouped bullets. Use in-section subheaders or labeled bullets only when they make grouped content easier to scan.
 7. Keep historical or forward-looking context only when it helps interpret the current business model.
 8. Avoid drifting into historical performance commentary, margin analysis, or deal recommendation language.
 9. Avoid generic strategy, market-positioning, or management-presentation phrasing.
@@ -161,9 +173,10 @@ The standard pattern is a short opening on the company and perimeter, followed b
 **Verification questions:**
 
 - Is it clear what is being acquired and what is excluded from the transaction perimeter?
+- Where legal structure or ownership context matters, is that perimeter support included clearly and proportionately?
 - Does the section explain what the business does and how it makes money?
 - Are mix, scale, dependencies, recent changes, or comparability points included only when they help the reader understand the current business model?
-- Is the section written as clear, scan-friendly bullets without drifting into historical performance, market-positioning, or generic risk commentary?
+- Does the section read like a concise company overview, with grouped perimeter, offering, and revenue-mechanics content rather than a list of disconnected facts?
 - Where relevant information is missing, does the draft use inline placeholders in square brackets rather than open questions or vague filler?
 
 ## Full examples
@@ -177,8 +190,7 @@ These examples show content flow, not required headings or exact bullet counts.
 
 - Ridgeview Fire Protection Ltd. provides inspection, maintenance, and minor repair services for commercial fire-safety systems across Alberta and Saskatchewan.
 - The transaction perimeter includes the operating company, service fleet, and field-service assets, and excludes a separately owned property entity that holds the head office and warehouse.
-- The Company serves property managers, industrial sites, and multi-site commercial customers through recurring inspection contracts and call-out repair work.
-- Revenue is generated primarily from scheduled inspection visits billed per site or device, with additional repair revenue driven by service-call volume and replacement parts.
+- The Company serves property managers, industrial sites, and multi-site commercial customers through recurring inspection contracts and call-out repair work, with revenue generated primarily from scheduled inspection visits billed per site or device and additional repair revenue driven by service-call volume and replacement parts.
 - As of March 31, 2025, Ridgeview employed 48 technicians from one dispatch center and serviced approximately 3,200 active customer sites.
 ```
 
@@ -189,13 +201,10 @@ These examples show content flow, not required headings or exact bullet counts.
 
 - Meridian Home Services Group operates a residential plumbing, HVAC, and electrical services platform across the US Southeast through a portfolio of local service brands.
 - The transaction perimeter includes 14 operating branches across three legal entities and excludes a seller-owned call-center entity and two non-core real estate entities.
-- The Group provides emergency repair, replacement, and maintenance services to residential customers, with additional revenue from equipment installation and membership plans.
-- Revenue is generated through one-time service jobs, larger installation tickets, and recurring membership fees that support repeat demand and dispatch efficiency.
-- HVAC represented approximately 48% of FY24 revenue, plumbing represented 31%, and electrical represented 21%, with installation-heavy HVAC work carrying the highest average ticket size.
-- Membership plans represented approximately 18% of FY24 revenue and supported recurring demand across all three service lines.
+- The Group provides emergency repair, replacement, and maintenance services to residential customers, with additional revenue from equipment installation and membership plans. Revenue is generated through one-time service jobs, larger installation tickets, and recurring membership fees that support repeat demand and dispatch efficiency.
+- HVAC represented approximately 48% of FY24 revenue, plumbing represented 31%, and electrical represented 21%, with installation-heavy HVAC work carrying the highest average ticket size. Membership plans represented approximately 18% of FY24 revenue and supported recurring demand across all three service lines.
 - As of December 31, 2024, the Group operated 14 branches, employed approximately 420 field technicians, and completed more than 190,000 service calls during the year.
-- Branch-level operations are managed locally, while procurement, digital marketing, finance, and call routing are coordinated centrally by the corporate platform.
-- The current model depends on centralized lead generation, shared dispatcher workflows, and a concentrated group of equipment suppliers, each of which affects branch productivity and service mix.
+- Branch-level operations are managed locally, while procurement, digital marketing, finance, and call routing are coordinated centrally by the corporate platform. The current model also depends on centralized lead generation, shared dispatcher workflows, and a concentrated group of equipment suppliers, each of which affects branch productivity and service mix.
 - Between FY23 and FY24, the Group completed six acquisitions and closed two underperforming locations, which increased route density in core markets and shifted revenue mix toward acquired HVAC operations.
 - Management also introduced a unified financing program for larger installation jobs in FY24, increasing conversion on higher-ticket replacement work.
 - Historical branch results are not fully comparable across periods because marketing, dispatch, and certain corporate payroll costs were centralized and allocated after period-end.

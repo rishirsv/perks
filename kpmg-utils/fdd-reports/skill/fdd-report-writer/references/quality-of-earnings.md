@@ -14,58 +14,72 @@
 
 ## Section objective
 
-The Quality of earnings reference supports three common tasks: rewriting existing adjustment wording, drafting new adjustment narratives from rough notes or support, and polishing already workable text. It should turn schedules, notes, and backup into quantified, active, company-specific diligence writing that explains what the item is, why it is adjusted, and how it affects earnings.
+The Quality of earnings reference supports six common tasks: rewriting existing adjustment wording, drafting new adjustment narratives, drafting `Overview`, drafting `Due diligence adjustments`, drafting `Other considerations`, and writing bridge-slide or other exhibit-sized QoE commentary.
 
-Simple add-backs can sometimes be drafted from the adjustment schedule alone when the caption clearly identifies the item, such as transaction costs, gains on disposal, or other obvious non-recurring items. More nuanced adjustments often require meeting notes, management explanations, or backup support to write a defensible narrative.
+Use this reference to turn schedules, detail tables, notes, and backup into quantified, company-specific diligence writing. Keep narrow adjustment asks narrow.
 
-The same reference also supports full quality-of-earnings sections. When the user provides a bridge, detailed notes, or enough supporting context, use the bridge and section architecture to write the full section. When the user asks for one or more adjustments only, return those adjustments cleanly without forcing the full section structure.
+- For `Overview`, default to `Basis of presentation` and `Adjustments`.
+- For `Due  diligence adjustments`, follow the referenced exhibit order and supporting tables.
+- For `Other considerations`, use consideration-style language for items that remain outside the included quality-of-earnings schedule. For bridge-slide commentary, follow the bridge sequence and displayed drivers.
+
+Simple add-backs can often be drafted from a clear schedule caption; more nuanced items usually require notes, management explanation, or backup support.
 
 Global writing, placeholder, and language rules are defined in `references/global-writing-conventions.md` and apply here.
 
 ## Core principles
 
-1. **Anchor the section to the right earnings basis:** Be clear whether the analysis starts from EBITDA, EBIT, EBT, net income, or another defined earnings metric, and carry that basis consistently through the section.
-2. **Default to the narrowest useful deliverable:** If the user asks to rewrite, draft, or polish one or more adjustments, return those adjustments cleanly rather than forcing the full quality-of-earnings section.
-3. **Keep included adjustments separate from excluded considerations:** If an item is subjective, pending, or unquantified, keep it outside the bridge and say why.
-4. **Explain each adjustment through the underlying earnings logic:** State what the item is, why it is adjusted or not adjusted, how it affects normalized earnings, and what supports that treatment.
-5. **Treat recurrence as a conclusion, not a label alone:** If an item is described as non-recurring, run-rate, recurring, or uncertain, provide the basis for that conclusion.
-6. **Keep category logic visible where it matters:** Separate management adjustments, diligence adjustments, sell-side adjustments, pro forma items, and other considerations when those distinctions improve readability or align with the source schedule.
-7. **Use the bridge as the anchor exhibit when the user asks for the full section:** Full quality-of-earnings sections are built around a reported-to-adjusted bridge or adjustment schedule, with commentary drafted beside it rather than as free-form prose.
-8. **Keep the section focused on earnings normalization:** Do not let the section drift into a full operating review, a balance-sheet section, or a generic diligence memo.
+1. **Anchor the analysis to the right earnings basis:** Be clear whether the analysis starts from EBITDA, EBIT, EBT, net income, or another defined earnings metric, and carry that basis consistently through the writing.
+2. **Match the deliverable to the request:** Return adjustment wording for narrow asks, section-level writing for `Overview`, `Due diligence adjustments`, or `Other considerations`, and exhibit commentary for bridge-slide asks.
+3. **Treat `Overview` as the main section-level starting point:** Open with the reported and adjusted earnings view the reader should focus on, then use `Basis of presentation` and `Adjustments` to frame the analysis.
+4. **Keep `Due diligence adjustments` and bridge commentary tied to exhibit order:** For detail tables or adjustment schedules, explain the referenced or labeled adjustments in exhibit order. For bridge slides, explain the key changes and drivers in the order shown.
+5. **Keep `Other considerations` distinct from included adjustments:** Use consideration-style language for subjective, assumption-driven, or unquantified items that remain outside the included quality-of-earnings schedule.
+6. **Present included adjustments as adjustments:** When identifiable diligence adjustments drive normalized earnings, make those adjustments visible as labeled adjustments or grouped adjustment categories rather than only as generic movement commentary.
+7. **Explain each adjustment or consideration through the earnings logic:** State what the item is, why it is adjusted or not adjusted, how it affects normalized earnings or the broader evaluation of the Company, and what supports that treatment.
 
 ## Analytical workflow
 
-1. **Classify the writing task first:** Identify whether the user wants to rewrite existing adjustment wording, draft new adjustment narratives from rough notes, polish already workable adjustment text, or write the full quality-of-earnings section. If the ask is ambiguous, default to the narrowest practical adjustment-writing task rather than the full section.
-2. **Match the writing mode to the source support:** If the user provides existing wording, improve it through rewrite or polish. If the user provides meeting notes, rough points, or adjustment support with no finished prose, draft fresh adjustment text from those inputs.
-3. **Review the available support and define the perimeter:** Start from the relevant adjustment wording, notes, bridge, management schedule, or support pack and identify the earnings basis, covered periods, and whether the user wants one adjustment, a grouped set, or the full section.
-4. **Assess whether the schedule is enough on its own:** If the adjustment schedule clearly identifies simple items such as transaction fees, gains on disposal, or other obvious non-recurring add-backs, draft directly from the schedule. If the treatment or rationale is not obvious, rely on notes, meeting commentary, or supporting detail before making the narrative more specific.
-5. **Separate the adjustment population:** Distinguish included adjustments from excluded considerations, and keep management, diligence, sell-side, buy-side, and pro forma layers separate where that distinction exists in the support.
-6. **Find the closest adjustment pattern:** For each adjustment, identify the closest narrative in the adjustment library and model the sentence pattern on that example before adapting it to the company-specific facts.
-7. **Draft in the right output shape:** For rewrite, return revised adjustment wording only. For draft, convert rough notes into complete adjustment narratives. For polish, preserve the logic and structure unless clarity requires a cleaner rewrite. For a full section, start with the normalized earnings movement and basis of presentation, present the bridge, then walk the main adjustments.
+1. **Classify the writing task first:** Identify whether the user wants to rewrite existing adjustment wording, draft new adjustment narratives from rough notes, polish already workable adjustment text, draft an `Overview`, draft `Due diligence adjustments`, draft `Other considerations`, or write bridge-slide commentary. If the ask is narrower or only requests one or more adjustments, keep the output narrow.
+2. **Match the writing mode to the source support:** If the user provides existing wording, improve it through rewrite or polish. If the user provides meeting notes, rough points, schedules, bridge slides, detail tables, or adjustment support with no finished prose, draft fresh text from those inputs.
+3. **Review the available support and define the perimeter:** Start from the relevant adjustment wording, notes, bridge, bridge slide, management schedule, detail table, other-considerations schedule, or support pack and identify the earnings basis, covered periods, and whether the user wants one adjustment, a named primary QoE section, or exhibit-sized commentary.
+4. **Assess whether the schedule is enough on its own:** If the adjustment schedule clearly identifies simple items such as transaction fees, gains on disposal, or other obvious non-recurring add-backs, draft directly from the schedule for adjustment-writing or exhibit-sized tasks. If the treatment or rationale is not obvious, rely on notes, meeting commentary, or supporting detail before making the narrative more specific.
+5. **Separate the adjustment population:** Distinguish included adjustments, pro forma items, excluded considerations, and other considerations, and keep management, diligence, sell-side, buy-side, and pro forma layers separate where that distinction exists in the support.
+6. **Find the closest labeled-adjustment pattern:** For each adjustment, identify the closest narrative in the adjustment library and model the sentence pattern on that example before adapting it to the company-specific facts.
+7. **Draft in the right output shape:**
+   - **For rewrite:** Return revised adjustment wording only.
+   - **For draft:** Convert rough notes, schedules, bridge slides, or support into complete adjustment narratives.
+   - **For polish:** Preserve the logic and structure unless clarity requires a cleaner rewrite.
+   - **For `Overview`:** Open with the reported and adjusted earnings view the reader should focus on, then use `Basis of presentation` and `Adjustments` as the default subsections. Use the schedule, chart, bridge, or table where they improve interpretation.
+   - **For `Due diligence adjustments`:** Keep the writing tied to the exhibit order the reader is using.
+     - **If the exhibit is a QoE detail table or adjustment schedule:** Present the referenced or labeled adjustments in the same order as the exhibit and tie each narrative to the relevant adjustment line.
+     - **If the exhibit includes supporting subtables for specific items:** Use the narrative to explain the adjustment logic and what the supporting table shows.
+   - **For `Other considerations`:** Start with the section lead-in, then present the considerations in the same order as the exhibit or schedule. Use consideration-style language for items that remain outside the included quality-of-earnings schedule because they are subjective, assumption-driven, or not yet supportable enough for inclusion.
+   - **For bridge-slide commentary:** Explain the main earnings movement and the key drivers shown in the bridge, following the sequence of the slide and tying the narrative to the displayed changes.
 8. **Keep the level of specificity supportable:** Quantify the item, use active voice, and state the rationale clearly, but do not infer unsupported facts beyond what the caption, notes, or backup can reasonably support.
-9. **Stop when the requested deliverable is complete:** Include enough detail for the reader to understand the requested adjustment wording or the normalized earnings view, but do not expand a narrow writing ask into a full support memo.
+9. **Stop when the requested deliverable is complete:** Include enough detail for the reader to understand the requested adjustment wording, exhibit commentary, or normalized earnings view, but do not expand a narrow writing ask into a full support memo.
 
 ## Section architecture
 
-Scale the output based on the requested deliverable, the complexity of the earnings basis, the number of adjustment categories, and whether unresolved or sell-side items could still change the current normalized view.
+Scale the output based on the requested deliverable, the complexity of the earnings basis, the number and type of items being discussed, and whether the reader needs an `Overview`, detailed `Due diligence adjustments`, `Other considerations`, or bridge-slide commentary.
 
 **Verbosity:**
 
-- Stop adding detail when the requested adjustment wording or normalized earnings discussion is fully interpretable. For rewrite, draft, or polish requests, this often means one paragraph per adjustment or one grouped block for a small adjustment set. For full-section requests, use one anchor bridge and then one numbered item per adjustment. Total length should scale with the number of adjustments and their complexity, but in most cases will fall around 450-1,100 words. Move above that range only when the section includes multiple adjustment categories, sell-side true-ups, or a more involved standalone-cost or pro forma discussion.
+- Stop adding detail when the requested adjustment wording, section, or exhibit commentary is fully interpretable. For rewrite, draft, or polish requests, this often means one paragraph per adjustment or one grouped block for a small adjustment set. `Overview` requests usually need one opening earnings line plus concise `Basis of presentation` and `Adjustments` subsections. `Due diligence adjustments` and `Other considerations` requests should follow exhibit order and add only as much detail as each item needs. Bridge-slide commentary should explain the main movements and drivers without turning into a full support memo. Total length should scale with the number of items and their complexity, but in most cases will fall around 450-1,100 words. Move above that range only when the section includes multiple adjustment categories, seller challenges, or a more involved standalone-cost, pro forma, or other-considerations analysis.
 
 **Required content areas:**
 
 - Requested output
-  - Return the rewritten, drafted, or polished adjustment wording the user asked for, or the full section when the user explicitly asks for it.
-- Earnings basis and treatment logic
-  - State the relevant earnings basis and explain the treatment of the adjustment items included in the draft.
-- Quantified adjustment commentary
-  - Explain the adjustments in quantified, company-specific language supported by the available facts.
+  - Return the rewritten, drafted, or polished adjustment wording the user asked for, or the requested QoE section or exhibit when the user explicitly asks for it.
+- Overview framing
+  - For `Overview`, state the relevant earnings basis, the adjusted view the reader should focus on, and the basis-of-presentation or adjustment framing needed to understand the analysis.
+- Item-level commentary
+  - For `Due diligence adjustments`, `Other considerations`, or adjustment-only asks, explain the items in quantified, company-specific language supported by the available facts.
 
 **Optional content areas:**
 
-- Basis of presentation and bridge
-  - Add when the user asks for the full quality-of-earnings section or a bridge-led exhibit.
+- Basis of presentation and adjustment definitions
+  - Add when the user asks for `Overview` and the reader needs a clear explanation of the periods shown, the source set, and the types of adjustments being presented.
+- Bridge, detail table, or schedule
+  - Add when the requested section or exhibit is supported by a bridge slide, QoE detail table, or adjustment schedule and the reader benefits from seeing that structure.
 - Adjustment category lead-ins
   - Add when management, diligence, sell-side, pro forma, or other groupings improve readability or match the schedule.
 - Sell-side or prior-analysis comparison
@@ -74,6 +88,8 @@ Scale the output based on the requested deliverable, the complexity of the earni
   - Add when shared services, owner support, or group allocations require a normalized standalone cost view.
 - Excluded or not-included items
   - Add when unresolved or unquantified items still matter to the earnings view.
+- Other considerations lead-in and support
+  - Add when subjective, assumption-driven, or unquantified items should be presented outside the included quality-of-earnings schedule.
 - Key sensitivities
   - Add when an assumption or pending item could still change adjusted earnings.
 
@@ -84,24 +100,31 @@ Scale the output based on the requested deliverable, the complexity of the earni
 - Existing adjustment wording where the user wants rewrite or polish support
 - Meeting notes, rough notes, management explanations, or talking points where the user wants fresh drafting support
 - The reported-to-adjusted earnings bridge or management adjustment schedule for the relevant periods
+- Bridge slides or movement exhibits where relevant
+- QoE detail tables, adjustment schedules, and referenced exhibits where relevant
+- Other considerations schedules or potential-impact tables where relevant
 - The reported earnings metric and any definitional bridge support where relevant
 - Trial balances, GL detail, and support for the adjustment items
 - Payroll, invoice, contract, headcount, facility, or policy support where relevant
 - Management, sell-side, buy-side, or other diligence adjustment schedules where relevant
 - Support for standalone costs, replacement costs, or pro forma adjustments where relevant
-- Details of unresolved, unquantified, or excluded items where relevant
+- Details of unresolved, unquantified, excluded, or other-consideration items where relevant
 
 **Data mapping considerations:**
 
 - If the user provides existing adjustment wording, preserve the underlying logic unless the text is unclear, unsupported, or structurally weak.
 - If the user provides rough notes, convert them into complete adjustment narratives using the closest example pattern from the library.
-- Use the bridge or adjustment schedule as the primary quantitative anchor when it is part of the requested deliverable.
+- If the request is `Overview`, synthesize the opening earnings view first and then add `Basis of presentation` and `Adjustments` framing where it helps the reader understand the analysis.
+- If the request is `Due diligence adjustments`, follow the exhibit order and tie each narrative to the referenced or labeled adjustment.
+- If the request is `Other considerations`, keep the items outside the included quality-of-earnings schedule and explain why they remain considerations rather than included adjustments.
+- If the request is bridge-slide commentary, follow the bridge order and explain the key movements and drivers in the same sequence as the exhibit.
+- Use the bridge, detail table, or adjustment schedule as the primary quantitative anchor when it is central to the requested deliverable, but keep `Overview` reading like a section rather than a bridge walkthrough.
 - Keep the bridge categories visible when the source analysis uses them, such as management, diligence, sell-side, buy-side, or pro forma adjustments.
 - Quantify the adjustment and explain what it relates to when that improves understanding of the earnings treatment.
 - If the schedule alone clearly identifies a simple add-back, draft directly from the caption and quantify it without inventing extra support. For example, a clearly labeled transaction-fee, gain-on-sale, or other obvious non-recurring item can often be written from the schedule itself.
 - If the adjustment rationale is not obvious from the schedule, rely on notes, management commentary, or backup support before making the narrative more specific.
-- Distinguish clearly between included bridge items and earnings-relevant considerations that remain outside the bridge.
-- If the user has already provided the bridge or exhibit, write the commentary to sit beside it rather than recreating it unless requested.
+- Distinguish clearly between included schedule items and earnings-relevant considerations that remain outside the included quality-of-earnings schedule.
+- If the user has already provided the bridge, detail table, or exhibit, write the commentary to sit beside it for exhibit-sized requests, and integrate it into the section flow for section-level requests unless the user asks to recreate the exhibit.
 - If the request is narrower than a full section, return only the requested adjustment prose or grouped adjustment block.
 - If source information is thin, keep the section concise and stay close to the supported adjustments.
 - If a relevant adjustment point matters but support is incomplete, use an inline placeholder in square brackets rather than vague filler. Example: `Warranty-related costs of [...] remain outside adjusted EBITDA pending support for [...]`
@@ -109,16 +132,20 @@ Scale the output based on the requested deliverable, the complexity of the earni
 **Formatting principle:**
 
 - For rewrite, draft, or polish requests, return the requested adjustment wording directly without adding unasked-for section scaffolding.
-- Use a short overview followed by a basis-of-presentation note, the bridge, and then adjustment commentary aligned to the bridge for full-section requests.
+- For `Overview`, use `Overview` as the primary section and `Basis of presentation` and `Adjustments` as the default subsections when that structure helps the reader.
+- For `Due diligence adjustments`, follow the exhibit order and tie each narrative to the referenced or labeled adjustment.
+- For bridge-slide commentary, explain the main movements and drivers in the same order as the bridge.
+- For `Other considerations`, use the section lead-in followed by consideration-style item commentary and supporting tables where helpful.
 - When the source analysis uses adjustment categories, state them explicitly in the same plain-language style as the source, such as `Management adjustments`, `Diligence adjustments`, `Sell-side adjustments`, or `Pro forma adjustments`.
-- When discussing a bridge line or adjustment that maps directly to the schedule, use the schedule label followed by a colon in bold, then explain what it relates to and how it affects normalized earnings.
+- When discussing a bridge line, schedule line, or referenced item that maps directly to the exhibit, use the label followed by a colon in bold, then explain what it relates to and how it affects normalized earnings or the broader evaluation of the Company.
+- For section-level requests, let the section shape and labeled items carry the analysis, and use the bridge, detail table, or schedule to support the section rather than replace it.
 - For narrower adjustment-only requests, use the closest adjustment narrative pattern directly and skip the broader section scaffolding.
 
 ## Typical content areas
 
 Use these as the main building blocks for the section. Choose only the content areas the draft actually needs.
 
-The most common pattern is one or more rewritten, drafted, or polished adjustment narratives. The full-section pattern is an overview of the reported and adjusted earnings position, followed by basis-of-presentation commentary, the bridge, and then the main earnings adjustments, with excluded items and sensitivities added only where they improve interpretation.
+The main QoE package usually comprises an `Overview` section, a `Due diligence adjustments` section, and, where relevant, `Bridge slide commentary` and `Other considerations`. Adjustment-only asks remain narrower and should not force the broader package.
 
 ### Adjustment rewrite or polish
 
@@ -178,28 +205,39 @@ Response:
 **Severance and restructuring:** Severance costs of [$0.6 million] in Q3 FY24 relate to the closure of two branches and the termination of 14 employees. The adjustment excludes these costs from EBITDA because they relate to a specific restructuring event and do not continue into FY25.
 ```
 
-### Opening normalized earnings line
+### Overview
+
+- Use when the user asks for the main QoE overview page or a section-level overview of reported and adjusted earnings.
+- Default structure: opening earnings view, `Basis of presentation`, and `Adjustments`.
+
+#### Opening earnings line
 
 - Start with one line that states the reported earnings basis and the adjusted view the reader should focus on.
-- Sample wording: `Reported EBITDA of [$24.8 million] for TTM Dec-24 adjusts to [$27.7 million] after net adjustments of [$2.9 million], primarily reflecting owner compensation normalization, non-recurring transaction costs, and supportable run-rate facility savings.`
+- Sample wording: `TTM Jun-24 reported EBITDA of [$22.3 million] decreases to [$22.0 million] after due diligence and pro forma adjustments.`
 
-### Basis of presentation
+#### Basis of presentation
 
-- Use a short note to explain the periods shown, the source set, and how the adjustments are grouped.
-- Sample wording: `The quality-of-earnings bridge summarizes reported and adjusted EBITDA for FY22, FY23, FY24, and TTM Dec-24. Adjustments are grouped as management, diligence, and pro forma items based on the source schedules used in the analysis.`
+- Use a short subsection to explain the periods shown, the source set, and the adjustment types being considered.
+- Sample wording: `The adjacent Quality of Earnings schedule illustrates due diligence and pro forma adjustments and other factors to be considered for FY21, FY22, FY23, TTM Apr-24, and TTM Jun-24. The proposed adjustments are not all-inclusive and are based on Management-provided information.`
 
-### Adjustment category lead-ins
+#### Adjustments
 
-- Use when the bridge or narrative separates the adjustments into clear groups.
-- Keep the grouping labels in the same plain language used in the schedule.
-- Sample wording: `**Management adjustments:** Adjustments identified by Management and included in the normalized earnings bridge.`
-- Sample wording: `**Diligence adjustments:** Incremental adjustments identified through diligence to reflect the underlying earnings of the business.`
-- Sample wording: `**Pro forma adjustments:** Adjustments to reflect supportable run-rate changes linked to the expected go-forward cost base.`
-- Sample wording: `**Sell-side adjustments:** Adjustments included in the seller's analysis and carried into the buy-side normalization where the support and recurrence basis align with the current earnings view.`
+- Use this subsection to define the key types of items presented in the analysis.
+- Keep the labels in the same plain language used in the schedule.
+- Sample wording: `**EBITDA, reported:** Represents the reported earnings basis before due diligence and pro forma adjustments.`
+- Sample wording: `**Due diligence adjustments:** Incremental adjustments identified through diligence to normalize earnings for non-recurring or non-operating items.`
+- Sample wording: `**Pro forma adjustments:** Indicative run-rate adjustments to reflect changes in the business operations that may affect revenue and EBITDA accordingly.`
+- Sample wording: `**Other considerations:** Potential quality-of-earnings matters identified during diligence that remain outside the quality-of-earnings schedule because they are subjective, assumption-driven, or not yet quantified.`
 
-### Adjustment narratives
+### Due diligence adjustments
 
-- This is the core of the section. Explain each adjustment in the same order it appears in the bridge, using the bridge label in bold followed by a concise narrative.
+- Use when the user asks for detailed adjustment commentary or a due diligence adjustments page.
+- Present the referenced or labeled adjustments in the same order as the exhibit and explain the treatment of each included item.
+- Where supporting subtables exist, use them to explain the quantified adjustment and the source of the data.
+
+#### Adjustment narratives
+
+- This is the core of the due diligence adjustments section. Explain each adjustment in the same order it appears in the exhibit, using the referenced label or adjustment label in bold followed by a concise narrative.
 - Sample wording: `**Owner compensation normalization:** Reported payroll includes compensation levels above the expected go-forward management structure. The adjustment replaces those amounts with a normalized market-based cost, increasing adjusted EBITDA by [$x.x million].`
 - Use a shorter form when the caption, treatment, and rationale are obvious from the schedule, such as simple non-recurring professional fees or a clearly labeled gain on disposal. In these cases, two to three sentences are often enough.
 - Use a fuller form when the item needs more context, such as sell-side reversals, pro forma savings, standalone costs, deal-specific fact patterns, accounting-policy corrections, or adjustments that depend on notes rather than the schedule alone. In these cases, use enough detail to explain the fact pattern, treatment, support, and any key assumption or limitation.
@@ -252,7 +290,7 @@ Structure deal-specific adjustments in this order:
 
 1. Name the specific fact pattern or business event.
 2. Explain why it affects historical or go-forward earnings.
-3. State whether the item is included in the bridge, excluded from the bridge, or presented as a sensitivity only.
+3. State whether the item is included in the quality-of-earnings schedule, presented in Other considerations, or shown as a sensitivity only.
 4. Quantify the impact and period where support allows.
 5. State the support, assumption set, or limitation that governs the treatment.
 
@@ -263,33 +301,53 @@ Common deal-specific structures include:
 - `**Deal-model or separation adjustment:** This adjustment reflects a specific post-transaction operating model, such as a long-term partnership agreement, outsourced channel, TSAs, standalone bank or broker costs, or a renegotiated supplier / processor agreement. The commentary contrasts the historical model with the go-forward model and explains the basis for using a run-rate or sensitivity approach.`
 - `**Calendar or event-specific adjustment:** This adjustment reflects a one-time timing distortion tied to a week-53 period, special trading window, short period, or other unusual calendar event. The commentary explains why the period is not comparable and how the normalization was quantified.`
 
+### Bridge slide commentary
+
+- Use when the user asks for EBITDA bridge, EBITDA margin bridge, or other period-to-period movement commentary.
+- Explain the movement and the key drivers in the same order as the bridge.
+- Tie the narrative to the displayed changes, focusing on the main revenue, margin, cost, or mix drivers rather than restating every bridge label mechanically.
+- Sample wording: `**FY21 to FY22 adjusted EBITDA:** Adjusted EBITDA increased from [$14.2 million] to [$16.6 million], primarily reflecting higher revenue and gross profit, partly offset by increases in variable expenses, compensation, and software-related operating costs.`
+
+### Other considerations
+
+- Use when the analysis identifies potential QoE matters that may be considered in the overall evaluation of the Company but are too subjective or insufficiently quantified for inclusion in the quality-of-earnings schedule.
+- Start with the following lead-in when the user asks for an `Other considerations` section or exhibit:
+  `The following includes potential quality of earnings considerations identified during diligence. These items relate to other matters that may be considered in the overall evaluation of the Company. Given the subjective nature of these assumptions, they have not been included in the quality of earnings schedule.`
+- Present the considerations in the same order as the exhibit and use supporting tables where they help explain the potential impact.
+- Use consideration-style wording such as `This consideration presents ...`, `Management indicates ...`, `Potential impact ...`, or `The item has not been included in the quality-of-earnings schedule because ...`.
+- When adapting an adjustment-style item into an other consideration, keep the factual explanation and quantified reference point where available, but shift the conclusion from an included adjustment to a potential consideration.
+- Sample wording: `**Cash rent expense:** The Company recognizes rent expense under IFRS 16 through depreciation and interest. This consideration presents the monthly cash rent expense to provide an alternative view of operating rent expense. Given the subjective nature of the treatment, the item has not been included in the quality-of-earnings schedule.`
+
 ### Supporting notes
 
-- Add these only when they improve the reader's interpretation of the bridge.
-- `Sell-side or prior-analysis note:` Use a short note when the analysis starts from seller-prepared work and the reader needs to know what was retained, changed, or challenged. Sample wording: `**Sell-side adjustments:** The seller-prepared bridge was used as the starting point for the analysis, with changes made where recurrence, support, or standalone assumptions did not appear supportable.`
-- `Excluded or not-included items:` Use a short note when an earnings-relevant item should be flagged but not included in adjusted EBITDA. Sample wording: `**Warranty provision:** The potential impact of the warranty reserve remains outside the adjusted EBITDA bridge pending support for the underlying claims history and reserve methodology.`
+- Add these only when they improve the reader's interpretation of the section or exhibit.
+- `Sell-side or prior-analysis note:` Use a short note when the analysis starts from seller-prepared work and the reader needs to know what was retained, changed, or challenged. Sample wording: `**Sell-side adjustments:** The seller-prepared schedule was used as the starting point for the analysis, with changes made where recurrence, support, or standalone assumptions did not appear supportable.`
+- `Excluded or not-included items:` Use a short note when an earnings-relevant item should be flagged but not included in adjusted EBITDA. Sample wording: `**Warranty provision:** The potential impact of the warranty reserve remains outside the quality-of-earnings schedule pending support for the underlying claims history and reserve methodology.`
 - `Key sensitivities:` Use a short note when an assumption or pending item could still move adjusted earnings. Sample wording: `**Facility savings timing:** Adjusted EBITDA remains sensitive to the implementation timing of the facility consolidation, where a three-month delay would reduce the current run-rate benefit by approximately [$x].`
 
 ## Section-specific writing guidance
 
-1. Use the earnings bridge as the structural anchor and keep the commentary aligned to the way the bridge is presented.
-2. For narrower asks, return the rewritten, drafted, or polished adjustment wording directly rather than turning the response into a mini section.
-3. State the basis of presentation and the categories of adjustment clearly before walking the adjustments themselves when the user asks for the full section.
-4. Explain each adjustment through the underlying item, the treatment, the recurrence conclusion, and the effect on normalized earnings.
-5. Where an adjustment type has a close analogue in the adjustment narrative library, follow that sentence pattern and adapt it to the company-specific facts rather than inventing a new structure.
-6. Use supporting notes for sell-side changes, excluded items, or sensitivities only when they improve the section.
+1. For `Overview`, start with the earnings view the reader should focus on and use `Basis of presentation` and `Adjustments` as the default subsections when that structure helps.
+2. For `Due diligence adjustments`, follow the exhibit order and tie each narrative to the referenced or labeled adjustment.
+3. For bridge-slide commentary, explain the main movements and key drivers in the same order as the bridge.
+4. For `Other considerations`, use the lead-in and keep consideration-style language for subjective or unquantified items that stay outside the included quality-of-earnings schedule.
+5. For narrower asks, return the rewritten, drafted, or polished adjustment wording directly rather than turning the response into a broader section.
+6. Explain each adjustment or consideration through the underlying item, the treatment or potential impact, and the supporting evidence.
+7. Where an adjustment type has a close analogue in the adjustment narrative library, follow that sentence pattern and adapt it to the company-specific facts rather than inventing a new structure.
+8. Use supporting notes for sell-side changes, excluded items, sensitivities, or cross-references only when they improve the section or exhibit.
 
 ## Verification and review checks
 
 **Verification questions:**
 
-- Is the section clear on the reported earnings basis and the adjusted earnings view being presented?
+- If the user asked for `Overview`, does the output read like an overview with `Basis of presentation` and `Adjustments` subsections?
+- If the user asked for `Due diligence adjustments`, are the referenced or labeled adjustments explained in exhibit order?
+- If the user asked for bridge-slide commentary, are the main movements and key drivers explained in bridge order?
+- If the user asked for `Other considerations`, are the items clearly framed as considerations outside the quality-of-earnings schedule because they are subjective, assumption-driven, or not yet quantified?
 - If the user asked for rewrite, draft, or polish only, does the response stay at that narrower adjustment-writing level?
-- Does the section explain the basis of presentation and the categories of adjustment before walking the main adjustments?
-- For each adjustment, does the commentary explain what it relates to, why it is included or excluded, and how it affects normalized earnings?
-- Where recurrence is described, is the rationale for that conclusion visible in the narrative?
-- If excluded items or sensitivities are flagged, are they clearly kept outside the bridge and described without unsupported certainty?
-- Does the section provide enough detail for the reader to understand the quality-of-earnings bridge and its main conclusions without turning into a full support memo?
+- For each adjustment or consideration, does the commentary explain what it relates to, why it matters, and the effect or potential impact supported by the available facts?
+- If excluded items or sensitivities are flagged, are they clearly separated from the included quality-of-earnings schedule and described without unsupported certainty?
+- Does the section or exhibit provide enough detail for the reader to understand the requested deliverable without turning into a full support memo?
 
 ## Full examples
 
@@ -319,41 +377,57 @@ Draft this adjustment from notes:
 **Payroll accrual normalization:** FY24 reported EBITDA understated payroll expense by [$0.2 million] because the final December pay cycle was recorded through a year-end catch-up entry rather than accrued in the service period. The adjustment reallocates the expense to FY24 so that adjusted EBITDA reflects the underlying payroll run-rate. Management corrected the close process in FY25, so the FY24 catch-up does not recur.
 ```
 
-### Example 3: Full quality-of-earnings section
+### Example 3: Quality of earnings - Overview
 
 ```markdown
-## Quality of earnings
+## Quality of earnings - Overview
 
-- Reported EBITDA of [$24.8 million] for TTM Dec-24 adjusts to [$27.7 million] after net adjustments of [$2.9 million], primarily reflecting owner compensation normalization, removal of one-time transaction costs, and supportable run-rate facility savings.
+TTM Jun-24 reported EBITDA of [$22.3 million] decreases to [$22.0 million] after due diligence and pro forma adjustments.
 
-Basis of presentation
-The quality-of-earnings bridge summarizes reported and adjusted EBITDA for FY22, FY23, FY24, and TTM Dec-24.
-Adjustments are grouped as follows:
-**Management adjustments:** Adjustments identified by Management and included in the normalized earnings bridge.
-**Diligence adjustments:** Incremental adjustments identified through diligence to reflect the underlying earnings of the business.
-**Pro forma adjustments:** Adjustments to reflect supportable run-rate changes linked to the expected go-forward cost base.
+### Basis of presentation
 
-Source note: Management adjustment schedules, trial balances, payroll detail, invoices, and executed contracts.
+The adjacent Quality of Earnings schedule illustrates due diligence and pro forma adjustments and other factors to be considered for FY21, FY22, FY23, TTM Apr-24, and TTM Jun-24. The proposed adjustments are not all-inclusive and are based on Management-provided information.
 
-| Line item              |     FY22 |     FY23 |     FY24 | TTM Dec-24 |
-| ---------------------- | -------: | -------: | -------: | ---------: |
-| Reported EBITDA        |     18.6 |     22.4 |     24.1 |       24.8 |
-| Management adjustments |      1.1 |      1.6 |      2.8 |        2.9 |
-| Diligence adjustments  |    (0.8) |    (0.2) |    (0.5) |      (0.5) |
-| Pro forma adjustments  |    (0.7) |    (0.4) |      0.3 |        0.5 |
-| **Adjusted EBITDA**    | **18.2** | **23.4** | **26.7** |   **27.7** |
+### Adjustments
 
-Quality-of-earnings adjustments
+- **EBITDA, reported:** Represents the reported earnings basis before due diligence and pro forma adjustments.
+- **Due diligence adjustments:** Incremental adjustments identified through diligence to normalize earnings for non-recurring or non-operating items.
+- **Pro forma adjustments:** Indicative run-rate adjustments to reflect changes in the business operations that may affect revenue and EBITDA accordingly.
+- **Other considerations:** Potential quality-of-earnings matters identified during diligence that remain outside the quality-of-earnings schedule because they are subjective, assumption-driven, or not yet quantified.
+```
 
-1. **Owner compensation normalization:** Reported payroll includes compensation levels above the expected go-forward management structure. The adjustment replaces those amounts with agreed post-close compensation levels, increasing adjusted EBITDA by [$1.2 million] in FY24 and TTM Dec-24. Payroll detail and the agreed management structure indicate the revised cost base is run-rate.
-2. **Non-recurring transaction costs:** Legal, advisory, and diligence costs of [$1.6 million] in FY24 relate to the current transaction process. The adjustment excludes these costs from adjusted EBITDA, increasing EBITDA by [$1.6 million]. Invoice detail and GL coding show the costs relate to the transaction process.
-3. **Audit fee reversal:** A management-proposed add-back for annual audit fees of [$0.7 million] has been reversed because the cost recurs as part of the normal reporting environment of the business. The adjustment decreases adjusted EBITDA by [$0.7 million]. Historical invoices and the ongoing annual audit requirement show the cost is recurring.
-4. **Revenue cut-off normalization:** Revenue of [$0.3 million] was recorded in the wrong period in FY23. The adjustment reallocates the amount to the period in which the related services were delivered, improving comparability across periods without creating a new run-rate earnings benefit.
-5. **Payroll accrual normalization:** Payroll expense of [$0.2 million] in FY24 has been adjusted to reflect the payroll cycle and the period in which services were performed rather than the timing of the correcting accrual. The close process was corrected in subsequent periods, so the FY24 catch-up does not recur.
-6. **Run-rate facility savings:** Adjusted EBITDA includes a run-rate benefit of [$0.8 million] in FY24 and [$1.0 million] in TTM Dec-24 to reflect the impact of an executed facility consolidation as if it had been in place throughout the period. The support includes executed lease exits and implemented operating changes.
-7. **Standalone IT cost:** Historical periods reflected partial support from group resources. The adjustment records a normalized managed-services cost of [$0.5 million] in FY24 and TTM Dec-24 based on the signed go-forward support contract, reducing adjusted EBITDA by the same amount.
+### Example 4: Quality of earnings - Due diligence adjustments
 
-**Warranty provision:** The potential impact of the warranty reserve remains outside the adjusted EBITDA bridge pending support for the underlying claims history and reserve methodology.
+```markdown
+## Quality of earnings - Due diligence adjustments
 
-**Facility savings timing:** Adjusted EBITDA remains sensitive to the implementation timing of the facility consolidation, where a three-month delay would reduce the current run-rate benefit by approximately [$0.3 million].
+**Mobile POS IFRS 15:** Pursuant to IFRS 15, revenue from transaction-processing contracts with variable consideration is recognized based on the estimated number of transactions expected to be completed relative to total expected transaction volume over the contract period. Updating the estimate using average tiered pricing for the non-cancellable contract period and applying this to actual volume results in a reduction of revenue and EBITDA of [$2.4 million] in TTM Jun-24.
+
+**Settlement interest income:** The Company facilitates settlement funds for automated teller machine and point-of-sale devices. Interest income earned on settlement cash balances, although recorded within operating results, is excluded from EBITDA for quality-of-earnings purposes. This adjustment removes [$1.1 million] in TTM Jun-24.
+```
+
+### Example 5: Bridge slide commentary
+
+```markdown
+## Key findings - Adjusted EBITDA margin bridge
+
+**FY21 to FY22 adjusted EBITDA:** Adjusted EBITDA increased from [$14.2 million] to [$16.6 million], primarily reflecting higher revenue and gross profit. The increase was partly offset by higher variable expenses, compensation, and software-related operating costs.
+
+**FY22 to FY23 adjusted EBITDA:** Adjusted EBITDA increased from [$16.6 million] to [$20.0 million], driven by growth in processing services revenue and other revenue. The increase was partly offset by higher variable expenses, compensation, equipment and software expense, and other operating costs.
+
+**FY23 to TTM Jun-24 adjusted EBITDA:** Adjusted EBITDA increased from [$20.0 million] to [$22.0 million], primarily reflecting higher revenue from increased volume and related operating leverage. The increase was partly offset by higher variable expenses and other operating costs.
+```
+
+### Example 6: Other considerations
+
+```markdown
+## Quality of earnings - Other considerations
+
+The following includes potential quality of earnings considerations identified during diligence. These items relate to other matters that may be considered in the overall evaluation of the Company. Given the subjective nature of these assumptions, they have not been included in the quality of earnings schedule.
+
+**Cash rent expense:** The Company recognizes rent expense under IFRS 16 through depreciation and interest. This consideration presents the monthly cash rent expense to provide an alternative view of operating rent expense. Given the subjective nature of the treatment, the item has not been included in the quality-of-earnings schedule.
+
+**Issuer interchange fees:** Issuer interchange fees represent a new revenue stream earned as processing fees are generated on co-badged debit cards. This consideration presents the historical revenue associated with the product. Given the recent launch and the limited operating history, no run-rate adjustment has been included in the quality-of-earnings schedule.
+
+**Call center employees:** Management plans to increase full-time call center staffing as recruitment shifts away from part-time contractors. This consideration highlights the potential future payroll effect; however, the resulting cost savings and payroll impacts were not fully quantified and have not been included in the quality-of-earnings schedule.
 ```

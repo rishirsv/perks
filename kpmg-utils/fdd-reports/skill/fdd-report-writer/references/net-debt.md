@@ -14,31 +14,31 @@
 
 ## Section objective
 
-The Net debt and debt-like items section explains the purchase-price-relevant indebtedness position as at a clearly stated date. In most cases, it starts with the reported net debt or net cash schedule, explains the main definitional components of that position, and then brings in the additional reclasses, debt-like items, cash-like items, and other considerations that matter to the closing analysis.
+The Net debt and debt-like items section explains the purchase-price-relevant indebtedness position as at a clearly stated date. It supports both section-level net debt writeups and exhibit-sized schedule commentary.
 
-It should explain what the reported position is, what sits inside the major balances, what has been reclassified from net working capital or elsewhere, and which items may still need to be considered at closing. This section operates similarly to the balance sheet section, but with greater focus on net debt, cash availability, and purchase-price mechanics.
+In most cases, it starts with the reported net debt or net cash schedule, explains the main definitional components of that position, and then brings in the additional reclasses, debt-like items, cash-like items, and other closing considerations that matter to the purchase-price analysis.
 
 Global writing, placeholder, and language rules are defined in `references/global-writing-conventions.md` and apply here.
 
 ## Core principles
 
 1. **Anchor everything to one date:** Write the section as at a clearly stated balance-sheet or closing reference date.
-2. **Start from the reported schedule:** Net debt commentary should sit beside a dated schedule or components list rather than being drafted as free-form prose.
+2. **Start from the reported schedule:** Net debt commentary should sit beside a dated schedule, bridge, or components list rather than being drafted as free-form prose.
 3. **Separate reported components from additional considerations:** First explain the balances included in reported net debt or net cash, then explain the reclasses, debt-like items, cash-like items, or other considerations that sit beyond the reported definition.
-4. **Define cash carefully:** Explain what is included in cash and what is excluded when settlement balances, trust cash, restricted cash, trapped cash, or similar balances are present.
-5. **Explain classification through the balance itself:** Describe what the balance relates to, how it arises, and why it matters at closing, rather than repeatedly using formulaic language such as `this is debt-like because...`.
+4. **Define cash carefully:** Explain what is included in cash and what is excluded when settlement balances, trust cash, restricted cash, trapped cash, or similar balances are present. Where both total cash and available cash are provided, reconcile that sequence explicitly.
+5. **Explain classification through the balance itself:** Lead with what the balance represents and its closing relevance, rather than relying on repetitive formulaic language.
 6. **Bring in useful balance detail selectively:** For material debt, lease, tax, acquisition, or other obligations, include the key detail the reader needs to understand the item, such as facility type, counterparty, settlement mechanics, or what the balance pertains to.
 7. **Keep the section focused on purchase-price mechanics:** Do not turn the section into a lender memo, tax memo, covenant summary, or general negotiation list.
 
 ## Analytical workflow
 
-1. **Confirm the reference date and default scope:** Identify the `as at [Date]` point used for the net debt schedule and whether the section is discussing reported net debt, adjusted net debt, reported net cash, or adjusted net cash. If the user has not narrowed the request, treat the section as a full net debt walkthrough.
+1. **Confirm the reference date and default scope:** Identify the `as at [Date]` point used for the net debt schedule and whether the section is discussing reported net debt, adjusted net debt, reported net cash, or adjusted net cash. If the user asks for an exhibit narrative, schedule commentary, or concise net debt note, keep the output exhibit-sized. Otherwise, treat the section as a full net debt walkthrough.
 2. **Review the full net debt schedule first:** Start with the full schedule, trial balance, or balance-sheet support and identify the major debt, cash, and debt-like balances.
 3. **Identify the main definitional balances:** Determine which reported balances make up the net debt or net cash position, such as cash, debt facilities, leases, shareholder balances, taxes, or acquisition-related obligations.
 4. **Choose the section shape and identify what needs emphasis:** Decide whether the section should read as a straightforward schedule-backed net debt section or whether cash definition, cross-workstream reclasses, debt-like adjustments, or closing mechanics need additional emphasis.
 5. **Identify reclasses and additional adjustments:** Pull in balances reclassified from net working capital, items excluded from cash, acquisition obligations, transaction items, taxes, bonuses, or other purchase-price-relevant balances.
 6. **Decide what belongs in the main analysis versus other considerations:** Put quantified and supportable items into the main analysis, and keep unresolved, contingent, or still-developing items in a short `Other considerations` grouping only when needed.
-7. **Draft the section in final reading order:** Start with the dated position and schedule framing, then explain the main reported components in schedule order, then cover the additional adjustments or reclasses, and then add any closing considerations that materially affect interpretation.
+7. **Draft the section in final reading order:** Start with the dated position and a short schedule-framing line if needed, then explain the main reported components in schedule order, then cover the additional adjustments or reclasses, and then add any closing considerations that materially affect interpretation.
 8. **Add useful detail only where it changes the reading:** Explain facility, lease, tax, acquisition, or closing mechanics only where they help the reader understand the balance and its likely treatment.
 9. **State cross-workstream or closing implications where needed:** If a balance affects the funds flow, locked-box treatment, peg, or another workstream, say so directly.
 10. **Stop when the net debt position is interpretable:** Include enough detail for the reader to understand the reported position, the main reclasses, and the key closing considerations without turning the section into an exhaustive balance-sheet appendix.
@@ -49,7 +49,7 @@ Scale the section based on the complexity of the net debt definition, the number
 
 **Verbosity:**
 
-- Stop adding detail when the reader can understand the reported net debt or net cash position, the main balances within it, the material reclasses or additional items, and any major closing considerations. In most cases, aim for one anchor schedule plus 5-10 commentary bullets or numbered items and roughly 250-700 words. Move above that range only when the capital structure, debt-like adjustments, or closing mechanics require fuller explanation.
+- Stop adding detail when the reader can understand the reported net debt or net cash position, the main balances within it, the material reclasses or additional items, and any major closing considerations. In most cases, aim for one anchor schedule plus 5-10 line-item commentary blocks and roughly 250-700 words. Move above that range only when the capital structure, debt-like adjustments, or closing mechanics require fuller explanation.
 
 **Required content areas:**
 
@@ -77,6 +77,7 @@ Scale the section based on the complexity of the net debt definition, the number
 
 - The net debt or net cash schedule as at the relevant date
 - The supporting balance sheet, trial balance, and account-level support for the material net debt captions
+- Cash bridge support showing total cash, excluded cash, and available cash where those figures differ
 - Cash breakdowns showing unrestricted, restricted, trust, settlement, or other non-operating balances where relevant
 - Debt schedules, lease schedules, shareholder or related-party balance support, and acquisition-obligation schedules where relevant
 - Reclasses from net working capital or other workstreams where relevant
@@ -91,12 +92,13 @@ Scale the section based on the complexity of the net debt definition, the number
 - Use net working capital and QoE work to identify reclasses or other items that affect the closing debt view.
 - Keep `Other considerations` for items that are relevant but not fully settled, not as a place for generic open questions.
 - If the user has already provided the schedule or exhibit, write the commentary to sit beside it rather than recreating it unless requested.
+- If both total cash and available cash are provided, explain the exclusion bridge directly so that the narrative reconciles to the schedule.
 - If source information is thin, keep the section concise and stay close to the supported balances.
 - If a relevant detail or closing mechanic matters but is not provided, use an inline placeholder in square brackets rather than padding with generic commentary. Example: `Restricted cash relates primarily to [...]` or `Final settlement treatment should be confirmed for [...]`
 
 **Formatting principle:**
 
-- Use a short opening line or two, then commentary grouped around the net debt schedule in the same order the reader sees the balances.
+- Use one short lead-in sentence, then bold line-item commentary grouped around the net debt schedule in the same order the reader sees the balances.
 - When discussing a balance that maps directly to the schedule, use the schedule label followed by a colon in bold, then explain what the balance relates to and how it should be understood.
 - Use a separate lead-in for the additional adjustments or other considerations when that makes the section easier to scan, such as `Adjustments to net debt include:` or `Other considerations include:`.
 
@@ -128,7 +130,7 @@ The standard pattern is a dated schedule followed by commentary on the reported 
 
 - Use when: settlement, trust, restricted, trapped, or regulatory balances affect the conclusion.
 - Skip when: cash is straightforward and unrestricted.
-- Sample wording: `**Cash and cash equivalents:** Represent operating cash balances held in Canadian and U.S. dollar accounts. These balances exclude transaction-settlement cash, which remains part of working capital.`
+- Sample wording: `**Cash available to the business:** Total cash on the balance sheet was [$x.x million], of which [$x.x million] related to restricted or otherwise unavailable balances. Accordingly, [$x.x million] was treated as available cash for net debt purposes.`
 
 ### Adjustments lead-in
 
@@ -141,6 +143,7 @@ The standard pattern is a dated schedule followed by commentary on the reported 
 - Use for one reclass, debt-like item, cash-like item, or other purchase-price-relevant adjustment.
 - Explain what the balance relates to first, then the closing or purchase-price relevance.
 - Sample wording: `**Income tax payable:** Includes current income taxes relating to profits earned before completion. As the final computation is completed through the year-end process, the unpaid pre-completion amount should be estimated at closing if the reported balance changes.`
+- Sample wording: `**Transaction bonuses:** Includes accrued bonuses expected to settle at closing. To the extent these amounts remain unpaid at completion, they should be reflected in the purchase-price analysis or funds flow.`
 
 ### Cross-workstream note
 
@@ -158,9 +161,10 @@ The standard pattern is a dated schedule followed by commentary on the reported 
 
 1. Use the net debt schedule as the structural anchor and keep the commentary aligned to the schedule order.
 2. Explain what each balance relates to before moving to the purchase-price implication.
-3. For debt-like balances, prefer practical explanation and closing relevance over repetitive formulaic language.
-4. Include instrument or facility detail only when it helps the reader understand the balance or its likely treatment.
-5. Keep unresolved items brief and grouped in `Other considerations` only when they are still decision-useful.
+3. Where the schedule distinguishes reported cash, excluded cash, and available cash, explain that sequence explicitly and keep the narrative internally reconciled to the schedule.
+4. For debt-like balances, prefer practical explanation and closing relevance over repetitive formulaic language.
+5. Include instrument or facility detail only when it helps the reader understand the balance or its likely treatment.
+6. Keep unresolved items brief and grouped in `Other considerations` only when they are still decision-useful.
 
 ## Verification and review checks
 
@@ -170,7 +174,10 @@ The standard pattern is a dated schedule followed by commentary on the reported 
 - Does the section explain the reported net debt or net cash schedule before moving to the additional adjustments?
 - For the material balances, does the commentary explain what they relate to and why they matter to the net debt view?
 - Where relevant, does the section define cash carefully and distinguish operating cash from restricted, trust, settlement, or other excluded balances?
+- If the schedule provides total cash, excluded cash, and available cash, do those balances reconcile clearly in both the schedule and the narrative?
+- If an item is contested, does the commentary explain the treatment judgment clearly without turning into a negotiation memo?
 - If a balance is reclassified from net working capital or linked to another workstream, is that interaction stated clearly?
+- Does the section use a short lead-in followed by bold line-item commentary in schedule order where that is the requested shape?
 - Does the section provide enough detail for the reader to understand the main components and closing considerations without turning into an exhaustive debt memo?
 
 ## Full examples
@@ -184,7 +191,7 @@ The examples below show the type of net debt schedule the skill may receive, fol
 ```markdown
 ## Net debt and debt-like items
 
-- The schedule below presents the Company's reported net cash position as at June 30, 2024.
+The schedule below presents the Company's reported net cash position as at June 30, 2024.
 
 Source note: Management-prepared net debt schedule as at June 30, 2024, reconciled to the Jun-24 trial balance.
 
@@ -221,7 +228,7 @@ Adjustments to net debt include:
 ```markdown
 ## Net debt and debt-like items
 
-- The schedule below illustrates the net indebtedness position of the Company as at December 31, 2024, including operating cash, debt facilities, acquisition-related obligations, and identified reclasses from net working capital.
+The schedule below illustrates the net indebtedness position of the Company as at December 31, 2024, including operating cash, debt facilities, acquisition-related obligations, and identified reclasses from net working capital.
 
 Source note: Management-prepared net debt schedule as at December 31, 2024, reconciled to the Dec-24 trial balance and supporting balance-sheet schedules.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hard Cut"
+  short_description: "Enforce hard-cut architecture policy"
+  default_prompt: "Use $hard-cut to apply a hard-cut policy and remove compatibility code from this change."

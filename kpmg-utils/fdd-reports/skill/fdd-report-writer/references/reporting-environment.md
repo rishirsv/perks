@@ -16,7 +16,7 @@
 
 The Reporting environment section summarizes the company-specific policies and reporting practices that matter to diligence. In most cases, this is a financial reporting and accounting policy section, so it should explain the reporting basis, audit status, close process, systems, key accounting policies, and the team structure that supports financial reporting. It can also flex to narrower policy areas, such as payroll, benefits, IT, or other target-company policies, when those are the user's focus or are materially relevant to the analysis.
 
-The goal is to explain how a policy or reporting process works in practice, who owns it, how often it operates, what systems or processes support it, and why it matters for interpreting the business or the reported numbers. Summarize the policy in company-specific language rather than repeating policy text or standards language word for word.
+The goal is to explain how a policy or reporting process works in practice, who owns it, how often it operates, what systems or processes support it, and why it matters for interpreting the business or the reported numbers. For broad reporting-environment requests, organize the section into concise grouped topic blocks based on the policy areas the user actually provided. Summarize the policy in company-specific language rather than repeating policy text or standards language word for word.
 
 Global writing, placeholder, and language rules are defined in `references/global-writing-conventions.md` and apply here.
 
@@ -26,8 +26,9 @@ Global writing, placeholder, and language rules are defined in `references/globa
 2. **Default broad requests to the financial reporting environment:** If the user asks for this section generally, lead with reporting basis, audit status, close process, systems, finance-team ownership, and the accounting policies that shape the reported numbers.
 3. **Keep the discussion company-specific and practical:** Explain how the policy operates at the Company rather than paraphrasing a policy manual or accounting standard in the abstract.
 4. **Focus on the policies that change interpretation:** Cover the policies that affect reported numbers, operating interpretation, process reliability, or diligence conclusions, and leave out immaterial handbook-style detail.
-5. **Add execution context where it matters:** Include ownership, cadence, systems, thresholds, estimates, approvals, or exceptions when they help the reader understand how the policy is applied in practice.
-6. **End with the implication for the reader:** Make clear how the policy should shape interpretation of the financial analysis, operating model, or specific topic the user asked about.
+5. **Let the source material drive the topic grouping:** Organize broad sections around the policy topics actually surfaced by the user or source data, rather than forcing a fixed list of reporting-environment subtopics.
+6. **Add execution context where it matters:** Include ownership, cadence, systems, thresholds, estimates, approvals, or exceptions when they help the reader understand how the policy is applied in practice.
+7. **End with the implication for the reader:** Make clear how the policy should shape interpretation of the financial analysis, operating model, or specific topic the user asked about.
 
 ## Analytical workflow
 
@@ -37,7 +38,7 @@ Global writing, placeholder, and language rules are defined in `references/globa
 4. **Choose the section shape:** Decide whether the section should read as a default reporting-environment section, an accounting-policy-focused section, or a function-specific policy section.
 5. **Identify the core policy topics:** Focus on the policies that most affect reported numbers, process reliability, employee obligations, system governance, or the topic requested by the user.
 6. **Map the execution detail:** For each material policy area, identify who owns it, how often it operates, what systems or support it relies on, and where manual intervention or judgment enters the process.
-7. **Draft in final reading order:** Start with the scope and reporting context, then cover the core policy topics, then add ownership, systems, process, or transition context in the clearest order for the requested topic.
+7. **Draft in final reading order:** Start with the scope and reporting context, then group the material policy topics in the clearest order for the requested topic, and then add ownership, systems, process, transition, or implication context where it helps the reader interpret each topic.
 8. **Add exceptions only when they change interpretation:** Include policy changes, framework transitions, system migrations, or manual-process limitations only when they affect comparability, reliance, or understanding.
 9. **Close with the practical implication:** Explain how the policy affects the financial analysis, operating model, or requested topic, rather than ending with policy description alone.
 10. **Stop when the policy is fully interpretable:** Include enough detail for the reader to understand how the policy operates and why it matters, but do not turn the section into a policy manual or a controls audit.
@@ -48,7 +49,7 @@ Scale the section based on the breadth of policy topics requested, the amount of
 
 **Verbosity:**
 
-- Stop adding detail when the reader can understand the reporting basis, close environment, key policy mechanics, ownership, and the main implications for the analysis. In most cases, aim for 5-10 substantive bullets or numbered items and roughly 400-900 words. Move above that range only when the section covers multiple policy areas, mixed reporting-basis issues, or several policy topics that each require practical explanation.
+- Stop adding detail when the reader can understand the reporting basis, close environment, key policy mechanics, ownership, and the main implications for the analysis. In most cases, aim for 5-10 substantive grouped bullets or numbered items and roughly 400-900 words. Move above that range only when the section covers multiple policy areas, mixed reporting-basis issues, or several policy topics that each require practical explanation.
 
 **Required content areas:**
 
@@ -91,6 +92,7 @@ Scale the section based on the breadth of policy topics requested, the amount of
 
 - Start with the policy scope the user actually wants. If the request is broad, default first to the financial reporting environment and accounting policies.
 - Group related policy points into natural topics rather than listing disconnected facts.
+- Let the source material determine the most useful topic blocks. Use sample topic families as reference points, not as a fixed checklist.
 - For each policy, explain what it is, how it operates, who owns it, how often it is applied, and why it matters.
 - Include team composition when it explains execution, control, continuity, or dependence on a small number of people.
 - Include systems and manual dependencies only when they help explain how the policy is implemented or where risk or interpretation enters.
@@ -100,7 +102,8 @@ Scale the section based on the breadth of policy topics requested, the amount of
 
 **Formatting principle:**
 
-- Use a short opening scope line followed by bulleted or numbered policy commentary grouped in the order most natural for the requested topic.
+- Use a short opening scope or scope-and-disclaimer line followed by grouped policy commentary in the order most natural for the requested topic.
+- For broad reporting-environment requests, default to concise topic blocks built from the source material the user provided rather than a fixed subtopic list.
 - Prefer denser, integrated bullets over a long list of short fragments. It is usually better to combine closely related points such as reporting basis, close cadence, audit status, and key systems into one well-structured opening bullet than to split them artificially.
 - When a policy or topic is clear, use the topic name followed by a colon in bold, then explain how the policy works in practice and, where helpful, what it means for the reader.
 - Match the section title to the user’s context. Use titles such as `Reporting environment`, `Accounting policies`, `Finance and reporting policies`, `Payroll and benefits policies`, or `IT policies` as appropriate.
@@ -109,11 +112,12 @@ Scale the section based on the breadth of policy topics requested, the amount of
 
 Use these as the main building blocks for the section. Choose only the content areas the draft actually needs.
 
-The standard pattern is a short scope-setting line followed by policy commentary grouped by topic, with an implication line only where it adds meaning.
+The standard pattern is a short scope-setting line followed by policy commentary grouped by the topics most clearly supported in the source material, with an implication line only where it adds meaning.
 
 ### Scope and title note
 
 - Open the section by defining what policy area it covers and how the reader should frame it.
+- Use a short disclaimer-style framing line when the source basis, review scope, or reliance boundary matters to interpretation.
 - Keep this short and practical.
 - Sample wording: `The section below summarizes the Company’s reporting environment and the accounting policies that most affect historical comparability and interpretation of the financial analysis.`
 
@@ -141,7 +145,7 @@ The standard pattern is a short scope-setting line followed by policy commentary
 - Skip when the content would become a software inventory with no policy implication.
 - Sample wording: `**Systems:** The Company uses Business Central as its ERP, Workday for payroll and HR, and a separate consolidation model for group reporting. Payroll and certain operating systems are uploaded through scheduled interfaces, with manual reclasses concentrated in consolidation and shared-service allocations.`
 
-### Accounting policy summary
+### Accounting policy topics
 
 - Use when the section includes revenue recognition, leases, capitalization, provisions, loyalty, ECL, commissions, or other financial policies.
 - Skip when the point is just a generic accounting-standard summary.
@@ -181,8 +185,9 @@ The standard pattern is a short scope-setting line followed by policy commentary
 
 1. Match the section title to the actual topic requested rather than forcing everything into `Reporting environment`.
 2. Use bold topic labels and explain how the policy works in practice instead of paraphrasing a policy document line by line.
-3. Include ownership, cadence, thresholds, or estimate mechanics only when they materially affect how the policy should be understood.
-4. Keep audit, reporting-basis, system, and limitation language factual and brief.
+3. For broad reporting-environment requests, group the content into the most relevant topic blocks surfaced by the source material rather than forcing a fixed set of headings.
+4. Include ownership, cadence, thresholds, or estimate mechanics only when they materially affect how the policy should be understood.
+5. Keep audit, reporting-basis, system, and limitation language factual and brief.
 
 ## Verification and review checks
 
@@ -190,6 +195,7 @@ The standard pattern is a short scope-setting line followed by policy commentary
 
 - Does the section title and opening scope line match the policy topic the user actually asked for?
 - If the request is broad, does the section cover the reporting basis, key policy topics, and the team or process context needed to understand them?
+- For broad reporting-environment requests, does the section read like grouped topic-block commentary rather than a generic list of policy facts?
 - For each material policy, does the section explain how it works in practice, who owns it, and why it matters?
 - Where relevant, does the section include cadence, systems, manual dependencies, or estimate mechanics rather than describing the policy at a purely abstract level?
 - If there is an audit, framework, or policy-transition issue, is it stated clearly and tied to interpretation?
