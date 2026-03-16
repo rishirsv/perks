@@ -1,23 +1,33 @@
 {
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "allow": [
-      "Read(//Users/rishi/**)",
-      "Bash(find /Users/rishi/Code/kpmg -type f -name *corpus* -o -name *example* -o -name *sample* -o -name *template*)",
-      "Bash(grep -h \"^## Appendix\" /Users/rishi/Code/kpmg/fdd-report-writer/extracted/*.md)",
-      "Bash(find /Users/rishi/Code/kpmg/fdd-report-writer -name *appendix* -o -name *corpus* -o -name *reference*)",
-      "Bash(sed 's/: .*$//')",
-      "Bash(sed 's/ \\(.*$//')",
-      "Bash(mkdir -p /tmp/kpmg-template)",
-      "Bash(unzip -o /Users/rishi/Code/kpmg/kpmg-slidegen/docs/kpmg-mc-slide-template.pptx -d /tmp/kpmg-template)",
-      "Read(//private/tmp/kpmg-template/ppt/slides/**)",
-      "Read(//tmp/kpmg-template/ppt/slides/**)",
-      "Bash(done)",
-      "Read(//tmp/kpmg-template/ppt/slideLayouts/**)",
-      "Read(//private/tmp/kpmg-template/ppt/slideLayouts/**)"
+      "Bash",
+      "Edit",
+      "Write",
+      "WebFetch",
+      "WebSearch",
+      "Skill",
+      "NotebookEdit",
+      "ExitPlanMode",
+      "mcp__*"
+    ],
+    "deny": [],
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(rm -rf:*)",
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fd:*)",
+      "Bash(docker:*)",
+      "Bash(kubectl:*)",
+      "Bash(helm:*)"
     ]
   },
-  "model": "haiku",
-  "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true
+  "enableAllProjectMcpServers": true,
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "defaultMode": "acceptEdits",
+  "effortLevel": "max"
 }

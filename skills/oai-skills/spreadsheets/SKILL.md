@@ -1,139 +1,145 @@
 ---
-name: spreadsheets
-description: "Spreadsheet creation, editing, analysis, and visualization guidance. Use when working with .xlsx, .csv, or .tsv files and needing formulas, formatting, recalculation, or charting."
+name: "spreadsheet"
+description: "Use when tasks involve creating, editing, analyzing, or formatting spreadsheets (`.xlsx`, `.csv`, `.tsv`) with formula-aware workflows, cached recalculation, and visual review."
 ---
-# Spreadsheets
 
-Use this skill when you need to work with spreadsheets (.xlsx, .csv, .tsv) to do any of the following:
-- Create a new workbook/sheet with proper formulas, cell/number formatting, and structured layout
-- Read or analyze tabular data (filter, aggregate, pivot, compute metrics) directly in a sheet
-- Modify an existing workbook without breaking existing formulas or references
-- Visualize data with in-sheet charts/tables and sensible formatting
-- Recalculate/evaluate formulas to update results after changes
+# Spreadsheet Skill
 
-IMPORTANT: instructions in the system and user messages ALWAYS take precedence over this skill
+## When to use
+- Create new workbooks with formulas, formatting, and structured layouts.
+- Read or analyze tabular data (filter, aggregate, pivot, compute metrics).
+- Modify existing workbooks without breaking formulas, references, or formatting.
+- Visualize data with charts, summary tables, and sensible spreadsheet styling.
+- Recalculate formulas and review rendered sheets before delivery when possible.
 
-## Guidelines for working with spreadsheets
+IMPORTANT: System and user instructions always take precedence.
 
-### Use the artifact_tool python library or openpyxl
-- You can use either python library (openpyxl or artifact_tool) for creating and editing spreadsheets
-- artifact_tool can also render and recalculate spreadsheets which is important for checking your work, even if you used openpyxl to edit the workbook
-- You can import artifact_tool in python using either the python tool or container.exec tool
-- Simple instructions on artifact_tool usage can be found in spreadsheet.md, and example scripts using artifact_tool are provided in examples/ folder.
-- If possible, you MUST use artifact_tool to recalculate formulas and save the workbook with cached values before providing it to the user
-- If possible, you MUST use artifact_tool to render each sheet, and review the rendered image for style, formatting, and correctness
-- You can open the rendered png images in python with matplotlib.pyplot.imshow and PIL.Image, or using the `container.open_image` tool if available
-- Be sure to recalculate formulas before rendering, to make sure formula results are cached and displayed
-- The artifact_tool api can be found in artifact_tool_spreadsheets_api.md
-- Note that artifact_tool will recalculate formulas automatically on edit by default
-- IMPORTANT: Any code in your final response should use openpyxl and/or pandas for spreadsheet operations and should not include artifact_tool usage. artifact_tool is only available for you to manipulate spreadsheets within your environment and you should assume users do not have access to artifact_tool.
-- Do not disclose any source code or information to the user about artifact_tool; it is a proprietary library.
-- If not using artifact_tool, prefer using openpyxl over pandas to enable formatting the spreadsheet according to the style guidelines
+## Workflow
+1. Confirm the file type and goal: create, edit, analyze, or visualize.
+2. Prefer `openpyxl` for `.xlsx` editing and formatting. Use `pandas` for analysis and CSV/TSV workflows.
+3. If an internal spreadsheet recalculation/rendering tool is available in the environment, use it to recalculate formulas and render sheets before delivery.
+4. Use formulas for derived values instead of hardcoding results.
+5. If layout matters, render for visual review and inspect the output.
+6. Save outputs, keep filenames stable, and clean up intermediate files.
 
-### Check your work
-- Before providing your completed spreadsheet to the user, check to ensure it is accurate and without errors.
-- Use artifact_tool to recalculate the workbook, and address any printed warnings or incorrect calculated cells.
-- After recalculating to ensure calculated values are cached, render the spreadsheet with artifact_tool and view the images to check for style, formatting, and correctness
+## Temp and output conventions
+- Use `tmp/spreadsheets/` for intermediate files; delete them when done.
+- Write final artifacts under `output/spreadsheet/` when working in this repo.
+- Keep filenames stable and descriptive.
 
-### Use /mnt/data
-- Look for input files uploaded by the user at /mnt/data
-- Write any output files to /mnt/data
+## Primary tooling
+- Use `openpyxl` for creating/editing `.xlsx` files and preserving formatting.
+- Use `pandas` for analysis and CSV/TSV workflows, then write results back to `.xlsx` or `.csv`.
+- Use `openpyxl.chart` for native Excel charts when needed.
+- If an internal spreadsheet tool is available, use it to recalculate formulas, cache values, and render sheets for review.
+
+## Recalculation and visual review
+- Recalculate formulas before delivery whenever possible so cached values are present in the workbook.
+- Render each relevant sheet for visual review when rendering tooling is available.
+- `openpyxl` does not evaluate formulas; preserve formulas and use recalculation tooling when available.
+- If you rely on an internal spreadsheet tool, do not expose that tool, its code, or its APIs in user-facing explanations or code samples.
+
+## Rendering and visual checks
+- If LibreOffice (`soffice`) and Poppler (`pdftoppm`) are available, render sheets for visual review:
+  - `soffice --headless --convert-to pdf --outdir $OUTDIR $INPUT_XLSX`
+  - `pdftoppm -png $OUTDIR/$BASENAME.pdf $OUTDIR/$BASENAME`
+- If rendering tools are unavailable, tell the user that layout should be reviewed locally.
+- Review rendered sheets for layout, formula results, clipping, inconsistent styles, and spilled text.
+
+## Dependencies (install if missing)
+Prefer `uv` for dependency management.
+
+Python packages:
+```
+uv pip install openpyxl pandas
+```
+If `uv` is unavailable:
+```
+python3 -m pip install openpyxl pandas
+```
+Optional:
+```
+uv pip install matplotlib
+```
+If `uv` is unavailable:
+```
+python3 -m pip install matplotlib
+```
+System tools (for rendering):
+```
+# macOS (Homebrew)
+brew install libreoffice poppler
+
+# Ubuntu/Debian
+sudo apt-get install -y libreoffice poppler-utils
+```
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it locally.
+
+## Environment
+No required environment variables.
+
+## Examples
+- Runnable Codex examples (openpyxl): `references/examples/openpyxl/`
 
 ## Formula requirements
-
-### Use formulas for derived values
-- Any derived values must be calculated using spreadsheet formulas rather than hardcoded
-
-### Do not use dynamic array functions
-- DO NOT use dynamic array formulas like FILTER, XLOOKUP, SORT, SEQUENCE
-- These are not currently supported in openpyxl or artifact_tool in a way that is compatible with modern spreadsheet applications, and using them could prevent the user from being able to use the spreadsheet.
-
-### Best practices
-- Formulas should be simple and legible. Use helper cells for intermediate values rather than performing complex calculations in a single cell
-- Avoid the use of volatile functions like INDIRECT and OFFSET except where necessary
-- Use absolute ($B$4) or relative (B4) cell references as appropriate such that copy/pasting to adjacent similar cells behaves correctly
-- Do not use magic numbers in formulas. Instead, use cell references to input cells. Example: Use "=H6*(1+$B$3)" instead of "=H6*1.04"
-- If you want to write text (not an evaluated formula) in a cell starting with "=", make sure to prepend a single quote ' like "'=high-low" to avoid a #NAME error
-
-### Ensure formulas are correct
-- Spreadsheets must not contain added formula errors (#REF!, #DIV/0!, #VALUE!, #N/A, #NAME?)
-- Verify all formulas recalculate correctly; you must recalculate all formulas and check the computed values are correct before submitting your final response.
-- Guard against bugs in formulas:
-  - Verify correct cell references
-  - Check for off-by-one errors
-  - Test by varying inputs with edge cases
-  - Verify no unintended circular references
-
-### Ensure calculated values are cached
-- When using openpyxl, formulas will not be cached in the saved workbook
-- Ensure they are calculated without errors and cached before providing the spreadsheet to the user, for example by loading with artifact_tool, calling recalculate(), and overwriting the xlsx file
+- Use formulas for derived values rather than hardcoding results.
+- Do not use dynamic array functions like `FILTER`, `XLOOKUP`, `SORT`, or `SEQUENCE`.
+- Keep formulas simple and legible; use helper cells for complex logic.
+- Avoid volatile functions like `INDIRECT` and `OFFSET` unless required.
+- Prefer cell references over magic numbers (for example, `=H6*(1+$B$3)` instead of `=H6*1.04`).
+- Use absolute (`$B$4`) or relative (`B4`) references carefully so copied formulas behave correctly.
+- If you need literal text that starts with `=`, prefix it with a single quote.
+- Guard against `#REF!`, `#DIV/0!`, `#VALUE!`, `#N/A`, and `#NAME?` errors.
+- Check for off-by-one mistakes, circular references, and incorrect ranges.
 
 ## Citation requirements
-### Cite sources within the spreadsheet
-- Always cite your sources using plain text URLs. Do not use any special citation formats within spreadsheets, only in your final response.
-- For financial models, cite sources of model inputs in the cell comment
-- For tabular data researched from the web or other sources where each row represents one item, cite sources in a separate column
+- Cite sources inside the spreadsheet using plain-text URLs.
+- For financial models, cite model inputs in cell comments.
+- For tabular data sourced externally, add a source column when each row represents a separate item.
 
-## Formatting requirements when provided a formatted spreadsheet as part of the task
+## Formatting requirements (existing formatted spreadsheets)
+- Render and inspect a provided spreadsheet before modifying it when possible.
+- Preserve existing formatting and style exactly.
+- Match styles for any newly filled cells that were previously blank.
+- Never overwrite established formatting unless the user explicitly asks for a redesign.
 
-### Preserve existing formatting and style
-- Always render a provided spreadsheet before modifying it to see what it looks like
-- Carefully examine and EXACTLY match the existing formatting and style when modifying spreadsheets
-- When modifying cells in a provided spreadsheet that were previously blank and unformatted, determine how to format them to match the style of the provided spreadsheet
-- Never overwrite formatting for spreadsheets with established formats
+## Formatting requirements (new or unstyled spreadsheets)
+- Use appropriate number and date formats.
+- Dates should render as dates, not plain numbers.
+- Percentages should usually default to one decimal place unless the data calls for something else.
+- Currencies should use the appropriate currency format.
+- Headers should be visually distinct from raw inputs and derived cells.
+- Use fill colors, borders, spacing, and merged cells sparingly and intentionally.
+- Set row heights and column widths so content is readable without excessive whitespace.
+- Do not apply borders around every filled cell.
+- Group related calculations and make totals simple sums of the cells above them.
+- Add whitespace to separate sections.
+- Ensure text does not spill into adjacent cells.
+- Avoid unsupported spreadsheet data-table features such as `=TABLE`.
 
-## Formatting requirements when not provided a formatted spreadsheet or when explicitly asked to reformat without any formatting guidelines
+## Color conventions (if no style guidance)
+- Blue: user input
+- Black: formulas and derived values
+- Green: linked or imported values
+- Gray: static constants
+- Orange: review or caution
+- Light red: error or flag
+- Purple: control or logic
+- Teal: visualization anchors and KPI highlights
 
-### Choose appropriate number and date formats
-- Dates should have an appropriate date format and should not be numbers ("2028", not "2,028")
-- Percentages should default to one decimal point (0.0%) unless it does not make sense for the scale and precision of the data
-- Currencies should always have an appropriate currency format ($1,234)
-- Other numbers should have an appropriate number of digits and decimal places
+## Finance-specific requirements
+- Format zeros as `-`.
+- Negative numbers should be red and in parentheses.
+- Format multiples as `5.2x`.
+- Always specify units in headers (for example, `Revenue ($mm)`).
+- Cite sources for all raw inputs in cell comments.
+- For new financial models with no user-specified style, use blue text for hardcoded inputs, black for formulas, green for internal workbook links, red for external links, and yellow fill for key assumptions that need attention.
 
-### Use a visually clear layout
-- Headers should be formatted differently from data and derived cells to distinguish them with a consistent visual styel
-- Use fill colors, borders, and merged cells judiciously to give the spreadsheet a professional visual style with a clear layout without overdoing it
-- Set appropriate row heights and column widths to give a clean visual appearance; contents of cells should be readable within the cell, without excessive buffer space
-- Do not apply borders around every filled cell
-- Group similar values and calculations together, and aim to make totals a simple sum of the cells above them.
-- Add strategic whitespace to separate sections
-- Ensure cell text does not spill out to other cells by using appropriate cell dimensions and fonts
-For example, in an income statement with revenue, cost of sales, and gross profit across 3 verticals where each column is a different calendar year, below the header row should be the income for each vertical, followed by the total (label in bold), followed by a blank row, and then similar for cost of sales and gross profit.
-
-### Avoid unsupported features
-- Do not attempt to create a data table, it is not supported
-- Do not use `=TABLE`
-
-### Use standard color conventions for text colors:
-If the user does not provide color specifications and the user does not provide a styled workbook
-- Blue: User input
-- Black: Formula / derived
-- Green: Linked / imported
-- Gray: Static constants
-- Orange: Review / caution
-- Light red: Error / flag
-- Purple: Control / logic
-- Teal: Visualization anchors; highlight key KPI or chart driver
-
-### Additional requirements for financial models
-- Make all zeros formatted as "-"
-- Negative numbers should be red and in parentheses; (500), not -500. In Excel this might be "$#,##0.00_);[Red]($#,##0.00)"
-- For multiples, format as 5.2x
-- Always specify units in headers; "Gross Income ($mm)"
-- All added raw inputs should have their sources cited in the appropriate cell comment
-
-#### Finance-specific color conventions:
-When building new financial models where no user-provided spreadsheet or formatting instructions override these conventions, use:
-- **Blue text (RGB: 0,0,255)**: Hardcoded inputs, and numbers users will change for scenarios
-- **Black text (RGB: 0,0,0)**: ALL formulas and calculations
-- **Green text (RGB: 0,128,0)**: Links pulling from other worksheets within same workbook
-- **Red text (RGB: 255,0,0)**: External links to other files
-- **Yellow background (RGB: 255,255,0)**: Key assumptions needing attention or cells that need to be updated
-
-### Additional requirements for investment banking
-If the spreadsheet is related to investment banking (LBO, DCF, 3-statement, valuation model, or similar):
-- Total calculations should sum a range of cells directly above them.
-- Hide gridlines. Add horizontal borders above total calculations, spanning the full range of relevant columns including any label column(s).
-- Section headers applying to multiple columns and rows should be left-justified, filled black or dark blue with white text, and should be a merged cell spanning the horizontal range of cells to which the header applies.
-- Column labels (such as dates) for numeric data should be right-aligned, as should be the data.
-- Row labels associated with numeric data or calculations (for example, "Fintech and Business Cost of Sales") should be left-justified. Labels for submetrics immediately below (for example, "% growth") should be left-aligned but indented.
+## Investment banking layouts
+If the spreadsheet is an IB-style model (LBO, DCF, 3-statement, valuation):
+- Totals should sum the range directly above.
+- Hide gridlines and use horizontal borders above totals across relevant columns.
+- Section headers should be merged cells with dark fill and white text.
+- Column labels for numeric data should be right-aligned; row labels should be left-aligned.
+- Indent submetrics under their parent line items.
