@@ -63,7 +63,7 @@ description = "Review-focused subagent. For every task, invoke $review first, th
 
 [agents.worker_fast]
 config_file = "agents/worker-fast.toml"
-description = "Fast implementation-focused subagent using Codex Spark for quicker scoped changes and PR delivery."
+description = "Fast implementation-focused subagent for lightweight edits and straightforward coding tasks."
 
 [agents.worker_mini]
 config_file = "agents/worker-mini.toml"

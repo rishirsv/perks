@@ -1,178 +1,135 @@
 ---
 name: ideate
-description: "Create a feature specification through natural conversation. Use only when the user explicitly invokes `ideate`/`$ideate` or explicitly asks to use the ideate skill for brainstorming and spec writing. Do not auto-activate for general brainstorming, planning, or spec-writing requests."
+description: Create a feature specification through repo-aware conversation. Use only when the user explicitly invokes `ideate`/`$ideate` or explicitly asks to use the ideate skill for brainstorming, shaping a feature, or writing a spec. Do not auto-activate for general brainstorming, planning, or spec-writing requests.
 ---
 
 # Ideate
 
-Turn ideas into fully formed designs and clear specifications through collaborative dialogue.
+Turn a rough idea into a decision-complete feature spec through collaborative, evidence-first dialogue.
 
-Only use this skill after an explicit user request to use `ideate`/`$ideate`.
+Stay in ideation mode:
 
-Start by understanding the current project's context and conventions. Ask the user questions to refine the idea.
+- Do not implement code.
+- Do not modify product code.
+- You may read the repository and create or update documentation.
 
-**Do not write or modify any code.** This produces documentation only.
+## Core behavior
 
-## Process
+- Start with repository context, not generic brainstorming. Read the most relevant docs, existing specs, plans, and adjacent code before asking questions.
+- If a question can be answered by exploring the codebase, explore the codebase instead.
+- Interview the user relentlessly until the design is decision-complete and both sides share the same understanding.
+- Walk the design tree in dependency order, resolving one branch at a time instead of jumping between unrelated decisions.
+- For every unresolved decision you ask about, provide a recommended answer or default.
+- Prefer the smallest sensible scope. Push non-essential ideas out of the first version.
 
-### 1. Get Feature Name
+## Workflow
 
-If not provided, ask:
+### 1. Establish context and target document
 
-> "What are we building?"
+- Read the current project guidance first, such as `AGENTS.md`, `README.md`, relevant docs, and any existing spec or plan related to the request.
+- Inspect nearby code and existing product behavior before proposing flows or requirements.
+- If a relevant spec already exists, update it instead of creating a duplicate.
+- Resolve:
+  - `feature_name`
+  - `feature_slug`
+  - `spec_path`
+- Default to `docs/product-specs/<feature-slug>-spec.md` when the repo uses that convention. If the repo uses a different spec location, follow the local convention instead.
+- Only ask the user to confirm the path or slug when there is real ambiguity or risk.
 
-Then derive:
+### 2. Run a dependency-ordered interview
 
-- `feature_slug = kebab-case(feature_name)`
-- `spec_path = <project-root>/docs/product-specs/<feature-slug>-spec.md`
+Treat ideation like a structured interview, not a free-form brainstorm.
 
-Confirm these with the user before continuing. If a similar spec already exists, prefer updating it instead of creating duplicates.
+- Start with the highest-leverage unknowns first.
+- Ask only what is still unknown after repo exploration.
+- Ask one focused question or a small batch of tightly related questions at a time.
+- Prefer multiple-choice, yes/no, or constrained options when possible.
+- Explain why a question matters when the dependency is not obvious.
+- Recommend a default answer for each question based on repo evidence, product sense, and simplicity.
+- After each answer, restate the decision and carry its implications forward before asking the next branch.
 
-### 2. Brainstorm and Ask Questions
+Walk down the design tree in roughly this order:
 
-Start by brainstorming the idea with the user by asking a small batch of questions per message.
+1. Problem and user
+2. Trigger and entry point
+3. Core user flow
+4. State, data, and system behavior
+5. Constraints and non-goals
+6. Edge cases, failure modes, and permissions
+7. Success criteria, rollout, and verification signals
 
-Continue brainstorming as long as the user is engaged and wants to continue. When you have a good understanding, present a concise bullet outline of the idea, ask if they want to continue, and suggest 2-3 areas to explore next.
+Keep going until you can describe the solution without guessing.
 
-**Rules:**
+### 3. Summarize before drafting
 
-- Ask questions in **batches of 2-4** per message.
-- Prefer **multiple-choice** questions when possible (2-4 options plus an "Other" free-text option).
-- For each multiple-choice question, mark one option as ` (recommended)` based on context or sensible defaults.
-- Clearly tell the user how to answer a batch (for example: "Reply with the option letter/number for each question.").
-- Adapt each batch based on previous answers.
-- Stop when you can describe the solution without guessing.
-- Use the RequestUserInput or AskUserQuestion tool to ask questions if available; otherwise, ask questions in plain text.
+Before writing the spec, provide a concise summary of:
 
-**Areas to explore** (as needed):
+- what is being built
+- who it is for and why it matters
+- the core flow
+- key constraints and non-goals
+- any remaining open questions
 
-- What problem does this solve?
-- Who uses it and how often?
-- What's the core user flow?
-- What are the boundaries (what's NOT included)?
-- Any technical constraints?
-- How do we know it's working? (success criteria)
+If important ambiguity remains, keep interviewing. Do not draft a spec that depends on hidden guesses.
 
-#### Example
+### 4. Write or update the spec
 
-```text
-User: $ideate weekly digest emails
+Create or update the spec at `spec_path`.
 
-Assistant: Let's ideate weekly digest emails.
+Keep the document concise, concrete, and implementation-aware without turning it into an implementation plan.
 
-I'll start with a small batch of questions.
-Please answer with the option letter for each question.
+Mandatory sections:
 
-1) Who should receive the digest?
-   A. Every active user
-   B. Only users who opt in (recommended)
-   C. Only admins
+- `TL;DR`
+- `Scope`
+- `What We Are Building`
+- `Requirements`
+- `Acceptance Criteria`
 
-2) What should the digest include?
-   A. New comments
-   B. New tasks
-   C. Both (recommended)
-   D. Other: <free text>
+Optional sections:
 
-User: 1B, 2C
+- `User Stories`
+- `How It Works`
+- `Context`
+- `Assumptions`
+- `Open Questions`
+- `Risk And Failure Analysis`
+- `Rollout And Rollback`
+- `Verification`
 
-Assistant: Great - opt-in users only, and include both comments and tasks.
-Next, I'll ask about the sending schedule and email design.
-```
+Include optional sections only when they materially improve clarity or match repo conventions.
 
-### 3. Present Design Summary
+### 5. Ground the spec in evidence
 
-Before writing the spec, summarize in 2-3 short paragraphs:
+- Tie decisions back to repo evidence when possible.
+- Reference existing files, patterns, constraints, and adjacent behavior when they affect the spec.
+- If something could not be verified in the codebase, say so explicitly instead of implying certainty.
 
-- What we're building
-- How it works (high level)
-- Key constraints or decisions
+### 6. Finish cleanly
 
-Ask: **"Does this look right?"**
+After saving the spec:
 
-If no: clarify and iterate.  
-If yes: write the spec.
+- share the path that was created or updated
+- give a short recap of the final shape of the feature
+- call out any open questions that still need a decision
 
-### 4. Write Spec
+## Questioning guidance
 
-Create/update: `spec_path` (default: `<project-root>/docs/product-specs/<feature-slug>-spec.md`)
+Use these prompts as a mental checklist, not as canned text:
 
-Use the template below. Keep it concise; add detail only where needed.
+- What user problem are we solving?
+- Who is the primary user?
+- What triggers this flow?
+- What must happen, in order, for the feature to feel complete?
+- What existing product behavior or code patterns constrain the design?
+- What is explicitly out of scope for the first version?
+- What could fail, confuse users, or require permissions?
+- How will we know the feature works?
 
-Mandatory sections: TL;DR, Scope, What We're Building, Requirements, Acceptance Criteria.  
-Optional add-ons: User Stories, How It Works, Context, Open Questions (include only when helpful).
+## Failure shields
 
----
-
-## Template
-
-```markdown
-# Feature: <feature-name>
-
-## TL;DR
-
-- **Problem:** [one sentence]
-- **Solution:** [2-3 bullets]
-
-## Scope
-
-- **In:** [what is included]
-- **Out:** [what is not included]
-
-## What We're Building
-
-[What the user will see or do differently. Keep it concrete.]
-
-## User Stories (Optional)
-
-[Create user stories ordered by priority]
-
-### User Story N: <Title>
-
-- As a <user_type>, I want <action> so that <benefit>.
-
-## Requirements
-
-- [ ] Requirement 1
-- [ ] Requirement 2
-- [ ] Requirement 3
-
-## How It Works (Optional)
-
-- Describe the architecture of the solution in 2-3 concise paragraphs.
-- Include notes on UX/UI design, data flow, and any other relevant details as applicable.
-
-## Acceptance Criteria
-
-- Given <state>, when <action>, then <outcome>
-- Given <state>, when <action>, then <outcome>
-- Given <state>, when <action>, then <outcome>
-
-## Context (Optional)
-
-- Related code: `path/to/file.ts`
-- Constraints: [any important limitations]
-- References: [links, issues, docs]
-
-## Open Questions (Optional)
-
-- [Decision the user still needs to make]
-```
-
----
-
-## Save Summary
-
-After saving, output a **Save Summary** containing only the paths created or updated, one per line. Example:
-
-```text
-docs/product-specs/<feature-slug>-spec.md
-```
-
-Do not add any other text after the Save Summary.
-
----
-
-## Final Instructions
-
-- Be ruthless about scope (YAGNI). Push non-essentials to the Roadmap.
+- Do not ask broad questions that the repository can answer.
+- Do not dump a long questionnaire up front.
+- Do not write a spec before the critical branches of the design tree are resolved.
+- Do not drift into implementation or coding.
+- Do not preserve every user idea by default; simplify and narrow scope where appropriate.
