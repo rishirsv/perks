@@ -31,11 +31,6 @@ chatgpt/kpmg-slidegen/outputs/runs/
 !.env*.template
 # ---- /codex:system-and-env ----
 
-# ---- oracle ----
-.agents/oracle/
-skills/oracle/
-# ---- oracle ----
-
 # Node
 node_modules
 pycache

@@ -1,0 +1,51 @@
+[workflow]
+mode = "skill-optimization"
+working_root = "/Users/rishi/Code"
+run_root = ".codex-eval-runs"
+run_autoresearch = true
+
+[inputs]
+target_skill = "/Users/rishi/Code/ai-tools/reference/evals-skills/skills/autoresearch/SKILL.md"
+test_inputs = [
+  "Optimize the skill for a first-time user who wants minimal setup.",
+  "Optimize the skill for a user with an inherited eval stack.",
+  "Optimize the skill for a user who wants to launch via codex exec.",
+]
+context_notes = [
+  "Optional notes for the orchestrator or execution agent.",
+]
+evaluator_artifacts = []
+has_traces = true
+has_inherited_eval_stack = false
+is_rag = false
+human_review_needed = false
+
+[[inputs.binary_evals]]
+name = "Routing clarity"
+question = "Does the workflow classify the request into one mode and follow the fixed path for that mode?"
+pass_condition = "The output clearly picks either project or skill-optimization and uses the documented sequence for that path."
+fail_condition = "The output mixes both modes, skips the path choice, or invents a different sequence."
+
+[[inputs.binary_evals]]
+name = "Handoff completeness"
+question = "Does the setup produce every field required by the autoresearch handoff contract?"
+pass_condition = "The output includes the target skill path, test inputs, binary evals, run count, interval, budget decision, version name, and evaluator artifacts."
+fail_condition = "Any required handoff field is missing or only implied."
+
+[[inputs.binary_evals]]
+name = "Exec readiness"
+question = "Does the setup make the Codex exec launch parameters explicit?"
+pass_condition = "The output specifies the model/runtime settings or clearly points to the resolved config and launch command."
+fail_condition = "The command-line execution details are vague or missing."
+
+[autoresearch]
+runs_per_experiment = 5
+run_interval_seconds = 120
+budget_cap = 6
+version_name = "autoresearch-optimized"
+
+[codex]
+model = "gpt-5.4"
+reasoning_effort = "high"
+profile = ""
+extra_config = []
