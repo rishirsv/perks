@@ -1,3 +1,7 @@
+---
+description: Summarize the conversation so far in a detailed handoff format for continued work.
+---
+
 Your task is to create a detailed summary of the conversation so far, paying close attention to the user's explicit requests and your previous actions.
 This summary should be thorough in capturing technical details, code patterns, and architectural decisions that would be essential for continuing development work without losing context.
 

@@ -11,9 +11,18 @@ Review all changed files for reuse, quality, and efficiency. Fix any issues foun
 
 Run `git diff` (or `git diff HEAD` if there are staged changes) to see what changed. If there are no git changes, review the most recently modified files that the user mentioned or that you edited earlier in this conversation.
 
+### Behavior Lock (optional deep cleanup only)
+
+Activate this phase when the user explicitly asks to "deslop", "clean up AI output", or passes a scoped file list.
+
+1. Identify behavior that must not change in the target files
+2. Check if existing tests cover that behavior — run them
+3. If critical behavior is untested, add the narrowest regression test needed before editing
+4. Skip this phase for routine /simplify runs where changes are small and well-tested
+
 ## Phase 2: Launch Three Review Agents in Parallel
 
-Use the `spawn_agent` tool to launch all three worker-mini agents concurrently in a single message. Pass each agent the full diff so it has the complete context.
+Spawn subagents to launch all three worker-mini agents concurrently in a single message. Pass each agent the full diff so it has the complete context.
 
 ### Agent 1: Code Reuse Review
 
@@ -22,6 +31,7 @@ For each change:
 1. **Search for existing utilities and helpers** that could replace newly written code. Use `rg` to find similar patterns elsewhere in the codebase — common locations are utility directories, shared modules, and files adjacent to the changed ones.
 2. **Flag any new function that duplicates existing functionality.** Suggest the existing function to use instead.
 3. **Flag any inline logic that could use an existing utility** — hand-rolled string manipulation, manual path handling, custom environment checks, ad-hoc type guards, and similar patterns are common candidates.
+4. **Dead code / debug leftovers**: unused imports, unreachable branches, stale feature flags, `console.log` statements, commented-out code blocks
 
 ### Agent 2: Code Quality Review
 
@@ -32,6 +42,9 @@ Review the same changes for hacky patterns:
 3. **Copy-paste with slight variation**: near-duplicate code blocks that should be unified with a shared abstraction
 4. **Leaky abstractions**: exposing internal details that should be encapsulated, or breaking existing abstraction boundaries
 5. **Stringly-typed code**: using raw strings where constants, enums (string unions), or branded types already exist in the codebase
+6. **Needless abstraction**: pass-through wrappers, single-use helper layers, speculative indirection that adds a level without adding value
+7. **Over-defensive code**: try/catch around code that can't throw, null checks on values that are never null, fallback defaults that can never trigger
+8. **Verbose naming**: names that restate the type or context (`userDataObject`, `handleOnClickEvent`), or names padded with unnecessary qualifiers
 
 ### Agent 3: Efficiency Review
 
@@ -47,5 +60,12 @@ Review the same changes for efficiency:
 ## Phase 3: Fix Issues
 
 Wait for all three agents to complete. Aggregate their findings and fix each issue directly. If a finding is a false positive or not worth addressing, note it and move on — do not argue with the finding, just skip it.
+
+After all fixes, run quality gates:
+
+- Run the relevant subset of the project's test suite covering changed files
+- Run lint if configured
+- Run typecheck if configured
+- Verify the diff is minimal and scoped — no unrelated changes crept in
 
 When done, briefly summarize what was fixed (or confirm the code was already clean).

@@ -1,7 +1,7 @@
 ---
 description: Create a pull request for the changes you made, then trigger Codex review on it.
 argument-hint: [TITLE="<optional: title of the pull request>"]
---- 
+---
 
 Create a branch named `<project_name>/<description>` and create a pull request for the changes you made.
 If you are already on a siloed feature branch or worktree, you can skip the step of creating a new branch and just create a pull request for the changes you made.

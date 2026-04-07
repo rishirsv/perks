@@ -1,0 +1,7 @@
+interface:
+  display_name: "Brainstorm"
+  short_description: "Explore ideas through structured conversation"
+  default_prompt: "Use $brainstorm to explore this idea with me — interview me until we have a shared understanding of what to build and how."
+
+policy:
+  allow_implicit_invocation: false

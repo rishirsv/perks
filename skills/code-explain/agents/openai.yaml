@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Explain"
+  short_description: "Explain code in simple plain English"
+  default_prompt: "Use $code-explain to explain this code, diff, data model, or architecture in short, non-technical language."
