@@ -1,0 +1,4 @@
+interface:
+  display_name: "Batch"
+  short_description: "Batch and track large execution plans safely"
+  default_prompt: "Use $batch to turn this saved or in-chat plan into a dependency-aware execution plan, batch the work into ready waves, and coordinate resumable multi-worker execution through one canonical tracker."
