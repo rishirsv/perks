@@ -41,7 +41,7 @@ Review the same changes for hacky patterns:
 2. **Parameter sprawl**: adding new parameters to a function instead of generalizing or restructuring existing ones
 3. **Copy-paste with slight variation**: near-duplicate code blocks that should be unified with a shared abstraction
 4. **Leaky abstractions**: exposing internal details that should be encapsulated, or breaking existing abstraction boundaries
-5. **Stringly-typed code**: using raw strings where constants, enums (string unions), or branded types already exist in the codebase
+5. **Stringly-typed code**: using raw strings where constants, enums (string unions), or branded types already exist in the codebase-
 6. **Needless abstraction**: pass-through wrappers, single-use helper layers, speculative indirection that adds a level without adding value
 7. **Over-defensive code**: try/catch around code that can't throw, null checks on values that are never null, fallback defaults that can never trigger
 8. **Verbose naming**: names that restate the type or context (`userDataObject`, `handleOnClickEvent`), or names padded with unnecessary qualifiers
