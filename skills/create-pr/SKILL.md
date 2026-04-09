@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: Create a GitHub pull request for the current branch using `gh`. Use when asked to create or open a PR, publish a branch, open a draft PR, request reviewers, or turn completed branch work into a concise reviewer-friendly pull request. Inspect branch and git state first, ensure the branch is ready and pushable, write a short high-signal PR title and body, create the PR with explicit `gh` flags, and optionally add `@codex review` after creation when the user asks for it.
+description: Use when asked to create or open a GitHub pull request for the current branch with `gh`, including publishing the branch, drafting reviewer-friendly copy, and handling common PR options.
 ---
 
 # Create PR

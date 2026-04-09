@@ -1,0 +1,7 @@
+interface:
+  display_name: "Oracle"
+  short_description: "Package repo context for external expert review"
+  default_prompt: "Prepare a second-opinion bundle with prompt.md and context.zip for this repository question or review request."
+
+policy:
+  allow_implicit_invocation: false

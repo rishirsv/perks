@@ -1,6 +1,6 @@
 ---
 name: code-explain
-description: Explain code, diffs, files, data models, errors, or architecture in short, plain, non-technical language for a smart non-technical user. Use only when the user explicitly invokes `code-explain`, `$code-explain`, or explicitly asks for `explain` as a manual skill. Read the actual files or diff first, then explain what changed, which files matter, how the pieces fit together, and why it matters without long or jargon-heavy output.
+description: Use only when the user explicitly asks for a plain-language explanation of code, diffs, files, data models, errors, or architecture. Read the real code first and explain it for a non-technical audience.
 ---
 
 # Code Explain

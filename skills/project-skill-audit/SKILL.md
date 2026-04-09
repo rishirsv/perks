@@ -1,6 +1,6 @@
 ---
 name: project-skill-audit
-description: Analyze a project's past Codex sessions, memory files, and existing local skills to recommend the highest-value skills to create or update. Use when a user asks what skills a project needs, wants skill ideas grounded in real project history, wants an audit of current project-local skills, or wants recommendations for updating stale or incomplete skills instead of creating duplicates.
+description: Use when a project needs grounded skill recommendations based on past Codex sessions, memory files, and existing local skills, including audits of current skills and update opportunities.
 ---
 
 # Project Skill Audit

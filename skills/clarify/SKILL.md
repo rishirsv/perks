@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: "Ask the minimum clarifying questions needed before planning or implementation when requirements, scope, constraints, or acceptance criteria are underspecified. Use only when invoked explicitly; do not auto-activate."
+description: "Use only when the user explicitly asks for clarifying questions before planning or implementation. Ask only the minimum questions needed to make the task safe to proceed."
 ---
 
 # Clarify

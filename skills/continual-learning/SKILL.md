@@ -1,6 +1,6 @@
 ---
 name: continual-learning
-description: "Incrementally extract recurring user corrections and durable workspace facts from Codex chat changes, then propose AGENTS.md bullet updates for user approval. Use when the user asks to mine previous chats, maintain AGENTS.md memory, or build a self-learning preference loop."
+description: "Use when the user asks to mine previous Codex chats for recurring preferences or durable workspace facts and propose AGENTS.md updates."
 ---
 
 # Continual Learning

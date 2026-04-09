@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Create one safe, focused git commit from the current repository state. Use when asked to commit current work, write a commit message, checkpoint changes, or turn staged or unstaged edits into a single commit. Inspect git status and diffs, stage only the intended files, ignore unrelated changes, choose a concise repo-consistent message, and stop for confirmation only when the scope is mixed or risky.
+description: Use when asked to turn the current repository state into one safe, focused git commit, including staging only the intended files and writing a concise repo-consistent message.
 ---
 
 # Commit

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Component Designer"
+  short_description: "Design one scoped component task"
+  default_prompt: "Design one scoped component task for this request without implementing code."

@@ -1,6 +1,6 @@
 ---
 name: hard-cut
-description: "Enforce a hard-cut cleanup policy: keep one canonical implementation and delete compatibility, migration, fallback, adapter, coercion, and dual-shape code. Use for pre-release or internal-draft refactors where the goal is one final shape, especially when changing schemas, contracts, persisted state, routing, configuration, feature flags, enum/value sets, or architecture."
+description: "Use for pre-release or internal-draft refactors where the goal is one final shape and compatibility code should be removed, especially around schemas, contracts, persisted state, routing, configuration, feature flags, enum values, or architecture."
 ---
 
 # Hard-Cut Policy

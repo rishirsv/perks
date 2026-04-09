@@ -1,11 +1,8 @@
 ---
 name: auto-research-eval
 description: >
-  Optimize any skill by running it repeatedly against test inputs, scoring
-  outputs with binary Pass/Fail evals, mutating the prompt, and keeping
-  improvements. Based on Karpathy's autoresearch methodology. Use when: optimize
-  skill, improve skill, run autoresearch, eval my skill, benchmark skill,
-  auto-research-eval setup, auto-research-eval configure, auto-research-eval run.
+  Use when optimizing a skill with repeated test runs, binary pass/fail evals,
+  prompt mutation, and score-driven iteration.
 ---
 
 # Auto-Research-Eval

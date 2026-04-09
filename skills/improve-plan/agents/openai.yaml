@@ -1,7 +1,7 @@
 interface:
   display_name: "Improve Plan"
-  short_description: "Turn a draft plan into an execution-ready replacement"
-  default_prompt: "Use $improve-plan to treat this plan as a seed draft, close its gaps from repo evidence, and rewrite it into a stronger canonical plan that is ready to execute."
+  short_description: "Rewrite a draft into an execution-ready plan"
+  default_prompt: "Treat this plan as a seed draft, close its gaps from repo evidence, and rewrite it into a stronger canonical plan that is ready to execute."
 
 policy:
   allow_implicit_invocation: false

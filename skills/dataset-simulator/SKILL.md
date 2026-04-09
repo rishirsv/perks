@@ -1,14 +1,9 @@
 ---
 name: dataset-simulator
 description: >
-  Generates diverse, realistic synthetic datasets for evaluating AI pipelines,
-  training analysts, or stress-testing tools. Specializes in M&A data rooms
-  (complete VDR packages with cross-document consistency) but handles any
-  domain where structured synthetic data is needed. Use when the user asks to
-  generate synthetic data, create test datasets, simulate a data room, build
-  eval inputs, or produce realistic sample data for any domain. Do not use
-  when analyzing real data, when 100+ representative real traces already exist
-  (use stratified sampling instead), or when collecting production logs.
+  Use when the user needs realistic synthetic datasets for evals, analyst
+  training, tool testing, or sample data generation, especially for M&A data
+  rooms with cross-document consistency.
 ---
 
 # Dataset Simulator

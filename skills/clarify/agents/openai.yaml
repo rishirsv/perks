@@ -1,0 +1,7 @@
+interface:
+  display_name: "Clarify"
+  short_description: "Ask only the questions needed to proceed"
+  default_prompt: "Ask the minimum clarifying questions needed to make this task safe to plan or implement."
+
+policy:
+  allow_implicit_invocation: false

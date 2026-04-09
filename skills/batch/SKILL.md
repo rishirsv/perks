@@ -1,6 +1,6 @@
 ---
 name: batch
-description: "Coordinate broad, parallelizable implementation work from a saved or in-chat plan by turning it into a durable execution plan, decomposing it into dependency-aware units and batches, spawning workers only for ready units, and serially tracking resumable progress through one canonical execution tracker. Use only when explicitly asked to batch large work that mixes parallel and sequential execution."
+description: "Use only when the user explicitly asks to batch large implementation work from a saved or in-chat plan into dependency-aware execution waves with resumable tracking."
 ---
 
 # Batch

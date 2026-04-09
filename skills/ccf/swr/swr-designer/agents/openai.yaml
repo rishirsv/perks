@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWR Designer"
+  short_description: "Design one scoped SWR task"
+  default_prompt: "Design one scoped SWR task for this request without implementing code."

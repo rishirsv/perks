@@ -1,6 +1,6 @@
 ---
 name: recent-code-bugfix
-description: Find and fix a bug introduced by the current author within the last week in the current working directory. Use when a user wants a proactive bugfix from their recent changes, when the prompt is empty, or when asked to triage or fix issues caused by their recent commits. Require the root cause to map directly to the author's own changes.
+description: Find and fix a bug introduced by the current author within the last week in the current working directory. Use when the user wants a proactive bugfix from recent changes, when the prompt is empty, or when asked to triage issues caused by recent commits.
 ---
 
 # Recent Code Bugfix

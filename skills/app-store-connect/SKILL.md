@@ -1,6 +1,6 @@
 ---
 name: app-store-connect
-description: Repo-aligned App Store Connect CLI skill for `asc` auth, command discovery, build and TestFlight workflows, metadata sync, submission readiness, and App Store release automation. Use when asked to operate App Store Connect from the CLI, prepare a TestFlight/App Store release, manage ASC metadata, or automate a repeatable `asc` release flow.
+description: Use when operating App Store Connect from the CLI, including authentication, command discovery, build and TestFlight workflows, metadata sync, submission readiness, and release automation.
 ---
 
 # app-store-connect

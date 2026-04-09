@@ -4,6 +4,8 @@
 
 Avoid creating fall-back solutions unless asked.
 
+- Use the `clarify` skill only when the request is underspecified and you need the minimum clarifying questions required to make the task safe to plan or implement.
+
 ## Plans
 
 - In Plan mode, if the user requests plan changes, rewrite the original plan; do not create plan addendums.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Layout Designer"
+  short_description: "Design one scoped layout task"
+  default_prompt: "Design one scoped layout task for this request without implementing code."

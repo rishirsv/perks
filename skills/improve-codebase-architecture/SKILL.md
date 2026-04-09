@@ -1,6 +1,6 @@
 ---
 name: improve-codebase-architecture
-description: Explore a codebase to find architectural improvement opportunities, focusing on deepening shallow modules, improving testability, and surfacing refactor RFC candidates. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly coupled modules, or make a codebase more AI-navigable.
+description: Use when the user wants high-value architecture improvements, refactoring opportunities, better testability, tighter module boundaries, or a codebase that is easier to navigate.
 ---
 
 # Improve Codebase Architecture

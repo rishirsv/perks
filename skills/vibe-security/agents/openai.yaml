@@ -1,8 +1,5 @@
 interface:
   display_name: "Vibe Security"
-  short_description: "Audits vibe-coded apps for common security vulnerabilities."
+  short_description: "Audit AI-built apps for common security issues"
   brand_color: "#DC2626"
-  default_prompt: "Use $vibe-security to audit my project for security issues."
-
-policy:
-  allow_implicit_invocation: true
+  default_prompt: "Audit this project for security vulnerabilities common in AI-generated applications."

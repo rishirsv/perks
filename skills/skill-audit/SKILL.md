@@ -1,11 +1,9 @@
 ---
 name: skill-audit
 description: >
-  Audit an agent skill for release readiness, instruction quality, scope, and
-  resource design. Use when the user asks to audit, review, critique, or
-  pressure-test a skill directory or `SKILL.md`, or asks whether a skill is
-  ready to ship. Not for general code review, evaluator review, or prompt-only
-  critique.
+  Use when auditing a skill for release readiness, instruction quality, scope,
+  and resource design, including pressure-testing a skill directory or
+  `SKILL.md`.
 ---
 
 # Skill Audit

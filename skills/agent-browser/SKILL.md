@@ -1,6 +1,6 @@
 ---
 name: agent-browser
-description: Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting data, testing web apps, or automating any browser task.
+description: Use when the user needs to interact with a website through a browser, including navigation, form filling, clicking, screenshots, extraction, testing, or browser automation.
 ---
 
 # Browser Automation with agent-browser

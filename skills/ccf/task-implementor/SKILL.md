@@ -1,6 +1,6 @@
 ---
 name: task-implementor
-description: Implements exactly one given task by choosing the smallest applicable implementor skills. It does not orchestrate other tasks or execution plans.
+description: Use when implementing exactly one given task by choosing the smallest applicable implementor skills. Do not use it to orchestrate other tasks or execution plans.
 ---
 
 # Task Implementor

@@ -1,6 +1,6 @@
 ---
 name: polish-design
-description: "Review and polish frontend interfaces with a fast default loop or an explicit evaluator-led multi-pass loop. Also supports critique-first review and resilience-focused hardening within the same skill. Use when the interface needs a quality pass that diagnoses and improves design, especially when the user asks for polish, critique, hardening, iterative refinement such as `polish-design 3x`, subagents, or a dedicated design evaluator."
+description: "Use when a frontend interface needs polish, critique, hardening, or iterative refinement, with a fast default loop and an evaluator-led pass only when explicitly requested."
 ---
 
 # Polish Design

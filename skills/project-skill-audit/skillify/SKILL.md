@@ -1,6 +1,6 @@
 ---
 name: skillify
-description: "Capture a repeatable workflow from the current session and turn it into a reusable skill. Use only when explicitly asked to convert work you just did into a checked-in repo skill or a local `.claude/skills` skill."
+description: "Use only when explicitly asked to turn a repeatable workflow from the current session into a reusable skill."
 ---
 
 # Skillify

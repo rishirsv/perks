@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Create a concise but complete continuation handoff for ongoing work. Use only when the user explicitly invokes `handoff` or `$handoff`. Capture what the user wants, what has been done, which files and commands matter, what changed direction, what remains unresolved, and the exact next step so another session or agent can continue without re-discovery.
+description: Create a concise but complete continuation handoff for ongoing work. Use only when the user explicitly asks for a handoff. Capture the current goal, progress, important files and commands, unresolved issues, and the exact next step.
 ---
 
 # Handoff

@@ -41,10 +41,6 @@ voice_transcription = true
 [agents]
 max_threads = 8
 
-[agents.fast_explorer]
-config_file = "agents/fast-explorer.toml"
-description = "Fast explorer subagent for quick codebase investigation and concise findings."
-
 [agents.explore_fast]
 config_file = "agents/explore-fast.toml"
 description = "Fast read-only file search specialist for quick codebase exploration and analysis."
@@ -88,14 +84,6 @@ ignore_default_excludes = true
 include_only = []
 inherit = "all"
 set = {}
-
-###############################################################################
-# History
-###############################################################################
-
-[history]
-persistence = "save-all"
-# max_bytes = 0
 
 ###############################################################################
 # UI & Notice Settings

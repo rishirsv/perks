@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: "Structured, repo-aware conversation to explore an idea, plan, or task until nothing important remains ambiguous. Optionally writes a feature spec for large features. Use only when the user explicitly invokes `brainstorm`/`$brainstorm`. Do not auto-activate."
+description: "Use only when the user explicitly asks to brainstorm an idea, feature, or task through structured conversation. Do not auto-activate."
 ---
 
 # Brainstorm

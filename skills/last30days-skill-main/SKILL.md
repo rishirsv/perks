@@ -1,6 +1,6 @@
 ---
 name: last30days-skill-main
-description: "Research a topic from the last 30 days on Reddit + X + Web, become an expert, and write copy-paste-ready prompts for the user's target tool."
+description: "Use when the user wants research from the last 30 days across Reddit, X, and the web, plus copy-paste-ready prompts for a target tool when helpful."
 ---
 
 # Last 30 Days

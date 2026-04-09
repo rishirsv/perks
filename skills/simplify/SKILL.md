@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: "Instructions for simplifying code"
+description: "Use when cleaning up recent code changes for clarity, reuse, quality, and efficiency."
 ---
 
 # Simplify

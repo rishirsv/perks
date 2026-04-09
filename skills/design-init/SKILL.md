@@ -1,6 +1,6 @@
 ---
 name: design-init
-description: "Create or refresh `docs/DESIGN.md` for iterative UI work on an existing repository. Use only when the user explicitly asks to set up, initialize, create, refresh, or update repo design context before design iteration. This skill owns design-context generation and refresh only; it does not perform the later design, review, or polish work."
+description: "Use only when the user explicitly asks to create or refresh `docs/DESIGN.md` before design iteration. This skill handles design-context generation only."
 ---
 
 # Design Init

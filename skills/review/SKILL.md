@@ -1,6 +1,6 @@
 ---
 name: review
-description: "Reviews code or review of documents."
+description: "Use only when explicitly asked to review code, plans, or documents without implementing changes."
 ---
 
 # Review

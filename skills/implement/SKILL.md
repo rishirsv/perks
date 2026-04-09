@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Execute a plan or issue end-to-end with review checkpoints and clean commits. Use only when you begin work on implementing a formal plan or issue."
+description: "Use when implementing a formal plan or issue end to end with review checkpoints, verification, and clean commits."
 ---
 
 # Implement

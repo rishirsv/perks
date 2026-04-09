@@ -1,6 +1,6 @@
 ---
 name: frontend-skill
-description: Use when the task asks for a visually strong landing page, website, app, prototype, demo, or game UI. This skill enforces restrained composition, image-led hierarchy, cohesive content structure, tasteful motion, and conditional iOS/Expo-native guidance when the work actually targets iOS.
+description: Use when the task needs a visually strong landing page, website, app, prototype, demo, or game UI with clear art direction, hierarchy, restraint, and conditional iOS or Expo guidance.
 ---
 
 # Frontend Skill

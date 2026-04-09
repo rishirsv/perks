@@ -1,6 +1,6 @@
 ---
 name: improve-plan
-description: "Strengthen an existing execution plan into a decision-complete, execution-ready replacement using repo evidence, current conventions, and targeted clarification only when the codebase cannot answer."
+description: "Use when strengthening an existing execution plan into a decision-complete, execution-ready replacement using repo evidence and current conventions."
 ---
 
 # Improve Plan
@@ -39,6 +39,7 @@ If no target plan can be found, stop and say exactly what was searched.
 
 - Prefer concrete codebase evidence over abstract design opinions.
 - If a question can be answered by reading code, docs, tests, scripts, or adjacent implementations, explore instead of asking.
+- Use parallel read-only exploration when it materially speeds up independent evidence gathering. If sub-agents are available, give them narrow, non-overlapping investigation tasks and keep the critical-path rewrite work local.
 - Rewrite the plan as one clean replacement, not an addendum.
 - Preserve completed checkboxes when improving an existing saved plan unless the plan is clearly wrong and needs a reset.
 - Keep the improved plan aligned with repo conventions, naming, architecture, and validation habits.
@@ -54,8 +55,9 @@ Drive the plan through these states in order:
 1. `draft detected`
 2. `gaps identified`
 3. `repo evidence gathered`
-4. `plan rewritten`
-5. `ready`, `batch-ready`, or `blocked on one decision`
+4. `clarification resolved`
+5. `plan rewritten`
+6. `ready`, `batch-ready`, or `blocked on one decision`
 
 Do not skip a state just because the draft sounds polished.
 
@@ -104,9 +106,64 @@ Inspect only the sources needed to close the gaps:
 
 Update the plan as you learn. Do not wait until the end to reflect discoveries.
 
+When parts of the investigation are independent, parallelize the read-only work. Good parallel tasks include:
+
+- checking similar implementations in neighboring modules
+- finding real validation commands and test entry points
+- locating existing plan/spec conventions
+- tracing one specific subsystem or contract
+
+Do not delegate the main reasoning thread that decides what the final plan should say.
+
 When the plan depends on unstable external guidance such as current library behavior, APIs, or best practices, research that only when needed and say that it was externally verified.
 
-### 4. Apply critical feedback
+### 4. Resolve missing decisions
+
+After repo exploration, decide which clarification mode applies:
+
+- `no clarification needed` - the repo and user-provided draft are sufficient
+- `targeted clarification` - 1-2 plan-critical answers are missing
+- `deep interview required` - several linked decisions are unresolved and the plan cannot responsibly be rewritten yet
+
+Use the lightest mode that can close the gap.
+
+#### 4a. Targeted clarification
+
+Use this when only a small number of answers are still needed.
+
+- Ask only the smallest necessary question set.
+- Prefer multiple-choice, yes/no, or tightly constrained options.
+- Explain what part of the plan depends on the answer.
+- Offer a recommended default when appropriate.
+
+#### 4b. Deep interview required
+
+Use this when the draft plan is missing multiple linked decisions that materially affect:
+
+- user-facing behavior
+- architecture or boundaries
+- implementation ordering
+- validation strategy
+- scope in/out
+
+When this mode is triggered:
+
+- Stay focused on rescuing the plan, not on reopening the whole product ideation process.
+- Interview the user one question at a time.
+- Walk the unresolved decision tree in dependency order.
+- For each unresolved branch, provide your recommended answer or default.
+- After each answer, restate the decision and carry its implications into the next question.
+- Prefer the smallest defensible scope; push optional ideas out of the rewritten plan.
+- Stop the interview as soon as the plan can be rewritten without guessing.
+
+If the user asks you to proceed without all answers:
+
+- state the assumptions as a short numbered list
+- confirm them before rewriting the plan
+
+Do not ask questions the repo can answer. Do not ask broad brainstorming questions when a plan-shaped question would close the branch faster.
+
+### 5. Apply critical feedback
 
 Do not simply polish the draft. Challenge it.
 
@@ -122,7 +179,7 @@ Surface:
 
 Prefer a smaller, cleaner, more defensible plan over a bloated one. If the draft is trying to preserve every idea, narrow it to the recommended path.
 
-### 5. Rewrite the plan
+### 6. Rewrite the plan
 
 Produce a full replacement plan that another engineer or agent can execute cold.
 
@@ -148,7 +205,7 @@ When rewriting:
 
 Do not optimize for sounding comprehensive. Optimize for reducing implementation ambiguity.
 
-### 6. Decide execution shape
+### 7. Decide execution shape
 
 Classify the improved plan as one of:
 
@@ -164,29 +221,16 @@ Only classify as batch-ready when:
 
 Otherwise keep the plan as one implementation flow.
 
-### 7. Ask only the smallest necessary question
-
-Ask the user a question only when the unresolved item materially changes:
-
-- user-facing behavior
-- architecture
-- scope
-- implementation ordering
-- validation strategy
-
-If blocked, ask one focused question and explain exactly which part of the plan depends on it.
-
-Do not ask for approval in plain text. If the surrounding workflow has a dedicated approval step, leave the plan in its strongest state and use that mechanism.
-
 ## What good output looks like
 
 Your response should:
 
 1. State which plan you improved.
 2. Summarize the key gaps or contradictions you found.
-3. Provide the improved plan as a full replacement.
-4. State the readiness classification.
-5. If blocked, ask the smallest possible follow-up question.
+3. If clarification was needed, briefly state which decisions were resolved and which defaults were chosen.
+4. Provide the improved plan as a full replacement.
+5. State the readiness classification.
+6. If still blocked, ask the smallest possible follow-up question.
 
 The improved plan should feel like a promoted artifact, not an edited note dump.
 
@@ -201,7 +245,9 @@ The improved plan should feel like a promoted artifact, not an edited note dump.
 - Do not silently drop completed checkboxes from an existing saved plan.
 - Do not stop at "better wording" if the underlying plan is still weak.
 - Do not let a polished but underspecified draft pass as ready.
+- Do not switch into a deep interview unless the missing decisions actually change the plan in a material way.
+- Do not use deep interview mode as a substitute for normal repo exploration or broad brainstorming.
 
 ## Goal
 
-Leave the user with a stronger canonical plan that is ready to implement without extra interpretation.
+Leave the user with a stronger canonical plan that is ready to implement without extra interpretation, using deeper questioning only when the existing draft truly needs it.

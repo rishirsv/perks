@@ -1,6 +1,6 @@
 ---
 name: research
-description: Research best practices, current guidance, and codebase patterns before planning or implementation. Use when explicitly invoked via $research or when the user asks for a sourced research brief.
+description: Use when the user asks for a sourced research brief or needs current best practices, primary guidance, and codebase patterns before planning or implementation.
 ---
 
 # Research

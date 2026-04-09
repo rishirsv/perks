@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: "Autonomous repo-wide refactor architect: analyze a codebase, identify and justify the single highest-value refactor relative to cost and risk, then produce a decisive recommendation and execution plan (and optionally implement safely if requested). Use for one-shot refactor prioritization, architectural cleanup with minimal blast radius, and velocity/bug-surface reduction without asking clarifying questions."
+description: "Use when choosing the single highest-value refactor for a codebase based on payoff, cost, and risk, with an evidence-backed recommendation and execution plan."
 ---
 
 # Refactor

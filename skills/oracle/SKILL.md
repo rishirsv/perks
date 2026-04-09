@@ -1,6 +1,6 @@
 ---
 name: oracle
-description: "Prepare a second-opinion bundle for an external expert model by creating `prompt.md` and `context.zip`. Use only when the user explicitly asks to package repo context for Oracle, ChatGPT Pro, or another external expert review."
+description: "Prepare a second-opinion bundle for an external expert model by creating `prompt.md` and `context.zip`. Use only when the user explicitly asks to package repo context for external expert review."
 ---
 
 # Oracle

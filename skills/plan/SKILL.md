@@ -1,6 +1,6 @@
 ---
 name: plan
-description: "Create an implementation plan when the user explicitly asks for a formal plan related to any type of task."
+description: "Use only when the user explicitly asks for a formal implementation plan."
 ---
 
 # Plan
