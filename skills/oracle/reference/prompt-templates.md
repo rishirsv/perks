@@ -2,7 +2,8 @@
 
 Use these templates to generate `prompt.md` for ChatGPT Pro or another external expert model.
 
-Every template assumes the downstream model sees only `context.zip`.
+Review-oriented templates assume the downstream model sees only `context.zip`.
+The Ultraplan template assumes the downstream model sees only `context.txt`.
 Copy the smallest template that fits, then trim anything you do not need.
 For reusable building blocks, see [prompt-blocks.md](prompt-blocks.md).
 
@@ -20,6 +21,79 @@ Replace `{ROLE}` with one of these:
 | Data/SQL | a database engineer reviewing correctness and performance |
 | UI/UX | an expert UI/UX designer doing a rigorous visual and interaction review |
 | Prompting | a prompt engineer improving Codex or GPT-5.4 prompts for reliability and clarity |
+| Planning | a principal engineer creating a high-confidence implementation plan for a complex change in an unfamiliar codebase |
+
+## Ultraplan Template
+
+```xml
+<task>
+You are {ROLE}.
+
+I am uploading `context.txt` containing a curated repository slice and manifest.
+Treat `context.txt` as authoritative.
+Start by reading the manifest section at the top of `context.txt`.
+
+Create a high-confidence implementation plan for this task.
+Do not write code.
+Do not stop for routine clarification.
+Proceed with the best reasonable assumptions and label them explicitly.
+
+Task: {TASK}
+Success criteria: {SUCCESS_CRITERIA}
+Constraints: {CONSTRAINTS}
+Draft plan to refine, if provided: {SEED_PLAN}
+
+Repository-specific preferences:
+- Prefer the smallest change that fits the existing codebase.
+- Avoid fallback solutions unless the task explicitly requires them.
+- Separate observed facts, assumptions, and recommendations.
+</task>
+
+<structured_output_contract>
+Return exactly these sections:
+1. Current understanding
+2. Assumptions and unknowns
+3. Relevant file and system touchpoints
+4. Options considered
+5. Recommended approach
+6. ## Approved Plan
+7. Validation checklist
+8. Risks and follow-ups
+
+Inside `## Approved Plan`, include:
+- phases with a short non-technical outcome for each phase
+- an implementation checklist
+- concrete validation steps
+</structured_output_contract>
+
+<default_follow_through_policy>
+Default to the most reasonable low-risk interpretation and keep going.
+Only stop to ask questions when a missing detail changes correctness or safety materially.
+</default_follow_through_policy>
+
+<completeness_contract>
+Resolve the planning task fully before stopping.
+Do not stop at the first plausible plan.
+Check for edge cases, sequencing issues, missing validations, and risky assumptions before finalizing.
+</completeness_contract>
+
+<grounding_rules>
+Ground every concrete claim in `context.txt`.
+Cite file paths for codebase claims.
+If a point is an inference, label it clearly.
+</grounding_rules>
+
+<action_safety>
+Keep the recommended plan tightly scoped to the stated task.
+Avoid unrelated refactors, renames, or cleanup unless they are required for correctness.
+Call out risky or irreversible actions explicitly.
+</action_safety>
+
+<verification_loop>
+Before finalizing, verify that the plan matches the uploaded repository slice and the requested outcome.
+If the first draft is underspecified, revise it instead of stopping early.
+</verification_loop>
+```
 
 ## Code Review Template
 

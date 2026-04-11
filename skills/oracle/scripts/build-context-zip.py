@@ -40,7 +40,7 @@ DEFAULT_EXCLUDED_BASENAMES = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Build context.zip for Oracle (ChatGPT Pro) uploads.",
+        description="Build Oracle context artifacts for external model uploads.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
 
@@ -53,6 +53,11 @@ def parse_args() -> argparse.Namespace:
         "--out",
         required=True,
         help="Output zip path (e.g., /path/to/context.zip).",
+    )
+    parser.add_argument(
+        "--text-out",
+        default="",
+        help="Optional text bundle path for ChatGPT web uploads (e.g., /path/to/context.txt).",
     )
     parser.add_argument(
         "--zip-root",
@@ -353,11 +358,99 @@ def render_manifest(
     return "\n".join(lines)
 
 
+def _language_hint(path: Path) -> str:
+    suffix = path.suffix.lower()
+    return {
+        ".ts": "ts",
+        ".tsx": "tsx",
+        ".js": "js",
+        ".jsx": "jsx",
+        ".py": "python",
+        ".rb": "ruby",
+        ".go": "go",
+        ".rs": "rust",
+        ".java": "java",
+        ".kt": "kotlin",
+        ".swift": "swift",
+        ".sh": "bash",
+        ".zsh": "bash",
+        ".json": "json",
+        ".yml": "yaml",
+        ".yaml": "yaml",
+        ".toml": "toml",
+        ".md": "md",
+        ".sql": "sql",
+        ".html": "html",
+        ".css": "css",
+    }.get(suffix, "")
+
+
+def render_text_bundle(
+    repo_root: Path,
+    entries: list[BundleEntry],
+    *,
+    task: str = "",
+    constraints: list[str] | None = None,
+    verify: list[str] | None = None,
+    exclude_patterns: list[str] | None = None,
+    default_excludes_enabled: bool = True,
+) -> str:
+    manifest = render_manifest(
+        repo_root,
+        entries,
+        task=task,
+        constraints=constraints,
+        verify=verify,
+        exclude_patterns=exclude_patterns,
+        default_excludes_enabled=default_excludes_enabled,
+    )
+
+    lines: list[str] = []
+    lines.append("# Oracle text context bundle")
+    lines.append("")
+    lines.append("This file is intended for ChatGPT web uploads.")
+    lines.append(
+        "Treat the manifest and file contents below as the authoritative repository slice."
+    )
+    lines.append("")
+    lines.append(manifest)
+    lines.append("")
+    lines.append("## File contents")
+    lines.append("")
+
+    for entry in entries:
+        lines.append(f"### File: {entry.rel_path.as_posix()}")
+        if entry.reason.strip():
+            lines.append(f"Reason: {entry.reason.strip()}")
+        language_hint = _language_hint(entry.rel_path)
+        if language_hint:
+            lines.append(f"Language hint: {language_hint}")
+        lines.append("")
+        try:
+            text = entry.abs_path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            lines.append("[Skipped: file is not valid UTF-8 text.]")
+            lines.append("")
+            continue
+
+        lines.append(f"<<< BEGIN FILE {entry.rel_path.as_posix()} >>>")
+        lines.append(text.rstrip("\n"))
+        lines.append(f"<<< END FILE {entry.rel_path.as_posix()} >>>")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
 def main() -> int:
     args = parse_args()
 
     repo_root = Path(args.repo_root).expanduser()
     out_path = Path(args.out).expanduser()
+    text_out_path = (
+        Path(args.text_out).expanduser()
+        if str(args.text_out or "").strip()
+        else None
+    )
     zip_root = str(args.zip_root).strip().strip("/").strip()
     if not zip_root:
         raise SystemExit("--zip-root must not be empty")
@@ -421,6 +514,21 @@ def main() -> int:
 
     size_kb = os.path.getsize(out_path) / 1024
     print(f"Wrote: {out_path} ({size_kb:.1f} KB; {len(entries)} files)", file=sys.stderr)
+
+    if text_out_path is not None:
+        text_out_path.parent.mkdir(parents=True, exist_ok=True)
+        text_bundle = render_text_bundle(
+            repo_root,
+            entries,
+            task=args.task,
+            constraints=args.constraint,
+            verify=args.verify,
+            exclude_patterns=exclude_patterns,
+            default_excludes_enabled=default_excludes_enabled,
+        )
+        text_out_path.write_text(text_bundle, encoding="utf-8")
+        print(f"Wrote: {text_out_path}", file=sys.stderr)
+
     return 0
 
 

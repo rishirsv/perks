@@ -1,17 +1,20 @@
 ---
 name: oracle
-description: "Prepare a second-opinion bundle for an external expert model by creating `prompt.md` and `context.zip`. Use only when the user explicitly asks to package repo context for external expert review."
+description: "Prepare an external-model bundle with `prompt.md` plus repo context artifacts for expert review or GPT-5.x Pro web planning. Use only when the user explicitly asks to package repo context for an external model."
 ---
 
 # Oracle
 
-Prepare an "ask an expert" bundle for ChatGPT Pro or another external model that will review real repo context.
+Prepare an external-model bundle for either:
+- a second-opinion review, diagnosis, or recommendation
+- an `ultraplan` planning pass in ChatGPT on the web using GPT-5.x Pro
 
-**Produces two artifacts:**
+**Produces artifacts:**
 - `prompt.md`: paste as the message
-- `context.zip`: upload alongside it (contains files plus `MANIFEST.md`)
+- `context.zip`: zipped repo slice with `MANIFEST.md`
+- `context.txt` in `ultraplan` mode: a single web-friendly text bundle containing the manifest plus selected file contents
 
-**Good fits:** debugging, code review, architecture validation, research, prompt critique, or a careful second opinion on a risky change.
+**Good fits:** debugging, code review, architecture validation, research, prompt critique, careful second opinions on risky changes, or high-confidence implementation planning.
 
 ## Activation Rule
 
@@ -21,6 +24,13 @@ Do not auto-activate for:
 - ordinary mentions of Oracle the company or database
 - generic requests for a second opinion with no request to package repo context
 - ordinary mentions of ChatGPT Pro that are not asking for a repo-context bundle
+
+## Bundle Modes
+
+Choose one mode before assembling artifacts:
+
+- `review` (default): package repo context for review, diagnosis, critique, or recommendation
+- `ultraplan`: package repo context for ChatGPT on the web to study the codebase and produce a planning-only implementation plan
 
 ## Output Location
 
@@ -34,8 +44,9 @@ Prompt the downstream model like an operator, not a collaborator.
 - Tell the model what "done" looks like instead of hoping it infers the goal.
 - Use compact XML-style prompt blocks for stable structure.
 - Prefer a better prompt contract over longer prose or "think harder" wording.
-- Ground claims in `context.zip`; if something is inferred, have the model label it.
+- Ground claims in the uploaded context artifact; if something is inferred, have the model label it.
 - Do not invite questions. Tell the model to proceed with assumptions and list unknowns.
+- In `ultraplan` mode, keep the bundle self-contained. Do not rely on web-side memory or tools beyond the uploaded context and pasted prompt.
 
 Default prompt shape:
 - `<task>`: the concrete job, relevant repo context, and expected end state
@@ -51,15 +62,28 @@ Custom assembly guidance lives in [reference/custom-prompt-guide.md](reference/c
 
 ## Workflow
 
-1. Understand the user's real question and reduce it to one clear downstream task.
-2. Pick the downstream role.
-3. Select the smallest file set that can support a grounded answer.
-4. Choose the smallest prompt recipe that fits and add only the blocks that matter.
-5. Write `prompt.md`.
-6. Create `context.zip`.
-7. Tell the user exactly what to paste, upload, and verify locally.
+1. Understand the user's real question and choose `review` or `ultraplan`.
+2. Reduce it to one clear downstream task.
+3. Pick the downstream role.
+4. Select the smallest file set that can support a grounded answer.
+5. Choose the smallest prompt recipe that fits and add only the blocks that matter.
+6. Write `prompt.md`.
+7. Create the context artifact(s).
+8. Tell the user exactly what to paste, upload, and verify locally.
 
 ## Instructions
+
+### 0) Choose the bundle mode
+
+Use `ultraplan` mode when the external model's job is to create a high-confidence implementation plan.
+
+In `ultraplan` mode:
+- planning only; do not ask the downstream model to write code
+- require a final `## Approved Plan` section so the result is easy to paste back into local planning docs
+- require phase outcomes and an implementation checklist
+- tell the downstream model to proceed with assumptions and list unknowns instead of asking routine questions
+- avoid fallback solutions unless the task explicitly requires them
+- keep the bundle self-contained; do not rely on project memory, apps, or canvas-like features being available
 
 ### 1) Choose the downstream role
 
@@ -75,6 +99,7 @@ Pick one from `reference/prompt-templates.md#role-values` and use it as `{ROLE}`
 | Data/SQL | a database engineer reviewing correctness and performance |
 | UI/UX | an expert UI/UX designer doing a rigorous visual and interaction review |
 | Prompting | a prompt engineer improving Codex or GPT-5.4 prompts for reliability and clarity |
+| Planning | a principal engineer creating a high-confidence implementation plan for a complex change in an unfamiliar codebase |
 
 ### 2) Select files conservatively
 
@@ -90,16 +115,18 @@ Never include secrets such as `.env` files, credentials, tokens, or raw private 
 
 ### 3) Write `prompt.md`
 
-Start from the smallest template in [reference/prompt-templates.md](reference/prompt-templates.md). If none fit, assemble a custom prompt using [reference/custom-prompt-guide.md](reference/custom-prompt-guide.md).
+Start from the smallest template in [reference/prompt-templates.md](reference/prompt-templates.md). For `ultraplan` mode, start from the Ultraplan template. If none fit, assemble a custom prompt using [reference/custom-prompt-guide.md](reference/custom-prompt-guide.md).
 
 Prompt-writing rules:
-- Assume the model knows nothing beyond `context.zip`.
-- Tell it to read `context/MANIFEST.md` first.
+- Assume the model knows nothing beyond the uploaded context artifact.
+- In `review` mode, tell it to read `context/MANIFEST.md` first.
+- In `ultraplan` mode, tell it to read the manifest section at the top of `context.txt` first.
 - Use XML blocks consistently so the prompt has stable internal structure.
 - Add only the blocks that matter for this task; do not dump every possible rule into every prompt.
 - Require file-path citations for concrete claims.
 - Prefer explicit output contracts over vague instructions.
 - Do not ask the downstream model to ask questions; have it proceed with assumptions and list unknowns.
+- In `ultraplan` mode, require a plan that can be used directly in this repo's plan docs: phase outcomes, implementation checklist, and validation steps.
 
 Block-selection defaults:
 - Use `task` in every prompt.
@@ -113,7 +140,7 @@ Block-selection defaults:
 - Add `action_safety` when asking for fix plans or change recommendations.
 - Add `dig_deeper_nudge` for adversarial review or regression hunting.
 
-### 4) Create `context.zip`
+### 4) Create context artifacts
 
 Use the installed skill path so the workflow works from any local repo:
 
@@ -125,6 +152,7 @@ fi
 
 REPO_ROOT="$(pwd)" "$ORACLE_SKILL_DIR/scripts/oracle.sh" \
   --out ".agents/oracle/<slug>/context.zip" \
+  --text-out ".agents/oracle/<slug>/context.txt" \
   --task "Summary of what downstream model should do" \
   --entry "path/to/folder::Main feature folder"
 ```
@@ -135,6 +163,7 @@ Direct Python form:
 REPO_ROOT="$(pwd)" python3 "$ORACLE_SKILL_DIR/scripts/build-context-zip.py" \
   --repo-root "$REPO_ROOT" \
   --out ".agents/oracle/<slug>/context.zip" \
+  --text-out ".agents/oracle/<slug>/context.txt" \
   --task "Summary" \
   --constraint "Key constraint" \
   --verify "Command to validate locally" \
@@ -146,6 +175,7 @@ Useful options:
 - `--entries-from <file>`: read entries from a file with one `PATH::REASON` per line
 - `--dry-run`: preview the manifest without writing the zip
 - `--estimate-tokens`: estimate bundle size before hand-off
+- `--text-out <file>`: also write a single text bundle for ChatGPT web uploads
 
 ### 5) Keep the bundle small
 
@@ -161,6 +191,11 @@ Smaller, sharper bundles usually produce better answers than giant uploads with 
 ### 6) Hand-off
 
 Tell the user:
-- upload `context.zip`
-- paste the contents of `prompt.md`
-- treat the response as a second opinion, then verify locally with tests, logs, or manual checks
+- in `review` mode: upload `context.zip` and paste `prompt.md`
+- in `ultraplan` mode:
+  - open a fresh ChatGPT web chat or fresh project chat
+  - select `GPT-5.x Pro` and the highest available thinking setting
+  - upload `context.txt`
+  - paste `prompt.md`
+  - treat the result as a planning draft, then verify locally before implementation
+- if using a project, still upload `context.txt` and paste the full prompt; do not assume project memory alone contains enough context
