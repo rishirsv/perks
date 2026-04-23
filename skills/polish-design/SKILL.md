@@ -1,18 +1,19 @@
 ---
 name: polish-design
-description: "Use when a frontend interface needs polish, critique, hardening, or iterative refinement, with a fast default loop and an evaluator-led pass only when explicitly requested."
+description: "Use when an interface needs polish, critique, hardening, reference matching, or iterative refinement, with a fast default loop and an evaluator-led pass only when explicitly requested."
 ---
 
 # Polish Design
 
-Polish frontend interfaces with a tight implementation loop by default, and switch to a stricter evaluator-led loop only when the user explicitly asks for subagents, a dedicated evaluator, or multi-pass critique.
+Polish interfaces with a tight implementation loop by default, and switch to a stricter evaluator-led loop only when the user explicitly asks for subagents, a dedicated evaluator, or multi-pass critique.
 
-Use `frontend-skill` as the design principles foundation. Every judgment call defers first to `docs/DESIGN.md` if it exists in the repo, then to `frontend-skill`, then to the evaluator rubric in `references/design-evaluation.md`, the critique rubric in `references/design-critique.md`, and the resilience checks in `references/hardening-checklist.md`.
+Use `frontend-skill` as the design principles foundation. Every judgment call defers first to `docs/DESIGN.md` if it exists in the repo, then to `frontend-skill`, then to the micro-polish guidance folded into `frontend-skill/references/micro-polish.md` when details matter, then to the evaluator rubric in `references/design-evaluation.md`, the critique rubric in `references/design-critique.md`, and the resilience checks in `references/hardening-checklist.md`.
 
 ## Priority Rule
 
 - Check for `docs/DESIGN.md` in the project root. If it exists, read it first and treat it as the primary design context.
 - Do not create or refresh `docs/DESIGN.md` silently.
+- For component-level polish, motion details, control feel, media edges, typography fit, or platform interaction feel, read `frontend-skill/references/micro-polish.md`.
 - For evaluator-led runs, read `references/design-evaluation.md` before producing any score or recommendation.
 - For critique-first requests, read `references/design-critique.md` before producing findings.
 - For hardening-focused requests or when resilience issues appear material, read `references/hardening-checklist.md` before recommending or making changes.
@@ -23,6 +24,7 @@ Default to the single-agent polish loop unless the user explicitly requests one 
 
 - critique, review, assess, or diagnose before editing
 - harden, productionize, handle edge cases, or make the UI more resilient
+- match a provided reference image, mockup, screenshot, or visual target
 - use subagents
 - use the `design_evaluator` agent
 - run multiple evaluator-led passes
@@ -33,6 +35,7 @@ Mode routing:
 - `default polish`: audit and improve in one pass
 - `critique-first`: findings first, edits second only if requested or clearly implied
 - `hardening-first`: prioritize resilience, states, overflow, and edge cases over visual flourish
+- `reference-match`: compare against a provided visual reference and iterate on the largest visible deltas
 - `evaluator-led`: use the dedicated multi-pass scoring loop
 
 Examples that should trigger the evaluator-led path:
@@ -59,6 +62,12 @@ Examples that should trigger `hardening-first`:
 - `Harden this dashboard before release`
 - `Make this UI production-ready`
 
+Examples that should trigger `reference-match`:
+
+- `Make this screen match this reference`
+- `Restyle this route from this screenshot`
+- `Iterate until it looks close to the mockup`
+
 ## Default Loop
 
 Use this path for most requests.
@@ -69,6 +78,7 @@ Use this path for most requests.
 4. Output concise findings in chat.
 5. Implement 1-3 high-impact fixes.
 6. Re-capture and confirm the result. If the capture is saved to disk, save it under `.agents/polish-design/<run-id>/screens/`.
+7. Run a final detail pass with `frontend-skill/references/micro-polish.md` when the changes touch controls, motion, typography, media, or component surface details.
 
 When issues are obvious, include critique and hardening lenses in the same pass rather than treating polish as purely visual.
 
@@ -83,6 +93,24 @@ Organize concise findings under these categories:
 5. Motion & Performance
 
 For each bullet: state the problem, where it is, severity (`Critical`, `High`, `Medium`, `Low`), and the fix direction in one line.
+
+## Reference-Match Loop
+
+Use this path when the user provides a screenshot, mockup, image, or visual reference and asks to build, restyle, or iterate toward it.
+
+1. Load or inspect the reference image when available.
+2. Identify the target surface, route, viewport, platform, framework, and source files before editing.
+3. Read `docs/DESIGN.md` when present and preserve the product concept, behavior, and copy unless the user asks for a redesign.
+4. Capture the current surface and save it under `.agents/polish-design/<run-id>/screens/` when possible.
+5. Compare composition first: viewport, geometry, density, hierarchy, background, chrome, navigation, major regions, and visible product state.
+6. Then compare details: typography, spacing, depth, media treatment, icon alignment, motion, selected states, and control feel. Read `frontend-skill/references/micro-polish.md` for this pass.
+7. Implement only the highest-impact visible deltas for the pass.
+8. Re-capture at the same viewport and compare again.
+9. Stop when the result is defensibly close, no high-impact visible deltas remain, unresolved deltas are listed, or a real blocker prevents closer matching.
+
+If several reference screens belong to one deliverable, prefer one shared app or prototype surface with multiple routes/views over separate scaffolds when the repo supports that shape.
+
+Treat third-party screenshots as references only. Recreate the design direction in the product's own code and design language; do not embed vendor screenshots, logos, or exact branded chrome.
 
 ## Critique-First Loop
 
@@ -168,6 +196,7 @@ Include only:
 - If the same blocker persists for two passes, do not keep polishing blindly. Re-evaluate the direction.
 - When the evaluator recommends `pivot`, change the design direction before more incremental polish.
 - When the evaluator recommends `stop`, do not chase cosmetic nits.
+- In reference-match mode, use the same deterministic stop gate: defensibly close, no high-impact visible deltas, unresolved deltas named, or blocked.
 - In critique-first mode, findings come before edits.
 - In hardening-first mode, resilience blockers outrank purely visual polish.
 
@@ -192,6 +221,7 @@ Do not save screens under `docs/`, `docs/polish`, or any other documentation pat
 Use a simple sequence-friendly naming structure inside `screens/`:
 
 - `00-current.png` when there is only one baseline capture
+- `00-reference.png` when a reference image is copied into the run folder
 - `01-before-pass-01.png`
 - `02-after-pass-01.png`
 - `03-before-pass-02.png`
@@ -247,11 +277,13 @@ If a capture tool saves files, route them to `.agents/polish-design/<run-id>/scr
 ## Guardrails
 
 - Always reference `frontend-skill` principles when judging design quality.
+- Treat micro-polish as part of `frontend-skill`; do not invoke or preserve a separate micro-polish skill.
 - The evaluator output must be skeptical, concise, and actionable.
 - Use critique and hardening references only when they materially fit the task; do not load every reference by default.
 - Do not drift into feature work or refactors unless a design blocker cannot be solved without them.
 - Do not install capture tools without asking.
 - Do not over-polish minor details while systemic problems remain.
+- In reference-match work, match composition before details.
 - Do not confuse critique with implementation. If the user asked for review only, stop after findings.
 - Do not confuse hardening with feature expansion. Add resilience, not scope.
 - Preserve the repo's design language unless the user explicitly asks for departure.

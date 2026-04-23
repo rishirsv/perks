@@ -170,7 +170,7 @@ Look for:
 
 - changes likely to break layout or states
 - excessive motion or asset cost
-- risky CSS or component changes without corresponding gains
+- risky styling or component changes without corresponding gains
 
 ## Automatic fail signals
 

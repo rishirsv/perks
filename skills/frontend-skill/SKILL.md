@@ -1,13 +1,13 @@
 ---
 name: frontend-skill
-description: Use when the task needs a visually strong landing page, website, app, prototype, demo, or game UI with clear art direction, hierarchy, restraint, and interface copy.
+description: Use when an interface needs strong visual direction across web, native app, prototype, demo, game, or other UI surfaces, with clear art direction, hierarchy, restraint, interaction quality, and interface copy.
 ---
 
 # Frontend Skill
 
-Use this skill when the quality of the work depends on art direction, hierarchy, restraint, imagery, and motion rather than component count.
+Use this skill when the quality of the work depends on art direction, hierarchy, restraint, imagery, interaction detail, and motion rather than component count.
 
-Goal: ship interfaces that feel deliberate, premium, and current. Default toward award-level composition: one big idea, strong imagery, sparse copy, rigorous spacing, and a small number of memorable motions.
+Goal: ship interfaces that feel deliberate, premium, and current. Default toward award-level composition: one big idea, strong imagery, sparse copy, rigorous spacing, precise interaction details, and a small number of memorable motions.
 
 ## Priority Order
 
@@ -21,7 +21,8 @@ When guidance overlaps, resolve it in this order:
 
 1. repository-specific design context
 2. the general frontend guidance in this skill
-3. the interface-writing guidance when the task includes meaningful product copy
+3. the micro-polish guidance when the task touches component details, motion, controls, media, typography, spacing, or platform interaction feel
+4. the interface-writing guidance when the task includes meaningful product copy
 
 ## Working Model
 
@@ -40,7 +41,7 @@ If the task includes meaningful interface copy, also define:
 
 ## Interface Writing
 
-Apply this section when the frontend task also includes copy inside the product surface: headlines, labels, buttons, empty states, onboarding text, errors, alerts, settings descriptions, helper text, or accessibility labels.
+Apply this section when the interface task also includes copy inside the product surface: headlines, labels, buttons, empty states, onboarding text, errors, alerts, settings descriptions, helper text, or accessibility labels.
 
 - Treat interface writing as part of the design work, not filler added at the end.
 - First, search for voice guidance in `AGENTS.md`, `CLAUDE.md`, `docs/DESIGN.md`, the design system, or existing product copy.
@@ -75,6 +76,14 @@ Apply this section when the frontend task also includes copy inside the product 
 - Establish the core tokens up front: type pairing, radius family, border behavior, shadow language, and accent strategy.
 - Keep those choices consistent across the whole surface. Do not mix soft glass cards, brutal borders, and editorial minimalism in the same concept unless the brief clearly demands it.
 - For custom decorative SVGs or shapes, keep them geometric and support the layout. Do not invent literal illustrations unless the brief calls for illustration.
+
+## Micro-Polish
+
+Use `references/micro-polish.md` when the task touches interface details such as rounded surfaces, visual depth, icon alignment, hover or press states, transitions, changing numbers, media edges, text wrapping, hit targets, or responsive fit.
+
+Treat these rules as platform-agnostic design principles. Translate them into the host environment's idioms rather than assuming a particular language, framework, or runtime.
+
+Apply micro-polish after composition, hierarchy, product clarity, and the design system direction are sound. Do not spend the pass on tiny details while the main layout, action, or information architecture is still wrong.
 
 ## Landing Pages
 
@@ -183,7 +192,7 @@ Ship at least 2-3 intentional motions for visually led work:
 - one scroll-linked, sticky, or depth effect
 - one hover, reveal, or layout transition that sharpens affordance
 
-Prefer Framer Motion when available for:
+Prefer the repo's existing platform-native motion system for:
 
 - section reveals
 - shared layout transitions
@@ -199,6 +208,8 @@ Motion rules:
 - fast and restrained
 - consistent across the page
 - removed if ornamental only
+- interruptible for user-controlled state changes whenever the platform supports it
+- respectful of reduced-motion settings and performance constraints
 
 ## Spacing And Overflow
 
@@ -235,6 +246,8 @@ Motion rules:
 - Repeating the same section composition down the whole page
 - Inconsistent radius, shadow, or stroke language
 - Headline wrapped into a tall text block because the container is too narrow
+- Controls that look visually polished but feel misaligned, cramped, slow, or hard to hit
+- Details copied from one platform into another where they fight native expectations
 
 ## Litmus Checks
 
@@ -249,3 +262,4 @@ Motion rules:
 - Would the design still feel premium if all decorative shadows were removed?
 - Does the layout rhythm change enough from section to section to avoid a template feel?
 - Are radius, borders, shadows, and accents behaving like one deliberate system?
+- Do controls, motion, media, and typography feel precise at the detail level?
