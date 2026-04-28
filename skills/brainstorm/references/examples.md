@@ -1,107 +1,73 @@
 # Brainstorm Examples
 
-Load this file for conversation shape reference. These examples show the rhythm and formatting of good brainstorms — not templates to copy literally.
+Load this file for conversation shape reference. These examples show rhythm and formatting, not templates to copy literally.
 
----
+## Example 1: Discover
 
-## Example 1: Quick Sounding Board
+Sizing: Standard. The user wants ideas before choosing a direction.
 
-Sizing: Quick. The user has a formed opinion and needs a fast reaction.
+> **User:** Ideate on ways to improve the workout resume experience.
+>
+> **Assistant:** Treating this as discovery around the workout resume experience. I’ll ground in the current workout docs/code, generate a candidate set, then show only the strongest directions.
+>
+> I found three constraints that matter: the live runtime owner is `WorkoutSessionController`, resume behavior must preserve in-progress state, and the app avoids duplicate truth between UI and persistence.
+>
+> **Ranked ideas**
+>
+> 1. **Resume as a calm continuity card**
+>    What it is: A small Home or shell surface that shows the active workout, last logged set, and next useful action.
+>    Warrant: direct repo grounding shows workout continuity already depends on live runtime state plus persistence.
+>    UX implication: The user feels picked up, not interrupted.
+>    Implementation implication: The card should read from the existing workout runtime/persistence boundary rather than own state.
+>    Risk: Easy to overbuild into a dashboard.
+>    Next step: Develop the UX states before planning implementation.
 
-> **User:** I'm thinking about adding a changelog to the CLI. Worth it?
->
-> **Assistant:** What's driving this — users asking for it, or a gut feeling that it's missing? And who reads the CLI output — developers, or also ops people who might not check GitHub?
->
-> **User:** Developers mostly. Nobody's asked, I just think it'd be nice.
->
-> **Assistant:** Honest take: if nobody's asking for it and your users are developers, they'll check the GitHub releases page or git log. A changelog command adds maintenance burden for something your audience already knows how to find.
->
-> Where it *would* pay off: if you ship breaking changes and want the CLI itself to surface "hey, v3 changed the config format." That's more of a migration warning than a changelog though.
->
-> My recommendation: skip the changelog, but add a `--version` flag that prints the version and a link to the releases page. Low effort, solves the real need. Sound right?
->
-> **User:** Yeah that's the move. Thanks.
+What this demonstrates: discovery generates and filters ideas before asking for detailed solution preferences.
 
-What this demonstrates: sized as quick, gave an honest recommendation fast, didn't manufacture phases or ceremony.
+## Example 2: Develop
 
----
+Sizing: Standard. The user has one rough idea and wants shape.
 
-## Example 2: Deep Software Brainstorm
+> **User:** I’m thinking about adding a lightweight daily readiness thing to Home.
+>
+> **Assistant:** My read: you’re not asking for a dashboard; you’re asking whether Home can make today’s training state feel legible. Before I propose shapes, is the primary moment:
+>
+> 1. opening the app before a workout,
+> 2. returning after a workout,
+> 3. checking progress on an off day?
+>
+> My default is **1**, because it gives Home a clearer job.
+>
+> **User:** Yeah, before a workout.
+>
+> **Assistant:** Then I’d compare three shapes: a tiny readiness line, a compact plan card, or an adaptive prompt. My recommendation is the compact plan card: it has enough substance to be useful but avoids turning Home into analytics chrome.
 
-Sizing: Deep. Multiple unknowns, cross-cutting scope, real alternatives to evaluate.
+What this demonstrates: development starts from the user's idea, asks one narrowing question, and recommends a shape.
 
-> **User:** We need to add real-time notifications to the app. Users are complaining about stale data.
->
-> **Assistant:** Before we get into solutions — a couple things to nail down:
->
-> 1) What's actually going stale?
->    a) Dashboard metrics / analytics
->    b) Collaborative data (e.g., two users editing the same thing)
->    c) Status updates (order status, build progress, etc.)
->    d) Multiple of the above — which is the most painful?
->
-> 2) How stale is "stale" right now — are we talking minutes or hours?
->
-> **User:** 1c, order status. And it's minutes — they place an order and keep refreshing to see if it shipped.
->
-> **Assistant:** Okay so the core problem is: a user takes an action, and the result of that action doesn't appear until they manually refresh. That's a feedback loop problem more than a general real-time data problem — which is good, because the scope is much narrower.
->
-> That changes the approach. We don't need every piece of data to be live — we just need status transitions to push to the client when they happen.
->
-> Before I look at approaches, one more: how many concurrent users are we talking about, roughly? That affects whether a simple solution will hold.
->
-> **User:** Maybe 500 concurrent on a busy day. Not huge.
->
-> **Assistant:** At 500 concurrent, all three common approaches will work fine. Here's how they compare for your case:
->
-> | | **SSE** | **WebSockets** | **Polling (30s)** |
-> |---|---|---|---|
-> | Complexity | Low — server pushes, client listens | Medium — bidirectional, needs connection mgmt | Lowest — just a timer |
-> | Latency | Near-instant | Near-instant | Up to 30s delay |
-> | Infra impact | Minimal at 500 users | Needs sticky sessions or Redis pub/sub | Minimal |
-> | Best for | One-way status updates | Chat, collab, bidirectional needs | When "good enough" is fine |
->
-> **My recommendation: SSE.** You only need server-to-client push. It's simpler than WebSockets, near-instant, works through most proxies and load balancers, and you won't need the bidirectional channel. Polling would also work but you said users are frustrated by the delay — 30 seconds won't fix the feeling.
->
-> Want to dig into the SSE implementation shape, or do you want to push back on the approach first?
+## Example 3: Pressure-Test
 
-What this demonstrates: adaptive entry (started at the problem, not step 1), question formatting with options, narrowed scope before exploring solutions, comparison table with clear recommendation and reasoning.
+Sizing: Quick. The user wants critique.
 
----
+> **User:** Grill this: we should add a separate ResumeManager for workouts.
+>
+> **Assistant:** The risk is ownership drift. If `WorkoutSessionController` already owns live workout runtime and the repository owns persistence, a separate `ResumeManager` may become a third truth for the same state.
+>
+> Strong part: naming resume as a distinct user moment is useful.
+>
+> Weak part: making it a separate manager probably solves the vocabulary problem by adding architecture.
+>
+> Simpler alternative: keep resume orchestration in the existing runtime owner, but give the UI a dedicated resume presentation model or computed read model.
+>
+> Recommendation: revise, not drop. Keep the product concept; do not add a new runtime owner unless repo evidence shows the existing owner cannot handle it.
 
-## Example 3: Universal Creative Brainstorm
+What this demonstrates: pressure-test names the failure mode and recommends proceed/revise/split/drop.
 
-Sizing: Standard. Not trivial but doesn't need deep branching.
+## Example 4: Direct
 
-> **User:** I need to name my new developer tool. It's a CLI that watches your test suite and re-runs only the tests affected by your code changes.
->
-> **Assistant:** Good problem to name for — it's specific enough to be evocative. Before I generate candidates, what's your instinct so far? Any names you've tried and rejected, or a vibe you're going for?
->
-> **User:** I tried "delta" but it's taken. I want something short, technical-feeling but not generic.
->
-> **Assistant:** Got it — short, technical, not generic, and "delta" tells me you like the idea of *change* as the core metaphor. Let me explore a few different angles:
->
-> **Change / difference metaphor:**
-> - Drift — your tests drift with your code
-> - Flux — continuous change
-> - Diff (too generic, probably taken)
->
-> **Watching / sensing metaphor:**
-> - Sentry — watches and reacts (but overloaded in dev tools)
-> - Reflex — automatic response to a stimulus
-> - Pulse — checks the heartbeat of your test suite
->
-> **Speed / precision metaphor:**
-> - Snipe — picks off exactly the right tests
-> - Stitch — reconnects tests to the code that changed
-> - Tap — light, fast, targeted
->
-> My top 3:
->
-> 1. **Reflex** — captures the "automatic response to change" idea. Short, memorable, feels technical without being jargony. Risk: there's a Haskell framework called Reflex, but different enough audience.
-> 2. **Drift** — evocative, unusual for a dev tool, ties to the delta/change metaphor you liked. Risk: could sound passive or negative ("drifting off course").
-> 3. **Tap** — shortest, punchiest, implies precision. Risk: very common English word, might be hard to search for.
->
-> Which of these directions feels warmest? Or did something I didn't star catch your eye?
+Sizing: No brainstorm needed.
 
-What this demonstrates: asked for existing thinking first, explored multiple angles (not just synonyms), grouped by theme, evaluated top candidates on fit and risk, ended with a question that invites reaction.
+> **User:** What files should I read before changing Home?
+>
+> **Assistant:** This does not need a brainstorm. Read `AGENTS.md`, `WORK-TRACKER.md`, the relevant Home feature files, and any active/completed Home routing plans. If behavior parity matters, check the shipped Expo Home implementation too.
+
+What this demonstrates: the skill exits brainstorm when the user asks a direct factual question.

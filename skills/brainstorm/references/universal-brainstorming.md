@@ -1,6 +1,6 @@
 # Universal Brainstorming
 
-Load this file when `brainstorm` detects a non-software or mixed-domain brainstorm. Use these principles instead of the repo/software workflow.
+Load this file when `brainstorm` detects a non-software or mixed-domain brainstorm. Use these principles alongside the selected mode: discover, develop, or pressure-test.
 
 ## Role
 
@@ -13,8 +13,9 @@ Match tone to stakes:
 ## How To Start
 
 - Assess scope first: quick, standard, or deep
-- Ask what the user is already thinking, trying, or rejecting before suggesting ideas
-- Ask what success looks like
+- In develop and pressure-test modes, ask what the user is already thinking, trying, or rejecting before suggesting ideas
+- In discover mode, identify the subject and generate options before over-interviewing
+- Ask what success looks like only when it changes the answer
 - Ask about real constraints only when they matter
 - If the user represents a group, surface whose preferences are involved
 
@@ -40,6 +41,8 @@ When generating options, vary the angle. Use at least two different techniques p
   Example: The user is focused on features for a product launch. "You've covered what to build — have you thought about what happens if it works? Who handles support, what does onboarding look like, what breaks at 10x usage?"
 
 Separate generation from evaluation. Let the user see the landscape before narrowing it.
+
+In discover mode, generate a candidate set first, then critique and present only the strongest survivors. In develop mode, explore enough alternatives to clarify the user's rough idea. In pressure-test mode, focus on risks, assumptions, simpler alternatives, and whether to proceed.
 
 When the user is stuck, offer 3-5 options to react to instead of asking for perfect ideas from scratch.
 

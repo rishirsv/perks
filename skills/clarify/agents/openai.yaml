@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $clarify to ask only the needed questions, sharpen fuzzy language, leave a short Common Understanding summary, and optionally create a docs artifact."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true
