@@ -2,6 +2,10 @@
 
 This is Rishi's system Codex agents file. The source copy is stored in `rs-tools` at `configs/codex/AGENTS.md` and may be synced to `~/.codex/AGENTS.md`.
 
+## Subagents
+
+- Prefer the `fast-explorer` subagent for quick code-based exploration, file/symbol searches, and lightweight repo orientation when deep analysis is unnecessary.
+
 ## Plans
 
 - For substantial features, architecture changes, refactors, migrations, or multi-session work, use an ExecPlan.

@@ -4,6 +4,7 @@
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 web_search = "live"
+suppress_unstable_features_warning = true
 
 [tools]
 view_image = true
