@@ -5,7 +5,7 @@ Personal Codex plugin marketplace and reusable agent skills.
 ## Structure
 
 - `skills/`: loose reusable skills while drafting or before plugin packaging.
-- `plugins/`: installable Codex plugins.
+- `plugins/`: installable Codex plugins, including packaged plugin agents.
 - `.agents/plugins/marketplace.json`: repo-scoped Codex marketplace catalog.
 - `.codex/config.toml`: repo-local Codex config that registers this marketplace.
 - `configs/`: reusable agent and prompt configuration.
@@ -19,6 +19,7 @@ This repo exposes a local Codex marketplace named `rs-tools`.
 Current plugin:
 
 - `plugins/rs-tools`: starter Codex plugin that bundles the `rs-tools` skill.
+- `plugins/rs-tools/.codex/agents`: Codex subagents packaged with the RS Tools plugin.
 
 Bundled skills:
 

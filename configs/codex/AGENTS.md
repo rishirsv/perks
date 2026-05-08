@@ -10,7 +10,7 @@ This is Rishi's system Codex agents file. The source copy is stored in `rs-tools
 
 - For substantial features, architecture changes, refactors, migrations, or multi-session work, use an ExecPlan.
 - Do not create ExecPlans for small edits, routine maintenance, or work that can be completed clearly in one session.
-- If the user requests plan changes, rewrite the existing plan instead of creating addendums.
+- When creating or updating plans, write one cohesive plan; rewrite the existing plan instead of creating plan addendums.
 - Store active plans at `docs/exec-plans/active/<feature-slug>-plan.md`.
 - Move completed plans to `docs/exec-plans/completed/<feature-slug>-plan.md`.
 - A plan should be restartable: another agent should be able to continue from the plan file plus the current working tree.
