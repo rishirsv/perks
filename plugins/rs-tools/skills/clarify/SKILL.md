@@ -120,6 +120,8 @@ Use the repo's existing spec location and format when one exists. Update an exis
 
 Write the spec cleanly. Capture the substance of the discussion, but do not paste the transcript or preserve conversational wording. The spec should read like the source of truth for implementation.
 
+Start specs directly with the document title and substantive sections. Do not add front-matter-style metadata blocks or decorative status headers such as `Status`, `Last updated`, `Audience`, `Owner`, or similar labels unless the existing project-native format already requires them.
+
 For feature-scale clarification, the spec must capture:
 
 - **Goal**: the user-visible outcome and why it matters
@@ -144,4 +146,5 @@ Do not use the spec as an ExecPlan. The spec captures requirements and decisions
 - Treating nice-to-have preferences as blockers.
 - Implementing from Clarify without the user's answers or confirmed assumptions.
 - Creating a new artifact family when the right durable output is a clean spec.
+- Adding boilerplate metadata headers or front-matter-style status blocks to specs.
 - Leaving implementation-blocking questions open in a feature spec.

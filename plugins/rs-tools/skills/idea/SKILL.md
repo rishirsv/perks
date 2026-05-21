@@ -107,6 +107,8 @@ When durable capture is needed, update the smallest existing project-native arti
 
 When creating one of these fallback artifacts, read `assets/templates.md` and use only the matching template.
 
+Start durable artifacts directly with the document title and substantive content. Do not add front-matter-style metadata blocks or decorative status headers such as `Status`, `Last updated`, `Audience`, `Owner`, or similar labels unless the existing project-native artifact already requires them.
+
 Do not create competing sources of truth.
 
 ## Ending
@@ -136,6 +138,7 @@ If the idea is not clear enough, keep asking the next highest-leverage question 
 - Do not turn every answer into a document.
 - Do not use operational docs as idea truth.
 - Do not over-explain the process in the visible response.
+- Do not add boilerplate metadata headers or front-matter-style status blocks to idea notes, specs, decision records, or plans.
 - Do not create an execution plan until the idea has settled enough to support one.
 - Do not implement inside Idea.
 

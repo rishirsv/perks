@@ -1,11 +1,11 @@
 ---
 name: simplify
-description: "Use when cleaning up recent code changes for clarity, reuse, quality, and efficiency."
+description: "Use when cleaning up recent code changes for clarity, reuse, quality, efficiency, and AI-generated code slop."
 ---
 
 # Simplify
 
-Review all changed files for reuse, quality, and efficiency. Fix any issues found.
+Review all changed files for reuse, structural simplicity, AI-generated code slop, quality, and efficiency. Fix any issues found while preserving behavior unless the user explicitly asks for behavior changes.
 
 ## Phase 1: Identify Changes
 
@@ -26,27 +26,35 @@ Spawn subagents to launch all three `worker` agents concurrently in a single mes
 
 Tell each agent to use available skills, plugins, repo instructions, and repo review guidance when they apply to the changed code.
 
-### Agent 1: Code Reuse Review
+### Agent 1: Reuse and Structural Simplification Review
 
 For each change:
 
 1. **Search for existing utilities and helpers** that could replace newly written code. Use `rg` to find similar patterns elsewhere in the codebase — common locations are utility directories, shared modules, and files adjacent to the changed ones.
 2. **Flag any new function that duplicates existing functionality.** Suggest the existing function to use instead.
 3. **Flag any inline logic that could use an existing utility** — hand-rolled string manipulation, manual path handling, custom environment checks, ad-hoc type guards, and similar patterns are common candidates.
-4. **Dead code / debug leftovers**: unused imports, unreachable branches, stale feature flags, `console.log` statements, commented-out code blocks
+4. **Look for structural simplifications** that preserve behavior while deleting branches, modes, helper layers, special cases, or concepts.
+5. **Flag refactors that move complexity around without reducing it.** Prefer reframing the model, ownership boundary, or default flow so less code is needed.
+6. **Flag feature-specific logic added to shared or unrelated paths.** Push logic toward the canonical package, module, helper, or abstraction that already owns the concept.
+7. **Flag new ad-hoc conditionals and one-off flags** that make an existing flow harder to reason about. Prefer a clearer model, dispatcher, policy object, or focused helper.
 
-### Agent 2: Code Quality Review
+### Agent 2: AI Slop and Code Quality Review
 
-Review the same changes for hacky patterns:
+Review the same changes for AI-generated slop and hacky patterns:
 
-1. **Redundant state**: state that duplicates existing state, cached values that could be derived, observers/effects that could be direct calls
-2. **Parameter sprawl**: adding new parameters to a function instead of generalizing or restructuring existing ones
-3. **Copy-paste with slight variation**: near-duplicate code blocks that should be unified with a shared abstraction
-4. **Leaky abstractions**: exposing internal details that should be encapsulated, or breaking existing abstraction boundaries
-5. **Stringly-typed code**: using raw strings where constants, enums (string unions), or branded types already exist in the codebase-
-6. **Needless abstraction**: pass-through wrappers, single-use helper layers, speculative indirection that adds a level without adding value
-7. **Over-defensive code**: try/catch around code that can't throw, null checks on values that are never null, fallback defaults that can never trigger
-8. **Verbose naming**: names that restate the type or context (`userDataObject`, `handleOnClickEvent`), or names padded with unnecessary qualifiers
+1. **Redundant state**: state that duplicates existing state, cached values that could be derived, observers/effects that could be direct calls.
+2. **Parameter sprawl**: adding new parameters or booleans to a function instead of generalizing or restructuring existing ownership.
+3. **Copy-paste with slight variation**: near-duplicate code blocks that should be unified with a shared abstraction or a simpler single flow.
+4. **Leaky abstractions**: exposing internal details that should be encapsulated, or breaking existing abstraction boundaries.
+5. **Stringly-typed code**: using raw strings where constants, enums (string unions), or branded types already exist in the codebase.
+6. **Needless abstraction**: pass-through wrappers, single-use helper layers, identity helpers, speculative indirection, or generic mechanisms that hide a simple data shape.
+7. **Over-defensive code**: try/catch around code that cannot throw, null checks on values that are never null, fallback defaults that can never trigger, and broad "just in case" guards that hide invariants.
+8. **Verbose naming**: names that restate the type or context (`userDataObject`, `handleOnClickEvent`), or names padded with unnecessary qualifiers.
+9. **Dead code / debug leftovers**: unused imports, unreachable branches, stale feature flags, `console.log` statements, commented-out code blocks, and abandoned TODO scaffolding.
+10. **Unnecessary comments and narration**: comments that restate obvious code, explain what changed instead of why it must exist, or sound like implementation notes from an AI draft.
+11. **Cast-heavy or loose contracts**: `any`, `unknown`, forced casts, unnecessary optionality, or ad-hoc object shapes used to bypass clear type boundaries.
+12. **Boilerplate scaffolding**: placeholder helpers, generic adapters, empty extension points, or configuration surfaces that were added because they seem reusable but are not needed by the current design.
+13. **Inconsistent local style**: code that ignores the surrounding file's naming, error handling, import organization, testing pattern, or component/module shape in a way that makes the change look pasted in.
 
 ### Agent 3: Efficiency Review
 
@@ -61,7 +69,9 @@ Review the same changes for efficiency:
 
 ## Phase 3: Fix Issues
 
-Wait for all three agents to complete. Aggregate their findings and fix each issue directly. If a finding is a false positive or not worth addressing, note it and move on — do not argue with the finding, just skip it.
+Wait for all three agents to complete. Aggregate their findings and fix each issue directly. Prefer deleting complexity over rearranging it. If a finding is a false positive or not worth addressing, note it and move on — do not argue with the finding, just skip it.
+
+Do not accept a change merely because tests pass if it leaves obvious AI slop, needless indirection, or a more tangled local design. If a structural cleanup is valid but too large to handle safely in the current pass, leave a short follow-up note with the exact scope.
 
 After all fixes, run quality gates:
 

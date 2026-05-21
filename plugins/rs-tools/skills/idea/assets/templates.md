@@ -2,6 +2,8 @@
 
 Use only when no project-native artifact already exists. Keep the artifact compact and source-of-truth oriented, not transcript-like.
 
+Start fallback artifacts directly with the title and the substantive sections shown below. Do not add front-matter-style metadata blocks or decorative status headers such as `Status`, `Last updated`, `Audience`, `Owner`, or similar labels.
+
 ## Idea Note
 
 ```md
