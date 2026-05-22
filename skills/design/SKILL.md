@@ -1,11 +1,11 @@
 ---
 name: design
-description: Use explicitly for high-craft UI and product design work across web, native apps, dashboards, tools, landing pages, onboarding, empty states, and design systems. Handles interface mockup images, A/B/C option boards, mobile flow boards, component studies, state matrices, reference-based visual refinements, creating and redesigning interfaces, initializing or refreshing docs/DESIGN.md, screenshot-led polish, UX/design critique, technical UI audits, accessibility, adaptive layout, typography, color, motion, microcopy, production hardening, and product/brand design judgment. Not for backend-only work.
+description: Use explicitly for high-craft UI and product design work across web, native apps, dashboards, tools, landing pages, onboarding, empty states, and design systems. Handles creating and redesigning interfaces, initializing or refreshing docs/DESIGN.md, screenshot-led polish, UX/design critique, technical UI audits, accessibility, adaptive layout, typography, color, motion, microcopy, production hardening, and product/brand design judgment. Not for backend-only work or throwaway prototypes.
 ---
 
 # Design
 
-Design produces real working interfaces, committed design choices, and inspected craft. Match implementation complexity to the vision: maximalism needs elaborate code; minimalism needs precision. Vary across projects. Never converge on the same safe answer.
+Design produces real working interfaces, committed design choices, design docs, audits, polish, and hardening. Match implementation complexity to the vision: maximalism needs elaborate code; minimalism needs precision. Vary across projects. Never converge on the same safe answer.
 
 ## Start Here
 
@@ -20,15 +20,13 @@ Design produces real working interfaces, committed design choices, and inspected
 
 - `init`: create `docs/DESIGN.md` when the repo lacks a design source of truth. Read [references/init.md](references/init.md).
 - `refresh`: update `docs/DESIGN.md` from the current implemented system. Read [references/init.md](references/init.md).
-- `mockup`: create interface mockup images, option boards, flow boards, component studies, state matrices, or reference-based refinements. Read [references/mockups.md](references/mockups.md).
-- `craft`: create or substantially redesign a surface, with mockups when useful. Read [references/craft.md](references/craft.md).
+- `craft`: create or substantially redesign a surface in the real stack. Read [references/craft.md](references/craft.md).
 - `audit`: evaluate a surface without changing code. Covers UX critique and technical UI audit. Read [references/audit.md](references/audit.md).
 - `polish`: improve an existing functional surface through visual passes. Read [references/polish.md](references/polish.md).
 - `harden`: make an existing surface survive real data, errors, devices, accessibility, and localization. Read [references/harden.md](references/harden.md).
 
 Plain-language requests route naturally:
 
-- "mock this", "make A/B/C options", "visualize this flow", "make a state matrix", "generate UI mockups" -> `mockup`
 - "shape this", "make a new flow", "build this screen", "redesign this surface" -> `craft`
 - "critique this", "review the design", "what's wrong with this UI" -> `audit`
 - "make it quieter", "fix the type", "tighten the layout", "make it bolder", "add delight" -> `polish`
@@ -133,7 +131,7 @@ Run two passes before committing to a visual direction:
 - Component vocabulary must be consistent. If the save button looks different in two places without reason, one is wrong.
 - Do not reinvent standard affordances for flavor: custom scrollbars, weird form controls, non-standard modals, unclear tabs.
 - Heavy color and full-saturation accents do not belong on inactive states.
-- Use product copy, not implementation leakage. Visible text, accessibility text, alt text, notifications, errors, and mockup UI text must not expose internal states, scopes, flags, enum names, agent rationale, or scaffold-as-UI. For copy work, read [references/ui-copy.md](references/ui-copy.md).
+- Use product copy, not implementation leakage. Visible text, accessibility text, alt text, notifications, and errors must not expose internal states, scopes, flags, enum names, agent rationale, or scaffold-as-UI. For copy work, read [references/ui-copy.md](references/ui-copy.md).
 - App UI should organize around a primary workspace, navigation, secondary context or inspector, and one clear accent for action or state.
 - Avoid dashboard-card mosaics, thick borders on every region, ornamental icons, and decorative gradients behind routine work.
 - Operator scan test: if someone scans only headings, labels, and numbers, can they understand the page immediately?

@@ -1,10 +1,10 @@
 # UI Copy
 
-Use this reference for visible text, accessibility labels, alt text, notifications, system dialogs, voice command labels, Siri or Shortcut intent labels, tooltips, placeholders, empty states, errors, and mockup UI text.
+Use this reference for visible text, accessibility labels, alt text, notifications, system dialogs, voice command labels, Siri or Shortcut intent labels, tooltips, placeholders, empty states, and errors.
 
 ## Implementation Leakage
 
-User-facing text must not exist because of an implementation detail. If a string makes sense because of a permission scope, feature flag, backing enum, state machine, internal taxonomy, agent rationale, or mockup scaffold, rewrite or remove it.
+User-facing text must not exist because of an implementation detail. If a string makes sense because of a permission scope, feature flag, backing enum, state machine, internal taxonomy, agent rationale, or scaffold label, rewrite or remove it.
 
 Implementation leakage is also scaffold-as-UI: text that explains the screen from the builder's point of view instead of helping the user act, understand state, or recover.
 

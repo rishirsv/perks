@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prototype"
+  short_description: "Prototype logic and UI reference directions"
+  default_prompt: "Use $prototype to explore logic or UI directions before committing to production implementation."

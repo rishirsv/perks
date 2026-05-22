@@ -51,7 +51,7 @@ Use severity for findings:
 - P2: real issue to fix soon.
 - P3: polish.
 
-Treat implementation leakage or scaffold-as-UI in production product surfaces as P1 when it can damage user trust, confuse task completion, or expose internal model/state. In mockups, treat it as P2 unless the copy is part of the implementation contract.
+Treat implementation leakage or scaffold-as-UI in production product surfaces as P1 when it can damage user trust, confuse task completion, or expose internal model/state.
 
 ## Output
 

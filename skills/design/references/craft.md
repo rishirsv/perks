@@ -1,17 +1,16 @@
 # Craft
 
-Craft creates or substantially redesigns a surface. It includes design direction, optional visual exploration, implementation, and rendered verification.
+Craft creates or substantially redesigns a surface. It includes design direction, implementation, and rendered verification.
 
 ## Flow
 
 1. Load `docs/DESIGN.md` first when present, then repo docs, components, tokens, screenshots, and running UI.
 2. Identify register: product or brand.
 3. Shape the surface enough to force real commitments.
-4. Generate visual probes or mockups when useful or requested. For image mockups, read [mockups.md](mockups.md).
-5. Build with the project's real stack and conventions.
-6. Inspect the rendered surface.
-7. Patch material defects found by inspection.
-8. Report what was built and what was verified.
+4. Build with the project's real stack and conventions.
+5. Inspect the rendered surface.
+6. Patch material defects found by inspection.
+7. Report what was built and what was verified.
 
 ## Shape Commitments
 
@@ -38,30 +37,6 @@ For brand landing pages, also read [lenses.md](lenses.md) and commit to a visual
 For product app surfaces, also read [lenses.md](lenses.md) and identify the primary workspace, navigation, secondary context or inspector, and one clear accent for action or state.
 
 Do not create a separate design brief file unless the user asks.
-
-## Mockups And Image Generation
-
-Use mockups when they improve the result:
-
-- net-new or high-stakes surface
-- major redesign
-- brand, onboarding, hero, or visually ambiguous work
-- user explicitly asks for mocks
-
-For interface mockup images, option boards, flows, component studies, state matrices, reference edits, responsive sets, or north-star visuals, read [mockups.md](mockups.md). It defines artifact types, variation depth, prompt construction, evaluation, and implementation handoff.
-
-Choose fidelity intentionally:
-
-- `sketch`: loose spatial idea
-- `wireframe`: structure and hierarchy
-- `mid-fi`: density, rhythm, component relationships
-- `high-fi`: near-final visual direction
-- `north-star`: aspirational composition and tone to preserve in code
-- `asset study`: badges, textures, marks, product imagery, illustrations
-- `state matrix`: default, empty, loading, error, success, long-content variants
-- `responsive set`: mobile, tablet, desktop versions
-
-Before coding from a mock, name what carries into implementation: composition, hierarchy, density, typography, color, imagery, motifs, and motion cues. Also name what not to literalize. Do not rasterize text, controls, forms, nav, or core content.
 
 ## Build Bar
 

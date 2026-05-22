@@ -87,7 +87,7 @@ Prefer in-situ photography over abstract gradients or fake 3D objects. Avoid ima
 
 ## Copy
 
-For product copy, accessibility text, empty states, errors, labels, and mockup UI text, read [ui-copy.md](ui-copy.md). It is the canonical source for preventing implementation leakage and scaffold-as-UI.
+For product copy, accessibility text, empty states, errors, and labels, read [ui-copy.md](ui-copy.md). It is the canonical source for preventing implementation leakage and scaffold-as-UI.
 
 ## Product Micro-Polish
 
