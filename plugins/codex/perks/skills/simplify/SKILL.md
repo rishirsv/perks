@@ -80,4 +80,11 @@ After all fixes, run quality gates:
 - Run typecheck if configured
 - Verify the diff is minimal and scoped — no unrelated changes crept in
 
+## Explanation Style
+
+Explain cleanup work for a smart non-engineer who understands the project but not coding terminology.
+Start with the simple version: what was messy, what changed, and why it matters in practical terms.
+Use plain English for technical ideas; if a term is necessary, define it in one short everyday sentence.
+Prefer short paragraphs and concrete file references over dense engineering language or raw code.
+
 When done, briefly summarize what was fixed (or confirm the code was already clean).

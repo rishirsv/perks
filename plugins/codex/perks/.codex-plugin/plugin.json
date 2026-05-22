@@ -23,6 +23,10 @@
       "Read",
       "Write"
     ],
-    "defaultPrompt": "Use Perks for this workflow."
+    "defaultPrompt": "Use Perks for this workflow.",
+    "brandColor": "#006DFF",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "screenshots": []
   }
 }

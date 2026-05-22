@@ -6,6 +6,7 @@ PLUGIN_NAME="perks"
 VERSION="0.1.0"
 
 SOURCE_SKILLS="$ROOT/skills"
+SOURCE_ASSETS="$ROOT/assets/$PLUGIN_NAME"
 CODEX_PLUGIN="$ROOT/plugins/codex/$PLUGIN_NAME"
 CLAUDE_PLUGIN="$ROOT/plugins/claude/$PLUGIN_NAME"
 CODEX_MARKETPLACE_DIR="$ROOT/.agents/plugins"
@@ -29,6 +30,7 @@ fi
 mkdir -p \
   "$CODEX_PLUGIN/.codex-plugin" \
   "$CODEX_PLUGIN/skills" \
+  "$CODEX_PLUGIN/assets" \
   "$CLAUDE_PLUGIN/.claude-plugin" \
   "$CLAUDE_PLUGIN/skills" \
   "$ROOT/.agents/plugins" \
@@ -36,6 +38,10 @@ mkdir -p \
 
 rsync -a --delete --exclude '.DS_Store' "$SOURCE_SKILLS/" "$CODEX_PLUGIN/skills/"
 rsync -a --delete --exclude '.DS_Store' "$SOURCE_SKILLS/" "$CLAUDE_PLUGIN/skills/"
+
+if [[ -d "$SOURCE_ASSETS" ]]; then
+  rsync -a --delete --exclude '.DS_Store' "$SOURCE_ASSETS/" "$CODEX_PLUGIN/assets/"
+fi
 
 mkdir -p "$HOME/.codex" "$HOME/.claude"
 cp "$SYSTEM_AGENTS_SOURCE" "$CODEX_SYSTEM_AGENTS"
@@ -76,7 +82,11 @@ codex_manifest = {
         "developerName": "Rishi",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],
-        "defaultPrompt": "Use Perks for this workflow."
+        "defaultPrompt": "Use Perks for this workflow.",
+        "brandColor": "#006DFF",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png",
+        "screenshots": []
     }
 }
 
