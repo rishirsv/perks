@@ -2,13 +2,12 @@
 
 ## Plans
 
-- Use ExecPlans only for substantial features, migrations, refactors, or multi-session work.
 - Store active plans in `docs/exec-plans/active/`; move completed plans to `docs/exec-plans/completed/`.
 - Rewrite existing plans instead of creating addendums.
 
 ## Perks Repo
 
-In `/Users/rishi/Code/perks`:
+In `~/Code/perks`:
 
 - `skills/` and `AGENTS.md` are the source files to edit.
 - `skill-workbench/` is for WIP/imported skills.
