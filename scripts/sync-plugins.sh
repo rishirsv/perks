@@ -159,7 +159,7 @@ if command -v codex >/dev/null 2>&1; then
   codex plugin remove "rs-tools@rs-tools" >/dev/null 2>&1 || true
   codex plugin marketplace remove "rs-tools" >/dev/null 2>&1 || true
   codex plugin marketplace remove "$PLUGIN_NAME" >/dev/null 2>&1 || true
-  codex plugin marketplace add "$MARKETPLACE_SOURCE"
+  codex plugin marketplace add "$MARKETPLACE_SOURCE" --sparse .agents --sparse plugins/codex
   codex plugin remove "$PLUGIN_NAME@$PLUGIN_NAME" >/dev/null 2>&1 || true
   codex plugin add "$PLUGIN_NAME@$PLUGIN_NAME"
 fi
@@ -168,7 +168,7 @@ if command -v claude >/dev/null 2>&1; then
   claude plugin uninstall "rs-tools@rs-tools" --scope user >/dev/null 2>&1 || true
   claude plugin marketplace remove "rs-tools" >/dev/null 2>&1 || true
   claude plugin marketplace remove "$PLUGIN_NAME" >/dev/null 2>&1 || true
-  claude plugin marketplace add "$MARKETPLACE_SOURCE"
+  claude plugin marketplace add "$MARKETPLACE_SOURCE" --sparse .claude-plugin plugins/claude
   claude plugin uninstall "$PLUGIN_NAME@$PLUGIN_NAME" >/dev/null 2>&1 || true
   claude plugin install "$PLUGIN_NAME@$PLUGIN_NAME" --scope user || claude plugin update "$PLUGIN_NAME@$PLUGIN_NAME" --scope user
 fi
