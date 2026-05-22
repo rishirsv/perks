@@ -7,6 +7,7 @@ Source repo for Rishi's personal Perks skills and Codex/Claude plugin builds.
 Day to day, only edit:
 
 - `skills/`: active Perks skills.
+- `assets/perks/`: source plugin icon assets.
 - `AGENTS.md`: compact system guidance shared by this repo, Codex, and Claude.
 
 Then run:
@@ -20,6 +21,7 @@ Everything else exists to package, install, sync, or stage those two surfaces.
 ## Structure
 
 - `skills/`: canonical Perks skills. This is the source folder to edit.
+- `assets/perks/`: canonical plugin icon assets copied into the Codex package.
 - `plugins/codex/perks/`: generated Codex plugin package.
 - `plugins/claude/perks/`: generated Claude plugin package.
 - `.agents/plugins/marketplace.json`: Codex marketplace entry for Perks.
@@ -31,7 +33,7 @@ Everything else exists to package, install, sync, or stage those two surfaces.
 
 ## Sync
 
-After any change under `skills/`, run:
+After any change under `skills/`, `assets/perks/`, or `AGENTS.md`, run:
 
 ```sh
 scripts/sync-plugins.sh
