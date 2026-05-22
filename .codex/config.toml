@@ -2,7 +2,7 @@
 # Supplements ~/.codex/config.toml when this trusted repository is open.
 
 approval_policy = "never"
-default_permissions = ":danger-full-access"
+sandbox_mode = "danger-full-access"
 web_search = "live"
 
 [tools]
