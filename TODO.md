@@ -2,7 +2,7 @@
 
 ## Completed: Idea Skill
 
-Status: promoted to `plugins/perks/skills/idea`.
+Status: active in `skills/idea`.
 
 Purpose: grill and refine serious ideas before planning or implementation.
 
@@ -22,10 +22,9 @@ Notes:
 Goal: one excellent skill for simplification, refactoring, tech debt, and architecture cleanup.
 
 References:
-- `references/candidates/coding/tech-debt`
-- `references/candidates/coding/simplify`
-- `references/candidates/coding/refactor`
-- `references/candidates/coding/yeet`
+- `skills/tech-debt`
+- `skills/simplify`
+- `skills/yeet`
 
 Direction:
 - Merge refactor, tech-debt, and simplify into one sharp coding-improvement skill.
@@ -40,12 +39,7 @@ Direction:
 Goal: one strong design skill, not several overlapping triggers.
 
 References:
-- `references/candidates/design/frontend-skill`
-- `references/candidates/design/polish-design`
-- `references/candidates/design/design-init`
-- `references/candidates/design/interface-mockups`
-- `references/candidates/design/create-design-system`
-- `references/system/imagegen`
+- `skills/design`
 
 Direction:
 - Prioritize repo design context such as `docs/DESIGN.md`.
@@ -53,29 +47,6 @@ Direction:
 - Preserve the strongest interface-writing and micro-polish guidance.
 - Avoid duplicating or fighting Codex's built-in frontend instructions.
 
-## Presentation References
+## Removed References
 
-Goal: keep OAI and presentation material as references for KPMG/deck work, not active plugin skills.
-
-References:
-- `references/oai/artifact`
-- `references/oai/skills`
-- `references/oai/presentations`
-
-Direction:
-- Mine for deck generation, artifact rendering, and presentation quality rules.
-- Keep out of `plugins/perks` until there is a clean, portable deck workflow.
-- Use Anthropic financial-services plugins as structural inspiration for KPMG workflows.
-
-## External Plugin References
-
-Goal: use Anthropic plugin repos as examples for role-based plugin design and domain workflow packaging.
-
-References:
-- `references/anthropic/knowledge-work-plugins`
-- `references/anthropic/financial-services-plugins`
-
-Direction:
-- Study plugin shape, command naming, connector boundaries, and skill granularity.
-- Do not install these directly from `perks`.
-- Borrow structure and patterns only when they improve our own skills.
+The old `references/` archive was removed to keep this public repo lean. Re-add external examples only when they are actively needed for a specific rebuild.

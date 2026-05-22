@@ -1,7 +1,0 @@
-interface:
-  display_name: "Brainstorm"
-  short_description: "Discover, develop, and pressure-test ideas"
-  default_prompt: "Use $brainstorm to discover ideas, develop a direction, or pressure-test this before planning."
-
-policy:
-  allow_implicit_invocation: false

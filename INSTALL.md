@@ -6,7 +6,7 @@ Copy the prompt below into Claude on the target Mac.
 
 You are helping me fully reset and reinstall OpenAI Codex on this Mac using my `perks` repo as reference material.
 
-Goal: delete the existing Codex app, Codex CLI, Codex configs, Codex caches, Codex plugins, and Codex skills; reinstall the Codex CLI fresh; clone my `perks` repo; and install its Codex config. The Perks plugin is intentionally not active while the repo is being redesigned.
+Goal: delete the existing Codex app, Codex CLI, Codex configs, Codex caches, Codex plugins, and Codex skills; reinstall the Codex CLI fresh; clone my `perks` repo; install its Codex config; and run the Perks plugin sync.
 
 Repo:
 
@@ -88,22 +88,14 @@ Expected important settings:
     sandbox_mode = "danger-full-access"
     web_search = "live"
 
-    [marketplaces.perks]
-    source_type = "local"
-    source = "/Users/rishi/Code/perks/.agents/plugins/marketplace.json"
+6. Sync and install the Perks plugins.
 
-    [plugins."perks@perks"]
-    enabled = true
+Run:
 
-If this Mac's username is not `rishi`, update the `source` path in `~/.codex/config.toml` to the actual cloned repo path, for example:
+    cd ~/Code/perks
+    scripts/sync-plugins.sh
 
-    source = "/Users/<username>/Code/perks/.agents/plugins/marketplace.json"
-
-Also update `~/Code/perks/.codex/config.toml` the same way if needed.
-
-6. Skip Perks plugin installation.
-
-The Perks plugin is intentionally not active right now. Do not run `codex plugin marketplace add` for this repo until a new marketplace and plugin are created.
+This rebuilds the Codex and Claude plugin folders from `skills/`, registers the local marketplaces, installs `perks@perks`, and refreshes local plugin caches.
 
 7. Open Codex once so it initializes plugin/cache state.
 
@@ -124,7 +116,12 @@ Check:
 
     test -f ~/Code/perks/README.md
     test -f ~/Code/perks/.codex/config.toml
-    test ! -e ~/Code/perks/plugins/perks/.codex-plugin/plugin.json
+    test -d ~/Code/perks/skills
+    test -d ~/Code/perks/skill-workbench
+    test -d ~/Code/perks/plugins/codex/perks/skills
+    test -d ~/Code/perks/plugins/claude/perks/skills
+    test -f ~/Code/perks/.agents/plugins/marketplace.json
+    test -f ~/Code/perks/.claude-plugin/marketplace.json
 
 9. Verify Codex config no longer enables the OpenAI-curated GitHub plugin.
 
@@ -137,7 +134,7 @@ Expected:
     [plugins."github@openai-curated"]
     enabled = false
 
-If the Perks plugin appears enabled, remove that block while the redesign is in progress. If the GitHub plugin block is missing, that is acceptable. Do not enable it.
+Expected: `perks@perks` is enabled after `scripts/sync-plugins.sh`. If the GitHub plugin block is missing, that is acceptable. Do not enable it unless intentionally needed.
 
 10. Final report.
 
@@ -146,6 +143,6 @@ Report:
 - Codex CLI path and version.
 - Whether `~/.codex/config.toml` was installed.
 - Whether `perks` was cloned or updated.
-- Confirm that the `perks` marketplace is not registered while the redesign is in progress.
-- Confirm that `perks@perks` is not enabled.
+- Confirm that the `perks` marketplace is registered.
+- Confirm that `perks@perks` is enabled.
 - Any login or restart still required.

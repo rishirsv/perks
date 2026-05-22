@@ -1,0 +1,16 @@
+{
+  "name": "perks",
+  "version": "0.1.0",
+  "description": "Rishi's personal Claude workflows and reusable skills.",
+  "author": {
+    "name": "Rishi"
+  },
+  "repository": "https://github.com/rishirsv/perks",
+  "license": "UNLICENSED",
+  "keywords": [
+    "personal",
+    "skills",
+    "workflow"
+  ],
+  "skills": "./skills/"
+}

@@ -1,0 +1,160 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+ROOT="${0:A:h:h}"
+PLUGIN_NAME="perks"
+VERSION="0.1.0"
+
+SOURCE_SKILLS="$ROOT/skills"
+CODEX_PLUGIN="$ROOT/plugins/codex/$PLUGIN_NAME"
+CLAUDE_PLUGIN="$ROOT/plugins/claude/$PLUGIN_NAME"
+CODEX_MARKETPLACE_DIR="$ROOT/.agents/plugins"
+CODEX_MARKETPLACE="$CODEX_MARKETPLACE_DIR/marketplace.json"
+CLAUDE_MARKETPLACE="$ROOT/.claude-plugin/marketplace.json"
+CLAUDE_MARKETPLACE_COMPAT="$ROOT/marketplace.json"
+
+if [[ ! -d "$SOURCE_SKILLS" ]]; then
+  echo "Missing source skills directory: $SOURCE_SKILLS" >&2
+  exit 1
+fi
+
+mkdir -p \
+  "$CODEX_PLUGIN/.codex-plugin" \
+  "$CODEX_PLUGIN/skills" \
+  "$CLAUDE_PLUGIN/.claude-plugin" \
+  "$CLAUDE_PLUGIN/skills" \
+  "$ROOT/.agents/plugins" \
+  "$ROOT/.claude-plugin"
+
+rsync -a --delete --exclude '.DS_Store' "$SOURCE_SKILLS/" "$CODEX_PLUGIN/skills/"
+rsync -a --delete --exclude '.DS_Store' "$SOURCE_SKILLS/" "$CLAUDE_PLUGIN/skills/"
+
+python3 - "$ROOT" "$PLUGIN_NAME" "$VERSION" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+name = sys.argv[2]
+version = sys.argv[3]
+
+codex_plugin = root / "plugins" / "codex" / name / ".codex-plugin" / "plugin.json"
+claude_plugin = root / "plugins" / "claude" / name / ".claude-plugin" / "plugin.json"
+codex_marketplace = root / ".agents" / "plugins" / "marketplace.json"
+claude_marketplace = root / ".claude-plugin" / "marketplace.json"
+claude_marketplace_compat = root / "marketplace.json"
+
+codex_manifest = {
+    "name": name,
+    "version": version,
+    "description": "Rishi's personal Codex workflows and reusable skills.",
+    "author": {"name": "Rishi"},
+    "repository": "https://github.com/rishirsv/perks",
+    "license": "UNLICENSED",
+    "keywords": ["personal", "skills", "workflow"],
+    "skills": "./skills/",
+    "interface": {
+        "displayName": "Perks",
+        "shortDescription": "Rishi's personal Codex workflows.",
+        "longDescription": "Perks packages Rishi's reusable coding, review, planning, and workflow skills for Codex.",
+        "developerName": "Rishi",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": "Use Perks for this workflow."
+    }
+}
+
+claude_manifest = {
+    "name": name,
+    "version": version,
+    "description": "Rishi's personal Claude workflows and reusable skills.",
+    "author": {"name": "Rishi"},
+    "repository": "https://github.com/rishirsv/perks",
+    "license": "UNLICENSED",
+    "keywords": ["personal", "skills", "workflow"],
+    "skills": "./skills/"
+}
+
+codex_catalog = {
+    "name": name,
+    "interface": {"displayName": "Perks"},
+    "plugins": [
+        {
+            "name": name,
+            "source": {"source": "local", "path": "./plugins/codex/perks"},
+            "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+            "category": "Productivity"
+        }
+    ]
+}
+
+claude_catalog = {
+    "name": name,
+    "owner": {"name": "Rishi"},
+    "metadata": {
+        "version": version,
+        "description": "Rishi's personal Claude plugin marketplace and reusable skills."
+    },
+    "plugins": [
+        {
+            "name": name,
+            "description": "Rishi's personal Claude workflows and reusable skills.",
+            "source": "./plugins/claude/perks",
+            "version": version,
+            "category": "productivity",
+            "tags": ["personal", "skills", "workflow"]
+        }
+    ]
+}
+
+for path, data in [
+    (codex_plugin, codex_manifest),
+    (claude_plugin, claude_manifest),
+    (codex_marketplace, codex_catalog),
+    (claude_marketplace, claude_catalog),
+    (claude_marketplace_compat, claude_catalog),
+]:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2) + "\n")
+PY
+
+CODEX_VALIDATOR="/Users/rishi/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py"
+if [[ -f "$CODEX_VALIDATOR" ]]; then
+  python3 "$CODEX_VALIDATOR" "$CODEX_PLUGIN"
+fi
+
+if command -v claude >/dev/null 2>&1; then
+  claude plugin validate "$CLAUDE_PLUGIN"
+  claude plugin validate "$ROOT"
+fi
+
+if command -v codex >/dev/null 2>&1; then
+  codex plugin remove "rs-tools@rs-tools" >/dev/null 2>&1 || true
+  codex plugin marketplace remove "rs-tools" >/dev/null 2>&1 || true
+  codex plugin marketplace remove "$PLUGIN_NAME" >/dev/null 2>&1 || true
+  codex plugin marketplace add "$ROOT"
+  codex plugin remove "$PLUGIN_NAME@$PLUGIN_NAME" >/dev/null 2>&1 || true
+  codex plugin add "$PLUGIN_NAME@$PLUGIN_NAME"
+fi
+
+if command -v claude >/dev/null 2>&1; then
+  claude plugin uninstall "rs-tools@rs-tools" --scope user >/dev/null 2>&1 || true
+  claude plugin marketplace remove "rs-tools" >/dev/null 2>&1 || true
+  claude plugin marketplace remove "$PLUGIN_NAME" >/dev/null 2>&1 || true
+  claude plugin marketplace add "$ROOT"
+  claude plugin uninstall "$PLUGIN_NAME@$PLUGIN_NAME" >/dev/null 2>&1 || true
+  claude plugin install "$PLUGIN_NAME@$PLUGIN_NAME" --scope user || claude plugin update "$PLUGIN_NAME@$PLUGIN_NAME" --scope user
+fi
+
+CODEX_CACHE="$HOME/.codex/plugins/cache/$PLUGIN_NAME/$PLUGIN_NAME/$VERSION"
+CLAUDE_CACHE="$HOME/.claude/plugins/cache/$PLUGIN_NAME/$PLUGIN_NAME/$VERSION"
+mkdir -p "$CODEX_CACHE" "$CLAUDE_CACHE"
+rsync -a --delete --exclude '.DS_Store' "$CODEX_PLUGIN/" "$CODEX_CACHE/"
+rsync -a --delete --exclude '.DS_Store' "$CLAUDE_PLUGIN/" "$CLAUDE_CACHE/"
+
+echo "Synced skills to:"
+echo "  $CODEX_PLUGIN/skills"
+echo "  $CLAUDE_PLUGIN/skills"
+echo "Refreshed local caches:"
+echo "  $CODEX_CACHE"
+echo "  $CLAUDE_CACHE"

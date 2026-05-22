@@ -1,35 +1,42 @@
 # Perks
 
-Planning repo for Rishi's next personal Codex and Claude plugin bundle.
-
-The previous `perks` plugin has been removed while the repo is audited and redesigned. There is intentionally no active installable plugin or marketplace in this repo right now.
+Source repo for Rishi's personal Perks skills and local Codex/Claude plugin builds.
 
 ## Structure
 
-- `skills/`: loose reusable skills while drafting or before plugin packaging.
-- `plugins/`: future installable plugin packages. This folder is intentionally empty or absent until the new Perks plugin is designed.
+- `skills/`: canonical Perks skills. This is the source folder to edit.
+- `skill-workbench/`: WIP and imported skills that are not part of the active Perks plugin yet.
+- `plugins/codex/perks/`: generated Codex plugin package.
+- `plugins/claude/perks/`: generated Claude plugin package.
+- `.agents/plugins/marketplace.json`: Codex marketplace entry for the local Perks plugin.
+- `.claude-plugin/marketplace.json` and `marketplace.json`: Claude marketplace entry for the local Perks plugin.
 - `.codex/config.toml`: repo-local Codex config for working in this repo.
-- `configs/`: reusable agent and prompt configuration.
-- `references/`: external examples, archived candidate skills, and source material.
+- `.codex/agents/loader.toml`: active Codex helper agent for Perks repo sync discipline.
+- `scripts/sync-plugins.sh`: rebuilds plugin folders from `skills/`, validates manifests, registers/install plugins, and refreshes local caches.
 - `TODO.md`: improvement backlog for future skill rebuilds.
 
-## Current State
+## Sync
 
-No plugin is active.
+After any change under `skills/`, run:
 
-The next Perks plugin should be rebuilt from the audit in `docs/exec-plans/active/perks-minimal-structure-plan.md`, using only the workflows that are worth keeping.
+```sh
+scripts/sync-plugins.sh
+```
 
-## References
+The script updates:
 
-Reference folders are not installed as active skills. They exist to guide future skill rebuilds and KPMG/deck work:
-
-- `references/oai/`: OAI artifact package, OAI skills, and presentation references.
-- `references/candidates/`: archived skills to mine while rebuilding coding and design workflows.
-- `references/system/`: installed system skills kept as design references.
-- `references/anthropic/`: Anthropic knowledge-work and financial-services plugin examples.
+- `plugins/codex/perks/skills/`
+- `plugins/claude/perks/skills/`
+- Codex marketplace/install state
+- Claude marketplace/install state
+- Local plugin caches under `~/.codex/plugins/cache/perks/perks/0.1.0` and `~/.claude/plugins/cache/perks/perks/0.1.0`
 
 ## Repo Codex Config
 
 This repo keeps its Codex config in `.codex/config.toml`.
 
-That file does not register or enable a Perks plugin while the redesign is in progress. User-specific secrets, auth, and machine-wide defaults should stay in `~/.codex/config.toml`.
+User-specific secrets, auth, and machine-wide defaults should stay in `~/.codex/config.toml`.
+
+Codex instructions stay in root `AGENTS.md`; they do not move into `.codex/`. Codex project subagents use `.codex/agents/*.toml`, not `.agents/`.
+
+Claude project subagents use `.claude/agents/*.md`. Claude plugin subagents should live under `agents/` at the plugin root.
