@@ -2,7 +2,7 @@
 
 ## Completed: Idea Skill
 
-Status: promoted to `plugins/rs-tools/skills/idea`.
+Status: promoted to `plugins/perks/skills/idea`.
 
 Purpose: grill and refine serious ideas before planning or implementation.
 
@@ -64,7 +64,7 @@ References:
 
 Direction:
 - Mine for deck generation, artifact rendering, and presentation quality rules.
-- Keep out of `plugins/rs-tools` until there is a clean, portable deck workflow.
+- Keep out of `plugins/perks` until there is a clean, portable deck workflow.
 - Use Anthropic financial-services plugins as structural inspiration for KPMG workflows.
 
 ## External Plugin References
@@ -77,5 +77,5 @@ References:
 
 Direction:
 - Study plugin shape, command naming, connector boundaries, and skill granularity.
-- Do not install these directly from `rs-tools`.
+- Do not install these directly from `perks`.
 - Borrow structure and patterns only when they improve our own skills.

@@ -25,13 +25,13 @@ If `gh auth status` fails, ask the user to authenticate with `gh auth login` and
 Set the skill script path from the installed skill:
 
 ```bash
-GH_REVIEW_SCRIPT="${CODEX_HOME:-$HOME/.codex}/plugins/cache/rs-tools/rs-tools/0.1.0/skills/gh-review/scripts/gh_review_collect.py"
+GH_REVIEW_SCRIPT="${CODEX_HOME:-$HOME/.codex}/plugins/cache/perks/perks/0.1.0/skills/gh-review/scripts/gh_review_collect.py"
 ```
 
 When working in this repo source copy, use:
 
 ```bash
-GH_REVIEW_SCRIPT="/Users/rishi/Code/rs-tools/plugins/rs-tools/skills/gh-review/scripts/gh_review_collect.py"
+GH_REVIEW_SCRIPT="/Users/rishi/Code/perks/plugins/perks/skills/gh-review/scripts/gh_review_collect.py"
 ```
 
 ## Mode Selection

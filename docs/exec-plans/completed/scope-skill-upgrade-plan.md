@@ -42,7 +42,7 @@ Upgrade the `scope` skill so it works as the larger, inverted counterpart to `cl
 
 ## Validation
 
-- Run `/Users/rishi/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/rs-tools/skills/scope` and expect a passing result.
+- Run `/Users/rishi/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/perks/skills/scope` and expect a passing result.
 - Read the updated Scope files and confirm progressive disclosure is preserved: `SKILL.md` handles routing and the shared contract, `references/` handles lane logic, and `assets/` holds output templates.
 - Confirm the final Discuss output is one `Scoped Direction` block with seven fields, not a heavy two-block synthesis.
 - Confirm Ideate keeps ranked survivors and does not force a full Discuss-style output.
@@ -66,4 +66,4 @@ Upgrade the `scope` skill so it works as the larger, inverted counterpart to `cl
 
 - Shipped: Upgraded Scope's trigger, shared contract, Discuss flow, Ideate footer, artifact routing, reusable templates, and OpenAI metadata.
 - Remaining: None.
-- Follow-up: Include the new `plugins/rs-tools/skills/scope/assets/` files when committing or syncing this skill, since artifact routing depends on them.
+- Follow-up: Include the new `plugins/perks/skills/scope/assets/` files when committing or syncing this skill, since artifact routing depends on them.

@@ -1,9 +1,9 @@
 ---
-name: rs-tools
-description: Use when working inside the rs-tools repo, adding personal Codex plugins, or explaining how the local plugin marketplace is organized.
+name: perks
+description: Use when working inside the perks repo, adding personal Codex plugins, or explaining how the local plugin marketplace is organized.
 ---
 
-# RS Tools
+# Perks
 
 This repo is a personal Codex plugin marketplace.
 

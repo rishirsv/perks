@@ -6,12 +6,12 @@ This document compares the local `scope` skill with Matt Pocock's `grill-with-do
 
 ## Sources Reviewed
 
-- Local Scope skill: `plugins/rs-tools/skills/scope/SKILL.md`
+- Local Scope skill: `plugins/perks/skills/scope/SKILL.md`
 - Local Scope references:
-  - `plugins/rs-tools/skills/scope/references/discuss.md`
-  - `plugins/rs-tools/skills/scope/references/ideate.md`
-  - `plugins/rs-tools/skills/scope/references/research.md`
-  - `plugins/rs-tools/skills/scope/references/artifacts.md`
+  - `plugins/perks/skills/scope/references/discuss.md`
+  - `plugins/perks/skills/scope/references/ideate.md`
+  - `plugins/perks/skills/scope/references/research.md`
+  - `plugins/perks/skills/scope/references/artifacts.md`
 - Matt Pocock source:
   - `https://raw.githubusercontent.com/mattpocock/skills/main/skills/engineering/grill-with-docs/SKILL.md`
   - `https://raw.githubusercontent.com/mattpocock/skills/main/skills/engineering/grill-with-docs/CONTEXT-FORMAT.md`

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repo is Rishi's personal Codex plugin marketplace and reusable skill source.
+This repo is Rishi's personal Codex perks marketplace and reusable skill source.
 
 ## Layout
 

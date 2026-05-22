@@ -1,14 +1,14 @@
 {
-  "name": "rs-tools",
+  "name": "perks",
   "interface": {
-    "displayName": "RS Tools"
+    "displayName": "Perks"
   },
   "plugins": [
     {
-      "name": "rs-tools",
+      "name": "perks",
       "source": {
         "source": "local",
-        "path": "./plugins/rs-tools"
+        "path": "./plugins/perks"
       },
       "policy": {
         "installation": "AVAILABLE",

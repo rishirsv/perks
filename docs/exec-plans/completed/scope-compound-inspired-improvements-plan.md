@@ -14,7 +14,7 @@ Improve the `scope` skill with a small set of useful ideas from Every's Compound
 ## Implementation Checklist
 
 - [x] 1.0 Improve durable artifact portability and reuse
-  - [x] 1.1 Add durable-output guidance in `plugins/rs-tools/skills/scope/SKILL.md`: generated repo docs should use repo-relative paths, not absolute paths.
+  - [x] 1.1 Add durable-output guidance in `plugins/perks/skills/scope/SKILL.md`: generated repo docs should use repo-relative paths, not absolute paths.
   - [x] 1.2 Restore the existing-artifact rule that was lost when `references/artifacts.md` was consolidated: if a matching context, product spec, or plan exists, read it and ask whether to continue or start fresh.
   - [x] 1.3 Update templates only if needed to reinforce repo-relative paths without duplicating the same rule everywhere.
   - [x] 1.4 Validation for 1.0: confirm final chat can still use absolute clickable paths, but durable repo artifacts use repo-relative paths.
@@ -41,15 +41,15 @@ Improve the `scope` skill with a small set of useful ideas from Every's Compound
 
 - [x] 5.0 Validate and review
   - [x] 5.1 Confirm the three prior small fixes remain intact: context template reader stance, precise `What To Discuss` reference, and settled-branch signal.
-  - [x] 5.2 Run `python3 /Users/rishi/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/rs-tools/skills/scope`.
-  - [x] 5.3 Search for stale references to deleted `references/artifacts.md` only inside runtime skill files: `plugins/rs-tools/skills/scope/`. The historical comparison doc in `docs/skill-reviews/` is out of scope unless separately refreshed.
+  - [x] 5.2 Run `python3 /Users/rishi/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/perks/skills/scope`.
+  - [x] 5.3 Search for stale references to deleted `references/artifacts.md` only inside runtime skill files: `plugins/perks/skills/scope/`. The historical comparison doc in `docs/skill-reviews/` is out of scope unless separately refreshed.
   - [x] 5.4 Review the final diff for over-engineering, especially new sections that look like mandatory ceremony.
   - [x] 5.5 Update this ExecPlan checklist and completion notes.
 
 ## Validation
 
-- `python3 /Users/rishi/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/rs-tools/skills/scope` passes.
-- `rg -n 'artifacts\\.md|references/artifacts' plugins/rs-tools/skills/scope` returns no matches.
+- `python3 /Users/rishi/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/perks/skills/scope` passes.
+- `rg -n 'artifacts\\.md|references/artifacts' plugins/perks/skills/scope` returns no matches.
 - The context template still says to write for a reader who was not in the conversation.
 - `references/discuss.md` still references "the lenses in What To Discuss below" and keeps the settled-branch signal.
 - `SKILL.md` does not add a labeled depth-mode section.

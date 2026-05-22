@@ -1,4 +1,4 @@
-# Repo-local Codex config for rs-tools.
+# Repo-local Codex config for perks.
 # This supplements ~/.codex/config.toml when Codex is opened in this repository.
 
 approval_policy = "never"
@@ -29,9 +29,9 @@ default_tools_approval_mode = "approve"
 open_world_enabled = true
 destructive_enabled = true
 
-[marketplaces.rs-tools]
+[marketplaces.perks]
 source_type = "local"
-source = "/Users/rishi/Code/rs-tools/.agents/plugins/marketplace.json"
+source = "/Users/rishi/Code/perks/.agents/plugins/marketplace.json"
 
-[plugins."rs-tools@rs-tools"]
+[plugins."perks@perks"]
 enabled = true

@@ -4,13 +4,13 @@ Copy the prompt below into Claude on the target Mac.
 
 ---
 
-You are helping me fully reset and reinstall OpenAI Codex on this Mac using my `rs-tools` repo as the source of truth.
+You are helping me fully reset and reinstall OpenAI Codex on this Mac using my `perks` repo as the source of truth.
 
-Goal: delete the existing Codex app, Codex CLI, Codex configs, Codex caches, Codex plugins, and Codex skills; reinstall the Codex CLI fresh; clone my `rs-tools` repo; install its Codex config and local plugin marketplace; and verify Codex works with my `rs-tools` plugin.
+Goal: delete the existing Codex app, Codex CLI, Codex configs, Codex caches, Codex plugins, and Codex skills; reinstall the Codex CLI fresh; clone my `perks` repo; install its Codex config and local plugin marketplace; and verify Codex works with my `perks` plugin.
 
 Repo:
 
-    https://github.com/rishirsv/rs-tools.git
+    https://github.com/rishirsv/perks.git
 
 Important behavior:
 
@@ -58,17 +58,17 @@ Then verify:
     which codex
     codex --version
 
-4. Clone or update `rs-tools`.
+4. Clone or update `perks`.
 
 Use:
 
     mkdir -p ~/Code
-    if [ -d ~/Code/rs-tools/.git ]; then
-      cd ~/Code/rs-tools
+    if [ -d ~/Code/perks/.git ]; then
+      cd ~/Code/perks
       git pull --ff-only
     else
-      git clone https://github.com/rishirsv/rs-tools.git ~/Code/rs-tools
-      cd ~/Code/rs-tools
+      git clone https://github.com/rishirsv/perks.git ~/Code/perks
+      cd ~/Code/perks
     fi
 
 5. Install the repo Codex config into the machine config.
@@ -76,7 +76,7 @@ Use:
 Create `~/.codex` and copy the repo config:
 
     mkdir -p ~/.codex
-    cp ~/Code/rs-tools/.codex/config.toml ~/.codex/config.toml
+    cp ~/Code/perks/.codex/config.toml ~/.codex/config.toml
 
 Then inspect it:
 
@@ -88,25 +88,25 @@ Expected important settings:
     sandbox_mode = "danger-full-access"
     web_search = "live"
 
-    [marketplaces.rs-tools]
+    [marketplaces.perks]
     source_type = "local"
-    source = "/Users/rishi/Code/rs-tools/.agents/plugins/marketplace.json"
+    source = "/Users/rishi/Code/perks/.agents/plugins/marketplace.json"
 
-    [plugins."rs-tools@rs-tools"]
+    [plugins."perks@perks"]
     enabled = true
 
 If this Mac's username is not `rishi`, update the `source` path in `~/.codex/config.toml` to the actual cloned repo path, for example:
 
-    source = "/Users/<username>/Code/rs-tools/.agents/plugins/marketplace.json"
+    source = "/Users/<username>/Code/perks/.agents/plugins/marketplace.json"
 
-Also update `~/Code/rs-tools/.codex/config.toml` the same way if needed.
+Also update `~/Code/perks/.codex/config.toml` the same way if needed.
 
 6. Register or refresh the local marketplace.
 
-From `~/Code/rs-tools`, run:
+From `~/Code/perks`, run:
 
-    codex plugin marketplace add ~/Code/rs-tools
-    codex plugin marketplace upgrade rs-tools || true
+    codex plugin marketplace add ~/Code/perks
+    codex plugin marketplace upgrade perks || true
 
 If `marketplace add` says it already exists, continue.
 
@@ -114,7 +114,7 @@ If `marketplace add` says it already exists, continue.
 
 Run:
 
-    cd ~/Code/rs-tools
+    cd ~/Code/perks
     codex --help
 
 If Codex requires login, run:
@@ -123,13 +123,13 @@ If Codex requires login, run:
 
 Then restart Codex after login.
 
-8. Verify the rs-tools plugin files.
+8. Verify the perks plugin files.
 
 Check:
 
-    test -f ~/Code/rs-tools/.agents/plugins/marketplace.json
-    test -f ~/Code/rs-tools/plugins/rs-tools/.codex-plugin/plugin.json
-    find ~/Code/rs-tools/plugins/rs-tools/skills -maxdepth 2 -name SKILL.md | sort
+    test -f ~/Code/perks/.agents/plugins/marketplace.json
+    test -f ~/Code/perks/plugins/perks/.codex-plugin/plugin.json
+    find ~/Code/perks/plugins/perks/skills -maxdepth 2 -name SKILL.md | sort
 
 Expected skills include:
 
@@ -138,21 +138,21 @@ Expected skills include:
     handoff
     hard-cut
     oracle
-    rs-tools
+    perks
     yeet
 
 9. Verify Codex config no longer enables the OpenAI-curated GitHub plugin.
 
 Run:
 
-    rg -n 'github@openai-curated|rs-tools@rs-tools|marketplaces.rs-tools' ~/.codex/config.toml || true
+    rg -n 'github@openai-curated|perks@perks|marketplaces.perks' ~/.codex/config.toml || true
 
 Expected:
 
     [plugins."github@openai-curated"]
     enabled = false
 
-    [plugins."rs-tools@rs-tools"]
+    [plugins."perks@perks"]
     enabled = true
 
 If the GitHub plugin block is missing, that is acceptable. Do not enable it.
@@ -163,7 +163,7 @@ Report:
 
 - Codex CLI path and version.
 - Whether `~/.codex/config.toml` was installed.
-- Whether `rs-tools` was cloned or updated.
-- Whether the `rs-tools` marketplace is registered.
-- Whether `rs-tools` appears enabled.
+- Whether `perks` was cloned or updated.
+- Whether the `perks` marketplace is registered.
+- Whether `perks` appears enabled.
 - Any login or restart still required.

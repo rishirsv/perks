@@ -24,7 +24,7 @@ After running the skill, the user should receive a repo-specific harness enginee
 - The report audience is equally the human project owner and future agents who may implement follow-up work.
 - At the end of assessment, ask where to write the final report. Propose `docs/harness-engineering-assessment.md` when the repo has a `docs/` folder. If the user wants chat-only output, keep the final report in chat and leave scratch artifacts temporary.
 - If the target repo already has clear conventions for plans, architecture docs, trackers, reports, or assessment artifacts, follow those conventions over the skill's defaults when they are discoverable and reasonable.
-- Draft the skill first as a loose source skill at `skills/harness-engineering/`; review and iterate there before syncing or bundling it into `plugins/rs-tools/skills/harness-engineering/`.
+- Draft the skill first as a loose source skill at `skills/harness-engineering/`; review and iterate there before syncing or bundling it into `plugins/perks/skills/harness-engineering/`.
 - The report should organize opportunities by themes, with detailed opportunities nested under each theme.
 - Opportunities should be grouped at the right working level: not every individual file change, but detailed enough to name related files, modules, docs, commands, or surfaces that support the finding.
 - Repeated instances of the same concept across multiple files should be grouped into one opportunity when they would be fixed or planned together.

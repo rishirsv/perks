@@ -87,7 +87,7 @@ Use only when the decision is hard to reverse, surprising without context, and t
 
 ## ExecPlan
 
-Use when the idea is ready for implementation sequencing and a durable plan is the next artifact. Match the project's plan-location convention. In Rishi's `rs-tools` repos, active plans live at `docs/exec-plans/active/<feature-slug>-plan.md`.
+Use when the idea is ready for implementation sequencing and a durable plan is the next artifact. Match the project's plan-location convention. In Rishi's `perks` repos, active plans live at `docs/exec-plans/active/<feature-slug>-plan.md`.
 
 ```md
 # <Feature Or Change Name> ExecPlan

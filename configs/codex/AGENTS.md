@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This is Rishi's system Codex agents file. The source copy is stored in `rs-tools` at `configs/codex/AGENTS.md` and may be synced to `~/.codex/AGENTS.md`.
+This is Rishi's system Codex agents file. The source copy is stored in `perks` at `configs/codex/AGENTS.md` and may be synced to `~/.codex/AGENTS.md`.
 
 ## Subagents
 

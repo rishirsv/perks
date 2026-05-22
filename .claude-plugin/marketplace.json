@@ -1,17 +1,17 @@
 {
-  "name": "rs-tools",
+  "name": "perks",
   "owner": {
     "name": "Rishi"
   },
   "metadata": {
     "version": "0.1.0",
-    "description": "Rishi's personal Claude plugin marketplace and reusable skills."
+    "description": "Claude-compatible metadata for the Perks plugin. Codex uses .agents/plugins/marketplace.json as the canonical marketplace."
   },
   "plugins": [
     {
-      "name": "rs-tools",
-      "description": "Rishi's personal Claude workflows and reusable skills.",
-      "source": "./plugins/rs-tools",
+      "name": "perks",
+      "description": "Rishi's personal Claude-compatible perks and reusable skills.",
+      "source": "./plugins/perks",
       "version": "0.1.0",
       "category": "productivity",
       "tags": [

@@ -2,7 +2,7 @@
 
 Refreshed on 2026-05-12 from the latest locally installed Codex sources on this machine.
 
-These folders are reference material only. They are not active `rs-tools` skills or installable plugin content.
+These folders are reference material only. They are not active `perks` skills or installable plugin content.
 
 ## Sources
 
