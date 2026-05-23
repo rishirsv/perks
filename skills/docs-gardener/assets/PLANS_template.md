@@ -5,8 +5,8 @@ Defines the execution plan lifecycle and required structure for plan files.
 
 ## Canonical Paths
 - Product specs: `docs/product-specs/<feature-slug>-spec.md`
-- Active plans: `docs/exec-plans/active/<feature-slug>-plan.md`
-- Completed plans: `docs/exec-plans/completed/<feature-slug>-plan.md`
+- Exec plans: `docs/exec-plans/<feature-slug>-plan.md`
+- Exec plan index: `docs/exec-plans/index.md`
 - Plan template: `assets/exec-plan_template.md`
 - Operational backlog: `WORK-TRACKER.md`
 

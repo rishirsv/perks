@@ -30,8 +30,8 @@ Within `docs/`:
 - `docs/product-specs/*`
 - `docs/project-specs/*`
 - `docs/logic/*`
-- `docs/exec-plans/active/*`
-- `docs/exec-plans/completed/*`
+- `docs/exec-plans/*`
+- `docs/exec-plans/index.md`
 - `docs/research/*`
 - `docs/artifacts/*`
 

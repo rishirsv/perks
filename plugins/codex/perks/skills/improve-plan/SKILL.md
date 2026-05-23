@@ -21,9 +21,9 @@ Accept any of these as the plan target:
 - the plan currently being discussed
 - a saved plan path
 - a feature slug that maps to the repo's conventional exec-plan path
-- the most recently modified active plan when the user clearly asks to improve "the plan" and no selector is given
+- the most recently modified plan when the user clearly asks to improve "the plan" and no selector is given
 
-Find the repo convention from local instructions such as `AGENTS.md`, `CLAUDE.md`, planning docs, or existing plan files. In this repo, the convention is `docs/exec-plans/active/<slug>-plan.md` and `docs/exec-plans/completed/<slug>-plan.md`; do not assume that path elsewhere.
+Find the repo convention from local instructions such as `AGENTS.md`, `CLAUDE.md`, planning docs, or existing plan files. Do not assume `active/` and `completed/` subfolders; some repos keep all plans flat under `docs/exec-plans/` and track completion status in an index.
 
 If no target can be found, stop and state exactly what you searched.
 
@@ -33,6 +33,7 @@ An objective is the current stated outcome for the work: it may come from the us
 
 - Keep the lane narrow: improve an existing plan; do not invent a fresh product direction.
 - Prefer repo evidence over abstract planning advice.
+- For any plan that may drive multi-step or multi-file implementation, read `references/plans-contract.md` before rewriting and preserve every required PLANS.md concept unless the target repo explicitly overrides it.
 - If code, docs, tests, scripts, adjacent implementations, or saved plans can answer a question, inspect them before asking the user.
 - Ask only plan-critical questions after exploration, and only when a reasonable assumption would materially change the plan.
 - Preserve completed checkboxes in a saved plan unless they are demonstrably wrong.
@@ -162,6 +163,7 @@ Before rewriting, check whether available plugins, skills, tools, local guidance
 
 Look for:
 
+- `references/plans-contract.md` for the verbatim PLANS.md requirements, skeleton, and revision rule when the target artifact is an ExecPlan
 - installed or repo-provided skills that cover the work domain
 - plugins or tools that change the best implementation or validation path
 - subagents that should review evidence, risks, validation, sequencing, or best-practice alignment
@@ -181,15 +183,23 @@ When asking, keep questions tight and explain what part of the plan depends on t
 
 ### 6. Plan rewritten
 
-Respect the project's required plan template. If none exists, use the repo's lightweight ExecPlan shape as the canonical fallback:
+Respect the project's required plan template. For ExecPlans, the PLANS.md contract adds these requirements that this skill must not silently drop:
 
-- `Purpose`
-- `Phase Outcomes`
-- `Implementation Checklist`
-- `Validation`
+- self-contained, beginner-friendly context that does not assume prior memory
+- a user-visible purpose and observable behavior
+- narrative milestones that each state goal, work, result, and proof
+- `Progress` with checkbox items and timestamps
+- exact concrete steps and commands with working directories and expected outputs where useful
+- validation and acceptance phrased as observable behavior
 - `Decision Log`
-- `Surprises And Discoveries`
-- `Completion Notes`
+- `Surprises & Discoveries`
+- `Outcomes & Retrospective`
+- idempotence and recovery guidance
+- artifacts/evidence notes when outputs prove success
+- interfaces and dependencies with stable names, paths, and signatures when applicable
+- a final revision note when the plan itself is materially revised
+
+If the target repo has no required plan template, use the PLANS.md skeleton from `references/plans-contract.md` as the canonical fallback.
 
 Add these sections only when they reduce ambiguity, improve continuation, or are needed to audit the objective:
 
@@ -215,8 +225,9 @@ When rewriting:
 - name real files, modules, commands, tests, artifacts, and contracts when that removes ambiguity
 - cite file paths or commands for concrete repo claims when the plan relies on them
 - include the relevant skill/plugin/tool guidance that should shape execution or validation
-- put validation inside each major phase and in a final validation section
+- put validation inside each milestone or major phase and in the final validation section
 - map every explicit requirement to evidence in the prompt-to-artifact checklist
+- keep narrative sections prose-first; use checkboxes for `Progress`, and use tables only when the target repo already prefers them or they materially improve auditability
 - make checkpoints resumable by stating:
   - plan target
   - evidence gathered
