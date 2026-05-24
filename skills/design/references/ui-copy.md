@@ -37,7 +37,7 @@ Ornamental labels are banned unless they come from real product naming, not from
 
 ## Product Copy Rules
 
-- Before writing or rewriting UI copy, look for durable voice guidance in `AGENTS.md`, `docs/DESIGN.md`, the design system, or existing product copy. If none exists, infer 3-4 working voice traits from the product.
+- Before writing or rewriting UI copy, look for durable voice guidance in design-related docs, `docs/DESIGN.md` or equivalent, `taste.md` or `TASTE.md`, brand docs, the design system, or existing product copy. If none exists, infer 3-4 working voice traits from the product.
 - Think in dials, not separate voices. A calm product can be warmer in onboarding and more matter-of-fact in errors without sounding like a different company.
 - If deleting 30% of the copy improves the page, keep deleting.
 - Use specific verbs: Create account, Save changes, Download report.
