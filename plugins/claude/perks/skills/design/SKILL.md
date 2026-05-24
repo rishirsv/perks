@@ -1,6 +1,6 @@
 ---
 name: design
-description: Use explicitly for high-craft UI and product design work across web, native apps, dashboards, tools, landing pages, onboarding, empty states, and design systems. Handles creating and redesigning interfaces, initializing or refreshing docs/DESIGN.md, screenshot-led polish, UX/design critique, technical UI audits, accessibility, adaptive layout, typography, color, motion, microcopy, production hardening, and product/brand design judgment. Not for backend-only work or throwaway prototypes.
+description: Use explicitly for high-craft UI, product, brand, and visual taste work across web, native apps, dashboards, tools, landing pages, onboarding, empty states, design systems, and design docs. Handles creating and redesigning interfaces, distilling screenshots or reference corpora into taste.md/TASTE.md, ingesting brand assets, initializing or refreshing docs/DESIGN.md, screenshot-led polish, UX/design critique, technical UI audits, accessibility, adaptive layout, typography, color, motion, microcopy, production hardening, and product/brand design judgment. Not for backend-only work or throwaway prototypes.
 ---
 
 # Design
@@ -11,7 +11,7 @@ Design produces real working interfaces, committed design choices, design docs, 
 
 1. Read the request literally. If the user asks for changes, make changes. If they ask for review, stay read-only.
 2. Load `docs/DESIGN.md` first when it exists. Treat it as the strongest design context unless the user explicitly asks to depart from it.
-3. Gather adjacent context: `AGENTS.md`, product specs, active plans, existing components, tokens, previews, screenshots, assets, and running UI.
+3. Always check for `taste.md` or `TASTE.md`, then gather other design-related context: design workflow docs, image-generation guidance, brand docs, product specs, active plans, existing components, tokens, previews, screenshots, assets, and running UI.
 4. Classify the surface as `product` or `brand`.
 5. Choose the lane below and read its reference.
 6. Inspect the rendered surface whenever tools exist. Code-only design work is a fallback, not normal design work.
@@ -20,6 +20,7 @@ Design produces real working interfaces, committed design choices, design docs, 
 
 - `init`: create `docs/DESIGN.md` when the repo lacks a design source of truth. Read [references/init.md](references/init.md).
 - `refresh`: update `docs/DESIGN.md` from the current implemented system. Read [references/init.md](references/init.md).
+- `distill`: extract concrete visual rules from screenshots, reference images, generated mockups, or an existing surface family before design work. Read [references/distill.md](references/distill.md).
 - `craft`: create or substantially redesign a surface in the real stack. Read [references/craft.md](references/craft.md).
 - `audit`: evaluate a surface without changing code. Covers UX critique and technical UI audit. Read [references/audit.md](references/audit.md).
 - `polish`: improve an existing functional surface through visual passes. Read [references/polish.md](references/polish.md).
@@ -28,12 +29,15 @@ Design produces real working interfaces, committed design choices, design docs, 
 Plain-language requests route naturally:
 
 - "shape this", "make a new flow", "build this screen", "redesign this surface" -> `craft`
+- "analyze these screenshots", "extract visual rules", "learn from this design corpus", "turn references into design guidance" -> `distill`
 - "critique this", "review the design", "what's wrong with this UI" -> `audit`
 - "make it quieter", "fix the type", "tighten the layout", "make it bolder", "add delight" -> `polish`
 - "handle edge cases", "make it production-ready", "test long text" -> `harden`
 - "create the design file", "initialize design docs" -> `init`
 
 If the user asks for a lane not listed, choose the closest listed lane and say the mapping briefly.
+
+When a craft, polish, refresh, or audit task includes a meaningful screenshot set or visual reference corpus, run a short `distill` pass before deciding what to build or promote. The goal is to name concrete visual rules from evidence, not to copy pixels or turn incidental content into doctrine.
 
 ## Product Or Brand
 
@@ -173,6 +177,17 @@ Use the strongest available way to see the UI:
 
 If rendering is unavailable, say what could not be verified.
 
+## Quality Contract
+
+Every design lane finishes by naming:
+
+- intent: what the surface or artifact is trying to accomplish
+- primary user state: who is using it and what pressure, mode, or job they are in
+- evidence inspected: design docs, taste docs, code, screenshots, previews, rendered UI, references, or assets
+- checks run: exact viewports, states, data cases, and interaction paths inspected
+- accessibility checks: keyboard or platform navigation, labels, roles, contrast, text scaling, motion, and color-independent state where relevant
+- unresolved risk: what remains unverified, deferred, or dependent on product judgment
+
 ## Output
 
-For implementation lanes, end with what changed, what was visually checked, and any unverified states. For audit, lead with findings ordered by severity. Keep explanations tied to the user, the surface, and the design system.
+For implementation lanes, end with what changed and the Quality Contract. For audit, lead with findings ordered by severity, then include the Quality Contract. Keep explanations tied to the user, the surface, and the design system.

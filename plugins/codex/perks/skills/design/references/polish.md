@@ -20,12 +20,13 @@ Default to 1-3 focused passes unless the user asks for deep polish or screenshot
 
 1. Load `docs/DESIGN.md`, adjacent UI, and current conventions.
 2. Capture or inspect the current surface. Save new screenshots using the artifact routing below when the capture tool can write files.
-3. Name the top issues.
-4. Choose a focused pass.
-5. Patch.
-6. Render again. Save after screenshots to the same folder when possible.
-7. Compare before and after.
-8. Repeat while the surface is improving.
+3. If several screenshots or states show a repeated surface family, read [distill.md](distill.md) and name the visual rules before patching.
+4. Name the top issues.
+5. Choose a focused pass.
+6. Patch.
+7. Render again. Save after screenshots to the same folder when possible.
+8. Compare before and after.
+9. Repeat while the surface is improving.
 
 Stop when remaining issues are minor, out of scope, unverifiable, or require a redesign.
 

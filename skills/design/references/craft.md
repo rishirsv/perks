@@ -6,11 +6,12 @@ Craft creates or substantially redesigns a surface. It includes design direction
 
 1. Load `docs/DESIGN.md` first when present, then repo docs, components, tokens, screenshots, and running UI.
 2. Identify register: product or brand.
-3. Shape the surface enough to force real commitments.
-4. Build with the project's real stack and conventions.
-5. Inspect the rendered surface.
-6. Patch material defects found by inspection.
-7. Report what was built and what was verified.
+3. If a screenshot or reference corpus is material, read [distill.md](distill.md) and extract visual rules before generating or building.
+4. Shape the surface enough to force real commitments.
+5. Build with the project's real stack and conventions.
+6. Inspect the rendered surface.
+7. Patch material defects found by inspection.
+8. Report what was built and what was verified.
 
 ## Shape Commitments
 

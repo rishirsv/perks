@@ -25,6 +25,20 @@ Test or reason through:
 - small devices, large devices, portrait, landscape
 - Dynamic Type, zoom, reduced motion, high contrast
 
+## Hardened State Matrix
+
+Before calling the work hardened, create a compact matrix for the target surface. Include only relevant rows, but mark any skipped critical category as `N/A` with a reason.
+
+| Category | Cases Checked | Evidence | Result | Unresolved Risk |
+| --- | --- | --- | --- | --- |
+| Data extremes | Long/short text, missing values, large numbers, many items | Screenshot, preview, test, or code path | Pass/fail/fixed | Remaining data risk |
+| Viewport/device extremes | Small, large, portrait, landscape, narrow/wide | Screenshot, simulator, browser, or responsive preview | Pass/fail/fixed | Remaining layout risk |
+| Interaction failures | Double submit, retry, rollback, disabled state, offline/timeout | Manual run, test, fixture, or code path | Pass/fail/fixed | Remaining recovery risk |
+| Accessibility path | Keyboard/platform navigation, focus order, labels, contrast, text scale, reduced motion | Manual run, audit, preview, or code path | Pass/fail/fixed | Remaining accessibility risk |
+| Locale/text expansion | Translation growth, CJK, RTL, emoji, accents, pluralization, currency/date formats | Fixture, preview, or code path | Pass/fail/fixed | Remaining locale risk |
+| Loading/empty/error/recovery | Initial loading, incremental loading, empty, no results, permission denied, error, retry, success | Screenshot, fixture, test, or code path | Pass/fail/fixed | Remaining state risk |
+| Performance-sensitive UI | Large lists/tables, expensive media, charts, animation, scrolling, repeated updates | Profiling, instrumentation, code path, or manual run | Pass/fail/fixed | Remaining performance risk |
+
 ## What To Fix
 
 ### Layout And Text
@@ -82,4 +96,4 @@ Render or run the target and inspect:
 - critical interaction path
 - accessibility path where relevant
 
-Report what was hardened and what remains untested.
+Report what was hardened, the completed Hardened State Matrix, and what remains untested.
