@@ -1,21 +1,23 @@
 ---
 name: refining-architecture
-description: "Finds and records repo architecture and code-quality improvement opportunities. Use for architecture refinement, scoped repo scans, periodic codebase reviews, or logging technical debt without implementing fixes."
+description: "Use when scanning a repo, area, screen, or scoped file list to find and record actionable architecture, reuse, quality, efficiency, or verification debt in the repo-native tracker, without editing the code that has the problem; not for fixing the current diff (use $simplify), removing fallback or compatibility code (use $hard-cut), or assessing agent-readiness and feedback loops (use $harness-engineering)."
 ---
 
 # Refining Architecture
 
-Find architecture and code-quality improvement opportunities, then record them in the repo-native tracker. Do not implement fixes unless the user separately asks for implementation after the scan.
+Find architecture and code-quality improvement opportunities, then record them in the repo-native tracker. This skill writes tracker entries; it does not edit the code that has the problem.
 
 ## Contract
 
-- Analyze and record findings; do not edit code to fix them.
+- Analyze and record findings; do not edit the code that has the problem.
 - Use parallel review workers as the default review engine.
 - Prefer actionable, evidence-backed entries over broad architecture essays.
 - Preserve the target repo's existing tracker format when one exists.
 - Merge into existing related tracker entries instead of duplicating them.
 - If a finding is speculative, mark it as speculative and explain what evidence would confirm it.
 - If a finding contradicts an existing architecture decision, record it only when the friction is real enough to justify revisiting that decision.
+
+If during the scan the user asks for an implementation pass on a recorded finding, stop, hand off to `$simplify` (for diff-scope fixes) or `$hard-cut` (for removing fallback or compatibility code), and resume tracking afterward.
 
 ## Inputs And Outputs
 
@@ -28,7 +30,7 @@ Use these inputs:
 
 Produce these outputs:
 
-- Updates to the repo-native tracker, or `docs/tech-debt.md` when no tracker exists.
+- Updates to the repo-native tracker. If no tracker exists, ask the user where to record findings before scanning — do not create one unprompted.
 - A concise chat summary of what was scanned, what changed in the tracker, the top recommendation, and any intentionally skipped areas.
 
 ## Architecture Vocabulary
@@ -107,21 +109,8 @@ Activate this phase when the user explicitly asks to deslop, clean up generated 
 Find the output target in this order:
 
 1. Use the tracker path named by the user.
-2. Use an existing repo-native tracker or backlog convention, such as `TECH-DEBT.md`, `docs/TECH-DEBT.md`, `docs/tech-debt.md`, `WORK-TRACKER.md`, or a docs index pointing to the canonical backlog.
-3. If no tracker exists, create `docs/tech-debt.md`.
-
-When creating `docs/tech-debt.md`, add this maintenance note before the first entry:
-
-```markdown
-## How To Maintain This File
-
-- Keep this file for actionable architecture, maintainability, reuse, quality, efficiency, and verification debt.
-- Add evidence for every entry: file paths, commands, PRs, review comments, failing tests, or observed workflow friction.
-- Merge related findings instead of creating duplicates.
-- Keep suggested fixes bounded enough for a future implementation pass.
-- Update status as work moves: `Queue`, `Planned`, `In Progress`, `Done`, `Obsolete`, or `Won't Do`.
-- When an item is fixed, keep a short completion note with the validating command, PR, or commit.
-```
+2. Use an existing repo-native tracker or backlog. Read `AGENTS.md`, `README.md`, docs indexes, and the root for tracker files (names vary by repo, e.g., `WORK-TRACKER.md`, `TECH-DEBT.md`, `docs/TECH-DEBT.md`, `docs/tech-debt.md`, `BACKLOG.md`).
+3. If no tracker exists, **ask the user** where to record findings and which filename matches their convention. Do not create a tracker unprompted. Only when the user confirms a path, create the file and seed it with a short maintenance note (entries need evidence, location, why it matters, suggested fix, verification; merge related findings; update status as work moves).
 
 ### Phase 3: Launch Three Review Agents In Parallel
 

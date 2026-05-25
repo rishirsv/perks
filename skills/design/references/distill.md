@@ -4,6 +4,13 @@ Distill is the Taste Engine. It turns screenshots, product captures, generated b
 
 Use it when the user asks to analyze a design corpus, learn from screenshots, improve a design system, extract taste, compare generated directions, ingest a brand, or update a design skill from visual evidence. Also use it as a lightweight side pass during `craft`, `polish`, `refresh`, or `audit` when several screenshots reveal a repeated surface family.
 
+## Scope Map
+
+- Core rule: analyze aesthetic DNA, not product meaning.
+- Context and corpus: choose the right evidence and labels.
+- Passes: per-image analysis, canonical synthesis, rule extraction, and artifact promotion.
+- Output: reusable taste rules and what to ignore.
+
 ## Core Rule
 
 Analyze aesthetic DNA, not product meaning. Extract style, layout, hierarchy, density, typography, color, material, light, depth, spacing, composition, rhythm, control treatment, restraint, and visual tension.
@@ -84,7 +91,7 @@ A bad rule is:
 - broad praise such as "make it premium", "make it elegant", or "make it beautiful"
 - an invitation for the model to invent a style
 - tied to product domain, copy, content, screenshots, slide topic, or fixture data
-- a stereotype shortcut such as luxury serif, beige editorial, neon tech, generic SaaS cards, or decorative glass
+- a stereotype shortcut such as luxury serif, beige editorial, neon tech, or generic SaaS cards
 
 Phrase rules as commands: "Use...", "Set...", "Keep...", "Reserve...", "Avoid...", "Do not...". Include numeric or relational constraints when exact values are unavailable: one accent max, low saturation, thin borders, large soft blur, localized density, few type weights, generous internal padding, etc.
 
@@ -150,7 +157,7 @@ Rules marked Verify, with the evidence needed to promote or discard them.
 A concrete checklist the design must pass before finishing.
 ```
 
-Avoid broad trigger words as style guidance: luxury, premium, editorial, tactile, sophisticated, elegant, boutique, fashion, lifestyle, atmospheric, cinematic, gallery-like, high-end, warm, tasteful, beautiful, elevated, object-like, refined, crafted, polished, clean, modern. You may list them only as words not to rely on.
+Avoid empty trigger words as the only style guidance: premium, elegant, sophisticated, tasteful, beautiful, refined, modern, clean. These describe nothing concrete on their own. Words like warm, atmospheric, cinematic, editorial, tactile, or object-like are usable when paired with specific evidence about typography, color, material, or composition.
 
 ## Promotion
 

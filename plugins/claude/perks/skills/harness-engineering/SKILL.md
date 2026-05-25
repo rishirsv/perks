@@ -1,6 +1,6 @@
 ---
 name: harness-engineering
-description: Evaluate a repository or project for agent-readiness and harness engineering opportunities. Use when Codex needs to deep-scan a codebase, map repo logic and boundaries, assess agent legibility, validation harnesses, feedback loops, architecture enforcement, repository knowledge, subagent workflows, or produce a Markdown harness-engineering assessment with downstream ExecPlan and architecture artifact options without immediately implementing them.
+description: "Use when assessing a repository or project for agent-readiness and harness-engineering opportunities such as repo maps, validation harnesses, feedback loops, observability, architecture enforcement, subagent workflows, and progressive-disclosure docs, producing a report-only Markdown assessment with downstream ExecPlan and architecture artifact options; not for ordinary code cleanup (use $simplify), file-by-file technical-debt logging (use $refining-architecture), PR review (use $gh-review), or directly implementing the changes the assessment proposes."
 ---
 
 # Harness Engineering

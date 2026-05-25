@@ -1,6 +1,6 @@
 ---
 name: yeet
-description: Publish local repository changes to GitHub using the GitHub CLI. Use only when the user explicitly asks to yeet, publish, push a branch and PR, open a pull request, or stage, commit, push, and create a draft PR in one end-to-end flow. Isolates intended changes, preserves unrelated work, writes a focused commit, pushes with tracking, and opens a reviewer-friendly draft PR.
+description: "Use when the user explicitly asks to yeet, publish, push a branch and PR, open a pull request, or run the stage-commit-push-and-open-draft-PR flow end to end — isolating intended changes, preserving unrelated work, writing a focused commit, pushing with tracking, and opening a reviewer-friendly draft PR; not for a local-only commit with no push (use $commit) or operating on existing PRs (use $gh-review)."
 ---
 
 # Yeet

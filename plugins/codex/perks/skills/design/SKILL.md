@@ -1,176 +1,63 @@
 ---
 name: design
-description: Use explicitly for high-craft UI, product, brand, and visual taste work across web, native apps, dashboards, tools, landing pages, onboarding, empty states, design systems, and design docs. Handles creating and redesigning interfaces, distilling screenshots or reference corpora into taste.md/TASTE.md, ingesting brand assets, initializing or refreshing docs/DESIGN.md, screenshot-led polish, UX/design critique, technical UI audits, accessibility, adaptive layout, typography, color, motion, microcopy, production hardening, and product/brand design judgment. Not for backend-only work or throwaway prototypes.
+description: Use when doing explicit UI, product, brand, visual-system, UX critique, screenshot-led polish, design-doc, taste-distillation, or design-hardening work. Not for backend-only tasks, generic styling chores, ordinary copyediting, or throwaway prototypes.
 ---
 
 # Design
 
-Design produces real working interfaces, committed design choices, design docs, audits, polish, and hardening. Match implementation complexity to the vision: maximalism needs elaborate code; minimalism needs precision. Vary across projects. Never converge on the same safe answer.
+Design handles high-craft UI, product, brand, visual-system, UX critique, polish, hardening, design docs, and taste distillation. Match the work to the surface: product UI should earn user trust quickly; brand surfaces need a point of view.
 
-## Start Here
+## Scope
 
-1. Read the request literally. If the user asks for changes, make changes. If they ask for review, stay read-only.
-2. Load `docs/DESIGN.md` first when it exists. Treat it as the strongest design context unless the user explicitly asks to depart from it.
-3. Always check for `taste.md` or `TASTE.md`, then gather other design-related context: design workflow docs, image-generation guidance, brand docs, product specs, active plans, existing components, tokens, previews, screenshots, assets, and running UI.
-4. Classify the surface as `product` or `brand`.
-5. Choose the lane below and read its reference.
-6. Inspect the rendered surface whenever tools exist. Code-only design work is a fallback, not normal design work.
+Use this skill for explicit design work:
 
-## Lanes
+- create or redesign a UI surface
+- critique UX or visual quality
+- polish a rendered surface
+- harden UI states, accessibility, layout, and copy
+- initialize or refresh `docs/DESIGN.md`
+- distill screenshots, references, or existing UI into `taste.md` or `TASTE.md`
+- translate visual references into implementation guidance
 
-- `init`: create `docs/DESIGN.md` when the repo lacks a design source of truth. Read [references/init.md](references/init.md).
-- `refresh`: update `docs/DESIGN.md` from the current implemented system. Read [references/init.md](references/init.md).
-- `distill`: extract concrete visual rules from screenshots, reference images, generated mockups, or an existing surface family before design work. Read [references/distill.md](references/distill.md).
-- `craft`: create or substantially redesign a surface in the real stack. Read [references/craft.md](references/craft.md).
-- `audit`: evaluate a surface without changing code. Covers UX critique and technical UI audit. Read [references/audit.md](references/audit.md).
-- `polish`: improve an existing functional surface through visual passes. Read [references/polish.md](references/polish.md).
-- `harden`: make an existing surface survive real data, errors, devices, accessibility, and localization. Read [references/harden.md](references/harden.md).
+Do not use this skill for backend-only work, generic code cleanup, ordinary copyediting, or throwaway prototypes.
 
-Plain-language requests route naturally:
+## Start
 
-- "shape this", "make a new flow", "build this screen", "redesign this surface" -> `craft`
-- "analyze these screenshots", "extract visual rules", "learn from this design corpus", "turn references into design guidance" -> `distill`
-- "critique this", "review the design", "what's wrong with this UI" -> `audit`
-- "make it quieter", "fix the type", "tighten the layout", "make it bolder", "add delight" -> `polish`
-- "handle edge cases", "make it production-ready", "test long text" -> `harden`
-- "create the design file", "initialize design docs" -> `init`
+1. Read the request literally: edit when asked to edit; stay read-only when asked to review.
+2. Load `docs/DESIGN.md` first when present.
+3. Check for `taste.md` or `TASTE.md`.
+4. Gather only relevant context: screenshots, previews, components, tokens, assets, brand docs, product specs, active plans, and existing routes.
+5. Classify the work as `product`, `brand`, or mixed.
+6. Choose one lane and load only the needed reference.
+7. Inspect rendered output whenever tools allow it.
 
-If the user asks for a lane not listed, choose the closest listed lane and say the mapping briefly.
+## Lane Selection
 
-When a craft, polish, refresh, or audit task includes a meaningful screenshot set or visual reference corpus, run a short `distill` pass before deciding what to build or promote. The goal is to name concrete visual rules from evidence, not to copy pixels or turn incidental content into doctrine.
+- `init`: create or refresh `docs/DESIGN.md`; read [references/init.md](references/init.md).
+- `distill`: extract visual rules from screenshots, references, generated mockups, or surface families; read [references/distill.md](references/distill.md).
+- `craft`: create or substantially redesign a surface in the real stack; read [references/craft.md](references/craft.md).
+- `audit`: critique or audit without editing; read [references/audit.md](references/audit.md).
+- `polish`: improve an existing functional surface through visual passes; read [references/polish.md](references/polish.md).
+- `harden`: make an existing surface survive real data, failure states, accessibility, devices, and localization; read [references/harden.md](references/harden.md).
+
+For typography, color, layout, imagery, motion, brand landing pages, product micro-polish, and design-system discipline, read [references/lenses.md](references/lenses.md) only when that axis matters.
+
+For visible UI text, labels, alt text, empty states, errors, notifications, and accessibility copy, read [references/ui-copy.md](references/ui-copy.md).
 
 ## Product Or Brand
 
-Product surfaces are app UIs, dashboards, settings, tools, data tables, forms, authenticated screens, and repeated workflows. Design serves the task. Familiarity is often a feature. The product slop test is: would a user fluent in the category's best tools trust this interface immediately, or pause at subtly-off components? Product UI fails through strangeness without purpose.
+Product surfaces are app UIs, dashboards, settings, tools, data tables, forms, authenticated screens, and repeated workflows. Design serves task completion and category trust.
 
-Product can afford system fonts, standard navigation, density, and consistency over surprise. Use those permissions. A good product surface often disappears into the task.
+Brand surfaces are landing pages, marketing pages, campaign pages, portfolios, showcases, and public narrative surfaces. Design is part of the deliverable and must carry a memorable point of view.
 
-Brand surfaces are landing pages, marketing pages, campaign pages, portfolios, public long-form, product showcases, venues, people, objects, or places. Design is part of the deliverable. The brand slop test is: if someone could say "AI made that" without hesitation, it failed. Brand fails through timid palettes, average layouts, no imagery when imagery is expected, and no point of view.
-
-Brand can afford ambitious first-load motion, single-purpose viewports, typographic risk, unexpected color strategies, and art direction per section. Use those permissions when the surface earns them.
-
-If a surface is mixed, let the current task decide. A product can have a brand-led welcome screen. A marketing site can contain product UI examples.
-
-## Color
-
-Pick a color strategy before choosing colors:
-
-- Restrained: tinted neutrals plus one accent at <=10% of the surface. Product default; brand minimalism.
-- Committed: one saturated color carries 30-60% of the surface. Brand default for identity-driven pages.
-- Full palette: 3-4 named roles used deliberately. Brand campaigns and product data visualization.
-- Drenched: the surface is the color. Brand heroes and campaign pages.
-
-Do not collapse everything to Restrained by reflex. The <=10% accent rule applies only to Restrained.
-
-Use OKLCH where the stack supports it. Reduce chroma as lightness approaches 0 or 100; high chroma at extremes looks garish. Never use pure `#000` or `#fff` for large surfaces. Tint neutrals toward the brand hue, even chroma 0.005-0.01 is enough.
-
-For brand color, name a real reference before picking a strategy: Klim #ff4500 orange drench, Stripe purple-on-white restraint, Liquid Death acid-green full palette, Vercel black monochrome. Unnamed ambition becomes beige.
-
-## Theme
-
-Theme comes from a physical usage scene, not a category. "Observability dashboard" does not force an answer. "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" does. Run the sentence, not the category.
-
-## Typography
-
-Typography carries most of the interface.
-
-- Body/prose measure: 65-75ch.
-- Limit most systems to two typefaces max. One family with committed weight and size contrast is often stronger than a timid pairing.
-- Product type: system fonts are legitimate. `-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif` is a valid native-feeling stack. One well-tuned sans usually carries headings, labels, buttons, body, and data. Use a fixed rem scale, ratio 1.125-1.2. Do not use display fonts in UI labels, buttons, or data.
-- Brand type: choose voice, not default prettiness. Use fluid `clamp()` for display headings when the surface benefits from breathing across viewports. Use >=1.25 ratio between hierarchy steps; flat scales read as uncommitted.
-- Light-on-dark text usually needs 0.05-0.1 more line-height because light type reads lighter and needs more air.
-- Use tabular or stable numerals when changing values would jitter.
-
-For new brand typography, reject reflex picks before browsing. Common saturated defaults: Fraunces, Newsreader, Lora, Crimson, Playfair Display, Cormorant, Syne, IBM Plex, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif. Existing brand identity wins, but greenfield choices must look further.
-
-## Layout
-
-Space is a design material.
-
-- Same padding everywhere is monotony. Use tight grouping for related items and generous separation between distinct ideas.
-- Do not wrap everything in containers. Most things do not need one.
-- Cards are not layout. Use them only when they frame distinct, actionable or comparable units. Never nest cards.
-- If a panel can become plain layout without losing meaning, remove the card treatment.
-- Commit either to asymmetry or to a strict visible grid. Splitting the difference becomes a generic centered stack.
-- Avoid centered hero stacks with icon, title, subtitle, and card grid unless the brief truly earns that template.
-- Avoid repeating the same section architecture more than once in a row. Do not default to text-left, image-right for every section.
-- Each section gets one job, one dominant visual idea, and one primary takeaway or action.
-
-## Motion
-
-Motion explains state, continuity, feedback, or reveal.
-
-- Product motion is usually 150-250 ms. No orchestrated page-load sequences on task surfaces.
-- Use ease-out-quart, ease-out-quint, or ease-out-expo curves. No bounce or elastic by default.
-- Do not casually animate layout properties such as width, height, top, left, or margins. Prefer transform, opacity, matched geometry, symbol transitions, or platform-native state animation.
-- Exit motion should usually be softer and shorter than entrance motion.
-- Toggles, drawers, menus, panels, hover states, and selection changes should retarget smoothly when the user changes intent.
-- Respect reduced motion.
-
-## Absolute Bans
-
-Match and refuse. If one of these appears in your planned design, rewrite the element with a different structure.
-
-- Thick side-stripe borders on cards, list items, alerts, or callouts. Use full borders, surface tints, icons, numbers, or structure.
-- Gradient text. Use a single solid color; create emphasis with size, weight, placement, or contrast.
-- Decorative glassmorphism. Use blur/glass only when it is rare, purposeful, and technically verified.
-- Hero-metric templates: big number, small label, supporting stats, gradient accent. If real data matters, design a real data presentation.
-- Identical card grids. Vary composition, span, rhythm, section type, or remove the cards.
-- Modal as first thought. Exhaust inline, route-level, drawer, popover, undo, progressive disclosure, or direct manipulation alternatives first.
-- Monospace as lazy shorthand for technical or developer. If the brand is not actually technical, mono reads as costume.
-- All-caps body copy. Reserve caps for short labels, metadata, and headings.
-- Large rounded-corner icons above every heading. This is template behavior, not identity.
-
-## Reflex Checks
-
-Run two passes before committing to a visual direction:
-
-1. First-order: if someone could guess the theme and palette from the category alone, such as healthcare -> white and teal, finance -> navy and gold, crypto -> neon on black, rework.
-2. Second-order: if someone could guess the aesthetic from category-plus-anti-reference, such as AI workflow tool that is not SaaS cream -> editorial typography, or fintech that is not navy-and-gold -> terminal dark mode, rework again.
-
-## Product Rules
-
-- Skeleton states usually beat spinners floating in content.
-- Empty states should teach the interface and offer the next useful action.
-- Component vocabulary must be consistent. If the save button looks different in two places without reason, one is wrong.
-- Do not reinvent standard affordances for flavor: custom scrollbars, weird form controls, non-standard modals, unclear tabs.
-- Heavy color and full-saturation accents do not belong on inactive states.
-- Use product copy, not implementation leakage. Visible text, accessibility text, alt text, notifications, and errors must not expose internal states, scopes, flags, enum names, agent rationale, or scaffold-as-UI. For copy work, read [references/ui-copy.md](references/ui-copy.md).
-- App UI should organize around a primary workspace, navigation, secondary context or inspector, and one clear accent for action or state.
-- Avoid dashboard-card mosaics, thick borders on every region, ornamental icons, and decorative gradients behind routine work.
-- Operator scan test: if someone scans only headings, labels, and numbers, can they understand the page immediately?
-
-## Brand Rules
-
-- Image-led briefs need imagery. Restaurants, hotels, magazines, photography, hobby communities, food, travel, fashion, venues, and product showcases should not ship as colored rectangles. Zero imagery is a bug unless the brand truly earns a type-only treatment.
-- One decisive image beats five mediocre ones. Search for the physical object or moment, not the generic category.
-- Tech and dev-tool brands can be image-light when typography, diagrams, code, or product artifacts carry the voice.
-- On branded landing pages, the brand or object must be a first-viewport signal, not tiny nav text.
-- Brand first, headline second, body third, CTA fourth.
-- No hero cards, stat strips, logo clouds, pill soup, or floating dashboards by default.
-- Keep hero headlines to roughly 2-3 lines on desktop and readable in one glance on mobile.
-- Text over imagery must sit on a calm tonal area with strong contrast and clear tap targets.
-- Visually led brand work should include 2-3 intentional motions: a hero entrance, a scroll/depth effect, and a hover/reveal/layout transition when the surface earns them.
-
-## Self-Checks
-
-Run these before calling a design done:
-
-- Is the brand or product unmistakable in the first screen?
-- Is there one strong visual anchor?
-- Can the page be understood by scanning headlines only?
-- Does each section have one job?
-- Are cards actually necessary?
-- Would the design still feel premium if decorative shadows were removed?
-- Are radius, borders, shadows, and accents behaving like one deliberate system?
-- Does layout rhythm change enough from section to section to avoid a template feel?
+Mixed surfaces should follow the current task. A product can have a brand-led welcome screen; a marketing site can contain product UI examples.
 
 ## Visual Evidence
 
 Use the strongest available way to see the UI:
 
 1. Native app, simulator, device, preview, or screenshot tooling.
-2. Browser Use, Agent Browser, or in-app browser for web/local targets.
+2. Browser, Agent Browser, or in-app browser for web or local targets.
 3. Project-native screenshot, snapshot, or preview tooling.
 4. Existing screenshots or user-provided images.
 5. Static code review only when rendering is unavailable.
@@ -179,15 +66,22 @@ If rendering is unavailable, say what could not be verified.
 
 ## Quality Contract
 
-Every design lane finishes by naming:
+End every design task with:
 
-- intent: what the surface or artifact is trying to accomplish
-- primary user state: who is using it and what pressure, mode, or job they are in
-- evidence inspected: design docs, taste docs, code, screenshots, previews, rendered UI, references, or assets
-- checks run: exact viewports, states, data cases, and interaction paths inspected
-- accessibility checks: keyboard or platform navigation, labels, roles, contrast, text scaling, motion, and color-independent state where relevant
-- unresolved risk: what remains unverified, deferred, or dependent on product judgment
+- intent
+- primary user state
+- evidence inspected
+- changes made or findings
+- checks run, including viewports and states where relevant
+- accessibility checks where relevant
+- unresolved risk
 
-## Output
+For audits, lead with findings ordered by severity. For implementation lanes, lead with what changed and what was verified.
 
-For implementation lanes, end with what changed and the Quality Contract. For audit, lead with findings ordered by severity, then include the Quality Contract. Keep explanations tied to the user, the surface, and the design system.
+## Guardrails
+
+- Do not invent a new product direction during polish.
+- Do not let generated mockups override product semantics, accessibility, platform conventions, or real content.
+- Do not ship uninspected UI when rendering is available.
+- Do not expose implementation leakage in user-facing copy.
+- Preserve useful local design doctrine; move deeper reasoning into the appropriate reference rather than deleting it.

@@ -25,7 +25,7 @@ Use rendered inspection when available: simulator, preview, device screenshot, B
 - Copy: CTAs, labels, empty states, errors, confirmations, tooltips, accessibility text, and scaffold-as-UI.
 - Product fit: earned familiarity, standard affordances, consistent component vocabulary, product copy.
 - Brand fit: point of view, first-viewport signal, imagery when expected, memorable composition.
-- AI slop: generic layout, fake metrics, gradient text, glass panels, identical card grids, purple-blue glow, category-reflex palette, second-order aesthetic reflex.
+- AI slop: generic layout, fake metrics, gradient text used as default emphasis, identical card grids, category-reflex palette.
 - Implementation leakage: internal states, scopes, flags, enum names, agent rationale, or scaffold text surfaced as UI.
 - Persona red flags: first-timer, power user, mobile/touch user, accessibility user, skeptical evaluator.
 

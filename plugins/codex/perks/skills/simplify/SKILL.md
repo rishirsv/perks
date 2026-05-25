@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: "Use when cleaning up recent code changes for clarity, reuse, quality, efficiency, and AI-generated code slop."
+description: "Use when cleaning up the current diff or recently changed code for clarity, reuse, quality, efficiency, and AI-generated code slop; not for scanning a whole repo or logging tracker entries (use $refining-architecture), removing fallback or compatibility code (use $hard-cut), or assessing agent-readiness (use $harness-engineering)."
 ---
 
 # Simplify

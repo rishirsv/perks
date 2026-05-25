@@ -3,9 +3,16 @@
 Use these templates to generate `prompt.md` for Oracle handoffs.
 
 - `review` templates assume the downstream model sees only `context.zip`
-- `ultraplan` templates assume the downstream model sees only `context.txt`
+- `planning` templates assume the downstream model sees only `context.txt`
 
 Copy the smallest template that fits, then trim anything that does not matter for the task.
+
+## Scope Map
+
+- Role values: choose the downstream reviewer or planner posture.
+- Planning template: use with `context.txt`.
+- Review, debugging, recommendation, and prompt-critique templates: use with `context.zip`.
+- Grounding rules: keep every downstream answer tied to the uploaded bundle.
 
 ## Role Values
 
@@ -19,7 +26,7 @@ Replace `{ROLE}` with one of these:
 | Prompting | a prompt engineer improving Codex or GPT prompts for reliability and clarity |
 | Planning | a principal engineer creating a high-confidence implementation plan for a complex change in an unfamiliar codebase |
 
-## Ultraplan Template
+## Planning Template
 
 ```xml
 <task>
@@ -209,7 +216,7 @@ You are {ROLE}.
 I am uploading `context.zip` containing repository files. Treat those files as authoritative.
 Start by reading `MANIFEST.md` at the root of the archive.
 
-Diagnose why this prompt, skill, or instruction set is underperforming and propose the smallest high-leverage changes.
+Diagnose why this prompt, skill, or instruction set is underperforming and propose the smallest high-impact changes.
 
 Target prompt or skill: {PROMPT_SCOPE}
 Observed failure modes: {FAILURE_MODES}

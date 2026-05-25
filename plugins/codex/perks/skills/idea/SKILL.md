@@ -77,6 +77,8 @@ Challenge language immediately when a term is vague, overloaded, or inconsistent
 
 Use concrete scenarios to test boundaries between terms, ownership, workflow states, audiences, artifacts, roles, relationships, permissions, lifecycle transitions, or system behavior.
 
+Watch for questions that cannot be answered well through conversation alone. If the next important uncertainty needs seeing, using, prototyping, researching, or implementing something, stop the interview loop and recommend that next artifact instead of continuing to ask questions.
+
 When the user describes how something works, check available durable docs or relevant source reality. If they disagree, surface the contradiction before continuing.
 
 Treat each answer as one of:
@@ -126,7 +128,7 @@ End with **Idea Direction** when the idea is clear enough to hand off, capture, 
 
 **Durable Output:** <chat only, existing doc updated, or recommended artifact>
 
-**Next Move:** <decision, artifact, research handoff, plan handoff, implementation handoff, or stop>
+**Next Move:** <decision, artifact, prototype handoff, research handoff, plan handoff, implementation handoff, or stop>
 ```
 
 If the idea is not clear enough, keep asking the next highest-leverage question instead of ending.

@@ -47,6 +47,28 @@ DEFAULT_EXCLUDED_SUFFIXES = {
     ".p12",
 }
 
+HARD_DENY_BASENAMES = {
+    ".env",
+    ".env.local",
+    ".env.production",
+    ".env.development",
+    ".env.test",
+    "MANIFEST.md",
+    "context.txt",
+    "context.zip",
+    "id_dsa",
+    "id_ecdsa",
+    "id_ed25519",
+    "id_rsa",
+    "prompt.md",
+}
+
+HARD_DENY_SUFFIXES = {
+    ".key",
+    ".p12",
+    ".pem",
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -55,7 +77,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--repo-root", default=".", help="Repository root (defaults to current directory).")
     parser.add_argument("--out", default="", help="Optional output zip path (for review mode).")
-    parser.add_argument("--text-out", default="", help="Optional text bundle path (for ultraplan mode).")
+    parser.add_argument("--text-out", default="", help="Optional text bundle path (for planning mode).")
     parser.add_argument("--task", default="", help="Optional short task summary for the manifest.")
     parser.add_argument(
         "--constraint",
@@ -78,13 +100,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--no-default-excludes",
         action="store_true",
-        help="Disable built-in excludes such as .agents, .git, node_modules, and secret-like files.",
+        help="Disable ordinary built-in excludes such as .git and node_modules. Hard-denied secret-like and generated Oracle outputs still stay excluded.",
     )
     parser.add_argument(
         "--entry",
         action="append",
         default=[],
         help='File entry in the form `PATH::REASON`. PATH may be a file, directory, or glob. Repeatable.',
+    )
+    parser.add_argument(
+        "--entry-file",
+        action="append",
+        default=[],
+        help="Path to a text file containing PATH::REASON entries, one per line. Blank lines and # comments are ignored.",
+    )
+    parser.add_argument(
+        "--max-tokens",
+        type=int,
+        default=0,
+        help="Fail if the estimated raw token count exceeds this budget.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Print the manifest and exit.")
     parser.add_argument(
@@ -143,7 +177,24 @@ def is_secret_like(rel_path: Path) -> bool:
     return False
 
 
+def is_hard_denied(rel_path: Path) -> bool:
+    name = rel_path.name
+    lowered = name.lower()
+    parts = rel_path.parts
+    if lowered.startswith(".env"):
+        return True
+    if lowered in {item.lower() for item in HARD_DENY_BASENAMES}:
+        return True
+    if rel_path.suffix.lower() in HARD_DENY_SUFFIXES:
+        return True
+    if ".agents" in parts and "oracle" in parts:
+        return True
+    return False
+
+
 def should_exclude(rel_path: Path, exclude_patterns: list[str], *, default_excludes_enabled: bool) -> bool:
+    if is_hard_denied(rel_path):
+        return True
     if default_excludes_enabled:
         if any(part in DEFAULT_EXCLUDED_DIRS for part in rel_path.parts[:-1]):
             return True
@@ -191,6 +242,19 @@ def build_entries(
         deduped.append(entry)
 
     return sorted(deduped, key=lambda entry: entry.rel_path.as_posix().lower())
+
+
+def read_entry_file(raw_path: str) -> list[str]:
+    path = Path(raw_path).expanduser()
+    if not path.exists():
+        raise SystemExit(f"Missing entry file: {path}")
+    entries: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        entries.append(stripped)
+    return entries
 
 
 def format_bytes(size: int) -> str:
@@ -248,6 +312,7 @@ def render_manifest(
         lines.append("")
 
     lines.append("## Excludes")
+    lines.append("- Hard-denied always: .env*, private key files, generated Oracle outputs, and .agents/oracle outputs")
     if default_excludes_enabled:
         lines.append(f"- Default excluded directories: {', '.join(sorted(DEFAULT_EXCLUDED_DIRS))}")
         lines.append(f"- Default excluded file names: {', '.join(sorted(DEFAULT_EXCLUDED_BASENAMES))}")
@@ -362,24 +427,30 @@ def write_zip(out_path: Path, manifest: str, entries: list[BundleEntry]) -> None
 
 def main() -> int:
     args = parse_args()
-    if not str(args.out).strip() and not str(args.text_out).strip():
+    if not args.dry_run and not str(args.out).strip() and not str(args.text_out).strip():
         raise SystemExit("Provide at least one output path with --out or --text-out.")
 
     repo_root = Path(args.repo_root).expanduser().resolve()
     exclude_patterns = [pattern.strip() for pattern in args.exclude if pattern and pattern.strip()]
     default_excludes_enabled = not bool(args.no_default_excludes)
+    raw_entries = list(args.entry or [])
+    for entry_file in args.entry_file or []:
+        raw_entries.extend(read_entry_file(entry_file))
     entries = build_entries(
         repo_root,
-        list(args.entry or []),
+        raw_entries,
         exclude_patterns,
         default_excludes_enabled=default_excludes_enabled,
     )
     if not entries:
         raise SystemExit("No files matched after expanding entries and applying excludes. Check --entry and --exclude.")
 
+    total_bytes = sum(entry.abs_path.stat().st_size for entry in entries)
+    tokens, warning = estimate_tokens(total_bytes)
+    if args.max_tokens and tokens > args.max_tokens:
+        raise SystemExit(f"Estimated tokens ~{tokens:,} exceed --max-tokens {args.max_tokens:,}. Trim the bundle.")
+
     if args.estimate_tokens:
-        total_bytes = sum(entry.abs_path.stat().st_size for entry in entries)
-        tokens, warning = estimate_tokens(total_bytes)
         print(f"Estimated tokens: ~{tokens:,}", file=sys.stderr)
         if warning:
             print(f"WARNING: {warning}", file=sys.stderr)

@@ -2,6 +2,13 @@
 
 Polish improves an existing, mostly functional surface. It makes the UI feel intentional, aligned, and ready.
 
+## Scope Map
+
+- Rule and loop: inspect, patch, render again, compare.
+- Screenshot artifacts: store operational evidence under `.agents/screenshots/`.
+- Good polish: fix hierarchy, density, alignment, copy, states, motion, and token drift.
+- Boundaries: do not turn polish into redesign, IA work, or a new design system.
+
 ## Rule
 
 Polish is visual-first. Use the best available way to see the actual surface:

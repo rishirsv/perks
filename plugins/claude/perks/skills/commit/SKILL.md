@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Create one safe, focused git commit from the current repository state. Use when the user asks to commit, save changes, make a git commit, or turn completed work into a commit. Stages only intended files, preserves unrelated work, checks the staged diff, and writes a concise repo-consistent message.
+description: "Use when creating one safe, focused git commit from the current repository state — committing, saving changes, making a git commit, or turning completed work into a commit — staging only intended files, preserving unrelated work, and writing a concise repo-consistent message; not for pushing, opening a PR, or running the stage-commit-push-PR flow end to end (use $yeet)."
 ---
 
 # Commit

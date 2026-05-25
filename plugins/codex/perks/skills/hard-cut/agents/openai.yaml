@@ -3,4 +3,4 @@ interface:
   short_description: "Enforce one canonical current-state codepath"
   default_prompt: "Use $hard-cut to remove legacy compatibility paths and keep one canonical implementation."
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

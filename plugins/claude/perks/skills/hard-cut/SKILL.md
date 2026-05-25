@@ -1,6 +1,6 @@
 ---
 name: hard-cut
-description: Enforce a hard-cut cleanup policy that keeps one canonical implementation and removes compatibility, migration, fallback, adapter, coercion, and dual-shape code. Use for pre-release or internal-draft refactors where the goal is one final shape, especially when changing schemas, contracts, persisted state, routing, configuration, feature flags, enum/value sets, or architecture.
+description: "Use when removing compatibility, migration, fallback, adapter, coercion, or dual-shape code to keep one canonical current-state implementation during pre-release or internal-draft refactors that change schemas, contracts, persisted state, routing, configuration, feature flags, enum/value sets, or architecture; not for cleaning up the current diff (use $simplify) or scanning a repo to record debt (use $refining-architecture)."
 ---
 
 # Hard-Cut Policy

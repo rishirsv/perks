@@ -140,22 +140,11 @@ Wide variation is for explicit reimagining. Vary structure, metaphor, density, m
 
 Radical variation is for "radically different", "north-star", "surprise me", or early exploration. Keep only the user job, product semantics, required content, accessibility expectations, and any named identity anchors. Avoid preserving current layout just because a screenshot exists.
 
-## Front-End Design Lens
+## Design Boundary
 
-Use these principles as a soft lens, not a mandate. The user's taste, product category, existing design system, and task at hand win.
+UI prototypes are exploration artifacts. Use this file to compare directions, generate references, or make disposable route variants. Use `$design` for production UI craft, polish, critique, hardening, design docs, or taste distillation.
 
-- Start with composition and hierarchy before components.
-- Give each screen or section one main job and one dominant visual idea.
-- For product UI, default to calm density, strong typography, minimal chrome, and clear workspace/navigation/context/action structure.
-- Use cards only when the card is the interaction or comparison unit. Prefer plain layout, dividers, lists, tables, panels, and spatial grouping when they communicate better.
-- Prefer utility copy in app surfaces: headings, labels, and numbers should let an operator understand the screen quickly.
-- For brand or landing work, use one strong visual anchor and make the product, place, person, or offer unmistakable in the first viewport.
-- Use imagery only when it does narrative work. Decorative texture is not enough.
-- Let whitespace, alignment, scale, cropping, and contrast do work before adding chrome, gradients, or ornament.
-- Motion can be implied in mockups, but only when it clarifies hierarchy, continuity, reveal, or affordance.
-- Avoid generic SaaS defaults: stacked card mosaics, decorative gradients behind routine app UI, ornamental icons, pill clutter, weak brand presence, and filler copy.
-
-When analyzing options, prefer the direction that best serves the user's goal, not the direction that best matches these defaults.
+When analyzing prototype options, prefer the direction that best answers the user question. Do not promote generated visuals, placeholder copy, fake controls, or throwaway route code into production requirements.
 
 ### Variation Defaults
 

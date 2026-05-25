@@ -2,6 +2,13 @@
 
 Use this reference when improving an ExecPlan. Preserve these concepts unless the target repository's own planning contract explicitly overrides them.
 
+## Scope Map
+
+- Verbatim requirements and skeleton: the contract to preserve for ExecPlans.
+- Formatting: how an ExecPlan should be shaped as Markdown.
+- Guidelines and milestones: how plans stay self-contained, safe, and verifiable.
+- Revision discipline: progress, discoveries, decision logs, and retrospective updates.
+
 ## Verbatim Requirements And Skeleton
 
 The PLANS.md contract requires an ExecPlan to be self-contained, self-sufficient, novice-guiding, and outcome-focused.

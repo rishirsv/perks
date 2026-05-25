@@ -2,6 +2,13 @@
 
 Use this reference for visible text, accessibility labels, alt text, notifications, system dialogs, voice command labels, Siri or Shortcut intent labels, tooltips, placeholders, empty states, and errors.
 
+## Scope Map
+
+- Implementation leakage: remove code-shaped, scaffold-shaped, or state-machine-shaped text.
+- Product copy rules: labels, actions, empty states, errors, and destructive choices.
+- Accessibility copy: labels and alt text must be user-facing copy, not hidden implementation notes.
+- Examples and checks: use to rewrite rough copy into product language.
+
 ## Implementation Leakage
 
 User-facing text must not exist because of an implementation detail. If a string makes sense because of a permission scope, feature flag, backing enum, state machine, internal taxonomy, agent rationale, or scaffold label, rewrite or remove it.

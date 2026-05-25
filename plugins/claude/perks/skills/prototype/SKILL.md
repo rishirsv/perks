@@ -1,36 +1,54 @@
 ---
 name: prototype
-description: Build prototypes and visual reference artifacts to answer design, UI, state, business-logic, or data-shape questions before committing to production code. Use when the user wants to prototype, sanity-check a state model or data model, generate imagegen UI mockups, make A/B/C interface option boards or contact sheets, explore radically different UI directions, create a throwaway route with switchable variants, refine a selected mock into a full-resolution implementation reference, or says "prototype this", "let me play with it", "mock this", "show a few options", or "try a few designs".
+description: Use when building a disposable prototype or visual reference artifact to answer one pre-production question about logic, state, data shape, interaction, or UI direction before production implementation; not for production UI craft, polish, critique, or hardening.
 ---
 
 # Prototype
 
-A prototype is work that answers a question before production implementation. The question decides the shape.
+A prototype answers one pre-production question. It is not production implementation.
 
-Some prototypes are intentionally throwaway, especially logic prototypes and route-variant code. Others are durable reference artifacts: imagegen boards, contact sheets, selected full-resolution mockups, or visual references that guide the final UI build.
+## Scope
 
-## Pick A Branch
+Use this skill when the user wants to explore whether an idea works before committing:
 
-Identify the question being answered from the prompt, surrounding code, design docs, screenshots, or by asking only when the core question itself is unclear. Then load the relevant branch file.
+- logic, state machine, business rule, API shape, or data model
+- visual direction, option board, contact sheet, or reference mock
+- disposable route variants that can be compared in the running app
 
-- **"Does this logic, state model, or data shape feel right?"** -> [LOGIC.md](LOGIC.md). Build a tiny interactive terminal app that pushes the model through cases that are hard to reason about on paper.
-- **"What should this look like, and what reference should guide the build?"** -> [UI.md](UI.md). Generate imagegen mockups, option boards, contact sheets, selected full-resolution reference mocks, and/or several radically different UI variations on a route, switchable via `?variant=`.
+Use `$design` instead for production UI craft, polish, critique, hardening, design docs, or taste distillation.
 
-The two branches produce different artifacts. If the question is genuinely ambiguous and the user is not reachable, default to whichever branch better matches the surrounding code: backend module -> logic; page, component, screenshot, or flow -> UI. State the assumption at the top of the prototype.
+## Mode Selection
 
-## Rules That Apply To Both
+- `logic`: the question is about state, transitions, rules, data shape, or API feel. Read [LOGIC.md](LOGIC.md).
+- `visual-reference`: the question is what a surface could look like or which direction to choose. Read the imagegen, board, contact-sheet, and reference-pass sections of [UI.md](UI.md).
+- `route-variants`: the user needs to play with options in the real app, compare density, or judge interaction in context. Read the runnable route variants section of [UI.md](UI.md).
 
-1. **Mark the artifact's role.** Code prototypes should be clearly throwaway. Imagegen boards and selected reference mockups should be clearly labeled as design references, not implementation truth.
-2. **One command or one artifact to inspect.** If code is involved, the user must be able to start it without thinking. If imagegen is involved, the output must be directly viewable and tied to the decision it answers.
-3. **No persistence by default.** State lives in memory. Persistence is the thing the prototype is checking, not something it should depend on. If the question explicitly involves persistence, use a scratch DB or local file with a clear `PROTOTYPE - wipe me` name.
-4. **Skip production polish for code prototypes.** No tests, no broad error handling, no abstractions, no migration paths. The point is to learn something fast and delete or absorb it. Visual reference artifacts can be polished enough to guide implementation.
-5. **Surface the state or decision.** After every action in logic prototypes, print the relevant state. For UI prototypes and mockups, make the compared options, preserved constraints, and decision question visible.
-6. **Delete, absorb, or retain as reference when done.** When prototype code has answered its question, delete it or fold the validated decision into real code under normal production constraints. When a visual artifact is selected as the implementation reference, keep it with the decision record or feature context.
+If ambiguous, infer from the artifact needed to answer the question. Backend/data question means `logic`. Screen, component, or flow question means `visual-reference` or `route-variants`.
 
-## When Done
+## Workflow
 
-The answer is the main thing worth keeping from a prototype. For visual work, the selected reference image may also be worth keeping.
+1. State the single question the prototype must answer.
+2. Choose the smallest artifact that answers it.
+3. Mark code prototypes as throwaway and visual artifacts as references.
+4. Keep persistence out unless persistence is the question.
+5. Make the artifact inspectable through one command, URL, or generated image.
+6. Surface the state, variants, or decision clearly.
+7. Capture the answer: verdict, selected direction, what to delete, what to absorb, and remaining uncertainty.
 
-Capture it somewhere durable: commit message, ADR, issue, product note, design note, or a `NOTES.md` next to the prototype. Include the question it answered, the selected direction, why it won, and any reference image that should guide implementation.
+## Output
 
-If the user is around, that capture can be a quick conversation. If not, leave a placeholder so they or a later agent can fill in the verdict before deleting the prototype.
+Return:
+
+- question answered
+- artifact path, command, URL, or image
+- what was learned
+- what should be deleted, retained as reference, or rebuilt properly
+- validation or inspection performed
+- known limitations
+
+## Guardrails
+
+- Do not promote prototype code directly to production.
+- Do not add broad tests, abstractions, migrations, or production error handling to throwaway code.
+- Do not wire variants to real destructive mutations.
+- Do not treat generated image text, fake icons, impossible shadows, or invented features as requirements.

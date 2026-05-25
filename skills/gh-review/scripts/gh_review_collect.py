@@ -254,7 +254,12 @@ def author_login(node: dict[str, Any]) -> str:
     return author.get("login") or "unknown"
 
 
-def flatten_comments(payload: dict[str, Any], include_trivial: bool) -> list[dict[str, Any]]:
+def flatten_comments(
+    payload: dict[str, Any],
+    include_trivial: bool,
+    *,
+    unresolved_only: bool = False,
+) -> list[dict[str, Any]]:
     pr = payload["pull_request"]
     items: list[dict[str, Any]] = []
 
@@ -300,6 +305,10 @@ def flatten_comments(payload: dict[str, Any], include_trivial: bool) -> list[dic
 
     for thread in payload["review_threads"]:
         for comment in thread.get("comments", {}).get("nodes") or []:
+            resolved = thread.get("isResolved")
+            outdated = thread.get("isOutdated")
+            if unresolved_only and (resolved is not False or outdated):
+                continue
             add_item(
                 {
                     "kind": "review_thread_comment",
@@ -314,14 +323,16 @@ def flatten_comments(payload: dict[str, Any], include_trivial: bool) -> list[dic
                     or thread.get("startLine")
                     or thread.get("originalLine")
                     or thread.get("originalStartLine"),
-                    "resolved": thread.get("isResolved"),
-                    "outdated": thread.get("isOutdated"),
+                    "resolved": resolved,
+                    "outdated": outdated,
                     "threadId": thread.get("id"),
                     "resolvedBy": thread.get("resolvedBy"),
                 }
             )
 
     items.sort(key=lambda item: item.get("updatedAt") or item.get("createdAt") or "")
+    if unresolved_only:
+        return [item for item in items if item.get("resolved") is False and not item.get("outdated")]
     return items
 
 
@@ -408,6 +419,42 @@ def next_step_for_pr(pr: dict[str, Any]) -> str:
     return "Check mergeability and review state before taking action."
 
 
+def readiness_blockers(pr: dict[str, Any]) -> list[str]:
+    blockers: list[str] = []
+    if pr.get("isDraft"):
+        blockers.append("draft PR")
+
+    checks = status_check_summary(pr.get("statusCheckRollup")).lower()
+    if "failing" in checks:
+        blockers.append(f"failing checks ({checks})")
+    elif "pending" in checks:
+        blockers.append(f"pending checks ({checks})")
+
+    decision = (pr.get("reviewDecision") or "").upper()
+    if decision == "CHANGES_REQUESTED":
+        blockers.append("changes requested")
+    elif decision == "REVIEW_REQUIRED":
+        blockers.append("review required")
+
+    mergeable = (pr.get("mergeable") or "").upper()
+    merge_state = (pr.get("mergeStateStatus") or "").upper()
+    if mergeable == "CONFLICTING" or merge_state in {"DIRTY", "BLOCKED"}:
+        blockers.append("merge conflicts or blocked merge state")
+    elif mergeable in {"UNKNOWN", ""}:
+        blockers.append("mergeability unknown")
+
+    return blockers
+
+
+def view_pr(number_or_url: str) -> dict[str, Any]:
+    fields = (
+        "number,title,url,state,isDraft,author,headRefName,baseRefName,"
+        "createdAt,updatedAt,closedAt,mergedAt,comments,reviewDecision,"
+        "mergeable,mergeStateStatus,statusCheckRollup"
+    )
+    return run_json(["gh", "pr", "view", number_or_url, "--json", fields])
+
+
 def render_prs_markdown(prs: list[dict[str, Any]]) -> str:
     if not prs:
         return "No open PRs found."
@@ -426,6 +473,56 @@ def render_prs_markdown(prs: list[dict[str, Any]]) -> str:
         lines.append(f"  - State: review {decision}; comments: {comments}; checks: {checks}; mergeable: {pr.get('mergeable') or 'unknown'}")
         lines.append(f"  - Initial thought: {next_step_for_pr(pr)}")
     return "\n".join(lines)
+
+
+def render_readiness_markdown(prs: list[dict[str, Any]]) -> str:
+    if not prs:
+        return "No PRs found."
+    lines = ["# Merge Readiness", ""]
+    for pr in prs:
+        blockers = readiness_blockers(pr)
+        lines.append(f"## PR #{pr['number']}: {pr['title']}")
+        lines.append(f"- URL: {pr.get('url')}")
+        lines.append(f"- Branch: {pr.get('headRefName')} -> {pr.get('baseRefName')}")
+        lines.append(f"- Checks: {status_check_summary(pr.get('statusCheckRollup'))}")
+        lines.append(f"- Review: {review_summary(pr)}")
+        lines.append(f"- Mergeable: {pr.get('mergeable') or 'unknown'}; state: {pr.get('mergeStateStatus') or 'unknown'}")
+        if blockers:
+            lines.append("- Blockers:")
+            lines.extend(f"  - {blocker}" for blocker in blockers)
+        else:
+            lines.append("- Blockers: none obvious from GitHub state")
+        lines.append(f"- Next action: {next_step_for_pr(pr)}")
+        lines.append("")
+    return "\n".join(lines).strip()
+
+
+def render_merge_plan_markdown(prs: list[dict[str, Any]]) -> str:
+    if not prs:
+        return "No open PRs found."
+
+    ready = [pr for pr in prs if not readiness_blockers(pr)]
+    blocked = [pr for pr in prs if readiness_blockers(pr)]
+    ready.sort(key=lambda pr: pr.get("updatedAt") or "")
+    blocked.sort(key=lambda pr: pr.get("updatedAt") or "")
+
+    lines = ["# Merge Plan Dry Run", ""]
+    if ready:
+        lines.append("## Ready-looking order")
+        for pr in ready:
+            lines.append(f"- #{pr['number']} {pr['title']} - {pr.get('url')}")
+        lines.append("")
+    else:
+        lines.append("## Ready-looking order")
+        lines.append("- None")
+        lines.append("")
+
+    if blocked:
+        lines.append("## Skipped or blocked")
+        for pr in blocked:
+            blockers = "; ".join(readiness_blockers(pr))
+            lines.append(f"- #{pr['number']} {pr['title']} - {blockers}")
+    return "\n".join(lines).strip()
 
 
 def render_comments_markdown(items: list[dict[str, Any]], since_days: int | None) -> str:
@@ -495,12 +592,19 @@ def cmd_comments(args: argparse.Namespace) -> None:
     collected: list[dict[str, Any]] = []
     for number in numbers:
         payload = fetch_pr(owner, repo, number)
-        collected.extend(flatten_comments(payload, include_trivial=args.all_comments))
+        collected.extend(
+            flatten_comments(
+                payload,
+                include_trivial=args.all_comments,
+                unresolved_only=args.unresolved_only,
+            )
+        )
 
     result = {
         "repo": f"{owner}/{repo}",
         "since_days": None if args.pr else args.since_days,
         "pr_numbers": numbers,
+        "unresolved_only": args.unresolved_only,
         "comments": collected,
     }
 
@@ -508,6 +612,42 @@ def cmd_comments(args: argparse.Namespace) -> None:
         print(json.dumps(result, indent=2))
     else:
         print(render_comments_markdown(collected, None if args.pr else args.since_days))
+
+
+def cmd_readiness(args: argparse.Namespace) -> None:
+    if args.pr:
+        prs = [view_pr(value) for value in args.pr]
+    else:
+        prs = list_prs(args.limit, state="open")
+
+    payload = [
+        {
+            "pull_request": pr,
+            "blockers": readiness_blockers(pr),
+            "next_action": next_step_for_pr(pr),
+        }
+        for pr in prs
+    ]
+    if args.format == "json":
+        print(json.dumps({"mode": "readiness", "items": payload}, indent=2))
+    else:
+        print(render_readiness_markdown(prs))
+
+
+def cmd_merge_plan(args: argparse.Namespace) -> None:
+    prs = list_prs(args.limit, state="open")
+    payload = [
+        {
+            "pull_request": pr,
+            "blockers": readiness_blockers(pr),
+            "ready": not readiness_blockers(pr),
+        }
+        for pr in prs
+    ]
+    if args.format == "json":
+        print(json.dumps({"mode": "merge-plan", "dry_run": True, "items": payload}, indent=2))
+    else:
+        print(render_merge_plan_markdown(prs))
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -530,8 +670,24 @@ def build_parser() -> argparse.ArgumentParser:
     comments.add_argument("--limit", type=int, default=100)
     comments.add_argument("--state", choices=("open", "closed", "merged", "all"), default="all")
     comments.add_argument("--all-comments", action="store_true", help="Include trivial praise/thanks comments.")
+    comments.add_argument(
+        "--unresolved-only",
+        action="store_true",
+        help="Include only unresolved, non-outdated review-thread comments; excludes top-level PR comments and review bodies.",
+    )
     comments.add_argument("--format", choices=("markdown", "json"), default="markdown")
     comments.set_defaults(func=cmd_comments)
+
+    readiness = sub.add_parser("readiness", help="Report merge readiness blockers for one or more PRs.")
+    readiness.add_argument("--pr", action="append", help="PR number or URL to inspect. Repeat for multiple PRs.")
+    readiness.add_argument("--limit", type=int, default=50)
+    readiness.add_argument("--format", choices=("markdown", "json"), default="markdown")
+    readiness.set_defaults(func=cmd_readiness)
+
+    merge_plan = sub.add_parser("merge-plan", help="Dry-run a safe-looking merge order for open PRs.")
+    merge_plan.add_argument("--limit", type=int, default=50)
+    merge_plan.add_argument("--format", choices=("markdown", "json"), default="markdown")
+    merge_plan.set_defaults(func=cmd_merge_plan)
     return parser
 
 

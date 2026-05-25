@@ -2,16 +2,53 @@
 
 Use these tactical lenses when a lane needs more design specificity.
 
+## Scope Map
+
+- Color and theme: choose a deliberate strategy before tokens.
+- Typography and layout: set hierarchy, measure, rhythm, and spacing.
+- Brand, imagery, motion, and product polish: apply only when relevant to the surface.
+- Design-system discipline, bans, reflex checks, and self-checks: use as final pressure tests.
+
+## Color Strategy
+
+Pick a color strategy before choosing colors:
+
+- Restrained: tinted neutrals plus one accent at <=10% of the surface. This is often the product default and a valid brand-minimalist choice.
+- Committed: one saturated color carries 30-60% of the surface. Use when identity or campaign energy should be unmistakable.
+- Full palette: 3-4 named roles used deliberately. Use for brand campaigns, product data visualization, or surfaces with real semantic color needs.
+- Drenched: the surface is the color. Use for brand heroes and campaign pages that earn a bold first impression.
+
+Do not collapse everything to Restrained by reflex. The <=10% accent rule applies only to Restrained.
+
+Use OKLCH where the stack supports it. Reduce chroma as lightness approaches 0 or 100; high chroma at extremes looks garish. Avoid pure `#000` or `#fff` for large surfaces. Tint neutrals toward the brand hue, even chroma 0.005-0.01 is enough.
+
+For brand color, name a real reference before picking a strategy — a real product, brand, place, or material whose color use you would honestly compare yourself to. Unnamed ambition becomes generic.
+
+## Theme
+
+Theme comes from a physical usage scene, not a category. "Observability dashboard" does not force an answer. "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" does. Run the sentence, not the category.
+
 ## Typography Selection
 
 For greenfield brand typography:
 
 1. Write three concrete brand-voice words. Avoid "modern", "clean", "elegant", and "premium"; use physical words like "warm", "mechanical", "clinical", "inked", "ceramic", "restless", "precise".
-2. List the fonts you would pick by reflex. If they include saturated defaults from `SKILL.md`, reject them.
+2. Note your reflex picks — the first two or three fonts that come to mind. If the final choice matches that reflex without earning it, restart.
 3. Browse a real catalog with the physical words in mind. Think museum label, field manual, receipt, watch dial, cheap newsprint, fabric tag, concert poster, lab notebook.
 4. Cross-check against the original reflex. If the final pick is just the first reflex with a rationale, restart.
 
+System-default sans choices like Inter, DM Sans, or platform UI fonts are legitimate when product clarity is the goal. The reflex check is about whether the pick is deliberate, not about banning specific families.
+
 Product UI usually does not need this. Use a tuned system or familiar sans stack unless the product has an established brand type system.
+
+Typography carries most of the interface:
+
+- Body/prose measure: 65-75ch.
+- Limit most systems to two typefaces max.
+- Product type: system fonts are legitimate. Use a fixed rem scale, ratio 1.125-1.2. Do not use display fonts in UI labels, buttons, or data.
+- Brand type: choose voice, not default prettiness. Use fluid `clamp()` for display headings when the surface benefits from breathing across viewports.
+- Light-on-dark text usually needs 0.05-0.1 more line-height because light type reads lighter and needs more air.
+- Use tabular or stable numerals when changing values would otherwise jitter.
 
 Pairing patterns by genre:
 
@@ -122,7 +159,24 @@ Establish the core system before polishing details:
 - icon style
 - motion vocabulary
 
-Do not mix soft glass cards, brutal borders, editorial typography, native material, and decorative gradients in one surface unless the brief explicitly demands collision.
+Pick one depth language per surface — shadow, outline, hairline, tonal layer, native material, or translucency — and apply it consistently. Mixing several casually reads as indecision rather than collision. Translucent/glass material is a legitimate choice when the platform, brand, or product context calls for it; treat it as one depth language, not a decorative effect layered on top of another.
+
+## Default Refusals
+
+Refuse these patterns unless the user explicitly asks for them or the brief clearly justifies the choice:
+
+- Thick side-stripe borders on cards, list items, alerts, or callouts. Use full borders, surface tints, icons, numbers, or structure.
+- Gradient text used as default emphasis. A single solid color with size, weight, placement, or contrast usually reads stronger; gradient text is a real brand move when the identity earns it.
+- Hero-metric templates without real data presentation: big number, small label, supporting stats, decorative accent. If real data matters, design a real data presentation; the template form is a legitimate fintech/analytics pattern when the numbers actually carry the story.
+- Identical card grids. Vary composition, span, rhythm, section type, or remove the cards.
+- Modal as first thought. Exhaust inline, route-level, drawer, popover, undo, progressive disclosure, or direct manipulation alternatives first.
+- Monospace as lazy shorthand for technical or developer. If the brand is not actually technical, mono reads as costume.
+- All-caps body copy. Reserve caps for short labels, metadata, and headings.
+- Large rounded-corner icons above every heading. This is template behavior, not identity.
+
+## Category Reflex Check
+
+Before committing to a visual direction, run one pass: if someone could guess the theme and palette from the product category alone — healthcare → white and teal, finance → navy and gold, crypto → neon on black — rework. A direction can still be conventional if conventional is correct, but it should be a deliberate choice, not the first thing the category suggests.
 
 ## Self-Check
 
