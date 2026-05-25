@@ -5,7 +5,6 @@ Use this when the target tracker has no stronger local format.
 ```markdown
 ### <short title>
 
-- Status: Queue
 - Source: <PR title/number> - <comment URL>
 - Classification: <bug follow-up | product follow-up | test gap | docs gap | architecture debt | cleanup | won't fix>
 - Where: <file/module/area>

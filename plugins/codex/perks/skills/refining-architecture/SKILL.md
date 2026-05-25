@@ -218,7 +218,6 @@ Preserve the current tracker style. If there is no style, use this fallback entr
 ```markdown
 ### <short title>
 
-- Status: Queue
 - Recommendation: Strong | Worth exploring | Speculative
 - Source: <scan date, user request, PR/comment URL, command, or other evidence>
 - Where: <file/module/area>
