@@ -49,7 +49,7 @@ _Avoid_: <aliases, overloaded terms, or rejected meanings>
 - <Open trail, or `None`.>
 ```
 
-## Product/Spec Brief
+## Requirements Note
 
 ```md
 # <Idea Or Product Area>
@@ -74,6 +74,8 @@ _Avoid_: <aliases, overloaded terms, or rejected meanings>
 
 - <Open trail, or `None`.>
 ```
+
+For a formal Product Requirements Document, do not expand this template. Hand off to `$prd` with the settled context from the idea session.
 
 ## Decision Record
 

@@ -5,7 +5,7 @@ description: "Use to grill, refine, and ground a serious idea before execution. 
 
 # Idea
 
-Use this skill to pressure-test an idea until it is clear enough to decide, capture, plan, research, hand off, or stop.
+Use this skill to pressure-test an idea until it is clear enough to decide, capture, formalize, plan, research, hand off, or stop.
 
 <what-to-do>
 
@@ -103,11 +103,12 @@ When durable capture is needed, update the smallest existing project-native arti
 
 - **Idea note**: shared understanding, constraints, assumptions, non-goals, open trails
 - **Domain/context note**: canonical terms, relationships, ownership boundaries, flagged ambiguity
-- **Product/spec brief**: outcome, audience, behavior, acceptance criteria
+- **Requirements note**: outcome, audience, behavior, acceptance signals
+- **PRD handoff**: use `$prd` when the next artifact should be a formal Product Requirements Document
 - **Decision record**: only for decisions that are hard to reverse, surprising without context, and the result of a real trade-off
 - **ExecPlan**: only when implementation sequencing is the next durable artifact
 
-When creating one of these fallback artifacts, read `assets/templates.md` and use only the matching template.
+When creating one of these fallback artifacts, read `assets/templates.md` and use only the matching template. Do not write a PRD inside Idea; recommend `$prd` when the idea has enough settled context for a formal requirements document.
 
 Start durable artifacts directly with the document title and substantive content. Do not add front-matter-style metadata blocks or decorative status headers such as `Status`, `Last updated`, `Audience`, `Owner`, or similar labels unless the existing project-native artifact already requires them.
 
@@ -128,7 +129,7 @@ End with **Idea Direction** when the idea is clear enough to hand off, capture, 
 
 **Durable Output:** <chat only, existing doc updated, or recommended artifact>
 
-**Next Move:** <decision, artifact, prototype handoff, research handoff, plan handoff, implementation handoff, or stop>
+**Next Move:** <decision, artifact, PRD handoff, prototype handoff, research handoff, plan handoff, implementation handoff, or stop>
 ```
 
 If the idea is not clear enough, keep asking the next highest-leverage question instead of ending.
@@ -141,6 +142,7 @@ If the idea is not clear enough, keep asking the next highest-leverage question 
 - Do not use operational docs as idea truth.
 - Do not over-explain the process in the visible response.
 - Do not add boilerplate metadata headers or front-matter-style status blocks to idea notes, specs, decision records, or plans.
+- Do not create PRD-shaped artifacts inside Idea; hand off to `$prd` once the idea is settled enough.
 - Do not create an execution plan until the idea has settled enough to support one.
 - Do not implement inside Idea.
 
