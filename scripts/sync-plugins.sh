@@ -12,6 +12,7 @@ SOURCE_ASSETS="$ROOT/assets/$PLUGIN_NAME"
 CODEX_PLUGIN="$ROOT/plugins/codex/$PLUGIN_NAME"
 CLAUDE_PLUGIN="$ROOT/plugins/claude/$PLUGIN_NAME"
 CODEX_PLUGIN_AGENTS="$CODEX_PLUGIN/agents"
+CLAUDE_PLUGIN_AGENTS="$CLAUDE_PLUGIN/agents"
 CODEX_MARKETPLACE_DIR="$ROOT/.agents/plugins"
 CODEX_MARKETPLACE="$CODEX_MARKETPLACE_DIR/marketplace.json"
 CLAUDE_MARKETPLACE="$ROOT/.claude-plugin/marketplace.json"
@@ -21,6 +22,8 @@ CODEX_SYSTEM_AGENTS="$HOME/.codex/AGENTS.md"
 CODEX_USER_AGENTS="$HOME/.codex/agents"
 CODEX_USER_AGENT_MARKER="$CODEX_USER_AGENTS/.perks-managed-agents"
 CLAUDE_SYSTEM_AGENTS="$HOME/.claude/CLAUDE.md"
+CLAUDE_USER_AGENTS="$HOME/.claude/agents"
+CLAUDE_USER_AGENT_MARKER="$CLAUDE_USER_AGENTS/.perks-managed-agents"
 
 if [[ ! -d "$SOURCE_SKILLS" ]]; then
   echo "Missing source skills directory: $SOURCE_SKILLS" >&2
@@ -39,6 +42,7 @@ mkdir -p \
   "$CODEX_PLUGIN/assets" \
   "$CLAUDE_PLUGIN/.claude-plugin" \
   "$CLAUDE_PLUGIN/skills" \
+  "$CLAUDE_PLUGIN_AGENTS" \
   "$ROOT/.agents/plugins" \
   "$ROOT/.claude-plugin"
 
@@ -51,11 +55,108 @@ else
   rm -rf "$CODEX_PLUGIN_AGENTS"
 fi
 
+if [[ -d "$SOURCE_CODEX_AGENTS" ]]; then
+  python3 - "$SOURCE_CODEX_AGENTS" "$CLAUDE_PLUGIN_AGENTS" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+source = Path(sys.argv[1])
+target = Path(sys.argv[2])
+target.mkdir(parents=True, exist_ok=True)
+for stale in target.glob("*.md"):
+    stale.unlink()
+
+
+def parse_codex_agent(path: Path) -> dict:
+    text = path.read_text()
+    data = {"skills": []}
+
+    for key in ["name", "description", "model", "model_reasoning_effort", "sandbox_mode"]:
+        match = re.search(rf'^{key}\s*=\s*"([^"]*)"', text, re.MULTILINE)
+        if match:
+            data[key] = match.group(1)
+
+    instruction_match = re.search(r'developer_instructions\s*=\s*"""(.*?)"""', text, re.DOTALL)
+    data["developer_instructions"] = instruction_match.group(1).strip() if instruction_match else ""
+
+    for match in re.finditer(r'^\s*path\s*=\s*"([^"]*/skills/([^/]+)/SKILL\.md)"', text, re.MULTILINE):
+        data["skills"].append(match.group(2))
+
+    return data
+
+
+def claude_model(codex_model):
+    if codex_model and codex_model.endswith("-mini"):
+        return "haiku"
+    return "sonnet"
+
+
+def claude_effort(codex_effort):
+    if codex_effort in {"low", "medium", "high", "xhigh", "max"}:
+        return codex_effort
+    return "medium"
+
+
+def tools_for(sandbox_mode):
+    if sandbox_mode == "read-only":
+        return ["Read", "Grep", "Glob", "Bash", "Skill"]
+    return ["Read", "Grep", "Glob", "Bash", "Write", "Edit", "MultiEdit", "Skill"]
+
+
+def yaml_scalar(value):
+    text = str(value)
+    if not text:
+        return '""'
+    if re.search(r"[:#\[\]{}&*!|>'\"%@`]", text) or text.strip() != text:
+        return '"' + text.replace("\\", "\\\\").replace('"', '\\"') + '"'
+    return text
+
+
+def yaml_frontmatter(data):
+    lines = []
+    for key, value in data.items():
+        if isinstance(value, list):
+            lines.append(f"{key}:")
+            for item in value:
+                lines.append(f"- {yaml_scalar(item)}")
+        else:
+            lines.append(f"{key}: {yaml_scalar(value)}")
+    return "\n".join(lines) + "\n"
+
+
+for path in sorted(source.glob("*.toml")):
+    agent = parse_codex_agent(path)
+    name = str(agent.get("name", path.stem))
+    frontmatter = {
+        "name": name,
+        "description": str(agent.get("description", "")),
+        "model": claude_model(agent.get("model") if isinstance(agent.get("model"), str) else None),
+        "effort": claude_effort(agent.get("model_reasoning_effort") if isinstance(agent.get("model_reasoning_effort"), str) else None),
+        "tools": tools_for(agent.get("sandbox_mode") if isinstance(agent.get("sandbox_mode"), str) else None),
+    }
+
+    skills = agent.get("skills", [])
+    if isinstance(skills, list) and skills:
+        frontmatter["skills"] = skills
+
+    body = str(agent.get("developer_instructions", "")).strip()
+    output = "---\n"
+    output += yaml_frontmatter(frontmatter)
+    output += "---\n\n"
+    output += body
+    output += "\n"
+    (target / f"{name}.md").write_text(output)
+PY
+else
+  rm -rf "$CLAUDE_PLUGIN_AGENTS"
+fi
+
 if [[ -d "$SOURCE_ASSETS" ]]; then
   rsync -a --delete --exclude '.DS_Store' "$SOURCE_ASSETS/" "$CODEX_PLUGIN/assets/"
 fi
 
-mkdir -p "$HOME/.codex" "$HOME/.claude" "$CODEX_USER_AGENTS"
+mkdir -p "$HOME/.codex" "$HOME/.claude" "$CODEX_USER_AGENTS" "$CLAUDE_USER_AGENTS"
 cp "$SYSTEM_AGENTS_SOURCE" "$CODEX_SYSTEM_AGENTS"
 
 if [[ -f "$CODEX_USER_AGENT_MARKER" ]]; then
@@ -70,6 +171,25 @@ if [[ -d "$SOURCE_CODEX_AGENTS" ]]; then
   for agent_file in "$SOURCE_CODEX_AGENTS"/*.toml(N); do
     cp "$agent_file" "$CODEX_USER_AGENTS/${agent_file:t}"
     print -r -- "${agent_file:t}" >> "$CODEX_USER_AGENT_MARKER"
+  done
+fi
+
+if [[ -f "$CLAUDE_USER_AGENT_MARKER" ]]; then
+  while IFS= read -r managed_agent; do
+    [[ -n "$managed_agent" ]] || continue
+    rm -f "$CLAUDE_USER_AGENTS/$managed_agent"
+  done < "$CLAUDE_USER_AGENT_MARKER"
+fi
+
+: > "$CLAUDE_USER_AGENT_MARKER"
+if [[ -d "$CLAUDE_PLUGIN_AGENTS" ]]; then
+  for agent_file in "$CLAUDE_PLUGIN_AGENTS"/*.md(N); do
+    target_agent="$CLAUDE_USER_AGENTS/${agent_file:t}"
+    if [[ -e "$target_agent" ]]; then
+      mv "$target_agent" "$target_agent.bak.$(date +%Y%m%d%H%M%S)"
+    fi
+    cp "$agent_file" "$target_agent"
+    print -r -- "${agent_file:t}" >> "$CLAUDE_USER_AGENT_MARKER"
   done
 fi
 
@@ -216,3 +336,5 @@ echo "  $CODEX_SYSTEM_AGENTS"
 echo "  $CLAUDE_SYSTEM_AGENTS -> $SYSTEM_AGENTS_SOURCE"
 echo "Synced Codex custom agents:"
 echo "  $CODEX_USER_AGENTS"
+echo "Synced Claude custom agents:"
+echo "  $CLAUDE_USER_AGENTS"
