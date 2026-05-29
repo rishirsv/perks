@@ -14,11 +14,47 @@ Stage the intended changes, commit them cleanly, push the branch, and open a rev
 
 ## Naming conventions
 
-- Branch: `{description}` when starting from the default branch and the scope is obvious.
+- Branch: `{type}/{description}` when starting from the default branch and the scope is obvious.
 - Commit: `{description}` as a terse, recallable subject.
 - PR title: `{description}` summarizing the full diff.
 
 If the repo already has an obvious branch naming pattern, follow that instead of forcing a new one.
+
+Prefer human branch prefixes that describe the work:
+
+- `feat/` for user-facing features or new capabilities
+- `fix/` for bugs, regressions, or broken behavior
+- `docs/` for documentation-only changes
+- `refactor/` for structure changes that preserve behavior
+- `test/` for test-only changes
+- `chore/` for maintenance that does not fit the others
+
+Do not use `codex/` as the default branch namespace. Use it only when the repo explicitly requires it or the user asks for it.
+
+Keep the slug short, lowercase, hyphenated, and outcome-oriented:
+
+- Prefer `feat/workout-rest-controls`
+- Prefer `fix/cloud-sync-retry-loop`
+- Prefer `docs/pr-filing-guidance`
+- Avoid `codex/implement-workout-rest-controls`
+- Avoid vague agent-centered names such as `feat/codex-updates`
+
+Choose the type from the dominant reviewer-visible purpose of the PR. If a feature also touches tests or docs, keep `feat/` rather than splitting the branch name into multiple concerns.
+
+## Invocation modifiers
+
+Treat short words after `$yeet` as publication modifiers when their meaning is obvious.
+
+- `$yeet review`: publish the draft PR, then add the exact PR comment `@codex please review`.
+- `$yeet`: publish the draft PR without requesting Codex review unless the user otherwise asks.
+
+Only post the review comment after the PR exists and you have its number or URL. Use:
+
+```bash
+gh pr comment <number-or-url> --body "@codex please review"
+```
+
+If the PR already exists for the branch, reuse that PR and still post the review comment when the user invoked `$yeet review`.
 
 ## Workflow
 
@@ -26,14 +62,17 @@ Follow this order:
 
 1. Inspect git state, branch, recent commits, remotes, and GitHub auth.
 2. Infer the intended publication scope from the request, diff, and files touched in this session.
-3. If the worktree is dirty or detached but the intended slice is obvious, isolate that slice instead of stopping.
-4. Stage only the intended files.
-5. Commit tersely with the description.
-6. Optionally rebase onto the current base branch when the repo policy or user request calls for it and doing so is clearly safe.
-7. Run checks if there is an obvious relevant command and they were not already run.
-8. Push with tracking.
-9. Open a draft PR with a detailed prose body that reflects the real issue, fix, and validation.
-10. Report the PR URL, branch, commit, and any follow-up state.
+3. Do a quick split-scope check: decide whether the changes are one reviewer-visible story or should become multiple PRs because they are about different things.
+4. If the worktree is dirty or detached but the intended slice is obvious, isolate that slice instead of stopping.
+5. Rename an unpublished `codex/...` branch to the preferred `{type}/{description}` shape when the scope is obvious.
+6. Stage only the intended files.
+7. Commit tersely with the description.
+8. Optionally rebase onto the current base branch when the repo policy or user request calls for it and doing so is clearly safe.
+9. Run checks if there is an obvious relevant command and they were not already run.
+10. Push with tracking.
+11. Open a draft PR with a detailed prose body that reflects the real issue, fix, and validation.
+12. If invoked as `$yeet review`, add `@codex please review` as a PR comment.
+13. Report the PR URL, branch, commit, review-comment state, and any follow-up state.
 
 ## Preflight
 
@@ -73,6 +112,25 @@ Treat dirty worktrees and detached `HEAD` as scoping problems to solve, not auto
 - If only part of a file should be included and there is no safe non-interactive split available, stop and ask one concise question.
 - If multiple plausible publication scopes exist, stop and ask one concise question.
 
+## Split-scope check
+
+Before staging, do a quick judgment pass on whether the PR should be split. Do not use file count, line count, or diff size as the deciding factor. Look for whether the changes tell one coherent story.
+
+Keep one PR when:
+
+- the changes support the same user-visible outcome, bug fix, docs update, refactor, or maintenance task
+- tests, fixtures, docs, generated files, or config changes are clearly supporting the main change
+- multiple files changed because one behavior crosses normal module boundaries
+
+Split or ask before publishing when:
+
+- the diff contains unrelated product surfaces, bugs, features, docs, or cleanup work
+- one part could be reviewed, reverted, or shipped independently without affecting the other
+- the PR body would need two separate "simple versions" to explain what changed
+- the branch name would need vague glue words such as `misc`, `updates`, `cleanup-and-feature`, or `various`
+
+When the split is obvious, publish only the intended slice and leave the other work untouched. When the split is plausible but not obvious, ask one concise question before staging.
+
 ## Branch and staging strategy
 
 Use the lightest safe path:
@@ -81,17 +139,25 @@ Use the lightest safe path:
 2. If on the default branch and the scope is obvious, create a branch:
 
 ```bash
-git switch -c "description"
+git switch -c "type/description"
 ```
 
 3. If detached or otherwise unsuitable but the scope is obvious, create a scoped branch before staging.
-4. Stage only the intended paths:
+4. If the current branch starts with `codex/`, the repo does not require that namespace, and the branch has not been pushed, rename it before publishing:
+
+```bash
+git branch -m "type/description"
+```
+
+Treat a branch as already pushed if it has an upstream or if `git ls-remote --heads origin "$(git branch --show-current)"` finds it. Do not rename pushed or shared branches unless the user asks.
+
+5. Stage only the intended paths:
 
 ```bash
 git add -- path/to/file another/path
 ```
 
-5. Recheck the staged diff before committing:
+6. Recheck the staged diff before committing:
 
 ```bash
 git diff --staged --stat
@@ -159,16 +225,21 @@ git push -u origin "$(git branch --show-current)"
 
 ## PR writing philosophy
 
-Keep the published-changes writing style.
+Keep the published-changes writing style, using the same plain-language posture as the explain skill.
 
 - Open the PR as a draft.
-- Write the PR description as detailed prose, not a terse bullet summary.
+- Write the PR description for a smart non-technical reader who needs to understand the change without wading through engineering language.
+- Start with the simple version first: what changed and why it matters.
+- Use short sentences, plain words, and concrete file or behavior references when they help.
+- Explain technical terms in one short everyday sentence only when the term matters.
+- Write detailed prose, not a terse bullet summary or a commit-by-commit changelog.
 - Cover:
   - the issue
-  - the cause and effect on users
-  - the root cause
+  - the practical effect on users, reviewers, or maintainers
+  - the root cause, when there is one
   - the fix
   - the tests or checks used to validate
+- Include known limits, skipped validation, or follow-up when relevant.
 - Edit the title and body so they reflect the actual diff, not generic commit text.
 - Write the PR description to a temp file with real newlines and pass it with `--body-file`.
 
@@ -183,6 +254,18 @@ gh pr create --draft --title "description" --body-file /tmp/pr-body.md --head "$
 Avoid relying on `gh pr create --fill` unless the user explicitly wants commit-derived text.
 
 If there is already an open PR for the branch, return that PR and use `gh pr edit` only when needed.
+
+## Optional Codex review request
+
+When the user invokes `$yeet review`, ask Codex to review the PR after creation:
+
+```bash
+gh pr comment <number-or-url> --body "@codex please review"
+```
+
+Do not put the review request in the PR body. It should be a separate comment so GitHub review automation can notice it.
+
+If posting the comment fails, keep the PR published and report the comment failure clearly.
 
 ## Safety rules
 

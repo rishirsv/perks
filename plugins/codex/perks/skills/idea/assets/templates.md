@@ -89,7 +89,7 @@ Use only when the decision is hard to reverse, surprising without context, and t
 
 ## ExecPlan
 
-Use when the idea is ready for implementation sequencing and a durable plan is the next artifact. Match the project's plan-location convention. Prefer `docs/exec-plans/<feature-slug>-plan.md` with completion status tracked in `docs/exec-plans/index.md` when the repo has no stronger convention.
+Use when the idea is ready for implementation sequencing and a durable plan is the next artifact. Follow the repo convention.
 
 ```md
 # <Feature Or Change Name> ExecPlan

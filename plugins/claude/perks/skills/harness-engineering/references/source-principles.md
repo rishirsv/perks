@@ -59,7 +59,7 @@ Good progressive-disclosure shape:
 - `AGENTS.md`: short map of how to work in the repo.
 - `ARCHITECTURE.md`: current domain map, boundaries, package relationships, and allowed dependency directions.
 - `docs/product/` or equivalent: product specs, core beliefs, user journeys, and domain language.
-- `docs/exec-plans/`: active and completed implementation plans for complex work.
+- `.plans/` or the repo's equivalent: active and completed implementation plans for complex work.
 - `docs/generated/`: generated references such as schema docs, API maps, route maps, or command indexes.
 - `docs/references/`: stable external or framework references that agents should load only when needed.
 - `docs/quality/` or tracker files: quality/readiness status, tech debt, verification gaps, and known recurring issues.
